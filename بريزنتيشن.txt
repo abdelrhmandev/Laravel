@@ -1,0 +1,48 @@
+Front-End Features: Ecommerce in Laravel
+
+    Shopping Cart, Wishlist, and Product Reviews in a Responsive Layout
+    Discounts and Coupons
+    Product characteristics include cost, promotion, stock, and size.
+    Category, tag, content, and web page for a blog
+    Shipping, payment, discount, etc.
+    Module/Extension:
+    Banner, image, and file upload manager
+    Search engine optimization (SEO) assistance: customer URL
+    Managing newsletters
+    Contact forms that send notifications in real time (Laravel Pusher)
+    Recommendations and related products in our categories
+    A product search form
+    Laravel Socialite (Facebook, Google, and Twitter) integration
+    customer login
+    Product sharing and following on many social media platforms…
+    Integration of payment methods (Paypal)
+    Order tracking system
+    Commenting system with multiple levels
+
+Admin Features: Ecommerce in Laravel
+
+    Media Manager
+    Product Manager
+    Unisharp Laravel File Manager
+    Roles and permissions for administrators
+    Brand manager
+    Banner manager
+    Order manager
+    Category manager
+    User Management
+    Shipping Management
+    Review Management
+    Blog, Category, and Tag Manager
+    Coupon Administration
+    System configuration: email, info shop, status, etc.
+    Pie chart with line chart
+    Create a pdf order form…
+    Message and notice in real time
+    Profile Preferences
+
+User Features: Ecommerce in Laravel
+
+    Order management
+    review management
+    comment management
+    profile settings

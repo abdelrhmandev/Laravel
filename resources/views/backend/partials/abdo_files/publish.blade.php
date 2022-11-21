@@ -1,0 +1,1 @@
+<h1>published :: {{ $row->published }}</h1>

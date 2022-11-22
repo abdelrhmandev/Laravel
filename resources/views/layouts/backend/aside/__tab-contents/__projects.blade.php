@@ -56,7 +56,7 @@
                             <a href="#" class="d-flex text-dark text-hover-primary align-items-center mb-5">
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-40px me-4">
-                                    <img src="assets/media/avatars/300-6.jpg" alt="" />
+                                    <img src="{{ asset('assets/backend/media/avatars/300-6.jpg')}}"" alt="" />
                                 </div>
                                 <!--end::Symbol-->
                                 <!--begin::Title-->
@@ -71,7 +71,7 @@
                             <a href="#" class="d-flex text-dark text-hover-primary align-items-center mb-5">
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-40px me-4">
-                                    <img src="assets/media/avatars/300-2.jpg" alt="" />
+                                    <img src="{{ asset('assets/backend/media/avatars/300-2.jpg')}}"" alt="" />
                                 </div>
                                 <!--end::Symbol-->
                                 <!--begin::Title-->
@@ -86,7 +86,7 @@
                             <a href="#" class="d-flex text-dark text-hover-primary align-items-center mb-5">
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-40px me-4">
-                                    <img src="assets/media/avatars/300-9.jpg" alt="" />
+                                    <img src="{{ asset('assets/backend/media/avatars/300-9.jpg')}}"" alt="" />
                                 </div>
                                 <!--end::Symbol-->
                                 <!--begin::Title-->
@@ -101,7 +101,7 @@
                             <a href="#" class="d-flex text-dark text-hover-primary align-items-center mb-5">
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-40px me-4">
-                                    <img src="assets/media/avatars/300-14.jpg" alt="" />
+                                    <img src="{{ asset('assets/backend/media/avatars/300-14.jpg')}}"" alt="" />
                                 </div>
                                 <!--end::Symbol-->
                                 <!--begin::Title-->
@@ -116,7 +116,7 @@
                             <a href="#" class="d-flex text-dark text-hover-primary align-items-center mb-5">
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-40px me-4">
-                                    <img src="assets/media/avatars/300-11.jpg" alt="" />
+                                    <img src="{{ asset('assets/backend/media/avatars/300-11.jpg')}}"" alt="" />
                                 </div>
                                 <!--end::Symbol-->
                                 <!--begin::Title-->
@@ -135,7 +135,7 @@
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-40px me-4">
                                     <span class="symbol-label bg-light">
-                                        <img class="w-20px h-20px" src="assets/media/svg/brand-logos/volicity-9.svg" alt="" />
+                                        <img class="w-20px h-20px" src="{{ asset('assets/backend/media/svg/brand-logos/volicity-9.svg')}}" alt="" />
                                     </span>
                                 </div>
                                 <!--end::Symbol-->
@@ -152,7 +152,7 @@
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-40px me-4">
                                     <span class="symbol-label bg-light">
-                                        <img class="w-20px h-20px" src="assets/media/svg/brand-logos/tvit.svg" alt="" />
+                                        <img class="w-20px h-20px" src="{{ asset('assets/backend/media/svg/brand-logos/tvit.svg')}}" alt="" />
                                     </span>
                                 </div>
                                 <!--end::Symbol-->
@@ -169,7 +169,7 @@
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-40px me-4">
                                     <span class="symbol-label bg-light">
-                                        <img class="w-20px h-20px" src="assets/media/svg/misc/infography.svg" alt="" />
+                                        <img class="w-20px h-20px" src="{{ asset('assets/backend/media/svg/misc/infography.svg')}}" alt="" />
                                     </span>
                                 </div>
                                 <!--end::Symbol-->
@@ -186,7 +186,7 @@
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-40px me-4">
                                     <span class="symbol-label bg-light">
-                                        <img class="w-20px h-20px" src="assets/media/svg/brand-logos/leaf.svg" alt="" />
+                                        <img class="w-20px h-20px" src="{{ asset('assets/backend/media/svg/brand-logos/leaf.svg')}}" alt="" />
                                     </span>
                                 </div>
                                 <!--end::Symbol-->
@@ -203,7 +203,7 @@
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-40px me-4">
                                     <span class="symbol-label bg-light">
-                                        <img class="w-20px h-20px" src="assets/media/svg/brand-logos/tower.svg" alt="" />
+                                        <img class="w-20px h-20px" src="{{ asset('assets/backend/media/svg/brand-logos/tower.svg')}}" alt="" />
                                     </span>
                                 </div>
                                 <!--end::Symbol-->
@@ -835,7 +835,7 @@
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px me-5">
                     <span class="symbol-label">
-                        <img src="assets/media/svg/brand-logos/bebo.svg" class="h-50 align-self-center" alt="" />
+                        <img src="{{ asset('assets/backend/media/svg/brand-logos/bebo.svg')}}" class="h-50 align-self-center" alt="" />
                     </span>
                 </div>
                 <!--end::Symbol-->
@@ -856,7 +856,7 @@
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px me-5">
                     <span class="symbol-label">
-                        <img src="assets/media/svg/brand-logos/vimeo.svg" class="h-50 align-self-center" alt="" />
+                        <img src="{{ asset('assets/backend/media/svg/brand-logos/vimeo.svg')}}" class="h-50 align-self-center" alt="" />
                     </span>
                 </div>
                 <!--end::Symbol-->
@@ -877,7 +877,7 @@
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px me-5">
                     <span class="symbol-label">
-                        <img src="assets/media/svg/brand-logos/kickstarter.svg" class="h-50 align-self-center" alt="" />
+                        <img src="{{ asset('assets/backend/media/svg/brand-logos/kickstarter.svg')}}" class="h-50 align-self-center" alt="" />
                     </span>
                 </div>
                 <!--end::Symbol-->
@@ -898,7 +898,7 @@
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px me-5">
                     <span class="symbol-label">
-                        <img src="assets/media/svg/brand-logos/balloon.svg" class="h-50 align-self-center" alt="" />
+                        <img src="{{ asset('assets/backend/media/svg/brand-logos/balloon.svg')}}" class="h-50 align-self-center" alt="" />
                     </span>
                 </div>
                 <!--end::Symbol-->
@@ -919,7 +919,7 @@
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px me-5">
                     <span class="symbol-label">
-                        <img src="assets/media/svg/brand-logos/infography.svg" class="h-50 align-self-center" alt="" />
+                        <img src="{{ asset('assets/backend/media/svg/brand-logos/infography.svg')}}" class="h-50 align-self-center" alt="" />
                     </span>
                 </div>
                 <!--end::Symbol-->
@@ -940,7 +940,7 @@
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px me-5">
                     <span class="symbol-label">
-                        <img src="assets/media/svg/brand-logos/disqus.svg" class="h-50 align-self-center" alt="" />
+                        <img src="{{ asset('assets/backend/media/svg/brand-logos/disqus.svg')}}" class="h-50 align-self-center" alt="" />
                     </span>
                 </div>
                 <!--end::Symbol-->
@@ -961,7 +961,7 @@
                 <!--begin::Symbol-->
                 <div class="symbol symbol-40px me-5">
                     <span class="symbol-label">
-                        <img src="assets/media/svg/brand-logos/plurk.svg" class="h-50 align-self-center" alt="" />
+                        <img src="{{ asset('assets/backend/media/svg/brand-logos/plurk.svg')}}" class="h-50 align-self-center" alt="" />
                     </span>
                 </div>
                 <!--end::Symbol-->

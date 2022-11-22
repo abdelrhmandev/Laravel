@@ -54,7 +54,7 @@ class RecipeController extends Controller
                         ->rawColumns(['checkbox','action'])            
                         ->make(true);    
             }    
-            return view('backend.recipes.final');    
+            return view('backend.recipes.index');    
         }
         
 

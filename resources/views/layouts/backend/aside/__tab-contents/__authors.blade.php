@@ -9,7 +9,7 @@
         <div class="d-flex align-items-center mb-7">
             <!--begin::Avatar-->
             <div class="symbol symbol-50px me-5">
-                <img src="assets/media/avatars/300-6.jpg" class="" alt="" />
+                <img src="{{ asset('assets/backend/media/avatars/300-6.jpg') }}" class="" alt="" />
             </div>
             <!--end::Avatar-->
             <!--begin::Text-->
@@ -24,7 +24,7 @@
         <div class="d-flex align-items-center mb-7">
             <!--begin::Avatar-->
             <div class="symbol symbol-50px me-5">
-                <img src="assets/media/avatars/300-5.jpg" class="" alt="" />
+                <img src="{{ asset('assets/backend/media/avatars/300-5.jpg') }}" class="" alt="" />
             </div>
             <!--end::Avatar-->
             <!--begin::Text-->
@@ -39,7 +39,7 @@
         <div class="d-flex align-items-center mb-7">
             <!--begin::Avatar-->
             <div class="symbol symbol-50px me-5">
-                <img src="assets/media/avatars/300-11.jpg" class="" alt="" />
+                <img src="{{ asset('assets/backend/media/avatars/300-11.jpg') }}" class="" alt="" />
             </div>
             <!--end::Avatar-->
             <!--begin::Text-->
@@ -54,7 +54,7 @@
         <div class="d-flex align-items-center mb-7">
             <!--begin::Avatar-->
             <div class="symbol symbol-50px me-5">
-                <img src="assets/media/avatars/300-23.jpg" class="" alt="" />
+                <img src="{{ asset('assets/backend/media/avatars/300-23.jpg') }}" class="" alt="" />
             </div>
             <!--end::Avatar-->
             <!--begin::Text-->
@@ -69,7 +69,7 @@
         <div class="d-flex align-items-center mb-7">
             <!--begin::Avatar-->
             <div class="symbol symbol-50px me-5">
-                <img src="assets/media/avatars/300-10.jpg" class="" alt="" />
+                <img src="{{ asset('assets/backend/media/avatars/300-10.jpg') }}" class="" alt="" />
             </div>
             <!--end::Avatar-->
             <!--begin::Text-->
@@ -84,7 +84,7 @@
         <div class="d-flex align-items-center mb-7">
             <!--begin::Avatar-->
             <div class="symbol symbol-50px me-5">
-                <img src="assets/media/avatars/300-9.jpg" class="" alt="" />
+                <img src="{{ asset('assets/backend/media/avatars/300-9.jpg') }}" class="" alt="" />
             </div>
             <!--end::Avatar-->
             <!--begin::Text-->
@@ -99,7 +99,7 @@
         <div class="d-flex align-items-center">
             <!--begin::Avatar-->
             <div class="symbol symbol-50px me-5">
-                <img src="assets/media/avatars/300-12.jpg" class="" alt="" />
+                <img src="{{ asset('assets/backend/media/avatars/300-12.jpg') }}" class="" alt="" />
             </div>
             <!--end::Avatar-->
             <!--begin::Text-->

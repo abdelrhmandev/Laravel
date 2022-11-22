@@ -16,7 +16,7 @@
         <!--end::Container-->
         <!--begin::Illustration-->
         <div class="text-center px-4">
-            <img src="assets/media/illustrations/sigma-1/18.png" alt="" class="mw-100 mh-300px" />
+            <img src="{{ asset('assets/backend/media/illustrations/sigma-1/18.png')}}" alt="" class="mw-100 mh-300px" />
         </div>
         <!--end::Illustration-->
     </div>

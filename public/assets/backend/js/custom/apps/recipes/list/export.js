@@ -1,7 +1,7 @@
 "use strict";
 
 // Class definition
-var KTRecipesExport = function () {
+var KTSubscriptionsExport = function () {
     var element;
     var submitButton;
     var cancelButton;
@@ -55,7 +55,7 @@ var KTRecipesExport = function () {
                             submitButton.removeAttribute('data-kt-indicator');
 
                             Swal.fire({
-                                text: "Recipes list has been successfully exported!",
+                                text: "Customer list has been successfully exported!",
                                 icon: "success",
                                 buttonsStyling: false,
                                 confirmButtonText: "Ok, got it!",
@@ -169,13 +169,13 @@ var KTRecipesExport = function () {
         // Public functions
         init: function () {
             // Elements
-            element = document.querySelector('#kt_recipes_export_modal');
+            element = document.querySelector('#kt_subscriptions_export_modal');
             modal = new bootstrap.Modal(element);
 
-            form = document.querySelector('#kt_recipes_export_form');
-            submitButton = form.querySelector('#kt_recipes_export_submit');
-            cancelButton = form.querySelector('#kt_recipes_export_cancel');
-            closeButton = element.querySelector('#kt_recipes_export_close');
+            form = document.querySelector('#kt_subscriptions_export_form');
+            submitButton = form.querySelector('#kt_subscriptions_export_submit');
+            cancelButton = form.querySelector('#kt_subscriptions_export_cancel');
+            closeButton = element.querySelector('#kt_subscriptions_export_close');
 
             handleForm();
             initForm();
@@ -185,5 +185,5 @@ var KTRecipesExport = function () {
 
 // On document ready
 KTUtil.onDOMContentLoaded(function () {
-    KTRecipesExport.init();
+    KTSubscriptionsExport.init();
 });

@@ -1,97 +1,88 @@
 "use strict";
 
+// Class definition
 var KTRecipesList = function () {
     // Define shared variables
-    var table;
     var datatable;
-    var toolbarBase;
-    var toolbarSelected;
-    var selectedCount;
+    var filterMonth;
+    var filterPayment;
+    var table
 
     // Private functions
-    var initDatatable = function () {
+    var initrecipeList = function () {
         // Set date data order
         const tableRows = table.querySelectorAll('tbody tr');
 
         tableRows.forEach(row => {
             const dateRow = row.querySelectorAll('td');
-            const realDate = moment(dateRow[5].innerHTML, "DD MMM YYYY, LT").format(); // select date from 4th column in table
+            const realDate = moment(dateRow[5].innerHTML, "DD MMM YYYY, LT").format(); // select date from 5th column in table
             dateRow[5].setAttribute('data-order', realDate);
         });
 
         // Init datatable --- more info on datatables: https://datatables.net/manual/
         datatable = $(table).DataTable({
             "info": false,
+            'pagingType': 'full_numbers',
             'order': [],
-            "pageLength": 10,
-            "lengthChange": false,
             'columnDefs': [
                 { orderable: false, targets: 0 }, // Disable ordering on column 0 (checkbox)
-                { orderable: false, targets: 6 }, // Disable ordering on column 6 (actions)                
+                { orderable: false, targets: 6 }, // Disable ordering on column 6 (actions)
             ]
         });
 
         // Re-init functions on every table re-draw -- more info: https://datatables.net/reference/event/draw
         datatable.on('draw', function () {
             initToggleToolbar();
-            handleRowDeletion();
+            handleDeleteRows();
             toggleToolbars();
         });
     }
 
     // Search Datatable --- official docs reference: https://datatables.net/reference/api/search()
-    var handleSearch = function () {
-        const filterSearch = document.querySelector('[data-kt-recipes-table-filter="search"]');
+    var handleSearchDatatable = () => {
+        const filterSearch = document.querySelector('[data-kt-recipe-table-filter="search"]');
         filterSearch.addEventListener('keyup', function (e) {
             datatable.search(e.target.value).draw();
         });
     }
 
     // Filter Datatable
-    var handleFilter = function () {
+    var handleFilterDatatable = () => {
         // Select filter options
-        const filterForm = document.querySelector('[data-kt-recipes-table-filter="form"]');
-        const filterButton = filterForm.querySelector('[data-kt-recipes-table-filter="filter"]');
-        const resetButton = filterForm.querySelector('[data-kt-recipes-table-filter="reset"]');
-        const selectOptions = filterForm.querySelectorAll('select');
+        filterMonth = $('[data-kt-recipe-table-filter="month"]');
+        filterPayment = document.querySelectorAll('[data-kt-recipe-table-filter="payment_type"] [name="payment_type"]');
+        const filterButton = document.querySelector('[data-kt-recipe-table-filter="filter"]');
 
         // Filter datatable on submit
         filterButton.addEventListener('click', function () {
-            var filterString = '';
-
             // Get filter values
-            selectOptions.forEach((item, index) => {
-                if (item.value && item.value !== '') {
-                    if (index !== 0) {
-                        filterString += ' ';
-                    }
+            const monthValue = filterMonth.val();
+            let paymentValue = '';
 
-                    // Build filter value options
-                    filterString += item.value;
+            // Get payment value
+            filterPayment.forEach(r => {
+                if (r.checked) {
+                    paymentValue = r.value;
+                }
+
+                // Reset payment value if "All" is selected
+                if (paymentValue === 'all') {
+                    paymentValue = '';
                 }
             });
+
+            // Build filter string from filter options
+            const filterString = monthValue + ' ' + paymentValue;
 
             // Filter datatable --- official docs reference: https://datatables.net/reference/api/search()
             datatable.search(filterString).draw();
         });
-
-        // Reset datatable
-        resetButton.addEventListener('click', function () {
-            // Reset filter form
-            selectOptions.forEach((item, index) => {
-                // Reset Select2 dropdown --- official docs reference: https://select2.org/programmatic-control/add-select-clear-items
-                $(item).val(null).trigger('change');
-            });
-
-            // Filter datatable --- official docs reference: https://datatables.net/reference/api/search()
-            datatable.search('').draw();
-        });
     }
 
-    // Delete subscirption
-    var handleRowDeletion = function () {
+    // Delete recipe
+    var handleDeleteRows = () => {
         // Select all delete buttons
-        const deleteButtons = table.querySelectorAll('[data-kt-recipes-table-filter="delete_row"]');
+        const deleteButtons = table.querySelectorAll('[data-kt-recipe-table-filter="delete_row"]');
 
         deleteButtons.forEach(d => {
             // Delete button on click
@@ -101,12 +92,12 @@ var KTRecipesList = function () {
                 // Select parent row
                 const parent = e.target.closest('tr');
 
-                // Get customer name
-                const customerName = parent.querySelectorAll('td')[1].innerText;
+                // Get recipe name
+                const recipeName = parent.querySelectorAll('td')[1].innerText;
 
                 // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
                 Swal.fire({
-                    text: "Are you sure you want to delete " + customerName + "?",
+                    text: "Are you sure you want to delete " + recipeName + "?",
                     icon: "warning",
                     showCancelButton: true,
                     buttonsStyling: false,
@@ -119,7 +110,7 @@ var KTRecipesList = function () {
                 }).then(function (result) {
                     if (result.value) {
                         Swal.fire({
-                            text: "You have deleted " + customerName + "!.",
+                            text: "You have deleted " + recipeName + "!.",
                             icon: "success",
                             buttonsStyling: false,
                             confirmButtonText: "Ok, got it!",
@@ -129,13 +120,10 @@ var KTRecipesList = function () {
                         }).then(function () {
                             // Remove current row
                             datatable.row($(parent)).remove().draw();
-                        }).then(function () {
-                            // Detect checked checkboxes
-                            toggleToolbars();
                         });
                     } else if (result.dismiss === 'cancel') {
                         Swal.fire({
-                            text: customerName + " was not deleted.",
+                            text: recipeName + " was not deleted.",
                             icon: "error",
                             buttonsStyling: false,
                             confirmButtonText: "Ok, got it!",
@@ -149,6 +137,24 @@ var KTRecipesList = function () {
         });
     }
 
+    // Reset Filter
+    var handleResetForm = () => {
+        // Select reset button
+        const resetButton = document.querySelector('[data-kt-recipe-table-filter="reset"]');
+
+        // Reset datatable
+        resetButton.addEventListener('click', function () {
+            // Reset month
+            filterMonth.val(null).trigger('change');
+
+            // Reset payment type
+            filterPayment[0].checked = true;
+
+            // Reset datatable --- official docs reference: https://datatables.net/reference/api/search()
+            datatable.search('').draw();
+        });
+    }
+
     // Init toggle toolbar
     var initToggleToolbar = () => {
         // Toggle selected action toolbar
@@ -156,10 +162,7 @@ var KTRecipesList = function () {
         const checkboxes = table.querySelectorAll('[type="checkbox"]');
 
         // Select elements
-        toolbarBase = document.querySelector('[data-kt-recipes-table-toolbar="base"]');
-        toolbarSelected = document.querySelector('[data-kt-recipes-table-toolbar="selected"]');
-        selectedCount = document.querySelector('[data-kt-recipes-table-select="selected_count"]');
-        const deleteSelected = document.querySelector('[data-kt-recipes-table-select="delete_selected"]');
+        const deleteSelected = document.querySelector('[data-kt-recipe-table-select="delete_selected"]');
 
         // Toggle delete selected toolbar
         checkboxes.forEach(c => {
@@ -175,7 +178,7 @@ var KTRecipesList = function () {
         deleteSelected.addEventListener('click', function () {
             // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
             Swal.fire({
-                text: "Are you sure you want to delete selected customers?",
+                text: "Are you sure you want to delete selected recipes?",
                 icon: "warning",
                 showCancelButton: true,
                 buttonsStyling: false,
@@ -188,7 +191,7 @@ var KTRecipesList = function () {
             }).then(function (result) {
                 if (result.value) {
                     Swal.fire({
-                        text: "You have deleted all selected customers!.",
+                        text: "You have deleted all selected recipes!.",
                         icon: "success",
                         buttonsStyling: false,
                         confirmButtonText: "Ok, got it!",
@@ -196,7 +199,7 @@ var KTRecipesList = function () {
                             confirmButton: "btn fw-bold btn-primary",
                         }
                     }).then(function () {
-                        // Remove all selected customers
+                        // Remove all selected recipes
                         checkboxes.forEach(c => {
                             if (c.checked) {
                                 datatable.row($(c.closest('tbody tr'))).remove().draw();
@@ -206,13 +209,10 @@ var KTRecipesList = function () {
                         // Remove header checked box
                         const headerCheckbox = table.querySelectorAll('[type="checkbox"]')[0];
                         headerCheckbox.checked = false;
-                    }).then(function () {
-                        toggleToolbars(); // Detect checked checkboxes
-                        initToggleToolbar(); // Re-init toolbar to recalculate checkboxes
                     });
                 } else if (result.dismiss === 'cancel') {
                     Swal.fire({
-                        text: "Selected customers was not deleted.",
+                        text: "Selected recipes was not deleted.",
                         icon: "error",
                         buttonsStyling: false,
                         confirmButtonText: "Ok, got it!",
@@ -227,6 +227,11 @@ var KTRecipesList = function () {
 
     // Toggle toolbars
     const toggleToolbars = () => {
+        // Define variables
+        const toolbarBase = document.querySelector('[data-kt-recipe-table-toolbar="base"]');
+        const toolbarSelected = document.querySelector('[data-kt-recipe-table-toolbar="selected"]');
+        const selectedCount = document.querySelector('[data-kt-recipe-table-select="selected_count"]');
+
         // Select refreshed checkbox DOM elements 
         const allCheckboxes = table.querySelectorAll('tbody [type="checkbox"]');
 
@@ -253,20 +258,21 @@ var KTRecipesList = function () {
         }
     }
 
+    // Public methods
     return {
-        // Public functions  
         init: function () {
-            table = document.getElementById('kt_recipes_table');
-
+            table = document.querySelector('#kt_recipes_table');
+            
             if (!table) {
                 return;
             }
 
-            initDatatable();
+            initrecipeList();
             initToggleToolbar();
-            handleSearch();
-            handleRowDeletion();
-            handleFilter();
+            handleSearchDatatable();
+            handleFilterDatatable();
+            handleDeleteRows();
+            handleResetForm();
         }
     }
 }();

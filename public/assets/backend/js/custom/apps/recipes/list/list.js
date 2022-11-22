@@ -1,6 +1,6 @@
 "use strict";
 
-var KTSubscriptionsList = function () {
+var KTRecipesList = function () {
     // Define shared variables
     var table;
     var datatable;
@@ -41,7 +41,7 @@ var KTSubscriptionsList = function () {
 
     // Search Datatable --- official docs reference: https://datatables.net/reference/api/search()
     var handleSearch = function () {
-        const filterSearch = document.querySelector('[data-kt-subscription-table-filter="search"]');
+        const filterSearch = document.querySelector('[data-kt-recipes-table-filter="search"]');
         filterSearch.addEventListener('keyup', function (e) {
             datatable.search(e.target.value).draw();
         });
@@ -50,9 +50,9 @@ var KTSubscriptionsList = function () {
     // Filter Datatable
     var handleFilter = function () {
         // Select filter options
-        const filterForm = document.querySelector('[data-kt-subscription-table-filter="form"]');
-        const filterButton = filterForm.querySelector('[data-kt-subscription-table-filter="filter"]');
-        const resetButton = filterForm.querySelector('[data-kt-subscription-table-filter="reset"]');
+        const filterForm = document.querySelector('[data-kt-recipes-table-filter="form"]');
+        const filterButton = filterForm.querySelector('[data-kt-recipes-table-filter="filter"]');
+        const resetButton = filterForm.querySelector('[data-kt-recipes-table-filter="reset"]');
         const selectOptions = filterForm.querySelectorAll('select');
 
         // Filter datatable on submit
@@ -91,7 +91,7 @@ var KTSubscriptionsList = function () {
     // Delete subscirption
     var handleRowDeletion = function () {
         // Select all delete buttons
-        const deleteButtons = table.querySelectorAll('[data-kt-subscriptions-table-filter="delete_row"]');
+        const deleteButtons = table.querySelectorAll('[data-kt-recipes-table-filter="delete_row"]');
 
         deleteButtons.forEach(d => {
             // Delete button on click
@@ -156,10 +156,10 @@ var KTSubscriptionsList = function () {
         const checkboxes = table.querySelectorAll('[type="checkbox"]');
 
         // Select elements
-        toolbarBase = document.querySelector('[data-kt-subscription-table-toolbar="base"]');
-        toolbarSelected = document.querySelector('[data-kt-subscription-table-toolbar="selected"]');
-        selectedCount = document.querySelector('[data-kt-subscription-table-select="selected_count"]');
-        const deleteSelected = document.querySelector('[data-kt-subscription-table-select="delete_selected"]');
+        toolbarBase = document.querySelector('[data-kt-recipes-table-toolbar="base"]');
+        toolbarSelected = document.querySelector('[data-kt-recipes-table-toolbar="selected"]');
+        selectedCount = document.querySelector('[data-kt-recipes-table-select="selected_count"]');
+        const deleteSelected = document.querySelector('[data-kt-recipes-table-select="delete_selected"]');
 
         // Toggle delete selected toolbar
         checkboxes.forEach(c => {
@@ -256,7 +256,7 @@ var KTSubscriptionsList = function () {
     return {
         // Public functions  
         init: function () {
-            table = document.getElementById('kt_subscriptions_table');
+            table = document.getElementById('kt_recipes_table');
 
             if (!table) {
                 return;
@@ -273,5 +273,5 @@ var KTSubscriptionsList = function () {
 
 // On document ready
 KTUtil.onDOMContentLoaded(function () {
-    KTSubscriptionsList.init();
+    KTRecipesList.init();
 });

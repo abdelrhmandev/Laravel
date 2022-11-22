@@ -55,7 +55,7 @@ var KTRecipesExport = function () {
                             submitButton.removeAttribute('data-kt-indicator');
 
                             Swal.fire({
-                                text: "Customer list has been successfully exported!",
+                                text: "Recipes list has been successfully exported!",
                                 icon: "success",
                                 buttonsStyling: false,
                                 confirmButtonText: "Ok, got it!",

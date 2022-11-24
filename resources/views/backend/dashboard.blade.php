@@ -1,6 +1,6 @@
 @extends('backend.base.base')
 @section('style')
-<link href="{{ asset('assets/backend/plugins/custom/fullcalendar/fullcalendar.bundle.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/backend/plugins/custom/fullcalendar/fullcalendar.bundle.css')}}"" rel="stylesheet" type="text/css" />
 <link href="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
 @stop
 
@@ -2981,6 +2981,7 @@
 <script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZonesLow.js"></script>
 <script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZoneAreasLow.js"></script>
 <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+
 <script src="{{ asset('assets/backend/js/widgets.bundle.js')}}"></script>
 <script src="{{ asset('assets/backend/js/custom/widgets.js')}}"></script>
 <script src="{{ asset('assets/backend/js/custom/apps/chat/chat.js')}}"></script>

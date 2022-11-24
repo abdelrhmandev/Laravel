@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app() -> getLocale() }}" lang="{{ app() -> getLocale() }}" data-textdirection="{{ app() -> getLocale() === 'ar' ? 'rtl' : 'ltr'}}">
+<html lang="en" lang="en" data-textdirection="{{ app() -> getLocale() === 'ar' ? 'rtl' : 'ltr'}}">
 	<!--begin::Head-->
 	<head><base href="">
 		<title>@yield('title')</title>
@@ -15,7 +15,7 @@
 		<link rel="canonical" href="Https://preview.keenthemes.com/metronic8" />
 		<link rel="shortcut icon" href="{{ asset('assets/backend/media/logos/favicon.ico')}}" />
 		<!--begin::Fonts-->
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
 		<!--end::Fonts-->
 		<!--begin::Vendor Stylesheets(used for this page only)-->
 		@yield('style')

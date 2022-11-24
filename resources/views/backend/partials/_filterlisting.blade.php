@@ -41,20 +41,20 @@
           <!--end::Option-->
           <!--begin::Option-->
           <label class="form-check form-check-sm form-check-custom form-check-solid mb-3 me-5">
-            <input class="form-check-input" type="radio" name="status" value="1" />
-            <span class="form-check-label text-gray-600">Published</span>
+            <input class="form-check-input" type="radio" name="status" value="published" />
+            <span class="form-check-label text-gray-600">published</span>
           </label>
           <!--end::Option-->
           <!--begin::Option-->
           <label class="form-check form-check-sm form-check-custom form-check-solid mb-3">
-            <input class="form-check-input" type="radio" name="status" value="0" />
-            <span class="form-check-label text-gray-600">Unpublished</span>
+            <input class="form-check-input" type="radio" name="status" value="unpublished" />
+            <span class="form-check-label text-gray-600">unpublished</span>
           </label>  
           <!--end::Option-->
           <!--begin::Option-->
           <label class="form-check form-check-sm form-check-custom form-check-solid">
-            <input class="form-check-input" type="radio" name="status" value="3" />
-            <span class="form-check-label text-gray-600">Scheduled</span>
+            <input class="form-check-input" type="radio" name="status" value="scheduled" />
+            <span class="form-check-label text-gray-600">scheduled</span>
           </label>
           <!--end::Option-->
         </div>

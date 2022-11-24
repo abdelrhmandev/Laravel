@@ -5,7 +5,7 @@ var KTCustomersList = function () {
     // Define shared variables
     var datatable;
     var filterMonth;
-    var filterStatus;
+    var filterPayment;
     var table
 
     // Private functions
@@ -50,7 +50,7 @@ var KTCustomersList = function () {
     var handleFilterDatatable = () => {
         // Select filter options
         filterMonth = $('[data-kt-customer-table-filter="month"]');
-        filterStatus = document.querySelectorAll('[data-kt-customer-table-filter="status"] [name="status"]');
+        filterPayment = document.querySelectorAll('[data-kt-customer-table-filter="status"] [name="status"]');
         const filterButton = document.querySelector('[data-kt-customer-table-filter="filter"]');
 
         // Filter datatable on submit
@@ -60,7 +60,7 @@ var KTCustomersList = function () {
             let paymentValue = '';
 
             // Get payment value
-            filterStatus.forEach(r => {
+            filterPayment.forEach(r => {
                 if (r.checked) {
                     paymentValue = r.value;
                 }
@@ -148,7 +148,7 @@ var KTCustomersList = function () {
             filterMonth.val(null).trigger('change');
 
             // Reset payment type
-            filterStatus[0].checked = true;
+            filterPayment[0].checked = true;
 
             // Reset datatable --- official docs reference: https://datatables.net/reference/api/search()
             datatable.search('').draw();

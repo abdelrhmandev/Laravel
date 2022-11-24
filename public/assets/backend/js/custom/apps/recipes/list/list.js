@@ -5,7 +5,7 @@ var KTCustomersList = function () {
     // Define shared variables
     var datatable;
     var filterMonth;
-    var filterPayment;
+    var filterStatus;
     var table
 
     // Private functions
@@ -22,6 +22,7 @@ var KTCustomersList = function () {
         // Init datatable --- more info on datatables: https://datatables.net/manual/
         datatable = $(table).DataTable({
             "info": false,
+            'pagingType': 'full_numbers',
             'order': [],
             'columnDefs': [
                 { orderable: false, targets: 0 }, // Disable ordering on column 0 (checkbox)
@@ -49,7 +50,7 @@ var KTCustomersList = function () {
     var handleFilterDatatable = () => {
         // Select filter options
         filterMonth = $('[data-kt-customer-table-filter="month"]');
-        filterPayment = document.querySelectorAll('[data-kt-customer-table-filter="payment_type"] [name="payment_type"]');
+        filterStatus = document.querySelectorAll('[data-kt-customer-table-filter="status"] [name="status"]');
         const filterButton = document.querySelector('[data-kt-customer-table-filter="filter"]');
 
         // Filter datatable on submit
@@ -59,7 +60,7 @@ var KTCustomersList = function () {
             let paymentValue = '';
 
             // Get payment value
-            filterPayment.forEach(r => {
+            filterStatus.forEach(r => {
                 if (r.checked) {
                     paymentValue = r.value;
                 }
@@ -147,7 +148,7 @@ var KTCustomersList = function () {
             filterMonth.val(null).trigger('change');
 
             // Reset payment type
-            filterPayment[0].checked = true;
+            filterStatus[0].checked = true;
 
             // Reset datatable --- official docs reference: https://datatables.net/reference/api/search()
             datatable.search('').draw();

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" lang="en" data-textdirection="{{ app() -> getLocale() === 'ar' ? 'rtl' : 'ltr'}}">
+<html lang="{{ app() -> getLocale() }}" lang="{{ app() -> getLocale() }}" data-textdirection="{{ app() -> getLocale() === 'ar' ? 'rtl' : 'ltr'}}">
 	<!--begin::Head-->
 	<head><base href="">
 		<title>@yield('title')</title>

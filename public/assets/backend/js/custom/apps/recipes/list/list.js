@@ -93,11 +93,11 @@ var KTCustomersList = function () {
                 const parent = e.target.closest('tr');
 
                 // Get customer name
-                const customerName = parent.querySelectorAll('td')[1].innerText;
+                const itemTitle = parent.querySelectorAll('td')[1].innerText;
 
                 // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
                 Swal.fire({
-                    text: "Are you sure you want to delete " + customerName + "?",
+                    text: "Are you sure you want to delete " + itemTitle + "?",
                     icon: "warning",
                     showCancelButton: true,
                     buttonsStyling: false,
@@ -110,7 +110,7 @@ var KTCustomersList = function () {
                 }).then(function (result) {
                     if (result.value) {
                         Swal.fire({
-                            text: "You have deleted " + customerName + "!.",
+                            text: "You have deleted " + itemTitle + "!.",
                             icon: "success",
                             buttonsStyling: false,
                             confirmButtonText: "Ok, got it!",
@@ -123,7 +123,7 @@ var KTCustomersList = function () {
                         });
                     } else if (result.dismiss === 'cancel') {
                         Swal.fire({
-                            text: customerName + " was not deleted.",
+                            text: itemTitle + " was not deleted.",
                             icon: "error",
                             buttonsStyling: false,
                             confirmButtonText: "Ok, got it!",

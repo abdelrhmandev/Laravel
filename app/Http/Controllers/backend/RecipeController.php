@@ -42,8 +42,8 @@ class RecipeController extends Controller
 
         //https://stackoverflow.com/questions/72000004/is-there-another-way-to-show-export-buttons-in-yajra-datatables-using-laravel-5
     
-
             if ($request->ajax()) {
+                
                 $query = Recipe::latest(); 
                  return Datatables::of($query)    
                         ->addIndexColumn()   

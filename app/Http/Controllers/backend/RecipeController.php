@@ -48,10 +48,10 @@ class RecipeController extends Controller
                  return Datatables::of($query)    
                         ->addIndexColumn()   
 
-                        ->editColumn('checkbox', function ($row) {
-                            return '<input type="checkbox" name="item[]" value="'.$row->id.'"/>';
-                        })             
-                        ->rawColumns(['checkbox','action'])            
+                        // ->editColumn('checkbox', function ($row) {
+                        //     return '<input type="checkbox" name="item[]" value="'.$row->id.'"/>';
+                        // })             
+                        // ->rawColumns(['checkbox','action'])            
                         ->make(true);    
             }    
             return view('backend.recipes.index');    

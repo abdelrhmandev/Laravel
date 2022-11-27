@@ -179,7 +179,7 @@
 								<div class="menu-item px-3">
 									<a href="../../demo7/dist/account/settings.html" class="menu-link d-flex px-5">
 									<span class="symbol symbol-20px me-4">
-										<img class="rounded-1" src="{{ asset('assets/backend/media/flags/spain.svg')}} alt="" />
+										<img class="rounded-1" src="{{ asset('assets/backend/media/flags/spain.svg')}}" alt="" />
 									</span>Spanish</a>
 								</div>
 								<!--end::Menu item-->
@@ -187,7 +187,7 @@
 								<div class="menu-item px-3">
 									<a href="../../demo7/dist/account/settings.html" class="menu-link d-flex px-5">
 									<span class="symbol symbol-20px me-4">
-										<img class="rounded-1" src="{{ asset('assets/backend/media/flags/germany.svg')}} alt="" />
+										<img class="rounded-1" src="{{ asset('assets/backend/media/flags/germany.svg')}}" alt="" />
 									</span>German</a>
 								</div>
 								<!--end::Menu item-->
@@ -195,7 +195,7 @@
 								<div class="menu-item px-3">
 									<a href="../../demo7/dist/account/settings.html" class="menu-link d-flex px-5">
 									<span class="symbol symbol-20px me-4">
-										<img class="rounded-1" src="{{ asset('assets/backend/media/flags/japan.svg')}} alt="" />
+										<img class="rounded-1" src="{{ asset('assets/backend/media/flags/japan.svg')}}" alt="" />
 									</span>Japanese</a>
 								</div>
 								<!--end::Menu item-->
@@ -203,7 +203,7 @@
 								<div class="menu-item px-3">
 									<a href="../../demo7/dist/account/settings.html" class="menu-link d-flex px-5">
 									<span class="symbol symbol-20px me-4">
-										<img class="rounded-1" src="{{ asset('assets/backend/media/flags/france.svg')}} alt="" />
+										<img class="rounded-1" src="{{ asset('assets/backend/media/flags/france.svg')}}" alt="" />
 									</span>French</a>
 								</div>
 								<!--end::Menu item-->

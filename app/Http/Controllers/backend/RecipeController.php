@@ -41,18 +41,13 @@ class RecipeController extends Controller
         // }
 
         //https://stackoverflow.com/questions/72000004/is-there-another-way-to-show-export-buttons-in-yajra-datatables-using-laravel-5
-    
+ 
             if ($request->ajax()) {
                 
-                $query = Recipe::latest(); 
-                 return Datatables::of($query)    
-                        ->addIndexColumn()   
-
-                        // ->editColumn('checkbox', function ($row) {
-                        //     return '<input type="checkbox" name="item[]" value="'.$row->id.'"/>';
-                        // })             
-                        // ->rawColumns(['checkbox','action'])            
-                        ->make(true);    
+                $query = Recipe::with('category')->latest(); 
+ 
+                 return Datatables::of($query)     
+                 ->make(true);  
             }    
             return view('backend.recipes.index');    
         }

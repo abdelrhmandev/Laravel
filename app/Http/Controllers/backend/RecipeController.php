@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use LaravelLocalization;
 use App\Models\Recipe;
 use App\Traits\UploadAble;
+use App\Traits\Functions;
 use App\Traits\DatatableLang;
 use App\DataTables\RecipesDataTable;
 use DataTables;
@@ -16,9 +17,9 @@ use Illuminate\Support\Str;
 
 class RecipeController extends Controller
 {
-    // use UploadAble;
+    use UploadAble,Functions;
 
-    use DatatableLang;
+   
 
     protected $model;
 
@@ -44,10 +45,65 @@ class RecipeController extends Controller
  
             if ($request->ajax()) {
                 
-                $query = Recipe::with('category')->latest(); 
+                $query = Recipe::with(['category','tags'])->latest();    
+
+                // ->setTotalRecords($count_total)
+                
+
+                 return Datatables::of($query)    
+                        ->addIndexColumn()    
+                        
+                        
+
+                        ->editColumn('title', function ($row) {
+                            $div = "<div class=\"d-flex align-items-center\">";                            
+                            if($row->image){
+                                $div.= "<a href=\"asdas\" title=".$row->translate->title." class=\"symbol symbol-50px\">
+                                            <span class=\"symbol-label\" style=\"background-image:url(".asset("storage/".$row->image).")\" />
+                                            </span>
+                                        </a>";                                                                
+                            }else{
+                                $div.="<div class=\"symbol symbol-50px overflow-hidden me-3\">
+                                            <a href=\"A\" title=".$row->translate->title.">
+                                                <div class=\"symbol-label fs-3 bg-light-primary text-primary\">".$this->str_split($row->translate->title,1)."</div>
+                                            </a>
+                                       </div>";  
+                            } 
+                            $div.="<div class=\"ms-5\">
+                                        <a href=\"sdasd\" class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-recipes-filter=\"item\">".$row->translate->title."</a>
+                                            <div class=\"text-muted fs-7 fw-bold\">
+                                                ".Str::of($row->translate->description)->words(8,'...')."
+                                            </div>
+                                    </div>"; 
+
+                            $div.= "</div>";
+                            return $div;
+                        
+                        })
+
+                        ->editColumn('category', function ($row) {                                                          
+                            return $row->category_id ? "<a href=\"sdasd\" class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-category-filter=\"category\">".$row->category->translate->title."</a>" : "<span aria-hidden=\"true\">—</span>";                                       
+                          })
+
+                          ->editColumn('tags', function($row) {                              
+                            $tags = "<div class=\"d-flex flex-column flex-grow-1 my-lg-0 my-2 pe-3\">														 
+                                        <span class=\"text-gray-400 fw-semibold fs-7\">";                                    
+                                        if(count($row->tags)){  
+                                            $tags_str = ''; 
+                                            foreach($row->tags as $tag){
+                                                $tags_str.= "<a class=\"text-primary fw-bold\" href =".route('tags.edit',$tag->id)." title=".$tag->translate->title.">".$tag->translate->title."</a>".' , ';
+                                            }
+                                            $tags.= substr_replace($tags_str,"",-2);
+                                        }else{
+                                            $tags.= "<span aria-hidden=\"true\">—</span>";
+                                        }                                                                                               
+                                    $tags.="</span>";
+                                    $tags.="</div>";                                                            
+                               return $tags;
+                           })                          
  
-                 return Datatables::of($query)     
-                 ->make(true);  
+                        ->rawColumns(['title','category','tags'])    
+                        ->make(true);    
             }    
             return view('backend.recipes.index');    
         }

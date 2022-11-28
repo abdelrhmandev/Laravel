@@ -40,7 +40,7 @@
             </span>
             <!--end::Svg Icon-->{{ __('site.filter') }}</button>
             <!--begin::Menu 1-->
-            {{-- @include('backend.partials._filterlisting') --}}
+            @include('backend.partials._filterlisting')
              <!--end::Menu 1-->
             <!--end::Filter-->
             <!--begin::Export-->
@@ -86,18 +86,19 @@
               </th>
  
             
-              <th class="min-w-125px">{{ __('site.id') }}</th>              
-              {{-- <th class="min-w-125px">{{ __('site.category') }}</th> --}}
-              {{-- <th class="min-w-125px">{{ __('site.tags') }}</th> --}}
-              {{-- <th class="min-w-125px">{{ __('site.status') }}</th> --}}
-              {{-- <th class="min-w-125px">{{ __('site.created_at') }}</th> --}}
-              {{-- <th class="text-end min-w-70px">{{ __('site.actions') }}</th> --}}
+              <th class="min-w-70px">{{ __('site.title') }}</th>              
+              <th>{{ __('site.category') }}</th>
+              <th>{{ __('site.tags') }}</th>
+              <th>{{ __('site.status') }}</th>
+              <th>{{ __('site.created_at') }}</th>
+              <th class="text-end min-w-70px">{{ __('site.actions') }}</th>
             </tr>
             <!--end::Table row-->
           </thead>
           <!--end::Table head-->
           <!--begin::Table body-->
           <tbody class="fw-semibold text-gray-600">
+            <tbody class="fw-semibold text-gray-600">
            </tbody>
           <!--end::Table body-->
         </table>
@@ -108,7 +109,7 @@
     <!--end::Card-->
     <!--begin::Modals-->
     <!--begin::Modal - Adjust Balance-->
-    {{-- @include('backend.partials.modals._exportlisting') --}}
+    @include('backend.partials.modals._exportlisting')
     <!--end::Modal - New Card-->
     <!--end::Modals-->
   </div>  <!--end::Container-->

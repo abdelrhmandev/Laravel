@@ -52,28 +52,24 @@ class RecipeController extends Controller
 
                  return Datatables::of($query)    
                         ->addIndexColumn()    
-                        
-                        
 
-                        ->editColumn('title', function ($row) {
+                        ->editColumn('translate.title', function ($row) {
                             $div = "<div class=\"d-flex align-items-center\">";                            
                             if($row->image){
-                                $div.= "<a href=\"asdas\" title=".$row->translate->title." class=\"symbol symbol-50px\">
+                                $div.= "<a href=\"asdas\" title='".$row->translate->title."' class=\"symbol symbol-50px\">
                                             <span class=\"symbol-label\" style=\"background-image:url(".asset("storage/".$row->image).")\" />
                                             </span>
                                         </a>";                                                                
                             }else{
                                 $div.="<div class=\"symbol symbol-50px overflow-hidden me-3\">
-                                            <a href=\"A\" title=".$row->translate->title.">
+                                            <a href=\"A\" title='".$row->translate->title."'>
                                                 <div class=\"symbol-label fs-3 bg-light-primary text-primary\">".$this->str_split($row->translate->title,1)."</div>
                                             </a>
                                        </div>";  
                             } 
+                            $description = "<div class=\"text-muted fs-7 fw-bold\">".Str::of($row->translate->description)->words(8,'...')."</div>";
                             $div.="<div class=\"ms-5\">
                                         <a href=\"sdasd\" class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-recipes-filter=\"item\">".$row->translate->title."</a>
-                                            <div class=\"text-muted fs-7 fw-bold\">
-                                                ".Str::of($row->translate->description)->words(8,'...')."
-                                            </div>
                                     </div>"; 
 
                             $div.= "</div>";
@@ -85,7 +81,7 @@ class RecipeController extends Controller
                             return $row->category_id ? "<a href=\"sdasd\" class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-category-filter=\"category\">".$row->category->translate->title."</a>" : "<span aria-hidden=\"true\">—</span>";                                       
                           })
 
-                          ->editColumn('tags', function($row) {                              
+                          /*->editColumn('tags', function($row) {                              
                             $tags = "<div class=\"d-flex flex-column flex-grow-1 my-lg-0 my-2 pe-3\">														 
                                         <span class=\"text-gray-400 fw-semibold fs-7\">";                                    
                                         if(count($row->tags)){  
@@ -100,9 +96,20 @@ class RecipeController extends Controller
                                     $tags.="</span>";
                                     $tags.="</div>";                                                            
                                return $tags;
-                           })                          
+                           })*/                          
  
-                        ->rawColumns(['title','category','tags'])    
+
+                         ->editColumn('published', function ($row) {                                                          
+                            return  $row->published == 1 ? 1 : 0;                                       
+ 
+                            // return  $row->published == 1 ? "<div class=\"badge badge-light-primary\">".__('site.published')."</div>" : "<div class=\"badge badge-light-danger\">".__('site.unpublished')."</div>";                                       
+                          })
+
+                          ->editColumn('created_at', function ($row) {
+                            return $row->created_at->format('d/m/Y');
+                        })
+
+                        ->rawColumns(['translate.title','published','created_at'])    
                         ->make(true);    
             }    
             return view('backend.recipes.index');    

@@ -161,64 +161,36 @@
 						<!--begin::Menu item-->
 						<div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="right-end" data-kt-menu-offset="-15px, 0">
 							<a href="#" class="menu-link px-5">
-								<span class="menu-title position-relative">Language
-								<span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">English
-								<img class="w-15px h-15px rounded-1 ms-2" src="{{ asset('assets/backend/media/flags/united-states.svg')}}" alt="" /></span></span>
+								<span class="menu-title position-relative">{{ __('site.language')}}
+								<span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">{{ LaravelLocalization::getCurrentLocaleName() }}
+								<img class="w-15px h-15px rounded-1 ms-2" src="{{ asset('assets/backend/media/flags/'.strtolower(LaravelLocalization::getCurrentLocale().".svg"))}}" alt="" /></span></span>
 							</a>
 							<!--begin::Menu sub-->
 							<div class="menu-sub menu-sub-dropdown w-175px py-4">
 								<!--begin::Menu item-->
+								@foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
 								<div class="menu-item px-3">
-									<a href="../../demo7/dist/account/settings.html" class="menu-link d-flex px-5 active">
+									<a hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}" class="menu-link d-flex px-5 active">
 									<span class="symbol symbol-20px me-4">
-										<img class="rounded-1" src="{{ asset('assets/backend/media/flags/united-states.svg')}}" alt="" />
-									</span>English</a>
+										<img class="rounded-1" src="{{ asset('assets/backend/media/flags/'.strtolower($localeCode.".svg"))}}" alt="" />
+									</span>{{ $properties['native'] }}</a>
 								</div>
+								@endforeach
 								<!--end::Menu item-->
-								<!--begin::Menu item-->
-								<div class="menu-item px-3">
-									<a href="../../demo7/dist/account/settings.html" class="menu-link d-flex px-5">
-									<span class="symbol symbol-20px me-4">
-										<img class="rounded-1" src="{{ asset('assets/backend/media/flags/spain.svg')}}" alt="" />
-									</span>Spanish</a>
-								</div>
-								<!--end::Menu item-->
-								<!--begin::Menu item-->
-								<div class="menu-item px-3">
-									<a href="../../demo7/dist/account/settings.html" class="menu-link d-flex px-5">
-									<span class="symbol symbol-20px me-4">
-										<img class="rounded-1" src="{{ asset('assets/backend/media/flags/germany.svg')}}" alt="" />
-									</span>German</a>
-								</div>
-								<!--end::Menu item-->
-								<!--begin::Menu item-->
-								<div class="menu-item px-3">
-									<a href="../../demo7/dist/account/settings.html" class="menu-link d-flex px-5">
-									<span class="symbol symbol-20px me-4">
-										<img class="rounded-1" src="{{ asset('assets/backend/media/flags/japan.svg')}}" alt="" />
-									</span>Japanese</a>
-								</div>
-								<!--end::Menu item-->
-								<!--begin::Menu item-->
-								<div class="menu-item px-3">
-									<a href="../../demo7/dist/account/settings.html" class="menu-link d-flex px-5">
-									<span class="symbol symbol-20px me-4">
-										<img class="rounded-1" src="{{ asset('assets/backend/media/flags/france.svg')}}" alt="" />
-									</span>French</a>
-								</div>
-								<!--end::Menu item-->
+								 
+							  
 							</div>
 							<!--end::Menu sub-->
 						</div>
 						<!--end::Menu item-->
 						<!--begin::Menu item-->
 						<div class="menu-item px-5 my-1">
-							<a href="../../demo7/dist/account/settings.html" class="menu-link px-5">Account Settings</a>
+							<a href="{{ route('profile') }}" class="menu-link px-5">{{ __('site.profile')}}</a>
 						</div>
 						<!--end::Menu item-->
 						<!--begin::Menu item-->
 						<div class="menu-item px-5">
-							<a href="../../demo7/dist/authentication/layouts/corporate/sign-in.html" class="menu-link px-5">Sign Out</a>
+							<a href="{{ route('profile') }}" class="menu-link px-5">{{ __('site.logout')}}</a>
 						</div>
 						<!--end::Menu item-->
 					</div>

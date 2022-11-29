@@ -14,10 +14,10 @@ Route::resource('tags', TagController::class)->except('show');
 
 
 
-// Route::group(['prefix' => 'profile'], function () {
-//     Route::get('/', 'ProfileController@index')->name('profile');
-//     Route::put('update', 'ProfileController@update')->name('update.profile');
-// });
+Route::group(['prefix' => 'profile'], function () {
+    Route::get('/', 'ProfileController@index')->name('profile');
+    Route::put('update', 'ProfileController@update')->name('update.profile');
+});
 
 // Route::group(['prefix' => 'recipes'], function () {
 //     Route::get('/reviews/{id}','RecipeController@reviews')->name('recipe.reviews'); // Recipe Reviews

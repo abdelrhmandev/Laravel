@@ -53,7 +53,7 @@ class RecipeController extends Controller
                  return Datatables::of($query)    
                         ->addIndexColumn()    
 
-                        ->editColumn('translate.title', function ($row) {
+                        ->editColumn('title', function ($row) {
                             $div = "<div class=\"d-flex align-items-center\">";                            
                             if($row->image){
                                 $div.= "<a href=\"asdas\" title='".$row->translate->title."' class=\"symbol symbol-50px\">
@@ -99,7 +99,7 @@ class RecipeController extends Controller
                            })*/                          
  
 
-                         ->editColumn('published', function ($row) {                                                          
+                         ->editColumn('status', function ($row) {                                                          
                             return  $row->published == 1 ? 1 : 0;                                       
  
                             // return  $row->published == 1 ? "<div class=\"badge badge-light-primary\">".__('site.published')."</div>" : "<div class=\"badge badge-light-danger\">".__('site.unpublished')."</div>";                                       
@@ -109,7 +109,7 @@ class RecipeController extends Controller
                             return $row->created_at->format('d/m/Y');
                         })
 
-                        ->rawColumns(['translate.title','published','created_at'])    
+                        ->rawColumns(['title'])    
                         ->make(true);    
             }    
             return view('backend.recipes.index');    

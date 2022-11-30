@@ -7,11 +7,10 @@ use LaravelLocalization;
 use App\Models\Recipe;
 use App\Traits\UploadAble;
 use App\Traits\Functions;
-use App\Traits\DatatableLang;
+// use App\Traits\DatatableLang;
 use App\DataTables\RecipesDataTable;
 use DataTables;
 use DB; 
-
 use Illuminate\Support\Str;
 
 
@@ -47,13 +46,16 @@ class RecipeController extends Controller
                 
                 $query = Recipe::with(['category','tags'])->latest();    
 
-                // ->setTotalRecords($count_total)
-                
+              
 
                  return Datatables::of($query)    
-                        ->addIndexColumn()    
-
-                        ->editColumn('title', function ($row) {
+                            ->addIndexColumn()
+                            ->filter(function ($instance) use ($request) {
+                                if (!empty($request->get('category_id'))) {     
+                                        $query = Recipe::with(['category','tags'])->where('category_id',1)->latest();      
+                                }
+                            })
+                            ->editColumn('title', function ($row) {
                             $div = "<div class=\"d-flex align-items-center\">";                            
                             if($row->image){
                                 $div.= "<a href=\"asdas\" title='".$row->translate->title."' class=\"symbol symbol-50px\">
@@ -100,8 +102,7 @@ class RecipeController extends Controller
  
 
                          ->editColumn('status', function ($row) {                                                          
-                            return  $row->published == 1 ? 1 : 0;                                       
- 
+                            return  $row->published == 1 ? 1:0;                                        
                             // return  $row->published == 1 ? "<div class=\"badge badge-light-primary\">".__('site.published')."</div>" : "<div class=\"badge badge-light-danger\">".__('site.unpublished')."</div>";                                       
                           })
 
@@ -109,7 +110,7 @@ class RecipeController extends Controller
                             return $row->created_at->format('d/m/Y');
                         })
 
-                        ->rawColumns(['title'])    
+                        ->rawColumns(['title','category','status','created_at'])    
                         ->make(true);    
             }    
             return view('backend.recipes.index');    

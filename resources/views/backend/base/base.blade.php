@@ -27,7 +27,7 @@
 			]) !!};
 		</script>		
 		@if(app()->getLocale() === 'ar')
- 
+		{{-- font-family: Droid Arabic Naskh,serif; --}}
 			<link href="https://fonts.googleapis.com/css2?family=Cairo:700"> 		
 			<link href="{{ asset('assets/backend/plugins/custom/prismjs/prismjs.bundle.rtl.css')}}" rel="stylesheet" type="text/css" />
 			<link href="{{ asset('assets/backend/plugins/global/plugins.bundle.rtl.css')}}" rel="stylesheet" type="text/css" />

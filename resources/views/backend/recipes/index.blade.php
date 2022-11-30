@@ -74,7 +74,7 @@
       <!--begin::Card body-->
       <div class="card-body pt-0">
         <!--begin::Table-->
-        <table class="d-none table align-middle table-row-dashed fs-6 gy-5" id="kt_recipes_datatable">
+        <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_recipes_datatable">
           <!--begin::Table head-->
           <thead>
             <!--begin::Table row-->
@@ -85,6 +85,10 @@
                 </div>
               </th>            
               <th>{{ __('site.title') }}</th>              
+              <th>{{ __('site.category') }}</th>
+              <th>{{ __('site.status') }}</th>
+              <th>{{ __('site.created_at') }}</th>
+              <th class="text-end min-w-70px">{{ __('site.actions') }}</th>
             </tr>
             <!--end::Table row-->
           </thead>

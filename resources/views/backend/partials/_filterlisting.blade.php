@@ -14,11 +14,11 @@
       <!--end::Input group-->
       <!--begin::Input group-->
       <div class="mb-10">
-        <label class="form-label fs-6 fw-semibold">Status:</label>
-        <select class="form-select form-select-solid fw-bold" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-recipes-table-filter="category_id" data-hide-search="true">       
-          <option value="all">ALL</option>
-          <option value="1">Snacks</option>
-          <option value="3">Soups</option> 
+        <label class="form-label fs-6 fw-semibold">{{ __('site.status')}}:</label>
+        <select class="form-select form-select-solid fw-bold" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-recipes-table-filter="status" name="published" id="published" data-hide-search="true">       
+          <option value="all">{{ __('site.all')}}</option>
+          <option value="1">{{ __('site.published')}}</option>
+          <option value="un">{{ __('site.unpublished')}}</option> 
         </select>
       </div>
       <!--end::Input group-->

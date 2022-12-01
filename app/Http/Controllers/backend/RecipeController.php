@@ -51,9 +51,18 @@ class RecipeController extends Controller
                  return Datatables::of($query)    
                             ->addIndexColumn()
                             ->filter(function ($instance) use ($request) {
-                                if (!empty($request->get('category_id'))) {     
-                                        $query = Recipe::with(['category','tags'])->where('category_id',1)->latest();      
-                                }
+                                if (!empty($request->get('published'))) {  
+                                    
+                                    if ($request->get('published') == '1') {
+                                        $instance->where('published', $request->get('published')); 
+                                    }
+                                    elseif($request->get('published') == 'un'){
+                                        $instance->where('published','0');
+                                      } 
+                                 
+                                  
+                                  
+                                } 
                             })
                             ->editColumn('title', function ($row) {
                             $div = "<div class=\"d-flex align-items-center\">";                            
@@ -80,7 +89,7 @@ class RecipeController extends Controller
                         })
 
                         ->editColumn('category', function ($row) {                                                          
-                            return $row->category_id ? "<a href=\"sdasd\" class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-category-filter=\"category\">".$row->category->translate->title."</a>" : "<span aria-hidden=\"true\">—</span>";                                       
+                            return $row->category_id ? "<a href=\"sdasd\" class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-category-filter=\"category\">".$row->category_id.'---'.$row->category->translate->title."</a>" : "<span aria-hidden=\"true\">—</span>";                                       
                           })
 
                           /*->editColumn('tags', function($row) {                              
@@ -101,16 +110,19 @@ class RecipeController extends Controller
                            })*/                          
  
 
-                         ->editColumn('status', function ($row) {                                                          
-                            return  $row->published == 1 ? 1:0;                                        
-                            // return  $row->published == 1 ? "<div class=\"badge badge-light-primary\">".__('site.published')."</div>" : "<div class=\"badge badge-light-danger\">".__('site.unpublished')."</div>";                                       
+                         ->editColumn('published', function ($row) {                                                          
+                            // return  $row->published == 1 ? 1:0;                                        
+                            return  $row->published == 1 ? "<div class=\"badge badge-light-primary\">".__('site.published')."</div>" : "<div class=\"badge badge-light-danger\">".__('site.unpublished')."</div>";                                       
                           })
-
+                          ->editColumn('featured', function ($row) {                                                          
+                            // return  $row->featured == 1 ? 1:0;                                        
+                            return  $row->featured == 1 ? "<div class=\"badge badge-light-primary\">".__('site.featured')."</div>" : "<div class=\"badge badge-light-danger\">".__('site.not_featured')."</div>";                                       
+                          })
                           ->editColumn('created_at', function ($row) {
                             return $row->created_at->format('d/m/Y');
                         })
 
-                        ->rawColumns(['title','category','status','created_at'])    
+                        ->rawColumns(['title','category','published','featured','created_at'])    
                         ->make(true);    
             }    
             return view('backend.recipes.index');    

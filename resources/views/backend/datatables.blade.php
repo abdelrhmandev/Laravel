@@ -27,12 +27,16 @@
                     },
                 ajax: {
                     url: "{{ route('recipes.index')}}",
+                    data: function (data) {
+                        data.published = $('#published').val();
+                    }                    
                 },
                 columns: [
                     { data: 'id', name: 'id',exportable:false},
                     { data: 'title', name: 'title'},
                     { data: 'category', name: 'category'},
-                    { data: 'status', name: 'status'},
+                    { data: 'published', name: 'published'},
+                    { data: 'featured', name: 'featured'},
                     { data: 'created_at', name: 'created_at'},
                     { data: null },
                 ],
@@ -93,13 +97,13 @@
                 ],
                 // Add data-filter attribute
                 createdRow: function (row, data, dataIndex) {
-                //  var statusC;
-                //  if (data.published == 1) {
-                //     statusC = 1;
-                // }else{
-                //     statusC = 0;
-                // }    
-                $(row).find('td:eq(2)').attr('data-filter', data.category_id);
+                 var statusC;
+                 if (data.published == 1) {
+                    statusC = 1;
+                }else{
+                    statusC = 0;
+                }    
+                $(row).find('td:eq(3)').attr('data-filter', statusC);
             }
             });
     

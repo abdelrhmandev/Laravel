@@ -1,6 +1,10 @@
 @extends('backend.base.base')
 @section('style')
+@if(app()->getLocale() === 'ar')
+<link href="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.rtl.css')}}" rel="stylesheet" type="text/css" />
+@else
 <link href="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
+@endif
 @stop
 @section('content')
 	<!--begin::Container-->
@@ -87,6 +91,7 @@
               <th>{{ __('site.title') }}</th>              
               <th>{{ __('site.category') }}</th>
               <th>{{ __('site.status') }}</th>
+              <th>{{ __('site.featured') }}</th>
               <th>{{ __('site.created_at') }}</th>
               <th class="text-end min-w-70px">{{ __('site.actions') }}</th>
             </tr>

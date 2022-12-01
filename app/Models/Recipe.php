@@ -35,12 +35,11 @@ class Recipe extends Model
         return $query->where('featured', 1);
     }
     public function scopePublished($query){
-        return $query->where('published', 1);
+        return $query->where('status', 'published');
     }
     */
 
     protected $casts = [
-        'published' => 'boolean',
         'featured' => 'boolean',
     ];
 
@@ -48,7 +47,7 @@ class Recipe extends Model
 //https://github.com/dimsav/laravel-translatable/blob/master/src/Translatable/Translatable.php
 
     protected $fillable = [
-		'image','published','cook','created_at','servings','featured','category_id'
+		'image','status','cook','created_at','servings','featured','category_id'
 	];
 
     public function translations(){

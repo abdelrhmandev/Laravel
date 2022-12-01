@@ -16,7 +16,7 @@ class CreateRecipesTable extends Migration
         Schema::create('recipes', function (Blueprint $table) {
             $table->id();
 			$table->string('image',150)->nullable();
-			$table->enum('published', ['0','1'])->default(1);
+			$table->enum('status', ['published', 'unpublished', 'scheduled'])->default('published');
             $table->tinyInteger('cook')->nullable()->comment('preparation time by minutes');
             $table->tinyInteger('servings')->nullable()->comment('by persons');
             $table->enum('featured', ['0','1'])->default(1);

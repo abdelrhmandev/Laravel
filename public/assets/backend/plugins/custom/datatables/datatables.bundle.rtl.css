@@ -1,9 +1,9 @@
+@import url("custom_pagination.css"); /* Using a url */ 
 @charset "UTF-8";
 table.dataTable td.dt-control {
   text-align: center;
   cursor: pointer;
 }
-
 table.dataTable td.dt-control:before {
   height: 1em;
   width: 1em;
@@ -178,7 +178,7 @@ table.dataTable.nowrap th, table.dataTable.nowrap td {
 
 table.dataTable th.dt-left,
 table.dataTable td.dt-left {
-  text-align: left;
+  text-align: right;
 }
 
 table.dataTable th.dt-center,
@@ -206,14 +206,14 @@ table.dataTable thead th,
 table.dataTable thead td,
 table.dataTable tfoot th,
 table.dataTable tfoot td {
-  text-align: left;
+  text-align: right;
 }
 
 table.dataTable thead th.dt-head-left,
 table.dataTable thead td.dt-head-left,
 table.dataTable tfoot th.dt-head-left,
 table.dataTable tfoot td.dt-head-left {
-  text-align: left;
+  text-align: right;
 }
 
 table.dataTable thead th.dt-head-center,
@@ -246,7 +246,7 @@ table.dataTable tfoot td.dt-head-nowrap {
 
 table.dataTable tbody th.dt-body-left,
 table.dataTable tbody td.dt-body-left {
-  text-align: left;
+  text-align: right;
 }
 
 table.dataTable tbody th.dt-body-center,
@@ -330,7 +330,7 @@ table.dataTable.table-hover > tbody > tr.selected:hover > * {
 
 div.dataTables_wrapper div.dataTables_length label {
   font-weight: normal;
-  text-align: left;
+  text-align: right;
   white-space: nowrap;
 }
 
@@ -346,7 +346,7 @@ div.dataTables_wrapper div.dataTables_filter {
 div.dataTables_wrapper div.dataTables_filter label {
   font-weight: normal;
   white-space: nowrap;
-  text-align: left;
+  text-align: right;
 }
 
 div.dataTables_wrapper div.dataTables_filter input {
@@ -941,7 +941,7 @@ span.dt-button-spacer.bar:empty {
 
 div.dt-button-collection span.dt-button-spacer {
   padding-left: 1rem !important;
-  text-align: left;
+  text-align: right;
 }
 
 table.DTCR_clonedTable.dataTable {
@@ -1507,7 +1507,7 @@ div.dt-datetime div.dt-datetime-time > span {
 }
 
 div.dt-datetime div.dt-datetime-time th {
-  text-align: left;
+  text-align: right;
 }
 
 div.dt-datetime div.dt-datetime-time div.dt-datetime-timeblock {

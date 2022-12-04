@@ -16,7 +16,7 @@
         <!--begin::Card title-->
         <div class="card-title">
           <!--begin::Search-->
-          <div class="d-flex align-items-center position-relative my-1">
+          {{-- <div class="d-flex align-items-center position-relative my-1">
             <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
             <span class="svg-icon svg-icon-1 position-absolute ms-6">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -26,7 +26,7 @@
             </span>
             <!--end::Svg Icon-->
             <input type="text" data-kt-recipes-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Search Recipes ..... " />
-          </div>
+          </div> --}}
           <!--end::Search-->
         </div>
         <!--begin::Card title-->
@@ -88,8 +88,8 @@
                   <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_recipes_datatable .form-check-input" value="1" />
                 </div>
               </th>            
-              <th>{{ __('site.title') }}</th>              
-              <th>{{ __('site.category') }}</th>
+              {{-- <th>{{ __('site.title') }}</th>  --}}            
+              <th>{{ __('site.category') }}</th> 
               <th>{{ __('site.status') }}</th>
               <th>{{ __('site.featured') }}</th>
               <th>{{ __('site.created_at') }}</th>

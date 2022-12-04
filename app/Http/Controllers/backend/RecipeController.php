@@ -50,12 +50,12 @@ class RecipeController extends Controller
 
                  return Datatables::of($query)    
                             ->addIndexColumn()
-                            ->filter(function ($instance) use ($request) {
-                                if ($request->has('status') && $request->get('status')) {
-                                        $instance->where('status', $request->get('status')); 
-                                }
-                            })
-                            ->editColumn('title', function ($row) {
+                            // ->filter(function ($instance) use ($request) {
+                            //     if ($request->has('status') && $request->get('status')) {
+                            //             $instance->where('status', $request->get('status')); 
+                            //     }
+                            // })
+                            ->editColumn('translate.title', function ($row) {
                             $div = "<div class=\"d-flex align-items-center\">";                            
                             if($row->image){
                                 $div.= "<a href=\"asdas\" title='".$row->translate->title."' class=\"symbol symbol-50px\">
@@ -79,8 +79,9 @@ class RecipeController extends Controller
                         
                         })
 
-                        ->editColumn('category', function ($row) {                                                          
-                            return $row->category_id ? "<a href=\"sdasd\" class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-category-filter=\"category\">".$row->category->translate->title."</a>" : "<span aria-hidden=\"true\">—</span>";                                       
+                        ->editColumn('category_id', function ($row) {                                                          
+                            return $row->category_id ?? '__';
+                            // return $row->category_id ? "<a href=\"sdasd\" class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-category-filter=\"category\">".$row->category->translate->title."</a>" : "<span aria-hidden=\"true\">—</span>";                                       
                           })
 
                           /*->editColumn('tags', function($row) {                              
@@ -119,7 +120,7 @@ class RecipeController extends Controller
                             return $row->created_at->format('d/m/Y');
                         })
 
-                        ->rawColumns(['title','category','status','featured','created_at'])    
+                        ->rawColumns(['category_id','status','featured','created_at'])    
                         ->make(true);    
             }    
             return view('backend.recipes.index');    

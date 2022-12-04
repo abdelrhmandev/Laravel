@@ -10,7 +10,13 @@
         // Private functions
         var initDatatable = function () {
             dt = $("#kt_recipes_datatable").DataTable({
-                searchDelay: 500,
+                 "search": [
+            {
+              "bRegex": true,
+              "bSmart": false,
+            }
+         ],
+                    searchDelay: 500,
                     processing: true,
                     serverSide: true,
                     info: true,
@@ -27,14 +33,14 @@
                     },
                 ajax: {
                     url: "{{ route('recipes.index')}}",
-                    data: function (d) {
-                        d.status = $('#status').val();
-                    }                    
+                    // data: function (d) {
+                    //     d.status = $('#status').val();
+                    // }                    
                 },
                 columns: [
                     { data: 'id', name: 'id',exportable:false},
-                    { data: 'title', name: 'title'},
-                    { data: 'category', name: 'category'},
+                    // { data: 'translate.title', name: 'translate.title'},
+                    { data: 'category_id', name: 'category_id'},
                     { data: 'status', name: 'status'},
                     { data: 'featured', name: 'featured'},
                     { data: 'created_at', name: 'created_at'},
@@ -97,7 +103,9 @@
                 ],
                 // Add data-filter attribute
                 createdRow: function (row, data, dataIndex) {
-                $(row).find('td:eq(3)').attr('data-filter', data.status);
+                $(row).find('td:eq(1)').attr('data-filter', data.category_id);
+                $(row).find('td:eq(2)').attr('data-filter', data.status);
+               
             }
             });
     
@@ -123,30 +131,52 @@
     
         // Filter Datatable
         var handleFilterDatatable = () => {
-            // Select filter options
-            filterStatus = document.querySelectorAll('[data-kt-recipes-table-filter="status"] [name="status"]');
-            const filterButton = document.querySelector('[data-kt-recipes-table-filter="filter"]');
-    
-            // Filter datatable on submit
-            filterButton.addEventListener('click', function () {
-                // Get filter values
-                let StatustValue = '';
-    
-                // Get payment value
-                filterStatus.forEach(r => {
-                    if (r.checked) {
-                        StatustValue = r.value;
+        // Select filter options
+
+        // category = $('[data-kt-recipes-table-filter="category"]');
+
+        const filterForm = document.querySelector('[data-kt-recipes-table-filter="status"]');
+        const filterButton = filterForm.querySelector('[data-kt-recipes-table-filter="filter"]');
+        const resetButton = filterForm.querySelector('[data-kt-recipes-table-filter="reset"]');
+        const selectOptions = filterForm.querySelectorAll('select');
+
+        // Filter datatable on submit
+        filterButton.addEventListener('click', function () {
+            
+            
+            var filterString = '';
+
+            // Get filter values
+            selectOptions.forEach((item, index) => {
+                if (item.value && item.value !== '') {
+                    if (index !== 0) {
+                        filterString += ' ';
                     }
-    
-                    // Reset payment value if "All" is selected
-                    if (StatustValue === 'all') {
-                        StatustValue = '';
-                    }
-                });
-    
-                // Filter datatable --- official docs reference: https://datatables.net/reference/api/search()
-                dt.search(StatustValue).draw();
+             
+                    // Build filter value options
+                    filterString += item.value;
+                }
             });
+
+            // Filter datatable --- official docs reference: https://datatables.net/reference/api/search()
+ 
+          
+            
+            dt.search(filterString).draw();
+
+               //dt.search(filterString).draw(); // Original code
+        });
+
+        // Reset datatable
+        resetButton.addEventListener('click', function () {
+            // Reset filter form
+            selectOptions.forEach((item, index) => {
+                // Reset Select2 dropdown --- official docs reference: https://select2.org/programmatic-control/add-select-clear-items
+                $(item).val(null).trigger('change');
+            });
+            // Filter datatable --- official docs reference: https://datatables.net/reference/api/search()
+            datatable.search('').draw();
+        });
         }
     
         // Delete customer

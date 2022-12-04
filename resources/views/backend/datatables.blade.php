@@ -10,15 +10,10 @@
         // Private functions
         var initDatatable = function () {
             dt = $("#kt_recipes_datatable").DataTable({
-                 "search": [
-            {
-              "bRegex": true,
-              "bSmart": false,
-            }
-         ],
-                    searchDelay: 500,
+                searchDelay: 500,
                     processing: true,
                     serverSide: true,
+                    serverFiltering: true, 
                     info: true,
                     pagingType: "full_numbers",
                     pageLength: 10,
@@ -133,7 +128,7 @@
         var handleFilterDatatable = () => {
         // Select filter options
 
-        // category = $('[data-kt-recipes-table-filter="category"]');
+        const category = $('[data-kt-recipes-table-filter="category"]');
 
         const filterForm = document.querySelector('[data-kt-recipes-table-filter="status"]');
         const filterButton = filterForm.querySelector('[data-kt-recipes-table-filter="filter"]');
@@ -145,26 +140,29 @@
             
             
             var filterString = '';
-
+          
             // Get filter values
             selectOptions.forEach((item, index) => {
                 if (item.value && item.value !== '') {
                     if (index !== 0) {
-                        filterString += ' ';
+                        filterString += ' ';                       
                     }
              
                     // Build filter value options
                     filterString += item.value;
+                
                 }
             });
 
             // Filter datatable --- official docs reference: https://datatables.net/reference/api/search()
  
-          
-            
-            dt.search(filterString).draw();
+            // dt.column(1).search( "^" +filterString, true, false, true).draw();
+            // dt.column(2).search( "^" +filterString, true, false, true).draw();
+            dt.search(filterString).draw(); // Original code
 
-               //dt.search(filterString).draw(); // Original code
+            // dt.column(1).search(filterString).draw();
+            // dt.column(2).search(filterString).draw();
+            
         });
 
         // Reset datatable

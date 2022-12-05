@@ -9,6 +9,10 @@
     
         // Private functions
         var initDatatable = function () {
+
+        
+ 
+
             dt = $("#kt_recipes_datatable").DataTable({
                 searchDelay: 500,
                     processing: true,
@@ -100,9 +104,14 @@
                 createdRow: function (row, data, dataIndex) {
                 $(row).find('td:eq(1)').attr('data-filter', data.category_id);
                 $(row).find('td:eq(2)').attr('data-filter', data.status);
+                $(row).find('td:eq(4)').attr('data-order', data.created_at);
                
             }
             });
+
+
+
+
     
             table = dt.$;
     
@@ -129,8 +138,9 @@
         // Select filter options
 
         const category = $('[data-kt-recipes-table-filter="category"]');
+        // const filterMonth = $('[data-kt-customer-table-filter="month"]');
 
-        const filterForm = document.querySelector('[data-kt-recipes-table-filter="status"]');
+        const filterForm = document.querySelector('[data-kt-recipes-table-filter="status"] [name="status"]');
         const filterButton = filterForm.querySelector('[data-kt-recipes-table-filter="filter"]');
         const resetButton = filterForm.querySelector('[data-kt-recipes-table-filter="reset"]');
         const selectOptions = filterForm.querySelectorAll('select');
@@ -138,32 +148,36 @@
         // Filter datatable on submit
         filterButton.addEventListener('click', function () {
             
+            // const monthValue = filterMonth.val();
             
-            var filterString = '';
-          
-            // Get filter values
-            selectOptions.forEach((item, index) => {
-                if (item.value && item.value !== '') {
-                    if (index !== 0) {
-                        filterString += ' ';                       
-                    }
-             
-                    // Build filter value options
-                    filterString += item.value;
-                
+            const categoryValue = category.val();
+
+    
+            var filterStatus = '';
+            alert('sadas');
+            // Get payment value
+            filterForm.forEach(r => {
+                if (r.checked) {
+                    StatusValue = r.value;
+                }
+                alert('sadas');
+
+                // Reset payment value if "All" is selected
+                if (StatusValue === 'all') {
+                    StatusValue = '';
                 }
             });
-
+            const filterString = StatusValue;
             // Filter datatable --- official docs reference: https://datatables.net/reference/api/search()
- 
-            // dt.column(1).search( "^" +filterString, true, false, true).draw();
-            // dt.column(2).search( "^" +filterString, true, false, true).draw();
+                 
             dt.search(filterString).draw(); // Original code
 
-            // dt.column(1).search(filterString).draw();
-            // dt.column(2).search(filterString).draw();
             
-        });
+
+       
+ 
+            
+         });
 
         // Reset datatable
         resetButton.addEventListener('click', function () {

@@ -15,7 +15,7 @@
       <!--begin::Input group-->
       <div class="mb-10">
         <label class="form-label fs-6 fw-semibold">{{ __('site.status')}}:</label>
-        <select class="form-select form-select-solid fw-bold" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-recipes-table-filter="status" name="status" id="status" data-hide-search="true">       
+        <select class="form-select form-select-solid fw-bold" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-recipes-table-filter="status" name="status" data-hide-search="true">       
           <option value="all">{{ __('site.all')}}</option>
           <option value="published">{{ __('site.published')}}</option>
           <option value="unpublished">{{ __('site.unpublished')}}</option> 
@@ -23,9 +23,22 @@
         </select>
       </div>
 
+        {{--<div class="mb-10">
+        <label class="form-label fs-6 fw-semibold">{{ __('site.category')}}:</label>
+ <select class="form-select form-select-solid fw-bold" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-customer-table-filter="month" data-dropdown-parent="#kt-toolbar-filter">
+															<option>---</option>
+															<option value="aug">August</option>
+															<option value="sep">September</option>
+															<option value="oct">October</option>
+															<option value="nov">November</option>
+															<option value="dec">December</option>
+														</select> 
+      </div> --}}
+
+      
       <div class="mb-10">
         <label class="form-label fs-6 fw-semibold">{{ __('site.category')}}:</label>
-        <select class="form-select form-select-solid fw-bold" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-recipes-table-filter="category" name="category" id="category" data-hide-search="true">       
+        <select class="form-select form-select-solid fw-bold" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-recipes-table-filter="category" data-hide-search="true">       
           <option value="all">{{ __('site.all')}}</option>
           <option value="1">cat 1</option>
           <option value="2">cat 2</option> 

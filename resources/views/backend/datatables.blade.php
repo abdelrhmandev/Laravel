@@ -31,7 +31,7 @@
                 },
                 columns: [
                     { data: 'id', name: 'id',exportable:false},
-                    { data: 'title', name: 'title'},
+                    // { data: 'title', name: 'title'},
                     { data: 'category', name: 'category'},
                     // { data: 'tags', name: 'tags'},
                     { data: 'status', name: 'status'},
@@ -345,11 +345,11 @@
         return {
             init: function () {
                 initDatatable();
-                handleSearchDatatable();
-                initToggleToolbar();
+                // handleSearchDatatable();
+                // initToggleToolbar();
                 handleFilterDatatable();
-                handleDeleteRows();
-                handleResetForm();
+                // handleDeleteRows();
+                // handleResetForm();
             }
         }
     }();

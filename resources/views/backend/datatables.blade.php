@@ -32,7 +32,7 @@
                 columns: [
                     { data: 'id', name: 'id',exportable:false},
                     // { data: 'title', name: 'title'},
-                    { data: 'category', name: 'category'},
+                    { data: 'category_id', name: 'category_id'},
                     // { data: 'tags', name: 'tags'},
                     { data: 'status', name: 'status'},
                     { data: 'created_at', name: 'created_at'},
@@ -95,30 +95,30 @@
                 ],
                 // Add data-filter attribute
                 createdRow: function (row, data, dataIndex) {
-                $(row).find('td:eq(1)').attr('data-filter', data.category_id);
-                $(row).find('td:eq(2)').attr('data-filter', data.status);
-     
+                    $(row).find('td:eq(1)').attr('data-filter', data.category_id);
+                    $(row).find('td:eq(2)').attr('data-filter', data.status);
+                }
             });
     
             table = dt.$;
     
             // Re-init functions on every table re-draw -- more info: https://datatables.net/reference/event/draw
             dt.on('draw', function () {
-                initToggleToolbar();
-                toggleToolbars();
-                handleDeleteRows();
+                // initToggleToolbar();
+                // toggleToolbars();
+                // handleDeleteRows();
                 KTMenu.createInstances();
             });
              
         }
     
         // Search Datatable --- official docs reference: https://datatables.net/reference/api/search()
-        var handleSearchDatatable = function () {
+        /*var handleSearchDatatable = function () {
             const filterSearch = document.querySelector('[data-kt-recipes-table-filter="search"]');
             filterSearch.addEventListener('keyup', function (e) {
                 dt.search(e.target.value).draw();
             });
-        }
+        }*/
     
         // Filter Datatable
         var handleFilterDatatable = () => {
@@ -131,6 +131,8 @@
                 // Get filter values
                 let StatustValue = '';
     
+                alert('dasasd');
+
                 // Get payment value
                 filterStatus.forEach(r => {
                     if (r.checked) {
@@ -147,7 +149,7 @@
                 dt.search(StatustValue).draw();
             });
         }
-    
+        /*
         // Delete customer
         var handleDeleteRows = () => {
             // Select all delete buttons
@@ -340,7 +342,7 @@
                 toolbarSelected.classList.add('d-none');
             }
         }
-    
+        */
         // Public methods
         return {
             init: function () {

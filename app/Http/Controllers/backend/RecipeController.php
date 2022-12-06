@@ -113,14 +113,14 @@ class RecipeController extends Controller
                             return $row->status;
                           })
                           ->editColumn('featured', function ($row) {                                                          
-                            // return  $row->featured == 1 ? 1:0;                                        
-                            return  $row->featured == 1 ? "<div class=\"badge badge-light-primary\">".__('site.featured')."</div>" : "<div class=\"badge badge-light-danger\">".__('site.not_featured')."</div>";                                       
+                            return  $row->featured == 1 ? 1:0;                                        
+                            // return  $row->featured == 1 ? "<div class=\"badge badge-light-primary\">".__('site.featured')."</div>" : "<div class=\"badge badge-light-danger\">".__('site.not_featured')."</div>";                                       
                           })
                           ->editColumn('created_at', function ($row) {
                             return $row->created_at->format('d/m/Y');
                         })
 
-                        ->rawColumns(['category_id','status','featured','created_at'])    
+                        ->rawColumns(['translate.title','category_id','status','created_at'])    
                         ->make(true);    
             }    
             return view('backend.recipes.index');    

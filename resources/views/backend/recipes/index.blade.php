@@ -88,7 +88,7 @@
                   <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_recipes_datatable .form-check-input" value="1" />
                 </div>
               </th>            
-              {{-- <th>{{ __('site.title') }}</th>  --}}            
+              <th>{{ __('site.title') }}</th>             
               <th>{{ __('site.category') }}</th> 
               <th>{{ __('site.status') }}</th>
               <th>{{ __('site.featured') }}</th>
@@ -111,7 +111,7 @@
     <!--end::Card-->
     <!--begin::Modals-->
     <!--begin::Modal - Adjust Balance-->
-    @include('backend.partials.modals._exportlisting')
+    {{-- @include('backend.partials.modals._exportlisting') --}}
     <!--end::Modal - New Card-->
     <!--end::Modals-->
   </div>  <!--end::Container-->

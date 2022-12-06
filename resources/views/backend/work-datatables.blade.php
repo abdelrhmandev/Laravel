@@ -97,7 +97,7 @@
                 createdRow: function (row, data, dataIndex) {
                 $(row).find('td:eq(1)').attr('data-filter', data.category_id);
                 $(row).find('td:eq(2)').attr('data-filter', data.status);
-                }
+     
             });
     
             table = dt.$;

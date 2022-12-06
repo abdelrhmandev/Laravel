@@ -8,7 +8,7 @@
     <div class="separator border-gray-200"></div>
     <!--end::Separator-->
     <!--begin::Content-->
-    <div class="px-7 py-5">
+    <div class="px-7 py-5" data-kt-recipes-table-filter="form">
       <!--begin::Input group-->
      
       <!--end::Input group-->
@@ -38,14 +38,14 @@
       
       <div class="mb-10">
         <label class="form-label fs-6 fw-semibold">{{ __('site.category')}}:</label>
-        <select class="form-select form-select-solid fw-bold" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-recipes-table-filter="category" data-hide-search="true">       
+        <select class="form-select form-select-solid fw-bold" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-recipes-table-filter="category" name="category" data-hide-search="true">       
           <option value="all">{{ __('site.all')}}</option>
           <option value="1">cat 1</option>
           <option value="2">cat 2</option> 
           <option value="3">cat 3 </option> 
           <option value="4">cat 4 </option>
         </select>
-      </div>
+      </div>  
       <!--end::Input group-->
       <!--begin::Input group-->
    

@@ -9,20 +9,16 @@
     
         // Private functions
         var initDatatable = function () {
-
-        
- 
-
             dt = $("#kt_recipes_datatable").DataTable({
                 searchDelay: 500,
                     processing: true,
                     serverSide: true,
-                    serverFiltering: true, 
                     info: true,
                     pagingType: "full_numbers",
                     pageLength: 10,
                     lengthChange: true,
                     stateSave: false,
+                    pageLength: 10,
                     lengthMenu: [[1, 10, 25, 50, -1], [1, 10, 25, 50, "AllXXX"]],
                     order: [],
                     select: {
@@ -32,16 +28,13 @@
                     },
                 ajax: {
                     url: "{{ route('recipes.index')}}",
-                    // data: function (d) {
-                    //     d.status = $('#status').val();
-                    // }                    
                 },
                 columns: [
                     { data: 'id', name: 'id',exportable:false},
-                    // { data: 'translate.title', name: 'translate.title'},
-                    { data: 'category_id', name: 'category_id'},
+                    // { data: 'title', name: 'title'},
+                    { data: 'category', name: 'category'},
+                    // { data: 'tags', name: 'tags'},
                     { data: 'status', name: 'status'},
-                    { data: 'featured', name: 'featured'},
                     { data: 'created_at', name: 'created_at'},
                     { data: null },
                 ],
@@ -104,20 +97,14 @@
                 createdRow: function (row, data, dataIndex) {
                 $(row).find('td:eq(1)').attr('data-filter', data.category_id);
                 $(row).find('td:eq(2)').attr('data-filter', data.status);
-                $(row).find('td:eq(4)').attr('data-order', data.created_at);
-               
-            }
+     
             });
-
-
-
-
     
             table = dt.$;
     
             // Re-init functions on every table re-draw -- more info: https://datatables.net/reference/event/draw
             dt.on('draw', function () {
-                // initToggleToolbar();
+                initToggleToolbar();
                 // toggleToolbars();
                 // handleDeleteRows();
                 KTMenu.createInstances();
@@ -126,73 +113,43 @@
         }
     
         // Search Datatable --- official docs reference: https://datatables.net/reference/api/search()
-        /*var handleSearchDatatable = function () {
+        var handleSearchDatatable = function () {
             const filterSearch = document.querySelector('[data-kt-recipes-table-filter="search"]');
             filterSearch.addEventListener('keyup', function (e) {
                 dt.search(e.target.value).draw();
             });
-        }*/
+        }
     
         // Filter Datatable
         var handleFilterDatatable = () => {
-        // Select filter options
-
-        const category = $('[data-kt-recipes-table-filter="category"]');
-        // const filterMonth = $('[data-kt-customer-table-filter="month"]');
-
-        const filterForm = document.querySelector('[data-kt-recipes-table-filter="status"] [name="status"]');
-        const filterButton = filterForm.querySelector('[data-kt-recipes-table-filter="filter"]');
-        const resetButton = filterForm.querySelector('[data-kt-recipes-table-filter="reset"]');
-        const selectOptions = filterForm.querySelectorAll('select');
-
-        // Filter datatable on submit
-        filterButton.addEventListener('click', function () {
-            
-            // const monthValue = filterMonth.val();
-            
-            const categoryValue = category.val();
-
+            // Select filter options
+            filterStatus = document.querySelectorAll('[data-kt-recipes-table-filter="status"] [name="status"]');
+            const filterButton = document.querySelector('[data-kt-recipes-table-filter="filter"]');
     
-            var filterStatus = '';
-            alert('sadas');
-            // Get payment value
-            filterForm.forEach(r => {
-                if (r.checked) {
-                    StatusValue = r.value;
-                }
-                alert('sadas');
-
-                // Reset payment value if "All" is selected
-                if (StatusValue === 'all') {
-                    StatusValue = '';
-                }
+            // Filter datatable on submit
+            filterButton.addEventListener('click', function () {
+                // Get filter values
+                let StatustValue = '';
+    
+                // Get payment value
+                filterStatus.forEach(r => {
+                    if (r.checked) {
+                        StatustValue = r.value;
+                    }
+    
+                    // Reset payment value if "All" is selected
+                    if (StatustValue === 'all') {
+                        StatustValue = '';
+                    }
+                });
+    
+                // Filter datatable --- official docs reference: https://datatables.net/reference/api/search()
+                dt.search(StatustValue).draw();
             });
-            const filterString = StatusValue;
-            // Filter datatable --- official docs reference: https://datatables.net/reference/api/search()
-                 
-            dt.search(filterString).draw(); // Original code
-
-            
-
-       
- 
-            
-         });
-
-        // Reset datatable
-        resetButton.addEventListener('click', function () {
-            // Reset filter form
-            selectOptions.forEach((item, index) => {
-                // Reset Select2 dropdown --- official docs reference: https://select2.org/programmatic-control/add-select-clear-items
-                $(item).val(null).trigger('change');
-            });
-            // Filter datatable --- official docs reference: https://datatables.net/reference/api/search()
-            datatable.search('').draw();
-        });
         }
     
         // Delete customer
-        /*var handleDeleteRows = () => {
+        var handleDeleteRows = () => {
             // Select all delete buttons
             const deleteButtons = document.querySelectorAll('[data-kt-recipes-table-filter="delete_row"]');
     
@@ -256,28 +213,24 @@
                     });
                 })
             });
-        }*/
+        }
     
         // Reset Filter
-       
-        /*var handleResetForm = () => {
+        var handleResetForm = () => {
             // Select reset button
             const resetButton = document.querySelector('[data-kt-recipes-table-filter="reset"]');
     
             // Reset datatable
             resetButton.addEventListener('click', function () {
                 // Reset payment type
-                filterStatus[3].checked = true;
+                filterStatus[0].checked = true;
     
                 // Reset datatable --- official docs reference: https://datatables.net/reference/api/search()
                 dt.search('').draw();
             });
-        }*/
-        
+        }
     
         // Init toggle toolbar
-         
-        /*
         var initToggleToolbar = function () {
             // Toggle selected action toolbar
             // Select all checkboxes
@@ -353,11 +306,9 @@
                 });
             });
         }
-        */
-         
     
         // Toggle toolbars
-        /*var toggleToolbars = function () {
+        var toggleToolbars = function () {
             // Define variables
             const container = document.querySelector('#kt_recipes_datatable');
             const toolbarBase = document.querySelector('[data-kt-recipes-table-toolbar="base"]');
@@ -389,7 +340,6 @@
                 toolbarSelected.classList.add('d-none');
             }
         }
-        */
     
         // Public methods
         return {

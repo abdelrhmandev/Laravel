@@ -8,7 +8,7 @@
     <div class="separator border-gray-200"></div>
     <!--end::Separator-->
     <!--begin::Content-->
-    <div class="px-7 py-5" data-kt-recipes-table-filter="status">
+    <div class="px-7 py-5">
       <!--begin::Input group-->
      
       <!--end::Input group-->

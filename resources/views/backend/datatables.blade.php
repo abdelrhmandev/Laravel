@@ -31,7 +31,7 @@
                 },
                 columns: [
                     { data: 'id', name: 'id',exportable:false},
-                    // { data: 'title', name: 'title'},
+                    { data: 'title', name: 'title'},
                     { data: 'category', name: 'category'},
                     // { data: 'tags', name: 'tags'},
                     { data: 'status', name: 'status'},
@@ -105,8 +105,8 @@
             // Re-init functions on every table re-draw -- more info: https://datatables.net/reference/event/draw
             dt.on('draw', function () {
                 initToggleToolbar();
-                // toggleToolbars();
-                // handleDeleteRows();
+                toggleToolbars();
+                handleDeleteRows();
                 KTMenu.createInstances();
             });
              
@@ -345,11 +345,11 @@
         return {
             init: function () {
                 initDatatable();
-                // handleSearchDatatable();
-                // initToggleToolbar();
+                handleSearchDatatable();
+                initToggleToolbar();
                 handleFilterDatatable();
-                // handleDeleteRows();
-                // handleResetForm();
+                handleDeleteRows();
+                handleResetForm();
             }
         }
     }();
@@ -358,5 +358,5 @@
     KTUtil.onDOMContentLoaded(function () {
         KTDatatablesServerSide.init();
     });
- </script>
+    </script>
     

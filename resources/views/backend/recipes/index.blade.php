@@ -16,7 +16,7 @@
         <!--begin::Card title-->
         <div class="card-title">
           <!--begin::Search-->
-          {{-- <div class="d-flex align-items-center position-relative my-1">
+          <div class="d-flex align-items-center position-relative my-1">
             <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
             <span class="svg-icon svg-icon-1 position-absolute ms-6">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -25,8 +25,8 @@
               </svg>
             </span>
             <!--end::Svg Icon-->
-            <input type="text" data-kt-recipes-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Search Recipes ..... " />
-          </div> --}}
+            <input type="text" data-kt-recipes-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="{{ __('site.search') }} ......" />
+          </div>
           <!--end::Search-->
         </div>
         <!--begin::Card title-->
@@ -44,7 +44,40 @@
             </span>
             <!--end::Svg Icon-->{{ __('site.filter') }}</button>
             <!--begin::Menu 1-->
-            @include('backend.partials._filterlisting')
+           
+            <div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px" data-kt-menu="true" id="kt-toolbar-filter">
+              <!--begin::Header-->
+              <div class="px-7 py-5">
+                <div class="fs-4 text-dark fw-bold">{{ __('site.filter_options') }}</div>
+              </div>
+              <!--end::Header-->
+              <!--begin::Separator-->
+              <div class="separator border-gray-200"></div>
+              <!--end::Separator-->
+              <!--begin::Content-->
+              <div class="px-7 py-5" data-kt-recipes-table-filter="form">
+                <!--begin::Input group-->
+               
+                <!--end::Input group-->
+                <!--begin::Input group-->
+               @include('backend.partials.filter_optipns._category',['category'=>$categories])
+               @include('backend.partials.filter_optipns._status',['status'=>['published','unpublished','scheduled']])
+           
+                <!--end::Input group-->
+                <!--begin::Actions-->
+                <div class="d-flex justify-content-end">
+                  <button type="reset" class="btn btn-light btn-active-light-primary fw-semibold me-2 px-6" data-kt-menu-dismiss="true" data-kt-recipes-table-filter="reset">{{ __('site.reset') }}</button>
+                  <button type="submit" class="btn btn-primary fw-semibold px-6" data-kt-menu-dismiss="true" data-kt-recipes-table-filter="filter">{{ __('site.apply') }}</button>
+                </div>
+                <!--end::Actions-->
+              </div>
+              
+              <!--end::Content-->
+            </div>
+
+            
+
+
              <!--end::Menu 1-->
             <!--end::Filter-->
             <!--begin::Export-->
@@ -60,7 +93,7 @@
             <!--end::Svg Icon-->{{ __('site.export') }}</button>
             <!--end::Export-->
             <!--begin::Add recipes-->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="google.com">{{ __('recipe.add') }}</button>
+            <a class="btn btn-primary" href="sdsadsa.php">{{ __('recipe.add') }}</a>
             <!--end::Add recipes-->
           </div>
           <!--end::Toolbar-->
@@ -82,7 +115,7 @@
           <!--begin::Table head-->
           <thead>
             <!--begin::Table row-->
-            <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+            <tr class="text-start text-bold-400 fw-bold fs-7 text-uppercase gs-0">
               <th class="w-10px pe-2">
                 <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
                   <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_recipes_datatable .form-check-input" value="1" />
@@ -90,6 +123,8 @@
               </th>            
               <th>{{ __('site.title') }}</th>             
               <th>{{ __('site.category') }}</th> 
+              {{-- <th>{{ __('site.tags') }}</th> --}}
+              {{-- <th>{{ __('site.comments') }}</th> --}}
               <th>{{ __('site.status') }}</th>
               <th>{{ __('site.featured') }}</th>
               <th>{{ __('site.created_at') }}</th>

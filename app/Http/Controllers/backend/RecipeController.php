@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Http\Controllers\Controller;
 use LaravelLocalization;
 use App\Models\Recipe;
+use App\Models\RecipeCategory;
 use App\Traits\UploadAble;
 use App\Traits\Functions;
 // use App\Traits\DatatableLang;
@@ -44,7 +45,7 @@ class RecipeController extends Controller
  
             if ($request->ajax()) {
                 
-                $query = Recipe::with(['category','tags'])->latest();    
+                $query = Recipe::withCount('comments')->with(['category','tags'])->latest();    
 
               
 
@@ -80,50 +81,73 @@ class RecipeController extends Controller
                         })
 
                         ->editColumn('category_id', function ($row) {                                                          
-                            return $row->category_id ?? '__';
-                            // return $row->category_id ? "<a href=\"sdasd\" class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-category-filter=\"category\">".$row->category->translate->title."</a>" : "<span aria-hidden=\"true\">—</span>";                                       
+                            // return $row->category_id ?? '__';
+                            return $row->category_id ? "<a href=\"sdasd\" class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-category-filter=\"category\">".$row->category->translate->title."</a>" : "<span aria-hidden=\"true\">—</span>";                                       
                           })
 
-                          /*->editColumn('tags', function($row) {                              
-                            $tags = "<div class=\"d-flex flex-column flex-grow-1 my-lg-0 my-2 pe-3\">														 
-                                        <span class=\"text-gray-400 fw-semibold fs-7\">";                                    
+                           ->editColumn('tags', function($row) {            
+                            $tags= "";                  
+                               
                                         if(count($row->tags)){  
+                                            $tags.= "<div class=\"d-flex flex-column flex-grow-1 my-lg-0 my-2 pe-3\">														 
+                                            <span class=\"text-gray-400 fw-semibold fs-7\">";     
+
                                             $tags_str = ''; 
                                             foreach($row->tags as $tag){
                                                 $tags_str.= "<a class=\"text-primary fw-bold\" href =".route('tags.edit',$tag->id)." title=".$tag->translate->title.">".$tag->translate->title."</a>".' , ';
                                             }
                                             $tags.= substr_replace($tags_str,"",-2);
+                                            $tags.="</span>";
+                                            $tags.="</div>";   
+
                                         }else{
                                             $tags.= "<span aria-hidden=\"true\">—</span>";
                                         }                                                                                               
-                                    $tags.="</span>";
-                                    $tags.="</div>";                                                            
+                                                         
                                return $tags;
-                           })*/                          
- 
+                           })                          
+                          
 
                          ->editColumn('status', function ($row) {                                                          
                            if($row->status == 'published') {
-                                $status = "<div class=\"badge badge-light-primary\">".__('site.published')."</div>";
+                                $status = "<div class=\"badge py-3 px-4 fs-7 badge-light-primary\">".__('site.published')."</div>";
                            }elseif($row->status == 'unpublished'){
-                                $status = "<div class=\"badge badge-light-danger\">".__('site.unpublished')."</div>";
+                                $status = "<div class=\"badge py-3 px-4 fs-7 badge-light-danger\">".__('site.unpublished')."</div>";
                            }elseif($row->status == 'scheduled') {
-                                $status = "<div class=\"badge badge-light-warning\">".__('site.scheduled')."</div>";
+                                $status = "<div class=\"badge py-3 px-4 fs-7 badge-light-warning\">".__('site.scheduled')."</div>";
                            }
-                            return $row->status;
+                            return $status;
                           })
                           ->editColumn('featured', function ($row) {                                                          
-                            return  $row->featured == 1 ? 1:0;                                        
-                            // return  $row->featured == 1 ? "<div class=\"badge badge-light-primary\">".__('site.featured')."</div>" : "<div class=\"badge badge-light-danger\">".__('site.not_featured')."</div>";                                       
+                            // return  $row->featured == 1 ? 1:0;  
+                            return  $row->featured == 1 ? "<div class=\"badge py-3 px-4 fs-7 badge-light-success\">".__('site.featured')."</div>" : "<div class=\"badge py-3 px-4 fs-7 badge-light-info\">".__('site.not_featured')."</div>";                                       
                           })
                           ->editColumn('created_at', function ($row) {
                             return $row->created_at->format('d/m/Y');
                         })
+                        
+                        ->editColumn('comments', function ($row) {                                                                                    
+                           return $row->comments_count > 0 ? "<span class=\"fw-bold text-success py-1\">".$row->comments_count."</span>":"<span aria-hidden=\"true\">—</span>";
+                           })
 
-                        ->rawColumns(['translate.title','category_id','status','created_at'])    
+                           
+
+                        ->rawColumns(['translate.title','category_id','status','featured','created_at'])    
                         ->make(true);    
             }    
-            return view('backend.recipes.index');    
+
+         
+
+
+            $compact                          = [
+            'categories'                      => RecipeCategory::select('id')->latest()->get(),
+            'page_title'                      => trans('orphan.interventions_menu'),
+            'header_title'                    => trans('orphan.interventions_menu')
+            ];
+            return view('backend.recipes.index', $compact);
+
+
+    
         }
         
 

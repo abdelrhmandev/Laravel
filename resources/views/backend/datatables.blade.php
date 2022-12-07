@@ -17,11 +17,13 @@ var KTDatatablesServerSide = function () {
             processing: true,
             serverSide: true,
             info: true,
+ 
+            bPaginate: true, 
             pagingType: "full_numbers",
-            pageLength: 10,
-            lengthChange: true,
+           
+            iDisplayLength: 1,
+            bLengthChange: true,
             stateSave: false,
-            pageLength: 10,
             lengthMenu: [[1, 10, 25, 50, -1], [1, 10, 25, 50, "AllXXX"]],
             order: [],
             select: {
@@ -33,13 +35,15 @@ var KTDatatablesServerSide = function () {
                 url: "{{ route('recipes.index')}}",
             },
             columns: [
-                   { data: 'id', name: 'id',exportable:false},
-                    { data: 'translate.title', name: 'translate.title'},
-                    { data: 'category_id', name: 'category_id'},
-                    // { data: 'tags', name: 'tags'},
-                    { data: 'status', name: 'status'},
-                    { data: 'created_at', name: 'created_at'},
-                    { data: null },
+                { data: 'id', name: 'id',exportable:false},
+                { data: 'translate.title', name: 'translate.title'},
+                { data: 'category_id', name: 'category_id'},
+                // { data: 'tags', name: 'tags'},
+                // { data: 'comments', name: 'comments'},
+                { data: 'status', name: 'status'},
+                { data: 'featured', name: 'featured'},
+                { data: 'created_at', name: 'created_at'},
+                { data: null },
             ],
             columnDefs: [
                 {
@@ -96,9 +100,9 @@ var KTDatatablesServerSide = function () {
             // Add data-filter attribute
                  // Add data-filter attribute
                  createdRow: function (row, data, dataIndex) {
-                    $(row).find('td:eq(2)').attr('data-filter', data.category_id);
-                    $(row).find('td:eq(3)').attr('data-filter', data.status);
-                    $(row).find('td:eq(4)').attr('data-filter', data.created_at);
+                    // $(row).find('td:eq(2)').attr('data-filter', data.category_id);
+                    // $(row).find('td:eq(3)').attr('data-filter', data.status);
+                    // $(row).find('td:eq(4)').attr('data-filter', data.created_at);
                 }
         });
 
@@ -106,61 +110,267 @@ var KTDatatablesServerSide = function () {
 
         // Re-init functions on every table re-draw -- more info: https://datatables.net/reference/event/draw
         dt.on('draw', function () {
+            initToggleToolbar();
+            toggleToolbars();
+            handleDeleteRows();
             KTMenu.createInstances();
         });
     }
 
     // Search Datatable --- official docs reference: https://datatables.net/reference/api/search()
  
+ 
+ 
+        var handleSearchDatatable = function () {
+                const filterSearch = document.querySelector('[data-kt-recipes-table-filter="search"]');
+                filterSearch.addEventListener('keyup', function (e) {
+                    dt.search(e.target.value).draw();
+                });
+            }
 
-    // Filter Datatable
-       // Filter Datatable
-       var handleFilterDatatable = function () {
-        // Select filter options
-        const filterForm = document.querySelector('[data-kt-recipes-table-filter="form"]');
+        // Filter Datatable
+        var handleFilterDatatable = function () {
+            // Select filter options
+            const filterForm = document.querySelector('[data-kt-recipes-table-filter="form"]');
 
-        const filterStatus = document.querySelectorAll('[data-kt-recipes-table-filter="status"][name="status"]');
+            filterStatus = document.querySelectorAll('[data-kt-recipes-table-filter="status"][name="status"]');
 
-        const filterCategory =  document.querySelectorAll('[data-kt-recipes-table-filter="category"][name="category"]');
+            const filterCategory =  document.querySelectorAll('[data-kt-recipes-table-filter="category"][name="category"]');
 
-        const filterButton = filterForm.querySelector('[data-kt-recipes-table-filter="filter"]');
+            const filterButton = filterForm.querySelector('[data-kt-recipes-table-filter="filter"]');
 
-        const resetButton = filterForm.querySelector('[data-kt-recipes-table-filter="reset"]');
+      
 
 
-        //const selectOptions = filterForm.querySelectorAll('select');
+            //const selectOptions = filterForm.querySelectorAll('select');
 
-        // Filter datatable on submit
-        filterButton.addEventListener('click', function () {
-            let  StatusValue = '';
-            let  CategoryValue =  '';
+            // Filter datatable on submit
+            filterButton.addEventListener('click', function () {
+                let  StatusValue = '';
+                let  CategoryValue =  '';
 
-            // Get filter Status Values
-            filterStatus.forEach(r => {
-                r.value === 'all' ? StatusValue = '' : StatusValue = r.value;                
-            });
-            //Get filter Categories Values
-            filterCategory.forEach(c => {
-                c.value === 'all' ? CategoryValue = '' : CategoryValue = c.value;                
-            });
-           
-            // Filter datatable --- official docs reference: https://datatables.net/reference/api/search()
-          
-            const filterString = StatusValue + ' ' + CategoryValue;
-            //dt.search(filterString).draw(); // Original Code
-                var searchStatus = StatusValue.toLowerCase(),
-                regexStatus = '\\b' + searchStatus + '\\b';
-                dt.column(2).search(regexStatus, true, false).column(1).search(CategoryValue).draw();
+                // Get filter Status Values
+                filterStatus.forEach(r => {
+                    r.value === 'all' ? StatusValue = '' : StatusValue = r.value;                
+                });
+                //Get filter Categories Values
+                filterCategory.forEach(c => {
+                    c.value === 'all' ? CategoryValue = '' : CategoryValue = c.value;                
+                });
             
+                // Filter datatable --- official docs reference: https://datatables.net/reference/api/search()
+            
+                const filterString = StatusValue + ' ' + CategoryValue;
+                //dt.search(filterString).draw(); // Original Code
+                    var searchStatus = StatusValue.toLowerCase(),regexStatus = '\\b' + searchStatus + '\\b';                    
+                    dt.column(3).search(regexStatus, true, false).column(2).search(CategoryValue).draw();                
+            });
+
+    
+        }
+        // Delete customer
+        var handleDeleteRows = () => {
+            // Select all delete buttons
+            const deleteButtons = document.querySelectorAll('[data-kt-recipes-table-filter="delete_row"]');
+    
+            deleteButtons.forEach(d => {
+                // Delete button on click
+                d.addEventListener('click', function (e) {
+                    e.preventDefault();
+    
+                    // Select parent row
+                    const parent = e.target.closest('tr');
+    
+                    // Get customer name
+                    const customerName = parent.querySelectorAll('td')[1].innerText;
+    
+                    // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
+                    Swal.fire({
+                        text: "Are you sure you want to delete " + customerName + "?",
+                        icon: "warning",
+                        showCancelButton: true,
+                        buttonsStyling: false,
+                        confirmButtonText: "Yes, delete!",
+                        cancelButtonText: "No, cancel",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-danger",
+                            cancelButton: "btn fw-bold btn-active-light-primary"
+                        }
+                    }).then(function (result) {
+                        if (result.value) {
+                            // Simulate delete request -- for demo purpose only
+                            Swal.fire({
+                                text: "Deleting " + customerName,
+                                icon: "info",
+                                buttonsStyling: false,
+                                showConfirmButton: false,
+                                timer: 2000
+                            }).then(function () {
+                                Swal.fire({
+                                    text: "You have deleted " + customerName + "!.",
+                                    icon: "success",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn fw-bold btn-primary",
+                                    }
+                                }).then(function () {
+                                    // delete row data from server and re-draw datatable
+                                    dt.draw();
+                                });
+                            });
+                        } else if (result.dismiss === 'cancel') {
+                            Swal.fire({
+                                text: customerName + " was not deleted.",
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn fw-bold btn-primary",
+                                }
+                            });
+                        }
+                    });
+                })
+            });
+        }
+ 
+        // Reset Filter
+        var handleResetForm = () => {
+
+          
+            // Select reset button
+            const resetButton = document.querySelector('[data-kt-recipes-table-filter="reset"]');
+    
+            // Reset datatable
+            resetButton.addEventListener('click', function () {
+            // Reset month
+            // filterMonth.val(null).trigger('change');
+          
+            // Reset payment type
+   
+
+            $("#status").val("all").change();
+            $("#category").val("all").change();
+
+           
+   
+
+            // Reset datatable --- official docs reference: https://datatables.net/reference/api/search()
+            dt.column(3).search('').column(2).search('').draw();  
         });
-
+        }
  
-    }
-
- 
-
- 
-
+        // Init toggle toolbar
+        var initToggleToolbar = function () {
+            // Toggle selected action toolbar
+            // Select all checkboxes
+            const container = document.querySelector('#kt_recipes_datatable');
+            const checkboxes = container.querySelectorAll('[type="checkbox"]');
+    
+            // Select elements
+            const deleteSelected = document.querySelector('[data-kt-recipes-table-select="delete_selected"]');
+    
+            // Toggle delete selected toolbar
+            checkboxes.forEach(c => {
+                // Checkbox on click event
+                c.addEventListener('click', function () {
+                    setTimeout(function () {
+                        toggleToolbars();
+                    }, 50);
+                });
+            });
+    
+            // Deleted selected rows
+            deleteSelected.addEventListener('click', function () {
+                // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
+                Swal.fire({
+                    text: "Are you sure you want to delete selected customers?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    buttonsStyling: false,
+                    showLoaderOnConfirm: true,
+                    confirmButtonText: "Yes, delete!",
+                    cancelButtonText: "No, cancel",
+                    customClass: {
+                        confirmButton: "btn fw-bold btn-danger",
+                        cancelButton: "btn fw-bold btn-active-light-primary"
+                    },
+                }).then(function (result) {
+                    if (result.value) {
+                        // Simulate delete request -- for demo purpose only
+                        Swal.fire({
+                            text: "Deleting selected customers",
+                            icon: "info",
+                            buttonsStyling: false,
+                            showConfirmButton: false,
+                            timer: 2000
+                        }).then(function () {
+                            Swal.fire({
+                                text: "You have deleted all selected customers!.",
+                                icon: "success",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn fw-bold btn-primary",
+                                }
+                            }).then(function () {
+                                // delete row data from server and re-draw datatable
+                                dt.draw();
+                            });
+    
+                            // Remove header checked box
+                            const headerCheckbox = container.querySelectorAll('[type="checkbox"]')[0];
+                            headerCheckbox.checked = false;
+                        });
+                    } else if (result.dismiss === 'cancel') {
+                        Swal.fire({
+                            text: "Selected customers was not deleted.",
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn fw-bold btn-primary",
+                            }
+                        });
+                    }
+                });
+            });
+        }
+    
+        // Toggle toolbars
+        var toggleToolbars = function () {
+            // Define variables
+            const container = document.querySelector('#kt_recipes_datatable');
+            const toolbarBase = document.querySelector('[data-kt-recipes-table-toolbar="base"]');
+            const toolbarSelected = document.querySelector('[data-kt-recipes-table-toolbar="selected"]');
+            const selectedCount = document.querySelector('[data-kt-recipes-table-select="selected_count"]');
+    
+            // Select refreshed checkbox DOM elements
+            const allCheckboxes = container.querySelectorAll('tbody [type="checkbox"]');
+    
+            // Detect checkboxes state & count
+            let checkedState = false;
+            let count = 0;
+    
+            // Count checked boxes
+            allCheckboxes.forEach(c => {
+                if (c.checked) {
+                    checkedState = true;
+                    count++;
+                }
+            });
+    
+            // Toggle toolbars
+            if (checkedState) {
+                selectedCount.innerHTML = count;
+                toolbarBase.classList.add('d-none');
+                toolbarSelected.classList.remove('d-none');
+            } else {
+                toolbarBase.classList.remove('d-none');
+                toolbarSelected.classList.add('d-none');
+            }
+        }
  
 
  
@@ -168,9 +378,12 @@ var KTDatatablesServerSide = function () {
     // Public methods
     return {
         init: function () {
-            initDatatable();
-            handleFilterDatatable();
- 
+        initDatatable();
+        handleSearchDatatable();
+        initToggleToolbar();
+        handleFilterDatatable();
+        handleDeleteRows();
+        handleResetForm();
         }
     }
 }();

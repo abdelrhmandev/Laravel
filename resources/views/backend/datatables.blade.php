@@ -16,12 +16,21 @@ var KTDatatablesServerSide = function () {
             searchDelay: 500,
             processing: true,
             serverSide: true,
-            info: true,
- 
-            bPaginate: true, 
+            info: true, 
+            bPaginate: true,             
             pagingType: "full_numbers",
-           
-            iDisplayLength: 1,
+            language: {
+            url: "//cdn.datatables.net/plug-ins/1.12.1/i18n/{{ app()->getLocale()}}.json"
+            },
+
+            fnDrawCallback: function() {
+                if (Math.ceil((this.fnSettings().fnRecordsDisplay()) / this.fnSettings()._iDisplayLength) < 1) {
+                    $('.dataTables_paginate').css("display", "none"); $('.dataTables_length').css("display", "none"); $('.dataTables_info').css("display", "none");            
+                }else{
+                    $('.dataTables_paginate').css("display", "block"); $('.dataTables_length').css("display", "block"); $('.dataTables_info').css("display", "block");            
+                }   
+            },            
+            iDisplayLength: 10,
             bLengthChange: true,
             stateSave: false,
             lengthMenu: [[1, 10, 25, 50, -1], [1, 10, 25, 50, "AllXXX"]],
@@ -164,6 +173,9 @@ var KTDatatablesServerSide = function () {
                 //dt.search(filterString).draw(); // Original Code
                     var searchStatus = StatusValue.toLowerCase(),regexStatus = '\\b' + searchStatus + '\\b';                    
                     dt.column(3).search(regexStatus, true, false).column(2).search(CategoryValue).draw();                
+                    
+ 
+
             });
 
     

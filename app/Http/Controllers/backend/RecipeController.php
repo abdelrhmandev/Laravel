@@ -45,7 +45,7 @@ class RecipeController extends Controller
  
             if ($request->ajax()) {
                 
-                $query = Recipe::withCount('comments')->with(['category','tags'])->latest();    
+                $query = Recipe::withCount('comments')->with(['category','tags.translate'])->latest();    
 
               
 
@@ -132,7 +132,7 @@ class RecipeController extends Controller
 
                            
 
-                        ->rawColumns(['translate.title','category_id','status','featured','created_at'])    
+                        ->rawColumns(['translate.title','category_id','status','tags','featured','created_at'])    
                         ->make(true);    
             }    
 

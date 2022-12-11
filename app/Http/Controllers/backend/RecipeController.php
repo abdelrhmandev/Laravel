@@ -64,11 +64,9 @@ class RecipeController extends Controller
                                             </span>
                                         </a>";                                                                
                             }else{
-                                $div.="<div class=\"symbol symbol-50px overflow-hidden me-3\">
-                                            <a href=\"A\" title='".$row->translate->title."'>
+                                $div.="<a href=\"A\" class=\"symbol symbol-50px\" title='".$row->translate->title."'>
                                                 <div class=\"symbol-label fs-3 bg-light-primary text-primary\">".$this->str_split($row->translate->title,1)."</div>
-                                            </a>
-                                       </div>";  
+                                       </a>";  
                             } 
                             $description = "<div class=\"text-muted fs-7 fw-bold\">".Str::of($row->translate->description)->words(8,'...')."</div>";
                             $div.="<div class=\"ms-5\">

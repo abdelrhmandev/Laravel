@@ -200,7 +200,7 @@ var KTDatatablesServerSide = function () {
     
                     // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
                     Swal.fire({
-                        text: "Are you sure you want to delete " + itemName + "?",
+                        text: "Are you sure you want to deleteXXXX " + itemName + "?",
                         icon: "warning",
                         showCancelButton: true,
                         buttonsStyling: false,
@@ -385,7 +385,7 @@ var KTDatatablesServerSide = function () {
                 toolbarSelected.classList.add('d-none');
             }
         }
- 
+        // Handle Export 
         var exportButtons = function (){
             const documentTitle = 'Customer Orders Repo222222222rt';
             var buttons = new $.fn.dataTable.Buttons(table, {

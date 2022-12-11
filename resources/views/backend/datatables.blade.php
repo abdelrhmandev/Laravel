@@ -15,7 +15,7 @@ var KTDatatablesServerSide = function () {
         dt = $("#kt_recipes_datatable").DataTable({
             searchDelay: 500,
             processing: true,
-            serverSide: true,
+            serverSide: true,                
             info: true, 
             bPaginate: true,             
             pagingType: "full_numbers",
@@ -36,7 +36,7 @@ var KTDatatablesServerSide = function () {
             lengthMenu: [[1, 10, 25, 50, -1], [1, 10, 25, 50, "AllXXX"]],
             order: [],
             select: {
-                style: 'multi',
+                style: 'os',
                 selector: 'td:first-child input[type="checkbox"]',
                 className: 'row-selected'
             },
@@ -52,7 +52,7 @@ var KTDatatablesServerSide = function () {
                 { data: 'status', name: 'status'},
                 { data: 'featured', name: 'featured'},
                 { data: 'created_at', name: 'created_at'},
-                { data: null },
+                { data: null ,exportable:false,printable:false,orderable:false,searchable:false},
             ],
             columnDefs: [
                 {
@@ -61,7 +61,7 @@ var KTDatatablesServerSide = function () {
                     render: function (data) {
                         return `
                             <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                <input class="form-check-input" type="checkbox" value="${data}" />
+                                <input class="form-check-input" name="item[]" type="checkbox" value="${data}" />
                             </div>`;
                     }
                 },
@@ -87,16 +87,16 @@ var KTDatatablesServerSide = function () {
                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a href="#" class="menu-link px-3" data-kt-recipes-table-filter="edit_row">
-                                        Edit
+                                    <a href="qqqqqqqqqqq" class="menu-link px-3" data-kt-recipes-table-filter="edit_row">
+                                        Edit Recipe
                                     </a>
                                 </div>
                                 <!--end::Menu item-->
 
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a href="#" class="menu-link px-3" data-kt-recipes-table-filter="delete_row">
-                                        Delete
+                                    <a href="2222222222222222222" class="menu-link px-3" data-kt-recipes-table-filter="delete_row">
+                                        Delete Recipe
                                     </a>
                                 </div>
                                 <!--end::Menu item-->
@@ -124,6 +124,8 @@ var KTDatatablesServerSide = function () {
             handleDeleteRows();
             KTMenu.createInstances();
         });
+
+ 
     }
 
     // Search Datatable --- official docs reference: https://datatables.net/reference/api/search()
@@ -194,11 +196,11 @@ var KTDatatablesServerSide = function () {
                     const parent = e.target.closest('tr');
     
                     // Get customer name
-                    const customerName = parent.querySelectorAll('td')[1].innerText;
+                    const itemName = parent.querySelectorAll('td')[1].innerText;
     
                     // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
                     Swal.fire({
-                        text: "Are you sure you want to delete " + customerName + "?",
+                        text: "Are you sure you want to delete " + itemName + "?",
                         icon: "warning",
                         showCancelButton: true,
                         buttonsStyling: false,
@@ -212,14 +214,14 @@ var KTDatatablesServerSide = function () {
                         if (result.value) {
                             // Simulate delete request -- for demo purpose only
                             Swal.fire({
-                                text: "Deleting " + customerName,
+                                text: "Deleting " + itemName,
                                 icon: "info",
                                 buttonsStyling: false,
                                 showConfirmButton: false,
                                 timer: 2000
                             }).then(function () {
                                 Swal.fire({
-                                    text: "You have deleted " + customerName + "!.",
+                                    text: "You have deleted " + itemName + "!.",
                                     icon: "success",
                                     buttonsStyling: false,
                                     confirmButtonText: "Ok, got it!",
@@ -233,7 +235,7 @@ var KTDatatablesServerSide = function () {
                             });
                         } else if (result.dismiss === 'cancel') {
                             Swal.fire({
-                                text: customerName + " was not deleted.",
+                                text: itemName + " was not deleted.",
                                 icon: "error",
                                 buttonsStyling: false,
                                 confirmButtonText: "Ok, got it!",
@@ -384,6 +386,44 @@ var KTDatatablesServerSide = function () {
             }
         }
  
+        var exportButtons = function (){
+            const documentTitle = 'Customer Orders Repo222222222rt';
+            var buttons = new $.fn.dataTable.Buttons(table, {
+                buttons: [
+                    {
+                        extend: 'copyHtml5',
+                        title: documentTitle
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        title: documentTitle
+                    },
+                    {
+                        extend: 'csvHtml5',
+                        title: documentTitle
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        title: documentTitle
+                    }
+                ]
+            }).container().appendTo($('#kt_recipes_datatable_buttons'));
+
+            // Hook dropdown menu click event to datatable export buttons
+            const exportButtons = document.querySelectorAll('#kt_recipes_datatable_export_menu [data-kt-export]');
+            exportButtons.forEach(exportButton => {
+                exportButton.addEventListener('click', e => {
+                    e.preventDefault();
+
+                    // Get clicked export value
+                    const exportValue = e.target.getAttribute('data-kt-export');
+                    const target = document.querySelector('.dt-buttons .buttons-' + exportValue);
+
+                    // Trigger click event on hidden datatable export buttons
+                    target.click();
+                });
+            });
+        }
 
  
 
@@ -396,6 +436,12 @@ var KTDatatablesServerSide = function () {
         handleFilterDatatable();
         handleDeleteRows();
         handleResetForm();
+        table = document.querySelector('#kt_recipes_datatable');
+        if ( !table ) {
+            return;
+        }
+        exportButtons();
+
         }
     }
 }();

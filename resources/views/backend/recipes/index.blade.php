@@ -118,7 +118,7 @@
               {{-- <th>{{ __('site.tags') }}</th> --}}
               {{-- <th>{{ __('site.comments') }}</th> --}}
               <th>{{ __('site.status') }}</th>
-              <th>{{ __('site.featured') }}</th>
+              {{-- <th>{{ __('site.featured') }}</th> --}}
               <th>{{ __('site.created_at') }}</th>
               <th class="text-end min-w-70px">{{ __('site.actions') }}</th>
             </tr>

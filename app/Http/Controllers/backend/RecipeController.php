@@ -59,7 +59,7 @@ class RecipeController extends Controller
                             ->editColumn('translate.title', function ($row) {
                             $div = "<div class=\"d-flex align-items-center\">";                            
                             if($row->image){
-                                $div.= "<a href=\"asdas\" title='".$row->translate->title."' class=\"symbol symbol-50px\">
+                                $div.= "<a href=\"qqqqqqq\" title='".$row->translate->title."' class=\"symbol symbol-50px\">
                                             <span class=\"symbol-label\" style=\"background-image:url(".asset("storage/".$row->image).")\" />
                                             </span>
                                         </a>";                                                                
@@ -71,7 +71,7 @@ class RecipeController extends Controller
                             $description = "<div class=\"text-muted fs-7 fw-bold\">".Str::of($row->translate->description)->words(8,'...')."</div>";
                             $div.="<div class=\"ms-5\">
                                         <a href=\"sdasd\" class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-recipes-filter=\"item\">".$row->translate->title."</a>
-                                    </div>"; 
+                                    ".$description."</div>"; 
 
                             $div.= "</div>";
                             return $div;
@@ -80,7 +80,7 @@ class RecipeController extends Controller
 
                         ->editColumn('category_id', function ($row) {                                                          
                             // return $row->category_id ?? '__';
-                            return $row->category_id ? "<a href=\"sdasd\" class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-category-filter=\"category\">".$row->category->translate->title."</a>" : "<span aria-hidden=\"true\">—</span>";                                       
+                            return $row->category_id ? "<a href=\"category\" class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-category-filter=\"category\">".$row->category->translate->title."</a>" : "<span aria-hidden=\"true\">—</span>";                                       
                           })
 
                            ->editColumn('tags', function($row) {            
@@ -293,23 +293,52 @@ class RecipeController extends Controller
     
  
         public function destroy($id){
-            try {
-                //get specific categories and its translations
-                $recipe = Recipe::find($id);
+
+            DB::table('settings')->where('id',$id)->delete();
+            
+            // return redirect()->route('recipes.index')->with(['success' => 'تم  الحذف بنجاح']);
+            // try {
+            //     //get specific categories and its translations
+            //     $recipe = Recipe::find($id);
     
-                if (!$recipe)
-                    return redirect()->route('admin.recipes')->with(['error' => 'هذا الماركة غير موجود ']);
+            //     if (!$recipe)
+            //         return redirect()->route('admin.recipes')->with(['error' => 'هذا الماركة غير موجود ']);
     
-                $recipe->delete();
+            //     $recipe->delete();
     
-                return redirect()->route('admin.recipes')->with(['success' => 'تم  الحذف بنجاح']);
+            //     return redirect()->route('admin.recipes')->with(['success' => 'تم  الحذف بنجاح']);
     
-            } catch (\Exception $ex) {
-                return redirect()->route('admin.recipes')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
-            }
+            // } catch (\Exception $ex) {
+            //     return redirect()->route('admin.recipes')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+            // }
         }
 
- 
+        /*
+            public function deleteAll(Request $request)
+
+    {
+
+        $ids = $request->ids;
+
+        DB::table("products")->whereIn('id',explode(",",$ids))->delete();
+
+        return response()->json(['success'=>"Products Deleted successfully."]);
+
+    }
+     */
+        public function destroyMultiple(Request $request){
+            // if (is_array(request('ids'))) {
+               
+                return $ids = $request->ids;
+                // $ids = [];
+                // foreach (request('item') as $id) {
+                //    $ids = $id;
+                // }
+                // return $ids;
+            // } 
+    
+    
+        }
         private function mapNutritions($nutritions){
             return collect($nutritions)->map(function ($i) {
                 return ['value' => $i];

@@ -294,8 +294,11 @@ class RecipeController extends Controller
  
         public function destroy($id){
 
-            DB::table('settings')->where('id',$id)->delete();
+            // DB::table('settings')->where('id',$id)->delete();
+            return response()->json(['success'=>"Product One Deleted successfully Controller.".$id]);
+
             
+
             // return redirect()->route('recipes.index')->with(['success' => 'تم  الحذف بنجاح']);
             // try {
             //     //get specific categories and its translations
@@ -329,7 +332,11 @@ class RecipeController extends Controller
         public function destroyMultiple(Request $request){
             // if (is_array(request('ids'))) {
                
-                return $ids = $request->ids;
+                $ids = $request->ids;
+
+                // return $ids;
+
+                return response()->json(['success'=>"Products Deleted successfully Controller.".$ids]);
                 // $ids = [];
                 // foreach (request('item') as $id) {
                 //    $ids = $id;

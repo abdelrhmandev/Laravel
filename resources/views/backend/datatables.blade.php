@@ -22,7 +22,7 @@ var KTDatatablesServerSide = function () {
             language: {
               //cdn.datatables.net/plug-ins/1.12.1/i18n/ar.json
               //cdn.datatables.net/plug-ins/1.12.1/i18n/en-GB.json   
-            url: "//cdn.datatables.net/plug-ins/1.12.1/i18n/{{ app()->getLocale()}}.json"
+            url: "//cdn.datatables.net/plug-ins/1.12.1/i18n/{{ app()->getLocale()}}.json",
             },
 
             fnDrawCallback: function() {
@@ -54,11 +54,14 @@ var KTDatatablesServerSide = function () {
                 { data: 'status', name: 'status'},
                 // { data: 'featured', name: 'featured'},
                 { data: 'created_at', name: 'created_at'},
-                { data: null ,exportable:false,printable:false,orderable:false,searchable:false},
+                { data: null },
             ],
             columnDefs: [
                 {
                     targets: 0,
+                    exportable: false,
+                    printable: false,
+                    searchable: false,
                     orderable: false,
                     render: function (data) {
                         return `
@@ -70,6 +73,9 @@ var KTDatatablesServerSide = function () {
                 {
                     targets: -1,
                     data: null,
+                    exportable: false,
+                    printable: false,
+                    searchable: false,                    
                     orderable: false,
                     className: 'text-end',
                     render: function (data, type, row) {
@@ -139,7 +145,7 @@ var KTDatatablesServerSide = function () {
                 filterSearch.addEventListener('keyup', function (e) {
                     dt.search(e.target.value).draw();
                 });
-            }
+        }
 
         // Filter Datatable
         var handleFilterDatatable = function () {
@@ -213,7 +219,7 @@ var KTDatatablesServerSide = function () {
                                 timer: 2000
                             }).then(function () {
                                 Swal.fire({
-                                text: "You have deleted all selected customers!.",
+                                text: response['success'], // respose from controller
                                 icon: "success",
                                 buttonsStyling: false,
                                 confirmButtonText: "Ok, got it!",
@@ -275,12 +281,8 @@ var KTDatatablesServerSide = function () {
             //https://www.itsolutionstuff.com/post/how-to-delete-multiple-records-using-checkbox-in-laravel-5-example.html
             // Select elements
             const deleteSelected = document.querySelector('[data-kt-recipes-table-select="delete_selected"]');
- 
-
            
-   
-           
-
+            var all_check_box = []; 
             // Toggle delete selected toolbar
             checkboxes.forEach(c => {
                 // Checkbox on click event
@@ -288,16 +290,13 @@ var KTDatatablesServerSide = function () {
                     setTimeout(function () {
                         toggleToolbars();
                     }, 50);
+                    all_check_box.push(c.value);
                 });   
             });
-            
- 
 
             // Deleted selected rows
-            deleteSelected.addEventListener('click', function () {
-
-                alert(join_selected_values);
-
+                deleteSelected.addEventListener('click', function () {
+                var join_selected_values = all_check_box.join(","); 
                 // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
                 Swal.fire({
                     text: "Are you sure you want to delete selewwwwwcted customers?"+join_selected_values,
@@ -313,58 +312,57 @@ var KTDatatablesServerSide = function () {
                     },
                 }).then(function (result) {
                     $.ajax({
-                    type: 'POST',
+                    type: 'post',
                     headers: {
-                        'X-CSRF-TOKEN': '2222sdasdasdsadsdas'
+                        'X-CSRF-TOKEN': 'wwwwwwwwwwwww'
                     },
-                    
                     url: "{{ route('recipes.destroyMultiple') }}",
-                    
-            success: function (response, textStatus, xhr) {
-                if (result.value) {
-                        Swal.fire({
-                            text: "Deleting selected customers",
-                            icon: "info",
-                            buttonsStyling: false,
-                            showConfirmButton: false,
-                            timer: 2000
-                        }).then(function () {
-                            Swal.fire({
-                                text: "You have deleted all selected customers!.",
-                                icon: "success",
-                                buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
-                                customClass: {
-                                    confirmButton: "btn fw-bold btn-primary",
-                                }
-                            }).then(function () {
-                                // delete row data from server and re-draw datatable
-                                dt.draw();
+                    data: {
+                        '_method': 'delete',
+                        'ids': join_selected_values,
+                    },                    
+                    success: function (response, textStatus, xhr) {
+                        if (result.value) {
+                                Swal.fire({
+                                    text: "Deleting selected customers",
+                                    icon: "info",
+                                    buttonsStyling: false,
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                }).then(function () {
+                                    Swal.fire({
+                                        text: response['success'], // respose from controller
+                                        icon: "success",
+                                        buttonsStyling: false,
+                                        confirmButtonText: "Ok, got it!",
+                                        customClass: {
+                                            confirmButton: "btn fw-bold btn-primary",
+                                        }
+                                    }).then(function () {
+                                        // delete row data from server and re-draw datatable
+                                        dt.draw();
+                                    });
+            
+                                    // Remove header checked box
+                                    const headerCheckbox = container.querySelectorAll('[type="checkbox"]')[0];
+                                    headerCheckbox.checked = false;
+                                });
+                            } else if (result.dismiss === 'cancel') {
+                                Swal.fire({
+                                    text: "Selected customers was not deleted.",
+                                    icon: "error",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn fw-bold btn-primary",
+                
+                                    }
                             });
-    
-                            // Remove header checked box
-                            const headerCheckbox = container.querySelectorAll('[type="checkbox"]')[0];
-                            headerCheckbox.checked = false;
-                        });
-                    } else if (result.dismiss === 'cancel') {
-                        Swal.fire({
-                            text: "Selected customers was not deleted.",
-                            icon: "error",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary",
-          
-                            }
+                            } // end of cancel case
+                        }
                     });
-                } // end of cancel case
-            }
-            });
-
-        });
-    })
-           
-           
+                });
+        })
         }
     
         // Toggle toolbars
@@ -407,19 +405,32 @@ var KTDatatablesServerSide = function () {
                 buttons: [
                     {
                         extend: 'copyHtml5',
-                        title: documentTitle
+                        title: documentTitle,
+                        exportOptions: {
+                            columns: "thead th:not(.noExport)"
+                        }                        
                     },
                     {
                         extend: 'excelHtml5',
-                        title: documentTitle
+                        title: documentTitle,
+                        exportOptions: {
+                            columns: "thead th:not(.noExport)"
+                        }                        
                     },
                     {
                         extend: 'csvHtml5',
-                        title: documentTitle
+                        title: documentTitle,
+                        exportOptions: {
+                            columns: "thead th:not(.noExport)"
+                        }
+
                     },
                     {
                         extend: 'pdfHtml5',
-                        title: documentTitle
+                        title: documentTitle,
+                        exportOptions: {
+                            columns: "thead th:not(.noExport)"
+                        }                        
                     }
                 ]
             }).container().appendTo($('#kt_recipes_datatable_buttons'));
@@ -435,6 +446,23 @@ var KTDatatablesServerSide = function () {
                     const target = document.querySelector('.dt-buttons .buttons-' + exportValue);
 
                     // Trigger click event on hidden datatable export buttons
+
+                    // ABDO //////////////////
+
+                    Swal.fire({
+								text: "Customer list has been successfully exported!",
+								icon: "success",
+								buttonsStyling: false,
+								confirmButtonText: "Ok, got it!",
+								customClass: {
+									confirmButton: "btn btn-primary"
+								}
+							})                    ///////////////////////////////
+
+
+
+
+
                     target.click();
                 });
             });

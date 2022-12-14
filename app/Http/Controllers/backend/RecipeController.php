@@ -343,7 +343,17 @@ class RecipeController extends Controller
                 // }
                 // return $ids;
             // } 
-    
+    /*
+         try {
+
+            Post::destroy($request->ids);
+            return response()->json([
+                'message'=>"Posts Deleted successfully."
+            ],200);
+
+        } catch(\Exception $e) {
+            report($e);
+        }*/
     
         }
         private function mapNutritions($nutritions){

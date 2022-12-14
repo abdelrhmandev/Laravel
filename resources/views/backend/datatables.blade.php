@@ -1,6 +1,4 @@
 <script>
-
-
 "use strict";
 
 // Class definition
@@ -22,7 +20,7 @@ var KTDatatablesServerSide = function () {
             language: {
               //cdn.datatables.net/plug-ins/1.12.1/i18n/ar.json
               //cdn.datatables.net/plug-ins/1.12.1/i18n/en-GB.json   
-            url: "//cdn.datatables.net/plug-ins/1.12.1/i18n/{{ app()->getLocale()}}.json",
+            url: "//cdn.datatables.net/plug-ins/1.12.1/i18n/ar.json",
             },
 
             fnDrawCallback: function() {
@@ -400,7 +398,25 @@ var KTDatatablesServerSide = function () {
         }
         // Handle Export 
         var exportButtons = function (){
-            const documentTitle = 'Customer Orders Repo222222222rt';
+            const documentTitle = 'Customer Orders Repo222222222rt ABDO';
+
+
+            pdfMake.fonts = {
+                Roboto: {
+                    normal: 'Roboto-Regular.ttf',
+                    bold: 'Roboto-Medium.ttf',
+                    italics: 'Roboto-Italic.ttf',
+                    bolditalics: 'Roboto-MediumItalic.ttf'
+                },
+                nikosh: {
+                    normal: "NikoshBAN.ttf",
+                    bold: "NikoshBAN.ttf",
+                    italics: "NikoshBAN.ttf",
+                    bolditalics: "NikoshBAN.ttf"
+                }
+            };
+
+
             var buttons = new $.fn.dataTable.Buttons(table, {
                 buttons: [
                     {
@@ -408,7 +424,10 @@ var KTDatatablesServerSide = function () {
                         title: documentTitle,
                         exportOptions: {
                             columns: "thead th:not(.noExport)"
-                        }                        
+                        },
+                        charset: 'utf-8',
+                        bom: 'true',
+                                                                  
                     },
                     {
                         extend: 'excelHtml5',
@@ -422,15 +441,55 @@ var KTDatatablesServerSide = function () {
                         title: documentTitle,
                         exportOptions: {
                             columns: "thead th:not(.noExport)"
-                        }
+                        },
+                        charset: 'utf-8',   
 
                     },
                     {
                         extend: 'pdfHtml5',
+                        customize: function(doc) {
+                        processDoc(doc);
+                        // doc.styles.tableHeader.fontSize = 30;
+                        // doc.defaultStyle.alignment = 'right';
+                        // doc.defaultStyle.font = 'Nikosh';
+                        },   
+                        charset: 'UTF-8',
+                        bom:  true,
                         title: documentTitle,
                         exportOptions: {
-                            columns: "thead th:not(.noExport)"
-                        }                        
+                            columns: "thead th:not(.noExport)",
+                        },
+
+                         
+
+                     
+
+                    // customize: function (doc) {
+                    //     doc.styles.message.alignment = "right";
+                    //     doc.styles.tableBodyEven.alignment = "center";
+                    //     doc.styles.tableBodyOdd.alignment = "center";
+                    //     doc.styles.tableFooter.alignment = "center";
+                    //     doc.styles.tableHeader.alignment = "center";
+                    //     doc.content[0]['text'] = doc.content[0]['text'].split(' ').reverse().join(' ');
+                    //     doc.content[1].margin = margins;
+                    //     doc.content[2].margin = margins;
+                    //     for (var i = 0; i < doc.content[2].table.body.length; i++) {
+                    //     // console.log(doc.content[1].table.body[i].length);
+                    //         for (var j = 0; j < doc.content[2].table.body[i].length; j++) {
+                    //             doc.content[2].table.body[i][j]['text'] = doc.content[2].table.body[i][j]['text'].split(' ').reverse().join(' ');
+                    //         }
+                    //     }
+                    // },
+            
+
+
+
+
+
+
+
+
+
                     }
                 ]
             }).container().appendTo($('#kt_recipes_datatable_buttons'));
@@ -449,7 +508,7 @@ var KTDatatablesServerSide = function () {
 
                     // ABDO //////////////////
 
-                    Swal.fire({
+                    /*Swal.fire({
 								text: "Customer list has been successfully exported!",
 								icon: "success",
 								buttonsStyling: false,
@@ -457,7 +516,9 @@ var KTDatatablesServerSide = function () {
 								customClass: {
 									confirmButton: "btn btn-primary"
 								}
-							})                    ///////////////////////////////
+							})  */
+                            
+                            ///////////////////////////////
 
 
 
@@ -490,6 +551,31 @@ var KTDatatablesServerSide = function () {
 KTUtil.onDOMContentLoaded(function () {
     KTDatatablesServerSide.init();
 });
-
+//////////
+function processDoc(doc) {
+ 
+    //
+// https://pdfmake.github.io/docs/fonts/custom-fonts-client-side/
+//
+// Update pdfmake's global font list, using the fonts available in
+// the customized vfs_fonts.js file (do NOT remove the Roboto default):
+pdfMake.fonts = {
+Roboto: {
+normal: 'Roboto-Regular.ttf',
+bold: 'Roboto-Medium.ttf',
+italics: 'Roboto-Italic.ttf',
+bolditalics: 'Roboto-MediumItalic.ttf'
+},
+Calibri: {
+normal: 'calibri.ttf',
+bold: 'calibrib.ttf',
+italics: 'calibrii.ttf"',
+bolditalics: 'calibriz.ttf',
+}
+};
+// modify the PDF to use a different default font:
+doc.defaultStyle.font = "Calibri";
+var i = 1;
+}
 </script>
     

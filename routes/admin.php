@@ -1,6 +1,6 @@
 <?php
 Route::get('/', 'DashboardController@index')->name('dashboard');
-
+// Route::get('/', DashboardController::class,'index')->name('dashboard');
 // Route::get('/', function () {
 //     return view('backend.dashboard');
 // });

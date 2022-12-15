@@ -15,7 +15,10 @@ var KTDatatablesServerSide = function () {
             processing: true,
             serverSide: true,                
             info: true, 
-            bPaginate: true,             
+            bPaginate: true,         
+             exportOptions: {
+                orthogonal: "myExport",
+            },    
             pagingType: "full_numbers",
             language: {
               //cdn.datatables.net/plug-ins/1.12.1/i18n/ar.json
@@ -398,7 +401,7 @@ var KTDatatablesServerSide = function () {
         }
         // Handle Export 
         var exportButtons = function (){
-            const documentTitle = 'Customer Orders Repo222222222rt ABDO';
+            const documentTitle = 'بسم الله الرحمن الرحيم';
 
 
             pdfMake.fonts = {
@@ -449,9 +452,7 @@ var KTDatatablesServerSide = function () {
                         extend: 'pdfHtml5',
                         customize: function(doc) {
                         processDoc(doc);
-                        // doc.styles.tableHeader.fontSize = 30;
-                        // doc.defaultStyle.alignment = 'right';
-                        // doc.defaultStyle.font = 'Nikosh';
+
                         },   
                         charset: 'UTF-8',
                         bom:  true,
@@ -554,28 +555,16 @@ KTUtil.onDOMContentLoaded(function () {
 //////////
 function processDoc(doc) {
  
-    //
-// https://pdfmake.github.io/docs/fonts/custom-fonts-client-side/
-//
-// Update pdfmake's global font list, using the fonts available in
-// the customized vfs_fonts.js file (do NOT remove the Roboto default):
-pdfMake.fonts = {
-Roboto: {
-normal: 'Roboto-Regular.ttf',
-bold: 'Roboto-Medium.ttf',
-italics: 'Roboto-Italic.ttf',
-bolditalics: 'Roboto-MediumItalic.ttf'
-},
-Calibri: {
-normal: 'calibri.ttf',
-bold: 'calibrib.ttf',
-italics: 'calibrii.ttf"',
-bolditalics: 'calibriz.ttf',
-}
-};
-// modify the PDF to use a different default font:
-doc.defaultStyle.font = "Calibri";
-var i = 1;
+doc.defaultStyle.color = "green";
+doc.defaultStyle.Arial = "trado";
+doc.styles.message.alignment = "right";
+doc.styles.tableBodyEven.alignment = "center";
+doc.styles.tableBodyOdd.alignment = "center";
+doc.styles.tableFooter.alignment = "center";
+doc.styles.tableHeader.alignment = "center";
+ 
+
+ 
 }
 </script>
     

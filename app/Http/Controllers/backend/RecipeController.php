@@ -74,7 +74,7 @@ class RecipeController extends Controller
                                     ".$description."</div>"; 
 
                             $div.= "</div>";
-                            return $div;
+                            return $row->translate->title;
                         
                         })
 
@@ -130,7 +130,7 @@ class RecipeController extends Controller
 
                            
 
-                        ->rawColumns(['translate.title','category_id','status','tags','featured','created_at'])    
+                        ->rawColumns(['translate.title'])    
                         ->make(true);    
             }    
 

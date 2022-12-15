@@ -103,7 +103,7 @@
       <!--begin::Card body-->
       <div class="card-body pt-0">
         <!--begin::Table-->
-        <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_recipes_datatable">
+        <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_recipes_datatable" align="right">
           <!--begin::Table head-->
           <thead>
             <!--begin::Table row-->
@@ -113,14 +113,14 @@
                   <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_recipes_datatable .form-check-input" value="1" />
                 </div>
               </th>            
-              <th>{{ __('site.title') }}</th>             
-              <th>{{ __('site.category') }}</th> 
+              <th class="text-end min-w-70px ">{{ __('site.title') }}</th>             
+              {{-- <th>{{ __('site.category') }}</th>  --}}
               {{-- <th>{{ __('site.tags') }}</th> --}}
               {{-- <th>{{ __('site.comments') }}</th> --}}
-              <th>{{ __('site.status') }}</th>
+              {{-- <th>{{ __('site.status') }}</th> --}}
               {{-- <th>{{ __('site.featured') }}</th> --}}
-              <th>{{ __('site.created_at') }}</th>
-              <th class="text-end min-w-70px noExport">{{ __('site.actions') }}</th>
+              {{-- <th>{{ __('site.created_at') }}</th> --}}
+              {{-- <th class="text-end min-w-70px noExport">{{ __('site.actions') }}</th> --}}
             </tr>
             <!--end::Table row-->
           </thead>
@@ -147,11 +147,17 @@
 
 @section('scripts')
 <!--begin::Vendors Javascript(used for this page only)-->
-@include('backend.datatables')
-<script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+{{-- @include('backend.datatables2') --}}
+{{-- @include('backend.datatables') --}}
 
+
+
+
+  
+<script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
- 
+
 
 
 <!--end::Vendors Javascript-->

@@ -15,7 +15,8 @@ var KTDatatablesServerSide = function () {
             processing: true,
             serverSide: true,                
             info: true, 
-            bPaginate: true,         
+            bPaginate: true,    
+            orientation: 'landscape',     
              exportOptions: {
                 orthogonal: "myExport",
             },    

@@ -1,38 +1,23 @@
 <script>
- $(document).ready(function() {
-    var table = $("#kt_recipes_datatable").DataTable({
+$(document).ready(function() {
+
+ 
+
+    var table = $("#example").DataTable({
         dom: "Bfrtip",
-        "buttons": [{
-            searchDelay: 500,
-            processing: true,
-            serverSide: true,                
-            info: true, 
-            bPaginate: true,               
+        buttons: [{
             extend: "pdfHtml5",
             orientation: 'landscape',
             pageSize: 'A4',
             exportOptions: {
                 orthogonal: "myExport",
-                columns: [4, 3, 2, 1, 0],
+                columns: [0],
             },
-            language: {
-              //cdn.datatables.net/plug-ins/1.12.1/i18n/ar.json
-              //cdn.datatables.net/plug-ins/1.12.1/i18n/en-GB.json   
-            url: "//cdn.datatables.net/plug-ins/1.12.1/i18n/ar.json",
-            },
-            ajax: {
-                url: "{{ route('recipes.index')}}",
-            },
-            columns: [
-                { data: 'translate.title', name: 'translate.title'}, 
-            ],            
-            customize: function(doc) {
-                doc.defaultStyle = {
-                    font: 'Cairo',
-                };
-                doc.styles.tableBodyEven.alignment = "center";
-                doc.styles.tableBodyOdd.alignment = "center";
-            },
+
+            customize: function ( doc ) {
+            processDoc(doc);
+        }
+       
         }, {
             extend: 'excelHtml5',
             exportOptions: {
@@ -52,19 +37,38 @@
         }]
     });
 });
-//////////
+
+
 function processDoc(doc) {
+  
+ pdfMake.fonts = {
+        Vazir: {
+                normal: 'https://kalouttravel.com/public/fonts/vazir/Vazir-Medium-FD.ttf',
+                bold: 'https://kalouttravel.com/public/fonts/vazir/Vazir-FD.ttf',
+                italics: 'https://kalouttravel.com/public/fonts/vazir/Vazir-FD.ttf',
+                bolditalics: 'https://kalouttravel.com/public/fonts/vazir/Vazir-FD.ttf'
+        }
+};
  
+        //
+    // https://pdfmake.github.io/docs/fonts/custom-fonts-client-side/
+    //
+    // Update pdfmake's global font list, using the fonts available in
+    // the customized vfs_fonts.js file (do NOT remove the Roboto default):
+ 
+doc.defaultStyle.font = Vazir;
 doc.defaultStyle.color = "green";
-doc.defaultStyle.Arial = "trado";
 doc.styles.message.alignment = "right";
 doc.styles.tableBodyEven.alignment = "center";
 doc.styles.tableBodyOdd.alignment = "center";
 doc.styles.tableFooter.alignment = "center";
 doc.styles.tableHeader.alignment = "center";
- 
 
  
-}
+    
+  
+ }
+
+
 </script>
     

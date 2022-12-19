@@ -7,7 +7,7 @@ Route::get('/', 'DashboardController@index')->name('dashboard');
 
 
 
-Route::resource('recipes', RecipeController::class)->except('show');
+Route::resource('cc', RecipeController::class)->except('show');
 Route::delete('recipes/destroy/all', 'RecipeController@destroyMultiple')->name('recipes.destroyMultiple');
  
 Route::resource('tags', TagController::class)->except('show');

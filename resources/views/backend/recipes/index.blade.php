@@ -20,9 +20,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
   
   
-  <script src="{{ asset('assets/backend/js/custom/pdfMake/vfs_fonts.js')}}"></script>
+  {{-- <script src="{{ asset('assets/backend/js/custom/pdfMake/vfs_fonts.js')}}"></script> --}}
+  <script src="{{ asset('assets/backend/js/custom/pdfMake/vfs_fonts2.js')}}"></script>
   
-  
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap" rel="stylesheet">
 
   <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.html5.min.js"></script>
   <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
@@ -41,13 +42,26 @@
         <th>الأسم بالكامل</th>
         <th>الوظيفه</th>
         <th>الحاله الصحيه</th>
+        <th>العمر</th>
+        <th>الحاله الصحيه</th>
+        <th>الحاله الصحيه</th>
+        <th>الحاله الصحيه</th>
+        <th>الحاله الصحيه</th>
+        <th>الحاله الصحيه</th>
+        <th>الحاله الصحيه</th>
    </tr>        
     </thead>
     <tbody>
-        @for ($i=0;$i<=10;$i++)            
+        @for ($i=0;$i<=0;$i++)            
         <tr>
           <td>عبدالرحمن مجدي</td>
           <td>مبرمج</td>
+          <td>سليم</td>
+          <td>80</td>
+          <td>سليم</td>
+          <td>سليم</td>          <td>سليم</td>
+          <td>سليم</td>
+          <td>سليم</td>
           <td>سليم</td>
           </tr>
           @endfor
@@ -78,7 +92,7 @@ $(document).ready(function() {
              
              exportOptions: {
                  orthogonal: "PDF",
-                 columns: ':visible:not(:eq(2))',
+                 columns: ':visible',
                  alignment:'right',
                  modifier: {order: 'index', page: 'current'}
                                    
@@ -89,8 +103,7 @@ $(document).ready(function() {
          }],
          columnDefs: [{
              targets: '_all',
-             render: function(data, type, row) {
-                
+             render: function(data, type, row) {                
                  return data;
              }
          }],
@@ -101,6 +114,18 @@ $(document).ready(function() {
  });
 
  function processDoc(doc,image) {
+    /* Original 
+    pdfMake.fonts = {
+         DroidKufi: {
+             normal: 'DroidKufi-Regular.ttf',
+             bold: 'DroidKufi-Regular.ttf',
+             italics: 'DroidKufi-Regular.ttf',
+             bolditalics: 'DroidKufi-Regular.ttf'
+         }
+     };
+     */
+       
+      
      pdfMake.fonts = {
          DroidKufi: {
              normal: 'DroidKufi-Regular.ttf',
@@ -109,9 +134,9 @@ $(document).ready(function() {
              bolditalics: 'DroidKufi-Regular.ttf'
          }
      };
-       
-      
  
+     
+
 
 
       doc.content[0]['text'] = doc.content[0]['text'].split(' ').reverse().join(' '); // Header Label
@@ -126,17 +151,20 @@ $(document).ready(function() {
  
 
  
-    doc.content[1].table.alignment = 'right';
-  
-    doc.content[1].table.widths = [ '40%',  '25%', '17.5%', '17.5%'];
+ 
  
         var now = new Date();
         var jsDate = now.getDate()+'-'+(now.getMonth()+1)+'-'+now.getFullYear();
         doc.pageMargins = [20,60,20,30];
-        doc.styles.tableHeader.fontSize = 20;
+        doc.styles.tableHeader.fontSize = 10;
         
         doc.styles.message.alignment = "right";
-        doc.defaultStyle.font = 'DroidKufi';
+        //doc.defaultStyle.font = 'DroidKufi'; // Original
+
+
+        doc.defaultStyle.font = 'Cairo'; // new one
+
+
         doc.content[0].alignment = 'right';     
       
         doc.defaultStyle.color = "green";

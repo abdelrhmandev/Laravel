@@ -7,17 +7,19 @@ function processExportedPDFDoc(doc,lang) {
 
     //https://itnext.io/angularjs-exporting-to-pdf-using-pdfmake-js-library-49f3afec97ef
 
-    /*
+    // https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/vfs_fonts.js
     pdfMake.fonts = {
             Cairo: {
                 normal: 'Cairo-Regular-400.ttf',
                 bold: 'Cairo-Regular-400.ttf',
                 italics: 'Cairo-Regular-400.ttf',
                 bolditalics: 'Cairo-Regular-400.ttf'
-            }
+            },
+            
         };
-        doc.defaultStyle.font = 'Cairo';
-        */
+         doc.defaultStyle.font = 'Cairo';
+
+     
         doc.defaultStyle.fontSize = 19;
      /*
         doc.content[0]['text'] = doc.content[0]['text'].split(' ').reverse().join(' '); // Header Label

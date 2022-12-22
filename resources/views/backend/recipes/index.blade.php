@@ -1,10 +1,14 @@
 @extends('backend.base.base')
 @section('style')
+
 @if(app()->getLocale() === 'ar')
 <link href="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.rtl.css')}}" rel="stylesheet" type="text/css" />
 @else
 <link href="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
 @endif
+ 
+
+
 @stop
 @section('content')
 	<!--begin::Container-->
@@ -154,10 +158,11 @@
 
 
 
-<script src="{{ asset('assets/backend/js/custom/pdfMake/processExportedPDFDoc.js')}}"></script>  
+<script src="{{ asset('assets/backend/js/custom/pdfMake/processExportedPDFDoc.js')}}"></script>
 <script src="{{ asset('assets/backend/js/custom/pdfMake/vfs_fonts2.js')}}"></script>  
-<script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+
 
 
 

@@ -11,10 +11,9 @@ var KTDatatablesServerSide = function () {
     // Private functions
     var initDatatable = function () {
 
-      
-        const lang = document.dir == 'rtl' ? 'ar' : 'en-GB';
+        var lang = document.dir == 'rtl' ? 'ar' : 'en-GB';
 
-       
+        
         dt = $("#kt_recipes_datatable").DataTable({
             searchDelay: 500,
             processing: true,
@@ -26,8 +25,8 @@ var KTDatatablesServerSide = function () {
                 orthogonal: "myExport",
             },    
             pagingType: "full_numbers",
-            language: {                
-                // url: "//cdn.datatables.net/plug-ins/1.12.1/i18n/"+lang+".json",
+            language: {
+            url: "//cdn.datatables.net/plug-ins/1.12.1/i18n/"+lang+".json",
             },
 
             fnDrawCallback: function() {
@@ -419,15 +418,17 @@ var KTDatatablesServerSide = function () {
                         exportOptions: {
                             columns: "thead th:not(.noExport)"
                         },
-     
-                                                                  
+                        charset: 'utf-8',
+                        bom: 'true',                                                                  
                     },
                     {
                         extend: 'excelHtml5',
                         title: documentTitle,
                         exportOptions: {
                             columns: "thead th:not(.noExport)"
-                        }                        
+                        },
+                        charset: 'utf-8',
+                        bom: 'true',                            
                     },
                     {
                         extend: 'csvHtml5',
@@ -435,36 +436,23 @@ var KTDatatablesServerSide = function () {
                         exportOptions: {
                             columns: "thead th:not(.noExport)"
                         },
-                        charset: 'utf-8',   
+                        charset: 'utf-8',
+                        bom: 'true',   
 
                     },
-                    {                     
-                    extend: 'pdfHtml5',                   
-                    className: 'btn btn-table-pdf',
-                    orientation: 'landscape',                
-                    exportOptions: {
-                        orthogonal: "PDF",
-                        columns: "thead th:not(.noExport)"
-                                        
-                    },
-
-                        customize: function ( doc ) {
-                            processExportedPDFDoc(doc,'ar');
-                        }
-                                                 
+                    {
+                        extend: 'pdfHtml5',                           
+                        title: documentTitle,
+                        exportOptions: {
+                            columns: "thead th:not(.noExport)",
+                        },
+                        charset: 'utf-8',
+                        bom: 'true', 
+                        customize: function(doc) {                           
+                            processExportedPDFDoc(doc,document.dir);
+                        },                            
                     }
-                ],
-                columnDefs: [{
-                targets: '_all',
-                render: function(data, type, row) {
-                if (type === 'PDF') {
-                return data.split(' ').reverse().join(' ');
-                }
-                return data;
-                }
-                }],                
-
-
+                ]
             }).container().appendTo($('#kt_recipes_datatable_buttons'));
 
             // Hook dropdown menu click event to datatable export buttons
@@ -525,18 +513,6 @@ KTUtil.onDOMContentLoaded(function () {
     KTDatatablesServerSide.init();
 });
 //////////
-function processDoc(doc) {
  
-doc.defaultStyle.color = "green";
-doc.defaultStyle.Arial = "trado";
-doc.styles.message.alignment = "right";
-doc.styles.tableBodyEven.alignment = "center";
-doc.styles.tableBodyOdd.alignment = "center";
-doc.styles.tableFooter.alignment = "center";
-doc.styles.tableHeader.alignment = "center";
- 
-
- 
-}
 </script>
     

@@ -68,13 +68,13 @@ class RecipeController extends Controller
                                                 <div class=\"symbol-label fs-3 bg-light-primary text-primary\">".$this->str_split($row->translate->title,1)."</div>
                                        </a>";  
                             } 
-                            $description = "<div class=\"text-muted fs-7 fw-bold\">".Str::of($row->translate->description)->words(8,'...')."</div>";
+                            $description = '';//"<div class=\"text-muted fs-7 fw-bold\">".Str::of($row->translate->description)->words(8,'...')."</div>";
                             $div.="<div class=\"ms-5\">
                                         <a href=\"sdasd\" class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-recipes-filter=\"item\">".$row->translate->title."</a>
                                     ".$description."</div>"; 
 
                             $div.= "</div>";
-                            return $row->translate->title;
+                            return $div;
                         
                         })
 
@@ -129,8 +129,10 @@ class RecipeController extends Controller
                            })
 
                            
+                           ->rawColumns(['translate.title','category_id','tags','status','created_at'])    
 
-                        ->rawColumns(['translate.title'])    
+
+                        // ->rawColumns(['translate.title','category_id','tags','status','featured','created_at','comments'])    
                         ->make(true);    
             }    
 

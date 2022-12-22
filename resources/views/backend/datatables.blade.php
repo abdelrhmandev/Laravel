@@ -10,6 +10,11 @@ var KTDatatablesServerSide = function () {
 
     // Private functions
     var initDatatable = function () {
+
+      
+        const lang = document.dir == 'rtl' ? 'ar' : 'en-GB';
+
+       
         dt = $("#kt_recipes_datatable").DataTable({
             searchDelay: 500,
             processing: true,
@@ -21,10 +26,8 @@ var KTDatatablesServerSide = function () {
                 orthogonal: "myExport",
             },    
             pagingType: "full_numbers",
-            language: {
-              //cdn.datatables.net/plug-ins/1.12.1/i18n/ar.json
-              //cdn.datatables.net/plug-ins/1.12.1/i18n/en-GB.json   
-            url: "//cdn.datatables.net/plug-ins/1.12.1/i18n/ar.json",
+            language: {                
+                // url: "//cdn.datatables.net/plug-ins/1.12.1/i18n/"+lang+".json",
             },
 
             fnDrawCallback: function() {
@@ -405,20 +408,7 @@ var KTDatatablesServerSide = function () {
             const documentTitle = 'بسم الله الرحمن الرحيم';
 
 
-            pdfMake.fonts = {
-                Roboto: {
-                    normal: 'Roboto-Regular.ttf',
-                    bold: 'Roboto-Medium.ttf',
-                    italics: 'Roboto-Italic.ttf',
-                    bolditalics: 'Roboto-MediumItalic.ttf'
-                },
-                nikosh: {
-                    normal: "NikoshBAN.ttf",
-                    bold: "NikoshBAN.ttf",
-                    italics: "NikoshBAN.ttf",
-                    bolditalics: "NikoshBAN.ttf"
-                }
-            };
+ 
 
 
             var buttons = new $.fn.dataTable.Buttons(table, {
@@ -429,8 +419,7 @@ var KTDatatablesServerSide = function () {
                         exportOptions: {
                             columns: "thead th:not(.noExport)"
                         },
-                        charset: 'utf-8',
-                        bom: 'true',
+     
                                                                   
                     },
                     {
@@ -449,51 +438,34 @@ var KTDatatablesServerSide = function () {
                         charset: 'utf-8',   
 
                     },
-                    {
-                        extend: 'pdfHtml5',
-                        customize: function(doc) {
-                        processDoc(doc);
-
-                        },   
-                        charset: 'UTF-8',
-                        bom:  true,
-                        title: documentTitle,
-                        exportOptions: {
-                            columns: "thead th:not(.noExport)",
-                        },
-
-                         
-
-                     
-
-                    // customize: function (doc) {
-                    //     doc.styles.message.alignment = "right";
-                    //     doc.styles.tableBodyEven.alignment = "center";
-                    //     doc.styles.tableBodyOdd.alignment = "center";
-                    //     doc.styles.tableFooter.alignment = "center";
-                    //     doc.styles.tableHeader.alignment = "center";
-                    //     doc.content[0]['text'] = doc.content[0]['text'].split(' ').reverse().join(' ');
-                    //     doc.content[1].margin = margins;
-                    //     doc.content[2].margin = margins;
-                    //     for (var i = 0; i < doc.content[2].table.body.length; i++) {
-                    //     // console.log(doc.content[1].table.body[i].length);
-                    //         for (var j = 0; j < doc.content[2].table.body[i].length; j++) {
-                    //             doc.content[2].table.body[i][j]['text'] = doc.content[2].table.body[i][j]['text'].split(' ').reverse().join(' ');
-                    //         }
-                    //     }
-                    // },
-            
-
-
-
-
-
-
-
-
-
+                    {                     
+                    extend: 'pdfHtml5',
+                    pagesize: 'A5',
+                    className: 'btn btn-table-pdf',
+                    orientation: 'landscape',                
+                    exportOptions: {
+                        orthogonal: "PDF",
+                        columns: ':visible',
+                        alignment: "right",
+                        modifier: {order: 'index', page: 'current'}
+                                        
+                    },
+                    customize: function(doc) {
+                        processExportedPDFDoc(doc,'{{ app()->getLocale() }}');
+                    }                               
                     }
-                ]
+                ],
+                columnDefs: [{
+                targets: '_all',
+                render: function(data, type, row) {
+                if (type === 'PDF') {
+                return data.split(' ').reverse().join(' ');
+                }
+                return data;
+                }
+                }],                
+
+
             }).container().appendTo($('#kt_recipes_datatable_buttons'));
 
             // Hook dropdown menu click event to datatable export buttons

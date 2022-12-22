@@ -1,4 +1,4 @@
-function processExportedPDFDoc(doc,lang,logo) {
+function processExportedPDFDoc(doc,lang) {
     var dir = '';
     if(lang == 'ar'){
         dir = 'right';

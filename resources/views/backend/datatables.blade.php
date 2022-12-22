@@ -439,20 +439,19 @@ var KTDatatablesServerSide = function () {
 
                     },
                     {                     
-                    extend: 'pdfHtml5',
-                    pagesize: 'A5',
+                    extend: 'pdfHtml5',                   
                     className: 'btn btn-table-pdf',
                     orientation: 'landscape',                
                     exportOptions: {
                         orthogonal: "PDF",
-                        columns: ':visible',
-                        alignment: "right",
-                        modifier: {order: 'index', page: 'current'}
+                        columns: "thead th:not(.noExport)"
                                         
                     },
-                    customize: function(doc) {
-                        processExportedPDFDoc(doc,'{{ app()->getLocale() }}');
-                    }                               
+
+                        customize: function ( doc ) {
+                            processExportedPDFDoc(doc,'ar');
+                        }
+                                                 
                     }
                 ],
                 columnDefs: [{

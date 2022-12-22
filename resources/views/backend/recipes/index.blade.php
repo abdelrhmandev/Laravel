@@ -35,7 +35,7 @@
  
 
 
-<div style="margin: 20px;" dir="rtl">
+<div style="margin: 20px;" dir="ltr">
 
     @if(app()->getLocale() === 'en')
     <table class="table" id="example">
@@ -63,13 +63,21 @@
         <th>الأسم  بالكامل</th>
 
         <th>المهنه</th>
- 
+        <th>الأسم  بالكامل</th>
+
+        <th>المهنه</th>
+        <th>الأسم  بالكامل</th>
+
+        <th>المهنه</th>
+
    </tr>        
     </thead>
     <tbody>
         @for ($i=0;$i<=0;$i++)            
         <tr>
           <td> عبدالرحمن  مجدي</td>
+          <td> مبرمج</td>          <td> عبدالرحمن  مجدي</td>
+          <td> مبرمج</td>          <td> عبدالرحمن  مجدي</td>
           <td> مبرمج</td>
  
           </tr>
@@ -92,6 +100,10 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
 </div>
 
 <script type="text/javascript">
+
+
+
+
 $(document).ready(function() {
      $('#example').DataTable({
          dom: 'Bfrtip',
@@ -107,11 +119,10 @@ $(document).ready(function() {
                  orthogonal: "PDF",
                  columns: ':visible',
                  alignment: "right",
-
                  modifier: {order: 'index', page: 'current'}
                                    
              },
-             customize: function(doc,'{{ app()->getLocale() }}') {
+             customize: function(doc) {
                  processExportedPDFDoc(doc,'{{ app()->getLocale() }}');
              }
          }],
@@ -127,8 +138,11 @@ $(document).ready(function() {
      });
  });
 
+
  
 </script>
+
+
 
 </body>
 </html>

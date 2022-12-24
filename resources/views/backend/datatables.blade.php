@@ -449,7 +449,7 @@ var KTDatatablesServerSide = function () {
                         charset: 'utf-8',
                         bom: 'true', 
                         customize: function(doc) {                           
-                            processExportedPDFDoc(doc,document.dir);
+                            processExportedPDFDoc(doc);
                         },                            
                     }
                 ]

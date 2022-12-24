@@ -1,4 +1,4 @@
-function processExportedPDFDoc(doc,lang) {
+function processExportedPDFDoc(doc) {
  
     // const dir = document.dir == 'rtl' ? 'right' : 'left';
 
@@ -8,16 +8,30 @@ function processExportedPDFDoc(doc,lang) {
     //https://itnext.io/angularjs-exporting-to-pdf-using-pdfmake-js-library-49f3afec97ef
 
     // https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/vfs_fonts.js
-    pdfMake.fonts = {
-            Cairo: {
-                normal: 'Cairo-Regular-400.ttf',
-                bold: 'Cairo-Regular-400.ttf',
-                italics: 'Cairo-Regular-400.ttf',
-                bolditalics: 'Cairo-Regular-400.ttf'
+     pdfMake.fonts = {
+            Roboto: {
+                normal: 'fonts/Roboto-Italic.ttf',
+                bold: 'fonts/Roboto-Italic.ttf',
+                italics: 'fonts/Roboto-Italic.ttf',
+                bolditalics: 'fonts/Roboto-Italic.ttf'
             },
-            
+            Droid:{
+                normal: 'fonts/Droid_Naskh_Regular.ttf',
+                bold: 'fonts/Droid_Naskh_Regular.ttf',
+                italics: 'fonts/Droid_Naskh_Regular.ttf',
+                bolditalics: 'fonts/Droid_Naskh_Regular.ttf'
+            },
+            Cairo:{
+                normal: 'fonts/Cairo.ttf',
+                bold: 'fonts/Cairo.ttf',
+                italics: 'fonts/Cairo.ttf',
+                bolditalics: 'fonts/Cairo.ttf'
+            }                       
         };
-         doc.defaultStyle.font = 'Cairo';
+                         
+
+        doc.defaultStyle.font = 'Cairo';
+        //  doc.defaultStyle.font = 'Roboto';
 
      
         doc.defaultStyle.fontSize = 19;

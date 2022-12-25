@@ -29,7 +29,7 @@
 		</script>		
 		@if(app()->getLocale() === 'ar')
 		{{-- font-family: Droid Arabic Naskh,serif; --}}
-			<link href="https://fonts.googleapis.com/css2?family=Cairo:700"> 		
+			<link href="https://fonts.googleapis.com/css?family=Cairo:300,400,500,600,700"> 		
 			<link href="{{ asset('assets/backend/plugins/custom/prismjs/prismjs.bundle.rtl.css')}}" rel="stylesheet" type="text/css" />
 			<link href="{{ asset('assets/backend/plugins/global/plugins.bundle.rtl.css')}}" rel="stylesheet" type="text/css" />
 			<link href="{{ asset('assets/backend/css/style.bundle.rtl.css')}}" rel="stylesheet" type="text/css" />
@@ -45,7 +45,7 @@
 	</head>
 	<!--end::Head-->
 	<!--begin::Body-->
-	<body id="kt_body" style="background-image: url()" class="header-fixed header-tablet-and-mobile-fixed aside-fixed aside-secondary-enabled">
+	<body style="font-family: Cairo" id="kt_body" style="background-image: url()" class="header-fixed header-tablet-and-mobile-fixed aside-fixed aside-secondary-enabled">
 		<!--begin::Main-->
 		<!--begin::Root-->
 		<div class="d-flex flex-column flex-root">

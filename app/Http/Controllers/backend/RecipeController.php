@@ -145,6 +145,7 @@ class RecipeController extends Controller
             'header_title'                    => trans('orphan.interventions_menu')
             ];
             return view('backend.recipes.index', $compact);
+            // return view('backend.recipes.pdf-index', $compact);
 
 
     

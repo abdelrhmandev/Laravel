@@ -1,9 +1,8 @@
 function processExportedPDFDoc(doc) {
  
- 
-    var dir = document.dir == 'rtl' ? 'right' : 'left';
+    // const dir = document.dir == 'rtl' ? 'right' : 'left';
 
-    const lang = document.dir == 'rtl' ? 'ar' : 'en';
+    const lang = document.dir == 'rtl' ? 'ar' : 'left';
 
     dir = 'center'; // look better in view
     //https://hellogreg.github.io/woff2base/ upload font and get it's base64code
@@ -12,25 +11,21 @@ function processExportedPDFDoc(doc) {
 
     // https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/vfs_fonts.js
 
-      /* */
-      /*pdfMake.fonts = {
-         DroidKufi: {
-             normal: 'DroidKufi-Regular.ttf',
-             bold: 'DroidKufi-Regular.ttf',
-             italics: 'DroidKufi-Regular.ttf',
-             bolditalics: 'DroidKufi-Regular.ttf'
-         }
-     };      
-        doc.defaultStyle.font = 'DroidKufi';
-     */
+    pdfMake.fonts = {
+        DroidKufi: {
+            normal: 'DroidKufi-Regular.ttf',
+            bold: 'DroidKufi-Regular.ttf',
+            italics: 'DroidKufi-Regular.ttf',
+            bolditalics: 'DroidKufi-Regular.ttf'
+        }
+    }
  
-         win.defaultStyle.font = 'Times New Roman';
 
-      
+     
         doc.defaultStyle.fontSize = 19;
     
         doc.content[0]['text'] = doc.content[0]['text'].split(' ').reverse().join(' '); // Header Label
-        if(dir == 'ar'){
+        if(lang == 'ar'){
             for (var i = 0; i < doc.content[1].table.body.length; i++) {
                 doc.content[1].table.body[i] = doc.content[1].table.body[i].reverse();
                 for (var j = 0; j < doc.content[1].table.body[i].length; j++) {
@@ -42,9 +37,12 @@ function processExportedPDFDoc(doc) {
         doc.content[0].alignment = 'center'; // welcome message it' OK
         //////////////
 
-         
-            
-        
+        var doc = {
+            content: 'مرحباااا',
+            defaultStyle: {
+                font: 'DroidKufi'
+            }
+        };
         doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split('');
         var now = new Date();
         var jsDate = now.getDate() + '-' + (now.getMonth() + 1) + '-' + now.getFullYear();

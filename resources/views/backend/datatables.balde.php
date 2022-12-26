@@ -27,7 +27,7 @@ $(document).ready(function() {
                                    
              },
              customize: function(doc) {
-                proccesspdf(doc);
+                arabicFont(doc);
              }
          }],
  

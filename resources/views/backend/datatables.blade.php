@@ -135,16 +135,7 @@
  
     /////////////////
     function processDoc(doc) {
-     
- 
         var font =  arabicFont(doc);     
-        doc.defaultStyle.font = 'Cairo';    
-             
-        
-            
-         
-          
-     
-        
+        doc.defaultStyle.font = 'Cairo';            
     }
     </script>

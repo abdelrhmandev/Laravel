@@ -1,4 +1,4 @@
-function proccesspdf(doc){ 
+function arabicFont(doc){ 
  
         // const dir = document.dir == 'rtl' ? 'right' : 'left';
         const lang = document.dir == 'rtl' ? 'ar' : 'left';

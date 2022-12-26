@@ -164,7 +164,6 @@
  
 <script src="{{ asset('assets/backend/js/custom/pdfMake/processExportedPDFDoc.js')}}"></script> 
 <script src="{{ asset('assets/backend/js/custom/pdfMake/pdfmake.min.js')}}"></script> 
- 
 <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js')}}"></script>
 
  

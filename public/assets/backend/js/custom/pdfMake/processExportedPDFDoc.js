@@ -1,5 +1,6 @@
 function arabicFont(doc){ 
  
+    alert('ssaszz544');
         // const dir = document.dir == 'rtl' ? 'right' : 'left';
         const lang = document.dir == 'rtl' ? 'ar' : 'left';
         dir = 'center'; // look better in view

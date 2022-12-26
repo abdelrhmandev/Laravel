@@ -27,7 +27,7 @@ $(document).ready(function() {
                                    
              },
              customize: function(doc) {
-                 processDoc(doc);
+                proccesspdf(doc);
              }
          }],
  
@@ -37,16 +37,6 @@ $(document).ready(function() {
      });
  });
 
- function processDoc(doc) {
-     pdfMake.fonts = {
-         DroidKufi: {
-             normal: 'DroidKufi-Regular.ttf',
-             bold: 'DroidKufi-Regular.ttf',
-             italics: 'DroidKufi-Regular.ttf',
-             bolditalics: 'DroidKufi-Regular.ttf'
-         }
-     };      
-     doc.defaultStyle.font = 'DroidKufi';  
- }
+ 
 </script>
     

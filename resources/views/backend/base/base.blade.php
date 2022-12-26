@@ -34,7 +34,9 @@
 			<link href="{{ asset('assets/backend/plugins/global/plugins.bundle.rtl.css')}}" rel="stylesheet" type="text/css" />
 			<link href="{{ asset('assets/backend/css/style.bundle.rtl.css')}}" rel="stylesheet" type="text/css" />
 		@else
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Sevillana&display=swap" rel="stylesheet">
 		<!--begin::Global Stylesheets Bundle(used by all pages)-->
 		<link href="{{ asset('assets/backend/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('assets/backend/css/style.bundle.css')}}" rel="stylesheet" type="text/css" />

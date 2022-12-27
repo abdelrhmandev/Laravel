@@ -1,4 +1,4 @@
-<div id="kt_recipes_datatable_example_1_export" class="d-none"></div>
+<div id="kt_datatable_example_1_export" class="d-none"></div>
 <!--end::Export buttons-->
 <div>
    <button type="button" class="btn btn-light-primary me-3" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
@@ -13,7 +13,7 @@
       <!--end::Svg Icon-->{{ __('site.export') }} Recipes 
    </button>
    <!--begin::Menu-->
-   <div id="kt_recipes_datatable_export_menu" class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-200px py-4" data-kt-menu="true">
+   <div id="kt_datatable_export_menu" class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-200px py-4" data-kt-menu="true">
       <div class="menu-item px-3"><a href="#" class="menu-link px-3" data-kt-export="copy"><span class="navi-icon">
          <i class="la la-copy"></i>
       </span> Copy to clipboard</a></div>
@@ -27,5 +27,5 @@
          <i class="la la-file-pdf-o"></i>
       </span> PDF</a></div>
    </div>
-   <div id="kt_recipes_datatable_buttons" class="d-none"></div>
+   <div id="kt_datatable_buttons" class="d-none"></div>
 </div>

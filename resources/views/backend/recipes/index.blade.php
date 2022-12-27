@@ -29,7 +29,7 @@
               </svg>
             </span>
             <!--end::Svg Icon-->
-            <input type="text" data-kt-recipes-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="{{ __('site.search') }} ......" />
+            <input type="text" data-kt-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="{{ __('site.search') }} ......" />
           </div>
           <!--end::Search-->
         </div>
@@ -37,7 +37,7 @@
         <!--begin::Card toolbar-->
         <div class="card-toolbar">
           <!--begin::Toolbar-->
-          <div class="d-flex justify-content-end" data-kt-recipes-table-toolbar="base">
+          <div class="d-flex justify-content-end" data-kt-table-toolbar="base">
             <!--begin::Filter-->
             <button type="button" class="btn btn-light-primary me-3" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
             <!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
@@ -59,7 +59,7 @@
               <div class="separator border-gray-200"></div>
               <!--end::Separator-->
               <!--begin::Content-->
-              <div class="px-7 py-5" data-kt-recipes-table-filter="form">
+              <div class="px-7 py-5" data-kt-table-filter="form">
                 <!--begin::Input group-->
                
                 <!--end::Input group-->
@@ -70,8 +70,8 @@
                 <!--end::Input group-->
                 <!--begin::Actions-->
                 <div class="d-flex justify-content-end">
-                  <button type="reset" class="btn btn-light btn-active-light-primary fw-semibold me-2 px-6" data-kt-menu-dismiss="true" data-kt-recipes-table-filter="reset">{{ __('site.reset') }}</button>
-                  <button type="submit" class="btn btn-primary fw-semibold px-6" data-kt-menu-dismiss="true" data-kt-recipes-table-filter="filter">{{ __('site.apply') }}</button>
+                  <button type="reset" class="btn btn-light btn-active-light-primary fw-semibold me-2 px-6" data-kt-menu-dismiss="true" data-kt-table-filter="reset">{{ __('site.reset') }}</button>
+                  <button type="submit" class="btn btn-primary fw-semibold px-6" data-kt-menu-dismiss="true" data-kt-table-filter="filter">{{ __('site.apply') }}</button>
                 </div>
                 <!--end::Actions-->
               </div>
@@ -88,16 +88,16 @@
             
             @include('backend.partials.modals._exportlisting')
             <!--end::Export-->
-            <!--begin::Add recipes-->
+            <!--begin::Add-->
             <a class="btn btn-primary" href="sdsadsa.php">{{ __('recipe.add') }}</a>
-            <!--end::Add recipes-->
+            <!--end::Add-->
           </div>
           <!--end::Toolbar-->
           <!--begin::Group actions-->
-          <div class="d-flex justify-content-end align-items-center d-none" data-kt-recipes-table-toolbar="selected">
+          <div class="d-flex justify-content-end align-items-center d-none" data-kt-table-toolbar="selected">
             <div class="fw-bold me-5">
-            <span class="me-2" data-kt-recipes-table-select="selected_count"></span>{{ __('site.selected') }}</div>
-            <button type="button" class="btn btn-danger" data-kt-recipes-table-select="delete_selected">{{ __('site.delete_selected') }}</button>
+            <span class="me-2" data-kt-table-select="selected_count"></span>{{ __('site.selected') }}</div>
+            <button type="button" class="btn btn-danger" data-kt-table-select="delete_selected">{{ __('site.delete_selected') }}</button>
           </div>
           <!--end::Group actions-->
         </div>
@@ -107,14 +107,14 @@
       <!--begin::Card body-->
       <div class="card-body pt-0">
         <!--begin::Table-->
-        <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_recipes_datatable">
+        <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_datatable">
           <!--begin::Table head-->
           <thead>
             <!--begin::Table row-->
             <tr class="text-start text-bold-400 fw-bold fs-7 text-uppercase gs-0">
               <th class="w-10px pe-2 noExport">
                 <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                  <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_recipes_datatable .form-check-input" value="1" />
+                  <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_datatable .form-check-input" value="1" />
                 </div>
               </th>            
               <th>{{ __('site.title') }}</th>             
@@ -155,25 +155,22 @@
 <!--begin::Vendors Javascript(used for this page only)-->
 {{-- @include('backend.datatables2') --}}
 @include('backend.datatables')
-
-
-
  
-
 <script src="{{ asset('assets/backend/js/custom/pdfMake/pdfmake.min.js')}}"></script> 
 <script src="{{ asset('assets/backend/js/custom/pdfMake/vfs_fonts.js')}}"></script>
-{{-- <script src="{{ asset('assets/backend/js/custom/pdfMake/processExportedPDFDoc.js')}}"></script>  --}}
-
 <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js')}}"></script>
 
  
-
-
-
 <!--end::Vendors Javascript-->
 <!--begin::Custom Javascript(used for this page only)-->
+<script>
+function loadDatatable(){
  
- 
+     var c = 'aaa'
+      ;
+      return c;
+} 
+</script>
 <!--end::Custom Javascript-->
- 
+
 @stop

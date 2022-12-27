@@ -46,9 +46,6 @@ class RecipeController extends Controller
             if ($request->ajax()) {
                 
                 $query = Recipe::withCount('comments')->with(['category','tags.translate'])->latest();    
-
-              
-
                  return Datatables::of($query)    
                             ->addIndexColumn()
                             // ->filter(function ($instance) use ($request) {
@@ -56,7 +53,7 @@ class RecipeController extends Controller
                             //             $instance->where('status', $request->get('status')); 
                             //     }
                             // })
-                            ->editColumn('translate.title', function ($row) {
+                            ->editColumn('title', function ($row) {
                             $div = "<div class=\"d-flex align-items-center\">";                            
                             if($row->image){
                                 $div.= "<a href=\"qqqqqqq\" title='".$row->translate->title."' class=\"symbol symbol-50px\">
@@ -82,7 +79,6 @@ class RecipeController extends Controller
                             // return $row->category_id ?? '__';
                             return $row->category_id ? "<a href=\"category\" class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-category-filter=\"category\">".$row->category->translate->title."</a>" : "<span aria-hidden=\"true\">—</span>";                                       
                           })
-
                            ->editColumn('tags', function($row) {            
                             $tags= "";                  
                                
@@ -103,9 +99,7 @@ class RecipeController extends Controller
                                         }                                                                                               
                                                          
                                return $tags;
-                           })                          
-                          
-
+                           })                                                    
                          ->editColumn('status', function ($row) {                                                          
                            if($row->status == 'published') {
                                 $status = "<div class=\"badge py-3 px-4 fs-7 badge-light-primary\">".__('site.published')."</div>";
@@ -128,10 +122,10 @@ class RecipeController extends Controller
                            return $row->comments_count > 0 ? "<span class=\"fw-bold text-success py-1\">".$row->comments_count."</span>":"<span aria-hidden=\"true\">—</span>";
                            })
 
-                           
-                           ->rawColumns(['translate.title','category_id','tags','status','created_at'])    
-
-
+                        ->editColumn('actions', function ($row) {                                                                                    
+                        return view('backend.recipes.btns.edit-delete', ['route'=>'recipes','id'=>$row->id,'title'=>'ssssss']);
+                        })                           
+                        ->rawColumns(['title','category_id','tags','status','created_at'])    
                         // ->rawColumns(['translate.title','category_id','tags','status','featured','created_at','comments'])    
                         ->make(true);    
             }    

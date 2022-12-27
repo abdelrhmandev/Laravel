@@ -10,8 +10,10 @@
     
         // Private functions
         var initDatatable = function () {
+
+            
             var lang = document.dir == 'rtl' ? 'ar' : 'en-GB';        
-            dt = $("#kt_recipes_datatable").DataTable({
+            dt = $("#kt_datatable").DataTable({
                 searchDelay: 500,
                 processing: true,
                 serverSide: true,                
@@ -47,15 +49,14 @@
                 },
                 columns: [
                     { data: 'id', name: 'id',exportable:false},
-                    { data: 'translate.title', name: 'translate.title'},
+                    { data: 'title', name: 'title'},
                     { data: 'category_id', name: 'category_id'},
-                    // { data: 'tags', name: 'tags'},
-                    // { data: 'comments', name: 'comments'},
                     { data: 'status', name: 'status'},
-                    // { data: 'featured', name: 'featured'},
                     { data: 'created_at', name: 'created_at'},
-                    { data: null },
+                    { data: 'actions' },
                 ],
+                loadDatatable(); 
+               
                 columnDefs: [
                     {
                         targets: 0,
@@ -76,41 +77,7 @@
                         printable: false,
                         searchable: false,                    
                         orderable: false,
-                        className: 'text-end',
-                        render: function (data, type, row) {
-                            return `
-                                <a href="#" class="btn btn-light btn-active-light-primary btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end" data-kt-menu-flip="top-end">
-                                    Actions
-                                    <span class="svg-icon svg-icon-5 m-0">
-                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <polygon points="0 0 24 0 24 24 0 24"></polygon>
-                                                <path d="M6.70710678,15.7071068 C6.31658249,16.0976311 5.68341751,16.0976311 5.29289322,15.7071068 C4.90236893,15.3165825 4.90236893,14.6834175 5.29289322,14.2928932 L11.2928932,8.29289322 C11.6714722,7.91431428 12.2810586,7.90106866 12.6757246,8.26284586 L18.6757246,13.7628459 C19.0828436,14.1360383 19.1103465,14.7686056 18.7371541,15.1757246 C18.3639617,15.5828436 17.7313944,15.6103465 17.3242754,15.2371541 L12.0300757,10.3841378 L6.70710678,15.7071068 Z" fill="currentColor" fill-rule="nonzero" transform="translate(12.000003, 11.999999) rotate(-180.000000) translate(-12.000003, -11.999999)"></path>
-                                            </g>
-                                        </svg>
-                                    </span>
-                                </a>
-                                <!--begin::Menu-->
-                                <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-3">
-                                        <a href="qqqqqqqqqqq" class="menu-link px-3" data-kt-recipes-table-filter="edit_row">
-                                            Edit Recipe
-                                        </a>
-                                    </div>
-                                    <!--end::Menu item-->
-    
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-3">
-                                        <a href="#" class="menu-link px-3" data-kt-recipes-table-filter="delete_row">
-                                            Delete Recipe
-                                        </a>
-                                    </div>
-                                    <!--end::Menu item-->
-                                </div>
-                                <!--end::Menu-->
-                            `;
-                        },
+                        className: 'text-end',                        
                     },
                 ],
                 // Add data-filter attribute
@@ -120,10 +87,8 @@
                         // $(row).find('td:eq(3)').attr('data-filter', data.status);
                         // $(row).find('td:eq(4)').attr('data-filter', data.created_at);
                     }
-            });
-    
-            table = dt.$;
-    
+            });    
+            table = dt.$;    
             // Re-init functions on every table re-draw -- more info: https://datatables.net/reference/event/draw
             dt.on('draw', function () {
                 initToggleToolbar();
@@ -135,7 +100,7 @@
     
         // Search Datatable --- official docs reference: https://datatables.net/reference/api/search()
             var handleSearchDatatable = function () {
-                    const filterSearch = document.querySelector('[data-kt-recipes-table-filter="search"]');
+                    const filterSearch = document.querySelector('[data-kt-table-filter="search"]');
                     filterSearch.addEventListener('keyup', function (e) {
                         dt.search(e.target.value).draw();
                     });
@@ -144,10 +109,10 @@
             // Filter Datatable
             var handleFilterDatatable = function () {
                 // Select filter options
-                const filterForm = document.querySelector('[data-kt-recipes-table-filter="form"]');
-                filterStatus = document.querySelectorAll('[data-kt-recipes-table-filter="status"][name="status"]');
-                const filterCategory =  document.querySelectorAll('[data-kt-recipes-table-filter="category"][name="category"]');
-                const filterButton = filterForm.querySelector('[data-kt-recipes-table-filter="filter"]');
+                const filterForm = document.querySelector('[data-kt-table-filter="form"]');
+                filterStatus = document.querySelectorAll('[data-kt-table-filter="status"][name="status"]');
+                const filterCategory =  document.querySelectorAll('[data-kt-table-filter="category"][name="category"]');
+                const filterButton = filterForm.querySelector('[data-kt-table-filter="filter"]');
                 //const selectOptions = filterForm.querySelectorAll('select');
                 // Filter datatable on submit
                 filterButton.addEventListener('click', function () {
@@ -171,7 +136,7 @@
             // Delete customer
             var handleDeleteRows = () => {
                 // Select all delete buttons
-                const deleteButtons = document.querySelectorAll('[data-kt-recipes-table-filter="delete_row"]');
+                const deleteButtons = document.querySelectorAll('[data-kt-table-filter="delete_row"]');
                 deleteButtons.forEach(d => {
                 // Delete button on click
                 d.addEventListener('click', function (e) {
@@ -250,7 +215,7 @@
             // Reset Filter
             var handleResetForm = () => {
                 // Select reset button
-                const resetButton = document.querySelector('[data-kt-recipes-table-filter="reset"]');
+                const resetButton = document.querySelector('[data-kt-table-filter="reset"]');
         
                 // Reset datatable
                 resetButton.addEventListener('click', function () {
@@ -270,11 +235,11 @@
             var initToggleToolbar = function () {
                 // Toggle selected action toolbar
                 // Select all checkboxes
-                const container = document.querySelector('#kt_recipes_datatable');
+                const container = document.querySelector('#kt_datatable');
                 const checkboxes = container.querySelectorAll('[type="checkbox"]');
                 //https://www.itsolutionstuff.com/post/how-to-delete-multiple-records-using-checkbox-in-laravel-5-example.html
                 // Select elements
-                const deleteSelected = document.querySelector('[data-kt-recipes-table-select="delete_selected"]');
+                const deleteSelected = document.querySelector('[data-kt-table-select="delete_selected"]');
                
                 var all_check_box = []; 
                 // Toggle delete selected toolbar
@@ -362,10 +327,10 @@
             // Toggle toolbars
             var toggleToolbars = function () {
                 // Define variables
-                const container = document.querySelector('#kt_recipes_datatable');
-                const toolbarBase = document.querySelector('[data-kt-recipes-table-toolbar="base"]');
-                const toolbarSelected = document.querySelector('[data-kt-recipes-table-toolbar="selected"]');
-                const selectedCount = document.querySelector('[data-kt-recipes-table-select="selected_count"]');
+                const container = document.querySelector('#kt_datatable');
+                const toolbarBase = document.querySelector('[data-kt-table-toolbar="base"]');
+                const toolbarSelected = document.querySelector('[data-kt-table-toolbar="selected"]');
+                const selectedCount = document.querySelector('[data-kt-table-select="selected_count"]');
         
                 // Select refreshed checkbox DOM elements
                 const allCheckboxes = container.querySelectorAll('tbody [type="checkbox"]');
@@ -435,10 +400,10 @@
                             },                            
                         }
                     ]
-                }).container().appendTo($('#kt_recipes_datatable_buttons'));
+                }).container().appendTo($('#kt_datatable_buttons'));
     
                 // Hook dropdown menu click event to datatable export buttons
-                const exportButtons = document.querySelectorAll('#kt_recipes_datatable_export_menu [data-kt-export]');
+                const exportButtons = document.querySelectorAll('#kt_datatable_export_menu [data-kt-export]');
                 exportButtons.forEach(exportButton => {
                     exportButton.addEventListener('click', e => {
                         e.preventDefault();
@@ -464,22 +429,22 @@
     
      
     
-        // Public methods
-        return {
-            init: function () {
-            initDatatable();
-            handleSearchDatatable();
-            initToggleToolbar();
-            handleFilterDatatable();
-            handleDeleteRows();
-            handleResetForm();
-            table = document.querySelector('#kt_recipes_datatable');
-            if ( !table ) {
-            return;
+            // Public methods
+            return {
+                init: function () {
+                initDatatable();
+                handleSearchDatatable();
+                initToggleToolbar();
+                handleFilterDatatable();
+                handleDeleteRows();
+                handleResetForm();
+                table = document.querySelector('#kt_datatable');
+                if ( !table ) {
+                return;
+                }
+                exportButtons();    
+                }
             }
-            exportButtons();    
-            }
-        }
     }();
     
     // On document ready

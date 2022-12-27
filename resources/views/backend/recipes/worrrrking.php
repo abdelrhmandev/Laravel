@@ -175,10 +175,71 @@ function loadDatatable(){
             
             var lang = document.dir == 'rtl' ? 'ar' : 'en-GB';        
             dt = $("#kt_datatable").DataTable({
-      
+                searchDelay: 500,
+                processing: true,
+                serverSide: true,                
+                info: true, 
+                bPaginate: true,    
+                orientation: 'landscape',     
+                exportOptions: {
+                    orthogonal: "myExport",
+                },    
+                pagingType: "full_numbers",
+                language: {
+                url: "//cdn.datatables.net/plug-ins/1.12.1/i18n/"+lang+".json",
+                },
+                fnDrawCallback: function() {
+                    if (Math.ceil((this.fnSettings().fnRecordsDisplay()) / this.fnSettings()._iDisplayLength) < 1) {
+                        $('.dataTables_paginate').css("display", "none"); $('.dataTables_length').css("display", "none"); $('.dataTables_info').css("display", "none");            
+                    }else{
+                        $('.dataTables_paginate').css("display", "block"); $('.dataTables_length').css("display", "block"); $('.dataTables_info').css("display", "block");            
+                    }   
+                   
+                },         
                 iDisplayLength: 10,
                 bLengthChange: true,
-          
+                stateSave: false,
+                lengthMenu: [[1, 10, 25, 50, -1], [1, 10, 25, 50, "AllXXX"]],
+                order: [],
+                select: {
+                    style: 'os',
+                    selector: 'td:first-child input[type="checkbox"]',
+                    className: 'row-selected'
+                },               
+                ajax: {
+                    url: "{{ route('recipes.index')}}",
+                },
+                columns: [
+                    { data: 'id', name: 'id',exportable:false},
+                    { data: 'title', name: 'title'},
+                    { data: 'category_id', name: 'category_id'},
+                    { data: 'status', name: 'status'},
+                    { data: 'created_at', name: 'created_at'},
+                    { data: 'actions' },
+                ],               
+                columnDefs: [
+                    {
+                        targets: 0,
+                        exportable: false,
+                        printable: false,
+                        searchable: false,
+                        orderable: false,
+                            render: function (data) {
+                                return `
+                                    <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                        <input class="form-check-input" class="sub_chk" data-id="${data}" value="${data}" type="checkbox" />
+                                    </div>`;
+                            }
+                    },{
+                        targets: -1,
+                        data: null,
+                        exportable: false,
+                        printable: false,
+                        searchable: false,                    
+                        orderable: false,
+                        className: 'text-end',                        
+                    },
+                ],
      
             });    
               

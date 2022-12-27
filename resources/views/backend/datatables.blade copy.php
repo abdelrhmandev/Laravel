@@ -10,6 +10,8 @@
     
         // Private functions
         var initDatatable = function () {
+
+            
             var lang = document.dir == 'rtl' ? 'ar' : 'en-GB';        
             dt = $("#kt_datatable").DataTable({
                 searchDelay: 500,
@@ -30,8 +32,9 @@
                         $('.dataTables_paginate').css("display", "none"); $('.dataTables_length').css("display", "none"); $('.dataTables_info').css("display", "none");            
                     }else{
                         $('.dataTables_paginate').css("display", "block"); $('.dataTables_length').css("display", "block"); $('.dataTables_info').css("display", "block");            
-                    }   
-                },            
+                    }                      
+                },
+         
                 iDisplayLength: 10,
                 bLengthChange: true,
                 stateSave: false,
@@ -42,6 +45,8 @@
                     selector: 'td:first-child input[type="checkbox"]',
                     className: 'row-selected'
                 },
+
+               
                 ajax: {
                     url: "{{ route('recipes.index')}}",
                 },
@@ -49,13 +54,12 @@
                     { data: 'id', name: 'id',exportable:false},
                     { data: 'title', name: 'title'},
                     { data: 'category_id', name: 'category_id'},
-                    // { data: 'tags', name: 'tags'},
-                    // { data: 'comments', name: 'comments'},
                     { data: 'status', name: 'status'},
-                    // { data: 'featured', name: 'featured'},
                     { data: 'created_at', name: 'created_at'},
                     { data: 'actions' },
                 ],
+                
+               
                 columnDefs: [
                     {
                         targets: 0,

@@ -154,7 +154,7 @@
 @section('scripts')
 <!--begin::Vendors Javascript(used for this page only)-->
 {{-- @include('backend.datatables2') --}}
-@include('backend.datatables')
+{{-- @include('backend.datatables') --}}
  
 <script src="{{ asset('assets/backend/js/custom/pdfMake/pdfmake.min.js')}}"></script> 
 <script src="{{ asset('assets/backend/js/custom/pdfMake/vfs_fonts.js')}}"></script>
@@ -166,10 +166,22 @@
 <!--begin::Custom Javascript(used for this page only)-->
 <script>
 
-var myData = 'ss';
+var dynamicColumns = [
+{ data: 'id', name: 'id',exportable:false},
+{ data: 'translate.title', name: 'translate.title'},
+{ data: 'category_id', name: 'category_id'},
+{ data: 'status', name: 'status'},
+{ data: 'created_at', name: 'created_at'},
+{ data: 'actions' , name : 'actions' },    
+];
 
 KTUtil.onDOMContentLoaded(function () {
-  loadDatatable('{{ route('recipes.index') }}',myData);
+  loadDatatable(
+    '{{ route('recipes.index') }}',
+    '{{ route('recipes.destroy','1212121') }}',
+    '{{ route('recipes.destroyMultiple') }}',
+     dynamicColumns
+    );
  });
  
  

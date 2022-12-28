@@ -53,10 +53,12 @@ class RecipeController extends Controller
                             //             $instance->where('status', $request->get('status')); 
                             //     }
                             // })
-                            ->editColumn('title', function ($row) {
+                            
+                            ->editColumn('translate.title', function ($row) {
+                             $route = route('recipes.edit',$row->id);   
                             $div = "<div class=\"d-flex align-items-center\">";                            
                             if($row->image){
-                                $div.= "<a href=\"qqqqqqq\" title='".$row->translate->title."' class=\"symbol symbol-50px\">
+                                $div.= "<a href=".$route." title='".$row->translate->title."' class=\"symbol symbol-50px\">
                                             <span class=\"symbol-label\" style=\"background-image:url(".asset("storage/".$row->image).")\" />
                                             </span>
                                         </a>";                                                                
@@ -67,7 +69,7 @@ class RecipeController extends Controller
                             } 
                             $description = '';//"<div class=\"text-muted fs-7 fw-bold\">".Str::of($row->translate->description)->words(8,'...')."</div>";
                             $div.="<div class=\"ms-5\">
-                                        <a href=\"sdasd\" class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-recipes-filter=\"item\">".$row->translate->title."</a>
+                                        <a href=".$route." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-recipes-filter=\"item\">".$row->translate->title."</a>
                                     ".$description."</div>"; 
 
                             $div.= "</div>";
@@ -122,10 +124,11 @@ class RecipeController extends Controller
                            return $row->comments_count > 0 ? "<span class=\"fw-bold text-success py-1\">".$row->comments_count."</span>":"<span aria-hidden=\"true\">—</span>";
                            })
 
-                        ->editColumn('actions', function ($row) {                                                                                    
-                        return view('backend.recipes.btns.edit-delete', ['route'=>'recipes','id'=>$row->id,'title'=>'ssssss']);
+                        ->editColumn('actions', function ($row) {      
+                                                         
+                        return view('backend.recipes.btns.edit-delete', ['edit_route'=>route('recipes.edit',$row->id),'id'=>$row->id]);
                         })                           
-                        ->rawColumns(['title','category_id','tags','status','created_at'])    
+                        ->rawColumns(['translate.title','category_id','status','created_at','actions'])    
                         // ->rawColumns(['translate.title','category_id','tags','status','featured','created_at','comments'])    
                         ->make(true);    
             }    

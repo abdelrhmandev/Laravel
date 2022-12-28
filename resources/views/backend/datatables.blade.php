@@ -6,7 +6,7 @@
         var table;
         var dt;
         var filterStatus;
-             
+             alert('dasdsa');
           
                 const documentTitle = 'بسم الله الرحمن الرحيم';
                  buttons = new $.fn.dataTable.Buttons(table, {

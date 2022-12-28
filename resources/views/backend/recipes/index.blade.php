@@ -158,40 +158,19 @@
  
 <script src="{{ asset('assets/backend/js/custom/pdfMake/pdfmake.min.js')}}"></script> 
 <script src="{{ asset('assets/backend/js/custom/pdfMake/vfs_fonts.js')}}"></script>
+<script src="{{ asset('assets/backend/js/custom/draw_datatable.js')}}"></script>
 <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js')}}"></script>
 
  
 <!--end::Vendors Javascript-->
 <!--begin::Custom Javascript(used for this page only)-->
 <script>
-function loadDatatable(){
 
-
-
-        // Shared variables
-        var table;
-        var dt;
-        var filterStatus;
-            
-            var lang = document.dir == 'rtl' ? 'ar' : 'en-GB';        
-            dt = $("#kt_datatable").DataTable({
-      
-                iDisplayLength: 10,
-                bLengthChange: true,
-          
-     
-            });    
-              
-         
-              exportButtonsXXXX();
-          
-          }
-
+var myData = 'ss';
 
 KTUtil.onDOMContentLoaded(function () {
-  loadDatatable();
- 
-});
+  loadDatatable('{{ route('recipes.index') }}',myData);
+ });
  
  
 

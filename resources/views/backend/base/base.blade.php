@@ -5,16 +5,16 @@
 		<title>{{ config('app.name', 'Laravel') }} | @yield('title')</title>
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<meta name="description" content="The most advanced Bootstrap Admin " />
-		<meta name="keywords" content="Metronic, bootstrap, bootstrap 5, Angular, VueJs, React, Laravel, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
+		<meta name="keywords" content="Metronic, bootstrap, bootstrap 5, Angular" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta property="og:locale" content="en_US" />
 		<meta property="og:type" content="article" />
-		<meta property="og:title" content="Metronic - Bootstrap 5 HTML, VueJS, React, Angular &amp; Laravel Admin Dashboard Theme" />
-		<meta property="og:url" content="https://keenthemes.com/metronic" />
-		<meta property="og:site_name" content="Keenthemes | Metronic" />
-		<link rel="canonical" href="Https://preview.keenthemes.com/metronic8" />
+		<meta property="og:title" content="Metronic - Bootstrap 5 HTML, VueJS, React" />
+		<meta property="og:url" content="#" />
+		<meta property="og:site_name" content="Abdo | Metronic" />
+		<link rel="canonical" href="google.com" />
 		<link rel="shortcut icon" href="{{ asset('assets/backend/media/logos/favicon.ico')}}" />
 		<!--begin::Fonts-->
 		
@@ -49,6 +49,9 @@
 	<!--end::Head-->
 	<!--begin::Body-->
 	<body id="kt_body" style="background-image: url()" class="header-fixed header-tablet-and-mobile-fixed aside-fixed aside-secondary-enabled">
+		{{ csrf_token() }} 
+		sadsadass	
+		{{  dd()}}
 		<!--begin::Main-->
 		<!--begin::Root-->
 		<div class="d-flex flex-column flex-root">

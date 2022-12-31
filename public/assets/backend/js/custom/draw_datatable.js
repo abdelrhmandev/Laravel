@@ -1,5 +1,5 @@
 
-    function loadDatatable(RoutedeListing,Routedestroy,RoutedestroyMultiple,dynamicColumns){
+    function loadDatatable(RouteListing,dynamicColumns){
  
         // Shared variables
         var table;
@@ -29,7 +29,7 @@
                         $('.dataTables_paginate').css("display", "block"); $('.dataTables_length').css("display", "block"); $('.dataTables_info').css("display", "block");            
                     }   
                 },            
-                iDisplayLength: 10,
+                iDisplayLength: 1,
                 bLengthChange: true,
                 stateSave: false,
                 lengthMenu: [[1, 10, 25, 50, -1], [1, 10, 25, 50, "AllXXX"]],
@@ -40,7 +40,7 @@
                     className: 'row-selected'
                 },
                 ajax: {
-                    url: RoutedeListing,
+                    url: RouteListing,
                 },
                 columns: dynamicColumns,  
                 columnDefs: [
@@ -53,7 +53,7 @@
                             render: function (data) {
                                 return `
                                     <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                        <input class="form-check-input" class="sub_chk" data-id="${data}" value="${data}" type="checkbox" />
+                                        <input class="form-check-input" class="sub_chk" data-id="${data}" id="id" value="${data}" type="checkbox" />
                                     </div>`;
                             }
                     },{
@@ -130,7 +130,7 @@
 
                
           
-                alert($('#personal-id-data').val());
+                
 
                 deleteButtons.forEach(d => {
                 // Delete button on click
@@ -140,6 +140,18 @@
                     const parent = e.target.closest('tr');
                     // Get customer name
                     const itemName = parent.querySelectorAll('td')[1].innerText;
+
+                    ///////////////
+
+                    const deleteRoute = document.querySelector('[data-kt-table-filter-route="search"]');
+                    deleteRoute.addEventListener('keyup', function (e) {
+                    alert('asdasdasdadasd'+e);
+                    });
+
+
+                //////////////////////////////
+
+
                     // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
                     Swal.fire({
                         text: "Are you sure you want to deleteXXXX AABDO" + itemName + "?",
@@ -158,7 +170,7 @@
                         headers: {
                             'X-CSRF-TOKEN': 'wwwwwwwwwwwww'
                         },
-                        url: Routedestroy,
+                        url: "{{ route('recipes.destroy','2') }}",
                         data: {
                             '_method': 'delete'
                         },
@@ -172,11 +184,12 @@
                                     showConfirmButton: false,
                                     timer: 2000
                                 }).then(function () {
+
                                     Swal.fire({
-                                    text: response['success'], // respose from controller
-                                    icon: "success",
+                                    text: response['msg'], // respose from controller
+                                    icon: response['status'],
                                     buttonsStyling: false,
-                                    confirmButtonText: "Ok, got it!",
+                                    confirmButtonText: "Ok, got it!  ssss",
                                     customClass: {
                                         confirmButton: "btn fw-bold btn-primary",
                                     }
@@ -270,7 +283,7 @@
                         headers: {
                             'X-CSRF-TOKEN': 'wwwwwwwwwwwww'
                         },
-                        url: RoutedestroyMultiple,
+                        url: '',
                         data: {
                             '_method': 'delete',
                             'ids': join_selected_values,

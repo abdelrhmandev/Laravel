@@ -1,5 +1,5 @@
 <script>
-    function loadDatatable(route,dynamicColumns){
+    function loadDatatable(RouteListing,dynamicColumns){
  
         // Shared variables
         var table;
@@ -40,7 +40,7 @@
                     className: 'row-selected'
                 },
                 ajax: {
-                    url: route,
+                    url: RouteListing,
                 },
                 columns: dynamicColumns,  
                 columnDefs: [
@@ -53,7 +53,7 @@
                             render: function (data) {
                                 return `
                                     <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                        <input class="form-check-input" class="sub_chk" data-id="${data}" value="${data}" type="checkbox" />
+                                        <input class="form-check-input" class="sub_chk" value="${data}" type="checkbox" />
                                     </div>`;
                             }
                     },{
@@ -127,6 +127,11 @@
             var handleDeleteRows = () => {
                 // Select all delete buttons
                 const deleteButtons = document.querySelectorAll('[data-kt-table-filter="delete_row"]');
+
+               
+          
+                
+
                 deleteButtons.forEach(d => {
                 // Delete button on click
                 d.addEventListener('click', function (e) {
@@ -135,14 +140,21 @@
                     const parent = e.target.closest('tr');
                     // Get customer name
                     const itemName = parent.querySelectorAll('td')[1].innerText;
+
+                    ///////////////
+  
+
+                //////////////////////////////
+
+
                     // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
                     Swal.fire({
-                        text: "Are you sure you want to deleteXXXX AABDO" + itemName + "?",
+                        text: "{{ __('admin.confirmDeleteMessage') }}" + itemName + "?",
                         icon: "warning",
                         showCancelButton: true,
                         buttonsStyling: false,
-                        confirmButtonText: "Yes, delete!",
-                        cancelButtonText: "No, cancel",
+                        confirmButtonText: "{{ __('admin.confirmButtonText') }}",
+                        cancelButtonText: "{{ __('admin.cancelButtonText') }}",
                         customClass: {
                             confirmButton: "btn fw-bold btn-danger",
                             cancelButton: "btn fw-bold btn-active-light-primary"
@@ -153,7 +165,8 @@
                         headers: {
                             'X-CSRF-TOKEN': 'wwwwwwwwwwwww'
                         },
-                        url: "{{ route('recipes.destroy','2') }}",
+                       
+                        url: $(this).attr("data-destroy-route"),
                         data: {
                             '_method': 'delete'
                         },
@@ -161,17 +174,18 @@
                             if (result.value) {
                                 // Simulate delete request -- for demo purpose only
                                 Swal.fire({
-                                    text: "Deleting selected customers",
+                                    text: "{{ __('admin.deletingItemMessage') }}",
                                     icon: "info",
                                     buttonsStyling: false,
                                     showConfirmButton: false,
                                     timer: 2000
                                 }).then(function () {
+
                                     Swal.fire({
-                                    text: response['success'], // respose from controller
-                                    icon: "success",
+                                    text: response['msg'], // respose from controller
+                                    icon: response['status'],
                                     buttonsStyling: false,
-                                    confirmButtonText: "Ok, got it!",
+                                    confirmButtonText: "{{ __('admin.confirmButtonTextGotit') }}",
                                     customClass: {
                                         confirmButton: "btn fw-bold btn-primary",
                                     }
@@ -183,12 +197,12 @@
                                     const headerCheckbox = container.querySelectorAll('[type="checkbox"]')[0];
                                     headerCheckbox.checked = false;
                                 });
-                            }/* End Of result.value*/ else if (result.dismiss === 'cancel') {
+                            }else if (result.dismiss === 'cancel') {
                                 Swal.fire({
-                                    text: "Selected customers was not deleted.",
+                                    text: "__('admin.notdeletedMessage')",
                                     icon: "error",
                                     buttonsStyling: false,
-                                    confirmButtonText: "Ok, got it!",
+                                    confirmButtonText: "{{ __('admin.confirmButtonTextGotit') }}",
                                     customClass: {
                                     confirmButton: "btn fw-bold btn-primary",
                                     }
@@ -248,24 +262,26 @@
                     var join_selected_values = all_check_box.join(","); 
                     // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
                     Swal.fire({
-                        text: "Are you sure you want to delete selewwwwwcted customers?"+join_selected_values,
+                        text: "{{ __('admin.confirmMultiDeleteMessage') }}"+"?"+join_selected_values,
                         icon: "warning",
                         showCancelButton: true,
                         buttonsStyling: false,
                         showLoaderOnConfirm: true,
-                        confirmButtonText: "Yes, delete!",
-                        cancelButtonText: "No, cancel",
+                        confirmButtonText: "{{ __('admin.confirmButtonText') }}",
+                        cancelButtonText: "{{ __('admin.cancelButtonText') }}",
                         customClass: {
                             confirmButton: "btn fw-bold btn-danger",
                             cancelButton: "btn fw-bold btn-active-light-primary"
                         },
                     }).then(function (result) {
+                        const destroyMultipleRouteId = document.getElementById('destroyMultipleroute');
+                        const destroyMultipleRoute = destroyMultipleRouteId.getAttribute('data-destroyMultiple-route');
                         $.ajax({
                         type: 'post',
                         headers: {
                             'X-CSRF-TOKEN': 'wwwwwwwwwwwww'
                         },
-                        url: "{{ route('recipes.destroyMultiple') }}",
+                        url: destroyMultipleRoute,
                         data: {
                             '_method': 'delete',
                             'ids': join_selected_values,
@@ -273,17 +289,17 @@
                         success: function (response, textStatus, xhr) {
                             if (result.value) {
                                     Swal.fire({
-                                        text: "Deleting selected customers",
+                                        text: "{{ __('admin.deletingselecteditem') }}",
                                         icon: "info",
                                         buttonsStyling: false,
                                         showConfirmButton: false,
                                         timer: 2000
                                     }).then(function () {
                                         Swal.fire({
-                                            text: response['success'], // respose from controller
-                                            icon: "success",
+                                            text: response['msg'], // respose from controller
+                                            icon: response['status'],
                                             buttonsStyling: false,
-                                            confirmButtonText: "Ok, got it!",
+                                            confirmButtonText: "{{ __('admin.confirmButtonTextGotit') }}",
                                             customClass: {
                                                 confirmButton: "btn fw-bold btn-primary",
                                             }
@@ -298,10 +314,10 @@
                                     });
                                 } else if (result.dismiss === 'cancel') {
                                     Swal.fire({
-                                        text: "Selected customers was not deleted.",
+                                        text: "{{ __('admin.notdeletedMessage') }}",
                                         icon: "error",
                                         buttonsStyling: false,
-                                        confirmButtonText: "Ok, got it!",
+                                        confirmButtonText: "{{ __('admin.confirmButtonTextGotit') }}",
                                         customClass: {
                                             confirmButton: "btn fw-bold btn-primary",
                     
@@ -434,7 +450,5 @@
     
     // On document ready
 
-    //////////
-
-     </script>
-        
+ 
+</script>

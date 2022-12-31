@@ -17,15 +17,22 @@ use Illuminate\Support\Str;
 
 class RecipeController extends Controller
 {
-    use UploadAble,Functions;
+    // use UploadAble,Functions;
 
+
+    public function __construct()
+    {
+        // https://github.com/zizohassan/car/blob/master/app/Application/routes/web.php
+        $this->middleware('guest');
+    }
+ 
    
 
     protected $model;
 
-    public function __construct(Recipe $model){
-        $this->model = $model;
-    }
+    // public function __construct(Recipe $model){
+    //     $this->model = $model;
+    // }
     //https://github.com/arabnewscms/EcommerceCourse/blob/master/lesson%2031%2B32%2B33%2B34%2B35%2B36%2B37%2B38%2B39%2B40/Archive.zip
     // https://www.webslesson.info/2019/10/laravel-6-crud-application-using-yajra-datatables-and-ajax.html
     public function index(Request $request){    
@@ -294,10 +301,31 @@ class RecipeController extends Controller
  
         public function destroy($id){
 
+            $deleteMessageSuccess = __('admin.deleteMessageSuccess:Recipe');
+            $deleteMessageError = __('admin.deleteMessageError:Recipe');
             // DB::table('settings')->where('id',$id)->delete();
-            return response()->json(['success'=>"Product One Deleted successfully Controller.".$id]);
 
-            
+            if($id == 100)
+            {
+                return response()->json([
+                    'status'=>"error",
+                    'msg'=>$deleteMessageError.$id
+                ]); // Bad Request
+
+
+            }else{
+
+                return response()->json([
+                    'status'=>"success",
+                    'msg'=>$deleteMessageSuccess.$id
+                ]); // 
+    
+            }
+
+ 
+
+
+            return $id;
 
             // return redirect()->route('recipes.index')->with(['success' => 'تم  الحذف بنجاح']);
             // try {
@@ -332,11 +360,30 @@ class RecipeController extends Controller
         public function destroyMultiple(Request $request){
             // if (is_array(request('ids'))) {
                
-                $ids = $request->ids;
+ 
 
                 // return $ids;
 
-                return response()->json(['success'=>"Products Deleted successfully Controller.".$ids]);
+                $ids = $request->ids;
+
+                $deleteMessageSuccess = __('admin.deleteMessageSuccess');
+                // $deleteMessageError = __('admin.deleteMessageError:Recipe');
+    
+
+                    //  return response()->json([
+                    //     'status'=>"error",
+                    //     'msg'=>$deleteMessageError
+                    // ]); // Bad Request
+    
+     
+                    return response()->json([
+                        'status'=>"success",
+                        'msg'=>$deleteMessageSuccess
+                    ]); // 
+        
+     
+
+
                 // $ids = [];
                 // foreach (request('item') as $id) {
                 //    $ids = $id;

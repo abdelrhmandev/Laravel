@@ -22,9 +22,9 @@
   <!--begin::Menu item-->
   <div class="menu-item px-3">
 
-    <input type="hidden" id="personal-id-data{$id}" value="{{ route('recipes.destroy',$id) }}"/>
+      {{-- <input type="hidden" id="personal-id-data{$id}" value="{{ route('recipes.destroy',$id) }}"/> --}}
 
-      <a href="#" class="menu-link px-3" data-kt-table-filter="delete_row">
+      <a id="{{ $id }}" data-destroy-route="{{ route('recipes.destroy',$id) }}" class="menu-link px-3"  data-kt-table-filter="delete_row">
         {{ __('admin.delete')}}    
       </a>
   </div>

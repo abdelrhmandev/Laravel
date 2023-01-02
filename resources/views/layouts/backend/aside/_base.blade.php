@@ -185,12 +185,12 @@
 						<!--end::Menu item-->
 						<!--begin::Menu item-->
 						<div class="menu-item px-5 my-1">
-							<a href="{{ route('profile') }}" class="menu-link px-5">{{ __('site.profile')}}</a>
+							<a href="{{ route('admin.profile') }}" class="menu-link px-5">{{ __('site.profile')}}</a>
 						</div>
 						<!--end::Menu item-->
 						<!--begin::Menu item-->
 						<div class="menu-item px-5">
-							<a href="{{ route('profile') }}" class="menu-link px-5">{{ __('site.logout')}}</a>
+							<a href="{{ route('admin.profile') }}" class="menu-link px-5">{{ __('site.logout')}}</a>
 						</div>
 						<!--end::Menu item-->
 					</div>

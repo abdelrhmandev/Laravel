@@ -49,9 +49,7 @@
 	<!--end::Head-->
 	<!--begin::Body-->
 	<body id="kt_body" style="background-image: url()" class="header-fixed header-tablet-and-mobile-fixed aside-fixed aside-secondary-enabled">
-		{{ csrf_token() }} 
-		sadsadass	
-		{{  dd()}}
+ 
 		<!--begin::Main-->
 		<!--begin::Root-->
 		<div class="d-flex flex-column flex-root">

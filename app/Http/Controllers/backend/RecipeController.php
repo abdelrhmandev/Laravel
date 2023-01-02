@@ -9,7 +9,7 @@ use App\Models\RecipeCategory;
 use App\Traits\UploadAble;
 use App\Traits\Functions;
 // use App\Traits\DatatableLang;
-use App\DataTables\RecipesDataTable;
+ 
 use DataTables;
 use DB; 
 use Illuminate\Support\Str;
@@ -17,22 +17,18 @@ use Illuminate\Support\Str;
 
 class RecipeController extends Controller
 {
-    // use UploadAble,Functions;
+     use UploadAble,Functions;
 
 
-    public function __construct()
-    {
-        // https://github.com/zizohassan/car/blob/master/app/Application/routes/web.php
-        $this->middleware('guest');
-    }
+ 
  
    
 
     protected $model;
 
-    // public function __construct(Recipe $model){
-    //     $this->model = $model;
-    // }
+    public function __construct(Recipe $model){
+        $this->model = $model;
+    }
     //https://github.com/arabnewscms/EcommerceCourse/blob/master/lesson%2031%2B32%2B33%2B34%2B35%2B36%2B37%2B38%2B39%2B40/Archive.zip
     // https://www.webslesson.info/2019/10/laravel-6-crud-application-using-yajra-datatables-and-ajax.html
     public function index(Request $request){    
@@ -50,10 +46,13 @@ class RecipeController extends Controller
 
         //https://stackoverflow.com/questions/72000004/is-there-another-way-to-show-export-buttons-in-yajra-datatables-using-laravel-5
  
+        $query = Recipe::withCount('comments')->with(['category','tags.translate'])->where('id',150);
             if ($request->ajax()) {
-                
-                $query = Recipe::withCount('comments')->with(['category','tags.translate'])->latest();    
-                 return Datatables::of($query)    
+                // https://preview.keenthemes.com/metronic8/demo7/authentication/general/error-404.html Not Found
+                // https://preview.keenthemes.com/metronic8/demo7/authentication/general/error-500.html System Error
+                    
+
+                 return Datatables::of($query->latest())    
                             ->addIndexColumn()
                             // ->filter(function ($instance) use ($request) {
                             //     if ($request->has('status') && $request->get('status')) {
@@ -62,7 +61,7 @@ class RecipeController extends Controller
                             // })
                             
                             ->editColumn('translate.title', function ($row) {
-                             $route = route('recipes.edit',$row->id);   
+                             $route = route('admin.recipes.edit',$row->id);   
                             $div = "<div class=\"d-flex align-items-center\">";                            
                             if($row->image){
                                 $div.= "<a href=".$route." title='".$row->translate->title."' class=\"symbol symbol-50px\">
@@ -97,7 +96,7 @@ class RecipeController extends Controller
 
                                             $tags_str = ''; 
                                             foreach($row->tags as $tag){
-                                                $tags_str.= "<a class=\"text-primary fw-bold\" href =".route('tags.edit',$tag->id)." title=".$tag->translate->title.">".$tag->translate->title."</a>".' , ';
+                                                $tags_str.= "<a class=\"text-primary fw-bold\" href =".route('admin.tags.edit',$tag->id)." title=".$tag->translate->title.">".$tag->translate->title."</a>".' , ';
                                             }
                                             $tags.= substr_replace($tags_str,"",-2);
                                             $tags.="</span>";
@@ -133,7 +132,7 @@ class RecipeController extends Controller
 
                         ->editColumn('actions', function ($row) {      
                                                          
-                        return view('backend.recipes.btns.edit-delete', ['edit_route'=>route('recipes.edit',$row->id),'id'=>$row->id]);
+                        return view('backend.recipes.btns.edit-delete', ['edit_route'=>route('admin.recipes.edit',$row->id),'id'=>$row->id]);
                         })                           
                         ->rawColumns(['translate.title','category_id','status','created_at','actions'])    
                         // ->rawColumns(['translate.title','category_id','tags','status','featured','created_at','comments'])    
@@ -144,6 +143,7 @@ class RecipeController extends Controller
 
 
             $compact                          = [
+            'counter'                         => $query->count(),    
             'categories'                      => RecipeCategory::select('id')->latest()->get(),
             'page_title'                      => trans('orphan.interventions_menu'),
             'header_title'                    => trans('orphan.interventions_menu')

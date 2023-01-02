@@ -13,6 +13,15 @@
                 processing: true,
                 serverSide: true,                
                 info: true, 
+       
+ 
+                oLanguage: {
+                    "sEmptyTable": '{{ @include('backend.partials.abdo_files.empty')}}'
+                },
+ 
+               
+   
+     
                 bPaginate: true,    
                 orientation: 'landscape',     
                 exportOptions: {
@@ -163,7 +172,7 @@
                         $.ajax({
                         type: 'post',
                         headers: {
-                            'X-CSRF-TOKEN': 'wwwwwwwwwwwww'
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                        
                         url: $(this).attr("data-destroy-route"),
@@ -199,7 +208,7 @@
                                 });
                             }else if (result.dismiss === 'cancel') {
                                 Swal.fire({
-                                    text: "__('admin.notdeletedMessage')",
+                                    text: "{{ __('admin.notdeletedMessage') }}",
                                     icon: "error",
                                     buttonsStyling: false,
                                     confirmButtonText: "{{ __('admin.confirmButtonTextGotit') }}",
@@ -279,7 +288,7 @@
                         $.ajax({
                         type: 'post',
                         headers: {
-                            'X-CSRF-TOKEN': 'wwwwwwwwwwwww'
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         url: destroyMultipleRoute,
                         data: {

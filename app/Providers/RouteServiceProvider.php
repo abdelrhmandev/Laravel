@@ -21,7 +21,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const HOME = '/home';
 
-    protected $admin_namespace = 'App\Http\Controllers\backend';
+    protected $backend_namespace = 'App\Http\Controllers\backend';
 
     protected $admin_route_alias = 'admin.';
 
@@ -63,17 +63,16 @@ class RouteServiceProvider extends ServiceProvider
         Route::group(['prefix' => LaravelLocalization::setLocale() , 
         'middleware' => ['localeSessionRedirect', 'localizationRedirect','localeViewPath']] , 
         function(){
-
-            // Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => 'admin'], function () {
-            Route::group([
+            Route::name('admin.')->group(function () {
+             Route::group([
                 'prefix'        =>config('custom.route_prefix') , 
-                'namespace'     => $this->admin_namespace,
-                // 'middleware'    => ['auth','admin' , 'admin-permissions']
-                'middleware'    => ['auth']
+                'namespace'     => $this->backend_namespace,      
+                'middleware'    => ['web'],                
                 ], function() {
                     require_once base_path('routes/admin.php');
             });
          });
+        });
     }
 
     /**

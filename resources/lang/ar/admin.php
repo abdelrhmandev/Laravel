@@ -19,6 +19,8 @@ return [
     'logout'                => 'تسجيل الخروج',
     'setting'               => 'الضبط',
     'name'                  => 'الاسم',
+    'category'              =>' القسم',
+    'actions'               =>' الأجراءات'  ,
     'username'              => 'اسم المستخدم',
     'password'              => 'الرقم السري',
     'password_confirmation' => 'تأكيد الرقم السري',

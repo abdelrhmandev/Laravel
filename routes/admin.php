@@ -6,7 +6,7 @@ Route::get('/', 'DashboardController@index')->name('dashboard');
 //     return view('backend.dashboard');
 // });
 
-
+https://github.com/zizohassan/car/blob/master/app/Application/routes/web.php
 
 Route::resource('recipes', RecipeController::class)->except('show');
 Route::delete('recipes/destroy/all', 'RecipeController@destroyMultiple')->name('recipes.destroyMultiple');
@@ -37,7 +37,11 @@ Route::group(['prefix' => 'profile'], function () {
 
 
 
-
+/*use App\Http\Controllers\OrderController;
+Route::controller(OrderController::class)->group(function () {
+    Route::get('/orders/{id}', 'show');
+    Route::post('/orders', 'store');
+});*/
 
 
 

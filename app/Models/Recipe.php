@@ -34,11 +34,11 @@ class Recipe extends Model
     public function scopeFeatured($query){
         return $query->where('featured', 1);
     }
-    public function scopePublished($query){
-        return $query->where('status', 'published');
-    }
-    */
 
+    */
+    public function scopeStatus($query,$arg){
+        return $query->where('status', $arg);
+    }
     protected $casts = [
         'featured' => 'boolean',
     ];

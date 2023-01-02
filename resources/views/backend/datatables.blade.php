@@ -13,10 +13,9 @@
                 processing: true,
                 serverSide: true,                
                 info: true, 
-       
- 
                 oLanguage: {
-                    "sEmptyTable": '{{ @include('backend.partials.abdo_files.empty')}}'
+                    "zeroRecords" : '@include("backend.partials.abdo_files.empty",["msg"=>"No Match"])',
+                    "sEmptyTable": '@include("backend.partials.abdo_files.empty",["msg"=>"No Records Founds"])'
                 },
  
                

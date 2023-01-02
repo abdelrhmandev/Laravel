@@ -46,7 +46,7 @@ class RecipeController extends Controller
 
         //https://stackoverflow.com/questions/72000004/is-there-another-way-to-show-export-buttons-in-yajra-datatables-using-laravel-5
  
-        $query = Recipe::withCount('comments')->with(['category','tags.translate'])->where('id',150);
+        $query = Recipe::withCount('comments')->with(['category','tags.translate']);
             if ($request->ajax()) {
                 // https://preview.keenthemes.com/metronic8/demo7/authentication/general/error-404.html Not Found
                 // https://preview.keenthemes.com/metronic8/demo7/authentication/general/error-500.html System Error
@@ -143,8 +143,11 @@ class RecipeController extends Controller
 
 
             $compact                          = [
+            'published_counter'               => Recipe::status('published')->count(),
+            'unpublished_counter'             => Recipe::status('unpublished')->count(),
+            'scheduled_counter'               => Recipe::status('scheduled')->count(),                
             'counter'                         => $query->count(),    
-            'categories'                      => RecipeCategory::select('id')->latest()->get(),
+            'categories'                      => RecipeCategory::select('id'),
             'page_title'                      => trans('orphan.interventions_menu'),
             'header_title'                    => trans('orphan.interventions_menu')
             ];

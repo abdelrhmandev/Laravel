@@ -17,11 +17,7 @@
                     "zeroRecords" : '@include("backend.partials.abdo_files.empty",["msg"=>"No Match"])',
                     "sEmptyTable": '@include("backend.partials.abdo_files.empty",["msg"=>"No Records Founds"])'
                 },
- 
-               
-   
-     
-                bPaginate: true,    
+                 bPaginate: true,    
                 orientation: 'landscape',     
                 exportOptions: {
                     orthogonal: "myExport",
@@ -457,6 +453,6 @@
     }
     
     // On document ready
+///////////////////////////////////////////////////////////////////////////////
 
- 
 </script>

@@ -11,6 +11,10 @@ https://github.com/zizohassan/car/blob/master/app/Application/routes/web.php
 Route::resource('recipes', RecipeController::class)->except('show');
 Route::delete('recipes/destroy/all', 'RecipeController@destroyMultiple')->name('recipes.destroyMultiple');
  
+
+
+Route::resource('recipe-categories',RecipeCategoryController::class)->except('show'); // Recipe Categories
+
 Route::resource('tags', TagController::class)->except('show');
 
 

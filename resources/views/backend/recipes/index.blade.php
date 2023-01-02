@@ -38,7 +38,7 @@
               </svg>
             </span>
             <!--end::Svg Icon-->
-            <input type="text" data-kt-table-filter="search" class="form-control form-control-solid w-320px ps-15" placeholder="{{ __('admin.search') }} ......" />
+            <input type="text" data-kt-table-filter="search" class="form-control form-control-solid w-200px ps-15" placeholder="{{ __('admin.search') }} ......" />
           </div>
           <!--end::Search-->
         </div>
@@ -167,16 +167,17 @@
 @section('scripts')
 <!--begin::Vendors Javascript(used for this page only)-->
 {{-- @include('backend.datatables2') --}}
-@include('backend.datatables')
- 
-<script src="{{ asset('assets/backend/js/custom/pdfMake/pdfmake.min.js')}}"></script> 
-<script src="{{ asset('assets/backend/js/custom/pdfMake/vfs_fonts.js')}}"></script>
-{{-- <script src="{{ asset('assets/backend/js/custom/draw_datatable.js')}}"></script> --}}
-<script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js')}}"></script>
 
+
+<script src="{{ asset('assets/backend/js/custom/pdfMake/pdfmake.min.js')}}"></script> 
+<script src="{{ asset('assets/backend/js/custom/pdfMake/vfs_load_fonts.js')}}"></script>
+<script src="{{ asset('assets/backend/js/custom/pdfMake/pdfhandle.js')}}"></script>
+<script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+@include('backend.datatables')
  
 <!--end::Vendors Javascript-->
 <!--begin::Custom Javascript(used for this page only)-->
+
 <script>
 
 var dynamicColumns = [

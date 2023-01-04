@@ -1,73 +1,51 @@
-<form method="POST" action="{{ route('recipes.store')}}" enctype="multipart/form-data">
-@csrf
-<?php $ii = 1; ?>											 
-@foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-<h1>Title {{ $properties['name'] }}</h1>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>FormValidation example - Using HTML 5 inputs and attributes</title>
+        <meta charset="utf-8" />
+        <meta content="width=device-width,initial-scale=1" name="viewport" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+        <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/formvalidation/0.6.2-dev/css/formValidation.min.css" integrity="sha512-B9GRVQaYJ7aMZO3WC2UvS9xds1D+gWQoNiXiZYRlqIVszL073pHXi0pxWxVycBk0fnacKIE3UHuWfSeETDCe7w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+    <body>
+      <form id="registrationForm">
+        <input
+            name="userName"
+            data-fv-not-empty="true"
+            data-fv-not-empty___message="The username is required"
+            data-fv-string-length="true"
+            data-fv-string-length___min="6"
+            data-fv-string-length___message="The name must be more than 6 characters long"
+        />
+    </form>
 
-<?php $lang = substr($properties['regional'],0,2);?>
-<div>
-  <input class="form-control form-control-solid" type="text" name="title_{{$lang}}">
-</div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.3/es6-shim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/formvalidation/0.6.2-dev/js/formValidation.min.js" integrity="sha512-DlXWqMPKer3hZZMFub5hMTfj9aMQTNDrf0P21WESBefJSwvJguz97HB007VuOEecCApSMf5SY7A7LkQwfGyVfg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
- 
+        <script src="/vendors/formvalidation/dist/js/plugins/Tachyons.min.js"></script>
 
-
-<br/>
-<h1>Description {{ $properties['name'] }}</h1>
-<div>{{ $properties['name'] }}
-  <input class="form-control form-control-solid" type="text" name="description_{{$lang}}">
-</div>
-
-<?php $ii++;	?>
-@endforeach
-<br>
-
-<h1>Category</h1>
- 
-  <select name="category_id" id="category_id">
-    <option value="0">---------</option>    
-        @foreach ($categories as $category)
-        <option value="{{$category->id }}"> {{$category->item->title }}</option>
-        @endforeach
-    </select>
- 
-
- 
-<h1>Tags</h1>
-
-@foreach ($tags as $tag)
-<p><input type="checkbox" name="tag[]" value="{{$tag->id }}"> {{$tag->item->title }}</p>
-@endforeach
-
-
-
-<h1>Image</h1>
-<input type="file" id="image" name="image" accept="image/*" /> 
-
-<br/>
-<br/>
-
-featured<input type="checkbox" name="featured" value="1"> 
-<br/>
-<br/>
-published <input type="checkbox" name="published" value="1"> 
-
-
-<br/>
-<br/>
-
-cook time by minutes <input type="text" name="cook"> 
-
-<br/>
-<br/>
-
-servings <input type="text" name="servings"> 
-
-
-<br/>
-
-<p><input type="submit"></p>
-
-
-
-</form>
+        <script>
+            document.addEventListener('DOMContentLoaded', function (e) {
+                FormValidation.formValidation(document.getElementById('demoForm'), {
+                    plugins: {
+                        declarative: new FormValidation.plugins.Declarative({
+                            html5Input: true,
+                        }),
+                        trigger: new FormValidation.plugins.Trigger(),
+                        tachyons: new FormValidation.plugins.Tachyons(),
+                        submitButton: new FormValidation.plugins.SubmitButton(),
+                        icon: new FormValidation.plugins.Icon({
+                            valid: 'fa fa-check',
+                            invalid: 'fa fa-times',
+                            validating: 'fa fa-refresh',
+                        }),
+                    },
+                });
+            });
+        </script>
+    </body>
+</html>

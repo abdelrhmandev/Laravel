@@ -161,7 +161,7 @@
 						<!--begin::Menu item-->
 						<div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="right-end" data-kt-menu-offset="-15px, 0">
 							<a href="#" class="menu-link px-5">
-								<span class="menu-title position-relative">{{ __('site.language')}}
+								<span class="menu-title position-relative">{{ __('admin.language')}}
 								<span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">{{ LaravelLocalization::getCurrentLocaleName() }}
 								<img class="w-15px h-15px rounded-1 ms-2" src="{{ asset('assets/backend/media/flags/'.strtolower(LaravelLocalization::getCurrentLocale().".svg"))}}" alt="" /></span></span>
 							</a>
@@ -185,12 +185,12 @@
 						<!--end::Menu item-->
 						<!--begin::Menu item-->
 						<div class="menu-item px-5 my-1">
-							<a href="{{ route('admin.profile') }}" class="menu-link px-5">{{ __('site.profile')}}</a>
+							<a href="{{ route('admin.profile') }}" class="menu-link px-5">{{ __('admin.profile')}}</a>
 						</div>
 						<!--end::Menu item-->
 						<!--begin::Menu item-->
 						<div class="menu-item px-5">
-							<a href="{{ route('admin.profile') }}" class="menu-link px-5">{{ __('site.logout')}}</a>
+							<a href="{{ route('admin.logout') }}" class="menu-link px-5">{{ __('admin.logout')}}</a>
 						</div>
 						<!--end::Menu item-->
 					</div>

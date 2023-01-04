@@ -139,6 +139,8 @@ class RecipeController extends Controller
 
 
             $compact                          = [
+            'resource'                        => $this->resource,
+            'trans_file'                      => $this->trans_file,
             'published_counter'               => $this->model::status('published')->count(),
             'unpublished_counter'             => $this->model::status('unpublished')->count(),
             'scheduled_counter'               => $this->model::status('scheduled')->count(),                
@@ -147,7 +149,7 @@ class RecipeController extends Controller
             'page_title'                      => trans('orphan.interventions_menu'),
             'header_title'                    => trans('orphan.interventions_menu')
             ];
-            return view('backend.recipes.index', $compact);
+            return view('backend.'.$this->resource.'.index', $compact);
             // return view('backend.recipes.pdf-index', $compact);
 
 
@@ -155,45 +157,9 @@ class RecipeController extends Controller
         }
         
 
-        public function indexDatatable(RecipesDataTable $dataTable,Request $request)
-        {
-            return $dataTable->render('backend.recipes.server_side');
-        }
+      
         
-         public function indexX()
-        {
-             
-            // https://dev.to/lathindu1/laravel-best-practice-coding-standards-part-02-a40
-
-
-
-
-            // $rows = DB::table('recipes')
-            // ->leftJoin('recipe_translations', 'recipes.id','=', 'recipe_translations.recipe_id')
-            // ->where('recipe_translations.lang', '=', 'en')->get();
-
-
-            // $rows = $this->model::has('item')->get();
-    
-//         $rows = $this->model::with(['item' => function($query)
-// {
-//     $query->where('lang','en');
-
-// }])->get();
-
-
-        $rows = $this->model::with('category','tags')->get();
-
-
-            $compact                          = [
-            'rows'                            => $rows,
-            'page_title'                      => trans('orphan.interventions_menu'),
-            'header_title'                    => trans('orphan.interventions_menu')
-            ];
-            return view('backend.recipes.index', $compact);
-
-
-         }
+ 
     
         /**
          * Show the form for creating a new resource.
@@ -201,10 +167,20 @@ class RecipeController extends Controller
          * @return \Illuminate\Http\Response
          */
         public function create(){             
-            $this->recipe->create(['pulished'=>1,'featured'=>1]);            
+
+            $compact                          = [
+                'resource'                        => $this->resource,
+                'trans_file'                      => $this->trans_file,
+                'categories'                      => RecipeCategory::select('id'),
+                'page_title'                      => trans('orphan.interventions_menu'),
+                'header_title'                    => trans('orphan.interventions_menu')
+                ];
+
+            // $this->recipe->create(['pulished'=>1,'featured'=>1]);            
             // $recipes =  Input::get('posts');
             // $recipes->tags()->sync($request->tags, false);
             //
+            return view('backend.'.$this->resource.'.create', $compact);
         }
     
  

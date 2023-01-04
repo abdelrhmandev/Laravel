@@ -16,7 +16,9 @@ class ProfileController extends Controller
         dd('update');
     }
 
-
+    public function logout(){
+        dd('update');
+    }
 
 
 }

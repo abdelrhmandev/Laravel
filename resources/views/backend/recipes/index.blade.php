@@ -22,14 +22,12 @@
         <!--begin::Card title-->
 
         <h3 class="card-title align-items-start flex-column">
-          <span class="card-label fw-bold fs-3 mb-1">Recipes {{ $counter }}</span>
-          <span class="text-muted mt-1 fw-semibold fs-7">Over 500 Recipes</span>
-      </h3>
+          <span class="card-label fw-bold fs-3 mb-1">{{ __($trans_file.'.all')}} {{ $counter }}</span>
+        </h3>
 
         <div class="card-title">
           <!--begin::Search-->
-          <div class="d-flex align-items-center position-relative my-1">
-            
+          <div class="d-flex align-items-center position-relative my-1">            
             <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
             <span class="svg-icon svg-icon-1 position-absolute ms-6">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -98,7 +96,8 @@
             @include('backend.partials.modals._exportlisting')
             <!--end::Export-->
             <!--begin::Add-->
-            <a class="btn btn-primary" href="sdsadsa.php">{{ __('recipe.add') }}</a>
+            
+            <a class="btn btn-primary" href="{{ route('admin.'.$resource.'.create') }}">{{ __($trans_file.'.add')}}</a>
             <!--end::Add-->
           </div>
           <!--end::Toolbar-->

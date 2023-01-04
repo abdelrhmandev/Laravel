@@ -36,7 +36,7 @@
                 iDisplayLength: 10,
                 bLengthChange: true,
                 stateSave: false,
-                lengthMenu: [[1, 10, 25, 50, -1], [1, 10, 25, 50, "AllXXX"]],
+                lengthMenu: [[1, 10, 25, 50, -1], [1, 10, 25, 50, "{{ __('admin.all')}}"]],
                 order: [],
                 select: {
                     style: 'os',
@@ -57,7 +57,7 @@
                             render: function (data) {
                                 return `
                                     <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                        <input class="form-check-input" class="sub_chk" value="${data}" type="checkbox" />
+                                        <input class="form-check-input" name="ids" class="sub_chk" value="${data}" type="checkbox" />
                                     </div>`;
                             }
                     },{
@@ -239,6 +239,9 @@
             });
             }
      
+
+
+
             // Init toggle toolbar "Delete Selected Items"
             var initToggleToolbar = function () {
                 // Toggle selected action toolbar
@@ -249,24 +252,31 @@
                 // Select elements
                 const deleteSelected = document.querySelector('[data-kt-table-select="delete_selected"]');
                
-                var all_check_box = []; 
+             
                 // Toggle delete selected toolbar
                 checkboxes.forEach(c => {
                     // Checkbox on click event
                     c.addEventListener('click', function () {
                         setTimeout(function () {
                             toggleToolbars();
-                        }, 50);
-                        all_check_box.push(c.value);
+                        }, 50); 
+                                          
                     });   
                 });
-    
+                 
+
                 // Deleted selected rows
                     deleteSelected.addEventListener('click', function () {
-                    var join_selected_values = all_check_box.join(","); 
+
+                    var checkedrows = [];
+                     $("#kt_datatable input:checkbox[name=ids]:checked").each(function() {
+                        checkedrows.push($(this).val());
+                    });
+                    var join_selected_values = checkedrows.join(","); 
+                    
                     // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
                     Swal.fire({
-                        text: "{{ __('admin.confirmMultiDeleteMessage') }}"+"?"+join_selected_values,
+                        text: "{{ __('admin.confirmMultiDeleteMessage') }}"+"?",
                         icon: "warning",
                         showCancelButton: true,
                         buttonsStyling: false,

@@ -18,9 +18,11 @@ Route::resource('recipe-categories',RecipeCategoryController::class)->except('sh
 Route::resource('tags', TagController::class)->except('show');
 
 
+Route::get('/lodassadsadsadgout', 'ProfileController@logout')->name('logout');
 
 Route::group(['prefix' => 'profile'], function () {
     Route::get('/', 'ProfileController@index')->name('profile');
+    
     Route::put('update', 'ProfileController@update')->name('update.profile');
 });
 

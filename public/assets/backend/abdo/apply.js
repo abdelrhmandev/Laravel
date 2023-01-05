@@ -13,11 +13,11 @@ var KTCareersApply = function () {
 			form,
 			{
 				fields: {
-
+ 
 					'start_date': {
 						validators: {
 							notEmpty: {
-								message: 'JS required'
+								message: 'JS is required'
 							}
 						}
 					},
@@ -25,17 +25,14 @@ var KTCareersApply = function () {
 				plugins: {
 					declarative: new FormValidation.plugins.Declarative({
 						html5Input: true,
-					}),
-					trigger: new FormValidation.plugins.Trigger(),
-					tachyons: new FormValidation.plugins.Tachyons(),
-					submitButton: new FormValidation.plugins.SubmitButton(),
-					icon: new FormValidation.plugins.Icon({
-						valid: 'fa fa-check',
-						invalid: 'fa fa-times',
-						validating: 'fa fa-refresh',
-					}),
-				 
-			 
+					}),				
+					tachyons: new FormValidation.plugins.Tachyons(),	
+					/*trigger: new FormValidation.plugins.Trigger(),
+					bootstrap: new FormValidation.plugins.Bootstrap5({
+						rowSelector: '.fv-row',
+                        eleInvalidClass: '',
+                        eleValidClass: ''
+					})*/ 
 				}
 			}
 		);
@@ -43,16 +40,24 @@ var KTCareersApply = function () {
 		// Action buttons
 		submitButton.addEventListener('click', function (e) {
 			e.preventDefault();
-			// Validate form before submit			 
-				validator.validate() ;	 			 			 
+
+			// Validate form before submit
+			 
+				validator.validate() ;
+
+	 
+			 
+			 
 		});
 	}
 
 	return {
 		// Public functions
 		init: function () {
+			// Elements
 			form = document.querySelector('#kt_careers_form');
-			submitButton = document.getElementById('kt_careers_submit_button');		 
+			submitButton = document.getElementById('kt_careers_submit_button');
+		 
 			handleForm();
 		}
 	};

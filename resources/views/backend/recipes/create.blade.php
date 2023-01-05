@@ -54,9 +54,7 @@
     <div class="row mb-5">
         <div class="col-md-6 fv-row">         
             <label class="required fs-5 fw-semibold mb-2">Srart Date</label> 
-            <input type="text" class="form-control form-control-solid" style="border: solid 10px;" placeholder="" 
-            data-fv-not-empty___message="HTML required"
-            name="start_date"/>            
+            <input type="text" class="form-control form-control-solid" style="border: solid 10px;" placeholder="" data-fv-not-empty___message="HTML required" name="start_date"/>            
         </div>        
     </div>
  
@@ -79,7 +77,7 @@
 
 @section('scripts')
 <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js')}}"></script>
-<script src="{{ asset('assets/backend/abdo/apply.js')}}"></script>
+{{-- <script src="{{ asset('assets/backend/abdo/apply.js')}}"></script> --}}
 
 
 <script src="{{ asset('assets/backend/plugins/global/plugins.bundle.js')}}"></script>
@@ -87,29 +85,28 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.3/es6-shim.min.js"></script>
  
-<script src="https://cdnjs.cloudflare.com/ajax/libs/formvalidation/0.6.2-dev/js/formValidation.min.js" integrity="sha512-DlXWqMPKer3hZZMFub5hMTfj9aMQTNDrf0P21WESBefJSwvJguz97HB007VuOEecCApSMf5SY7A7LkQwfGyVfg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+ 
 <script src="https://www.chineseshaolins.com/js/formvalidation/plugins/Tachyons.min.js"></script>
 
  
 <script type="text/javascript">
-    //   document.addEventListener('DOMContentLoaded', function (e) {
-    //             FormValidation.formValidation(document.getElementById('kt_careers_form'), {
-    //                 plugins: {
-    //                     declarative: new FormValidation.plugins.Declarative({
-    //                         html5Input: true,
-    //                     }),
-    //                     trigger: new FormValidation.plugins.Trigger(),
-    //                     // tachyons: new FormValidation.plugins.Tachyons(),
-    //                     submitButton: new FormValidation.plugins.SubmitButton(),
-    //                     icon: new FormValidation.plugins.Icon({
-    //                         valid: 'fa fa-check',
-    //                         invalid: 'fa fa-times',
-    //                         validating: 'fa fa-refresh',
-    //                     }),
-    //                 },
-    //             });
-    //         });
+      document.addEventListener('DOMContentLoaded', function (e) {
+                FormValidation.formValidation(document.getElementById('kt_careers_form'), {
+                    plugins: {
+                        declarative: new FormValidation.plugins.Declarative({
+                            html5Input: true,
+                        }),
+                        
+                    
+                        submitButton: new FormValidation.plugins.SubmitButton(),
+                        icon: new FormValidation.plugins.Icon({
+                            valid: 'fa fa-check',
+                            invalid: 'fa fa-times',
+                            validating: 'fa fa-refresh',
+                        }),
+                    },
+                });
+            });
 </script>   
 <!--end::Custom Javascript-->
 @stop

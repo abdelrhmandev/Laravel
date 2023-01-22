@@ -7,10 +7,10 @@
 <link href="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
 @endif
 
-<link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css" />
  
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/formvalidation/0.6.2-dev/css/formValidation.min.css" integrity="sha512-B9GRVQaYJ7aMZO3WC2UvS9xds1D+gWQoNiXiZYRlqIVszL073pHXi0pxWxVycBk0fnacKIE3UHuWfSeETDCe7w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-{{-- <link href="{{ asset('assets/backend/abdo/abdovalidation.css')}}" rel="stylesheet" type="text/css" /> --}}
+ 
+
+
 
 
 @stop
@@ -36,35 +36,49 @@
   </div>
 </form> --}}
 
-
- 
-
-    <form action="{{ route('admin.recipes.create')}}" class="form mb-15" method="get" id="kt_careers_form"
-    data-fvp-trigger="true"
-    data-fvp-trigger___class="FormValidation.plugins.Trigger"
-    data-fvp-submit-button="true"
-    data-fvp-submit-button___class="FormValidation.plugins.SubmitButton"
-    data-fvp-icon="true"
-    data-fvp-icon___class="FormValidation.plugins.Icon"
-    data-fvp-icon___valid="fa fa-check"
-    data-fvp-icon___invalid="fa fa-times"
-    data-fvp-icon___validating="fa fa-refresh"
-    >
- 
+<form action="" class="" id="kt_careers_form">
+    <!--begin::Input group-->
     <div class="row mb-5">
-        <div class="col-md-6 fv-row">         
-            <label class="required fs-5 fw-semibold mb-2">Srart Date</label> 
-            <input type="text" class="form-control form-control-solid" style="border: solid 10px;" placeholder="" data-fv-not-empty___message="HTML required" name="start_date"/>            
-        </div>        
-    </div>
+        <!--begin::Col-->
  
+        <!--end::Col-->
+        <!--begin::Col-->
+        <div class="col-md-6 fv-row">
+            <!--end::Label-->
+            <label class="required fs-5 fw-semibold mb-2">first Name</label>
+            <!--end::Label-->
+            <!--end::Input-->
+            <input type="text" style="border: solid 10px;" class="" 
+            placeholder="" name="first_name" required data-fv-not-empty___message="The first_name HTML is required" />
+            <!--end::Input-->
+        </div>
+        <!--end::Col-->
+    </div>
+    <!--end::Input group-->
+    <!--begin::Input group-->
+ 
+    <!--end::Input group-->
+    <!--begin::Input group-->
+ 
+    <!--end::Input group-->
+    <!--begin::Separator-->
     <div class="separator mb-8"></div>
+    <!--end::Separator-->
+    <!--begin::Submit-->
     <button type="submit" class="btn btn-primary" id="kt_careers_submit_button">
+        <!--begin::Indicator label-->
         <span class="indicator-label">Apply Now</span>
+        <!--end::Indicator label-->
+        <!--begin::Indicator progress-->
         <span class="indicator-progress">Please wait...
         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+        <!--end::Indicator progress-->
     </button>
+    <!--end::Submit-->
 </form>
+ 
+
+    
   </div>  
 @stop
 
@@ -76,37 +90,12 @@
 
 
 @section('scripts')
-<script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js')}}"></script>
-{{-- <script src="{{ asset('assets/backend/abdo/apply.js')}}"></script> --}}
-
-
-<script src="{{ asset('assets/backend/plugins/global/plugins.bundle.js')}}"></script>
-<script src="{{ asset('assets/backend/js/scripts.bundle.js')}}"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.3/es6-shim.min.js"></script>
- 
- 
 <script src="https://www.chineseshaolins.com/js/formvalidation/plugins/Tachyons.min.js"></script>
+ 
+<script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+<script src="{{ asset('assets/backend/abdo/apply.js')}}"></script>
 
  
-<script type="text/javascript">
-      document.addEventListener('DOMContentLoaded', function (e) {
-                FormValidation.formValidation(document.getElementById('kt_careers_form'), {
-                    plugins: {
-                        declarative: new FormValidation.plugins.Declarative({
-                            html5Input: true,
-                        }),
-                        
-                    
-                        submitButton: new FormValidation.plugins.SubmitButton(),
-                        icon: new FormValidation.plugins.Icon({
-                            valid: 'fa fa-check',
-                            invalid: 'fa fa-times',
-                            validating: 'fa fa-refresh',
-                        }),
-                    },
-                });
-            });
-</script>   
+ 
 <!--end::Custom Javascript-->
 @stop

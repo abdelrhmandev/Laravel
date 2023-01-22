@@ -13,7 +13,6 @@ var KTCareersApply = function () {
 			form,
 			{
 				fields: {
-
 					'start_date': {
 						validators: {
 							notEmpty: {
@@ -28,8 +27,7 @@ var KTCareersApply = function () {
 						rowSelector: '.fv-row',
                         eleInvalidClass: '',
                         eleValidClass: ''
-					}),
-			 
+					}),			 
 				}
 			}
 		);

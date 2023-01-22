@@ -1,6 +1,14 @@
 <?php
 
 return [
+    'deleteMessageSuccess'  => 'تم حذف : بنجاح',
+    'deleteMessageError'    => 'خطأ في عمليه حذف :',
+    'updateMessageSuccess'  => 'تم تحديث : بنجاح',
+    'updateMessageError'    => 'خطأ في عمليه تحديث :',
+    'storeMessageSuccess'   =>  'تم أضافه : بنجاح',
+    'storeMessageError'     => 'خطأ في عمليه أضافه :',
+    'delete_selected'       =>'حذف المختارين',
+    'filter_options'        =>'خيارات الفرز',    
     'status'                =>'الحاله',
     'activeted'             =>'مفعل',
     'deactiveted'           =>'غير مفعل',
@@ -116,4 +124,5 @@ return [
     'under-procedure'       => 'تحت الإجراء',
     'supported'             => 'مدعومة',
     'do-action'             => 'نفذ',
+    'please_wait'           =>'أنتظر قليلا',
 ];

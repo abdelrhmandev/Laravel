@@ -8,7 +8,21 @@
 @endif
 
  
+<style>
+    .my-field-error .fv-plugins-message-container,
+    .my-field-error .fv-plugins-icon {
+        font-size: 0.925rem; 
+color: #f1416c;
  
+
+ 
+    }
+    .my-field-success .fv-plugins-message-container,
+    .my-field-success .fv-plugins-icon {
+        font-size: 0.925rem;font-weight: 400;
+        color: #2780e3;
+    }
+</style>
 
 
 
@@ -36,47 +50,44 @@
   </div>
 </form> --}}
 
-<form action="" class="" id="kt_careers_form">
-    <!--begin::Input group-->
-    <div class="row mb-5">
-        <!--begin::Col-->
  
-        <!--end::Col-->
-        <!--begin::Col-->
-        <div class="col-md-6 fv-row">
-            <!--end::Label-->
-            <label class="required fs-5 fw-semibold mb-2">first Name</label>
-            <!--end::Label-->
-            <!--end::Input-->
-            <input type="text" style="border: solid 10px;" class="" 
-            placeholder="" name="first_name" required data-fv-not-empty___message="The first_name HTML is required" />
-            <!--end::Input-->
-        </div>
-        <!--end::Col-->
-    </div>
-    <!--end::Input group-->
-    <!--begin::Input group-->
- 
-    <!--end::Input group-->
-    <!--begin::Input group-->
- 
-    <!--end::Input group-->
-    <!--begin::Separator-->
-    <div class="separator mb-8"></div>
-    <!--end::Separator-->
-    <!--begin::Submit-->
-    <button type="submit" class="btn btn-primary" id="kt_careers_submit_button">
-        <!--begin::Indicator label-->
-        <span class="indicator-label">Apply Now</span>
-        <!--end::Indicator label-->
-        <!--begin::Indicator progress-->
-        <span class="indicator-progress">Please wait...
-        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-        <!--end::Indicator progress-->
-    </button>
-    <!--end::Submit-->
+
+<form action="m-0" class="form mb-15" method="post" id="kt_careers_form">
+
+    
+   
+        <div class="fl w-100">
+            <label class="required fs-5 fw-semibold mb-2">First Name</label>
+            
+
+
+                <input
+                    type="text"
+                    class="form-control form-control-solid  input-reset"
+                    name="name"
+                    data-fv-not-empty="true"
+                    data-fv-not-empty___message="The Csutom is required"
+                />
+            
+       
+   
+</div>
+
+
+  
+
+
+
+<button type="submit" class="btn btn-primary" id="kt_careers_submit_button">
+    <!--begin::Indicator label-->
+    <span class="indicator-label">Apply Now</span>
+    <!--end::Indicator label-->
+    <!--begin::Indicator progress-->
+    <span class="indicator-progress">Please wait...
+    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+    <!--end::Indicator progress-->
+</button>
 </form>
- 
 
     
   </div>  
@@ -91,11 +102,32 @@
 
 @section('scripts')
 <script src="https://www.chineseshaolins.com/js/formvalidation/plugins/Tachyons.min.js"></script>
- 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.3/es6-shim.min.js"></script>
 <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js')}}"></script>
 <script src="{{ asset('assets/backend/abdo/apply.js')}}"></script>
 
- 
+<script>
+    document.addEventListener('DOMContentLoaded', function (e) {
+    const form = document.getElementById('kt_careers_formXX');
+    FormValidation.formValidation(form, {
+        plugins: {
+            declarative: new FormValidation.plugins.Declarative(),
+            // Other plugins
+            trigger: new FormValidation.plugins.Trigger(),
+            tachyons: new FormValidation.plugins.Tachyons({
+						rowInvalidClass: 'my-field-error',
+						rowValidClass: 'my-field-success',
+					}),
+            submitButton: new FormValidation.plugins.SubmitButton(),
+            icon: new FormValidation.plugins.Icon({
+                valid: 'fa fa-check',
+                invalid: 'invalid-feedback',
+                validating: 'fa fa-refresh',
+            }),
+        },
+    });
+});
+</script>
  
 <!--end::Custom Javascript-->
 @stop

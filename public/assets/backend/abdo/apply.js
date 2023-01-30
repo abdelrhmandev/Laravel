@@ -6,7 +6,6 @@ var KTCareersApply = function () {
 	var validator;
 	var form;
 
-	// Init form inputs
  
 
 	// Handle form validation and submittion
@@ -14,21 +13,26 @@ var KTCareersApply = function () {
 		// Stepper custom navigation
 
 		// Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
-		validator = FormValidation.formValidation(
-			form,
-			{
+		validator = FormValidation.formValidation(form,{
  
-				trigger: new FormValidation.plugins.Trigger(),
 				plugins: {
-					declarative: new FormValidation.plugins.Declarative({
-						html5Input: true,
-					}),
-					 
-					tachyons: new FormValidation.plugins.Tachyons({
-						rowInvalidClass: 'my-field-error',
-						rowValidClass: 'my-field-success',
-					}),	
-					submitButton: new FormValidation.plugins.SubmitButton(),
+      
+				declarative: new FormValidation.plugins.Declarative(),
+				// Other plugins
+				trigger: new FormValidation.plugins.Trigger(),
+				tachyons: new FormValidation.plugins.Tachyons({
+				rowInvalidClass: 'my-field-error',
+				rowValidClass: 'my-field-success',
+				}),
+				submitButton: new FormValidation.plugins.SubmitButton(),
+				icon: new FormValidation.plugins.Icon({
+				valid: 'fa fa-check',
+				invalid: 'invalid-feedback',
+				validating: 'fa fa-refresh',
+				}),
+
+	  
+                    
 				}
 			}
 		);
@@ -97,8 +101,9 @@ var KTCareersApply = function () {
 			// Elements
 			form = document.querySelector('#kt_careers_form');
 			submitButton = document.getElementById('kt_careers_submit_button');
- 
-			 
+
+		 
+			handleForm();
 		}
 	};
 }();

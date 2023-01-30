@@ -12,7 +12,14 @@ class ProfileController extends Controller
         }
     }
 
-    public function update(){
+    public function edit()
+    {
+        if (view()->exists('backend.profile.edit')) {
+            return view('backend.profile.edit');
+        }
+    }
+
+    public function update(Request $request){
         dd('update');
     }
 

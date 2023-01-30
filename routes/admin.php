@@ -13,6 +13,10 @@ Route::delete('recipes/destroy/all', 'RecipeController@destroyMultiple')->name('
  
 
 
+Route::resource('roles', RoleController::class)->except('show');
+Route::resource('permissions', PermissionController::class)->except('show');
+
+
 Route::resource('recipe-categories',RecipeCategoryController::class)->except('show'); // Recipe Categories
 
 Route::resource('tags', TagController::class)->except('show');
@@ -22,7 +26,7 @@ Route::get('/lodassadsadsadgout', 'ProfileController@logout')->name('logout');
 
 Route::group(['prefix' => 'profile'], function () {
     Route::get('/', 'ProfileController@index')->name('profile');
-    
+    Route::get('/edit', 'ProfileController@edit')->name('edit.lprofile');
     Route::put('update', 'ProfileController@update')->name('update.profile');
 });
 

@@ -1,4 +1,10 @@
 @extends('backend.base.base')
+
+@section('breadcrumbs')
+<li class="breadcrumb-item text-muted">Recipes</li>
+<li class="breadcrumb-item text-dark">Listings</li>
+@stop
+
 @section('style')
 
 @if(app()->getLocale() === 'ar')

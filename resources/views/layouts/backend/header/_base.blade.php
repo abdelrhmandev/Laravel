@@ -3,21 +3,26 @@
     <!--begin::Container-->
     <div class="container-xxl d-flex align-items-center justify-content-between" id="kt_header_container">
       <!--begin::Page title-->
+
       <div class="page-title d-flex flex-column align-items-start justify-content-center flex-wrap mt-n5 mt-lg-0 me-lg-2 pb-2 pb-lg-0" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', lg: '#kt_header_container'}">
         <!--begin::Heading-->
         <h1 class="text-dark fw-bold my-0 fs-2">{{ __('admin.dashborad') }}</h1>
         <!--end::Heading-->
-        <!--begin::Breadcrumb-->
+        <!--begin::Breadcrumb-->       
+      
         <ul class="breadcrumb fw-semibold fs-base my-1">
           <li class="breadcrumb-item text-muted">
             <a href="../../demo7/dist/index.html" class="text-muted">{{ __('admin.home') }}</a>
           </li>
-          <li class="breadcrumb-item text-muted">Dashboard</li>
-          <li class="breadcrumb-item text-dark">Default</li>
-          {{-- views\layouts\backend\header --}}
+          @yield('breadcrumbs')
+           
         </ul>
+
         <!--end::Breadcrumb-->
       </div>
+
+
+      
       <!--end::Page title=-->
       <!--begin::Wrapper-->
       <div class="d-flex d-lg-none align-items-center ms-n2 me-2">

@@ -10,6 +10,17 @@ use App\Http\Controllers\Controller;
 
 class ProductAttributeController extends Controller
 {
+    protected $model;
+    protected $resource;
+    protected $trans_file;
+
+    public function __construct(Recipe $model){
+        $this->model = $model;
+        $this->resource = 'recipes';
+        $this->trans_file = 'recipe';
+    }
+
+    
     /**
      * @return \Illuminate\Http\JsonResponse
      */

@@ -4,11 +4,25 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use LaravelLocalization;
 use App\Models\Recipe;
+use UploadAble;
 use App\Models\RecipeCategory;
+
 
 
 class RecipeController extends Controller
 {
+
+    protected $model;
+    protected $resource;
+    protected $trans_file;
+
+    public function __construct(Recipe $model){
+        $this->model = $model;
+        $this->resource = 'recipes';
+        $this->trans_file = 'recipe';
+    }
+
+
     public function index(){ 
         if (view()->exists('admin.recipes.index')) {
             $recipes = Recipe::with('recipe','recipe_category.category')->latest()->get(); 

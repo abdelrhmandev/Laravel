@@ -7,10 +7,22 @@ use App\Models\Area;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\District;
-
+use UploadAble,Functions;
 
 class ProductCategoryController extends Controller
 {
+
+    protected $model;
+    protected $resource;
+    protected $trans_file;
+
+    public function __construct(Recipe $model){
+        $this->model = $model;
+        $this->resource = 'recipes';
+        $this->trans_file = 'recipe';
+    }
+
+
     public function index(){
         if (view()->exists('admin.product_categories.index')) {
             $product_categories = '';//Product::with(['district_info','area.area_info','area.city.city_info','area.city.country'])->get(); 

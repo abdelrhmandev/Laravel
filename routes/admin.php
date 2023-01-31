@@ -26,7 +26,7 @@ Route::get('/lodassadsadsadgout', 'ProfileController@logout')->name('logout');
 
 Route::group(['prefix' => 'profile'], function () {
     Route::get('/', 'ProfileController@index')->name('profile');
-    Route::get('/edit', 'ProfileController@edit')->name('edit.lprofile');
+    Route::get('/edit', 'ProfileController@edit')->name('edit.profile');
     Route::put('update', 'ProfileController@update')->name('update.profile');
 });
 

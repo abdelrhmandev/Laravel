@@ -6,11 +6,23 @@ use LaravelLocalization;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Brand;
-
+use UploadAble,Functions;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
+
+    protected $model;
+    protected $resource;
+    protected $trans_file;
+
+    public function __construct(Recipe $model){
+        $this->model = $model;
+        $this->resource = 'recipes';
+        $this->trans_file = 'recipe';
+    }
+
+
     /**
      * Display a listing of the resource.
      *

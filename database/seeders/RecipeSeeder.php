@@ -19,28 +19,28 @@ class RecipeSeeder extends Seeder
         //category_id 5 Pasta
 
        $items = [
-        ['image'=>'uploads/recipes/farmers_grilled_cheese.jpg','category_id'=>'1','featured'=>'1','published'=>'1','cook'=>'23','servings'=>'3'], 
+        ['image'=>'uploads/recipes/farmers_grilled_cheese.jpg','category_id'=>'1','featured'=>'1','status'=>'published','cook'=>'23','servings'=>'3'], 
         
-        ['image'=>'uploads/recipes/blt_pasta.jpg','category_id'=>'2','featured'=>'0','published'=>'1','cook'=>'15','servings'=>'10'],
+        ['image'=>'uploads/recipes/blt_pasta.jpg','category_id'=>'2','featured'=>'0','status'=>'published','cook'=>'15','servings'=>'10'],
         
-        ['image'=>'uploads/recipes/baked_tilapia_in_lemon_butter_sauce.jpg','category_id'=>'3','featured'=>'1','published'=>'0','cook'=>'22','servings'=>'2'],
+        ['image'=>'uploads/recipes/baked_tilapia_in_lemon_butter_sauce.jpg','category_id'=>'3','featured'=>'1','status'=>'published','cook'=>'22','servings'=>'2'],
         
-        ['image'=>'uploads/recipes/spicy-beef-taco-2cd04fc.jpg','category_id'=>'4','featured'=>'1','published'=>'0','cook'=>'45','servings'=>'4'],
+        ['image'=>'uploads/recipes/spicy-beef-taco-2cd04fc.jpg','category_id'=>'4','featured'=>'1','status'=>'unpublished','cook'=>'45','servings'=>'4'],
         
-        ['image'=>'uploads/recipes/healthy-chicken-pasta-bake-8c8fa07.jpg','category_id'=>'3','featured'=>'1','published'=>'0','cook'=>'33','servings'=>'6'],
+        ['image'=>'uploads/recipes/healthy-chicken-pasta-bake-8c8fa07.jpg','category_id'=>'3','featured'=>'1','status'=>'unpublished','cook'=>'33','servings'=>'6'],
         
-        ['image'=>'uploads/recipes/creamy-mushroom-and-spinach-pasta-9b0582e.jpg','category_id'=>'5','featured'=>'1','published'=>'0','cook'=>'44','servings'=>'7'],
+        ['image'=>'uploads/recipes/creamy-mushroom-and-spinach-pasta-9b0582e.jpg','category_id'=>'5','featured'=>'1','status'=>'unpublished','cook'=>'44','servings'=>'7'],
 
-        ['image'=>'uploads/recipes/smoked-brisket-a9a5c4e.jpg','category_id'=>'4','featured'=>'0','published'=>'0','cook'=>'13','servings'=>'5'],
+        ['image'=>'uploads/recipes/smoked-brisket-a9a5c4e.jpg','category_id'=>'4','featured'=>'0','status'=>'unpublished','cook'=>'13','servings'=>'5'],
 
-        ['image'=>'uploads/recipes/beef-and-Boston-baked-beans-5678a51.jpg','category_id'=>'4','featured'=>'0','published'=>'0','cook'=>'35','servings'=>'3'],
+        ['image'=>'uploads/recipes/beef-and-Boston-baked-beans-5678a51.jpg','category_id'=>'4','featured'=>'0','status'=>'published','cook'=>'35','servings'=>'3'],
 
 
-        ['image'=>'uploads/recipes/pasta-alla-norma.jpg','category_id'=>'5','featured'=>'1','published'=>'0','cook'=>'43','servings'=>'3'],
+        ['image'=>'uploads/recipes/pasta-alla-norma.jpg','category_id'=>'5','featured'=>'1','status'=>'unpublished','cook'=>'43','servings'=>'3'],
 
         
 
-        ['image'=>'uploads/recipes/chicken-mushroom-wellington.jpg','category_id'=>'3','featured'=>'1','published'=>'0','cook'=>'20','servings'=>'3'],
+        ['image'=>'uploads/recipes/chicken-mushroom-wellington.jpg','category_id'=>'3','featured'=>'1','status'=>'unpublished','cook'=>'20','servings'=>'3'],
 
         
 

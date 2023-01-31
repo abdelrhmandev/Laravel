@@ -14,7 +14,7 @@
   <!--begin::Menu item-->
   <div class="menu-item px-3">
       <a href="{{ $edit_route }}" class="menu-link px-3" data-kt-table-filter="edit_row">
-          {{ __('admin.edit')}}  
+          {{ __('site.edit')}}  
       </a>
   </div>
   <!--end::Menu item-->
@@ -24,8 +24,8 @@
 
       {{-- <input type="hidden" id="personal-id-data{$id}" value="{{ route('recipes.destroy',$id) }}"/> --}}
 
-      <a id="{{ $id }}" data-destroy-route="{{ route('admin.recipes.destroy',$id) }}" class="menu-link px-3"  data-kt-table-filter="delete_row">
-        {{ __('admin.delete')}}    
+      <a data-destroy-route="{{ $destroy_route}}" class="menu-link px-3"  data-kt-table-filter="delete_row">
+        {{ __('site.delete')}}    
       </a>
   </div>
   <!--end::Menu item-->

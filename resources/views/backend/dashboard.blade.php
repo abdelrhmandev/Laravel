@@ -1,6 +1,6 @@
 @extends('backend.base.base')
 @section('style')
-<link href="{{ asset('assets/backend/plugins/custom/fullcalendar/fullcalendar.bundle.css')}}"" rel="stylesheet" type="text/css" />
+<link href="{{ asset('assets/backend/plugins/custom/fullcalendar/fullcalendar.bundle.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
 @stop
 

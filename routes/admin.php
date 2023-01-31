@@ -8,18 +8,25 @@ Route::get('/', 'DashboardController@index')->name('dashboard');
 
 https://github.com/zizohassan/car/blob/master/app/Application/routes/web.php
 
-Route::resource('recipes', RecipeController::class)->except('show');
-Route::delete('recipes/destroy/all', 'RecipeController@destroyMultiple')->name('recipes.destroyMultiple');
+// Route::resource('recipes', RecipeController::class)->except('show');
+// Route::delete('recipes/destroy/all', 'RecipeController@destroyMultiple')->name('recipes.destroyMultiple');
  
+
+Route::resource('users', UserController::class)->except('show');
+Route::delete('users/destroy/all', 'UserController@destroyMultiple')->name('users.destroyMultiple');
 
 
 Route::resource('roles', RoleController::class)->except('show');
+// Route::delete('recipes/destroy/all', 'RecipeController@destroyMultiple')->name('recipes.destroyMultiple');
+
+
 Route::resource('permissions', PermissionController::class)->except('show');
+// Route::delete('recipes/destroy/all', 'RecipeController@destroyMultiple')->name('recipes.destroyMultiple');
 
 
-Route::resource('recipe-categories',RecipeCategoryController::class)->except('show'); // Recipe Categories
+// Route::resource('recipe-categories',RecipeCategoryController::class)->except('show'); // Recipe Categories
 
-Route::resource('tags', TagController::class)->except('show');
+// Route::resource('tags', TagController::class)->except('show');
 
 
 Route::get('/lodassadsadsadgout', 'ProfileController@logout')->name('logout');

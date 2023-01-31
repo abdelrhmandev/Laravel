@@ -180,6 +180,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class, //localization package https://github.com/mcamara/laravel-localization 
         Intervention\Image\ImageServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
         /*
          * Third Party Service Providers
          */

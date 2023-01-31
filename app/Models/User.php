@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Models;
-
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -20,6 +18,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'username',
         'email',
         'password',
     ];
@@ -44,10 +43,15 @@ class User extends Authenticatable
     ];
 
     
-    public function likes(){
-        return $this->belongsToMany(RecipeLike::class, 'recipe_likes','user_id','recipe_id'); // recipe_likes  = table
-    }
+    // public function likes(){
+    //     return $this->belongsToMany(RecipeLike::class, 'recipe_likes','user_id','recipe_id'); // recipe_likes  = table
+    // }
 
+    public function getRoleNames()
+    {
+        return $this->belongsToMany(Role::class);
+
+    }
 
     public function setPasswordAttribute($value) // to make password encrypted automatic
     {

@@ -3,6 +3,7 @@ namespace App\Http\Controllers\backend;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use App\Http\Controllers\Controller;
+use Spatie\Permission\Models\Role;
 use LaravelLocalization;
 use App\Models\User;
 use App\Traits\UploadAble;
@@ -31,7 +32,14 @@ class UserController extends Controller
     public function index(Request $request){    
          
  
-             $query = $this->model;
+
+ 
+             $query = $this->model::with('roles');
+            
+             $role = $query->pluck('display')->implode(' ');
+             dd($role);
+             
+
             if ($request->ajax()) {
                       
 
@@ -42,9 +50,9 @@ class UserController extends Controller
                             ->editColumn('name', function ($row) {
                              $route = route('admin.'.$this->resource.'.edit',$row->id);   
                             $div = "<div class=\"d-flex align-items-center\">";                            
-                            if($row->image){
+                            if($row->avatar){
                                 $div.= "<a href=".$route." title='".$row->name."' class=\"symbol symbol-50px\">
-                                            <span class=\"symbol-label\" style=\"background-image:url(".asset("storage/".$row->image).")\" />
+                                            <span class=\"symbol-label\" style=\"background-image:url(".asset("storage/".$row->avatar).")\" />
                                             </span>
                                         </a>";                                                                
                             }else{
@@ -53,6 +61,9 @@ class UserController extends Controller
                                        </a>";  
                             } 
                       
+                                $div.="<div class=\"ms-5\">
+                                <a href=".$route." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-recipes-filter=\"item\">".$row->name."</a>
+                                </div>"; 
 
                             $div.= "</div>";
                             return $div;
@@ -70,9 +81,14 @@ class UserController extends Controller
                         })        
                         
                         
+                        ->editColumn('created_at', function ($row) {
+                            return $row->created_at->format('d/m/Y');
+                        })
+
                         ->editColumn('role', function ($row) {      
                                                          
-                            return 'sdsadsa';
+                            $role = $row->roles()->pluck('display')->implode(' ');
+                            dd($role);
                             })    
 
                         ->rawColumns(['name','role','created_at','actions'])    
@@ -112,7 +128,7 @@ class UserController extends Controller
             $compact                          = [
                 'resource'                        => $this->resource,
                 'trans_file'                      => $this->trans_file,
-                'categories'                      => RecipeCategory::select('id'),
+            
                 'page_title'                      => trans('orphan.interventions_menu'),
                 'header_title'                    => trans('orphan.interventions_menu')
                 ];
@@ -137,27 +153,14 @@ class UserController extends Controller
         public function edit($id){
             
          
-            // $nutritions = nutrition::get()->map(function($nutrition) use ($recipe) {
-            //     $nutrition->value = data_get($recipe->nutritions->firstWhere('id', $nutrition->id), 'pivot.amount') ?? null;
-            //     return $nutrition;
-            // });
-        
+    
          
           
 
        
             
             
-            $row = $this->model::withCount(                
-                'likes',
-                'dislikes',              
-            )
-            ->with('category')
-            ->with(['likes.owner','dislikes.owner' => function ($query) {
-                $query->select('id','name');
-            }])
-            
-            ->find($id);
+            $row = $this->model::findOrFail($id);
 
 
 
@@ -172,12 +175,7 @@ class UserController extends Controller
  
             
             
-            $recipe_nutritions = $row->nutritions;
-            $nutritions = Nutrition::get()->map(function($nutrition) use ($recipe_nutritions) {
-                $nutrition->value = data_get($recipe_nutritions->firstWhere('id', $nutrition->id), 'pivot.value') ?? null;
-                return $nutrition;
-            });
-
+   
 
             
 
@@ -216,6 +214,14 @@ class UserController extends Controller
     
  
         public function destroy($id){
+
+            // https://qcode.in/easy-roles-and-permissions-in-laravel-5-4/
+
+            if ( Auth::user()->id == $id ) {
+                flash()->warning('Deletion of currently logged in user is not allowed :(')->important();
+                return redirect()->back();
+            }
+
 
             $deleteMessageSuccess = __('admin.deleteMessageSuccess:Recipe');
             $deleteMessageError = __('admin.deleteMessageError:Recipe');

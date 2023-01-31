@@ -129,7 +129,7 @@
               </th>            
               <th>{{ __('site.name') }}</th>         
               <th>{{ __('role.role') }}</th>    
-               <th>{{ __('site.username') }}</th> 
+              <th>{{ __('site.username') }}</th> 
               <th>{{ __('site.email') }}</th>              
               <th>{{ __('admin.created_at') }}</th>
               <th class="text-end min-w-70px noExport">{{ __('admin.actions') }}</th>  

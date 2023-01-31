@@ -12,10 +12,10 @@
                 searchDelay: 500,
                 processing: true,
                 serverSide: true,                
-                info: true, 
+                info: false, 
                 oLanguage: {
-                    "zeroRecords" : '@include("backend.partials.abdo_files.empty",["msg"=>"No Match"])',
-                    "sEmptyTable": '@include("backend.partials.abdo_files.empty",["msg"=>"No Records Founds"])'
+                    "zeroRecords" : '@include("backend.partials.no_matched_records")',
+                    "sEmptyTable": '@include("backend.partials.empty")',
                 },
                  bPaginate: true,    
                 orientation: 'landscape',     

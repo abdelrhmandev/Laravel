@@ -144,4 +144,5 @@ return [
     'ksa_currency'          =>'ر.س',
     'with_days'             =>'بالأيام',
     'allowed_file'          =>'أمتدادات الملفات المسموحه رفعها',
+    'no_matched_records'    =>'لا توجد سجلات متطابقة',
 ];

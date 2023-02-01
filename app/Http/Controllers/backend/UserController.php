@@ -9,7 +9,7 @@ use App\Models\User;
 use App\Traits\UploadAble;
 use App\Traits\Functions;
 // use App\Traits\DatatableLang;
- 
+use Carbon\Carbon;
 use DataTables;
 use DB; 
 use Illuminate\Support\Str;
@@ -34,14 +34,13 @@ class UserController extends Controller
  
 
  
-             $query = $this->model::with('roles');
-            
-             $role = $query->pluck('display')->implode(' ');
-             dd($role);
              
+            
+       
+        $query = $this->model::with('roles');
 
             if ($request->ajax()) {
-                      
+                
 
                  return Datatables::of($query->latest())    
                             ->addIndexColumn()
@@ -57,7 +56,7 @@ class UserController extends Controller
                                         </a>";                                                                
                             }else{
                                 $div.="<a href=".$route." class=\"symbol symbol-50px\" title='".$row->name."'>
-                                                <div class=\"symbol-label fs-3 bg-light-primary text-primary\">".$this->str_split($row->name,1)."</div>
+                                                <div class=\"symbol-label fs-3 bg-light-success text-success\">".$this->str_split($row->name,1)."</div>
                                        </a>";  
                             } 
                       
@@ -82,13 +81,19 @@ class UserController extends Controller
                         
                         
                         ->editColumn('created_at', function ($row) {
-                            return $row->created_at->format('d/m/Y');
+                             return $row->created_at->format('d/m/Y')."<div class=\"fw-semibold text-success fs-7\">".Carbon::createFromFormat('Y-m-d H:i:s', $row->created_at)->diffForHumans()."</div>";
                         })
 
                         ->editColumn('role', function ($row) {      
-                                                         
-                            $role = $row->roles()->pluck('display')->implode(' ');
-                            dd($role);
+                           $role = '';                              
+                            if(!empty($row->getRoleNames())){
+                            foreach($row->getRoleNames() as $v){
+                                $role.= "<a class=\"text-primary fw-bold\" href =".route('admin.roles.edit',$row->id).">".json_decode($v)->{app()->getLocale()}."</a>";
+                             }
+                         }
+
+
+                            return $role;
                             })    
 
                         ->rawColumns(['name','role','created_at','actions'])    
@@ -99,6 +104,7 @@ class UserController extends Controller
 
 
             $compact                          = [
+            'counter'                         =>$query->count(),       
             'resource'                        => $this->resource,
             'trans_file'                      => $this->trans_file,
             'page_title'                      => trans('orphan.interventions_menu'),

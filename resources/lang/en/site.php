@@ -1,6 +1,30 @@
 <?php
 
 return [
+    'dashboard'             =>'Dashboard',
+    'home'                  =>'Home',
+
+    'deleteMessageSuccess'  => 'sdsadadasds has been Deleted successfully',
+    'deleteMessageError'    => 'Error In delete this :',
+    'updateMessageSuccess'  => ': has been updated successfully',
+    'updateMessageError'    => 'Error in update this :',
+    'storeMessageSuccess'   =>  ': has been added successfully',
+    'storeMessageError'     => 'Error In store this :',
+    'deletingselecteditem'  => 'Deleting selected :',
+    'confirmButtonText'     =>'Yes, delete!',
+    'cancelButtonText'      =>'No, cancel',
+    'confirmButtonTextGotit'=>'Ok, got it!',
+    'notdeletedMessage'     =>'Selected customers admin was not deleted.',
+    'confirmDeleteMessage'  =>'Are you sure you want to delete ',
+    'deletingItemMessage'   =>'Deleting selected customers admin',
+    'confirmMultiDeleteMessage'  =>'Are you sure you want to delete selected customers admin',
+    'delete_selected'       =>'Delete Selecetd',
+    'selected'              =>'Selecetd',
+    'filter_options'        =>'Filter Options',
+    
+    'apply'                 =>'Apply',
+
+
     'online'                => 'Online',
     'login'                 => 'Login',
     'logout'                => 'Logout',
@@ -37,7 +61,7 @@ return [
     'show'                  => 'Show',
     'entries'               => 'entries',
     'captcha'               => 'Captcha',
-    'action'                => 'Action',
+    'actions'                => 'Actions',
     'title'                 => 'Title',
     'description'           => 'Description',
     'back'                  => 'Back',
@@ -123,6 +147,7 @@ return [
     'end_date'              =>'end_date',
     'ksa_currency'          =>'R.S',
     'with_days'             =>'with_days',
+    'empty_records'         =>'No Records Founds',
     'allowed_file'          =>'allowed_file',
     'no_matched_records'    =>'No Matched Records',
 ];

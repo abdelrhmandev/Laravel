@@ -36,7 +36,7 @@
                 iDisplayLength: 10,
                 bLengthChange: true,
                 stateSave: false,
-                lengthMenu: [[1, 10, 25, 50, -1], [1, 10, 25, 50, "{{ __('admin.all')}}"]],
+                lengthMenu: [[1, 10, 25, 50, -1], [1, 10, 25, 50, "{{ __('site.all')}}"]],
                 order: [],
                 select: {
                     style: 'os',
@@ -153,12 +153,12 @@
 
                     // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
                     Swal.fire({
-                        text: "{{ __('admin.confirmDeleteMessage') }}" + itemName + "?",
+                        text: "{{ __('site.confirmDeleteMessage') }}" + itemName + "?",
                         icon: "warning",
                         showCancelButton: true,
                         buttonsStyling: false,
-                        confirmButtonText: "{{ __('admin.confirmButtonText') }}",
-                        cancelButtonText: "{{ __('admin.cancelButtonText') }}",
+                        confirmButtonText: "{{ __('site.confirmButtonText') }}",
+                        cancelButtonText: "{{ __('site.cancelButtonText') }}",
                         customClass: {
                             confirmButton: "btn fw-bold btn-danger",
                             cancelButton: "btn fw-bold btn-active-light-primary"
@@ -178,7 +178,7 @@
                             if (result.value) {
                                 // Simulate delete request -- for demo purpose only
                                 Swal.fire({
-                                    text: "{{ __('admin.deletingItemMessage') }}",
+                                    text: "{{ __('site.deletingItemMessage') }}",
                                     icon: "info",
                                     buttonsStyling: false,
                                     showConfirmButton: false,
@@ -189,7 +189,7 @@
                                     text: response['msg'], // respose from controller
                                     icon: response['status'],
                                     buttonsStyling: false,
-                                    confirmButtonText: "{{ __('admin.confirmButtonTextGotit') }}",
+                                    confirmButtonText: "{{ __('site.confirmButtonTextGotit') }}",
                                     customClass: {
                                         confirmButton: "btn fw-bold btn-primary",
                                     }
@@ -203,10 +203,10 @@
                                 });
                             }else if (result.dismiss === 'cancel') {
                                 Swal.fire({
-                                    text: "{{ __('admin.notdeletedMessage') }}",
+                                    text: "{{ __('site.notdeletedMessage') }}",
                                     icon: "error",
                                     buttonsStyling: false,
-                                    confirmButtonText: "{{ __('admin.confirmButtonTextGotit') }}",
+                                    confirmButtonText: "{{ __('site.confirmButtonTextGotit') }}",
                                     customClass: {
                                     confirmButton: "btn fw-bold btn-primary",
                                     }
@@ -276,13 +276,13 @@
                     
                     // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
                     Swal.fire({
-                        text: "{{ __('admin.confirmMultiDeleteMessage') }}"+"?",
+                        text: "{{ __('site.confirmMultiDeleteMessage') }}"+"?",
                         icon: "warning",
                         showCancelButton: true,
                         buttonsStyling: false,
                         showLoaderOnConfirm: true,
-                        confirmButtonText: "{{ __('admin.confirmButtonText') }}",
-                        cancelButtonText: "{{ __('admin.cancelButtonText') }}",
+                        confirmButtonText: "{{ __('site.confirmButtonText') }}",
+                        cancelButtonText: "{{ __('site.cancelButtonText') }}",
                         customClass: {
                             confirmButton: "btn fw-bold btn-danger",
                             cancelButton: "btn fw-bold btn-active-light-primary"
@@ -303,7 +303,7 @@
                         success: function (response, textStatus, xhr) {
                             if (result.value) {
                                     Swal.fire({
-                                        text: "{{ __('admin.deletingselecteditem') }}",
+                                        text: "{{ __('site.deletingselecteditem') }}",
                                         icon: "info",
                                         buttonsStyling: false,
                                         showConfirmButton: false,
@@ -313,7 +313,7 @@
                                             text: response['msg'], // respose from controller
                                             icon: response['status'],
                                             buttonsStyling: false,
-                                            confirmButtonText: "{{ __('admin.confirmButtonTextGotit') }}",
+                                            confirmButtonText: "{{ __('site.confirmButtonTextGotit') }}",
                                             customClass: {
                                                 confirmButton: "btn fw-bold btn-primary",
                                             }
@@ -328,10 +328,10 @@
                                     });
                                 } else if (result.dismiss === 'cancel') {
                                     Swal.fire({
-                                        text: "{{ __('admin.notdeletedMessage') }}",
+                                        text: "{{ __('site.notdeletedMessage') }}",
                                         icon: "error",
                                         buttonsStyling: false,
-                                        confirmButtonText: "{{ __('admin.confirmButtonTextGotit') }}",
+                                        confirmButtonText: "{{ __('site.confirmButtonTextGotit') }}",
                                         customClass: {
                                             confirmButton: "btn fw-bold btn-primary",
                     

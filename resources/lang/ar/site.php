@@ -1,6 +1,11 @@
 <?php
 
 return [
+
+    'dashboard'             =>'داش بورد',
+    'home'                  =>'الرئيسيه',
+
+
     'deleteMessageSuccess'  => 'تم حذف : بنجاح',
     'deleteMessageError'    => 'خطأ في عمليه حذف :',
     'updateMessageSuccess'  => 'تم تحديث : بنجاح',
@@ -12,6 +17,7 @@ return [
     'delete-selected'       =>'المحددين للحذف',
     'selected'              =>'المحددين',
     'filter_options'        =>'خيارات الفرز',
+    
     'status'                =>'الحاله',
     'activeted'             =>'مفعل',
     'deactiveted'           =>'غير مفعل',
@@ -20,6 +26,8 @@ return [
     'mobile'                => 'رقم الجوال',
     'age'                   => 'العمر',
     'degree'                => 'الدرجه',
+    
+    
     'online'                => 'متصل',
     'login'                 => 'تسجيل الدخول',
     'logout'                => 'تسجيل الخروج',
@@ -57,7 +65,7 @@ return [
     'show'                  => 'عرض',
     'entries'               => 'المدخلات',
     'captcha'               => 'كود التحقق',
-    'action'                => 'الحدث',
+    'actions'               =>' الأجراءات',
     'title'                 => 'العنوان',
     'description'           => 'الوصف',
     'back'                  => 'عودة',
@@ -144,5 +152,6 @@ return [
     'ksa_currency'          =>'ر.س',
     'with_days'             =>'بالأيام',
     'allowed_file'          =>'أمتدادات الملفات المسموحه رفعها',
+    'empty_records'         =>'لا توجد سجلات',
     'no_matched_records'    =>'لا توجد سجلات متطابقة',
 ];

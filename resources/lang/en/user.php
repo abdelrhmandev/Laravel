@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'add'                   =>'Add New User',
+    'create'                =>'Add New User',
     'all'                   =>'Users',
     'my_profile'            => 'My Profile',
     'language'              =>  'Language',

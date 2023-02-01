@@ -22,7 +22,7 @@
         <!--begin::Card title-->
 
         <h3 class="card-title align-items-start flex-column">
-          <span class="card-label fw-bold fs-3 mb-1">{{ __($trans_file.'.all')}} 12121</span>
+          <span class="card-label fw-bold fs-3 mb-1">{{ __($trans_file.'.all')}} {{ ($counter)}}</span>
         </h3>
 
         <div class="card-title">
@@ -95,7 +95,7 @@
             <!--end::Export-->
             <!--begin::Add-->
             
-            <a class="btn btn-primary" href="{{ route('admin.'.$resource.'.create') }}">{{ __($trans_file.'.add')}}</a>
+            <a class="btn btn-primary" href="{{ route('admin.'.$resource.'.create') }}">{{ __($trans_file.'.create')}}</a>
             <!--end::Add-->
           </div>
           <!--end::Toolbar-->
@@ -131,37 +131,29 @@
               <th>{{ __('role.role') }}</th>    
               <th>{{ __('site.username') }}</th> 
               <th>{{ __('site.email') }}</th>              
-              <th>{{ __('admin.created_at') }}</th>
-              <th class="text-end min-w-70px noExport">{{ __('admin.actions') }}</th>  
+              <th>{{ __('site.created_at') }}</th>
+              <th class="text-end min-w-70px noExport">{{ __('site.actions') }}</th>  
             </tr>
 
           
             <!--end::Table row-->
           </thead>
-          <!--end::Table head-->
-          <!--begin::Table body-->
+ 
           <tbody class="fw-semibold text-gray-600"> 
           </tbody>
-          <!--end::Table body-->
+        
         </table>
          
-        <!--end::Table-->
+ 
       </div>
-      <!--end::Card body-->
+ 
     </div>
-    <!--end::Card-->
-    <!--begin::Modals-->
-    <!--begin::Modal - Adjust Balance-->
-    
-    <!--end::Modal - New Card-->
-    <!--end::Modals-->
-  </div>  <!--end::Container-->
+ 
 @stop
 
 
 @section('scripts')
-<!--begin::Vendors Javascript(used for this page only)-->
-{{-- @include('backend.datatables2') --}}
+ 
 
 
 <script src="{{ asset('assets/backend/js/custom/pdfMake/pdfmake.min.js')}}"></script> 
@@ -170,15 +162,14 @@
 <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js')}}"></script>
 @include('backend.datatables')
  
-<!--end::Vendors Javascript-->
-<!--begin::Custom Javascript(used for this page only)-->
+ 
 
 <script>
 
 var dynamicColumns = [
 { data: 'id', name: 'id',exportable:false},
 { data: 'name', name: 'name'},
-{ data: 'role', name: 'role'},
+{ data: 'role', name: 'role',searchable:false,filterable:false,orderable: false,},
 { data: 'username', name: 'username'},
 { data: 'email', name: 'email'},
 { data: 'created_at', name: 'created_at'},

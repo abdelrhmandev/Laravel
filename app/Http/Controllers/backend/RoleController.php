@@ -11,6 +11,10 @@ use DB;
 class RoleController extends Controller
 
 {
+    protected $model;
+    protected $resource;
+    protected $trans_file;
+
 
     /**
 
@@ -26,6 +30,9 @@ class RoleController extends Controller
 
     {
         $this->model = $model;
+        $this->resource = 'roles';
+        $this->trans_file = 'role';
+        
         //  $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index','store']]);
 
         //  $this->middleware('permission:role-create', ['only' => ['create','store']]);
@@ -52,9 +59,12 @@ class RoleController extends Controller
 
     public function index(){
         $compact = [
-            'rows' => $this->model::select('id','name','display')->latest()->get() 
+            'rows' => $this->model::select('id','name','display')->with('permissions')->withCount(['users','permissions'])->latest()->get(), 
+            'resource'                        => $this->resource,
+            'trans_file'                      => $this->trans_file,
+
         ];
-        return view('backend.roles.index', $compact);
+        return view('backend.'.$this->resource.'.index', $compact);
     }
 
     
@@ -73,9 +83,15 @@ class RoleController extends Controller
 
     {
 
-        $permission = Permission::get();
+ 
+        $compact = [
+            'rows' => $this->model::select('id','name','display')->with('permissions')->withCount(['users','permissions'])->latest()->get(), 
+            'resource'                        => $this->resource,
+            'trans_file'                      => $this->trans_file,
 
-        return view('roles.create',compact('permission'));
+        ];
+        return view('backend.'.$this->$resource.'.create', $compact);
+
 
     }
 

@@ -12,23 +12,56 @@
 @else
 <link href="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
 @endif
-
  
- 
-
-
-
-
 @stop
 @section('content')
  
 <div class="container-xxl" id="kt_content_container">
   <!--begin::Row-->
-  @if($rows->count() > 0)
+  @if($rows->count())
+
+  <div class="d-flex flex-wrap flex-stack mb-6">
+    <!--begin::Heading-->
+    <h3 class="fw-bold my-2">{{ __($trans_file.'.all')}}
+
+      <span class="badge badge-primary badge-circle badge-lg">{{ $rows->total() }}</span>
+
+    <span class="fs-6 text-gray-400 fw-semibold ms-1">Active</span></h3>
+    <!--end::Heading-->
+    <!--begin::Actions-->
+    <div class="d-flex flex-wrap my-2">
+      <div class="me-4">
+        <!--begin::Select-->
+        <select name="status" data-control="select2" data-hide-search="true" class="form-select form-select-sm bg-body border-body w-125px">
+          <option value="Active" selected="selected">Active</option>
+        
+        </select>
+        <!--end::Select-->
+      </div>
+      
+      <div class="text-center mb-1">
+        <!--begin::Link-->
+        <a class="btn btn-sm btn-primary me-2">{{ __('site.filter')}}</a>
+        <!--end::Link-->
+        <!--begin::Link-->
+         <!--end::Link-->    
+           <a href="#" class="btn btn-success btn-sm">{{ __($trans_file.'.create')}}</a>
+
+      </div>
+
+
+    </div>
+    <!--end::Actions-->
+  </div>
+
+  
   <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-5 g-xl-9">
+
+    
     <!--begin::Col-->
     @foreach ( $rows as $row)
  
+    
     <div class="col-md-4">
       <!--begin::Card-->
       <div class="card card-flush h-md-100">
@@ -44,26 +77,30 @@
         <!--begin::Card body-->
         <div class="card-body pt-1">
           <!--begin::Users-->
-          <div class="fw-bold text-success">{{ __('role.associated_users')}}            
+          @if($row->users_count)
+          <div class="fw-bold text-success">{{ __($trans_file.'.associated_users')}}            
             <span class="badge badge-primary badge-circle badge-lg">{{ $row->users_count}}</span>          
           </div>
+          @else
+          <span class="fw-bold text-danger">{{ __($trans_file.'.no_associated_users') }}</span>
+          @endif
           <!--end::Users-->
           <!--begin::Permissions-->
-          <div class="d-flex flex-column text-gray-600">
+          <div class="d-flex flex-column text-gray-600 scroll h-200px " data-kt-scroll="true">
         
             <!-- Check Role Has Permissions -->
-            {!! $row->permissions_count ? "<span class=\"fw-bold text-info\">".__('permission.all')."</span>" : '' !!} 
+            {!! $row->permissions_count ? "<span class=\"fw-bold text-info\">".__('permission.all')." <span class=\"badge badge-warning badge-circle badge-sm\">".$row->permissions_count."</span></span>" : '' !!} 
 
          
 
             @forelse ($row->permissions as $permission)
             <div class="d-flex align-items-center py-2">
-              <span class="bullet bg-primary me-3"></span> {{ json_decode($permission->display)->{app()->getLocale()}; }}
+              <span class="bullet bg-danger me-3"></span> {{ json_decode($permission->display)->{app()->getLocale()}; }}
             </div>
             @empty
             <span class="d-flex position-relative">
                 <span class="d-inline-block mb-2 fs fw-bold text-danger">
-                  {{ __('role.no_permissions_assigned')}} 
+                  {{ __($trans_file.'.no_permissions_assigned')}} 
                 </span> 
             </span>
             @endforelse
@@ -87,7 +124,9 @@
 
     @endforeach
  
-
+    <div class="d-flex flex-stack flex-wrap pt-10">
+      {!! $rows->links() !!}
+  </div>
 
  
     <!--end::Col-->

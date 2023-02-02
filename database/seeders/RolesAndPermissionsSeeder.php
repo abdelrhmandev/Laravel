@@ -25,6 +25,33 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'posts-publish','display' => '{"ar" : "نشر المقالات", "en" : "Publish Posts"}']);
         Permission::create(['name' => 'posts-unpublish','display' => '{"ar" : "إلغاء نشر المقالات", "en" : "Unpublish Posts"}']);
 
+
+
+        Permission::create(['name' => 'roles-list','display' => '{"ar" : "عرض الرتب", "en" : "List Roles"}']);
+        Permission::create(['name' => 'roles-delete','display' => '{"ar" : "حذف الرتب", "en" : "Delete Roles"}']);
+        Permission::create(['name' => 'roles-create','display' => '{"ar" : "أنشاء الرتب", "en" : "Create Roles"}']);
+        Permission::create(['name' => 'roles-edit','display' => '{"ar" : "تحرير الرتب", "en" : "Edit Roles"}']);
+
+
+        Permission::create(['name' => 'permissions-list','display' => '{"ar" : "عرض الصلاحيات", "en" : "List Permissions"}']);
+        Permission::create(['name' => 'permissions-delete','display' => '{"ar" : "حذف الصلاحيات", "en" : "Delete Permissions"}']);
+        Permission::create(['name' => 'permissions-create','display' => '{"ar" : "أنشاء الصلاحيات", "en" : "Create Permissions"}']);
+        Permission::create(['name' => 'permissions-edit','display' => '{"ar" : "تحرير الصلاحيات", "en" : "Edit Permissions"}']);
+
+        
+        Permission::create(['name' => 'clients-list','display' => '{"ar" : "عرض العملاء", "en" : "List Clients"}']);
+        Permission::create(['name' => 'clients-delete','display' => '{"ar" : "حذف العملاء", "en" : "Delete Clients"}']);
+        Permission::create(['name' => 'clients-create','display' => '{"ar" : "أنشاء العملاء", "en" : "Create Clients"}']);
+        Permission::create(['name' => 'clients-edit','display' => '{"ar" : "تحرير العملاء", "en" : "Edit Clients"}']);
+
+
+        Permission::create(['name' => 'menus-list','display' => '{"ar" : "عرض القوائم", "en" : "List Menus"}']);
+        Permission::create(['name' => 'menus-delete','display' => '{"ar" : "حذف القوائم", "en" : "Delete Menus"}']);
+        Permission::create(['name' => 'menus-create','display' => '{"ar" : "أنشاء القوائم", "en" : "Create Menus"}']);
+        Permission::create(['name' => 'menus-edit','display' => '{"ar" : "تحرير القوائم", "en" : "Edit Menus"}']);
+
+
+        
         // create roles and assign created permissions
 
         $role = Role::create(['name' => 'super-admin','display' => '{"ar" : "المدير العام", "en" : "SuperAdmin"}']);

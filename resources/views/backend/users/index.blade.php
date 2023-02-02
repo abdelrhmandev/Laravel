@@ -128,7 +128,7 @@
                 </div>
               </th>            
               <th>{{ __('site.name') }}</th>         
-              <th>{{ __('role.role') }}</th>    
+              <th>{{ __('role.single') }}</th>    
               <th>{{ __('site.username') }}</th> 
               <th>{{ __('site.email') }}</th>              
               <th>{{ __('site.created_at') }}</th>

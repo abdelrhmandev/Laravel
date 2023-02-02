@@ -6,5 +6,6 @@ return [
     'select'                     =>'Select Role',
     'single'                     =>'Role',
     'associated_users'           =>'Associated Users',
-    'no_permissions_assigned'    =>'No Permissions assigned For This Role',
+    'no_associated_users'        =>'No associated users for this role',
+    'no_permissions_assigned'    =>'No permissions assigned for this role',    
 ];

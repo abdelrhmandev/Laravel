@@ -59,7 +59,7 @@ class RoleController extends Controller
 
     public function index(){
         $compact = [
-            'rows' => $this->model::select('id','name','display')->with('permissions')->withCount(['users','permissions'])->latest()->get(), 
+            'rows' => $this->model::select('id','name','display')->with('permissions')->withCount(['users','permissions'])->latest()->paginate(9), 
             'resource'                        => $this->resource,
             'trans_file'                      => $this->trans_file,
 
@@ -123,15 +123,15 @@ class RoleController extends Controller
 
     
 
-        $role = Role::create(['name' => $request->input('name')]);
+        $role = $this->model::create(['name' => $request->input('name')]);
 
         $role->syncPermissions($request->input('permission'));
 
     
 
-        return redirect()->route('roles.index')
+        return redirect()->route($this->$resource.'.index')
 
-                        ->with('success','Role created successfully');
+                        ->with('success',$this->trans_file.'.storeMessageSuccess');
 
     }
 
@@ -151,7 +151,7 @@ class RoleController extends Controller
 
     {
 
-        $role = Role::find($id);
+        $row = $this->model::find($id);
 
         $rolePermissions = Permission::join("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")
 
@@ -161,7 +161,7 @@ class RoleController extends Controller
 
     
 
-        return view('roles.show',compact('role','rolePermissions'));
+        return view($this->$resource.'.show',compact('row','rolePermissions'));
 
     }
 
@@ -183,7 +183,7 @@ class RoleController extends Controller
 
     {
 
-        $role = Role::find($id);
+        $row = $this->model::find($id);
 
         $permission = Permission::get();
 
@@ -195,7 +195,7 @@ class RoleController extends Controller
 
     
 
-        return view('roles.edit',compact('role','permission','rolePermissions'));
+        return view($this->$resource.'.edit',compact('row','permission','rolePermissions'));
 
     }
 
@@ -229,21 +229,21 @@ class RoleController extends Controller
 
     
 
-        $role = Role::find($id);
+        $row = $this->model::find($id);
 
-        $role->name = $request->input('name');
+        $row->name = $request->input('name');
 
-        $role->save();
-
-    
-
-        $role->syncPermissions($request->input('permission'));
+        $row->save();
 
     
 
-        return redirect()->route('roles.index')
+        $row->syncPermissions($request->input('permission'));
 
-                        ->with('success','Role updated successfully');
+    
+
+        return redirect()->route($this->$resource.'.index')
+
+        >with('success',$this->trans_file.'.updateMessageSuccess');
 
     }
 
@@ -263,11 +263,11 @@ class RoleController extends Controller
 
     {
 
-        DB::table("roles")->where('id',$id)->delete();
+        // $this->modelwhere('id',$id)->delete();
 
-        return redirect()->route('roles.index')
+        return redirect()->route($this->$resource.'.index')
 
-                        ->with('success','Role deleted successfully');
+                        ->with('success',$this->trans_file.'.deleteMessageSuccess');
 
     }
 

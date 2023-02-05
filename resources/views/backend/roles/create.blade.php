@@ -58,9 +58,9 @@ color: #f1416c;
 
  
 
-<form action="m-0" class="form mb-15" method="post" id="kt_careers_form">
+<form class="form mb-15" method="post" id="kt_careers_form">
 
-    
+    @csrf
    
         <div class="fl w-100">
             <label class="required fs-5 fw-semibold mb-2">First Name</label>
@@ -105,12 +105,12 @@ color: #f1416c;
 
    
 
-@include('backend.form')
+
 @section('scripts')
 <script src="https://www.chineseshaolins.com/js/formvalidation/plugins/Tachyons.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.3/es6-shim.min.js"></script>
 <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js')}}"></script>
- 
+@include('backend.form')
  
  
 <!--end::Custom Javascript-->

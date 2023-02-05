@@ -58,8 +58,30 @@ var KTCareersApply = function () {
 
 							// Enable button
 							submitButton.disabled = false;
-							
-							Swal.fire({
+							var form = '#kt_careers_form';
+////
+$.ajax({
+                        type: 'put',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                       
+                        url: '{{ route('admin.roles.create')}}',
+					method: 'put',
+					data: new FormData(this),
+	 
+
+                        success: function (response, textStatus, xhr) {
+							$(form).trigger("reset");
+							alert(response.success)
+                        }
+                        });
+
+
+						/////
+
+
+							/*Swal.fire({
 								text: "Form has been successfully submitted!",
 								icon: "success",
 								buttonsStyling: false,
@@ -71,7 +93,7 @@ var KTCareersApply = function () {
 								if (result.isConfirmed) {
 									//form.submit();
 								}
-							});
+							});*/
 
 							//form.submit(); // Submit form
 						}, 2000);   						
@@ -80,7 +102,7 @@ var KTCareersApply = function () {
 
 						// Show error popuo. For more info check the plugin's official documentation: https://sweetalert2.github.io/
 						Swal.fire({
-							text: "Sorry, looks like there are some errors detected, please try again.",
+							text: "Sorry, loodasdsadasme errors detected, please try again.",
 							icon: "error",
 							buttonsStyling: false,
 							confirmButtonText: "Ok, got it!",

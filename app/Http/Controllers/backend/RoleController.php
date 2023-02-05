@@ -59,7 +59,7 @@ class RoleController extends Controller
 
     public function index(){
         $compact = [
-            'rows' => $this->model::select('id','name','display')->with('permissions')->withCount(['users','permissions'])->latest()->paginate(9), 
+            'rows' => $this->model::select('id','name','trans')->with('permissions')->withCount(['users','permissions'])->latest()->paginate(9), 
             'resource'                        => $this->resource,
             'trans_file'                      => $this->trans_file,
 
@@ -85,12 +85,12 @@ class RoleController extends Controller
 
  
         $compact = [
-            'rows' => $this->model::select('id','name','display')->with('permissions')->withCount(['users','permissions'])->latest()->get(), 
+            'rows' => $this->model::select('id','name','trans')->with('permissions')->withCount(['users','permissions'])->latest()->get(), 
             'resource'                        => $this->resource,
             'trans_file'                      => $this->trans_file,
 
         ];
-        return view('backend.'.$this->$resource.'.create', $compact);
+        return view('backend.'.$this->resource.'.create', $compact);
 
 
     }
@@ -113,6 +113,13 @@ class RoleController extends Controller
 
     {
 
+        return response()->json([
+            'status'=>"success",
+            'msg'=>$this->trans_file.'.storeMessageSuccess'
+        ]); // 
+
+
+        /*
         $this->validate($request, [
 
             'name' => 'required|unique:roles,name',
@@ -132,6 +139,7 @@ class RoleController extends Controller
         return redirect()->route($this->$resource.'.index')
 
                         ->with('success',$this->trans_file.'.storeMessageSuccess');
+                        */
 
     }
 

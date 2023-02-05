@@ -59,7 +59,7 @@ class PermissionController extends Controller
 
     public function index(){
         $compact = [
-            'rows' => $this->model::select('id','name','display')->with('permissions')->withCount(['users','permissions'])->latest()->get(), 
+            'rows' => $this->model::select('id','name','trans')->with('permissions')->withCount(['users','permissions'])->latest()->paginate(10), 
             'resource'                        => $this->resource,
             'trans_file'                      => $this->trans_file,
 
@@ -85,7 +85,7 @@ class PermissionController extends Controller
 
  
         $compact = [
-            'rows' => $this->model::select('id','name','display')->with('permissions')->withCount(['users','permissions'])->latest()->get(), 
+            'rows' => $this->model::select('id','name','trans')->with('permissions')->withCount(['users','permissions'])->latest()->get(), 
             'resource'                        => $this->resource,
             'trans_file'                      => $this->trans_file,
 

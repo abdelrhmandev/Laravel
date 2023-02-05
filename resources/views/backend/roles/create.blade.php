@@ -105,35 +105,13 @@ color: #f1416c;
 
    
 
-
+@include('backend.form')
 @section('scripts')
 <script src="https://www.chineseshaolins.com/js/formvalidation/plugins/Tachyons.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.3/es6-shim.min.js"></script>
 <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js')}}"></script>
-<script src="{{ asset('assets/backend/abdo/apply.js')}}"></script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function (e) {
-    const form = document.getElementById('kt_careers_formXX');
-    FormValidation.formValidation(form, {
-        plugins: {
-            declarative: new FormValidation.plugins.Declarative(),
-            // Other plugins
-            trigger: new FormValidation.plugins.Trigger(),
-            tachyons: new FormValidation.plugins.Tachyons({
-						rowInvalidClass: 'my-field-error',
-						rowValidClass: 'my-field-success',
-					}),
-            submitButton: new FormValidation.plugins.SubmitButton(),
-            icon: new FormValidation.plugins.Icon({
-                valid: 'fa fa-check',
-                invalid: 'invalid-feedback',
-                validating: 'fa fa-refresh',
-            }),
-        },
-    });
-});
-</script>
+ 
+ 
  
 <!--end::Custom Javascript-->
 @stop

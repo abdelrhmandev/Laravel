@@ -113,10 +113,30 @@ class RoleController extends Controller
 
     {
 
-        return response()->json([
-            'status'=>"success",
-            'msg'=>$this->trans_file.'.storeMessageSuccess'
-        ]); // 
+        $ids = $request->ids;
+
+
+                $deleteMessageSuccess = __('admin.deleteMessageSuccess');
+                // $deleteMessageError = __('admin.deleteMessageError:Recipe');
+    
+
+                    //  return response()->json([
+                    //     'status'=>"error",
+                    //     'msg'=>$deleteMessageError
+                    // ]); // Bad Request
+    
+                    $arry = [
+                        'name' => $request->input('title'),
+                        'trans'=> '{"ar" : "الsdasdasdمدير العام", "en" : "SupersadsadasAdmin"}',
+                        'guard_name'=>'web'
+                    ]; 
+     
+                    if(Role::create($arry)){
+                    return response()->json([
+                        'status'=>"success",
+                        'msg'=>$deleteMessageSuccess
+                    ]); // 
+                }
 
 
         /*

@@ -63,14 +63,14 @@ color: #f1416c;
     @csrf
    
         <div class="fl w-100">
-            <label class="required fs-5 fw-semibold mb-2">First Name</label>
+            <label class="required fs-5 fw-semibold mb-2">Role title</label>
             
 
 
                 <input
                     type="text"
                     class="form-control form-control-solid  input-reset"
-                    name="name"
+                    name="title"
                     data-fv-not-empty="true"
                     data-fv-not-empty___message="The Csutom is required"
                 />

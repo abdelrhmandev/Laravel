@@ -2,7 +2,7 @@
 "use strict";
 
 // Class definition
-var KTCareersApply = function () {
+var KTFormApply = function () {
 	var submitButton;
 	var validator;
 	var form;
@@ -59,26 +59,38 @@ var KTCareersApply = function () {
 							// Enable button
 							submitButton.disabled = false;
 							var form = '#kt_careers_form';
-////
-$.ajax({
-                        type: 'put',
+ 
+
+						$.ajax({
+                        type: 'post',
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
-                       
-                        url: '{{ route('admin.roles.create')}}',
-					method: 'put',
-					data: new FormData(this),
-	 
+                        url: '{{ route("admin.roles.store") }}',
+                        data: {
+                            '_method': 'post',							                              
+                        },  
+						data: $('#kt_careers_form').serialize(),
 
                         success: function (response, textStatus, xhr) {
-							$(form).trigger("reset");
-							alert(response.success)
-                        }
+                   
+                                        Swal.fire({
+                                            text: response['msg'], // respose from controller
+                                            icon: response['status'],
+                                            buttonsStyling: false,
+                                            confirmButtonText: "{{ __('site.confirmButtonTextGotit') }}",
+                                            customClass: {
+                                                confirmButton: "btn fw-bold btn-primary",
+                                            }
+                                        }) 
+                
+                                        // Remove header checked box
+                                  
+                                  
+                            }
                         });
 
 
-						/////
 
 
 							/*Swal.fire({
@@ -133,6 +145,6 @@ $.ajax({
 
 // On document ready
 KTUtil.onDOMContentLoaded(function () {
-	KTCareersApply.init();
+	KTFormApply.init();
 });
 </script>

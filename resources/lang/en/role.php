@@ -1,5 +1,11 @@
 <?php
 return [ 
+    'deleteMessageSuccess'       => 'Role has been deleted successfuly',
+    'deleteMessageError'         => 'Error in delete role',
+    'updateMessageSuccess'       => 'Role has been updated succssfuly',
+    'updateMessageError'         => 'Error in update role',
+    'storeMessageSuccess'        =>  'Role has been created succssfuly',
+    'storeMessageError'          => 'Error in create role' ,
     'all'                        =>'Roles',
     'create'                     =>'Create New Role', 
     'guard'                      =>'guard', 

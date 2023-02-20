@@ -66,11 +66,11 @@ var KTFormApply = function () {
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
-                        url: '{{ route("admin.roles.store") }}',
+						url: $(this).attr("data-route-url"),
                         data: {
                             '_method': 'post',							                              
                         },  
-						data: $('#kt_careers_form').serialize(),
+						data: $('#'+$(this).attr("data-form-id")).serialize(),
 
                         success: function (response, textStatus, xhr) {
                    

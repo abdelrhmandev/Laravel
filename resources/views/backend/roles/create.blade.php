@@ -58,7 +58,7 @@ color: #f1416c;
 
  
 
-<form id="kt_careers_form" class="form mb-15" method="post" data-route-url="{{ route('admin.roles.store')}}" data-form-id="create-role">
+<form id="kt_roles_form" data-form-type="create_role" class="form mb-15" method="post" data-url-action="{{ route('admin.roles.store') }}">
 
     @csrf
    
@@ -84,7 +84,7 @@ color: #f1416c;
 
 
 
-<button type="submit" class="btn btn-primary" id="kt_careers_submit_button">
+<button type="submit" class="btn btn-primary" id="kt_submit_button">
     <!--begin::Indicator label-->
     <span class="indicator-label">Apply Now</span>
     <!--end::Indicator label-->

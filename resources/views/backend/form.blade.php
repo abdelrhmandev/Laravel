@@ -40,6 +40,9 @@ var KTFormApply = function () {
 
 		// Action buttons
 		submitButton.addEventListener('click', function (e) {
+
+			alert(this.getAttribute('data-form-type').value);
+			
 			e.preventDefault();
 
 			// Validate form before submit
@@ -52,35 +55,32 @@ var KTFormApply = function () {
 
 						// Disable button to avoid multiple click 
 						submitButton.disabled = true;
-
+ 
 						setTimeout(function() {
 							submitButton.removeAttribute('data-kt-indicator');
 
 							// Enable button
 							submitButton.disabled = false;
 							 
-							var title = $("#title").val();
-
+							 
+							
+						 
 						$.ajaxSetup({
 							headers: {
 							'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 							}
 						});
 
+ 			 
+
 						$.ajax({   
 
-							/*
-													url: $(this).attr("data-route-url"),
-						type: 'POST',
-						dataType:"json",
-						data: $('#'+$(this).attr("data-form-id")).serialize(),
-						*/
-
+				 
 							type:'POST',
 
-							url:"{{ route('admin.roles.store') }}",
+							url: $('#kt_roles_form').data("url-action"),
 
-							data: $('#kt_careers_form').serialize(),
+							data: $('#kt_roles_form').serialize(),
 
                         success: function (response, textStatus, xhr) {
                    
@@ -144,8 +144,8 @@ var KTFormApply = function () {
 		// Public functions
 		init: function () {
 			// Elements
-			form = document.querySelector('#kt_careers_form');
-			submitButton = document.getElementById('kt_careers_submit_button');
+			form = document.querySelector('#kt_roles_form');
+			submitButton = document.getElementById('kt_submit_button');
 
 		 
 			handleForm();

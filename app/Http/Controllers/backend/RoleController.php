@@ -104,10 +104,12 @@ class RoleController extends Controller
      */
 
     public function store(Request $request){
+
+   
                     $arry = [
-                        'name' => $request->input('title'),
-                        'trans'=> '{"ar" : "الsdasdasdمدير العام", "en" : "SupersadsadasAdmin"}',
-                        'guard_name'=>'web'
+                        'name'          => $request->input('title'),
+                        'trans'         => '{"ar" : "الsdasdasdمدير العام", "en" : "SupersadsadasAdmin"}',
+                        'guard_name'    =>'web'
                     ]; 
 
 

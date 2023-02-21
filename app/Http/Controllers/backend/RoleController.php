@@ -112,17 +112,17 @@ class RoleController extends Controller
 
 
                     
-                    if($this->model::create($arry)){
-                        $status = "success";
-                        $msg = __($this->trans_file.'.storeMessageSuccess');        
+                  
+                    $result = $this->model::create($arry);
+                    if($result){ 
+                        $arr = array('msg' => __($this->trans_file.'.storeMessageSuccess'), 'status' => 'success');
                     }else{
-                        $status = "error";
-                        $msg = __($this->trans_file.'.storeMessageError');
+                        $arr = array('msg' => __($this->trans_file.'.storeMessageError'), 'status' => 'error');
                     }
-                    return response()->json([
-                        'status'=>$status,
-                        'msg'=>$msg
-                    ]); // 
+                    return Response()->json($arr);
+                                         
+                  
+            
                 
 
 

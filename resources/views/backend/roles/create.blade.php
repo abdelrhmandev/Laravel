@@ -58,7 +58,7 @@ color: #f1416c;
 
  
 
-<form class="form mb-15" method="post" data-route-url="{{ route('admin.roles.store')}}" data-form-id="create-role">
+<form id="kt_careers_form" class="form mb-15" method="post" data-route-url="{{ route('admin.roles.store')}}" data-form-id="create-role">
 
     @csrf
    

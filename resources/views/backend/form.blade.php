@@ -58,19 +58,29 @@ var KTFormApply = function () {
 
 							// Enable button
 							submitButton.disabled = false;
-							var form = '#kt_careers_form';
- 
+							 
+							var title = $("#title").val();
 
-						$.ajax({
-                        type: 'post',
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-						url: $(this).attr("data-route-url"),
-                        data: {
-                            '_method': 'post',							                              
-                        },  
+						$.ajaxSetup({
+							headers: {
+							'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+							}
+						});
+
+						$.ajax({   
+
+							/*
+													url: $(this).attr("data-route-url"),
+						type: 'POST',
+						dataType:"json",
 						data: $('#'+$(this).attr("data-form-id")).serialize(),
+						*/
+
+							type:'POST',
+
+							url:"{{ route('admin.roles.store') }}",
+
+							data: $('#kt_careers_form').serialize(),
 
                         success: function (response, textStatus, xhr) {
                    

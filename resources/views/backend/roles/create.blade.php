@@ -58,7 +58,30 @@ color: #f1416c;
 
  
 
-<form id="kt_roles_form" data-form-type="create_role" class="form mb-15" method="post" data-url-action="{{ route('admin.roles.store') }}">
+@if (count($errors) > 0)
+
+  <div class="alert alert-danger">
+
+    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+
+    <ul>
+
+       @foreach ($errors->all() as $error)
+
+         <li>{{ $error }}</li>
+
+       @endforeach
+
+    </ul>
+
+  </div>
+
+@endif
+
+
+
+
+<form id="FormId" data-form-id="create_role" data-route-url="{{ route('admin.roles.store') }}" class="form mb-15" method="post">
 
     @csrf
    
@@ -71,11 +94,19 @@ color: #f1416c;
                     type="text"
                     class="form-control form-control-solid  input-reset"
                     name="title"
-                    data-fv-not-empty="true"
-                    data-fv-not-empty___message="The Csutom is required"
                 />
             
-       
+                <br/>
+
+                @foreach($permission as $value)
+    
+                    <label>{{ Form::checkbox('permission[]', $value->id, false, array('class' => 'name')) }}
+    
+                    {{ $value->name }}</label>
+    
+                <br/>
+    
+                @endforeach       
    
 </div>
 

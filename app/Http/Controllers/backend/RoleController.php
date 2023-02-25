@@ -3,7 +3,9 @@ namespace App\Http\Controllers\backend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Role;
+use Response;
 use Spatie\Permission\Models\Permission;
+use Validator;
 use DB;
 
     
@@ -84,7 +86,7 @@ class RoleController extends Controller
             'rows'       => $this->model::select('id','name','trans')->with('permissions')->withCount(['users','permissions'])->latest()->get(), 
             'resource'   => $this->resource,
             'trans_file' => $this->trans_file,
-
+            'permission' => Permission::get(),
         ];
         return view('backend.'.$this->resource.'.create', $compact);
     }
@@ -105,16 +107,35 @@ class RoleController extends Controller
 
     public function store(Request $request){
 
-   
-                    $arry = [
+
+        // Setup the validator
+        $rules = array(
+        'title'      =>'required|unique:roles,name',
+        'permission' => 'required');
+        $validator = Validator::make($request->all(),$rules);
+
+       
+
+        // Validate the input and return correct response
+        // return $validator->errors()->all();
+        if ($validator->fails()){
+            $msg = $validator->errors()->all(); 
+            // $msg = $validator->getMessageBag()->toArray(); 
+            $arr = array('msg' => $msg,'status' => false);
+        }else{
+            $arr = array('msg' => __($this->trans_file.'.storeMessageSuccess'), 'status' => true);
+        }        
+        return response()->json($arr); // 400 being the HTTP code for an invalid request.
+
+
+
+        // ,200); in success
+        
+                    /*$arry = [
                         'name'          => $request->input('title'),
                         'trans'         => '{"ar" : "الsdasdasdمدير العام", "en" : "SupersadsadasAdmin"}',
                         'guard_name'    =>'web'
-                    ]; 
-
-
-                    
-                  
+                    ];                   
                     $result = $this->model::create($arry);
                     if($result){ 
                         $arr = array('msg' => __($this->trans_file.'.storeMessageSuccess'), 'status' => 'success');
@@ -122,6 +143,7 @@ class RoleController extends Controller
                         $arr = array('msg' => __($this->trans_file.'.storeMessageError'), 'status' => 'error');
                     }
                     return Response()->json($arr);
+                    */
                                          
                   
             

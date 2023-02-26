@@ -97,7 +97,7 @@ color: #f1416c;
                 />
             
                 <br/>
-
+            {{-- Select Permission<br/>
                 @foreach($permission as $value)
     
                     <label>{{ Form::checkbox('permission[]', $value->id, false, array('class' => 'name')) }}
@@ -106,7 +106,7 @@ color: #f1416c;
     
                 <br/>
     
-                @endforeach       
+                @endforeach        --}}
    
 </div>
 
@@ -115,15 +115,18 @@ color: #f1416c;
 
 
 
+
+
 <button type="submit" class="btn btn-primary" id="kt_submit_button">
     <!--begin::Indicator label-->
-    <span class="indicator-label">Apply Now</span>
+    <span class="indicator-label">Submit </span>
     <!--end::Indicator label-->
     <!--begin::Indicator progress-->
     <span class="indicator-progress">Please wait...
     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
     <!--end::Indicator progress-->
 </button>
+<button type="reset" class="btn btn-warning">Reset</button>
 </form>
 
     

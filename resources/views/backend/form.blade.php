@@ -25,8 +25,8 @@
 				}
 			);
 			// Action buttons
-			submitButton.addEventListener('click', function (event) {
-				event.preventDefault();
+			submitButton.addEventListener('click', function (e) {
+				e.preventDefault();
 
 				// Validate form before submit
 				if (validator) {

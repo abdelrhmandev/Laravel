@@ -92,8 +92,10 @@ color: #f1416c;
 
                 <input
                     type="text"
-                    class="form-control form-control-solid  input-reset"
+                    class="input-reset"
                     name="title"
+                    required
+                    data-fv-notempty-message="The Role is required"
                 />
             
                 <br/>

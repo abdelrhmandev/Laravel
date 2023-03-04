@@ -3,7 +3,7 @@
 return [
     'dashboard'             =>'Dashboard',
     'home'                  =>'Home',
-
+    'errors_detected'       =>'Sorry, some errors detected, please try again.',
     'deleteMessageSuccess'  => 'sdsadadasds has been Deleted successfully',
     'deleteMessageError'    => 'Error In delete this :',
     'updateMessageSuccess'  => ': has been updated successfully',

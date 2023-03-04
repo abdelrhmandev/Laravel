@@ -122,6 +122,13 @@ class RoleController extends Controller
             // $msg = $validator->getMessageBag()->toArray(); 
             $arr = array('msg' => $msg,'status' => false);
         }else{
+                $arry = [
+                        'name'          => $request->input('title'),
+                        'trans'         => '{"ar" : "الsdasdasdمدير العام", "en" : "SupersadsadasAdmin"}',
+                        'guard_name'    =>'web'
+                    ];                   
+                    $result = $this->model::create($arry);
+
             $arr = array('msg' => __($this->trans_file.'.storeMessageSuccess'), 'status' => true);
         }        
         return response()->json($arr); // 400 being the HTTP code for an invalid request.

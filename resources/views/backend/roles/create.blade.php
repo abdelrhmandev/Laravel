@@ -18,10 +18,7 @@
     .my-field-error .fv-plugins-message-container,
     .my-field-error .fv-plugins-icon {
         font-size: 0.925rem; 
-color: #f1416c;
- 
-
- 
+        color: #b02a37; 
     }
     .my-field-success .fv-plugins-message-container,
     .my-field-success .fv-plugins-icon {
@@ -58,26 +55,7 @@ color: #f1416c;
 
  
 
-@if (count($errors) > 0)
-
-  <div class="alert alert-danger">
-
-    <strong>Whoops!</strong> There were some problems with your input.<br><br>
-
-    <ul>
-
-       @foreach ($errors->all() as $error)
-
-         <li>{{ $error }}</li>
-
-       @endforeach
-
-    </ul>
-
-  </div>
-
-@endif
-
+ 
 
 
 
@@ -95,8 +73,8 @@ color: #f1416c;
                     class="input-reset"
                     name="title"
                     required
-                    data-fv-notempty-message="The Role is required"
-                />
+                    data-fv-not-empty="true"
+                    data-fv-not-empty___message="The Role is required"/>              
             
                 <br/>
             {{-- Select Permission<br/>

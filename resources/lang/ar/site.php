@@ -4,8 +4,7 @@ return [
 
     'dashboard'             =>'داش بورد',
     'home'                  =>'الرئيسيه',
-
-
+    'errors_detected'       =>'عذرا ، تم الكشف عن بعض الأخطاء ، يرجى المحاولة مرة أخرى.',
     'deleteMessageSuccess'  => 'تم حذف : بنجاح',
     'deleteMessageError'    => 'خطأ في عمليه حذف :',
     'updateMessageSuccess'  => 'تم تحديث : بنجاح',

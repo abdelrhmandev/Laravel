@@ -2,7 +2,7 @@
 <html direction="{{ LaravelLocalization::getCurrentLocaleDirection() }}" dir="{{ LaravelLocalization::getCurrentLocaleDirection() }}" style="direction: {{ LaravelLocalization::getCurrentLocaleDirection() }}" lang="{{ app()->getLocale() }}">
 	<!--begin::Head-->
 	<head>
-		<title>{{ config('app.name', 'Laravel') }} | @yield('title')</title>
+		<title>{{ config('app.name', 'Laravel') }} ABDO| @yield('title')</title>
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<meta name="description" content="The most advanced Bootstrap Admin " />
 		<meta name="keywords" content="Metronic, bootstrap, bootstrap 5, Angular" />

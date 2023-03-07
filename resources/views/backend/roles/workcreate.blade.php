@@ -62,54 +62,57 @@
 
 
 <form id="FormId" data-form-id="create_role" data-route-url="{{ route('admin.roles.store') }}" class="form mb-15" method="post">
+
     @csrf
    
+        <div class="fl w-100">
+            <label class="required fs-5 fw-semibold mb-2">Role title</label>
+            
+
+
+                <input
+                    type="text"
+                    class="input-reset"
+                    name="title"
+                    required
+                    data-fv-not-empty="true"
+                    data-fv-not-empty___message="The Role is required"
+                    />              
+            
+                <br/>
+             Select Permission<br/>
+                @foreach($permission as $value)
+
+                <input type="checkbox" value="{{ $value->id}}" name="permission[]">
+                   
+                <label>
+                    {{ $value->name }}</label>
     
- 
+                <br/>
+    
+                @endforeach        
    
-        <!--begin::Heading-->
-     
-        <!--end::Heading-->
-        <!--begin::Input group-->
-        <div class="d-flex flex-column mb-8 fv-row">
-            <!--begin::Label-->
-            <label class="required d-flex align-items-center fs-6 fw-semibold mb-2">
-                <span class="required">Target Title</span>
-                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Specify a target name for future usage and reference"></i>
-            </label>
-            <!--end::Label-->
-            <input type="text" class="form-control form-control-solid" placeholder="Enter Target Title" name="target_title"
-            required
-            data-fv-not-empty___message="The age is required"
-            />
-        </div>
-        <!--end::Input group-->
-        <!--begin::Input group-->
-        
-        <!--end::Input group-->
-        <!--begin::Input group-->
- 
-        <!--end::Input group-->
-        <!--begin::Input group-->
- 
-        <!--end::Input group-->
-        <!--begin::Input group-->
-         
-        <!--end::Input group-->
-        <!--begin::Input group-->
-    
-        <!--end::Input group-->
-        <!--begin::Actions-->
-        <div class="text-center">
-            <button type="reset" id="kt_modal_new_target_cancel" class="btn btn-light me-3">Cancel</button>
-            <button type="submit" id="kt_modal_new_target_submit" class="btn btn-primary">
-                <span class="indicator-label">Submit</span>
-                <span class="indicator-progress">Please wait...
-                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-            </button>
-        </div>
-        <!--end::Actions-->
-    </form>
+</div>
+
+
+  
+
+
+
+
+
+<button type="submit" class="btn btn-primary" id="kt_submit_button">
+    <!--begin::Indicator label-->
+    <span class="indicator-label">Submit </span>
+    <!--end::Indicator label-->
+    <!--begin::Indicator progress-->
+    <span class="indicator-progress">Please wait...
+    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+    <!--end::Indicator progress-->
+</button>
+<button type="reset" class="btn btn-warning">Reset</button>
+</form>
+
     
   </div>  
 @stop

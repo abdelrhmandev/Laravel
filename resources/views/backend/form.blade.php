@@ -5,9 +5,7 @@ var KTFormApply = function () {
    var submitButton;
    var validator;
    var form;
-   var msg = '';
-   var icon = '';
-   var html = '';
+ 
 
    var handleForm = function () {
       validator = FormValidation.formValidation(form, {
@@ -63,13 +61,14 @@ var KTFormApply = function () {
                                  }
                               })
                            } else if (response['status'] == false) {
+                              let msgError = '';
                               $.each(response['msg'], function (key, value) {
-                                 msg += '<p>' + value + '</p>';
+                                 msgError+= '<p>' + value + '</p>';
                               });
-                              html += msg;
+                            
                               // manage response jquery 
                               Swal.fire({
-                                 html: html, // respose from controller
+                                 html: msgError, // respose from controller
                                  icon: 'error',
                                  buttonsStyling: false,
                                  confirmButtonText: "{{ __('site.confirmButtonTextGotit') }}",

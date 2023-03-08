@@ -110,7 +110,12 @@ class RoleController extends Controller
 
         // Setup the validator
         $rules = array(
-        'title'      =>'required|unique:roles,name');
+            'title'           =>'required|unique:roles,name',
+            'permission'      =>'required'
+        );
+
+
+
         $validator = Validator::make($request->all(),$rules);
 
        

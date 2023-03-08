@@ -10,20 +10,18 @@ var KTFormApply = function () {
    var handleForm = function () {
       validator = FormValidation.formValidation(form, {
          plugins: {
-            declarative: new FormValidation.plugins.Declarative(),
-            // Other plugins
+            declarative: new FormValidation.plugins.Declarative({
+                html5Input: true,
+            }),
             trigger: new FormValidation.plugins.Trigger(),
-            tachyons: new FormValidation.plugins.Tachyons({
-               rowInvalidClass: 'my-field-error',
-               rowValidClass: 'my-field-success',
-            }),
+            tachyons: new FormValidation.plugins.Tachyons(),
             submitButton: new FormValidation.plugins.SubmitButton(),
-            icon: new FormValidation.plugins.Icon({
-               valid: 'fa fa-check',
-               invalid: 'invalid-feedback',
-               validating: 'fa fa-refresh',
+            tachyons: new FormValidation.plugins.Tachyons({
+                rowInvalidClass: 'my-field-error',
+                rowValidClass:   'my-field-success',
             }),
-         }
+             
+        },
       });
       submitButton.addEventListener('click', function (e) {
          e.preventDefault();
@@ -50,7 +48,6 @@ var KTFormApply = function () {
                         dataType: "json",
                         success: function (response, textStatus, xhr) {
                            if (response['status'] == true) {
-                              $('#FormId')[0].reset();
                               Swal.fire({
                                  text: response['msg'], // respose from controller
                                  icon: 'success',

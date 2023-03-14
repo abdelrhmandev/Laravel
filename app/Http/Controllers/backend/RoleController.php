@@ -6,6 +6,7 @@ use Spatie\Permission\Models\Role;
 use Response;
 use Spatie\Permission\Models\Permission;
 use Validator;
+use App\Http\Requests\backend\RoleRequest;
 use DB;
 
     
@@ -105,26 +106,17 @@ class RoleController extends Controller
 
      */
 
-    public function store(Request $request){
+    public function store(RoleRequest $request){
 
-
-        // Setup the validator
-        $rules = array(
-            'title'           =>'required|unique:roles,name',
-            'permission'      =>'required'
-        );
-
-
-
-        $validator = Validator::make($request->all(),$rules);
+        $validated = $request->validated();
 
        
 
         // Validate the input and return correct response
         // return $validator->errors()->all();
-        if ($validator->fails()){
-            $msg = $validator->errors()->all(); 
-            // $msg = $validator->getMessageBag()->toArray(); 
+        if ($validated->fails()){
+            $msg = $validated->errors()->all(); 
+            // $msg = $validated->getMessageBag()->toArray(); 
             $arr = array('msg' => $msg,'status' => false);
         }else{
                 $arry = [

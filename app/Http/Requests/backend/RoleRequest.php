@@ -1,12 +1,8 @@
 <?php
-
 namespace App\Http\Requests;
-
-use App\Rules\ProductQty;
-use App\Rules\UniqueAttributeName;
 use Illuminate\Foundation\Http\FormRequest;
 
-class RolesRequest extends FormRequest
+class RoleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,8 +22,8 @@ class RolesRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required',
-            'permissions' => 'required|array|min:1',
+            'title'           =>'required|unique:roles,name',
+            'permissions'      => 'required|array|min:1',
         ];
     }
 

@@ -1,12 +1,12 @@
 <?php
 namespace App\Http\Controllers\backend;
+use App\Http\Requests\backend\RoleRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Role;
 use Response;
 use Spatie\Permission\Models\Permission;
-use Validator;
-use App\Http\Requests\backend\RoleRequest;
+
 use DB;
 
     
@@ -108,26 +108,31 @@ class RoleController extends Controller
 
     public function store(RoleRequest $request){
 
+
+
+
+
         $validated = $request->validated();
 
-       
+ 
+                      $arr = array('msg' => $validated(),'status' => false);
+
+
 
         // Validate the input and return correct response
         // return $validator->errors()->all();
-        if ($validated->fails()){
-            $msg = $validated->errors()->all(); 
-            // $msg = $validated->getMessageBag()->toArray(); 
-            $arr = array('msg' => $msg,'status' => false);
-        }else{
-                $arry = [
-                        'name'          => $request->input('title'),
-                        'trans'         => '{"ar" : "الsdasdasdمدير العام", "en" : "SupersadsadasAdmin"}',
-                        'guard_name'    =>'web'
-                    ];                   
-                    $result = $this->model::create($arry);
+        // if (1==1){
+        //       $arr = array('msg' => $validated->errors(),'status' => false);
+        // }else{
+        //         $arry = [
+        //                 'name'          => $request->input('title'),
+        //                 'trans'         => '{"ar" : "الsdasdasdمدير العام", "en" : "SupersadsadasAdmin"}',
+        //                 'guard_name'    =>'web'
+        //             ];                   
+        //             $result = $this->model::create($arry);
 
-            $arr = array('msg' => __($this->trans_file.'.storeMessageSuccess'), 'status' => true);
-        }        
+        //     $arr = array('msg' => __($this->trans_file.'.storeMessageSuccess'), 'status' => true);
+        // }        
         return response()->json($arr); // 400 being the HTTP code for an invalid request.
 
 

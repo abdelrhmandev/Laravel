@@ -76,14 +76,8 @@ var KTFormApply = function () {
                            }
                         },
                         error: function (response, textStatus, xhr) {
-                           $.each(errors, function (fieldName, errorBag) {
-                              let errorMessages = '';
-                              // put each error message in a div
-                              $.each(errorBag, function (i, message) {
-                                 errorMessages += '<div>' + message + '</div>';
-                              });
-
-                           });
+                         
+                           errorMessages ='sdsadsa';
                           Swal.fire({
                               text: errorMessages, // respose from controller
                               icon: 'error',

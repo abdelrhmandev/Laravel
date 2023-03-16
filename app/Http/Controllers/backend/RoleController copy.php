@@ -112,24 +112,62 @@ class RoleController extends Controller
 
 
 
-    
+        // $validated = $request->validated();
 
-  
-        $arr = array('msg' => $request->errors()->title,'status' => false);
-        return response()->json($arr); // 400 being the HTTP code for an invalid request.
-
+ 
+        //               $arr = array('msg' => $validated(),'status' => false);
 
 
-  
+
+        // Validate the input and return correct response
+        // return $validator->errors()->all();
+        // if (1==1){
+        //       $arr = array('msg' => $validated->errors(),'status' => false);
+        // }else{
+        //         $arry = [
+        //                 'name'          => $request->input('title'),
+        //                 'trans'         => '{"ar" : "الsdasdasdمدير العام", "en" : "SupersadsadasAdmin"}',
+        //                 'guard_name'    =>'web'
+        //             ];                   
+        //             $result = $this->model::create($arry);
+
+        //     $arr = array('msg' => __($this->trans_file.'.storeMessageSuccess'), 'status' => true);
+        // }        
+        //return response()->json($arr); // 400 being the HTTP code for an invalid request.
+
+
+
+        // ,200); in success
         
-                
+                    /*$arry = [
+                        'name'          => $request->input('title'),
+                        'trans'         => '{"ar" : "الsdasdasdمدير العام", "en" : "SupersadsadasAdmin"}',
+                        'guard_name'    =>'web'
+                    ];                   
+                    $result = $this->model::create($arry);
+                    if($result){ 
+                        $arr = array('msg' => __($this->trans_file.'.storeMessageSuccess'), 'status' => 'success');
+                    }else{
+                        $arr = array('msg' => __($this->trans_file.'.storeMessageError'), 'status' => 'error');
+                    }
+                    return Response()->json($arr);
+                    */
                                          
                   
             
                 
 
 
-     
+        /*
+        $this->validate($request, [
+            'name' => 'required|unique:roles,name',
+            'permission' => 'required',
+        ]);
+        $role = $this->model::create(['name' => $request->input('name')]);
+        $role->syncPermissions($request->input('permission'));
+        return redirect()->route($this->$resource.'.index')
+                        ->with('success',$this->trans_file.'.storeMessageSuccess');
+                        */
 
     }
 

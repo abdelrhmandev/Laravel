@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Requests\backend;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\JsonResponse;
 class RoleRequest extends FormRequest
 {
     /**
@@ -25,5 +26,8 @@ class RoleRequest extends FormRequest
             'permissions'      => 'required|array|min:1',
         ];
     }
+
+ 
+
 
 }

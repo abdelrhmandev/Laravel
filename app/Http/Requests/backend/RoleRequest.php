@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Requests\backend;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Exceptions\HttpResponseException;
 class RoleRequest extends FormRequest
 {
     /**
@@ -21,6 +21,7 @@ class RoleRequest extends FormRequest
      */
     public function rules()
     {
+        ////////////////
         return [
             'title'           =>'required|unique:roles,name',
             'permissions'      => 'required|array|min:1',
@@ -28,6 +29,13 @@ class RoleRequest extends FormRequest
     }
 
  
-
+    public function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'success'   => false,
+            'message'   => 'Validation errors',
+            'data'      => $validator->errors()
+        ]));
+    }
 
 }

@@ -110,14 +110,17 @@ class RoleController extends Controller
 
 
 
+        
+        if(!(empty($request->failedValidation))) {
+            $arr = array('msg' => $request->failedValidation()->data,'status' => false);
+        }else{
 
+            // return $request->validated();
+            $arr = array('msg' => __($this->trans_file.'.storeMessageSuccess'), 'status' => true);    
 
-    
-
-  
-        $arr = array('msg' => $request->errors()->title,'status' => false);
+        }
+ 
         return response()->json($arr); // 400 being the HTTP code for an invalid request.
-
 
 
   

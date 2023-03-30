@@ -66,35 +66,17 @@
     @csrf
    
         <div class="fl w-100">
-            <label class="required fs-5 fw-semibold mb-2">Role title</label>
-            
+        <label class="required fs-5 fw-semibold mb-2">Role title</label>
+        <input type="text" class="input-reset" name="title" required data-fv-not-empty="true" data-fv-not-empty___message="The Role is required"/>
+        </div>
 
-
-                <input
-                    type="text"
-                    class="input-reset"
-                    name="title"
-                    required
-                    data-fv-not-empty="true"
-                    data-fv-not-empty___message="The Role is required"
-                    />              
-            
-                <br/>
-             Select Permission<br/>
-                @foreach($permission as $value)
-
-                <input type="checkbox" value="{{ $value->id}}" name="permission[]">
-                   
-                <label>
-                    {{ $value->name }}</label>
+        <div class="fl w-100">
+            <label class="required fs-5 fw-semibold mb-2">Permissions</label>
+            @foreach($permission as $value)
+                <input type="checkbox" value="{{ $value->id}}" name="permission[]" required data-fv-not-empty="true" data-fv-not-empty___message="The Permission is required">{{ $value->name }}
+            @endforeach                
+        </div>
     
-                <br/>
-    
-                @endforeach        
-   
-</div>
-
-
   
 
 

@@ -33,88 +33,61 @@
 @stop
 @section('content')
  
-  <div class="container-xxl" id="kt_content_container">
-    {{-- <form id="defaultForm" method="post" class="form-horizontal" action="target.php"
-    data-bv-message="This value is not valid"
-    data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
-    data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
-    data-bv-feedbackicons-validating="glyphicon glyphicon-refresh">
-  <div class="form-group">
-      <label class="col-lg-3 control-label">Full name</label>
-      <div class="col-lg-4">
-          <input type="text" class="form-control" name="firstName" placeholder="First name" data-bv-trigger="keyup" required data-bv-notempty-message="The first name is required and cannot be empty" />
-      </div>
- 
-  </div>
-  <div class="form-group">
-      <div class="col-lg-9 col-lg-offset-3">
-          <button type="submit" class="btn btn-primary">Sign up</button>
-      </div>
-  </div>
-</form> --}}
-
+  
  
 
  
+<div class="container-xxl" id="kt_content_container">
+    <!--begin::Card-->
+    <div class="card card-flush">
+        <!--begin::Card body-->
+        <div class="card-body">
+            <!--begin:::Tabs-->
+            <ul class="nav nav-tabs nav-line-tabs nav-line-tabs-2x border-transparent fs-4 fw-semibold mb-15">
+                <!--begin:::Tab item-->
+                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                <li class="nav-item">
+                    <a class="nav-link text-active-primary pb-5 {{ LaravelLocalization::getCurrentLocaleName() == $properties['name'] ? 'active':''}}" data-bs-toggle="tab" href="#{{ $properties['native'] }}">
+                    <!--begin::Svg Icon | path: icons/duotune/general/gen001.svg-->
+             
+                        <img width="24" height="24" class="rounded-1" src="{{ asset('assets/backend/media/flags/'.strtolower($localeCode.".svg"))}}" alt="" />
 
+                    <!--end::Svg Icon-->{{ $properties['native'] }}</a>
+                </li>
+                @endforeach
+ 
+              
+ 
+            </ul>
+            <!--end:::Tabs-->
+            <!--begin:::Tab content-->
+            <div class="tab-content" id="myTabContent">
+                <!--begin:::Tab pane-->
 
-
-
-
-<form id="FormId" data-form-id="create_role" data-route-url="{{ route('admin.roles.store') }}" class="form mb-15" method="post">
-
-    @csrf
-   
-        <div class="fl w-100">
-            <label class="required fs-5 fw-semibold mb-2">Role title</label>
-            
-
-
-                <input
-                    type="text"
-                    class="input-reset"
-                    name="title"
-                    required
-                    data-fv-not-empty="true"
-                    data-fv-not-empty___message="The Role is required"
-                    />              
-            
-                <br/>
-             Select Permission<br/>
-                @foreach($permission as $value)
-
-                <input type="checkbox" value="{{ $value->id}}" name="permission[]">
-                   
-                <label>
-                    {{ $value->name }}</label>
-    
-                <br/>
-    
-                @endforeach        
-   
+                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                <div class="tab-pane fade {{ LaravelLocalization::getCurrentLocaleName() == $properties['name'] ? 'show active':''}}" id="{{ $properties['native'] }}" role="tabpanel">
+                    {{ $properties['name'] }}
+                </div>
+                <!--end:::Tab pane-->
+                <!--begin:::Tab pane-->
+                
+                @endforeach
+                <!--end:::Tab pane-->
+                <!--begin:::Tab pane-->
+         
+                <!--end:::Tab pane-->
+            </div>
+            <!--end:::Tab content-->
+        </div>
+        <!--end::Card body-->
+    </div>
+    <!--end::Card-->
 </div>
 
 
-  
 
 
-
-
-
-<button type="submit" class="btn btn-primary" id="kt_submit_button">
-    <!--begin::Indicator label-->
-    <span class="indicator-label">Submit </span>
-    <!--end::Indicator label-->
-    <!--begin::Indicator progress-->
-    <span class="indicator-progress">Please wait...
-    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-    <!--end::Indicator progress-->
-</button>
-<button type="reset" class="btn btn-warning">Reset</button>
-</form>
-
-    
-  </div>  
+ 
 @stop
 
 

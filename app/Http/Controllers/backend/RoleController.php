@@ -1,6 +1,6 @@
 <?php
 namespace App\Http\Controllers\backend;
-use App\Http\Requests\backend\RoleRequest;
+use App\Http\Requests\backend\RoleRequest as ObjectRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Role;
@@ -106,19 +106,17 @@ class RoleController extends Controller
 
      */
 
-    public function store(RoleRequest $request){
+    public function store(ObjectRequest $request){
 
 
 
         
-        if(!(empty($request->failedValidation))) {
-            $arr = array('msg' => $request->failedValidation()->data,'status' => false);
-        }else{
+ 
 
             // return $request->validated();
             $arr = array('msg' => __($this->trans_file.'.storeMessageSuccess'), 'status' => true);    
 
-        }
+       
  
         return response()->json($arr); // 400 being the HTTP code for an invalid request.
 

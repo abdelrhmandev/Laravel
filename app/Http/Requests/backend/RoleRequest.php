@@ -15,6 +15,14 @@ class RoleRequest extends FormRequest
         return true;
     }
 
+    /*
+    https://dev.to/secmohammed/laravel-form-request-tips-tricks-2p12
+    public function authorize()
+    {
+      return auth()->user()->can('update-post', $this->post);
+    }
+     */
+
     /**
      * Get the validation rules that apply to the request.
      *

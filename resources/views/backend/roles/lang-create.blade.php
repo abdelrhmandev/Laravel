@@ -55,9 +55,6 @@
                     <!--end::Svg Icon-->{{ $properties['native'] }}</a>
                 </li>
                 @endforeach
- 
-              
- 
             </ul>
             <!--end:::Tabs-->
             <!--begin:::Tab content-->

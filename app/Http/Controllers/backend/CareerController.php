@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\backend;
+namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Faq;
-class FaqController extends Controller
+use App\Models\Career;
+class CareerController extends Controller
 {
 
     protected $model;
     protected $resource;
     protected $trans_file;
 
-    public function __construct(Faq $model){
+    public function __construct(Recipe $model){
         $this->model = $model;
         $this->resource = 'recipes';
         $this->trans_file = 'recipe';
@@ -21,7 +21,6 @@ class FaqController extends Controller
     
     public function index()
     {
-        dd('here');
         if (view()->exists('admin.faqs.index')) {
             $faqs = Faq::with('faq')->latest()->get(); 
             return view('admin.faqs.index',['faqs'=>$faqs]);

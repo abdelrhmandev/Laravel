@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\backend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use LaravelLocalization;
@@ -12,12 +12,7 @@ class PageController extends Controller
     protected $resource;
     protected $trans_file;
 
-    public function __construct(Recipe $model){
-        $this->model = $model;
-        $this->resource = 'recipes';
-        $this->trans_file = 'recipe';
-    }
-
+ 
 
 
     public function index()

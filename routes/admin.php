@@ -8,6 +8,10 @@ Route::get('/', 'DashboardController@index')->name('dashboard');
 
 https://github.com/zizohassan/car/blob/master/app/Application/routes/web.php
 
+
+ 
+ 
+
 // Route::resource('recipes', RecipeController::class)->except('show');
 // Route::delete('recipes/destroy/all', 'RecipeController@destroyMultiple')->name('recipes.destroyMultiple');
  
@@ -26,7 +30,11 @@ Route::resource('permissions', PermissionController::class)->except('show');
 
 // Route::resource('recipe-categories',RecipeCategoryController::class)->except('show'); // Recipe Categories
 
-// Route::resource('tags', TagController::class)->except('show');
+Route::resource('tags', TagController::class)->except('show');
+Route::resource('careers', CareerController::class)->except('show');
+Route::resource('faqs', FaqController::class)->except('show');
+Route::resource('posts', PostController::class)->except('show');
+Route::resource('slides', SlideController::class)->except('show');
 
 
 Route::get('/lodassadsadsadgout', 'ProfileController@logout')->name('logout');

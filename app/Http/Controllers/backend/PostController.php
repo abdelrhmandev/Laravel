@@ -1,27 +1,22 @@
 <?php
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\backend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Post as TheModel;
 use UploadAble,Functions;
 use LaravelLocalization;
 
 class PostController extends Controller
 {
 
-    protected $model;
-    protected $resource;
-    protected $trans_file;
+ 
 
-    public function __construct(Recipe $model){
-        $this->model = $model;
-        $this->resource = 'recipes';
-        $this->trans_file = 'recipe';
-    }
-
+  
 
 
     public function index()
     {
+       dd('das');
         return view('admin.posts.index');
     }
         public function create()

@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\backend;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use App\Http\Controllers\Controller;

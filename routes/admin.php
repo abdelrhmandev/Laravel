@@ -12,8 +12,13 @@ https://github.com/zizohassan/car/blob/master/app/Application/routes/web.php
  
  
 
-// Route::resource('recipes', RecipeController::class)->except('show');
-// Route::delete('recipes/destroy/all', 'RecipeController@destroyMultiple')->name('recipes.destroyMultiple');
+ 
+
+Route::resource('nutritions', NutritionController::class)->except('show');
+
+
+Route::resource('recipes', RecipeController::class)->except('show');
+Route::delete('recipes/destroy/all', 'RecipeController@destroyMultiple')->name('recipes.destroyMultiple');
  
 
 Route::resource('users', UserController::class)->except('show');
@@ -21,20 +26,40 @@ Route::delete('users/destroy/all', 'UserController@destroyMultiple')->name('user
 
 
 Route::resource('roles', RoleController::class)->except('show');
-// Route::delete('recipes/destroy/all', 'RecipeController@destroyMultiple')->name('recipes.destroyMultiple');
+Route::delete('recipes/destroy/all', 'RecipeController@destroyMultiple')->name('recipes.destroyMultiple');
 
 
 Route::resource('permissions', PermissionController::class)->except('show');
-// Route::delete('recipes/destroy/all', 'RecipeController@destroyMultiple')->name('recipes.destroyMultiple');
+Route::delete('recipes/destroy/all', 'RecipeController@destroyMultiple')->name('recipes.destroyMultiple');
 
 
-// Route::resource('recipe-categories',RecipeCategoryController::class)->except('show'); // Recipe Categories
+Route::resource('recipe-categories',RecipeCategoryController::class)->except('show'); // Recipe Categories
+
+
+ 
+
+
+Route::resource('cities', CityController::class)->except('show');
+Route::resource('areas', AreaController::class)->except('show');
+Route::resource('districts', DistrictController::class)->except('show');
+
+
 
 Route::resource('tags', TagController::class)->except('show');
 Route::resource('careers', CareerController::class)->except('show');
 Route::resource('faqs', FaqController::class)->except('show');
+Route::resource('pages', PageController::class)->except('show');
 Route::resource('posts', PostController::class)->except('show');
 Route::resource('slides', SlideController::class)->except('show');
+
+
+Route::resource('clients', ClientController::class)->except('show');
+
+
+ 
+
+Route::get('/contacts', 'ContactController@index')->name('contacts');
+
 
 
 Route::get('/lodassadsadsadgout', 'ProfileController@logout')->name('logout');

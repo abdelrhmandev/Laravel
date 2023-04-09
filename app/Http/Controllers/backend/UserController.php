@@ -22,12 +22,7 @@ class UserController extends Controller
     protected $resource;
     protected $trans_file;
 
-    public function __construct(User $model){
-        $this->model = $model;
-        $this->resource = 'users';
-        $this->trans_file = 'user';
-    }
-
+ 
  
     public function index(Request $request){    
          

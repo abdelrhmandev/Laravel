@@ -1,7 +1,5 @@
 <?php
-
-namespace App\Http\Controllers\Admin;
-
+namespace App\Http\Controllers\backend;
 use App\Models\Product;
 use App\Models\Attribute;
 use Illuminate\Http\Request;

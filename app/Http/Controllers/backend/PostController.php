@@ -17,11 +17,11 @@ class PostController extends Controller
     public function index()
     {
        dd('das');
-        return view('admin.posts.index');
+        return view('backend.posts.index');
     }
         public function create()
     {
-        return view('admin.posts.create');
+        return view('backend.posts.create');
     }
 
 

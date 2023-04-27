@@ -16,27 +16,28 @@ class PostCategoryController extends Controller
     protected $resource;
     protected $trans_file;
 
-    public function __construct(Recipe $model){
-        $this->model = $model;
+    public function __construct(){
+       
         $this->resource = 'recipes';
         $this->trans_file = 'recipe';
     }
 
 
     public function index(){
-        if (view()->exists('admin.districts.index')) {
-            $districts = District::with(['district_info','area.area_info','area.city.city_info','area.city.country'])->get(); 
-            return view('admin.districts.index',['districts'=>$districts]);
+        if (view()->exists('backend.post_categories.index')) {
+            // $post_categories = District::with(['district_info','area.area_info','area.city.city_info','area.city.country'])->get(); 
+
+            return view('backend.post_categories.index');
         }
     }
         public function create(){
-        if (view()->exists('admin.districts.create')) {
-            return view('admin.districts.create');
+        if (view()->exists('backend.post_categories.create')) {
+            return view('backend.post_categories.create');
         }
     }
      public function edit(){
-        if (view()->exists('admin.districts.index')) {
-            return view('admin.districts.edit');
+        if (view()->exists('backend.post_categories.index')) {
+            return view('backend.post_categories.edit');
         }
     }
 

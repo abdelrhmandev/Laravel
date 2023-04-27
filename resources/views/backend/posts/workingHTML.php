@@ -24,12 +24,75 @@
 @stop
 @section('content')
 <div class="container-xxl" id="kt_content_container">
-							 
+							<!--begin::Form-->
 							<form id="kt_ecommerce_add_product_form" class="form d-flex flex-column flex-lg-row" data-kt-redirect="../../demo7/dist/apps/ecommerce/catalog/products.html">
-							 
-							
-							 
-								<div class="d-flex flex-column gap-7 gap-lg-10 w-100 mb-7 me-lg-10">
+								<!--begin::Aside column-->
+								<div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
+									<!--begin::Thumbnail settings-->
+									<div class="card card-flush py-4">
+										<!--begin::Card header-->
+										<div class="card-header">
+											<!--begin::Card title-->
+											<div class="card-title">
+												<h2>Thumbnail</h2>
+											</div>
+											<!--end::Card title-->
+										</div>
+										<!--end::Card header-->
+										<!--begin::Card body-->
+										<div class="card-body text-center pt-0">
+											<!--begin::Image input-->
+											<!--begin::Image input placeholder-->
+											<style>.image-input-placeholder { background-image: url('assets/media/svg/files/blank-image.svg'); } [data-theme="dark"] .image-input-placeholder { background-image: url('assets/media/svg/files/blank-image-dark.svg'); }</style>
+											<!--end::Image input placeholder-->
+											<div class="image-input image-input-empty image-input-outline image-input-placeholder mb-3" data-kt-image-input="true">
+												<!--begin::Preview existing avatar-->
+												<div class="image-input-wrapper w-150px h-150px"></div>
+												<!--end::Preview existing avatar-->
+												<!--begin::Label-->
+												<label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
+													<i class="bi bi-pencil-fill fs-7"></i>
+													<!--begin::Inputs-->
+													<input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
+													<input type="hidden" name="avatar_remove" />
+													<!--end::Inputs-->
+												</label>
+												<!--end::Label-->
+												<!--begin::Cancel-->
+												<span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
+													<i class="bi bi-x fs-2"></i>
+												</span>
+												<!--end::Cancel-->
+												<!--begin::Remove-->
+												<span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
+													<i class="bi bi-x fs-2"></i>
+												</span>
+												<!--end::Remove-->
+											</div>
+											<!--end::Image input-->
+											<!--begin::Description-->
+											<div class="text-muted fs-7">Set the product thumbnail image. Only *.png, *.jpg and *.jpeg image files are accepted</div>
+											<!--end::Description-->
+										</div>
+										<!--end::Card body-->
+									</div>
+									<!--end::Thumbnail settings-->
+									<!--begin::Status-->
+									 
+									<!--end::Status-->
+									<!--begin::Category & tags-->
+									 
+									<!--end::Category & tags-->
+									<!--begin::Weekly sales-->
+									 
+									<!--end::Weekly sales-->
+									<!--begin::Template settings-->
+									 
+									<!--end::Template settings-->
+								</div>
+								<!--end::Aside column-->
+								<!--begin::Main column-->
+								<div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
 									<!--begin:::Tabs-->
 									<ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-semibold mb-n2">
 										<!--begin:::Tab item-->
@@ -193,59 +256,9 @@
 										<!--end::Button-->
 									</div>
 								</div>
-							 
-                                <div class="d-flex flex-column flex-row-fluid gap-7 w-lg-400px gap-lg-10">								 
-									<div class="card card-flush py-4">
-										<!--begin::Card header-->
-										<div class="card-header">
-											<!--begin::Card title-->
-											<div class="card-title">
-												<h2>Thumbnail</h2>
-											</div>
-											<!--end::Card title-->
-										</div>
-										<!--end::Card header-->
-										<!--begin::Card body-->
-										<div class="card-body text-center pt-0">
-											<!--begin::Image input-->
-											<!--begin::Image input placeholder-->
-											<style>.image-input-placeholder { background-image: url('assets/media/svg/files/blank-image.svg'); } [data-theme="dark"] .image-input-placeholder { background-image: url('assets/media/svg/files/blank-image-dark.svg'); }</style>
-											<!--end::Image input placeholder-->
-											<div class="image-input image-input-empty image-input-outline image-input-placeholder mb-3" data-kt-image-input="true">
-												<!--begin::Preview existing avatar-->
-												<div class="image-input-wrapper w-150px h-150px"></div>
-												<!--end::Preview existing avatar-->
-												<!--begin::Label-->
-												<label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
-													<i class="bi bi-pencil-fill fs-7"></i>
-													<!--begin::Inputs-->
-													<input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
-													<input type="hidden" name="avatar_remove" />
-													<!--end::Inputs-->
-												</label>
-												<!--end::Label-->
-												<!--begin::Cancel-->
-												<span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
-													<i class="bi bi-x fs-2"></i>
-												</span>
-												<!--end::Cancel-->
-												<!--begin::Remove-->
-												<span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
-													<i class="bi bi-x fs-2"></i>
-												</span>
-												<!--end::Remove-->
-											</div>
-											<!--end::Image input-->
-											<!--begin::Description-->
-											<div class="text-muted fs-7">Set the product thumbnail image. Only *.png, *.jpg and *.jpeg image files are accepted</div>
-											<!--end::Description-->
-										</div>
-										<!--end::Card body-->
-									</div>	                                    			 
-								</div>
-
+								<!--end::Main column-->
 							</form>
-							 
+							<!--end::Form-->
 						</div>
 @stop
 

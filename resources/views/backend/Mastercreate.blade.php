@@ -60,14 +60,31 @@
 													<!--end::Card header-->
 													<!--begin::Card body-->
 													<div class="card-body pt-0">
-
-														<x-backend.cms.title />
-
 														<!--begin::Input group-->
-														 
+														<div class="mb-10 fv-row">
+															<!--begin::Label-->
+															<label class="required form-label">Product Name</label>
+															<!--end::Label-->
+															<!--begin::Input-->
+															<input type="text" name="product_name" class="form-control mb-2" placeholder="Product name" value="" />
+															<!--end::Input-->
+															<!--begin::Description-->
+															<div class="text-muted fs-7">A product name is required and recommended to be unique.</div>
+															<!--end::Description-->
+														</div>
 														<!--end::Input group-->
 														<!--begin::Input group-->
-														<x-backend.cms.description />
+														<div>
+															<!--begin::Label-->
+															<label class="form-label">Description</label>
+															<!--end::Label-->
+															<!--begin::Editor-->
+															<div id="kt_ecommerce_add_product_description" name="kt_ecommerce_add_product_description" class="min-h-200px mb-2"></div>
+															<!--end::Editor-->
+															<!--begin::Description-->
+															<div class="text-muted fs-7">Set a description to the product for better visibility.</div>
+															<!--end::Description-->
+														</div>
 														<!--end::Input group-->
 													</div>
 													<!--end::Card header-->
@@ -131,11 +148,10 @@
 
 									<!--end::Status-->
 									<!--begin::Category & tags-->
-									<x-backend.cms.category />
+									
 									<!--end::Category & tags-->
 									<!--begin::Weekly sales-->
 								 
-									<x-backend.cms.tags />
 									<!--end::Weekly sales-->
 									<!--begin::Template settings-->
 									 

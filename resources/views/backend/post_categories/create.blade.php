@@ -31,7 +31,7 @@
                   <div class="card card-flush py-4">
                      <div class="card-body pt-2">
                         <x-backend.cms.title :lang="$properties['name']" />
-                        <x-backend.cms.description :lang="$properties['name']":required="'1'" />
+                        <x-backend.cms.description :lang="$properties['name']" />
                      </div>
                   </div>
                </div>
@@ -47,8 +47,23 @@
 </div>
 @stop
 @section('scripts')
+
 <script src="https://www.chineseshaolins.com/js/formvalidation/plugins/Tachyons.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.3/es6-shim.min.js"></script>
+
+
+
+
+
+
+
+
+<!--CKEditor Build Bundles:: Only include the relevant bundles accordingly-->
+
+
+
+
+
 <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js') }}"></script>
 <!--begin::Custom Javascript(used for this page only)-->
 <script src="{{ asset('assets/backend/js/custom/apps/ecommerce/catalog/save-category.js') }}"></script>
@@ -58,6 +73,23 @@
 <script src="{{ asset('assets/backend/js/custom/utilities/modals/upgrade-plan.js') }}"></script>
 <script src="{{ asset('assets/backend/js/custom/utilities/modals/create-app.js') }}"></script>
 <script src="{{ asset('assets/backend/js/custom/utilities/modals/users-search.js') }}"></script>
+
+
+<script src="{{ asset('assets/backend/plugins/custom/ckeditor/ckeditor-classic.bundle.js') }}"></script>
+<script src="{{ asset('assets/backend/plugins/custom/ckeditor/ckeditor-inline.bundle.js') }}"></script>
+<script src="{{ asset('assets/backend/plugins/custom/ckeditor/ckeditor-balloon.bundle.js') }}"></script>
+<script src="{{ asset('assets/backend/plugins/custom/ckeditor/ckeditor-balloon-block.bundle.js') }}"></script>
+<script src="{{ asset('assets/backend/plugins/custom/ckeditor/ckeditor-document.bundle.js') }}"></script>
+<script>
+   .create(document.querySelector('#kt_docs_ckeditor_classic'))
+   .then(editor => {
+       console.log(editor);
+   })
+   .catch(error => {
+       console.error(error);
+   });
+</script>
+
 @include('backend.form')
 <!--end::Custom Javascript-->
 @stop

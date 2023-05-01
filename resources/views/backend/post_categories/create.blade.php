@@ -80,16 +80,45 @@
 <script src="{{ asset('assets/backend/plugins/custom/ckeditor/ckeditor-balloon.bundle.js') }}"></script>
 <script src="{{ asset('assets/backend/plugins/custom/ckeditor/ckeditor-balloon-block.bundle.js') }}"></script>
 <script src="{{ asset('assets/backend/plugins/custom/ckeditor/ckeditor-document.bundle.js') }}"></script>
-<script>
-   .create(document.querySelector('#kt_docs_ckeditor_classic'))
-   .then(editor => {
-       console.log(editor);
-   })
-   .catch(error => {
-       console.error(error);
-   });
-</script>
-
 @include('backend.form')
 <!--end::Custom Javascript-->
+<script>
+
+
+// Class definition
+var KTQuilDemos = function() {
+
+// Private functions
+var demo1 = function() {
+    var quill = new Quill('#kt_quil_1', {
+        modules: {
+            toolbar: [
+                [{
+                    header: [1, 2, false]
+                }],
+                ['bold', 'italic', 'underline'],
+                ['image', 'code-block']
+            ]
+        },
+        placeholder: 'Type your text here...',
+        theme: 'snow' // or 'bubble'
+    });
+}
+
+return {
+    // public functions
+    init: function() {
+        demo1();
+        demo2();
+    }
+};
+}();
+
+jQuery(document).ready(function() {
+KTQuilDemos.init();
+});
+
+
+</script>
+   
 @stop

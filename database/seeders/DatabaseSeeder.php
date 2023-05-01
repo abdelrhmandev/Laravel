@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             // ProductCategorySeeder::class,
             // ProductSeeder::class,
             // ProductReviewSeeder::class,  
-            // PostCategorySeeder::class,
+            PostCategorySeeder::class,
             // PostSeeder::class,
             // PostCommentSeeder::class,  
             // FaqSeeder::class,

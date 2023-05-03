@@ -14,25 +14,13 @@ class PostCategoryController extends Controller
     protected $resource;
     protected $trans_file;
 
-    public function __construct(){
-       
-        $this->resource = 'recipes';
-        $this->trans_file = 'recipe';
-    }
+ 
 
 
     public function store(PostCategoryRequest $request){
 
-
-        https://blog.logrocket.com/validating-arrays-nested-values-laravel/
-
         dd('das');
-                
-            // Do this
-    auth()->user()->posts()->create([
-    'title' => request()->input('title'),
-    'post_text' => request()->input('post_text'),
-    ]);
+      
     
 }
 

@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Requests\backend;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
+// use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
 class PostCategoryRequest extends FormRequest
 {
@@ -31,11 +31,14 @@ class PostCategoryRequest extends FormRequest
     public function rules()
     {
         ////////////////
-        return [
-            'title'           =>'required|unique:roles,name',
-            'permission'      => 'required|array|min:1',
-        ];
+        foreach(\LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
+              $rules['title_.'.substr($properties['regional'],0,2)] = 'required'; 
+        } 
+            return $rules; 
     }
+
+ 
+
 
  
     // public function failedValidation(Validator $validator)

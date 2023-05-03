@@ -33,8 +33,8 @@
                <div class="d-flex flex-column gap-7 gap-lg-10">
                   <div class="card card-flush py-4">
                      <div class="card-body pt-2">
-                        <x-backend.cms.title :lang="$properties['name']" :langshortcode="$properties['regional']" />
-                        <x-backend.cms.description :lang="$properties['name']" />
+                        <x-backend.cms.title :lang="$properties['name']" :langshortcode="substr($properties['regional'],0,2)" />
+                        {{-- <x-backend.cms.description :lang="$properties['name']" /> --}}
                      </div>
                   </div>
                </div>
@@ -44,7 +44,7 @@
          <x-backend.btns.create :label="'Add'" />
       </div>
       <div class="d-flex flex-column flex-row-fluid gap-7 w-lg-400px gap-lg-10">
-         <x-backend.cms.image :lable="'Image'" />
+         {{-- <x-backend.cms.image :lable="'Image'" /> --}}
       </div>
    </form>
 </div>

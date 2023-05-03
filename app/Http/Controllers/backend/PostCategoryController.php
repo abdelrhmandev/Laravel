@@ -1,12 +1,10 @@
 <?php
 namespace App\Http\Controllers\backend;
+use App\Http\Requests\backend\PostCategoryRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use LaravelLocalization;
-use App\Models\Area;
-use App\Models\City;
-use App\Models\Country;
-use App\Models\District;
+use App\Models\PostCategory;
 use UploadAble,Functions;
 
 
@@ -23,7 +21,10 @@ class PostCategoryController extends Controller
     }
 
 
-    public function store(Request $request){
+    public function store(PostCategoryRequest $request){
+
+
+        https://blog.logrocket.com/validating-arrays-nested-values-laravel/
 
         dd('das');
                 

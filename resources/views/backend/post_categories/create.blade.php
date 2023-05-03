@@ -12,7 +12,8 @@
 @stop
 @section('content')
 <div class="container-xxl" id="kt_content_container">
-   <form id="kt_ecommerce_add_product_form" class="form d-flex flex-column flex-lg-row" data-kt-redirect="../../demo7/dist/apps/ecommerce/catalog/products.html">
+   <form id="kt_ecommerce_add_product_form" class="form d-flex flex-column flex-lg-row" method="post" {{ route('admin.post-category.store')}}>
+     @csrf
       <div class="d-flex flex-column gap-7 gap-lg-10 w-100 mb-7 me-lg-10">
          <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-semibold mb-n2">
             @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
@@ -26,11 +27,13 @@
          </ul>
          <div class="tab-content">
             @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+
+             
             <div class="tab-pane fade {{ LaravelLocalization::getCurrentLocaleName() == $properties['name'] ? 'show active':''}}" id="{{ $properties['native'] }}" role="tabpanel">
                <div class="d-flex flex-column gap-7 gap-lg-10">
                   <div class="card card-flush py-4">
                      <div class="card-body pt-2">
-                        <x-backend.cms.title :lang="$properties['name']" />
+                        <x-backend.cms.title :lang="$properties['name']" :langshortcode="$properties['regional']" />
                         <x-backend.cms.description :lang="$properties['name']" />
                      </div>
                   </div>

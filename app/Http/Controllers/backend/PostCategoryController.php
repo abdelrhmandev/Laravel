@@ -23,6 +23,18 @@ class PostCategoryController extends Controller
     }
 
 
+    public function store(Request $request){
+
+        dd('das');
+                
+            // Do this
+    auth()->user()->posts()->create([
+    'title' => request()->input('title'),
+    'post_text' => request()->input('post_text'),
+    ]);
+    
+}
+
     public function index(){
         if (view()->exists('backend.post_categories.index')) {
             // $post_categories = District::with(['district_info','area.area_info','area.city.city_info','area.city.country'])->get(); 

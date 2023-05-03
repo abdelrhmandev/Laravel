@@ -12,7 +12,7 @@
 @stop
 @section('content')
 <div class="container-xxl" id="kt_content_container">
-   <form id="kt_ecommerce_add_product_form" class="form d-flex flex-column flex-lg-row" method="post" {{ route('admin.post-category.store')}}>
+   <form id="kt_ecommerce_add_product_form" class="form d-flex flex-column flex-lg-row" method="post" action="{{ route('admin.post-category.store')}}">
      @csrf
       <div class="d-flex flex-column gap-7 gap-lg-10 w-100 mb-7 me-lg-10">
          <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-semibold mb-n2">

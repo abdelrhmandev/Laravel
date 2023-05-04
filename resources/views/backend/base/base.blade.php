@@ -42,73 +42,29 @@
 		<link href="{{ asset('assets/backend/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('assets/backend/css/style.bundle.css')}}" rel="stylesheet" type="text/css" />
 		@endif
-		<!--end::Global Stylesheets Bundle-->
-		
- 
 	</head>
-	<!--end::Head-->
-	<!--begin::Body-->
 	<body id="kt_body" style="background-image: url()" class="header-fixed header-tablet-and-mobile-fixed aside-fixed aside-secondary-enabled">
  
-		<!--begin::Main-->
-		<!--begin::Root-->
 		<div class="d-flex flex-column flex-root">
-			<!--begin::Page-->
 			<div class="page d-flex flex-row flex-column-fluid">
-				<!--begin::Aside-->
 				@include('layouts.backend.aside._base') 
-				<!--end::Aside-->
-				<!--begin::Wrapper-->
 				<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
-					<!--begin::Header-->
 					@include('layouts.backend.header._base') 
-					<!--end::Header-->
-					<!--begin::Content-->
-
-					
-						@include('backend.partials.alerts.message') 					 
-						
+					@include('backend.partials.alerts.message') 					 
 					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-						<!--begin::Container-->
 						@yield('content')
-						<!--end::Container-->
 					</div>
-					<!--end::Content-->
-					<!--begin::Footer-->
 					@include('layouts.backend._footer') 
-					<!--end::Footer-->
 				</div>
-				<!--end::Wrapper-->
 			</div>
-			<!--end::Page-->
 		</div>
-		<!--end::Root-->
-		<!--begin::Drawers-->
 		@include('backend.partials.topbar._activity-drawer')
-		<!--end::Drawers-->
-		<!--end::Main-->
- 
 		<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
 			@include('layouts.backend._scrolltop') 
 		</div>
-		<!--end::Scrolltop-->
-		<!--begin::Modals-->
 		@include('backend.partials.modals._main')
-		<!--end::Modals-->
-		<!--begin::Javascript-->
-	 
-		<!--begin::Global Javascript Bundle(mandatory for all pages)-->
 		<script src="{{ asset('assets/backend/plugins/global/plugins.bundle.js')}}"></script>
-		<script src="{{ asset('assets/backend/js/scripts.bundle.js')}}"></script>
-		<!--end::Global Javascript Bundle-->
-		<!--begin::Vendors Javascript(used for this page only)-->
-		<!--end::Vendors Javascript-->
- 
- 
- 
+		<script src="{{ asset('assets/backend/js/scripts.bundle.js')}}"></script> 
 		@yield('scripts')
-		<!--end::Custom Javascript-->
-		<!--end::Javascript-->
 	</body>
-	<!--end::Body-->
 </html>

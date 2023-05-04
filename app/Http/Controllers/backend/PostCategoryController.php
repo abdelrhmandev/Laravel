@@ -21,8 +21,8 @@ class PostCategoryController extends Controller
 
     public function store(Request $request){
 
-
-        return back()->with('error' , 'error message s');
+        return back()->with('success' , 'message message s');
+       
         dd();
 
         

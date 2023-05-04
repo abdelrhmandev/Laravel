@@ -5,27 +5,57 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use LaravelLocalization;
 use App\Models\PostCategory;
-use UploadAble,Functions;
+use App\Models\PostCategoryTranslation;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+
+use App\Traits\UploadAble;
 
 
 class PostCategoryController extends Controller
 {
-    protected $model;
-    protected $resource;
-    protected $trans_file;
+    use UploadAble;
 
  
 
 
     public function store(PostCategoryRequest $request){
 
-        $validated = $request->validated();
 
-        $validated['post_category_id'] = 1;
-     
-        \DB::table('post_categories_translations')->insert($validated);
+        return back()->with('danger' , 'sdsadasdsa');
+        dd();
+
+        
+        $validated['published'] = isset($request->published) ? 1 : 0;
+        $validated['parent_id'] = isset($request->parent_id) ? $request->parent_id : 0;
+        $validated['image'] = (!empty($request->image)) ? $this->uploadOne($request->image, 'post_categories') : NULL;    
+       
+       
+        $query = PostCategory::create($validated);
+ 
+       
+
       
+        DB::beginTransaction();   
+        try{
+        foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
+            $translatable_data[] = [
+                'title'             =>$request->input('title_'.substr($properties['regional'],0,2)),
+                'slug'              =>Str::slug($request->input('title_'.substr($properties['regional'],0,2))),            
+                'description'       =>$request->input('description_'.substr($properties['regional'],0,2)),
+                'lang'              =>substr($properties['regional'],0,2),
+                'post_category_id'  =>$query->id,
+                ];                
+            }
+            PostCategoryTranslation::insert($translatable_data);
+            DB::commit();
     
+ 
+        } catch (\Exception $e) {
+            DB::rollback();
+            return back()->with('danger' , $e->getMessage());
+         }
+     
 }
 
     public function index(){

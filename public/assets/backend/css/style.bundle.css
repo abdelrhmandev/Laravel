@@ -27388,36 +27388,55 @@ html:not([data-theme=dark]) .theme-light-bg-body {
 }
 
 .alert-success {
+/*  
   color: var(--kt-success);
   border-color: var(--kt-success);
   background-color: var(--kt-success-light);
+*/
+  background-color: #1BC5BD;
+  border-color: #1BC5BD;
+  color: #FFFFFF;
+
 }
 .alert-success .alert-link {
   color: var(--kt-success);
 }
 
 .alert-info {
-  color: var(--kt-info);
+ /* color: var(--kt-info);
   border-color: var(--kt-info);
   background-color: var(--kt-info-light);
+  */
+  background-color: #6993FF;
+  border-color: #6993FF;
+  color: #FFFFFF;
+
 }
 .alert-info .alert-link {
   color: var(--kt-info);
 }
 
 .alert-warning {
-  color: var(--kt-warning);
+ /* color: var(--kt-warning);
   border-color: var(--kt-warning);
   background-color: var(--kt-warning-light);
+  */
+  background-color: #FFA800;
+  border-color: #FFA800;
+  color: #ffffff;
 }
 .alert-warning .alert-link {
   color: var(--kt-warning);
 }
 
 .alert-danger {
-  color: var(--kt-danger);
+  /*color: var(--kt-danger);
   border-color: var(--kt-danger);
   background-color: var(--kt-danger-light);
+ */
+  background-color: #F64E60;
+  border-color: #F64E60;
+  color: #ffffff;
 }
 .alert-danger .alert-link {
   color: var(--kt-danger);

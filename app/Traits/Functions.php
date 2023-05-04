@@ -63,8 +63,12 @@ trait Functions
     }
 
 
-    public function str_split(string $str, int $len = 1)
-    {
+    public function HandleMultiLangdatabase($array){
+        
+    
+    }
+    
+    public function str_split(string $str, int $len = 1){
         $arr		= [];
         $length 	= mb_strlen($str, 'UTF-8');    
         for ($i = 0; $i < $length; $i += $len) {    

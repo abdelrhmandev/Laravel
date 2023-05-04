@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Post;
 class PostCategory extends Model
 {
-    protected $fillable=['title','slug','status'];
+    protected $fillable=['parent_id','image','published'];
 
 
     protected $table = 'post_categories';

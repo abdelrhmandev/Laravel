@@ -12,7 +12,7 @@
 @stop
 @section('content')
 <div class="container-xxl" id="kt_content_container">
-   <form id="kt_ecommerce_add_product_form" class="form d-flex flex-column flex-lg-row" method="post" action="{{ route('admin.post-category.store')}}">
+   <form id="kt_ecommerce_add_product_form" class="form d-flex flex-column flex-lg-row" method="post" enctype="multipart/form-data" action="{{ route('admin.post-category.store')}}">
      @csrf
       <div class="d-flex flex-column gap-7 gap-lg-10 w-100 mb-7 me-lg-10">
          <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-semibold mb-n2">
@@ -34,7 +34,7 @@
                   <div class="card card-flush py-4">
                      <div class="card-body pt-2">
                         <x-backend.cms.title :lang="$properties['name']" :langshortcode="substr($properties['regional'],0,2)" />
-                        {{-- <x-backend.cms.description :lang="$properties['name']" /> --}}
+                        <x-backend.cms.description :lang="$properties['name']" />
                      </div>
                   </div>
                </div>
@@ -44,7 +44,8 @@
          <x-backend.btns.create :label="'Add'" />
       </div>
       <div class="d-flex flex-column flex-row-fluid gap-7 w-lg-400px gap-lg-10">
-         {{-- <x-backend.cms.image :lable="'Image'" /> --}}
+         <x-backend.cms.image :lable="'Image'" />
+         <x-backend.cms.status :lable="'Image'" />
       </div>
    </form>
 </div>

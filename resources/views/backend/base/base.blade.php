@@ -64,8 +64,18 @@
 					@include('layouts.backend.header._base') 
 					<!--end::Header-->
 					<!--begin::Content-->
+
+					<div class="container-xxl" id="kt_content_container">
+						@include('layouts.backend.search.partials._main') 
+					</div>
+						
 					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 						<!--begin::Container-->
+
+						
+						 
+
+
 						@yield('content')
 						<!--end::Container-->
 					</div>

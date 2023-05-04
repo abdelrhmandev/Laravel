@@ -19,10 +19,10 @@ class PostCategoryController extends Controller
  
 
 
-    public function store(PostCategoryRequest $request){
+    public function store(Request $request){
 
 
-        return back()->with('danger' , 'sdsadasdsa');
+        return back()->with('error' , 'error message s');
         dd();
 
         

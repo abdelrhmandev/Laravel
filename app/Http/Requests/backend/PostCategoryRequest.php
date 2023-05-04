@@ -32,7 +32,7 @@ class PostCategoryRequest extends FormRequest
     {
         ////////////////
         foreach(\LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
-              $rules['title_.'.substr($properties['regional'],0,2)] = 'required'; 
+              $rules['title_'.substr($properties['regional'],0,2)] = 'required'; 
         } 
             return $rules; 
     }

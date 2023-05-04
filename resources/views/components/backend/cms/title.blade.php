@@ -7,7 +7,7 @@
 <input type="text" name="title_{{ $langshortcode }}" class="form-control mb-2" placeholder="Add Title [{{ $lang }}]" />
 @error('title_'.$langshortcode)
 <span class="invalid-feedbackXX" role="alert">
-<strong>ssssssssssssss</strong>
+<strong>{{ $message }}</strong>
 </span>
 @enderror
 <!--end::Input-->

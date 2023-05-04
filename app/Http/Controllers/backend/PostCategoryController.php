@@ -19,7 +19,11 @@ class PostCategoryController extends Controller
 
     public function store(PostCategoryRequest $request){
 
-        dd('das');
+        $validated = $request->validated();
+
+        $validated['post_category_id'] = 1;
+     
+        \DB::table('post_categories_translations')->insert($validated);
       
     
 }

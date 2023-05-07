@@ -114,8 +114,8 @@ var KTAppEcommerceSaveCategory = function () {
 
     // Category status handler
     const handleStatus = () => {
-        const target = document.getElementById('kt_ecommerce_add_category_status');
-        const select = document.getElementById('kt_ecommerce_add_category_status_select');
+        const target = document.getElementById('status');
+        const select = document.getElementById('status_select');
         const statusClasses = ['bg-success', 'bg-warning', 'bg-danger'];
 
         $(select).on('change', function (e) {

@@ -19,14 +19,14 @@ class PostCategoryController extends Controller
  
 
 
-    public function store(Request $request){
+    public function store(PostCategoryRequest $request){
 
-        return back()->with('success' , 'message message s');
-       
-        dd();
-
+   
+        $validated = $request->validated();
+          
+ 
         
-        $validated['published'] = isset($request->published) ? 1 : 0;
+        $validated['status'] = isset($request->status) ? 1 : 0;
         $validated['parent_id'] = isset($request->parent_id) ? $request->parent_id : 0;
         $validated['image'] = (!empty($request->image)) ? $this->uploadOne($request->image, 'post_categories') : NULL;    
        
@@ -34,14 +34,14 @@ class PostCategoryController extends Controller
         $query = PostCategory::create($validated);
  
        
-
+        dd();
       
         DB::beginTransaction();   
         try{
         foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
             $translatable_data[] = [
-                'title'             =>$request->input('title_'.substr($properties['regional'],0,2)),
-                'slug'              =>Str::slug($request->input('title_'.substr($properties['regional'],0,2))),            
+                'title'             =>$request->input('title'.substr($properties['regional'],0,2)),
+                'slug'              =>Str::slug($request->input('title'.substr($properties['regional'],0,2))),            
                 'description'       =>$request->input('description_'.substr($properties['regional'],0,2)),
                 'lang'              =>substr($properties['regional'],0,2),
                 'post_category_id'  =>$query->id,

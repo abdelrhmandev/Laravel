@@ -4,13 +4,8 @@
 <!--end::Label-->
 <!--begin::Input-->
 
-<input type="text" name="title_{{ $langshortcode }}" class="form-control mb-2" placeholder="Add Title [{{ $lang }}]" />
+<input type="text" name="title_{{ $langshortcode }}" class="form-control mb-2 @error('title_'.$langshortcode) is-invalid @enderror" value="{{ old('title_'.$langshortcode)  }}" placeholder="Add Title [{{ $lang }}]" />
 @error('title_'.$langshortcode)
-<span class="invalid-feedbackXX" role="alert">
-<strong>{{ $message }}</strong>
-</span>
+<div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
 @enderror
-<!--end::Input-->
-<!--begin::Description-->
-<!--end::Description-->
 </div>

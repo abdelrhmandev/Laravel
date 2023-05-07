@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-end">
+<div class="d-flex justify-content">
     <!--begin::Button-->
      <!--end::Button-->
     <!--begin::Button-->

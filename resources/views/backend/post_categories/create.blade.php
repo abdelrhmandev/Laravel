@@ -26,6 +26,9 @@
             @endforeach
          </ul>
          <div class="tab-content">
+
+ 
+
             @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
 
              
@@ -34,7 +37,7 @@
                   <div class="card card-flush py-4">
                      <div class="card-body pt-2">
                         <x-backend.cms.title :lang="$properties['name']" :langshortcode="substr($properties['regional'],0,2)" />
-                        <x-backend.cms.description :lang="$properties['name']" />
+                        <x-backend.cms.description :lang="$properties['name']" :langshortcode="substr($properties['regional'],0,2)" />
                      </div>
                   </div>
                </div>
@@ -44,8 +47,8 @@
          <x-backend.btns.create :label="'Add'" />
       </div>
       <div class="d-flex flex-column flex-row-fluid gap-7 w-lg-400px gap-lg-10">
-         <x-backend.cms.image :lable="'Image'" />
-         <x-backend.cms.status :lable="'Image'" />
+         <x-backend.cms.image :label="'Imagssssssse'" />
+         <x-backend.cms.status :label="'Ssadas'" />
       </div>
    </form>
 </div>
@@ -70,18 +73,15 @@
 
 <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js') }}"></script>
 <!--begin::Custom Javascript(used for this page only)-->
-<script src="{{ asset('assets/backend/js/custom/apps/ecommerce/catalog/save-category.js') }}"></script>
-<script src="{{ asset('assets/backend/js/widgets.bundle.js') }}"></script>
-<script src="{{ asset('assets/backend/js/custom/widgets.js') }}"></script>
-<script src="{{ asset('assets/backend/js/custom/apps/chat/chat.js') }}"></script>
-<script src="{{ asset('assets/backend/js/custom/utilities/modals/upgrade-plan.js') }}"></script>
-<script src="{{ asset('assets/backend/js/custom/utilities/modals/create-app.js') }}"></script>
-<script src="{{ asset('assets/backend/js/custom/utilities/modals/users-search.js') }}"></script>
+
+<script src="{{ asset('assets/backend/js/common.js') }}"></script>
+
+
 
 
 <script src="{{ asset('assets/backend/plugins/custom/ckeditor/ckeditor-classic.bundle.js') }}"></script>
 
-@include('backend.form')
+{{-- @include('backend.form') --}}
 <!--end::Custom Javascript-->
 <script>
 var KTCkeditor = function () {

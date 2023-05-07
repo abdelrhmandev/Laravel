@@ -3,7 +3,7 @@
     <div class="card-header">
         <!--begin::Card title-->
         <div class="card-title">
-            <h2>Thumbnail</h2>          
+            <h2>{{ $label }}</h2>     
         </div>
         <!--end::Card title-->
     </div>
@@ -40,9 +40,14 @@
         </div>
         <!--end::Image input-->
         <!--begin::Description-->
-        <div class="text-muted fs-7">Set the product thumbnail image. Only *.png, *.jpg and *.jpeg image files are accepted</div>
+        <div class="text-muted fs-7">Only *.png, *.jpg and *.jpeg image files are accepted</div>
+
+        @error('image')
+        <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+        @enderror
         <!--end::Description-->
     </div>
+   
     <!--end::Card body-->
 </div>
 <!--end::Thumbnail settings-->

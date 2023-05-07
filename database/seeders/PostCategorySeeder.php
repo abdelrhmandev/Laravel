@@ -14,11 +14,11 @@ class PostCategorySeeder extends Seeder
 
 
        $items = [
-        ['image'=>'uploads/post_categories/it.jpg','published'=>'1'],
-        ['image'=>'uploads/post_categories/programing.jpg','published'=>'1'],
-        ['image'=>'uploads/post_categories/design.jpg','published'=>'1'],
-        ['image'=>'uploads/post_categories/social-net-work.jpg','published'=>'0'],
-        ['image'=>'uploads/post_categories/security.jpg','published'=>'1'],
+        ['image'=>'uploads/post_categories/it.jpg','status'=>'1'],
+        ['image'=>'uploads/post_categories/programing.jpg','status'=>'1'],
+        ['image'=>'uploads/post_categories/design.jpg','status'=>'1'],
+        ['image'=>'uploads/post_categories/social-net-work.jpg','status'=>'0'],
+        ['image'=>'uploads/post_categories/security.jpg','status'=>'1'],
   
        ];
        DB::table('post_categories')->insert($items);      

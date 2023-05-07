@@ -30,11 +30,24 @@ class PostCategoryRequest extends FormRequest
      */
     public function rules()
     {
-        ////////////////
+        ///MULTI Languages Inputs Validation///////////
         foreach(\LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
-              $rules['title_'.substr($properties['regional'],0,2)] = 'required'; 
+              $rules['title_'.substr($properties['regional'],0,2)] = 'required|unique:post_categories_translations,title|max:255'; 
+              $rules['description_'.substr($properties['regional'],0,2)] = 'nullable|max:500'; 
         } 
-            return $rules; 
+
+
+
+        $rules['status'] = 'required|in:published,unpublished'; 
+
+        $rules['image'] =  'nullable|mimes:jpg,jpeg,png|max:2048';
+ 
+        // $rules['parent'] = 'required|exists:categories,id';
+
+        // $rules['start_date'] = 'required_with:special_price|date_format:Y-m-d';
+
+        return $rules; 
+
     }
 
  

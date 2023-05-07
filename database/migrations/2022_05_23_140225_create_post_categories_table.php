@@ -17,7 +17,7 @@ class CreatePostCategoriesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('parent_id')->default(0)->nullable();
 			$table->string('image',150)->nullable();
-			$table->enum('published', ['0','1'])->default(1);
+			$table->enum('status', ['0','1'])->default(1);
 			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
@@ -27,8 +27,6 @@ class CreatePostCategoriesTable extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->longText('description')->nullable();
-            $table->string('meta_title')->nullable();
-            $table->longText('meta_description')->nullable();
 			$table->string('lang')->index();			
 			$table->unique(['post_category_id','lang']);  
             $table->index(['title','slug']);

@@ -21,10 +21,14 @@ class PostCategoryController extends Controller
 
     public function store(PostCategoryRequest $request){
 
+
+ 
    
         $validated = $request->validated();
-          
- 
+
+
+      
+        
         
         $validated['status'] = isset($request->status) ? 1 : 0;
         $validated['parent_id'] = isset($request->parent_id) ? $request->parent_id : 0;

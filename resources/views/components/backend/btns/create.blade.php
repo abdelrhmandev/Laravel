@@ -1,11 +1,12 @@
 <div class="d-flex justify-content">
-    <!--begin::Button-->
-     <!--end::Button-->
-    <!--begin::Button-->
-    <button type="submit" id="kt_ecommerce_add_product_submit" class="btn btn-primary">
-        <span class="indicator-label">{{ $label }}</span>
+    <button type="submit" class="btn btn-primary" id="kt_careers_submit_button">
+        <!--begin::Indicator label-->
+        <span class="indicator-label">Apply NXXXow</span>
+        <!--end::Indicator label-->
+        <!--begin::Indicator progress-->
         <span class="indicator-progress">Please wait...
         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+        <!--end::Indicator progress-->
     </button>
-    <!--end::Button-->
 </div>
+

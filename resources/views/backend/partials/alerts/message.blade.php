@@ -1,5 +1,5 @@
 @if (Session::has('success'))
-    <div class="container-xxl" id="kt_content_container">
+  
         {{-- <div class="alert alert-success" role="alert">
             {{ Session::get('success') }}          
         </div> --}}
@@ -33,7 +33,7 @@
 
 
 
-    </div>
+     
 @elseif(Session::has('error'))
     <div class="container-xxl" id="kt_content_container">
         <div class="alert alert-danger" role="alert">

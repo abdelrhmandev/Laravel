@@ -81,7 +81,8 @@ color: #f1416c;
                 <div class="card card-flush py-4">
                    <div class="card-body pt-5">
                       <x-backend.cms.title :lang="$properties['name']" :langshortcode="substr($properties['regional'],0,2)" />
-                    </div>
+                      <x-backend.cms.description :lang="$properties['name']" :langshortcode="substr($properties['regional'],0,2)" />
+                   </div>
                 </div>
              </div>
           </div>
@@ -89,7 +90,10 @@ color: #f1416c;
        </div>        
        <x-backend.btns.create :label="'Add'" />
     </div>
- 
+    <div class="d-flex flex-column flex-row-fluid gap-7 w-lg-400px gap-lg-10">
+       <x-backend.cms.image :label="'Imagssssssse'" />
+       <x-backend.cms.status :label="'Ssadas'" />
+    </div>
  </form>
 
     
@@ -106,11 +110,22 @@ color: #f1416c;
 @section('scripts')
 <script src="https://www.chineseshaolins.com/js/formvalidation/plugins/Tachyons.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.3/es6-shim.min.js"></script>
- 
+<script src="{{ asset('assets/backend/plugins/custom/ckeditor/ckeditor-classic.bundle.js') }}"></script>
 <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js')}}"></script>
-<script src="{{ asset('assets/backend/abdo/apply2.js')}}"></script>
+<script src="{{ asset('assets/backend/abdo/apply.js')}}"></script>
 
- 
+<script>
+   let elements = document.querySelectorAll('.editor')
+   for (let element of elements) {
+       ClassicEditor.create(element, {})
+       .then( editor => {
+           element.ckEditor = editor;
+       } )
+       .catch( err => {
+           console.error( err.stack );
+       } );
+   }
+   </script>
  
 <!--end::Custom Javascript-->
 @stop

@@ -85,7 +85,7 @@
 
 
 
-                            <ul class="nav nav-tabs" role="tablist">
+                            <ul id="uiID" class="nav nav-tabs" role="tablist">
                                 <?php $i = 1; ?>											 
                                 @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                                 @if($properties['name'] == 'English')

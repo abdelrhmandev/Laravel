@@ -4,7 +4,7 @@
     <!--end::Label-->
     <!--begin::Input-->
 
-    <input data-fv-not-empty="true" data-fv-not-empty___message="The Csutoxxxxxxxxxm is required" type="text"
+    <input type="text"
         id="title_{{ $langshortcode }}" name="title_{{ $langshortcode }}"
         class="form-control mb-2 @error('title_' . $langshortcode) is-invalid @enderror"
         value="{{ old('title_' . $langshortcode) }}" placeholder="Add Title [{{ $lang }}]" />

@@ -2,6 +2,7 @@
 
 // Class definition
 var KTAppEcommerceSaveCategory = function () {
+ 
 
  
 
@@ -18,18 +19,25 @@ var KTAppEcommerceSaveCategory = function () {
         validator = FormValidation.formValidation(
             form,
             {
+                excluded: [':disabled'],
+                icon: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+
                 fields: {
                     'title_en': {
                         validators: {
                             notEmpty: {
-                                message: 'Category name is required'
+                                message: 'Title En js is required'
                             }
                         }
                     },
-					'title_ar': {
+                    'title_ar': {
                         validators: {
                             notEmpty: {
-                                message: 'Category name is required'
+                                message: 'Title Ar js is required'
                             }
                         }
                     }
@@ -43,7 +51,23 @@ var KTAppEcommerceSaveCategory = function () {
                     })
                 }
             }
-        );
+        ),validator.on('core.form.invalid', function(e,data) {
+      
+            // https://old.formvalidation.io/examples/using-data-returned-validator/
+
+            // var tabPane   = event.formValidation.form.title_en.value;
+ 
+            var formab     = data.result();
+            // var validator = data.bv;
+            // var tabPane  = data.element.parents('.tab-pane');
+            // var tabId     = tabPane.attr('id');
+           
+            alert('dsaasasdas');
+        });  
+        
+        
+        // Called when a field is invalid
+ 
 
         // Handle submit button
         submitButton.addEventListener('click', e => {
@@ -54,44 +78,7 @@ var KTAppEcommerceSaveCategory = function () {
                 validator.validate().then(function (status) {
                     console.log('validated!');
 
-                    if (status == 'Valid') {
-                        submitButton.setAttribute('data-kt-indicator', 'on');
-
-                        // Disable submit button whilst loading
-                        submitButton.disabled = true;
-
-                        setTimeout(function () {
-                            submitButton.removeAttribute('data-kt-indicator');
-
-                            Swal.fire({
-                                text: "Form has been successfully submitted!",
-                                icon: "success",
-                                buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
-                                customClass: {
-                                    confirmButton: "btn btn-primary"
-                                }
-                            }).then(function (result) {
-                                if (result.isConfirmed) {
-                                    // Enable submit button after loading
-                                    submitButton.disabled = false;
-
-                                    // Redirect to customers list page
-                                    window.location = form.getAttribute("data-kt-redirect");
-                                }
-                            });
-                        }, 2000);
-                    } else {
-                        Swal.fire({
-                            text: "Sorry, looks like there are some errors detected, please try again.",
-                            icon: "error",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn btn-primary"
-                            }
-                        });
-                    }
+ 
                 });
             }
         })
@@ -101,7 +88,7 @@ var KTAppEcommerceSaveCategory = function () {
     return {
         init: function () {
             // Init forms
- 
+       
             handleSubmit();
         }
     };

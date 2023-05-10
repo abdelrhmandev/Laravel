@@ -61,96 +61,76 @@
 </form> --}}
 
 
-        <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row"
-            data-kt-redirect="../../demo7/dist/apps/ecommerce/catalog/categories.html">
-            <!--begin::Aside column-->
-
-            <!--end::Aside column-->
-            <!--begin::Main column-->
-            <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
-                <!--begin::General options-->
-                <div class="card card-flush py-4">
-                    <!--begin::Card header-->
-                    <div class="card-header">
-                        <div class="card-title">
-                            <h2>General</h2>
-                        </div>
-                    </div>
-                    <!--end::Card header-->
-                    <!--begin::Card body-->
-                    <div class="card-body pt-0">
-                        <!--begin::Input group-->
-                        <div class="mb-10 fv-row">
-                            <!--begin::Label-->
 
 
+  
+<form id="kt_ecommerce_add_category_form" method="POST">
 
-                            <ul id="uiID" class="nav nav-tabs" role="tablist">
-                                <?php $i = 1; ?>											 
-                                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                @if($properties['name'] == 'English')
-                                @php $flag = '012-uk.svg'; @endphp
-                                @else
-                                @php $flag = '021-egypt.svg';@endphp
-                                @endif
-                                <li class="nav-item">
-                                <a data-toggle="tab" hreflang="{{$localeCode}}" href="#{{ $properties['name'] }}" class="nav-link {{{ LaravelLocalization::getCurrentLocaleName() == $properties['name'] ? 'active':''}}}"><span class="kt-header__topbar-icon"><img width="20" height="15" src="{{ asset('backend/assets/media/flags/'.$flag)}}" alt=""></span> <i class="fa"></i>{{ $properties['native'] }}</a></li>
-                                <?php $i++;	?>
-                                @endforeach
-                                </ul>
-
-
-                                <div class="tab-content">
-                                    <?php $ii = 1; ?>											 
-                                        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode2 => $properties2)
-                                        <?php $lang = substr($properties2['regional'],0,2);?>
-                                        <div class="tab-pane {{{ LaravelLocalization::getCurrentLocaleName() == $properties2['name'] ? 'active':''}}}" id="{{ $properties2['name'] }}">
-            
-                                            <div class="form-group row">
-                                                <label class="col-lg-12 control-label" for="title_{{ $lang }}">  [{{ trans('admin.'.$lang) }}] <span class="text-danger">*</span></label>
-                                                <div class="col-lg-12">
-                                                @php $title_value = old('title_'.$lang); @endphp
-                                                @php if(isset($object->id)) { $value = 'title_'.$lang; $title_value = $object->$value; } @endphp
-                                                <input class="form-control" type="text" name="title_{{ $lang }}" value="{{ $title_value }}" id="title_{{ $lang }}">
-                                                @error('title_'.$lang)<div class="invalid-feedback d-block">{{ $message }}</div>@enderror
-                                                </div>
-                                                </div>
-            
-                                                
-                                        </div>
-                                    <?php $ii++;	?>
-                                    @endforeach
-                                    </div>
-
-                            <!--end::Description-->
-                        </div>
-                        <!--end::Input group-->
-                        <!--begin::Input group-->
-
-                        <!--end::Input group-->
-                    </div>
-                    <!--end::Card header-->
-                </div>
-                <!--end::General options-->
-                <!--begin::Meta options-->
-
-                <!--end::Automation-->
-                <div class="d-flex justify-content-end">
-                    <!--begin::Button-->
-                    <a href="../../demo7/dist/apps/ecommerce/catalog/products.html" id="kt_ecommerce_add_product_cancel"
-                        class="btn btn-light me-5">Cancel</a>
-                    <!--end::Button-->
-                    <!--begin::Button-->
-                    <button type="submit" id="kt_ecommerce_add_category_submit" class="btn btn-primary">
-                        <span class="indicator-label">Save Changes</span>
-                        <span class="indicator-progress">Please wait...
-                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                    </button>
-                    <!--end::Button-->
+     <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Age</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Name</button>
+    </li>
+ 
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <div class="cf mb2">
+            <div class="fl w-100">
+                <div class="fl w-25 pa2">Age</div>
+                <div class="fl w-20">
+                    <input
+                        type="text"
+                        class="input-reset ba b--black-20 pa2 mb2 db w-100"
+                        name="age"
+                        min="10"
+                        data-fv-greater-than___inclusive="true"
+                        data-fv-greater-than___message="The input must be greater than or equal to 10"
+                        max="100"
+                        data-fv-less-than___inclusive="false"
+                        data-fv-less-than___message="The input must be less than 100"
+                        required
+                        data-fv-not-empty___message="The age is required"
+                    />
                 </div>
             </div>
-            <!--end::Main column-->
-        </form>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+        <div class="cf mb2">
+            <div class="fl w-100">
+                <div class="fl w-25 pa2">name</div>
+                <div class="fl w-20">
+                    <input
+                        type="text"
+                        class="input-reset ba b--black-20 pa2 mb2 db w-100"
+                        name="name"
+                        required
+                        data-fv-not-empty___message="The name is required"
+                    />
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+ 
+  </div>
+
+   
+
+    <div class="cf mb2">
+        <div class="fl w-100">
+            <div class="fl w-25 pa2"></div>
+            <div class="fl w-50">
+                <button type="submit" id="kt_ecommerce_add_category_submit" class="ba b--black-20 bg-blue white ph3 pv2 br2">Submit</button>
+            </div>
+        </div>
+    </div>
+</form>
 
     </div>
 @stop
@@ -163,23 +143,62 @@
 
 
 @section('scripts')
-    <script src="https://www.chineseshaolins.com/js/formvalidation/plugins/Tachyons.min.js"></script>
+  <script src="https://www.chineseshaolins.com/js/formvalidation/plugins/Tachyons.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.3/es6-shim.min.js"></script>
     <script src="{{ asset('assets/backend/plugins/custom/ckeditor/ckeditor-classic.bundle.js') }}"></script>
     <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-    <script src="{{ asset('assets/backend/abdo/apply2.js') }}"></script>
+    {{-- <script src="{{ asset('assets/backend/abdo/apply2.js') }}"></script> --}}
 
     <script>
-        let elements = document.querySelectorAll('.editor')
-        for (let element of elements) {
-            ClassicEditor.create(element, {})
-                .then(editor => {
-                    element.ckEditor = editor;
-                })
-                .catch(err => {
-                    console.error(err.stack);
+ 
+
+ const form = document.getElementById('kt_ecommerce_add_category_form');
+        const submitButton = document.getElementById('kt_ecommerce_add_category_submit');
+
+
+    validator = FormValidation.formValidation(
+            form,
+            {
+                    plugins: {
+                        declarative: new FormValidation.plugins.Declarative({
+                            html5Input: true,
+                        }),
+                        trigger: new FormValidation.plugins.Trigger(),
+                        tachyons: new FormValidation.plugins.Tachyons(),
+                        submitButton: new FormValidation.plugins.SubmitButton(),
+                        icon: new FormValidation.plugins.Icon({
+                            valid: 'fa fa-check',
+                            invalid: 'fa fa-times',
+                            validating: 'fa fa-refresh',
+                        }),
+                    },
                 });
-        }
+                      // Handle submit button
+        submitButton.addEventListener('click', e => {
+            e.preventDefault();
+
+            // Validate form before submit
+            if (validator) {
+                validator.validate().then(function (status) {
+                    console.log('validated!');
+
+                    if (status == 'Valid') {
+           
+                    } else {
+                        var $tabPane = status.element.parents('.tab-pane'),
+                tabId    = $tabPane.attr('id');
+                alert(tabId);
+                    }
+                });
+            }
+        })
+  
+            
+
+                
+
+              
+           
     </script>
 
     <!--end::Custom Javascript-->

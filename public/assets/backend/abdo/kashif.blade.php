@@ -20,9 +20,23 @@
                      <form id="SubmitForm" method="post" class="form-horizontal" action="{{ route($array['resources'].'.store') }}" enctype="multipart/form-data">										
 						@csrf
 						<div class="kt-portlet__body">						
-						@include('backend.includes.languages_tabs')												
-						@include('backend.includes.modules_blocks.countries')
-                        @include('backend.includes.modules_blocks.areas')
+					
+                            
+                            <ul class="nav nav-tabs" role="tablist">
+                                <?php $i = 1; ?>											 
+                                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                @if($properties['name'] == 'English')
+                                @php $flag = '012-uk.svg'; @endphp
+                                @else
+                                @php $flag = '021-egypt.svg';@endphp
+                                @endif
+                                <li class="nav-item">
+                                <a data-toggle="tab" hreflang="{{$localeCode}}" href="#{{ $properties['name'] }}" class="nav-link {{{ LaravelLocalization::getCurrentLocaleName() == $properties['name'] ? 'active':''}}}"><span class="kt-header__topbar-icon"><img width="20" height="15" src="{{ asset('backend/assets/media/flags/'.$flag)}}" alt=""></span> <i class="fa"></i>{{ $properties['native'] }}</a></li>
+                                <?php $i++;	?>
+                                @endforeach
+                                </ul>
+
+                                
                         
 
                         <div class="tab-content">

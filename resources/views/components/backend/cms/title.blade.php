@@ -1,14 +1,10 @@
 <div class="mb-10 fl w-100">
     <!--begin::Label-->
-    <label class="required form-label">Title [{{ $lang }}] </label>
+    <label class="required form-label">ss [{{ $lang }}] </label>
     <!--end::Label-->
     <!--begin::Input-->
 
     <input type="text"
-        id="title_{{ $langshortcode }}" name="title_{{ $langshortcode }}"
-        class="form-control mb-2 @error('title_' . $langshortcode) is-invalid @enderror"
-        value="{{ old('title_' . $langshortcode) }}" placeholder="Add Title [{{ $lang }}]" />
-    @error('title_' . $langshortcode)
-        <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
-    @enderror
-</div>
+        id="title_{{ $langshortcode }}" name="title_{{ $langshortcode }}"/>
+
+    </div>

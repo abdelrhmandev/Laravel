@@ -5,6 +5,11 @@
     <!--begin::Input-->
 
     <input type="text"
-        id="title_{{ $langshortcode }}" name="title_{{ $langshortcode }}"/>
+        id="title_{{ $langshortcode }}" name="title_{{ $langshortcode }}"
+        type="text"
+        class="input-reset ba b--black-20 pa2 mb2 db w-100"
+        required
+        data-fv-not-empty___message="title {{ $langshortcode }} is required"
+        />
 
     </div>

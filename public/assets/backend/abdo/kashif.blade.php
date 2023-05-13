@@ -94,33 +94,27 @@
 
         //  End Ajax country and city 
 
-$(document).ready(function() {
-$('#SubmitForm')
-        .bootstrapValidator({
+        var handleForm = function() {
+        validator = FormValidation.formValidation(form,{
+            framework: 'bootstrap',
             excluded: [':disabled'],
-            feedbackIcons: {
-                valid: 'glyphicon glyphicon-ok',
-                invalid: 'glyphicon glyphicon-remove',
-                validating: 'glyphicon glyphicon-refresh'
-            },
-            fields: {
-                title_en: {
-                    validators: {
-                        notEmpty: {
-                            message: '{{ trans('validation_custom.required')}}'
-                        }
-                    }
-                },
-				title_ar: {
-                    validators: {
-                        notEmpty: {
-                            message: '{{ trans('validation_custom.required')}}'
-                        }
-                    }
-                }
-            }
-        })
-        .on('status.field.bv', function(e, data) {
+				plugins: {      
+                    declarative: new FormValidation.plugins.Declarative({
+                    html5Input: true,
+                    }),
+                    trigger: new FormValidation.plugins.Trigger(),
+                    tachyons: new FormValidation.plugins.Tachyons({
+                        rowInvalidClass: 'my-field-error',
+                        rowValidClass: 'my-field-success',
+                    }),
+                    submitButton: new FormValidation.plugins.SubmitButton(),
+                    icon: new FormValidation.plugins.Icon({
+                        valid: 'fa fa-check',
+                        invalid: 'fa fa-times',
+                        validating: 'fa fa-refresh',
+                    }),
+				}
+			}).on('status.field.bv', function(e, data) {
             var $form     = $(e.target),
                 validator = data.bv,
                 $tabPane  = data.element.parents('.tab-pane'),

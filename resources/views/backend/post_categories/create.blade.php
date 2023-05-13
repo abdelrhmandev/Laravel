@@ -37,103 +37,73 @@ color: #f1416c;
 @section('content')
  
   <div class="container-xxl" id="kt_content_container">
-    {{-- <form id="defaultForm" method="post" class="form-horizontal" action="target.php"
-    data-bv-message="This value is not valid"
-    data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
-    data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
-    data-bv-feedbackicons-validating="glyphicon glyphicon-refresh">
-  <div class="form-group">
-      <label class="col-lg-3 control-label">Full name</label>
-      <div class="col-lg-4">
-          <input type="text" class="form-control" name="firstName" placeholder="First name" data-bv-trigger="keyup" required data-bv-notempty-message="The first name is required and cannot be empty" />
-      </div>
  
-  </div>
-  <div class="form-group">
-      <div class="col-lg-9 col-lg-offset-3">
-          <button type="submit" class="btn btn-primary">Sign up</button>
-      </div>
-  </div>
-</form> --}}
-
  
-<form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row" method="post" enctype="multipart/form-data" action="{{ route('admin.post-category.store')}}">
-   @csrf
-    <div class="d-flex flex-column gap-7 gap-lg-10 w-100 mb-7 me-lg-10">
 
-       <ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-semibold mb-n2">
-          @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-          <li class="nav-item">
-             <a class="nav-link text-active-primary pb-5 {{ LaravelLocalization::getCurrentLocaleName() == $properties['name'] ? 'active':''}}" data-bs-toggle="tab" href="#{{ substr($properties['regional'],0,2) }}">
-                 					
-                <i class="fa"></i> {{ $properties['native'] }}
-             </a>
-          </li>
-          @endforeach
+    <form id="kt_ecommerce_add_category_form" method="post" class="form-horizontal" action="" enctype="multipart/form-data">										
+
+
+    @csrf
+   <div class="kt-portlet__body">	
+
+        <ul class="nav nav-tabs" role="tablist">
+     											 
+        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+ 
+        <li class="nav-item">
+            <a data-toggle="tab" hreflang="{{$localeCode}}" href="#{{ substr($properties['regional'],0,2) }}" 
+            class="nav-link {{{ LaravelLocalization::getCurrentLocaleName() == $properties['name'] ? 'active':''}}}">
+             
+                <i class="fa"></i>{{ $properties['native'] }}</a></li>
+        
+        @endforeach
        </ul>
        <div class="tab-content">
 
 
 
-       @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-          <div class="tab-pane fade {{ LaravelLocalization::getCurrentLocaleName() == $properties['name'] ? 'show active':''}}" id="{{ substr($properties['regional'],0,2) }}" role="tabpanel">
-             <div class="d-flex flex-column gap-7 gap-lg-10">
-                <div class="card card-flush py-4">
-                   <div class="card-body pt-5">
+       										 
+        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode2 => $properties2)
+        <?php $lang = substr($properties2['regional'],0,2);?>
+        <div class="tab-pane fade {{ LaravelLocalization::getCurrentLocaleName() == $properties2['name'] ? 'show active':''}}" id="{{ substr($properties2['regional'],0,2) }}" role="tabpanel">
 
-                    <div class="mb-10 fl w-100">
-                        <!--begin::Label-->
-                        <label class="required form-label">ss [{{ substr($properties['regional'],0,2) }}] </label>
-                        <!--end::Label-->
-                        <!--begin::Input-->
-                    
-                        <input type="text"
-                            id="title_{{ substr($properties['regional'],0,2) }}" name="title_{{ substr($properties['regional'],0,2) }}"
-                            required
-                            data-fv-not-empty___message="The title {{ substr($properties['regional'],0,2)}} is required"
-                            />
-                    
-                        </div>
+      
+            
+            <div class="form-group row">
+                <label class="col-lg-12 control-label" for="title_{{ $lang }}">  [{{ $lang }}] <span class="text-danger">*</span></label>
+                <div class="col-lg-12">
+                
+                 
 
-                        
-                    </div>
-                </div>
-             </div>
-          </div>
-          @endforeach
-       </div>        
-
-
-       <div class="cf mb2">
-        <div class="fl w-100">
-            <div class="fl w-25 pa2">Email address</div>
-            <div class="fl w-40">
-                <input
+                    <input type="text"
+                    id="title_{{ $lang }}" name="title_{{ $lang }}"
+                    type="text"
                     class="input-reset ba b--black-20 pa2 mb2 db w-100"
-                    name="email"
                     required
-                    data-fv-not-empty___message="The email is required"
-                />
-            </div>
+                    data-fv-not-empty___message="title {{ $lang }} is required"
+                    />
+
+                    
+                </div>
+                </div>
+                
+
+                
         </div>
-    </div>
-
-
-       <div class="d-flex justify-content">
-        <button type="submit" class="btn btn-primary" id="kt_ecommerce_add_category_submit">
-            <!--begin::Indicator label-->
-            <span class="indicator-label">Apply NXXXow</span>
-            <!--end::Indicator label-->
-            <!--begin::Indicator progress-->
-            <span class="indicator-progress">Please wait...
-            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-            <!--end::Indicator progress-->
-        </button>
-    </div>
-    
-    
-    </div>
  
+    @endforeach
+        <br/>
+     <br/>
+     <div class="kt-form__actions">
+        <button type="submit" class="btn btn-brand" id="kt_ecommerce_add_category_submit">SEND</button>
+        <button type="reset" class="btn btn-secondary">{{ trans('crud.cancel') }}</button>
+        </div>
+        </div>
+
+       </div>        
+    
+    </div>
+
  </form>
 
     
@@ -148,61 +118,74 @@ color: #f1416c;
 
 
 @section('scripts')
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js" integrity="sha256-PbFF1Mdg86urwOYXWNJPP4z5Ge9KLp6KXX1NURQY8Ho=" crossorigin="anonymous"></script> --}}
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js" integrity="sha256-PbFF1Mdg86urwOYXWNJPP4z5Ge9KLp6KXX1NURQY8Ho=" crossorigin="anonymous"></script>
 <script src="https://www.chineseshaolins.com/js/formvalidation/plugins/Tachyons.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.3/es6-shim.min.js"></script>
 <script src="{{ asset('assets/backend/plugins/custom/ckeditor/ckeditor-classic.bundle.js') }}"></script>
 <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js')}}"></script>
-        <script>
-
  
-
-// Get elements
+<script src="{{ asset('assets/backend/abdo/apply2.js')}}"></script>
  
-let validator;
+<script type="text/javascript">
 
-// Get elements
-const form = document.getElementById('kt_ecommerce_add_category_form');
+
+
+    //  End Ajax country and city 
+ 
+var validator;
+
+var form = document.getElementById('kt_ecommerce_add_category_form');
 const submitButton = document.getElementById('kt_ecommerce_add_category_submit');
 
 
-validator = FormValidation.formValidation(
-            form,
-            {
-                    
-                    plugins: {
-                        declarative: new FormValidation.plugins.Declarative(),
-				// Other plugins
-				trigger: new FormValidation.plugins.Trigger(),
-				tachyons: new FormValidation.plugins.Tachyons({
-			 
-				}),
-                        submitButton: new FormValidation.plugins.SubmitButton(),
-                        icon: new FormValidation.plugins.Icon({
-                            valid: 'fa fa-check',
-                            invalid: 'fa fa-times',
-                            validating: 'fa fa-refresh',
-                        }),
-                    },
-                }) 
-                    // Handle submit button
-        submitButton.addEventListener('click', e => {
-            e.preventDefault();
 
-            // Validate form before submit
-            if (validator) {
-                validator.validate().then(function (status) {
-                    console.log('validated!');
+    $(document).ready(function() {
+$('#kt_ecommerce_add_category_form')
+    .bootstrapValidator({
+       
+ 
+        excluded: [':disabled'],
+                
+                plugins: {
+                    declarative: new FormValidation.plugins.Declarative({
+                    html5Input: true,
+                    }),
+                    trigger: new FormValidation.plugins.Trigger(),
+                    tachyons: new FormValidation.plugins.Tachyons({
+                        rowInvalidClass: 'my-field-error',
+                        rowValidClass: 'my-field-success',
+                    }),
+                    submitButton: new FormValidation.plugins.SubmitButton(),
+                    icon: new FormValidation.plugins.Icon({
+                        valid: 'fa fa-check',
+                        invalid: 'fa fa-times',
+                        validating: 'fa fa-refresh',
+                    }),
+                }
 
-                 
-                });
+    })
+    .on('status.field.bv', function(e, data) {
+        var $form     = $(e.target),
+            validator = data.bv,
+            $tabPane  = data.element.parents('.tab-pane'),
+            tabId     = $tabPane.attr('id');
+        
+        if (tabId) {
+            var $icon = $('a[href="#' + tabId + '"][data-toggle="tab"]').parent().find('i');
+
+            // Add custom class to tab containing the field
+            if (data.status == validator.STATUS_INVALID) {
+                $icon.removeClass('fa-check').addClass('fa-times');
+            } else if (data.status == validator.STATUS_VALID) {
+                var isValidTab = validator.isValidContainer($tabPane);
+                $icon.removeClass('fa-check fa-times')
+                     .addClass(isValidTab ? 'fa-check' : 'fa-times');
             }
-        })
-        </script>
+        }
+    });
+});
  
-
- 
- 
+</script>
 <!--end::Custom Javascript-->
 @stop

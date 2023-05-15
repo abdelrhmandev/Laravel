@@ -76,13 +76,29 @@ color: #f1416c;
 
 
        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+       <?php $lang = substr($properties['regional'],0,2);?>
           <div class="tab-pane fade {{ LaravelLocalization::getCurrentLocaleName() == $properties['name'] ? 'show active':''}}" id="{{ substr($properties['regional'],0,2) }}" role="tabpanel">
              <div class="d-flex flex-column gap-7 gap-lg-10">
                 <div class="card card-flush py-4">
                    <div class="card-body pt-5">
-                      <x-backend.cms.title :lang="$properties['name']" :langshortcode="substr($properties['regional'],0,2)" />
-                      <x-backend.cms.description :lang="$properties['name']" :langshortcode="substr($properties['regional'],0,2)" />
-                   </div>
+
+                   <div class="mb-10 fl w-100">
+    <!--begin::Label-->
+    <label class="required form-label">ss [{{ $lang }}] </label>
+    <!--end::Label-->
+    <!--begin::Input-->
+
+    <input type="text"
+        id="title_{{ $lang }}" name="title_{{ $lang }}"
+        type="text"
+        class="input-reset ba b--black-20 pa2 mb2 db w-100"
+        required
+        data-bv-not-empty___message="title {{ $lang }} is required"
+        />
+
+    </div>
+
+   </div>
                 </div>
              </div>
           </div>
@@ -112,7 +128,7 @@ color: #f1416c;
 <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.3/es6-shim.min.js"></script>
 <script src="{{ asset('assets/backend/plugins/custom/ckeditor/ckeditor-classic.bundle.js') }}"></script>
 <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js')}}"></script>
-{{-- <script src="{{ asset('assets/backend/abdo/apply.js')}}"></script> --}}
+ 
 
 <script>
    document.addEventListener('DOMContentLoaded', function (e) {

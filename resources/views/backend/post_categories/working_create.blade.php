@@ -112,7 +112,89 @@ color: #f1416c;
 <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.3/es6-shim.min.js"></script>
 <script src="{{ asset('assets/backend/plugins/custom/ckeditor/ckeditor-classic.bundle.js') }}"></script>
 <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js')}}"></script>
-<script src="{{ asset('assets/backend/abdo/apply.js')}}"></script>
+<script>
+   "use strict";
+
+// Class definition
+var KTCareersApply = function () {
+	var submitButton;
+	var validator;
+	var form;
+
+ 
+
+	// Handle form validation and submittion
+	var handleForm = function() {
+		// Stepper custom navigation
+
+		// Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
+		validator = FormValidation.formValidation(form,{
+
+		 
+			fields: {
+				'title_en': {
+					validators: {
+						notEmpty: {
+							message: 'Category name is required'
+						}
+					}
+				}
+			},
+		 
+				plugins: {
+      
+				declarative: new FormValidation.plugins.Declarative(),
+				// Other plugins
+				trigger: new FormValidation.plugins.Trigger(),
+				tachyons: new FormValidation.plugins.Tachyons({
+				rowInvalidClass: 'my-field-error',
+				rowValidClass: 'my-field-success',
+				}),
+				submitButton: new FormValidation.plugins.SubmitButton(),
+				icon: new FormValidation.plugins.Icon({
+				valid: 'fa fa-check',
+				invalid: 'invalid-feedback',
+				validating: 'fa fa-refresh',
+				}),
+
+	  
+                    
+				}
+			}
+		);
+      .on('status.field.bv', function(e, data) {
+        var $form     = $(e.target),
+            validator = data.bv,
+            $tabPane  = data.element.parents('.tab-pane'),
+            tabId     = $tabPane.attr('id');
+         });
+
+		// Action buttons
+		submitButton.addEventListener('click', function (e) {
+			e.preventDefault();
+
+ 
+		});
+	}
+
+	return {
+		// Public functions
+		init: function () {
+			// Elements
+			form = document.querySelector('#kt_careers_form');
+			submitButton = document.getElementById('kt_careers_submit_button');
+
+		 
+			handleForm();
+		}
+	};
+}();
+
+// On document ready
+KTUtil.onDOMContentLoaded(function () {
+	KTCareersApply.init();
+});
+</script>
 
 <script>
    let elements = document.querySelectorAll('.editor')

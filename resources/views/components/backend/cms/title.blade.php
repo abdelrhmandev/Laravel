@@ -9,7 +9,7 @@
         type="text"
         class="input-reset ba b--black-20 pa2 mb2 db w-100"
         required
-        data-fv-not-empty___message="title {{ $langshortcode }} is required"
+        data-bv-not-empty___message="title {{ $langshortcode }} is required"
         />
 
     </div>

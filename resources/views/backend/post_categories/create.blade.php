@@ -133,26 +133,26 @@ const form = $('#kt_ecommerce_add_category_form')
 const submitButton = $('#kt_ecommerce_add_category_submit');
     //  End Ajax country and city 
  
-$(document).ready(function() {
+   
 
-    form.bootstrapValidator({
-       
- 
+    $('#kt_ecommerce_add_category_form').formValidation({
+        framework: 'bootstrap',
+        icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
         fields: {
             title_en: {
+                row: '.col-xs-8',
                 validators: {
                     notEmpty: {
-                        message: 'title en'
+                        message: 'The titlsssssssssssse is required'
                     }
                 }
             },
-            title_ar: {
-                validators: {
-                    notEmpty: {
-                        message: 'title ar'
-                    }
-                }
-            }
+             
+ 
         }
     })
     .on('status.field.bv', function(e, data) {
@@ -174,7 +174,7 @@ $(document).ready(function() {
             }
         }
     });
-});
+ 
  
 </script>
 <!--end::Custom Javascript-->

@@ -71,13 +71,12 @@ color: #f1416c;
             
             <div class="form-group row">
                 <label class="col-lg-12 control-label" for="title_{{ $lang }}">  [{{ $lang }}] <span class="text-danger">*</span></label>
-                <div class="col-lg-12">
+                <div class="fl w-40">
                 
                  
                 <input class="form-control" type="text" name="title_{{ $lang }}" 
                 id="title_{{ $lang }}"
-                class="input-reset ba b--black-20 pa2 mb2 db w-100"
-                required
+                data-fv-not-empty="true"
                 data-bv-not-empty___message="title {{ $lang }} is required"
                 >
                 
@@ -116,40 +115,45 @@ color: #f1416c;
 
 @section('scripts')
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js" integrity="sha256-PbFF1Mdg86urwOYXWNJPP4z5Ge9KLp6KXX1NURQY8Ho=" crossorigin="anonymous"></script>
 <script src="https://www.chineseshaolins.com/js/formvalidation/plugins/Tachyons.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.3/es6-shim.min.js"></script>
 <script src="{{ asset('assets/backend/plugins/custom/ckeditor/ckeditor-classic.bundle.js') }}"></script>
 <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js')}}"></script>
  
- 
+{{-- <script src="{{ asset('assets/backend/abdo/apply2.js')}}"></script> --}}
  
 <script type="text/javascript">
+
 
 let validator;
 
 // Get elements
-var form = $('#kt_ecommerce_add_category_form');
-var submitButton = $('#kt_ecommerce_add_category_submit');
-
+const form = $('#kt_ecommerce_add_category_form')
+const submitButton = $('#kt_ecommerce_add_category_submit');
     //  End Ajax country and city 
-    document.addEventListener('DOMContentLoaded', function (e) {
-    FormValidation.formValidation(document.getElementById('kt_ecommerce_add_category_form'), {
+ 
+$(document).ready(function() {
+
+    form.bootstrapValidator({
        
  
-        plugins: {
-                        declarative: new FormValidation.plugins.Declarative({
-                            html5Input: true,
-                        }),
-                        trigger: new FormValidation.plugins.Trigger(),
-                        tachyons: new FormValidation.plugins.Tachyons(),
-                        submitButton: new FormValidation.plugins.SubmitButton(),
-                        icon: new FormValidation.plugins.Icon({
-                            valid: 'fa fa-check',
-                            invalid: 'fa fa-times',
-                            validating: 'fa fa-refresh',
-                        }),
-                    },
+        fields: {
+            title_en: {
+                validators: {
+                    notEmpty: {
+                        message: 'title en'
+                    }
+                }
+            },
+            title_ar: {
+                validators: {
+                    notEmpty: {
+                        message: 'title ar'
+                    }
+                }
+            }
+        }
     })
     .on('status.field.bv', function(e, data) {
         var $form     = $(e.target),
@@ -171,7 +175,6 @@ var submitButton = $('#kt_ecommerce_add_category_submit');
         }
     });
 });
-
  
 </script>
 <!--end::Custom Javascript-->

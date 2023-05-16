@@ -118,7 +118,7 @@ color: #f1416c;
 <script src="{{ asset('assets/backend/plugins/custom/ckeditor/ckeditor-classic.bundle.js') }}"></script>
 <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js')}}"></script>
  
-<script src="{{ asset('assets/backend/abdo/apply2.js')}}"></script>
+{{-- <script src="{{ asset('assets/backend/abdo/apply2.js')}}"></script> --}}
  
 <script type="text/javascript">
 

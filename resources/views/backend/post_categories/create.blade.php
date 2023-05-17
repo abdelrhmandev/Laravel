@@ -129,30 +129,22 @@ color: #f1416c;
 let validator;
 
 // Get elements
-const form = $('#kt_ecommerce_add_category_form')
-const submitButton = $('#kt_ecommerce_add_category_submit');
+const form = $('#kt_ecommerce_add_category_form');
+const submitButton = document.getElementById('#kt_ecommerce_add_category_submit');
+
+
     //  End Ajax country and city 
  
-   
-
-    $('#kt_ecommerce_add_category_form').formValidation({
-        framework: 'bootstrap',
-        icon: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
+ 
+    form.bootstrapValidator({
         fields: {
             title_en: {
-                row: '.col-xs-8',
                 validators: {
                     notEmpty: {
-                        message: 'The titlsssssssssssse is required'
+                        message: 'titleasdasdasd JS  en'
                     }
                 }
-            },
-             
- 
+            }
         }
     })
     .on('status.field.bv', function(e, data) {

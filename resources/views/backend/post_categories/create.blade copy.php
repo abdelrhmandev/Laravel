@@ -65,7 +65,7 @@ color: #f1416c;
           @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
           <li class="nav-item">
              <a class="nav-link text-active-primary pb-5 {{ LaravelLocalization::getCurrentLocaleName() == $properties['name'] ? 'active':''}}" data-bs-toggle="tab" href="#{{ substr($properties['regional'],0,2) }}">
-                <img width="20" height="20" class="rounded-1" src="{{ asset('assets/backend/media/flags/'.strtolower($localeCode.".svg"))}}" alt="" />						
+                <i class="fa"></i>					
                 {{ $properties['native'] }}
              </a>
           </li>
@@ -78,7 +78,27 @@ color: #f1416c;
        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
        <?php $lang = substr($properties['regional'],0,2);?>
           <div class="tab-pane fade {{ LaravelLocalization::getCurrentLocaleName() == $properties['name'] ? 'show active':''}}" id="{{ substr($properties['regional'],0,2) }}" role="tabpanel">
-             <div class="d-flex flex-column gap-7 gap-lg-10">
+          
+          
+            <div class="cf mb2">
+                {{-- <div class="fl w-100">
+                    <div class="fl w-25 pa2">Username</div>
+                    <div class="fl w-40">
+                        <input
+                            type="text"
+                            class="input-reset ba b--black-20 pa2 mb2 db w-100"
+                            name="username"
+                            required
+                            data-fv-not-empty___message="The usernassssssssme is required"
+                            pattern="^[a-zA-Z0-9]+$"
+                            data-fv-regexp___message="The username can only consist of alphabetical, number"
+                        />
+                    </div>
+                </div> --}}
+            </div>  <div class="d-flex flex-column gap-7 gap-lg-10">
+
+
+
                 <div class="card card-flush py-4">
                    <div class="card-body pt-5">
 
@@ -93,7 +113,7 @@ color: #f1416c;
         type="text"
         class="input-reset ba b--black-20 pa2 mb2 db w-100"
         required
-        data-bv-not-empty___message="title {{ $lang }} is required"
+        data-fv-not-empty___message="The username is required"
         />
 
     </div>
@@ -104,12 +124,21 @@ color: #f1416c;
           </div>
           @endforeach
        </div>        
-       <x-backend.btns.create :label="'Add'" />
+       <div class="d-flex justify-content">
+        <button type="submit" class="btn btn-primary" id="kt_ecommerce_add_category_submit">
+            <!--begin::Indicator label-->
+            <span class="indicator-label">Apply NXXXow</span>
+            <!--end::Indicator label-->
+            <!--begin::Indicator progress-->
+            <span class="indicator-progress">Please wait...
+            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+            <!--end::Indicator progress-->
+        </button>
     </div>
-    <div class="d-flex flex-column flex-row-fluid gap-7 w-lg-400px gap-lg-10">
-       <x-backend.cms.image :label="'Imagssssssse'" />
-       <x-backend.cms.status :label="'Ssadas'" />
+    
+    
     </div>
+
  </form>
 
     
@@ -131,6 +160,14 @@ color: #f1416c;
  
 
 <script>
+
+let validator;
+
+// Get elements
+const form = $('#kt_ecommerce_add_category_form');
+const submitButton = document.getElementById('#kt_ecommerce_add_category_submit');
+
+
    document.addEventListener('DOMContentLoaded', function (e) {
                 FormValidation.formValidation(document.getElementById('kt_ecommerce_add_category_form'), {
                     plugins: {
@@ -146,7 +183,10 @@ color: #f1416c;
                             validating: 'fa fa-refresh',
                         }),
                     },
-                });
+                }).FormValidation.formValidatio.on('core.validator.notvalidated', function(event) {
+
+                    alert('hhh');
+}); 
             });
    </script>
  

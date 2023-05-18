@@ -40,67 +40,98 @@ color: #f1416c;
  
  
 
-    <form id="kt_ecommerce_add_category_form" method="post" class="form-horizontal" action="" enctype="multipart/form-data">										
-
-
-    @csrf
-   <div class="kt-portlet__body">	
-
-        <ul class="nav nav-tabs" role="tablist">
-     											 
-        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
- 
-        <li class="nav-item">
-            <a data-toggle="tab" hreflang="{{$localeCode}}" href="#{{ substr($properties['regional'],0,2) }}" 
-            class="nav-link {{{ LaravelLocalization::getCurrentLocaleName() == $properties['name'] ? 'active':''}}}">
-             
-                <i class="fa"></i>{{ $properties['native'] }}</a></li>
-        
-        @endforeach
-       </ul>
-       <div class="tab-content">
-
-
-
-       										 
-        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode2 => $properties2)
-        <?php $lang = substr($properties2['regional'],0,2);?>
-        <div class="tab-pane fade {{ LaravelLocalization::getCurrentLocaleName() == $properties2['name'] ? 'show active':''}}" id="{{ substr($properties2['regional'],0,2) }}" role="tabpanel">
-
+    <form id="kt_ecommerce_add_category_form" method="get" class="form d-flex flex-column flex-lg-row" data-kt-redirect="../../demo7/dist/apps/ecommerce/catalog/categories.html">
       
-            
-            <div class="form-group row">
-                <label class="col-lg-12 control-label" for="title_{{ $lang }}">  [{{ $lang }}] <span class="text-danger">*</span></label>
-                <div class="fl w-40">
+        <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
+            <!--begin::General options-->
+            <div class="card card-flush py-4">
+                <!--begin::Card header-->
+                <div class="card-header">
+                    <div class="card-title">
+                        <h2>General</h2>
+                    </div>
+                </div>
+                <!--end::Card header-->
+                <!--begin::Card body-->
+                <div class="card-body pt-0">
+                    <!--begin::Input group-->
+                    <div class="mb-10 fv-row">
+                        <!--begin::Label-->
+                      
+                        <!--end::Label-->
+                        <!--begin::Input-->
+
+
+                        <ul class="nav nav-tabsXXXxxx" role="tablist">
+     											 
+                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                     
+                            <li class="nav-item">
+                                <a data-toggle="tab" hreflang="{{$localeCode}}" href="#{{ substr($properties['regional'],0,2) }}" 
+                                class="nav-link {{{ LaravelLocalization::getCurrentLocaleName() == $properties['name'] ? 'active':''}}}">
+                                 
+                                    <i class="fa"></i>{{ $properties['native'] }}</a></li>
+                            
+                            @endforeach
+                           </ul>
+
+                        <div class="tab-contentXXXXXxx">
+                        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode2 => $properties2)
+                        <?php $lang = substr($properties2['regional'],0,2);?>
+                        <div class="tab-pane fade {{ LaravelLocalization::getCurrentLocaleName() == $properties2['name'] ? 'show active':''}}" id="{{ substr($properties2['regional'],0,2) }}" role="tabpanel">
                 
+                      
+                            
+                            <div class="form-group row">
+                                <label class="col-lg-12 control-label" for="title_{{ $lang }}">  [{{ $lang }}] <span class="text-danger">*</span></label>
+                                <div class="fl w-40">
+                                
+                                 
+                                <input class="form-control" type="text" name="title_{{ $lang }}" 
+                                id="title_{{ $lang }}"
+                                required
+                                data-fv-not-empty___message="The assssssssge is required"
+                                value="sdasd"
+                                >
+                                
+                                </div>
+                                </div>
+                                
+                
+                                
+                        </div>
                  
-                <input class="form-control" type="text" name="title_{{ $lang }}" 
-                id="title_{{ $lang }}"
-                data-fv-not-empty="true"
-                data-bv-not-empty___message="title {{ $lang }} is required"
-                >
-                
+                    @endforeach
+                        </div>
+                        <!--end::Input-->
+                        <!--begin::Description-->
+                         <!--end::Description-->
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+             
+                    <!--end::Input group-->
                 </div>
-                </div>
-                
-
-                
+                <!--end::Card header-->
+            </div>
+            <!--end::General options-->
+            <!--begin::Meta options-->
+             
+            <!--end::Automation-->
+            <div class="d-flex justify-content-end">
+                <!--begin::Button-->
+                 <!--end::Button-->
+                <!--begin::Button-->
+                <button type="submit" id="kt_ecommerce_add_category_submit" class="btn btn-primary">
+                    <span class="indicator-label">Save Changes</span>
+                    <span class="indicator-progress">Please wait...
+                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                </button>
+                <!--end::Button-->
+            </div>
         </div>
- 
-    @endforeach
-        <br/>
-     <br/>
-     <div class="kt-form__actions">
-        <button type="submit" class="btn btn-brand" id="kt_ecommerce_add_category_submit">SEND</button>
-        <button type="reset" class="btn btn-secondary">{{ trans('crud.cancel') }}</button>
-        </div>
-        </div>
-
-       </div>        
-    
-    </div>
-
- </form>
+        <!--end::Main column-->
+    </form>
 
     
   </div>  
@@ -115,7 +146,7 @@ color: #f1416c;
 
 @section('scripts')
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js" integrity="sha256-PbFF1Mdg86urwOYXWNJPP4z5Ge9KLp6KXX1NURQY8Ho=" crossorigin="anonymous"></script>
+
 <script src="https://www.chineseshaolins.com/js/formvalidation/plugins/Tachyons.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.35.3/es6-shim.min.js"></script>
 <script src="{{ asset('assets/backend/plugins/custom/ckeditor/ckeditor-classic.bundle.js') }}"></script>
@@ -125,49 +156,95 @@ color: #f1416c;
  
 <script type="text/javascript">
 
+"use strict";
 
-let validator;
+// Class definition
+var KTAppEcommerceSaveCategory = function () {
 
-// Get elements
-const form = $('#kt_ecommerce_add_category_form');
-const submitButton = document.getElementById('#kt_ecommerce_add_category_submit');
-
-
-    //  End Ajax country and city 
+    
  
+
  
-    form.bootstrapValidator({
-        fields: {
-            title_en: {
-                validators: {
-                    notEmpty: {
-                        message: 'titleasdasdasd JS  en'
-                    }
+    // Submit form handler
+    const handleSubmit = () => {
+        // Define variables
+        let validator;
+
+        // Get elements
+        var form = document.getElementById('kt_ecommerce_add_category_form');
+        var submitButton = document.getElementById('kt_ecommerce_add_category_submit');
+
+        // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
+        validator = FormValidation.formValidation(form,{
+ 
+                plugins: {
+                    declarative: new FormValidation.plugins.Declarative({
+                            html5Input: true,
+                        }),
+                        trigger: new FormValidation.plugins.Trigger(),
+                        tachyons: new FormValidation.plugins.Tachyons(),
+                        submitButton: new FormValidation.plugins.SubmitButton(),
+                        icon: new FormValidation.plugins.Icon({
+                            valid: 'fa fa-check',
+                            invalid: 'fa fa-times',
+                            validating: 'fa fa-refresh',
+                        }),
+                ////////////////////////////////
+                fieldStatus: new FormValidation.plugins.FieldStatus({
+                    onStatusChanged: function(areFieldsValid) {
+                      
+                       alert(areFieldsValid);
+                    },
+                })
+
+                ///////////////////////////////////
+       
                 }
-            }
-        }
-    })
-    .on('status.field.bv', function(e, data) {
-        var $form     = $(e.target),
-            validator = data.bv,
-            $tabPane  = data.element.parents('.tab-pane'),
-            tabId     = $tabPane.attr('id');
-        
-        if (tabId) {
-            var $icon = $('a[href="#' + tabId + '"][data-toggle="tab"]').parent().find('i');
+        });
 
-            // Add custom class to tab containing the field
-            if (data.status == validator.STATUS_INVALID) {
-                $icon.removeClass('fa-check').addClass('fa-times');
-            } else if (data.status == validator.STATUS_VALID) {
-                var isValidTab = validator.isValidContainer($tabPane);
-                $icon.removeClass('fa-check fa-times')
-                     .addClass(isValidTab ? 'fa-check' : 'fa-times');
+        // Handle submit button
+        submitButton.addEventListener('click', e => {
+            e.preventDefault();
+
+            // Validate form before submit
+            if (validator) {
+                validator.validate().then(function (status) {
+                    console.log('validated!');
+
+                    if (status == 'Valid') {
+                        alert('Ok');
+                    } else {
+
+                        Swal.fire({
+                            text: "Sorry, looks like there are some errors detected, please try again.",
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn btn-primary"
+                            }
+                        });
+                    }
+                });
             }
+        })
+    }
+
+    // Public methods
+    return {
+        init: function () {
+            // Init forms
+ 
+            handleSubmit();
         }
-    });
- 
- 
+    };
+}();
+
+// On document ready
+KTUtil.onDOMContentLoaded(function () {
+    KTAppEcommerceSaveCategory.init();
+});
+
 </script>
 <!--end::Custom Javascript-->
 @stop

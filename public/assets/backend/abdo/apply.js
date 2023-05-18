@@ -60,8 +60,8 @@ var KTCareersApply = function () {
 		// Public functions
 		init: function () {
 			// Elements
-			form = document.querySelector('#kt_careers_form');
-			submitButton = document.getElementById('kt_careers_submit_button');
+			form = document.querySelector('#kt_ecommerce_add_category_form');
+			submitButton = document.getElementById('kt_ecommerce_add_category_submit');
 
 		 
 			handleForm();

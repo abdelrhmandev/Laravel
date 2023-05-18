@@ -76,13 +76,21 @@ color: #f1416c;
 
 
        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+       <?php $lang = substr($properties2['regional'],0,2);?>
           <div class="tab-pane fade {{ LaravelLocalization::getCurrentLocaleName() == $properties['name'] ? 'show active':''}}" id="{{ substr($properties['regional'],0,2) }}" role="tabpanel">
              <div class="d-flex flex-column gap-7 gap-lg-10">
                 <div class="card card-flush py-4">
                    <div class="card-body pt-5">
-                      <x-backend.cms.title :lang="$properties['name']" :langshortcode="substr($properties['regional'],0,2)" />
-                      <x-backend.cms.description :lang="$properties['name']" :langshortcode="substr($properties['regional'],0,2)" />
-                   </div>
+
+
+                     <input type="text"
+                     id="title_{{ $lang }}" name="title_{{ $lang }}"
+                     type="text"
+                     class="input-reset ba b--black-20 pa2 mb2 db w-100"
+                     required
+                     data-bv-not-empty___message="title {{ $lang }} is required"
+                     />
+                                    </div>
                 </div>
              </div>
           </div>
@@ -90,10 +98,7 @@ color: #f1416c;
        </div>        
        <x-backend.btns.create :label="'Add'" />
     </div>
-    <div class="d-flex flex-column flex-row-fluid gap-7 w-lg-400px gap-lg-10">
-       <x-backend.cms.image :label="'Imagssssssse'" />
-       <x-backend.cms.status :label="'Ssadas'" />
-    </div>
+ 
  </form>
 
     

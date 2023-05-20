@@ -55,22 +55,24 @@ color: #f1416c;
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
                     <!--begin::Input group-->
-                    <div class="mb-10 fv-row">
+                    <div class="mb-10 fv-row" id="tabs">
                         <!--begin::Label-->
                       
                         <!--end::Label-->
                         <!--begin::Input-->
 
 
-                        <ul class="nav nav-tabsXXXxxx" role="tablist">
+                        <ul id="apptabs" class="nav nav-tabsXXXxxx" role="tablist">
      											 
                             @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                      
                             <li class="nav-item">
-                                <a data-toggle="tab" hreflang="{{$localeCode}}" href="#{{ substr($properties['regional'],0,2) }}" 
+                                <a id="tabs-{{ substr($properties['regional'],0,2) }}" 
+                                data-toggle="tab" hreflang="{{$localeCode}}" 
+                                href="#{{ substr($properties['regional'],0,2) }}" 
                                 class="nav-link {{{ LaravelLocalization::getCurrentLocaleName() == $properties['name'] ? 'active':''}}}">
                                  
-                                    <i class="fa"></i>{{ $properties['native'] }}</a></li>
+                                    <i class="fa" id="icon_{{ substr($properties['regional'],0,2) }}"></i>{{ $properties['native'] }}</a></li>
                             
                             @endforeach
                            </ul>
@@ -78,7 +80,9 @@ color: #f1416c;
                         <div class="tab-contentXXXXXxx">
                         @foreach(LaravelLocalization::getSupportedLocales() as $localeCode2 => $properties2)
                         <?php $lang = substr($properties2['regional'],0,2);?>
-                        <div class="tab-pane fade {{ LaravelLocalization::getCurrentLocaleName() == $properties2['name'] ? 'show active':''}}" id="{{ substr($properties2['regional'],0,2) }}" role="tabpanel">
+                        <div 
+                        class="tab-pane fade {{ LaravelLocalization::getCurrentLocaleName() == $properties2['name'] ? 'show active':''}}" 
+                        id="{{ substr($properties2['regional'],0,2) }}" role="tabpanel">
                 
                       
                             
@@ -169,6 +173,9 @@ var KTAppEcommerceSaveCategory = function () {
     const handleSubmit = () => {
         // Define variables
         let validator;
+        var parentId,tabIndex;
+        var icon_msg;
+
 
         // Get elements
         var form = document.getElementById('kt_ecommerce_add_category_form');
@@ -190,12 +197,6 @@ var KTAppEcommerceSaveCategory = function () {
                             validating: 'fa fa-refresh',
                         }),
                 ////////////////////////////////
-                fieldStatus: new FormValidation.plugins.FieldStatus({
-                    onStatusChanged: function(areFieldsValid) {
-                      
-                       alert(areFieldsValid);
-                    },
-                })
 
                 ///////////////////////////////////
        
@@ -206,27 +207,31 @@ var KTAppEcommerceSaveCategory = function () {
         submitButton.addEventListener('click', e => {
             e.preventDefault();
 
-            // Validate form before submit
-            if (validator) {
-                validator.validate().then(function (status) {
-                    console.log('validated!');
+            
+            validator.on('core.field.valid', function(data) {
 
-                    if (status == 'Valid') {
-                        alert('Ok');
-                    } else {
 
-                        Swal.fire({
-                            text: "Sorry, looks like there are some errors detected, please try again.",
-                            icon: "error",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn btn-primary"
-                            }
-                        });
-                    }
+                parentId = $("#"+data).parents('.tab-pane').attr("id");
+             
+                
+                $('#icon_'+parentId).removeClass('fa').addClass('fa fa-times');
+
+                // icon_msg.removeClass('fa-check').addClass('fa-times');
+
+                // parentId = $('#'+data).parents("ul#apptabs li a.active").attr("id");
+
+                Swal.fire({
+                text: "Sorry, looks like there are some errors detected, please try again.",
+                icon: "error",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, got it!",
+                customClass: {
+                confirmButton: "btn btn-primary"
+                }
                 });
-            }
+
+            });
+
         })
     }
 

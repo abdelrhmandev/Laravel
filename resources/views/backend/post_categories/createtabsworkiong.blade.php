@@ -168,7 +168,16 @@ $('#kt_ecommerce_add_category_form')
         }
     });
 });
- 
+
+
+/////////////
+$( "#tabs" ).tabs();
+    
+    parentId = $("#age").parents("div[id*='tabs']").attr("id");
+    tabIndex = $("li a[href='#"+parentId+"']").parents("li").index();
+    con
+
+    //////////////////
 </script>
 <!--end::Custom Javascript-->
 @stop

@@ -95,7 +95,7 @@ color: #f1416c;
                                 id="title_{{ $lang }}"
                                 required
                                 data-fv-not-empty___message="The assssssssge is required"
-                                
+                                value="sdasd"
                                 >
                                 
                                 </div>
@@ -201,68 +201,37 @@ var KTAppEcommerceSaveCategory = function () {
                 ///////////////////////////////////
        
                 }
-        }).on('core.field.invalid', function(data) {
+        });
 
-            parentId = $("#"+data).parents('.tab-pane').attr("id");
-            var $icon = $('a[href="#' + parentId + '"][data-toggle="tab"]').parent().find('i');
-            $icon.removeClass('fa-check').addClass('fa-times');
-        }).on('core.field.valid', function(data) {
-
-parentId = $("#"+data).parents('.tab-pane').attr("id");
-var $icon = $('a[href="#' + parentId + '"][data-toggle="tab"]').parent().find('i');
-$icon.removeClass('fa-times').addClass('fa-check');
-});
-
-        // Handle submit button
         // Handle submit button
         submitButton.addEventListener('click', e => {
             e.preventDefault();
 
-            // Validate form before submit
-            if (validator) {
-                validator.validate().then(function (status) {
-                    console.log('validated!');
+            
+            validator.on('core.field.valid', function(data) {
 
-                    if (status == 'Valid') {
-                        submitButton.setAttribute('data-kt-indicator', 'on');
 
-                        // Disable submit button whilst loading
-                        submitButton.disabled = true;
+                parentId = $("#"+data).parents('.tab-pane').attr("id");
+             
+                
+                $('#icon_'+parentId).removeClass('fa').addClass('fa fa-times');
 
-                        setTimeout(function () {
-                            submitButton.removeAttribute('data-kt-indicator');
+                // icon_msg.removeClass('fa-check').addClass('fa-times');
 
-                            Swal.fire({
-                                text: "Form has been successfully submitted!",
-                                icon: "success",
-                                buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
-                                customClass: {
-                                    confirmButton: "btn btn-primary"
-                                }
-                            }).then(function (result) {
-                                if (result.isConfirmed) {
-                                    // Enable submit button after loading
-                                    submitButton.disabled = false;
+                // parentId = $('#'+data).parents("ul#apptabs li a.active").attr("id");
 
-                                    // Redirect to customers list page
-                                    window.location = form.getAttribute("data-kt-redirect");
-                                }
-                            });
-                        }, 2000);
-                    } else {
-                        Swal.fire({
-                            text: "Sorry, looks like there are some errors detected, please try again.",
-                            icon: "error",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn btn-primary"
-                            }
-                        });
-                    }
+                Swal.fire({
+                text: "Sorry, looks like there are some errors detected, please try again.",
+                icon: "error",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, got it!",
+                customClass: {
+                confirmButton: "btn btn-primary"
+                }
                 });
-            }
+
+            });
+
         })
     }
 

@@ -31,18 +31,8 @@
 							 
 								<div class="d-flex flex-column gap-7 gap-lg-10 w-100 mb-7 me-lg-10">
 									<!--begin:::Tabs-->
-									<ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-semibold mb-n2">
-										<!--begin:::Tab item-->
-										<li class="nav-item">
-											<a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_ecommerce_add_product_general">General</a>
-										</li>
-										<!--end:::Tab item-->
-										<!--begin:::Tab item-->
-										<li class="nav-item">
-											<a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_ecommerce_add_product_advanced">Advanced</a>
-										</li>
-										<!--end:::Tab item-->
-									</ul>
+									
+                                    <x-backend.langs.ulTabs />
 									<!--end:::Tabs-->
 									<!--begin::Tab content-->
 									<div class="tab-content">
@@ -61,23 +51,33 @@
 													<!--begin::Card body-->
 													<div class="card-body pt-0">
 
-														<x-backend.cms.title />
+														<div class="mb-10 fv-row">
+															<!--begin::Label-->
+															<label class="required form-label">Product Name</label>
+															<!--end::Label-->
+															<!--begin::Input-->
+															<input type="text" name="product_name" class="form-control mb-2" placeholder="Product name" value="" />
+															<!--end::Input-->
+															<!--begin::Description-->
+															<div class="text-muted fs-7">A product name is required and recommended to be unique.</div>
+															<!--end::Description-->
+														</div>
 
 														<!--begin::Input group-->
 														 
 														<!--end::Input group-->
 														<!--begin::Input group-->
-														<x-backend.cms.description />
+														 
 														<!--end::Input group-->
 													</div>
 													<!--end::Card header-->
 												</div>
 												<!--end::General options-->
 												<!--begin::Media-->
-												<x-backend.cms.media />
+												 
 												<!--end::Media-->
 												<!--begin::Pricing-->
-												<x-backend.ecommerce.pricing />
+												 
 												<!--end::Pricing-->
 											</div>
 										</div>
@@ -86,35 +86,54 @@
 										<div class="tab-pane fade" id="kt_ecommerce_add_product_advanced" role="tab-panel">
 											<div class="d-flex flex-column gap-7 gap-lg-10">
 												<!--begin::Inventory-->
-												<x-backend.ecommerce.inventory />
+												<div class="card card-flush py-4">
+													<!--begin::Card header-->
+													<div class="card-header">
+														<div class="card-title">
+															<h2>Inventory</h2>
+														</div>
+													</div>
+													<!--end::Card header-->
+													<!--begin::Card body-->
+													<div class="card-body pt-0">
+														<!--begin::Input group-->
+														<div class="mb-10 fv-row">
+															<!--begin::Label-->
+															<label class="required form-label">SKU</label>
+															<!--end::Label-->
+															<!--begin::Input-->
+															<input type="text" name="sku" class="form-control mb-2" placeholder="SKU Number" value="" />
+															<!--end::Input-->
+															<!--begin::Description-->
+															<div class="text-muted fs-7">Enter the product SKU.</div>
+															<!--end::Description-->
+														</div>
+														<!--end::Input group-->
+														<!--begin::Input group-->
+														 
+														<!--end::Input group-->
+														<!--begin::Input group-->
+														 
+														<!--end::Input group-->
+														<!--begin::Input group-->
+														 
+														<!--end::Input group-->
+													</div>
+													<!--end::Card header-->
+												</div>
 												<!--end::Inventory-->
 												<!--begin::Variations-->
-												
-												<x-backend.ecommerce.variations />
-												<!--end::Variations-->
-												<!--begin::Shipping-->
-												<x-backend.ecommerce.shippings />
+											 
 												<!--end::Shipping-->
 												<!--begin::Meta options-->
-												<x-backend.cms.seo />
+												 
 												<!--end::Meta options-->
 											</div>
 										</div>
 										<!--end::Tab pane-->
 									</div>
 									<!--end::Tab content-->
-									<div class="d-flex justify-content-end">
-										<!--begin::Button-->
-										<a href="../../demo7/dist/apps/ecommerce/catalog/products.html" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5">Cancel</a>
-										<!--end::Button-->
-										<!--begin::Button-->
-										<button type="submit" id="kt_ecommerce_add_product_submit" class="btn btn-primary">
-											<span class="indicator-label">Save Changes</span>
-											<span class="indicator-progress">Please wait...
-											<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-										</button>
-										<!--end::Button-->
-									</div>
+									<x-backend.btns.create />
 								</div>
 							 
 								<div class="d-flex flex-column flex-row-fluid gap-7 w-lg-400px gap-lg-10">

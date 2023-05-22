@@ -3,7 +3,7 @@
     <div class="card-header">
         <!--begin::Card title-->
         <div class="card-title">
-            <h2>{{ $label }}</h2>     
+            <h2>ssssssssssss</h2>     
         </div>
         <!--end::Card title-->
     </div>

@@ -14,9 +14,44 @@
 		type="text/css" />
 @endif
 @stop
+
+ 
+	<style>
+
+
+.ribbon.ribbon-right .ribbon-target {
+  border-top-left-radius: 0.42rem;
+  border-bottom-left-radius: 0.42rem;
+}
+.ribbon .ribbon-target {
+display: -webkit-box;
+display: -ms-flexbox;
+display: flex;
+-webkit-box-pack: center;
+-ms-flex-pack: center;
+justify-content: center;
+-webkit-box-align: center;
+-ms-flex-align: center;
+align-items: center;
+padding: 5px 10px;
+position: absolute;
+z-index: 1;
+ 
+}
+</style>
+
 @section('content')
 
 <div class="container-xxl" id="kt_content_container">
+
+
+
+	
+
+
+
+
+
 		<form id="kt_ecommerce_add_product_form" class="form d-flex flex-column flex-lg-row" data-kt-redirect="../../demo7/dist/apps/ecommerce/catalog/products.html">							 
 			<div class="d-flex flex-column gap-7 gap-lg-10 w-100 mb-7 me-lg-10">
 				<!--begin:::Tabs-->									

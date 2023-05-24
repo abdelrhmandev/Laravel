@@ -5,7 +5,7 @@
             <div class="card card-flush py-4">
                 
                     <div class="card-header ribbon ribbon-top ribbon-ver" style="min-height:10px !important;">
-                        <div class="ribbon-target" style="top: -7px; @if (app()->getLocale() == 'ar') left: @else right:  @endif 20px;">                         
+                        <div class="ribbon-target symbol symbol-25px symbol-circle" style="top: -7px; @if (app()->getLocale() == 'ar') left: @else right:  @endif 20px;">                         
                                 <img class="carousel-custom" width="25" height="25" src="{{ asset('assets/backend/media/flags/'.substr($properties['regional'],0,2).'.svg')}}"/>
                             </div>                                            
                     </div>

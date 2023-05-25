@@ -15,10 +15,24 @@
                         <input type="text" id="title{{ substr($properties['regional'],0,2) }}" name="title_{{ substr($properties['regional'],0,2) }}" class="form-control mb-2"/>
                      </div>
 
-                    <div class="mb-10 fv-row">
+                    {{-- <div class="mb-10 fv-row">
                         <label class="required form-label" for="description{{ substr($properties['regional'],0,2) }}">{{ __('site.description')}}</label>
                             <textarea rows="4" cols="30" type="text" id="description_{{ substr($properties['regional'],0,2) }}" name="description_{{ substr($properties['regional'],0,2) }}" class="editor @error('description_'.substr($properties['regional'],0,2)) is-invalid @enderror"/>{{ old('description_'.substr($properties['regional'],0,2)) }}</textarea>                            
-                     </div>
+                     </div> --}}
+
+
+                     <div class="mb-10 fv-row">
+                        <!--begin::Label-->
+                        <label class="required form-label" for="description{{ substr($properties['regional'],0,2) }}">{{ __('site.description')}}</label>
+                        <!--end::Label-->
+                        <!--begin::Editor-->
+                        <div id="description_div_{{ substr($properties['regional'],0,2) }}" class="min-h-100px mb-2"></div>
+                        <!--end::Editor-->
+                        <!--begin::Description-->
+                         <!--end::Description-->
+                    </div>
+
+
                    
                 </div>
             </div>

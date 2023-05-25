@@ -95,7 +95,7 @@ z-index: 1;
     <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js') }}"></script>
 
     <!--begin::Custom Javascript(used for this page only)-->
-    <script src="{{ asset('assets/backend/js/custom/apps/ecommerce/catalog/save-category.js') }}"></script>
+    {{-- <script src="{{ asset('assets/backend/js/custom/apps/ecommerce/catalog/save-category.js') }}"></script> --}}
     <script src="{{ asset('assets/backend/js/widgets.bundle.js') }}"></script>
     <script src="{{ asset('assets/backend/js/custom/widgets.js') }}"></script>
     <script src="{{ asset('assets/backend/js/custom/apps/chat/chat.js') }}"></script>
@@ -105,18 +105,75 @@ z-index: 1;
 	<script src="{{ asset('assets/backend/plugins/custom/ckeditor/ckeditor-classic.bundle.js') }}"></script>
 
 
-    @include('backend.form')
+    {{-- @include('backend.form') --}}
 	<script>
-	let elements = document.querySelectorAll('.editor')
-	for (let element of elements) {
-	ClassicEditor.create(element, {})
-	.then( editor => {
-	element.ckEditor = editor;
-	} )
-	.catch( err => {
-	console.error( err.stack );
-	} );
-	}
+	////////////
+	"use strict";
+
+// Class definition
+var KTAppEcommerceSaveCategory = function () {
+
+    // Private functions
+
+		// $("#description_en").val(
+		// $("#description_Div_en").html()
+		// );
+
+    // Init quill editor
+    const initQuill = () => {
+        // Define all elements for quill editor
+        const elements = [
+            '#description_div_en',
+			'#description_div_ar'
+        ];
+
+        // Loop all elements
+        elements.forEach(element => {
+            // Get quill element
+            let quill = document.querySelector(element);
+
+            // Break if element not found
+            if (!quill) {
+                return;
+            }
+
+            // Init quill --- more info: https://quilljs.com/docs/quickstart/
+            quill = new Quill(element, {
+                modules: {
+                    toolbar: [
+                        [{
+                            header: [1, 2, false]
+                        }],
+                        ['bold', 'italic', 'underline'],
+                        ['image', 'code-block']
+                    ]
+                },
+                placeholder: 'Type your texasdast here...',
+                theme: 'snow' // or 'bubble'
+            });
+        });
+
+    }
+
+    
+
+    // Public methods
+    return {
+        init: function () {
+            // Init forms
+            initQuill();
+ 
+        }
+    };
+}();
+
+// On document ready
+KTUtil.onDOMContentLoaded(function () {
+    KTAppEcommerceSaveCategory.init();
+});
+
+	/////////////
+ 
 	</script>
    
     <!--end::Custom Javascript-->

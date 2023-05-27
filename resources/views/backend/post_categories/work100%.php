@@ -181,32 +181,32 @@ var KTAppEcommerceSaveCategory = function () {
         var form = document.getElementById('kt_ecommerce_add_category_form');
         var submitButton = document.getElementById('kt_ecommerce_add_category_submit');
 
-        // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
-        validator = FormValidation.formValidation(form,{
- 
-                plugins: {
-                    declarative: new FormValidation.plugins.Declarative({
-                            html5Input: true,
-                        }),
-                        trigger: new FormValidation.plugins.Trigger(),
-                        tachyons: new FormValidation.plugins.Tachyons(),
-                        submitButton: new FormValidation.plugins.SubmitButton(),
-                        icon: new FormValidation.plugins.Icon({
-                            valid: 'fa fa-check',
-                            invalid: 'fa fa-times',
-                            validating: 'fa fa-refresh',
-                        }),
-                ////////////////////////////////
+// Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
+validator = FormValidation.formValidation(form,{
 
-                ///////////////////////////////////
-       
-                }
-        }).on('core.field.invalid', function(data) {
+plugins: {
+    declarative: new FormValidation.plugins.Declarative({
+            html5Input: true,
+        }),
+        trigger: new FormValidation.plugins.Trigger(),
+        tachyons: new FormValidation.plugins.Tachyons(),
+        submitButton: new FormValidation.plugins.SubmitButton(),
+        icon: new FormValidation.plugins.Icon({
+            valid: 'fa fa-check',
+            invalid: 'fa fa-times',
+            validating: 'fa fa-refresh',
+        }),
+////////////////////////////////
 
-            parentId = $("#"+data).parents('.tab-pane').attr("id");
-            var $icon = $('a[href="#' + parentId + '"][data-toggle="tab"]').parent().find('i');
-            $icon.removeClass('fa-check').addClass('fa-times');
-        }).on('core.field.valid', function(data) {
+///////////////////////////////////
+
+}
+}).on('core.field.invalid', function(data) {
+
+parentId = $("#"+data).parents('.tab-pane').attr("id");
+var $icon = $('a[href="#' + parentId + '"][data-toggle="tab"]').parent().find('i');
+$icon.removeClass('fa-check').addClass('fa-times');
+}).on('core.field.valid', function(data) {
 
 parentId = $("#"+data).parents('.tab-pane').attr("id");
 var $icon = $('a[href="#' + parentId + '"][data-toggle="tab"]').parent().find('i');

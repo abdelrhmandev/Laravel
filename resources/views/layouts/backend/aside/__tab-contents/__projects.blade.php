@@ -56,7 +56,7 @@
                             <a href="#" class="d-flex text-dark text-hover-primary align-items-center mb-5">
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-40px me-4">
-                                    <img src="{{ asset('assets/backend/media/avatars/300-6.jpg')}}"" alt="" />
+                                    <img src="{{ asset('assets/backend/media/avatars/300-6.jpg')}}" alt="" />
                                 </div>
                                 <!--end::Symbol-->
                                 <!--begin::Title-->
@@ -71,7 +71,7 @@
                             <a href="#" class="d-flex text-dark text-hover-primary align-items-center mb-5">
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-40px me-4">
-                                    <img src="{{ asset('assets/backend/media/avatars/300-2.jpg')}}"" alt="" />
+                                    <img src="{{ asset('assets/backend/media/avatars/300-2.jpg')}}" alt="" />
                                 </div>
                                 <!--end::Symbol-->
                                 <!--begin::Title-->
@@ -86,7 +86,7 @@
                             <a href="#" class="d-flex text-dark text-hover-primary align-items-center mb-5">
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-40px me-4">
-                                    <img src="{{ asset('assets/backend/media/avatars/300-9.jpg')}}"" alt="" />
+                                    <img src="{{ asset('assets/backend/media/avatars/300-9.jpg')}}" alt="" />
                                 </div>
                                 <!--end::Symbol-->
                                 <!--begin::Title-->
@@ -101,7 +101,7 @@
                             <a href="#" class="d-flex text-dark text-hover-primary align-items-center mb-5">
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-40px me-4">
-                                    <img src="{{ asset('assets/backend/media/avatars/300-14.jpg')}}"" alt="" />
+                                    <img src="{{ asset('assets/backend/media/avatars/300-14.jpg')}}" alt="" />
                                 </div>
                                 <!--end::Symbol-->
                                 <!--begin::Title-->
@@ -116,7 +116,7 @@
                             <a href="#" class="d-flex text-dark text-hover-primary align-items-center mb-5">
                                 <!--begin::Symbol-->
                                 <div class="symbol symbol-40px me-4">
-                                    <img src="{{ asset('assets/backend/media/avatars/300-11.jpg')}}"" alt="" />
+                                    <img src="{{ asset('assets/backend/media/avatars/300-11.jpg')}}" alt="" />
                                 </div>
                                 <!--end::Symbol-->
                                 <!--begin::Title-->

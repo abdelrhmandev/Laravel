@@ -176,15 +176,14 @@ var KTAppHandleSubmitForm = function() {
         // Define variables
         let validator;
         let parentId;
-
+        let tabIndex;
+        let icon;
 
         // Get elements
         const form = document.getElementById('kt_ecommerce_add_category_form');
         const submitButton = document.getElementById('kt_ecommerce_add_category_submit');
-
         // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
 
-        // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
         validator = FormValidation.formValidation(form, {
 
             plugins: {
@@ -211,14 +210,16 @@ var KTAppHandleSubmitForm = function() {
             }
         }).on('core.field.invalid', function(data) {
 
+            
+
             parentId = $("#" + data).parents('.tab-pane').attr("id");
-            var $icon = $('a[href="#' + parentId + '"][data-toggle="tab"]').parent().find('i');
-            $icon.removeClass('fa-check').addClass('fa-times');
+            icon = $('a[href="#' + parentId + '"][data-bs-toggle="tab"]').parent().find('i');
+            icon.removeClass('fa-check').addClass('fa-times');
         }).on('core.field.valid', function(data) {
 
             parentId = $("#" + data).parents('.tab-pane').attr("id");
-            var $icon = $('a[href="#' + parentId + '"][data-toggle="tab"]').parent().find('i');
-            $icon.removeClass('fa-times').addClass('fa-check');
+            icon = $('a[href="#' + parentId + '"][data-bs-toggle="tab"]').parent().find('i');
+            icon.removeClass('fa-times').addClass('fa-check');
         });
 
         // Handle submit button

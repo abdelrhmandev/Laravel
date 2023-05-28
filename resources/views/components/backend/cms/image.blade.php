@@ -5,6 +5,13 @@
         <div class="card-title">
             <h2>ssssssssssss</h2>     
         </div>
+
+{{-- 
+    required
+data-fv-not-empty___message="{{  __('validation.required',['attribute'=>'image']) }}"
+fl 
+form-control
+ --}}
         <!--end::Card title-->
     </div>
     <!--end::Card header-->

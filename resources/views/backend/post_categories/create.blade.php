@@ -67,6 +67,8 @@ z-index: 1;
 <!--begin::Tab content-->
 <x-backend.langs.LangInputs />
 <!--end::Tab content-->
+
+
 <x-backend.btns.create />
 </div>							 
 <div class="d-flex flex-column flex-row-fluid gap-7 w-lg-400px gap-lg-10">

@@ -17,9 +17,9 @@
                     <div class="mb-5 fv-row fl">
                         <label class="required form-label" for="title{{ substr($properties['regional'],0,2) }}">{{ __('site.title') }}</label>
                         <input type="text" id="title_{{ substr($properties['regional'],0,2) }}" name="title_{{ substr($properties['regional'],0,2) }}" 
-                        class="form-control mb-2"                        
+                         class="form-control mb-2"                        
                         required
-                        data-fv-not-empty___message="{{  __('validation.required',['attribute'=>'title'.'&nbsp;'.substr($properties['regional'],0,2)]) }}"
+                        data-fv-not-empty___message="The assssssssge is required"
                         />
                      </div>
 
@@ -38,6 +38,4 @@
         </div>
     </div>
     @endforeach
-
-
 </div>

@@ -65,23 +65,15 @@
 
 
 
-        <form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row"
-            data-kt-redirect="../../demo7/dist/apps/ecommerce/catalog/products.html" enctype="multipart/form-data">
+        <form id="CreatePostCategory" action="{{ $storeUrl }}" class="form d-flex flex-column flex-lg-row"
+            data-kt-redirect="{{ $redirectUrl }}" enctype="multipart/form-data">
             <div class="d-flex flex-column gap-7 gap-lg-10 w-100 mb-7 me-lg-10">
                 <!--begin:::Tabs-->
                 <x-backend.langs.ulTabs />
                 <!--end:::Tabs-->
                 <!--begin::Tab content-->
-
-
                 <x-backend.langs.LangInputs />
-
                 <!--end::Tab content-->
-
-
-
-
-
                 <x-backend.btns.create />
             </div>
             <div class="d-flex flex-column flex-row-fluid gap-7 w-lg-400px gap-lg-10">
@@ -109,5 +101,10 @@
     <!--begin::Custom Javascript(used for this page only)-->
     <script src="{{ asset('assets/backend/js/widgets.bundle.js') }}"></script>
     <script src="{{ asset('assets/backend/js/custom/handleFormSubmit.js') }}"></script>
+
+    <script>
+        handleFormSubmit();
+    </script>
+
     {{-- @include('backend.form') --}}
 @stop

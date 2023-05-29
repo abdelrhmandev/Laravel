@@ -21,24 +21,15 @@ class PostCategoryController extends Controller
 
     public function store(PostCategoryRequest $request){
 
-
- 
-   
         $validated = $request->validated();
-
-
-      
-        
-        
         $validated['status'] = isset($request->status) ? 1 : 0;
-        $validated['parent_id'] = isset($request->parent_id) ? $request->parent_id : 0;
+        // $validated['parent_id'] = isset($request->parent_id) ? $request->parent_id : 0;
         $validated['image'] = (!empty($request->image)) ? $this->uploadOne($request->image, 'post_categories') : NULL;    
        
        
         $query = PostCategory::create($validated);
  
        
-        dd();
       
         DB::beginTransaction();   
         try{
@@ -66,7 +57,17 @@ class PostCategoryController extends Controller
         if (view()->exists('backend.post_categories.index')) {
             // $post_categories = District::with(['district_info','area.area_info','area.city.city_info','area.city.country'])->get(); 
 
-            return view('backend.post_categories.index');
+
+            $compact = [
+                'storeUrl'   => route('post_category.store'), 
+                'redirectUrl'    => route('post_category.index'),
+                // 'trans_file'  => $this->trans_file,
+                ''
+    
+            ];
+
+            
+            return view('backend.post_categories.index',$compact);
         }
     }
         public function create(){

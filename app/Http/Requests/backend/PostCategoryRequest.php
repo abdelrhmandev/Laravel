@@ -38,7 +38,7 @@ class PostCategoryRequest extends FormRequest
 
 
 
-        $rules['status'] = 'required|in:published,unpublished'; 
+        // $rules['status'] = 'required|in:published,unpublished'; 
 
         $rules['image'] =  'nullable|mimes:jpg,jpeg,png|max:2048';
  

@@ -3,7 +3,7 @@
     <div class="card-header">
         <!--begin::Card title-->
         <div class="card-title">
-            <h2>{{ $label ?? 'sssssssssss'}}</h2>
+            <h2> Status</h2>
         </div>
         <!--end::Card title-->
         <!--begin::Card toolbar-->

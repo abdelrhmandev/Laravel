@@ -1,41 +1,42 @@
-<div class="tab-content">
-    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+<p class="bg-info text-inverse-info p-3 fw-semibold fw-6">
+    SEO Meta Options ( <i>Optional</i> )
+</p>
+<div class="mb-8 fv-row">
+    <label class="form-label" for="meta_tag_title{{ substr($properties['regional'], 0, 2) }}">
+        Meta Tag Title </label>
+    <input type="text" id="meta_tag_title_{{ substr($properties['regional'], 0, 2) }}"
+        name="meta_tag_title_{{ substr($properties['regional'], 0, 2) }}" class="form-control mb-2" />
 
-    <div class="tab-pane fade {{ LaravelLocalization::getCurrentLocaleName() == $properties['name'] ? 'show active':''}}" id="{{ substr($properties['regional'],0,2) }}" role="tabpanel">
-        <div class="d-flex flex-column gap-7 gap-lg-10">
-            <div class="card card-flush py-4">
-
-
-
-                <div class="card-header ribbon ribbon-top ribbon-ver" style="min-height:10px !important;">
-    <div class="ribbon-target symbol symbol-25px symbol-circle" style="top: -7px; @if (app()->getLocale() == 'ar') left: @else right:  @endif 20px;">                         
-            <img class="carousel-custom" width="25" height="25" src="{{ asset('assets/backend/media/flags/'.substr($properties['regional'],0,2).'.svg')}}"/>
-        </div>                                            
+    <div class="text-muted fs-7">Set a meta tag title. Recommended to be simple and precise
+        keywords.</div>
 </div>
 
-                    <div class="card-body pt-0">
-                    <div class="mb-5 fv-row fl">
-                        <label class="required form-label" for="title{{ substr($properties['regional'],0,2) }}">{{ __('site.title') }}</label>
-                        <input type="text" id="title_{{ substr($properties['regional'],0,2) }}" name="title_{{ substr($properties['regional'],0,2) }}" 
-                         class="form-control mb-2"                        
-                        required
-                        data-fv-not-empty___message="The assssssssge is required"
-                        />
-                     </div>
+
+<div class="mb-5 fv-row">
+    <!--begin::Label-->
+    <label class="form-label" for="meta_tag_description{{ substr($properties['regional'], 0, 2) }}"> Meta Tag
+        Description </label>
+    <div id="meta_tag_description_div_{{ substr($properties['regional'], 0, 2) }}" class="min-h-100px mb-2"></div>
+    <textarea class="d-none" rows="4" cols="30" type="text"
+        id="meta_tag_description{{ substr($properties['regional'], 0, 2) }}"
+        name="meta_tag_description{{ substr($properties['regional'], 0, 2) }}" /></textarea>
+    <div class="text-muted fs-7">Set a meta tag description to the category for increased SEO
+        ranking.</div>
+</div>
 
 
-                     <div class="mb-5 fv-row">
-                        <!--begin::Label-->
-                        <label class="form-label" for="description{{ substr($properties['regional'],0,2) }}">{{ __('site.description')}}</label>
-                        <div id="description_div_{{ substr($properties['regional'],0,2) }}" class="min-h-100px mb-2"></div>
-                        <textarea class="d-none" rows="4" cols="30" type="text" id="description_{{ substr($properties['regional'],0,2) }}" name="description_{{ substr($properties['regional'],0,2) }}" class="editor @error('description_'.substr($properties['regional'],0,2)) is-invalid @enderror"/></textarea>
-                    </div>
-
-
-                   
-                </div>
-            </div>
-        </div>
+<div class="mb-5 fv-row">
+    <!--begin::Label-->
+    <label class="form-label">Meta Tag Keywords</label>
+    <!--end::Label-->
+    <!--begin::Editor-->
+    <input id="kt_ecommerce_add_category_meta_keywords" name="kt_ecommerce_add_category_meta_keywords"
+        class="form-control mb-2" />
+    <!--end::Editor-->
+    <!--begin::Description-->
+    <div class="text-muted fs-7">Set a list of keywords that the category is related to.
+        Separate the keywords by adding a comma
+        <code>,</code>between each keyword.
     </div>
-    @endforeach
+    <!--end::Description-->
 </div>

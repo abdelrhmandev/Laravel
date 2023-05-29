@@ -3,23 +3,23 @@
     <div class="card-header">
         <!--begin::Card title-->
         <div class="card-title">
-            <h2>ssssssssssss</h2>     
+            <h2>Image</h2>     
         </div>
 
-{{-- 
-    required
-data-fv-not-empty___message="{{  __('validation.required',['attribute'=>'image']) }}"
-fl 
-form-control
- --}}
-        <!--end::Card title-->
+ 
+
     </div>
     <!--end::Card header-->
     <!--begin::Card body-->
-    <div class="card-body text-center pt-0">
+    <div class="card-body text-center pt-0 fl">
         <!--begin::Image input-->
         <!--begin::Image input placeholder-->
-        <style>.image-input-placeholder { background-image: url('assets/media/svg/files/blank-image.svg'); } [data-theme="dark"] .image-input-placeholder { background-image: url('assets/media/svg/files/blank-image-dark.svg'); }</style>
+        <style>.image-input-placeholder { 
+            background-image: url({{ asset('assets/backend/media/svg/files/blank-image.svg')}}); 
+            } [data-theme="dark"] .image-input-placeholder { 
+                background-image: url({{ asset('assets/backend/media/svg/files/blank-image.svg')}}); 
+            }
+            </style>
         <!--end::Image input placeholder-->
         <div class="image-input image-input-empty image-input-outline image-input-placeholder mb-3" data-kt-image-input="true">
             <!--begin::Preview existing image-->
@@ -29,8 +29,16 @@ form-control
             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change image">
                 <i class="bi bi-pencil-fill fs-7"></i>
                 <!--begin::Inputs-->
-                <input type="file" name="image" accept=".png, .jpg, .jpeg" />
+              
+                <input type="file" name="image" id="image"
+                accept=".png, .jpg, .jpeg"
+                data-fv-file="true" 
+                data-fv-file___extension="jpeg,jpg,png" 
+                data-fv-file___type="image/jpeg,image/jpg,image/png" 
+                data-fv-file___message="{{  __('validation.mimetypes',['attribute'=>'image','values'=>'*.png, *.jpg and *.jpeg']) }}"
+                />
                 <input type="hidden" name="image_remove" />
+               
                 <!--end::Inputs-->
             </label>
             <!--end::Label-->

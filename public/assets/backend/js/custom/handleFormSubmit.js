@@ -14,7 +14,9 @@ var KTAppHandleSubmitForm = function() {
         // Define all elements for quill editor
         const elements = [
             '#description_div_en',
-            '#description_div_ar'
+            '#description_div_ar',
+            '#meta_tag_description_div_en',
+            '#meta_tag_description_div_ar'
         ];
 
         // Loop all elements
@@ -45,7 +47,7 @@ var KTAppHandleSubmitForm = function() {
 
     }
 
-    /*
+  
     // Init tagify
     const initTagify = () => {
         // Define all elements for tagify
@@ -67,60 +69,16 @@ var KTAppHandleSubmitForm = function() {
             new Tagify(tagify);
         });
     }
+ 
+ 
+ 
 
-    // Init form repeater --- more info: https://github.com/DubFriend/jquery.repeater
-    const initFormRepeater = () => {
-        $('#kt_ecommerce_add_category_conditions').repeater({
-            initEmpty: false,
-
-            defaultValues: {
-                'text-input': 'foo'
-            },
-
-            show: function () {
-                $(this).slideDown();
-
-                // Init select2 on new repeated items
-                initConditionsSelect2();
-            },
-
-            hide: function (deleteElement) {
-                $(this).slideUp(deleteElement);
-            }
-        });
-    }
-
-    // Init condition select2
-    const initConditionsSelect2 = () => {
-        // Tnit new repeating condition types
-        const allConditionTypes = document.querySelectorAll('[data-kt-ecommerce-catalog-add-category="condition_type"]');
-        allConditionTypes.forEach(type => {
-            if ($(type).hasClass("select2-hidden-accessible")) {
-                return;
-            } else {
-                $(type).select2({
-                    minimumResultsForSearch: -1
-                });
-            }
-        });
-
-        // Tnit new repeating condition equals
-        const allConditionEquals = document.querySelectorAll('[data-kt-ecommerce-catalog-add-category="condition_equals"]');
-        allConditionEquals.forEach(equal => {
-            if ($(equal).hasClass("select2-hidden-accessible")) {
-                return;
-            } else {
-                $(equal).select2({
-                    minimumResultsForSearch: -1
-                });
-            }
-        });
-    }
+ 
 
     // Category status handler
     const handleStatus = () => {
-        const target = document.getElementById('kt_ecommerce_add_category_status');
-        const select = document.getElementById('kt_ecommerce_add_category_status_select');
+        const target = document.getElementById('status');
+        const select = document.getElementById('status_select');
         const statusClasses = ['bg-success', 'bg-warning', 'bg-danger'];
 
         $(select).on('change', function (e) {
@@ -129,16 +87,16 @@ var KTAppHandleSubmitForm = function() {
             switch (value) {
                 case "published": {
                     target.classList.remove(...statusClasses);
-                    target.classList.add('bg-success');
+                    target.classList.add('bg-primary');
                     hideDatepicker();
                     break;
                 }
-                case "scheduled": {
+                /*case "scheduled": {
                     target.classList.remove(...statusClasses);
                     target.classList.add('bg-warning');
                     showDatepicker();
                     break;
-                }
+                }*/
                 case "unpublished": {
                     target.classList.remove(...statusClasses);
                     target.classList.add('bg-danger');
@@ -149,34 +107,15 @@ var KTAppHandleSubmitForm = function() {
                     break;
             }
         });
-
-
-        // Handle datepicker
-        const datepicker = document.getElementById('kt_ecommerce_add_category_status_datepicker');
-
-        // Init flatpickr --- more info: https://flatpickr.js.org/
-        $('#kt_ecommerce_add_category_status_datepicker').flatpickr({
-            enableTime: true,
-            dateFormat: "Y-m-d H:i",
-        });
-
-        const showDatepicker = () => {
-            datepicker.parentNode.classList.remove('d-none');
-        }
-
-        const hideDatepicker = () => {
-            datepicker.parentNode.classList.add('d-none');
-        }
     }
-    */
+ 
     // Condition type handler
 
     // Submit form handler
     const handleSubmit = () => {
         // Define variables
         let validator;
-        let parentId;
-        let tabIndex;
+        let parentId;        
         let icon;
 
         // Get elements
@@ -209,9 +148,6 @@ var KTAppHandleSubmitForm = function() {
 
             }
         }).on('core.field.invalid', function(data) {
-
-            
-
             parentId = $("#" + data).parents('.tab-pane').attr("id");
             icon = $('a[href="#' + parentId + '"][data-bs-toggle="tab"]').parent().find('i');
             icon.removeClass('fa-check').addClass('fa-times');
@@ -279,13 +215,8 @@ var KTAppHandleSubmitForm = function() {
         init: function() {
             // Init forms
             initQuill();
-            // initTagify();
-            // initFormRepeater();
-            // initConditionsSelect2();
-
-            // Handle forms
-            // handleStatus();
-            // handleConditions();
+            initTagify();
+            handleStatus();
             handleSubmit();
         }
     };

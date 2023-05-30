@@ -107,7 +107,7 @@
     <script>
 
  
-    handleFormSubmitFunc('CreatePostCategory');
+    handleFormSubmitFunc();
    
 
 

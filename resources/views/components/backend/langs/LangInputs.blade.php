@@ -38,7 +38,7 @@
                             <textarea class="d-none" rows="4" cols="30" type="text"
                                 id="description_{{ substr($properties['regional'], 0, 2) }}"
                                 name="description_{{ substr($properties['regional'], 0, 2) }}"
-                                class="editor @error('description_' . substr($properties['regional'], 0, 2)) is-invalid @enderror" /></textarea>
+                                class="editor @error('description_' . substr($properties['regional'], 0, 2)) is-invalid @enderror"/></textarea>
                         </div>
 
                         

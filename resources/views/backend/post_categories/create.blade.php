@@ -65,7 +65,7 @@
 
 
 
-        <form id="CreatePostCategory" action="{{ $storeUrl }}" class="form d-flex flex-column flex-lg-row"
+        <form id="PostCategoryForm" data-route-url="{{ $storeUrl }}" class="form d-flex flex-column flex-lg-row"
             data-kt-redirect="{{ $redirectUrl }}"
             data-form-submit-error="{{ __('site.form_submit_error')}}"
             enctype="multipart/form-data">
@@ -75,6 +75,8 @@
                 <!--end:::Tabs-->
                 <!--begin::Tab content-->
                 <x-backend.langs.LangInputs />
+
+                
                 <!--end::Tab content-->
                 <x-backend.btns.create />
             </div>
@@ -106,8 +108,15 @@
 
     <script>
 
+
+// On document ready
+KTUtil.onDOMContentLoaded(function() {
+   handleFormSubmitFunc('PostCategoryForm',JSON.parse('{!! json_encode(LaravelLocalization::getSupportedLocales()) !!}'));
+});
+
+
  
-    handleFormSubmitFunc();
+
    
 
 

@@ -20,23 +20,8 @@
     <textarea class="d-none" rows="4" cols="30" type="text"
         id="meta_tag_description{{ substr($properties['regional'], 0, 2) }}"
         name="meta_tag_description{{ substr($properties['regional'], 0, 2) }}" /></textarea>
-    <div class="text-muted fs-7">Set a meta tag description to the category for increased SEO
-        ranking.</div>
+    <div class="text-muted fs-7">Meta tag description should be between 50-155 characters.</div>
 </div>
 
 
-<div class="mb-5 fv-row">
-    <!--begin::Label-->
-    <label class="form-label">Meta Tag Keywords</label>
-    <!--end::Label-->
-    <!--begin::Editor-->
-    <input id="kt_ecommerce_add_category_meta_keywords" name="kt_ecommerce_add_category_meta_keywords"
-        class="form-control mb-2" />
-    <!--end::Editor-->
-    <!--begin::Description-->
-    <div class="text-muted fs-7">Set a list of keywords that the category is related to.
-        Separate the keywords by adding a comma
-        <code>,</code>between each keyword.
-    </div>
-    <!--end::Description-->
-</div>
+ 

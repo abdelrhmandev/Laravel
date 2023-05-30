@@ -11,6 +11,7 @@ class PostCategoryTranslation extends Model
     protected $fillable = [
 		'category_id',
 		'title',
+        'description',
         'slug',
 		'lang',
 	];

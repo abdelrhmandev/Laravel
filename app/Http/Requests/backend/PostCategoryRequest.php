@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Requests\backend;
 use Illuminate\Foundation\Http\FormRequest;
-// use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
 class PostCategoryRequest extends FormRequest
 {
@@ -40,7 +40,7 @@ class PostCategoryRequest extends FormRequest
 
         // $rules['status'] = 'required|in:published,unpublished'; 
 
-        $rules['image'] =  'nullable|mimes:jpg,jpeg,png|max:2048';
+        // $rules['image'] =  'nullable|mimes:jpg,jpeg,png|max:2048';
  
         // $rules['parent'] = 'required|exists:categories,id';
 
@@ -54,12 +54,12 @@ class PostCategoryRequest extends FormRequest
 
 
  
-    // public function failedValidation(Validator $validator)
-    // {
-    //     throw new HttpResponseException(response()->json([
-    //         'status'   => false,
-    //         'msg'      => $validator->errors()
-    //     ]));
-    // }
+    public function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'status'   => false,
+            'msg'      => $validator->errors()
+        ]));
+    }
     
 }

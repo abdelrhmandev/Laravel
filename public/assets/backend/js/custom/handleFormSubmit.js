@@ -179,10 +179,10 @@
                             cache: false,
 
                             success: function (response, textStatus, xhr) {
-                                if (response["status"] == 'success') {
+                                if (response["status"] == true) {
                                     Swal.fire({
-                                        text: response["message"],
-                                        icon: "success",
+                                        text: response["msg"],
+                                        icon: response["icon"],
                                         buttonsStyling: false,
                                         confirmButtonText: "Ok, got it!",
                                         customClass: {
@@ -197,9 +197,23 @@
                                             window.location = form.getAttribute("data-kt-redirect");
                                         }
                                     });
-                                }else{
+                                }
+                                
+                                
+                                
+                                if (response["status"] == false){
+
+
+                                    var msgs = '';
+                                    response["msg"].forEach(item  => {      
+                                        msgs+=item;                      
+                                    });
+
+
+                                    
+                                    
                                     Swal.fire({
-                                        text: response["message"],
+                                        text: msgs,
                                         icon: "warning",
                                         buttonsStyling: false,
                                         confirmButtonText: "Ok, got it!",

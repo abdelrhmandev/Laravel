@@ -47,14 +47,14 @@ class PostCategoryController extends Controller
             }
             PostCategoryTranslation::insert($translatable_data);
             
-            $arr = array('message' => __('site.mission_completed'), 'status' => 'success');
+            $arr = array('msg' => __('site.mission_completed'), 'status' => true);
             DB::commit();
     
 
  
         } catch (\Exception $e) {
             DB::rollback();
-            $arr = array('message' => $e->getMessage(), 'status' => 'error');
+            $arr = array('msg' => $e->getMessage(), 'status' => 'error');
          }
           
 

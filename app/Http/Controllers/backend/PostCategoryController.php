@@ -72,7 +72,16 @@ class PostCategoryController extends Controller
     }
         public function create(){
         if (view()->exists('backend.post_categories.create')) {
-            return view('backend.post_categories.create');
+            $compact = [
+                'storeUrl'   => route('admin.post-category.store'), 
+                'redirectUrl'    => route('admin.post-category.index'),
+                // 'trans_file'  => $this->trans_file,
+                ''
+    
+            ];
+
+            
+            return view('backend.post_categories.create',$compact);
         }
     }
      public function edit(){

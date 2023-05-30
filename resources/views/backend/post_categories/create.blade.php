@@ -66,7 +66,9 @@
 
 
         <form id="CreatePostCategory" action="{{ $storeUrl }}" class="form d-flex flex-column flex-lg-row"
-            data-kt-redirect="{{ $redirectUrl }}" enctype="multipart/form-data">
+            data-kt-redirect="{{ $redirectUrl }}"
+            data-form-submit-error="{{ __('site.form_submit_error')}}"
+            enctype="multipart/form-data">
             <div class="d-flex flex-column gap-7 gap-lg-10 w-100 mb-7 me-lg-10">
                 <!--begin:::Tabs-->
                 <x-backend.langs.ulTabs />
@@ -103,7 +105,13 @@
     <script src="{{ asset('assets/backend/js/custom/handleFormSubmit.js') }}"></script>
 
     <script>
-        handleFormSubmit();
+
+ 
+    handleFormSubmitFunc('CreatePostCategory');
+   
+
+
+        
     </script>
 
     {{-- @include('backend.form') --}}

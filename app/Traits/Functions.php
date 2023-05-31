@@ -65,7 +65,17 @@ trait Functions
 
     public function HandleMultiLangdatabase($array){
         
-    
+        // foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
+
+          
+        //     $translatable_data[] = [
+        //         'title'            =>$request->input('title_'.substr($properties['regional'],0,2)),
+        //         'slug'             =>Str::slug($request->input('title_'.substr($properties['regional'],0,2))),            
+        //         'description'      =>$request->input('description_'.substr($properties['regional'],0,2)),
+        //         'lang'             =>substr($properties['regional'],0,2),
+        //         'post_category_id' =>$query->id,
+        //         ];                
+        //     }
     }
     
     public function str_split(string $str, int $len = 1){

@@ -8,13 +8,13 @@ use App\Models\PostCategory;
 use App\Models\PostCategoryTranslation;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+ 
 
-use App\Traits\UploadAble;
 
 
 class PostCategoryController extends Controller
 {
-    use UploadAble;
+    use UploadAble,Functions;
 
  
 
@@ -23,18 +23,18 @@ class PostCategoryController extends Controller
 
         
         $validated = $request->validated();
-        // $validated['status'] = isset($request->status) ? 1 : 0;
-        $validated['parent_id'] = isset($request->parent_id) ? $request->parent_id : 0;
         $validated['image'] = (!empty($request->image)) ? $this->uploadOne($request->image, 'post_categories') : NULL;    
-       
-       
         $query = PostCategory::create($validated);
  
        
       
         DB::beginTransaction();   
         try{
-        foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
+
+
+            // HandleMultiLangdatabase(['title','slug','description']);
+
+            foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
 
           
             $translatable_data[] = [
@@ -66,17 +66,12 @@ class PostCategoryController extends Controller
     public function index(){
         if (view()->exists('backend.post_categories.index')) {
             // $post_categories = District::with(['district_info','area.area_info','area.city.city_info','area.city.country'])->get(); 
-
-
             $compact = [
                 'storeUrl'   => route('admin.post-category.store'), 
                 'redirectUrl'    => route('admin.post_category.index'),
                 // 'trans_file'  => $this->trans_file,
-                ''
-    
-            ];
-
-            
+                ''    
+            ];            
             return view('backend.post_categories.index',$compact);
         }
     }
@@ -88,9 +83,7 @@ class PostCategoryController extends Controller
                 // 'trans_file'  => $this->trans_file,
                 ''
     
-            ];
-
-            
+            ];            
             return view('backend.post_categories.create',$compact);
         }
     }

@@ -143,11 +143,11 @@ function handleFormSubmitFunc(formId, langs) {
                 //console.log('validated!');
 
                 if (status == 'Valid') {
-                    submitButton.setAttribute('data-kt-indicator', 'on');
+                    // submitButton.setAttribute('data-kt-indicator', 'on');
                     // Disable submit button whilst loading
-                    submitButton.disabled = true;
+                    // submitButton.disabled = true;
                     setTimeout(function() {
-                        submitButton.removeAttribute('data-kt-indicator');
+                        // submitButton.removeAttribute('data-kt-indicator');
                         $.ajaxSetup({
                             headers: {
                                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(

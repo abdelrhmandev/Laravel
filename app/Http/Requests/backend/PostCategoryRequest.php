@@ -32,7 +32,9 @@ class PostCategoryRequest extends FormRequest
     {
         ///MULTI Languages Inputs Validation///////////
         foreach(\LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
-              $rules['title_'.substr($properties['regional'],0,2)] = 'required|unique:post_categories_translations,title|max:255'; 
+              $rules['title_'.substr($properties['regional'],0,2)] = 'required|max:255'; 
+              //              $rules['title_'.substr($properties['regional'],0,2)] = 'required|unique:post_categories_translations,title|max:255'; 
+
               $rules['description_'.substr($properties['regional'],0,2)] = 'nullable|max:500'; 
         } 
 

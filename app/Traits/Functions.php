@@ -1,6 +1,7 @@
 <?php
 namespace App\Traits;
 use Illuminate\Support\Str;
+use LaravelLocalization;
 /**
  * Trait UploadAble
  * @package App\Traits
@@ -67,15 +68,17 @@ trait Functions
         
         // foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
 
-          
-        //     $translatable_data[] = [
-        //         'title'            =>$request->input('title_'.substr($properties['regional'],0,2)),
-        //         'slug'             =>Str::slug($request->input('title_'.substr($properties['regional'],0,2))),            
-        //         'description'      =>$request->input('description_'.substr($properties['regional'],0,2)),
-        //         'lang'             =>substr($properties['regional'],0,2),
-        //         'post_category_id' =>$query->id,
-        //         ];                
-        //     }
+            $langs = \LaravelLocalization::getSupportedLocales();
+
+
+            dd(array_merge($array,$langs));
+            // $arr[] = [
+            //     'title'            =>$request->input('title_'.substr($properties['regional'],0,2)),
+            //     'slug'             =>Str::slug($request->input('title_'.substr($properties['regional'],0,2))),            
+            //     'description'      =>$request->input('description_'.substr($properties['regional'],0,2)),
+            //     'lang'             =>substr($properties['regional'],0,2),
+            //     ];                
+            // }
     }
     
     public function str_split(string $str, int $len = 1){

@@ -21,24 +21,26 @@
                     <div class="card-body pt-0">
                         <div class="mb-5 fv-row fl">
                             <label class="required form-label"
-                                for="title{{ substr($properties['regional'], 0, 2) }}">{{ __('site.title') }}</label>
+                                for="title-{{ substr($properties['regional'], 0, 2) }}">{{ __('site.title') }}</label>
                             <input type="text" id="title_{{ substr($properties['regional'], 0, 2) }}"
                                 name="title_{{ substr($properties['regional'], 0, 2) }}" class="form-control mb-2"
                                 required
-                                data-fv-not-empty___message="{{ __('validation.required', ['attribute' => 'title' . '&nbsp;' . substr($properties['regional'], 0, 2)]) }}" />
+                                data-fv-not-empty___message="{{ __('validation.required', ['attribute' => 'title' . '&nbsp;' . substr($properties['regional'], 0, 2)]) }}"
+                                value="sports {{ substr($properties['regional'], 0, 2) }}"
+                                />
                         </div>
 
 
                         <div class="mb-5 fv-row">
                             <!--begin::Label-->
                             <label class="form-label"
-                                for="description{{ substr($properties['regional'], 0, 2) }}">{{ __('site.description') }}</label>
-                            <div id="description_div_{{ substr($properties['regional'], 0, 2) }}"
-                                class="min-h-100px mb-2"></div>
-                            <textarea class="d-none" rows="4" cols="30" type="text"
+                                for="description-{{ substr($properties['regional'], 0, 2) }}">{{ __('site.description') }}</label>
+                            
+                                
+                                <textarea rows="4" cols="30"
                                 id="description_{{ substr($properties['regional'], 0, 2) }}"
                                 name="description_{{ substr($properties['regional'], 0, 2) }}"
-                                class="editor @error('description_' . substr($properties['regional'], 0, 2)) is-invalid @enderror"/></textarea>
+                                class="editor @error('description_' . substr($properties['regional'], 0, 2)) is-invalid @enderror"/>sports is good {{ substr($properties['regional'], 0, 2) }} </textarea>
                         </div>
 
                         

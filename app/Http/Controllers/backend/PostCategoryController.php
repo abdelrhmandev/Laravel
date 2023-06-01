@@ -29,29 +29,25 @@ class PostCategoryController extends Controller
  
        
       
-        DB::beginTransaction();   
-        try{
+   
 
+           $cc = $this->HandleMultiLangdatabase(['title_','description_']);
 
-            $this->HandleMultiLangdatabase(['title']);
-
-
-            // PostCategoryTranslation::insert($translatable_data);
-            
-          
-
-                DB::commit();
-    
-
- 
-        } catch (\Exception $e) {
-            DB::rollback();
-            $arr = array('msg' => $e->getMessage(), 'status' => 'error');
-         }
-          
 
         
-         return response()->json($arr);
+            
+        //    return response()->json($request->$cc);
+
+            dd( $request->only($cc));
+
+            //   return response()->json($cc);
+           
+      
+
+  
+
+        
+        
      
 }
 

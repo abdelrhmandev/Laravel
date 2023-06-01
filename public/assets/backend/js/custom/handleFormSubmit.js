@@ -1,43 +1,16 @@
-function handleFormSubmitFunc(formId, langs) {
+function handleFormSubmitFunc(formId) {
 
-
-
-    let quillelements = [];
-    Object.keys(langs).forEach(key => {
-        quillelements.push(
-            '#description_div_' + key
-        );
-        quillelements.push(
-            '#meta_tag_description_div_' + key
-        );
-    });
-
-
-
-
-    quillelements.forEach(element => {
-        let quill = document.querySelector(element);
-        if (!quill) {
-            return;
-        }
-        // Init quill --- more info: https://quilljs.com/docs/quickstart/
-        quill = new Quill(element, {
-            modules: {
-                toolbar: [
-                    [{
-                        header: [1, 2, false]
-                    }],
-                    ['bold', 'italic', 'underline'],
-                    ['image', 'code-block']
-                    ['direction', 'rtl'] // this is rtl support
-                ]
-            },
-            // placeholder: 'Type your text here...',
-            theme: 'snow', // or 'bubble'
-
-        });
-    });
-
+ /*
+ let quillelements = [];
+Object.keys(langs).forEach(key => {
+    quillelements.push(
+        '#description_div_' + key
+    );
+    quillelements.push(
+        '#meta_tag_description_div_' + key
+    );
+});
+ */
 
 
 
@@ -130,19 +103,18 @@ function handleFormSubmitFunc(formId, langs) {
 
 
         e.preventDefault();
-
-        Object.keys(langs).forEach(key => {
-            $("#description_" + keys).val(
-                $("#description_div_" + keys + " p").html()
-            );
-        });
-
+ 
+        
         // Validate form before submit
         if (validator) {
             validator.validate().then(function(status) {
                 //console.log('validated!');
 
                 if (status == 'Valid') {
+
+                   //https://ckeditor.com/docs/ckeditor5/latest/installation/getting-started/getting-and-setting-data.html
+
+
                     // submitButton.setAttribute('data-kt-indicator', 'on');
                     // Disable submit button whilst loading
                     // submitButton.disabled = true;

@@ -23,7 +23,7 @@
         <!--end::Image input placeholder-->
         <div class="image-input image-input-empty image-input-outline image-input-placeholder mb-3" data-kt-image-input="true">
             <!--begin::Preview existing image-->
-            <div class="image-input-wrapper w-150px h-150px"></div>
+            <div class="image-input-wrapper w-200px h-200px"></div>
             <!--end::Preview existing image-->
             <!--begin::Label-->
             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change image">

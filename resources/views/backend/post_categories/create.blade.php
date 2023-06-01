@@ -105,13 +105,24 @@
     <!--begin::Custom Javascript(used for this page only)-->
     <script src="{{ asset('assets/backend/js/widgets.bundle.js') }}"></script>
     <script src="{{ asset('assets/backend/js/custom/handleFormSubmit.js') }}"></script>
+    {{-- <script src="{{ asset('assets/backend/plugins/custom/ckeditor/ckeditor-classic.bundle.js') }}"></script> --}}
+
+
+
+
+    <script src="{{ asset('assets/backend/plugins/custom/tinymce/tinymce.bundle.js') }}"></script>
+
+
+  
+
+
 
     <script>
 
 
 // On document ready
 KTUtil.onDOMContentLoaded(function() {
-   handleFormSubmitFunc('PostCategoryForm',JSON.parse('{!! json_encode(LaravelLocalization::getSupportedLocales()) !!}'));
+   handleFormSubmitFunc('PostCategoryForm');
 });
 
 
@@ -122,6 +133,27 @@ KTUtil.onDOMContentLoaded(function() {
 
         
     </script>
+
+
+<script type="text/javascript">
+
+
+
+
+ 
+ 
+
+ 
+ @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+
+ tinymce.init({selector: ('#description_{{ substr($properties['regional'], 0, 2) }}'), height : "280"});
+
+ @endforeach
+
+
+ 
+</script>
+
 
     {{-- @include('backend.form') --}}
 @stop

@@ -68,11 +68,40 @@ trait Functions
  
         $requestInputs = [];
         foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties){                  
+            
+
+
+ 
+            $x = substr($properties['regional'],0,2);
+
+
+            
             foreach($array as $v){
-                $requestInputs[] = $v.substr($properties['regional'],0,2);
-            } 
+                $vv = substr($v,0,-1);
+
+                $vav = $v.substr($properties['regional'],0,2);
+
+                $value = request()->$vav;
+
+
+
+ 
+
+
+ 
+
+                // echo '<br>';
+                // echo $value;
+                $requestInputs[$x][$vv] =  $value;
+
+                $requestInputs[$x]['lang'] = substr($properties['regional'],0,2);
+
+                // $requestInputs[$x]['post_category_id'] = 2;
+             } 
+
         }
 
+ 
         return $requestInputs;
    
 

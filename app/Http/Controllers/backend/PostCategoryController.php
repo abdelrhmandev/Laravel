@@ -34,11 +34,25 @@ class PostCategoryController extends Controller
            $cc = $this->HandleMultiLangdatabase(['title_','description_']);
 
 
-        
+
+           
+               $cc['post_category_id'] = 2;
+
+                PostCategoryTranslation::insert($cc);
+
+         
+        //    $ccx = (array_values($cc));
+
+
+            // dd($request);
+
+        //    dd( $request->only($cc));
+
+        //    $cc['post_category_id'] = 2;
             
         //    return response()->json($request->$cc);
 
-            dd( $request->only($cc));
+        // PostCategoryTranslation::insert($cc);
 
             //   return response()->json($cc);
            

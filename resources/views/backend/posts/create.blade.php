@@ -6,51 +6,54 @@
 @stop
 
 @section('style')
-@if (app()->getLocale() === 'ar')
-<link href="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.rtl.css') }}" rel="stylesheet"
-type="text/css" />
-@else
-<link href="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet"
-type="text/css" />
-@endif
+    @if (app()->getLocale() === 'ar')
+        <link href="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.rtl.css') }}" rel="stylesheet"
+            type="text/css" />
+    @else
+        <link href="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet"
+            type="text/css" />
+    @endif
 
 
 
-<style>
-.ribbon.ribbon-right .ribbon-target {
-  border-top-left-radius: 0.42rem;
-  border-bottom-left-radius: 0.42rem;
-}
-.ribbon .ribbon-target {
-display: -webkit-box;
-display: -ms-flexbox;
-display: flex;
--webkit-box-pack: center;
--ms-flex-pack: center;
-justify-content: center;
--webkit-box-align: center;
--ms-flex-align: center;
-align-items: center;
-padding: 5px 10px;
-position: absolute;
-z-index: 1; 
-}
-.my-field-error .fv-plugins-message-container,
-    .my-field-error .fv-plugins-icon {
-	font-size: 0.925rem; 
-	color: #f1416c;
-	
-}
+    <style>
+        .ribbon.ribbon-right .ribbon-target {
+            border-top-left-radius: 0.42rem;
+            border-bottom-left-radius: 0.42rem;
+        }
 
-.fv-plugins-tachyons .fv-plugins-icon {
-  top: 30px;
-}
-.my-field-success .fv-plugins-message-container,
-	.my-field-success .fv-plugins-icon {
-	font-size: 0.925rem;
-	color: #28a745;
-}
-</style>
+        .ribbon .ribbon-target {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            padding: 5px 10px;
+            position: absolute;
+            z-index: 1;
+        }
+
+        .my-field-error .fv-plugins-message-container,
+        .my-field-error .fv-plugins-icon {
+            font-size: 0.925rem;
+            color: #f1416c;
+
+        }
+
+        .fv-plugins-tachyons .fv-plugins-icon {
+            top: 30px;
+        }
+
+        .my-field-success .fv-plugins-message-container,
+        .my-field-success .fv-plugins-icon {
+            font-size: 0.925rem;
+            color: #28a745;
+        }
+    </style>
 @stop
 
 
@@ -58,46 +61,35 @@ z-index: 1;
 
 @section('content')
 
-<div class="container-xxl" id="kt_content_container">
-
-	
-
-<form id="kt_ecommerce_add_category_form" class="form d-flex flex-column flex-lg-row" data-kt-redirect="../../demo7/dist/apps/ecommerce/catalog/products.html" enctype="multipart/form-data">							 
-<div class="d-flex flex-column gap-7 gap-lg-10 w-100 mb-7 me-lg-10">
-<!--begin:::Tabs-->									
-<x-backend.langs.ulTabs />
-<!--end:::Tabs-->
-<!--begin::Tab content-->
+    <div class="container-xxl" id="kt_content_container">
 
 
-<x-backend.langs.LangInputs :showseo="true" />
 
-<!--end::Tab content-->
+        <form id="PostCategoryForm" data-route-url="{{ $storeUrl }}" class="form d-flex flex-column flex-lg-row"
+            data-kt-redirect="{{ $redirectUrl }}"
+            data-form-submit-error="{{ __('site.form_submit_error')}}"
+            enctype="multipart/form-data">
+            <div class="d-flex flex-column gap-7 gap-lg-10 w-100 mb-7 me-lg-10">
+                <!--begin:::Tabs-->
+                <x-backend.langs.ulTabs />
+                <!--end:::Tabs-->
+                <!--begin::Tab content-->
+                <x-backend.langs.LangInputs />
 
- 
- 
- 
-
-<x-backend.btns.create />
-</div>							 
-<div class="d-flex flex-column flex-row-fluid gap-7 w-lg-400px gap-lg-10">
-<!--begin::Thumbnail settings-->
-<x-backend.cms.image />
-<!--end::Thumbnail settings-->
-<!--begin::Status-->
-<x-backend.cms.status />
-<!--end::Status-->
-<!--begin::Category & tags-->
-<x-backend.cms.category />
-<!--end::Category & tags-->
-<!--begin::Weekly sales-->								 
-<x-backend.cms.tags />
-<!--end::Weekly sales-->
-<!--begin::Template settings-->									 
-<!--end::Template settings-->
-</div>
-</form>							  
-</div>
+                <x-backend.cms.single-select-category />
+                <!--end::Tab content-->
+                <x-backend.btns.create />
+            </div>
+            <div class="d-flex flex-column flex-row-fluid gap-7 w-lg-400px gap-lg-10">
+                <!--begin::Thumbnail settings-->
+                <x-backend.cms.image />
+                <x-backend.cms.publish />
+                
+                <!--end::Thumbnail settings-->
+                <!--begin::Status-->         
+            </div>
+        </form>
+    </div>
 @stop
 
 
@@ -109,11 +101,61 @@ z-index: 1;
 
 @section('scripts')
 
-<script src="{{ asset('assets/backend/js/custom/Tachyons.min.js') }}"></script>
-<script src="{{ asset('assets/backend/js/custom/es6-shim.min.js') }}"></script>
-<script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-<!--begin::Custom Javascript(used for this page only)-->
-<script src="{{ asset('assets/backend/js/widgets.bundle.js') }}"></script>
-<script src="{{ asset('assets/backend/js/custom/handleFormSubmit.js') }}"></script>
-{{-- @include('backend.form') --}}   
+    <script src="{{ asset('assets/backend/js/custom/Tachyons.min.js') }}"></script>
+    <script src="{{ asset('assets/backend/js/custom/es6-shim.min.js') }}"></script>
+    <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+    <!--begin::Custom Javascript(used for this page only)-->
+    <script src="{{ asset('assets/backend/js/widgets.bundle.js') }}"></script>
+    <script src="{{ asset('assets/backend/js/custom/handleFormSubmit.js') }}"></script>
+    {{-- <script src="{{ asset('assets/backend/plugins/custom/ckeditor/ckeditor-classic.bundle.js') }}"></script> --}}
+
+
+
+
+    <script src="{{ asset('assets/backend/plugins/custom/tinymce/tinymce.bundle.js') }}"></script>
+
+
+  
+
+
+
+    <script>
+
+
+// On document ready
+KTUtil.onDOMContentLoaded(function() {
+   handleFormSubmitFunc('PostCategoryForm');
+});
+
+
+ 
+
+   
+
+
+        
+    </script>
+
+
+<script type="text/javascript">
+
+
+
+
+ 
+ 
+
+ 
+ @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+
+ tinymce.init({selector: ('#description_{{ substr($properties['regional'], 0, 2) }}'), height : "280"});
+
+ @endforeach
+
+
+ 
+</script>
+
+
+    {{-- @include('backend.form') --}}
 @stop

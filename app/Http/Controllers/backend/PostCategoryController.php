@@ -24,13 +24,15 @@ class PostCategoryController extends Controller
 
         
         $validated = $request->validated();
-        $validated['published'] = isset($request->published) ? 1 : 0;
+        $validated['published'] = isset($request->published) ? '1' : '0';
+
+       
         $validated['image'] = (!empty($request->image)) ? $this->uploadOne($request->image, 'post_categories') : NULL;    
         $query = PostCategory::create($validated);
  
        
       
-   
+        
 
            $cc = $this->HandleMultiLangdatabase(['title_','slug_','description_'],['post_category_id'=>$query->id]);
 

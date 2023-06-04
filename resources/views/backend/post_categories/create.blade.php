@@ -74,15 +74,17 @@
                 <x-backend.langs.ulTabs />
                 <!--end:::Tabs-->
                 <!--begin::Tab content-->
-                <x-backend.langs.LangInputs />
+                <x-backend.langs.LangInputsClassic />
 
-                
+                <x-backend.cms.single-select-category />
                 <!--end::Tab content-->
                 <x-backend.btns.create />
             </div>
             <div class="d-flex flex-column flex-row-fluid gap-7 w-lg-400px gap-lg-10">
                 <!--begin::Thumbnail settings-->
                 <x-backend.cms.image />
+                <x-backend.cms.publish />
+                
                 <!--end::Thumbnail settings-->
                 <!--begin::Status-->         
             </div>
@@ -144,11 +146,6 @@ KTUtil.onDOMContentLoaded(function() {
  
 
  
- @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-
- tinymce.init({selector: ('#description_{{ substr($properties['regional'], 0, 2) }}'), height : "280"});
-
- @endforeach
 
 
  

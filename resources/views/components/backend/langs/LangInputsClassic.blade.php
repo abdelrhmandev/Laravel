@@ -38,30 +38,16 @@
                                 name="slug_{{ substr($properties['regional'], 0, 2) }}" class="form-control mb-2"
                                 />
                         </div>
-
-                        @if(isset($richTextArea))
-                        <div class="mb-5 fv-row">
-                            <!--begin::Label-->
-                            <label class="form-label"
-                                for="description-{{ substr($properties['regional'], 0, 2) }}">{{ __('site.description') }}</label>
-                                <textarea rows="4" cols="30"
-                                id="description_{{ substr($properties['regional'], 0, 2) }}"
-                                name="description_{{ substr($properties['regional'], 0, 2) }}"
-                                class="editor @error('description_' . substr($properties['regional'], 0, 2)) is-invalid @enderror"/>sports is good {{ substr($properties['regional'], 0, 2) }} </textarea>
-                        </div>
-                        @else
+ 
                         <div class="d-flex flex-column mb-8">
                             <label class="form-label"
                             for="description-{{ substr($properties['regional'], 0, 2) }}">{{ __('site.description') }}</label>
                             <textarea class="form-control form-control-solid" rows="4" name="application" placeholder=""></textarea>
                         </div>
 
-                        @endif
+                  
                         
-                        @if(isset($showseo))
-                        <x-backend.seo.LangInputs :properties="$properties" />
-                        
-                        @endif
+         
 
 
 

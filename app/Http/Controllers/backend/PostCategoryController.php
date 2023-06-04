@@ -25,18 +25,18 @@ class PostCategoryController extends Controller
         
         $validated = $request->validated();
         $validated['image'] = (!empty($request->image)) ? $this->uploadOne($request->image, 'post_categories') : NULL;    
-        // $query = PostCategory::create($validated);
+        $query = PostCategory::create($validated);
  
        
       
    
 
-           $cc = $this->HandleMultiLangdatabase(['title_','description_']);
+           $cc = $this->HandleMultiLangdatabase(['title_','slug_','description_'],['post_category_id'=>$query->id]);
 
 
 
-           
-               $cc['post_category_id'] = 2;
+        
+         
 
                 PostCategoryTranslation::insert($cc);
 

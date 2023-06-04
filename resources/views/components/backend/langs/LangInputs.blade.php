@@ -26,7 +26,16 @@
                                 name="title_{{ substr($properties['regional'], 0, 2) }}" class="form-control mb-2"
                                 required
                                 data-fv-not-empty___message="{{ __('validation.required', ['attribute' => 'title' . '&nbsp;' . substr($properties['regional'], 0, 2)]) }}"
-                                value="sports {{ substr($properties['regional'], 0, 2) }}"
+                                
+                                />
+                        </div>
+
+
+                        <div class="mb-5 fv-row fl">
+                            <label class="form-label"
+                                for="slug-{{ substr($properties['regional'], 0, 2) }}">{{ __('site.slug') }}</label>
+                            <input type="text" id="slug_{{ substr($properties['regional'], 0, 2) }}"
+                                name="slug_{{ substr($properties['regional'], 0, 2) }}" class="form-control mb-2"
                                 />
                         </div>
 

@@ -8,6 +8,7 @@ use LaravelLocalization;
  */
 trait Functions
 {
+
     /**
      * @param UploadedFile $file
      * @param null $folder
@@ -64,40 +65,40 @@ trait Functions
     }
 
 
-    public function HandleMultiLangdatabase($array){
+    public function HandleMultiLangdatabase($array,$f){
  
         $requestInputs = [];
+
+
+        
+
+ 
         foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties){                  
             
 
-
+            
  
             $x = substr($properties['regional'],0,2);
 
 
             
             foreach($array as $v){
-                $vv = substr($v,0,-1);
 
+
+               
+                $vv = substr($v,0,-1);
                 $vav = $v.substr($properties['regional'],0,2);
 
-                $value = request()->$vav;
-
-
-
- 
-
-
- 
-
-                // echo '<br>';
-                // echo $value;
-                $requestInputs[$x][$vv] =  $value;
-
+             
+                if($vv == 'slug'){
+                    $requestInputs[$x]['slug'] = request()->$vav ?? Str::slug($requestInputs[$x]['title']);    
+                }else{
+                $requestInputs[$x][$vv] =  request()->$vav;
                 $requestInputs[$x]['lang'] = substr($properties['regional'],0,2);
-
-                // $requestInputs[$x]['post_category_id'] = 2;
-             } 
+                $requestInputs[$x][key($f)] =   end($f);
+                } 
+            }
+             
 
         }
 

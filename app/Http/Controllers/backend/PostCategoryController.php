@@ -24,6 +24,7 @@ class PostCategoryController extends Controller
 
         
         $validated = $request->validated();
+        $validated['published'] = isset($request->published) ? 1 : 0;
         $validated['image'] = (!empty($request->image)) ? $this->uploadOne($request->image, 'post_categories') : NULL;    
         $query = PostCategory::create($validated);
  

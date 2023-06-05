@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PostCategoryTranslation extends Model
+class CategoryTranslation extends Model
 {
-    protected $table = 'post_categories_translations';
+    protected $table = 'category_translations';
 
     protected $fillable = [
 		'category_id',
@@ -16,7 +16,7 @@ class PostCategoryTranslation extends Model
 		'lang',
 	];
 
-    public function post_category(){
+    public function category(){
         return $this->belongsTo(PostCategory::class);
     }
 

@@ -2,6 +2,7 @@
 namespace App\Traits;
 use Illuminate\Support\Str;
 use LaravelLocalization;
+use App\Models\Category;
 /**
  * Trait UploadAble
  * @package App\Traits
@@ -16,6 +17,27 @@ trait Functions
      * @param null $filename
      * @return false|string
      */
+
+
+     public function childView($category){                 
+        $html ='<ul>';
+        foreach ($category->childs as $arr) {
+            if(count($arr->childs)){
+            $html .='<li>'.$arr->title.'';                  
+                    $html.= $this->childView($arr);
+                }else{
+                    $html .='<li>'.$arr->title.'';                                 
+                    $html .="</li>";
+                }                   
+        }
+
+        $html .="</ul>";
+        return $html;
+}
+
+    
+
+
     public function displayAsideMenuItem($transFile,$Route){
         $html = '<span class="menu-link">
         <span class="menu-icon">

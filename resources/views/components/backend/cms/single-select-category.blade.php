@@ -16,12 +16,23 @@
       
         <!--end::Label-->
         <!--begin::Select2-->
-        <select class="form-select mb-2" data-placeholder="Select an option" data-allow-clear="false">
-            <option></option>
-            <option value="Computers">Computers</option>
-            <option value="Watches">Watches</option>
- 
-        </select>
+
+        
+        <ul id="tree1">
+        @foreach($categories as $category)
+        
+           {{$category->translate->title }} 
+
+           @if(count($category->_children))
+
+           <x-backend.cms.manageChild :childs="$category->_children" />
+
+      
+           @endif
+           
+   @endforeach
+</ul>
+
     
     </div>
     <!--end::Card body-->

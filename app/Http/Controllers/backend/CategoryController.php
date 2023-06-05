@@ -86,24 +86,20 @@ class CategoryController extends Controller
                 'storeUrl'   => route('admin.categories.store'), 
                 'redirectUrl'    => route('admin.categories.create'),
                 // 'trans_file'  => $this->trans_file,
-                ''
+                'categories' =>  Category::with('_children')->get(), 
+
     
             ];            
 
 
-            $q = Category::with('_parent')->get();
+   
+ ?>
+       
+
+<?php
 
 
-            foreach($q as $v){
-
-                echo $v->id;
-                echo '<br>';
-            }
-
-
-
-
-            //return view('backend.categories.create',$compact);
+             return view('backend.categories.create',$compact);
         }
     }
      public function edit(){

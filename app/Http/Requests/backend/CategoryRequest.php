@@ -3,7 +3,7 @@ namespace App\Http\Requests\backend;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
-class PostCategoryRequest extends FormRequest
+class CategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -32,7 +32,8 @@ class PostCategoryRequest extends FormRequest
     {
         ///MULTI Languages Inputs Validation///////////
         foreach(\LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
-                $rules['title_'.substr($properties['regional'],0,2)] = 'required|unique:post_categories_translations,title|max:255'; 
+
+              $rules['title_'.substr($properties['regional'],0,2)] = 'required|unique:category_translations,title|max:255'; 
 
               $rules['description_'.substr($properties['regional'],0,2)] = 'nullable|max:500'; 
         } 
@@ -43,7 +44,7 @@ class PostCategoryRequest extends FormRequest
 
         $rules['image'] =  'nullable|mimes:jpg,jpeg,png|max:2048';
  
-        $rules['parent'] = 'nullable|exists:categories,id';
+        $rules['parent'] = 'nullable|exists:category,id';
 
         // $rules['start_date'] = 'required_with:special_price|date_format:Y-m-d';
 

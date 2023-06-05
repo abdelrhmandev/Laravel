@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePostCategoriesTable extends Migration
+class CreateCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreatePostCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('post_categories', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('parent_id')->default(0)->nullable();
 			$table->string('image',150)->nullable();
@@ -22,15 +22,15 @@ class CreatePostCategoriesTable extends Migration
 			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
 
-        Schema::create('post_categories_translations', function (Blueprint $table) {                 
+        Schema::create('category_translations', function (Blueprint $table) {                 
             $table->id();               
             $table->string('title');
             $table->string('slug')->unique();
             $table->longText('description')->nullable();
 			$table->string('lang')->index();			
-			$table->unique(['post_category_id','lang']);  
+			$table->unique(['category_id','lang']);  
             $table->index(['title','slug']);
-            $table->foreignId('post_category_id')->constrained('post_categories')->onDelete('cascade');
+            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
         });	
     }
 
@@ -41,7 +41,7 @@ class CreatePostCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('post_categories');
-        Schema::dropIfExists('post_categories_translations');
+        Schema::dropIfExists('categories');
+        Schema::dropIfExists('category_translations');
     }
 }

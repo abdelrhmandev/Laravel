@@ -13,7 +13,7 @@ https://github.com/zizohassan/car/blob/master/app/Application/routes/web.php
  
 
  
-Route::resource('post-category',PostCategoryController::class)->except('show'); // Post Categories
+Route::resource('categories',CategoryController::class)->except('show'); // Post Categories
 
 Route::resource('nutritions', NutritionController::class)->except('show');
 

@@ -11,10 +11,10 @@ class Category extends Model
  
     protected $table = 'categories';
 
-    protected $with = ['translate'];
+    // protected $with = ['translate'];
 
     public function _parent(){
-        return $this->belongsTo(Category::class, 'parent_id');
+        return $this->belongsTo(Category::class, 'parent_id')->with('_parent');
     }
 
 

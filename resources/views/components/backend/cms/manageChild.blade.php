@@ -1,24 +1,7 @@
-<ul>
-    @foreach($childs as $child)
+ @foreach ($childs as $child)
+     {{ $child->id }}
 
-
-<li>
-
-    <i>{{ $child->translate->title }} 
-
-@if(count($child->_children))
-
-   
-
-        <x-backend.cms.manageChild :childs="$child->_children" />
-
-
-    @endif
-
-</li>
-
-
-    
-@endforeach
-
-</ul>
+     @if (count($child->_children))
+         <x-backend.cms.manageChild :childs="$child->_children" />
+     @endif
+ @endforeach

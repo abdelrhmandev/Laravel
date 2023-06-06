@@ -17,25 +17,21 @@
         <!--end::Label-->
         <!--begin::Select2-->
 
-        {{-- <select class="form-select mb-2" data-control="select2" data-allow-clear="true">
-           <option value="0">None</option>
-            {!! $categories !!} 
-        </select> --}}
- 
-
+        
+  
         @foreach($categories as $category)
         
-        <p>{{ $category->id }} </p>
+           {{$category->translate->title }} 
 
-        @if(count($category->_children))
+           @if(count($category->_children))
 
-        <x-backend.cms.manageChild :childs="$category->_children" />
+           <x-backend.cms.manageChild :childs="$category->_children" />
 
-   
-        @endif
-        
-        @endforeach
-
+      
+           @endif
+           
+   @endforeach
+ 
 
     
     </div>

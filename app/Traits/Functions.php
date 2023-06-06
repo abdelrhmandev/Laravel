@@ -10,32 +10,46 @@ use App\Models\Category;
 trait Functions
 {
 
-    /**
-     * @param UploadedFile $file
-     * @param null $folder
-     * @param string $disk
-     * @param null $filename
-     * @return false|string
-     */
+    function hasChild($cccccccccccccc){
 
+        $cc = Category::with('_children')->where('id',$cccccccccccccc)->count();  
 
-     public function childView($category){                 
-        $html ='<ul>';
-        foreach ($category->childs as $arr) {
-            if(count($arr->childs)){
-            $html .='<li>'.$arr->title.'';                  
-                    $html.= $this->childView($arr);
-                }else{
-                    $html .='<li>'.$arr->title.'';                                 
-                    $html .="</li>";
-                }                   
+        if ($cc > 0) {
+            return true;
         }
+        return false;
 
-        $html .="</ul>";
-        return $html;
-}
-
+    }
     
+    public function dumpTree($c,$parent = 0, $level = 0){	
+        
+        $cats = $c->where('parent_id',$parent)->get();      
+        $c = '';
+        foreach ($cats AS $cat) {
+            $c.='<option value="'. $cat->id .'">' . str_repeat("-", $level*2) . $cat->id .'<-------->'. $cat->id . "</option>"; 		
+         
+            // if ($this->hasChild($cat->id)) { 
+            // //     // $c.=$this->dumpTree($cat->_children(),$cat->id, $level+1);  
+            // }
+        }
+        return $c;
+    }
+      
+   
+ 
+    
+    // public function dumpTree($parent = 0, $level = 0){	
+
+    //     $cats = Category::where('parent_id',$parent)->get();        
+    //     $c = '';
+    //     foreach ($cats AS $cat) {
+    //         $c.='<option value="'. $cat->id .'">' . str_repeat("-", $level*2) . $cat->id . "</option>"; 		
+   
+    //     }
+    //     return $c;
+    // }
+ 
+   
 
 
     public function displayAsideMenuItem($transFile,$Route){

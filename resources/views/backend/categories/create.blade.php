@@ -200,22 +200,25 @@ outline: 0;
             enctype="multipart/form-data">
             <div class="d-flex flex-column gap-7 gap-lg-10 w-100 mb-7 me-lg-10">
                 <!--begin:::Tabs-->
-                <x-backend.langs.ulTabs />
+                {{-- <x-backend.langs.ulTabs /> --}}
                 <!--end:::Tabs-->
                 <!--begin::Tab content-->
-                <x-backend.langs.LangInputsClassic />
+                {{-- <x-backend.langs.LangInputsClassic /> --}}
 
               
+
+
+        
 
                 <x-backend.cms.single-select-category :categories="$categories" />
 
                 <!--end::Tab content-->
-                <x-backend.btns.create />
+                {{-- <x-backend.btns.create /> --}}
             </div>
             <div class="d-flex flex-column flex-row-fluid gap-7 w-lg-400px gap-lg-10">
                 <!--begin::Thumbnail settings-->
-                <x-backend.cms.image />
-                <x-backend.cms.publish />
+                {{-- <x-backend.cms.image /> --}}
+                {{-- <x-backend.cms.publish /> --}}
                 
                 <!--end::Thumbnail settings-->
                 <!--begin::Status-->         

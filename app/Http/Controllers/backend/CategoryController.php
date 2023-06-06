@@ -82,21 +82,27 @@ class CategoryController extends Controller
     }
         public function create(){
         if (view()->exists('backend.categories.create')) {
+
+            $dumpTree = Category::select('id','parent_id'); 
             $compact = [
                 'storeUrl'   => route('admin.categories.store'), 
                 'redirectUrl'    => route('admin.categories.create'),
                 // 'trans_file'  => $this->trans_file,
+                
+
+
+
                 'categories' =>  Category::with('_children')->get(), 
 
-    
+                // 'dumpTree' =>  $this->dumpTree($dumpTree), 
             ];            
 
 
    
- ?>
-       
+            
 
-<?php
+          
+ 
 
 
              return view('backend.categories.create',$compact);

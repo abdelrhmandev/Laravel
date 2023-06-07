@@ -22,20 +22,35 @@
             {!! $categories !!} 
         </select> --}}
  
+ 
 
-        @foreach($categories as $category)
+            
+            
         
-        <p>{{ $category->id }} </p>
 
-        @if(count($category->_children))
+            <ul>
+                @foreach ($categories as $category)
+                    <li>{{ $category->id }}</li>
+                    <ul>
+                    @foreach ($category->children as $childCategory)
 
-        <x-backend.cms.manageChild :childs="$category->_children" />
+                        <div style="margin-left: 20px;">
+                    {{ $childCategory->id }}
+                        </div>
+                    {{-- @include('components.backend.cms.manageChild', ['child_category' => $childCategory]) --}}
 
-   
-        @endif
-        
-        @endforeach
+               
+                    @endforeach
+                    </ul>
+                @endforeach
+            </ul>
 
+             
+ 
+                
+
+            
+         
 
     
     </div>

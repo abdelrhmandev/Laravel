@@ -208,9 +208,15 @@ outline: 0;
               
 
 
+                {{-- <select>
+                    {!! $dumpTree !!}
+                </select> --}}
         
 
-                <x-backend.cms.single-select-category :categories="$categories" />
+                <x-backend.cms.single-select-category :categories="$categories" :dashes="''"/>
+
+
+
 
                 <!--end::Tab content-->
                 {{-- <x-backend.btns.create /> --}}

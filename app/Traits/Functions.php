@@ -12,25 +12,25 @@ trait Functions
 
     function hasChild($cccccccccccccc){
 
-        $cc = Category::with('_children')->where('id',$cccccccccccccc)->count();  
+        // $cc = Category::where('id',$cccccccccccccc)->count();  
 
-        if ($cc > 0) {
+        if ($cccccccccccccc > 0) {
             return true;
         }
         return false;
 
     }
     
-    public function dumpTree($c,$parent = 0, $level = 0){	
+    public function dumpTree($parent = null, $level = 0){	
         
-        $cats = $c->where('parent_id',$parent)->get();      
+   
+        
+        $cats = Category::whereNull('parent_id')->with('childrenCategories')->where('parent_id',$parent)->get();      
         $c = '';
         foreach ($cats AS $cat) {
             $c.='<option value="'. $cat->id .'">' . str_repeat("-", $level*2) . $cat->id .'<-------->'. $cat->id . "</option>"; 		
          
-            // if ($this->hasChild($cat->id)) { 
-            // //     // $c.=$this->dumpTree($cat->_children(),$cat->id, $level+1);  
-            // }
+         
         }
         return $c;
     }

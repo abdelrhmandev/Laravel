@@ -6,9 +6,3 @@
         @endforeach
     </ul>
 @endif
-
-
-
-
- 
-

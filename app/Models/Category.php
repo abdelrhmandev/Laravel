@@ -14,46 +14,24 @@ class Category extends Model
 
     // protected $with = ['translate'];
 
-    public function _parent(){
-        return $this->belongsTo(Category::class, 'parent_id')->with('_parent');
-    }
 
 
-
-        // # single Item
-        public function translate(){
-            return $this->hasOne(CategoryTranslation::class)->where('lang',app()->getLocale());
-        }
-
-
-//////////////////
-        public function scopeRoot($query){
-
-            $query->whereNull('parent_id');
-        }
-
-        public function children(){
+    
+        public function categories()
+        {
             return $this->hasMany(Category::class,'parent_id','id');
         }
 
-        ////////
 
-        public function categories()
-        {
-            return $this->hasMany(Category::class,'id',);
+      
+
+        public function children(){
+            return $this->hasMany(Category::class,'parent_id','id')->with('children');
         }
 
-        public function childrenCategories()
-        {
-            return $this->hasMany(Category::class,'parent_id','id')->with('categories');
-        }
-
-
  
-        // public function _children(){
-        //     return $this->hasMany(Category::class,'parent_id','id')->with('_children');
-        // }
- 
+
+        
 
     // public function post(){
     //     return $this->hasMany('App\Models\Post','post_cat_id','id')->where('status','active');

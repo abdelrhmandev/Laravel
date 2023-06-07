@@ -97,7 +97,9 @@ class CategoryController extends Controller
 
            
 
-                'categories' =>  Category::with('children')->root()->get()
+                'categories' =>  Category::whereNull('parent_id')
+                ->with('children')
+                ->get()
                  
 
                 // 'dumpTree' =>  $this->dumpTree(), 

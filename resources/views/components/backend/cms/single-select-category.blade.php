@@ -34,10 +34,8 @@
                     <ul>
                     @foreach ($category->children as $childCategory)
 
-                        <div style="margin-left: 20px;">
-                    {{ $childCategory->id }}
-                        </div>
-                    {{-- @include('components.backend.cms.manageChild', ['child_category' => $childCategory]) --}}
+                     
+                    @include('components.backend.cms.manageChild', ['child_category' => $childCategory])
 
                
                     @endforeach

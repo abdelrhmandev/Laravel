@@ -10,7 +10,19 @@ use App\Models\Category;
 trait Functions
 {
 
+<<<<<<< HEAD
  
+=======
+
+    function getCategoryTree($parent_id = 0, $spacing = '', $tree_array = array()) {
+        $categories = Category::select('id', 'parent_id')->where('parent_id' ,'=', $parent_id)->orderBy('parent_id')->get();
+        foreach ($categories as $item){
+            $tree_array[] = ['categoryId' => $item->id, 'categoryName' =>$spacing] ;
+            $tree_array = $this->getCategoryTree($item->id, $spacing . '--', $tree_array);
+        }
+        return $tree_array;
+    }
+>>>>>>> 2fdf09f8be045c7d71ccca98e0c0457074c2f648
 
 
     function hasChild($cccccccccccccc){

@@ -14,6 +14,7 @@ class Category extends Model
 
     // protected $with = ['translate'];
 
+<<<<<<< HEAD
 
    // this relationship will only return one level of child items
 //    public function categories()
@@ -84,7 +85,26 @@ public function parents() {
         // public function _children(){
         //     return $this->hasMany(Category::class,'parent_id','id')->with('_children');
         // }
+=======
+
+
+    
+        public function categories()
+        {
+            return $this->hasMany(Category::class,'parent_id','id');
+        }
+
+
+      
+
+        public function children(){
+            return $this->hasMany(Category::class,'parent_id','id')->with('children');
+        }
+
+>>>>>>> 2fdf09f8be045c7d71ccca98e0c0457074c2f648
  
+
+        
 
     // public function post(){
     //     return $this->hasMany('App\Models\Post','post_cat_id','id')->where('status','active');

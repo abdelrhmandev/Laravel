@@ -116,8 +116,14 @@ class CategoryController extends Controller
 
                 'categories'     => $row->getThreadedCategories(),   
 
+<<<<<<< HEAD
                
                
+=======
+                'categories' =>  Category::whereNull('parent_id')
+                ->with('children')
+                ->get()
+>>>>>>> 2fdf09f8be045c7d71ccca98e0c0457074c2f648
                  
 
                 // 'dumpTree' =>  $this->dumpTree(), 

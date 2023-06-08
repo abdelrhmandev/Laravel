@@ -213,7 +213,23 @@ outline: 0;
                 </select> --}}
         
 
-                <x-backend.cms.single-select-category :categories="$categories" :dashes="''"/>
+                <ul>
+                    @if(count($categories) > 0)
+                        @foreach ($categories as $category)
+                            <li>{{ $category->id }}</li>
+                            <ul>
+                                @if(count($category->childCategories))
+                                    @foreach ($category->childCategories as $subCategories)
+                                        @include('components.backend.cms.sub_category', ['sub_categories' => $subCategories])
+                                    @endforeach
+                                @endif
+                            </ul>
+                        @endforeach
+                    @endif
+                </ul>
+
+
+                {{-- <x-backend.cms.single-select-category :categories="$categories" :dashes="''"/> --}}
 
 
 

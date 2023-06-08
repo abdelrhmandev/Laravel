@@ -1,8 +1,11 @@
-<li>{{ $child_category->name }}</li>
-@if ($child_category->categories)
+<li>{{ $sub_categories->id }}</li>
+@if ($sub_categories->categories)
     <ul>
-        @foreach ($child_category->categories as $childCategory)
-            @include('backend.sub_category', ['sub_categories' => $childCategory])
-        @endforeach
+        @if(count($sub_categories->categories) > 0)
+            @foreach ($sub_categories->categories as $subCategories)
+                
+                @include('backend.sub_category', ['sub_categories' => $subCategories])
+            @endforeach
+        @endif
     </ul>
 @endif

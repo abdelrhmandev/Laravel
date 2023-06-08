@@ -26,7 +26,7 @@
 
 
 
-{{-- @include ('backend.partials.comments.list', ['collection' => $comments['root']]) --}}
+  @include ('backend.partials.comments.list', ['collection' => $comments['root']])  
 
 
     {{-- https://www.youtube.com/watch?v=wCfKSpIMVpY --}}

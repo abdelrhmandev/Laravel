@@ -18,6 +18,19 @@ class CategoryController extends Controller
     use UploadAble,Functions;
 
  
+// https://laraveldaily.com/post/eloquent-recursive-hasmany-relationship-with-unlimited-subcategories
+// https://laracasts.com/discuss/channels/laravel/recursive-relationship-set-depth
+
+
+// https://medium.com/@codeaxion77/how-to-code-recursive-function-to-get-subcategory-ids-optimized-unoptimized-laravel-56931c52dd49
+
+
+
+// https://blog.codecourse.com/recursive-nested-data-in-laravel
+
+
+// https://stackoverflow.com/questions/47441861/laravel-5-5-multi-level-menu-query-order
+
 
 
     public function store(CategoryRequest $request){
@@ -86,18 +99,25 @@ class CategoryController extends Controller
             // $dumpTree = Category::select('id','parent_id'); 
 
 
-            // $dumpTree = Category::with('children')->whereNull('parent_id');
+ 
+
+
+   $row = Category::whereNull('parent_id')
+   
+   
+   ->get();
 
             
+   dd($row->getThreadedCategories());
+   
             $compact = [
-                'storeUrl'   => route('admin.categories.store'), 
-                'redirectUrl'    => route('admin.categories.create'),
-                // 'trans_file'  => $this->trans_file,
+
                 
 
-           
+                'categories'     => $row->getThreadedCategories(),   
 
-                'categories' =>  Category::with('children')->root()->get()
+               
+               
                  
 
                 // 'dumpTree' =>  $this->dumpTree(), 
@@ -107,14 +127,16 @@ class CategoryController extends Controller
    
             
 
-          
+       
  
-           
-
- 
+      
 
 
-             return view('backend.categories.create',$compact);
+             return view('backend.categories.ccca',$compact);
+
+
+            //  return view('backend.categories.create',$compact);
+
         }
     }
      public function edit(){

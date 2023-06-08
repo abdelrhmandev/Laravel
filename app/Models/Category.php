@@ -14,44 +14,72 @@ class Category extends Model
 
     // protected $with = ['translate'];
 
-    public function _parent(){
-        return $this->belongsTo(Category::class, 'parent_id')->with('_parent');
-    }
+
+   // this relationship will only return one level of child items
+//    public function categories()
+//    {
+//        return $this->hasMany(Category::class, 'parent_id','id');
+//    }
+
+   // This is method where we implement recursive relationship
+   public function childCategories()
+   {
+       return $this->hasMany(Category::class, 'parent_id','id')->with('categories');
+   }
+
+   public function owner()
+   {
+       return $this->belongsTo(Category::class, 'parent_id','id');
+   }
+
+ 
+
+   public function categories()
+   {
+       return $this->hasMany(Category::class, 'parent_id','id');
+   }
+
+   public function getThreadedComments()
+   {
+       return $this->comments()->with('owner')->get()->threaded();
+   }
 
 
 
-        // # single Item
-        public function translate(){
-            return $this->hasOne(CategoryTranslation::class)->where('lang',app()->getLocale());
-        }
 
+   public function newCollection(array $models = [])
+   {
+       return new CategoryCollection($models);
+   }
+   
 
-//////////////////
-        public function scopeRoot($query){
+// Recursive children
+// public function children() {
+//     return $this->hasMany('App\Models\Category', 'parent_id')->with('children');
+// }
 
-            $query->whereNull('parent_id');
-        }
+// // One level parent
+// public function parent() {
+//     return $this->belongsTo('App\Models\Category', 'parent_id');
+// }
 
-        public function children(){
-            return $this->hasMany(Category::class,'parent_id','id');
-        }
+// Recursive parents
+public function parents() {
+    return $this->belongsTo('App\Models\Category', 'parent_id')->with('parent');
+}
 
-        ////////
+    
 
-        public function categories()
-        {
-            return $this->hasMany(Category::class,'id',);
-        }
+        // public function categories()
+        // {
+        //     return $this->hasMany(Category::class,'parent_id','id');
+        // }
 
-        public function childrenCategories()
-        {
-            return $this->hasMany(Category::class,'parent_id','id')->with('categories');
-        }
+        //         public function childrenCategories()
+        // {
+        //     return $this->hasMany(Category::class,'parent_id','id')->with('categories');
+        // }
 
-        public function childCategories()
-        {
-            return $this->hasMany(Category::class,'parent_id','id')->with('categories');
-        }
  
         // public function _children(){
         //     return $this->hasMany(Category::class,'parent_id','id')->with('_children');

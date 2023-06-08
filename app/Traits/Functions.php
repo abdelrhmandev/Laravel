@@ -10,6 +10,9 @@ use App\Models\Category;
 trait Functions
 {
 
+ 
+
+
     function hasChild($cccccccccccccc){
 
         // $cc = Category::where('id',$cccccccccccccc)->count();  

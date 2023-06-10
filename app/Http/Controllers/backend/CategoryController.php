@@ -116,17 +116,16 @@ class CategoryController extends Controller
 
    
                 
-                'categories' =>  Category::tree()
+                // 'categories' =>  Category::tree(),
                  
-
+                'categories' => Category::getCategoryTreeForParentId()
                 // 'dumpTree' =>  $this->dumpTree(), 
             ];            
 
 
    
-            
 
-        
+            
       
  
             //  return view('backend.categories.ccca',$compact);

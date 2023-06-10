@@ -1,5 +1,11 @@
 <?php
 use Illuminate\Support\Facades\Route;
+use App\Models\Category;
+
+// Route::get('tree', function () {
+//     return Category::tree();
+// });
+
 Route::get('/', 'DashboardController@index')->name('dashboard');
 // Route::get('/', DashboardController::class,'index')->name('dashboard');
 // Route::get('/', function () {

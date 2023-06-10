@@ -7,55 +7,58 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Collection;
 
 class Category extends Model
 {
-    use HasFactory;
 
-    protected $guarded = ['id'];
 
-    public static function tree()
+    
+
+
+    public function parent()
     {
-        $allCategories = Category::get();
-
-        $rootCategories = $allCategories->whereNull('parent_id');
-
-        self::formatTree($rootCategories, $allCategories);
-
-        return $rootCategories;
+        return $this->belongsTo('App\Models\Category', 'parent_id', 'id');
     }
 
-    public function children(){
-        return $this->hasMany(Category::class,'parent_id','id')->with('categories');
+    public function children()
+    {
+        return $this->hasMany('App\Models\Category', 'parent_id');
     }
 
 
-    private static function formatTree($categories, $allCategories)
-    {
-        foreach ($categories as $category) {
-            $category->children = $allCategories->where('parent_id', $category->id)->values();
+    public function getAllParents()
+{
+    $parents = collect([]);
 
-            if ($category->children->isNotEmpty()) {
-                self::formatTree($category->children, $allCategories);
-            }
+    $parent = $this->parent;
+
+    while(!is_null($parent)) {
+        $parents->push($parent);
+        $parent = $parent->parent;
+    }
+
+    return $parents;
+}
+
+    public static function getCategoryTreeForParentId($parent_id = 0)
+    {
+
+        $categories = array();
+
+        $result = Category::with('children')->get()->where('parent_id',$parent_id);
+
+
+
+        foreach ($result as $mainCategory) {
+          $category = array();
+          $category['id'] = $mainCategory->id;
+
+          $category['parent_id'] = $mainCategory->parent_id;
+          $category['sub_categories'] = self::getCategoryTreeForParentId($category['id']);
+          $categories[$mainCategory->id] = $category;
         }
+        return $categories;
     }
 
-    public function images(): MorphMany
-    {
-        return $this->morphMany(Image::class, 'imageable');
-    }
-
-    public function isChild(): bool
-    {
-        return $this->parent_id !== null;
-    }
-
-    public function parent(): BelongsTo
-    {
-        return $this->belongsTo(Category::class, 'parent_id')
-            ->withDefault([
-                'name' => 'Default',
-            ]);
-    }
 }

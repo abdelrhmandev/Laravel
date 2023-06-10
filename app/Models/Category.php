@@ -2,115 +2,60 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Post;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 class Category extends Model
 {
-    protected $fillable=['parent_id','image','published'];
+    use HasFactory;
 
-    //https://codecourse.com/watch/quick-and-easy-nested-categories-in-laravel
- 
-    protected $table = 'categories';
+    protected $guarded = ['id'];
 
-    // protected $with = ['translate'];
+    public static function tree()
+    {
+        $allCategories = Category::get();
 
-<<<<<<< HEAD
+        $rootCategories = $allCategories->whereNull('parent_id');
 
-   // this relationship will only return one level of child items
-//    public function categories()
-//    {
-//        return $this->hasMany(Category::class, 'parent_id','id');
-//    }
+        self::formatTree($rootCategories, $allCategories);
 
-   // This is method where we implement recursive relationship
-   public function childCategories()
-   {
-       return $this->hasMany(Category::class, 'parent_id','id')->with('categories');
-   }
+        return $rootCategories;
+    }
 
-   public function owner()
-   {
-       return $this->belongsTo(Category::class, 'parent_id','id');
-   }
-
- 
-
-   public function categories()
-   {
-       return $this->hasMany(Category::class, 'parent_id','id');
-   }
-
-   public function getThreadedComments()
-   {
-       return $this->comments()->with('owner')->get()->threaded();
-   }
+    public function children(){
+        return $this->hasMany(Category::class,'parent_id','id')->with('categories');
+    }
 
 
+    private static function formatTree($categories, $allCategories)
+    {
+        foreach ($categories as $category) {
+            $category->children = $allCategories->where('parent_id', $category->id)->values();
 
-
-   public function newCollection(array $models = [])
-   {
-       return new CategoryCollection($models);
-   }
-   
-
-// Recursive children
-// public function children() {
-//     return $this->hasMany('App\Models\Category', 'parent_id')->with('children');
-// }
-
-// // One level parent
-// public function parent() {
-//     return $this->belongsTo('App\Models\Category', 'parent_id');
-// }
-
-// Recursive parents
-public function parents() {
-    return $this->belongsTo('App\Models\Category', 'parent_id')->with('parent');
-}
-
-    
-
-        // public function categories()
-        // {
-        //     return $this->hasMany(Category::class,'parent_id','id');
-        // }
-
-        //         public function childrenCategories()
-        // {
-        //     return $this->hasMany(Category::class,'parent_id','id')->with('categories');
-        // }
-
- 
-        // public function _children(){
-        //     return $this->hasMany(Category::class,'parent_id','id')->with('_children');
-        // }
-=======
-
-
-    
-        public function categories()
-        {
-            return $this->hasMany(Category::class,'parent_id','id');
+            if ($category->children->isNotEmpty()) {
+                self::formatTree($category->children, $allCategories);
+            }
         }
+    }
 
+    public function images(): MorphMany
+    {
+        return $this->morphMany(Image::class, 'imageable');
+    }
 
-      
+    public function isChild(): bool
+    {
+        return $this->parent_id !== null;
+    }
 
-        public function children(){
-            return $this->hasMany(Category::class,'parent_id','id')->with('children');
-        }
-
->>>>>>> 2fdf09f8be045c7d71ccca98e0c0457074c2f648
- 
-
-        
-
-    // public function post(){
-    //     return $this->hasMany('App\Models\Post','post_cat_id','id')->where('status','active');
-    // }
-
-    // public static function getBlogByCategory($slug){
-    //     return Category::with('post')->where('slug',$slug)->first();
-    // }
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(Category::class, 'parent_id')
+            ->withDefault([
+                'name' => 'Default',
+            ]);
+    }
 }

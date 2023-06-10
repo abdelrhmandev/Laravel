@@ -102,23 +102,21 @@ class CategoryController extends Controller
  
 
 
-   $row = Category::whereNull('parent_id')
-   
-   
-   ->get();
 
             
-   dd($row->getThreadedCategories());
+   
+
+   
+   
+   
    
             $compact = [
 
                 
 
-                'categories'     => $row->getThreadedCategories(),   
-
-                'categories' =>  Category::whereNull('parent_id')
-                ->with('children')
-                ->get()
+   
+                
+                'categories' =>  Category::tree()
                  
 
                 // 'dumpTree' =>  $this->dumpTree(), 
@@ -128,15 +126,13 @@ class CategoryController extends Controller
    
             
 
-       
- 
+        
       
+ 
+            //  return view('backend.categories.ccca',$compact);
 
 
-             return view('backend.categories.ccca',$compact);
-
-
-            //  return view('backend.categories.create',$compact);
+             return view('backend.categories.create',$compact);
 
         }
     }

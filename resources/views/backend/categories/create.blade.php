@@ -1,5 +1,3 @@
-<select>
-@foreach ($categories as $category)
-<option value="">{{ $category['id'] }}</option>
-@endforeach
-</select>
+ <select>
+    {!! $categories !!}
+ </select>

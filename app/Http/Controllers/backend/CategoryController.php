@@ -96,6 +96,8 @@ class CategoryController extends Controller
         public function create(){
         if (view()->exists('backend.categories.create')) {
 
+
+            echo '<pre>';
             // $dumpTree = Category::select('id','parent_id'); 
 
 
@@ -116,17 +118,38 @@ class CategoryController extends Controller
 
    
                 
-                // 'categories' =>  Category::tree(),
+                'categories' =>  $this->dumpTree(NULL,0),
                  
-                'categories' => Category::getCategoryTreeForParentId()
+                 
                 // 'dumpTree' =>  $this->dumpTree(), 
             ];            
 
 
    
+          /*
+            $arra = Category::with('nested_descendants')->get();
 
-            
-      
+            // $arra = $account->nested_descendants; // collection of recursively loaded children
+       
+            foreach($arra as $c){
+
+                // echo '<b>'.$c->id.'</b>';
+                
+                if($c->nested_descendants){
+
+                    foreach($c->nested_descendants as $cv){
+                        
+                       
+                        // echo $c->id.'-----------------'.$cv->id;
+
+                       
+                    }
+                    
+                }
+                echo '<br>';
+            }
+
+        */
  
             //  return view('backend.categories.ccca',$compact);
 

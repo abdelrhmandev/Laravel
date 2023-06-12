@@ -100,68 +100,27 @@ class CategoryController extends Controller
             echo '<pre>';
             // $dumpTree = Category::select('id','parent_id'); 
 
-
  
-
-            foreach (Category::tree() as $key => $value) {
-                # code...
-            echo $value->id;
-
-            echo '<br>';
-            
-            }
-
-            
-   
 
     
 
             $compact = [
-
+ 
                 
-
-   
-                
-                // 'categories' =>  $categories
-             
-                 
-                 
-                // 'dumpTree' =>  $this->dumpTree(), 
+                'categories' =>  Category::tree()
+  
             ];            
 
 
    
-          /*
-            $arra = Category::with('nested_descendants')->get();
-
-            // $arra = $account->nested_descendants; // collection of recursively loaded children
-       
-            foreach($arra as $c){
-
-                // echo '<b>'.$c->id.'</b>';
-                
-                if($c->nested_descendants){
-
-                    foreach($c->nested_descendants as $cv){
-                        
-                       
-                        // echo $c->id.'-----------------'.$cv->id;
-
-                       
-                    }
-                    
-                }
-                echo '<br>';
-            }
-
-        */
  
-            //  return view('backend.categories.ccca',$compact);
+ 
+         
 
 
-           
+          
 
-            //  return view('backend.categories.create',$compact);
+             return view('backend.categories.create',$compact);
 
         }
     }

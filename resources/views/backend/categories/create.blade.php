@@ -1,14 +1,6 @@
-<ul>
-   @if(count($categories) > 0)
-       @foreach ($categories as $category)
-           <li>{{ $category->id }}</li>
-           <ul>
-               @if(count($category->children))
-                   @foreach ($category->children as $subCategories)
-                       @include('backend.sub_category', ['sub_categories' => $subCategories])
-                   @endforeach
-               @endif
-           </ul>
-       @endforeach
-   @endif
-</ul>
+<div class="container-xxl" id="kt_content_container">
+<select>
+    <x-categories :categories="$categories" />
+
+</select>
+</div>

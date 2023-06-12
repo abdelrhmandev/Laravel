@@ -1,8 +1,8 @@
-<div class="flex items-center">
+ <option>
     @if($category->isChild())
        SUB
     @endif
-    <div class="">{{ $category->id }}</div>
-</div>
+     {{ $category->id }} 
+ </option> 
 
 <x-categories :categories="$category->children" />

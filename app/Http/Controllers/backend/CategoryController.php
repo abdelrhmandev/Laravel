@@ -103,22 +103,27 @@ class CategoryController extends Controller
 
  
 
+            foreach (Category::tree() as $key => $value) {
+                # code...
+            echo $value->id;
 
+            echo '<br>';
+            
+            }
 
             
    
 
-   
-   
-   
-   
+    
+
             $compact = [
 
                 
 
    
                 
-                'categories' =>  $this->dumpTree(NULL,0),
+                // 'categories' =>  $categories
+             
                  
                  
                 // 'dumpTree' =>  $this->dumpTree(), 
@@ -154,7 +159,9 @@ class CategoryController extends Controller
             //  return view('backend.categories.ccca',$compact);
 
 
-             return view('backend.categories.create',$compact);
+           
+
+            //  return view('backend.categories.create',$compact);
 
         }
     }

@@ -4,36 +4,32 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Collection;
 
 class Category extends Model
 {
+    use HasFactory;
 
-  // Relationships
-  public function parent()
-  {
-      return $this->belongsTo('App\Models\Category', 'parent_id');
-  }
+    protected $guarded = ['id'];
 
-  public function children()
-  {
-      return $this->hasMany('App\Models\Category', 'parent_id');
-  }
+    public static function tree()
+    {
+        $allCategories = Category::get();
 
-  public function nested_ancestors()
-  {
-      return $this->belongsTo('App\Models\Category', 'parent_id');
-  }
+        $rootCategories = $allCategories->whereNull('parent_id');
 
-  public function nested_descendants()
-  {
-      return $this->hasMany('App\Models\Category', 'parent_id');
-  }
+        self::formatTree($rootCategories, $allCategories);
 
- 
+        return $rootCategories;
+    }
+
+    private static function formatTree($categories, $allCategories)
+    {
+        foreach ($categories as $category) {
+            $category->children = $allCategories->where('parent_id', $category->id)->values();
+
+            if ($category->children->isNotEmpty()) {
+                self::formatTree($category->children, $allCategories);
+            }
+        }
+    }
 }
-
- 

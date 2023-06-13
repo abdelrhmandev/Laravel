@@ -1,0 +1,21 @@
+<?php
+return [
+'title' => 'أسم المدينه',
+'edit' =>'تعديل المدينه',
+'add' =>'أضف مدينه',
+'delete' =>'حذف مدينه',
+'select' =>'أختر المدينه',
+'cities' =>'المدن',
+'city' =>'المدينه',
+'all' =>'كل المدن',
+'depanted_cities'=>'أختر المدن التي سيكون مسؤل عنها ',
+//'area_manager_cities'=>'أختر المدن التي سيكون مسؤل عنها ',
+'city_percentage_meter'=>'مؤشر أداء المدن',
+'no_data_added_yet' =>'عذرا لاتوجد مدن مضافه',
+'deleteMessageSuccess' => 'تم حذف المدينه بنجاح',
+'deleteMessageError' => 'خطأ في عمليه حذف المدينه',
+'updateMessageSuccess' => 'تم تحديث المدينه بنجاح',
+'updateMessageError' => 'خطأ في عمليه تحديث المدينه',
+'storeMessageSuccess' =>  'تم أضافه المدينه بنجاح',
+'storeMessageError' => 'خطأ في عمليه أضافه المدينه',
+];

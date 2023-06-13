@@ -17,43 +17,30 @@ class CategoryController extends Controller
 {
     use UploadAble,Functions;
 
- 
-// https://laraveldaily.com/post/eloquent-recursive-hasmany-relationship-with-unlimited-subcategories
-// https://laracasts.com/discuss/channels/laravel/recursive-relationship-set-depth
-
-
-// https://medium.com/@codeaxion77/how-to-code-recursive-function-to-get-subcategory-ids-optimized-unoptimized-laravel-56931c52dd49
-
-
-
-// https://blog.codecourse.com/recursive-nested-data-in-laravel
-
-
-// https://stackoverflow.com/questions/47441861/laravel-5-5-multi-level-menu-query-order
-
-
-
-    public function store(Request $request){
+    public function store(CategoryRequest $request){
 
         
-        /*$validated = $request->validated();
-        $validated['published'] = isset($request->published) ? '1' : '0';
-
-       
+        $validated = $request->validated();
+        $validated['published'] = isset($request->published) ? '1' : '0';       
         $validated['image'] = (!empty($request->image)) ? $this->uploadOne($request->image, 'categories') : NULL;    
-
         $validated['parent_id'] = isset($request->parent_id) ? $request->parent_id : NULL;
 
 
-       $query = Category::create($validated);
+        $query = Category::create($validated);
+        DB::beginTransaction();
+        try{
         $translatedArr = $this->HandleMultiLangdatabase(['title_','slug_','description_'],['category_id'=>$query->id]);
-        CategoryTranslation::insert($translatedArr);
-        */
+        if(CategoryTranslation::insert($translatedArr)){
+            $arr = array('msg' => __('category.storeMessageSuccess'), 'status' => true);
+        }
+        DB::commit();
+        }
+        catch (\Exception $e) {
+            DB::rollback();
+            $arr = array('msg' => __('category.storeMessageError'), 'status' => false);
+         }
 
-
-            $arr = array('msg' => __('site.mission_completed'), 'status' => true);
-
-            return response()->json($arr);
+        return response()->json($arr);
            
       
 
@@ -109,9 +96,28 @@ class CategoryController extends Controller
 
         }
     }
-     public function edit(){
+     public function edit($id){
         if (view()->exists('backend.categories.index')) {
-            return view('backend.categories.edit');
+            $compact = [
+                'updateUrl'   => route('admin.categories.update',$id), 
+                'redirectUrl'    => route('admin.categories.index'),
+                'redirectUrlAdd'    => route('admin.categories.create'),
+                'categories' =>  Category::tree()
+  
+            ];            
+
+
+   
+ 
+ 
+         
+
+
+          
+
+             return view('backend.categories.edit',$compact);
+
+
         }
     }
 

@@ -48,7 +48,7 @@ function handleFormSubmitFunc(formId) {
     let keys;
     // Get elements
     const form = document.getElementById(formId);
-    const submitButton = document.getElementById('kt_ecommerce_add_category_submit');
+    const submitButton = document.getElementById('btn-submit');
     // Init form validation rules. For more info check the FormValidation plugin's official
     documentation: https: //formvalidation.io/
 
@@ -129,16 +129,15 @@ function handleFormSubmitFunc(formId) {
                             success: function(response, textStatus, xhr) {
                                 if (response["status"] == true) {
                                     Swal.fire({
-                                        text: response["msg"],
-                            
+                                        text: response["msg"],                            
                                         icon: 'success',
                                         showCancelButton: true,
                                         buttonsStyling: false,
-                                        confirmButtonText: "Go to Categories",
-                                        cancelButtonText: "Add New Cat",
+                                        confirmButtonText: form.getAttribute("data-kt-all-label"),
+                                        cancelButtonText: form.getAttribute("data-kt-add-new-item-label"),
                                         customClass: {
-                                            confirmButton: "btn fw-bold btn-primary",
-                                            cancelButton: "btn fw-bold btn-active-light-primary"
+                                            confirmButton: "btn btn-light-success",
+                                            cancelButton: "btn btn-light-primary"
                                         }
                                     }).then(function(result) {
                                         if (result.isConfirmed) {
@@ -149,9 +148,8 @@ function handleFormSubmitFunc(formId) {
                                             window.location = form.getAttribute("data-kt-redirect");
                                         }else{
                                             submitButton.disabled = false;
-
                                             // Redirect to customers list page
-                                            window.location = form.getAttribute("data-kt-redirect-add");
+                                            window.location = window.location.href;
 
                                         }
                                     });
@@ -173,9 +171,9 @@ function handleFormSubmitFunc(formId) {
                                         html: msgError, // respose from controller
                                         icon: "warning",
                                         buttonsStyling: false,
-                                        confirmButtonText: "Ok, got it!",
+                                        confirmButtonText: form.getAttribute("data-form-agree-label"),
                                         customClass: {
-                                            confirmButton: "btn btn-primary"
+                                            confirmButton: "btn btn-light-warning"
                                         }
                                     })
 
@@ -189,12 +187,12 @@ function handleFormSubmitFunc(formId) {
                     }, 2000);
                 } else {
                     Swal.fire({
-                        text: form.getAttribute('data-form-submit-error'),
+                        text: form.getAttribute('data-form-submit-error-message'),
                         icon: "error",
                         buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
+                        confirmButtonText: form.getAttribute("data-form-agree-label"),
                         customClass: {
-                            confirmButton: "btn btn-primary"
+                            confirmButton: "btn btn-light-danger"
                         }
                     });
                 }

@@ -30,7 +30,7 @@
                                 />
                         </div>
 
-
+                        @if($slug == 1)
                         <div class="mb-5 fv-row fl">
                             <label class="form-label"
                                 for="slug-{{ substr($properties['regional'], 0, 2) }}">{{ __('site.slug') }}</label>
@@ -38,9 +38,10 @@
                                 name="slug_{{ substr($properties['regional'], 0, 2) }}" class="form-control mb-2"
                                 />
                         </div>
+                        @endif
 
-                        @if(isset($richTextArea))
-                        <div class="mb-5 fv-row">
+                        @if($description && $richTextArea == 1)
+                            <div class="fv-row">
                             <!--begin::Label-->
                             <label class="form-label"
                                 for="description-{{ substr($properties['regional'], 0, 2) }}">{{ __('site.description') }}</label>
@@ -49,8 +50,8 @@
                                 name="description_{{ substr($properties['regional'], 0, 2) }}"
                                 class="editor @error('description_' . substr($properties['regional'], 0, 2)) is-invalid @enderror"/>sports is good {{ substr($properties['regional'], 0, 2) }} </textarea>
                         </div>
-                        @else
-                        <div class="d-flex flex-column mb-8">
+                        @elseif($description && $richTextArea == 0)
+                        <div class="d-flex flex-column">
                             <label class="form-label"
                             for="description-{{ substr($properties['regional'], 0, 2) }}">{{ __('site.description') }}</label>
                             <textarea class="form-control form-control-solid" rows="4" name="application" placeholder=""></textarea>
@@ -59,8 +60,7 @@
                         @endif
                         
                         @if(isset($showseo))
-                        <x-backend.seo.LangInputs :properties="$properties" />
-                        
+                        <x-backend.seo.LangInputs :properties="$properties" />                        
                         @endif
 
 

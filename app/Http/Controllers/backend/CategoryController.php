@@ -33,44 +33,27 @@ class CategoryController extends Controller
 
 
 
-    public function store(CategoryRequest $request){
+    public function store(Request $request){
 
         
-        $validated = $request->validated();
+        /*$validated = $request->validated();
         $validated['published'] = isset($request->published) ? '1' : '0';
 
        
         $validated['image'] = (!empty($request->image)) ? $this->uploadOne($request->image, 'categories') : NULL;    
-        $query = Category::create($validated);
- 
-       
-      
-        
 
-           $cc = $this->HandleMultiLangdatabase(['title_','slug_','description_'],['category_id'=>$query->id]);
+        $validated['parent_id'] = isset($request->parent_id) ? $request->parent_id : NULL;
 
 
-
-        
-         
-
-                CategoryTranslation::insert($cc);
-
-         
-        //    $ccx = (array_values($cc));
+       $query = Category::create($validated);
+        $translatedArr = $this->HandleMultiLangdatabase(['title_','slug_','description_'],['category_id'=>$query->id]);
+        CategoryTranslation::insert($translatedArr);
+        */
 
 
-            // dd($request);
+            $arr = array('msg' => __('site.mission_completed'), 'status' => true);
 
-        //    dd( $request->only($cc));
-
-        //    $cc['post_category_id'] = 2;
-            
-        //    return response()->json($request->$cc);
-
-        // CategoryTranslation::insert($cc);
-
-            //   return response()->json($cc);
+            return response()->json($arr);
            
       
 
@@ -87,6 +70,7 @@ class CategoryController extends Controller
             $compact = [
                 'storeUrl'   => route('admin.categories.store'), 
                 'redirectUrl'    => route('admin.categories.index'),
+                
                 // 'trans_file'  => $this->trans_file,
                 ''    
             ];            
@@ -97,7 +81,7 @@ class CategoryController extends Controller
         if (view()->exists('backend.categories.create')) {
 
 
-            echo '<pre>';
+            // echo '<pre>';
             // $dumpTree = Category::select('id','parent_id'); 
 
  
@@ -105,8 +89,9 @@ class CategoryController extends Controller
     
 
             $compact = [
- 
-                
+                'storeUrl'   => route('admin.categories.store'), 
+                'redirectUrl'    => route('admin.categories.index'),
+                'redirectUrlAdd'    => route('admin.categories.create'),
                 'categories' =>  Category::tree()
   
             ];            

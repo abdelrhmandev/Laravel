@@ -34,6 +34,8 @@ class CategoryRequest extends FormRequest
         foreach(\LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
 
               $rules['title_'.substr($properties['regional'],0,2)] = 'required|unique:category_translations,title|max:255'; 
+              $rules['slug_'.substr($properties['regional'],0,2)] = 'nullable|unique:category_translations,slug|max:255'; 
+
 
               $rules['description_'.substr($properties['regional'],0,2)] = 'nullable|max:500'; 
         } 
@@ -41,11 +43,8 @@ class CategoryRequest extends FormRequest
 
 
         $rules['published'] = 'required|in:0,1'; 
-
-        $rules['image'] =  'nullable|mimes:jpg,jpeg,png|max:2048';
- 
+        $rules['image'] =  'nullable|max:1000kb|mimes:jpeg,bmp,png,gif'; // max size 1 MB  
         $rules['parent'] = 'nullable|exists:category,id';
-
         // $rules['start_date'] = 'required_with:special_price|date_format:Y-m-d';
 
         return $rules; 

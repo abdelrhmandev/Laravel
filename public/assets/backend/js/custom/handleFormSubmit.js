@@ -1,16 +1,6 @@
 function handleFormSubmitFunc(formId) {
 
- /*
- let quillelements = [];
-Object.keys(langs).forEach(key => {
-    quillelements.push(
-        '#description_div_' + key
-    );
-    quillelements.push(
-        '#meta_tag_description_div_' + key
-    );
-});
- */
+ 
 
 
 
@@ -115,11 +105,11 @@ Object.keys(langs).forEach(key => {
                    //https://ckeditor.com/docs/ckeditor5/latest/installation/getting-started/getting-and-setting-data.html
 
 
-                    // submitButton.setAttribute('data-kt-indicator', 'on');
+                    submitButton.setAttribute('data-kt-indicator', 'on');
                     // Disable submit button whilst loading
-                    // submitButton.disabled = true;
+                    submitButton.disabled = true;
                     setTimeout(function() {
-                        // submitButton.removeAttribute('data-kt-indicator');
+                        submitButton.removeAttribute('data-kt-indicator');
                         $.ajaxSetup({
                             headers: {
                                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
@@ -140,11 +130,15 @@ Object.keys(langs).forEach(key => {
                                 if (response["status"] == true) {
                                     Swal.fire({
                                         text: response["msg"],
+                            
                                         icon: 'success',
+                                        showCancelButton: true,
                                         buttonsStyling: false,
-                                        confirmButtonText: "Ok, got it!",
+                                        confirmButtonText: "Go to Categories",
+                                        cancelButtonText: "Add New Cat",
                                         customClass: {
-                                            confirmButton: "btn btn-primary"
+                                            confirmButton: "btn fw-bold btn-primary",
+                                            cancelButton: "btn fw-bold btn-active-light-primary"
                                         }
                                     }).then(function(result) {
                                         if (result.isConfirmed) {
@@ -153,6 +147,12 @@ Object.keys(langs).forEach(key => {
 
                                             // Redirect to customers list page
                                             window.location = form.getAttribute("data-kt-redirect");
+                                        }else{
+                                            submitButton.disabled = false;
+
+                                            // Redirect to customers list page
+                                            window.location = form.getAttribute("data-kt-redirect-add");
+
                                         }
                                     });
                                 }

@@ -83,7 +83,10 @@
             <div class="d-flex flex-column flex-row-fluid gap-7 w-lg-400px gap-lg-10">
                 <!--begin::Thumbnail settings-->
                 <x-backend.cms.image />
+                <x-backend.cms.categories-multi-select :categories="$categories" :level="0" />
+
                 <x-backend.cms.publish />
+
                 
                 <!--end::Thumbnail settings-->
                 <!--begin::Status-->         

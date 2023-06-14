@@ -1,8 +1,20 @@
 <div class="card card-flush py-4">
-    <div class="card-body pt-5">
-        <div class="mb-5 fv-row fl">
-            <label class="form-label" for="parent_category">Parent Category</label>
-            <select name="parent_id" class="form-select mb-2" data-control="select2" data-allow-clear="true">
+    <!--begin::Card header-->
+    <div class="card-header">
+        <!--begin::Card title-->
+        <div class="card-title">
+            <h2>{{ __('category.parent') }}</h2>
+        </div>
+        <!--end::Card title-->
+    </div>
+    <!--end::Card header-->
+    <!--begin::Card body-->
+    <div class="card-body pt-0">
+        <!--begin::Input group-->
+        <!--begin::Label-->
+        <!--end::Label-->
+        <!--begin::Select2-->
+        <select name="parent_id" class="form-select mb-2" data-control="select2" data-allow-clear="true">
                 <option value="0">None</option>
                 @foreach ($categories as $category)
                     <option value="{{ $category->id }}">
@@ -14,6 +26,6 @@
                     </option>
                 @endforeach
             </select>
-        </div>
     </div>
+    <!--end::Card body-->
 </div>

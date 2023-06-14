@@ -5,6 +5,7 @@ return [
 'add' =>'Add Category',
 'delete' =>'Delete Category',
 'select' =>'Select Category',
+'select_multi' =>'Select Categories',
 'plural' =>'Categories',
 'deleteMessageSuccess' => 'Category has been deleted successfully',
 'deleteMessageError' => 'Error in delete Category',

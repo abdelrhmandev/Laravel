@@ -155,20 +155,24 @@
             enctype="multipart/form-data">
             <div class="d-flex flex-column gap-7 gap-lg-10 w-100 mb-7 me-lg-10">
                 <!--begin:::Tabs-->
-                {{-- <x-backend.langs.ulTabs/> --}}
+                <x-backend.langs.ulTabs/>
                 <!--end:::Tabs-->
                 <!--begin::Tab content-->
-                {{-- <x-backend.langs.LangInputs :description="1" :richTextArea="0" :slug="1" /> --}}
+                <x-backend.langs.LangInputs :description="1" :richTextArea="0" :slug="1" />
 
-                {{-- <x-backend.cms.select-single-option :categories="$categories" :level="0" /> --}}
                 <!--end::Tab content-->
-                {{-- <x-backend.btns.create /> --}}
+                <x-backend.btns.create />
             </div>
             <div class="d-flex flex-column flex-row-fluid gap-7 w-lg-400px gap-lg-10">
                 <!--begin::Thumbnail settings-->
-                {{-- <x-backend.cms.image /> --}}
-                 <x-backend.cms.categories-multi-select />
-                {{-- <x-backend.cms.publish /> --}}
+                  <x-backend.cms.image />
+
+                    <x-backend.cms.select-single-option :categories="$categories" :level="0" />
+
+
+
+
+                <x-backend.cms.publish />
                 
                 <!--end::Thumbnail settings-->
                 <!--begin::Status-->         
@@ -195,23 +199,6 @@
     <script src="{{ asset('assets/backend/plugins/custom/tinymce/tinymce.bundle.js') }}"></script>
 
 
-    <script src="https://preview.colorlib.com/theme/bootstrap/multiselect-01/js/popper.js"></script>
-    <script src="https://preview.colorlib.com/theme/bootstrap/multiselect-01/js/bootstrap.min.js"></script>
-    <script src="https://preview.colorlib.com/theme/bootstrap/multiselect-01/js/bootstrap-multiselect.js"></script>
-    <script>
-        (function($) {
-
-"use strict";
-
- $(document).ready(function() {
-    $('#multiple-checkboxes').multiselect({
-      includeSelectAllOption: true,
-    });
-});
- 
-})(jQuery);
-
-        </script>
 
     <script>
 // On document ready

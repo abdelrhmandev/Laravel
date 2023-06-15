@@ -13,7 +13,7 @@ class Category extends Model
 
     protected $guarded = ['id'];
 
-    protected $with = ['translate'];
+     
 
 
     public function scopePublished($query,$type) {
@@ -21,6 +21,11 @@ class Category extends Model
     }
 
     
+
+ 
+
+
+
     // # single Item
     public function translate(){
         return $this->hasOne(CategoryTranslation::class)->where('lang',app()->getLocale());
@@ -29,7 +34,7 @@ class Category extends Model
 
     public static function tree()
     {
-        $allCategories = Category::select('id','parent_id')->published('1')->get();
+        $allCategories = Category::select('id','parent_id')->published('1')->with('translate')->get();
 
         $rootCategories = $allCategories->whereNull('parent_id');
 

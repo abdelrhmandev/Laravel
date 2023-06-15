@@ -1,7 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Route;
-use App\Models\Category;
-
+use App\Http\Controllers\backend\CategoryController;
 // Route::get('tree', function () {
 //     return Category::tree();
 // });

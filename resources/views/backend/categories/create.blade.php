@@ -158,7 +158,9 @@
                 <x-backend.langs.ulTabs/>
                 <!--end:::Tabs-->
                 <!--begin::Tab content-->
-                <x-backend.langs.LangInputs :description="1" :richTextArea="0" :slug="1" />
+              
+
+                <x-backend.langs.LangInputs :showDescription="1" :richTextArea="0" :showSlug="1" />
 
                 <!--end::Tab content-->
                 <x-backend.btns.create />
@@ -168,6 +170,7 @@
                   <x-backend.cms.image />
 
                     <x-backend.cms.select-single-option :categories="$categories" :level="0" />
+                    
 
 
 

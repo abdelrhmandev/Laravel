@@ -16,6 +16,10 @@ class CategoryTranslation extends Model
 		'lang',
 	];
 
+
+ 
+
+
     public function category(){
         return $this->belongsTo(PostCategory::class);
     }

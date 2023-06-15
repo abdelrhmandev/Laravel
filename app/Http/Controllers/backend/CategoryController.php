@@ -29,10 +29,10 @@ class CategoryController extends Controller
         $query = Category::create($validated);
         DB::beginTransaction();
         try{
-        $translatedArr = $this->HandleMultiLangdatabase(['title_','slug_','description_'],['category_id'=>$query->id]);
-        if(CategoryTranslation::insert($translatedArr)){
-            $arr = array('msg' => __('category.storeMessageSuccess'), 'status' => true);
-        }
+            $translatedArr = $this->HandleMultiLangdatabase(['title_','slug_','description_'],['category_id'=>$query->id]);
+            if(CategoryTranslation::insert($translatedArr)){
+                $arr = array('msg' => __('category.storeMessageSuccess'), 'status' => true);
+            }
         DB::commit();
         }
         catch (\Exception $e) {
@@ -69,7 +69,7 @@ class CategoryController extends Controller
 
 
             // echo '<pre>';
-            // $dumpTree = Category::select('id','parent_id'); 
+     
 
  
 
@@ -97,23 +97,39 @@ class CategoryController extends Controller
         }
     }
      public function edit($id){
-        if (view()->exists('backend.categories.index')) {
+
+
+ 
+        if (view()->exists('backend.categories.edit')) {
+
+
+
+
+
+            
+ 
+
+            $row = Category::findOrFail($id);
+
+            $e =  CategoryTranslation::where('category_id',$id)->get();
+            $arr = [];
+            foreach($e as $v){
+                $arr[$v->lang] = ['title'=>$v->title , 'slug'=>$v->slug];
+            } 
+ 
+
             $compact = [
-                'updateUrl'   => route('admin.categories.update',$id), 
-                'redirectUrl'    => route('admin.categories.index'),
+                'updateUrl'         => route('admin.categories.update',$id), 
+                'redirectUrl'       => route('admin.categories.index'),
                 'redirectUrlAdd'    => route('admin.categories.create'),
-                'categories' =>  Category::tree()
+                'categories'        =>  Category::tree(),
+                'row'               => $row,
+                'values'            => $arr,
   
             ];            
-
-
-   
  
- 
-         
-
-
-          
+            
+             
 
              return view('backend.categories.edit',$compact);
 

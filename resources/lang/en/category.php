@@ -6,6 +6,7 @@ return [
 'delete' =>'Delete Category',
 'select' =>'Select Category',
 'select_multi' =>'Select Categories',
+'parent'=>'Parent Category',
 'plural' =>'Categories',
 'deleteMessageSuccess' => 'Category has been deleted successfully',
 'deleteMessageError' => 'Error in delete Category',

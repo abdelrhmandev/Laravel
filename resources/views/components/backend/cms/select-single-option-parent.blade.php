@@ -17,13 +17,11 @@
         <select name="parent_id" class="form-select mb-2" data-control="select2" data-allow-clear="true">
                 <option value="0">None</option>
                 @foreach ($categories as $category)
-                    <option value="{{ $category->id }}"
-                        
-                        @if($category->id == $category->parent_id) "selected" @else "" @endif
-                        >
-                        {{ $category->translate->title }}  {{ $category->parent_id ?? 'NO' }}
+                    <option value="{{ $category->id }}" @if(isset($row->parent_id) && $row->parent_id  == $category->id) {{ "selected" }} @endif>
+                        {{ $category->translate->title }}
                         @if ($category->children->isNotEmpty())
-                            <x-backend.cms.select-single-option-childs  :childs="$category->children" : level="{{ $level + 1 }}" :parentid="$category->id ?? ''" :ss="/>
+                            <x-backend.cms.select-single-option-childs :childs="$category->children" :row="$row ?? ''"
+                                level="{{ $level + 1 }}" />
                         @endif
                     </option>
                 @endforeach

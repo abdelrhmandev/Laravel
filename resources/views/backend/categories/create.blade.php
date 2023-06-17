@@ -169,7 +169,7 @@
                 <!--begin::Thumbnail settings-->
                   <x-backend.cms.image />
 
-                    <x-backend.cms.select-single-option :categories="$categories" :level="0" />
+                    <x-backend.cms.select-single-option-parent :categories="$categories" :level="0" />
                     
 
 

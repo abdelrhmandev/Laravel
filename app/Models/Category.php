@@ -20,12 +20,6 @@ class Category extends Model
         return $query->where('published',$type);
     }
 
-    
-
- 
-
-
-
     // # single Item
     public function translate(){
         return $this->hasOne(CategoryTranslation::class)->where('lang',app()->getLocale());

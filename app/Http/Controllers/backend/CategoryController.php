@@ -114,7 +114,11 @@ class CategoryController extends Controller
             $e =  CategoryTranslation::where('category_id',$id)->get();
             $arr = [];
             foreach($e as $v){
-                $arr[$v->lang] = ['title'=>$v->title , 'slug'=>$v->slug];
+                $arr[$v->lang] = [                
+                    'title'=>$v->title, 
+                    'slug'=>$v->slug,
+                    'description'=>$v->description,
+                ];
             } 
  
 

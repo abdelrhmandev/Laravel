@@ -33,7 +33,7 @@
 
                     <div class="card-body pt-0">
 
-                        {{ $values[substr($properties['regional'], 0, 2)]['title'] }}
+                        
 
                         
                         <div class="mb-5 fv-row fl">
@@ -43,8 +43,7 @@
                                 name="title_{{ substr($properties['regional'], 0, 2) }}" class="form-control mb-2"
                                 required
                                 data-fv-not-empty___message="{{ __('validation.required', ['attribute' => 'title' . '&nbsp;' . substr($properties['regional'], 0, 2)]) }}"
-                                value=""
-                                
+                                value="{{ $values[substr($properties['regional'], 0, 2)]['title'] ?? '' }}"                                
                                 />
                         </div>
 
@@ -54,6 +53,7 @@
                                 for="slug-{{ substr($properties['regional'], 0, 2) }}">{{ __('site.slug') }}</label>
                             <input type="text" id="slug_{{ substr($properties['regional'], 0, 2) }}"
                                 name="slug_{{ substr($properties['regional'], 0, 2) }}" class="form-control mb-2"
+                                value="{{ $values[substr($properties['regional'], 0, 2)]['slug'] ?? '' }}"
                                 />
                         </div>
                         @endif
@@ -66,13 +66,13 @@
                                 <textarea rows="4" cols="30"
                                 id="description_{{ substr($properties['regional'], 0, 2) }}"
                                 name="description_{{ substr($properties['regional'], 0, 2) }}"
-                                class="editor @error('description_' . substr($properties['regional'], 0, 2)) is-invalid @enderror"/>sports is good {{ substr($properties['regional'], 0, 2) }} </textarea>
+                                class="editor @error('description_' . substr($properties['regional'], 0, 2)) is-invalid @enderror"/>{{ $values[substr($properties['regional'], 0, 2)]['description'] ?? '' }}</textarea>
                         </div>
                         @elseif($showDescription && $richTextArea == 0)
                         <div class="d-flex flex-column">
                             <label class="form-label"
                             for="description-{{ substr($properties['regional'], 0, 2) }}">{{ __('site.description') }}</label>
-                            <textarea class="form-control form-control-solid" rows="4" name="application" placeholder=""></textarea>
+                            <textarea class="form-control form-control-solid" rows="4" name="application" placeholder="">{{ $values[substr($properties['regional'], 0, 2)]['description'] ?? '' }}</textarea>
                         </div>
 
                         @endif

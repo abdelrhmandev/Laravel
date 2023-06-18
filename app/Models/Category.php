@@ -21,6 +21,12 @@ class Category extends Model
     }
 
     // # single Item
+
+    public function GG(){
+        return $this->hasMany(CategoryTranslation::class);
+    }
+
+
     public function translate(){
         return $this->hasOne(CategoryTranslation::class)->where('lang',app()->getLocale());
     }

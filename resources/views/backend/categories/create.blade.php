@@ -175,7 +175,7 @@
 
 
 
-                <x-backend.cms.publish />
+                    <x-backend.cms.publish :published="1" />
                 
                 <!--end::Thumbnail settings-->
                 <!--begin::Status-->         

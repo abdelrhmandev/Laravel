@@ -108,27 +108,18 @@ class CategoryController extends Controller
 
             
  
+         $row = Category::findOrFail($id);
 
-            $row = Category::findOrFail($id);
-
-            $e =  CategoryTranslation::where('category_id',$id)->get();
-            $arr = [];
-            foreach($e as $v){
-                $arr[$v->lang] = [                
-                    'title'=>$v->title, 
-                    'slug'=>$v->slug,
-                    'description'=>$v->description,
-                ];
-            } 
- 
+  
+     
 
             $compact = [
-                'updateUrl'         => route('admin.categories.update',$id), 
-                'redirectUrl'       => route('admin.categories.index'),
-                'redirectUrlAdd'    => route('admin.categories.create'),
-                'categories'        =>  Category::tree(),
-                'row'               => $row,
-                'values'            => $arr,
+                'updateUrl'               => route('admin.categories.update',$id), 
+                'redirectUrl'             => route('admin.categories.index'),
+                'redirectUrlAdd'          => route('admin.categories.create'),
+                'categories'              =>  Category::tree(),
+                'row'                     => $row,
+                'TrsanslatedColumnValues' => $this->getItemtranslatedllangs($row->gg(),['title','slug','description']),
   
             ];            
  

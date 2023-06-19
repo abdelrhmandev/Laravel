@@ -42,7 +42,7 @@ class CategoryRequest extends FormRequest
 
 
 
-        $rules['published'] = 'required|in:0,1'; 
+        $rules['published'] = 'nullable|in:0,1'; 
         $rules['image'] =  'nullable|max:1000|mimes:jpeg,bmp,png,gif'; // max size 1 MB  
         $rules['parent'] = 'nullable|exists:category,id';
         // $rules['start_date'] = 'required_with:special_price|date_format:Y-m-d';

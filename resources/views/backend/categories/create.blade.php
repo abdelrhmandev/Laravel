@@ -169,7 +169,7 @@
                 <!--begin::Thumbnail settings-->
                   <x-backend.cms.image />
 
-                    <x-backend.cms.select-single-option-parent :categories="$categories" :level="0" />
+                    {{-- <x-backend.cms.select-single-option-parent :categories="$categories" :level="0" /> --}}
                     
 
 
@@ -210,7 +210,7 @@ KTUtil.onDOMContentLoaded(function() {
 });
    
 @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-tinymce.init({selector: ('#description_{{ substr($properties['regional'], 0, 2) }}'), height : "280"});
+tinymce.init({selector: ('.editor_{{ substr($properties['regional'], 0, 2) }}'), height : "280"});
 @endforeach
 </script>
 

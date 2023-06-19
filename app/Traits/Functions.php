@@ -2,7 +2,6 @@
 namespace App\Traits;
 use Illuminate\Support\Str;
 use LaravelLocalization;
-use App\Models\Category;
 /**
  * Trait UploadAble
  * @package App\Traits

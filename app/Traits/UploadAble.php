@@ -1,43 +1,37 @@
 <?php
-
 namespace App\Traits;
-
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-/**
- * Trait UploadAble
- * @package App\Traits
- */
+use Illuminate\Http\UploadedFile;
+
 trait UploadAble
 {
-    /**
-     * @param UploadedFile $file
-     * @param null $folder
-     * @param string $disk
-     * @param null $filename
-     * @return false|string
-     */
-    public function uploadOne(UploadedFile $file, $folder = null, $disk = 'public', $filename = null)
-    {
+
+
+    // public function uploadOne($reqqqquest, $folder)
+    // {
+
+    //      $imageName = time().'.'.$request->image->extension();
+
+    //     // Public Folder
+    //     $request->image->move(public_path('uploads/categories'), $imageName);
+
+    // }
+
+    
+ /**/
+     public function uploadFile($uploadedFile, $folder)
+    {    
+    
+
+ 
+
+            $extension = $uploadedFile->getClientOriginalExtension();            
+            $fileNameToStore =  Str::random(25) . "." . $extension;
+            $uploadedFile->move(public_path('uploads/'.$folder), $fileNameToStore);
+            $database_file = 'uploads/'.$folder.'/'.$fileNameToStore;
+            return $database_file;
       
+ 
+    } 
 
-        $extension = $file->getClientOriginalExtension();
-        $name =  !is_null($filename) ? $filename : Str::random(25);
-        $fileNameToStore =  $name . "." . $extension;
-
-        $path =$file->storeAs('public/uploads/'.$folder,$fileNameToStore);
-
-        $database_file = 'uploads/'.$folder.'/'.$fileNameToStore;
-        return $database_file;
-    }
-
-    /**
-     * @param null $path
-     * @param string $disk
-     */
-    public function deleteOne($path = null, $disk = 'public')
-    {
-        Storage::disk($disk)->delete($path);
-    }
 }

@@ -1,18 +1,9 @@
 <div class="tab-content">
     @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-    
-    
-    
-    
-    
-
         <div class="tab-pane fade {{ LaravelLocalization::getCurrentLocaleName() == $properties['name'] ? 'show active' : '' }}"
             id="{{ substr($properties['regional'], 0, 2) }}" role="tabpanel">
             <div class="d-flex flex-column gap-7 gap-lg-10">
                 <div class="card card-flush py-4">
-
-
-
                     <div class="card-header ribbon ribbon-top ribbon-ver" style="min-height:10px !important;">
                         <div class="ribbon-target symbol symbol-25px symbol-circle"
                             style="top: -7px; @if (app()->getLocale() == 'ar') left: @else right: @endif 20px;">
@@ -20,22 +11,7 @@
                                 src="{{ asset('assets/backend/media/flags/' . substr($properties['regional'], 0, 2) . '.svg') }}" />
                         </div>
                     </div>
-
-
-
-                     
-
-                    
-
-                  
-
-                  
-
-                    <div class="card-body pt-0">
-
-                        
-
-                        
+                    <div class="card-body pt-0">                        
                         <div class="mb-5 fv-row fl">
                             <label class="required form-label"
                                 for="title-{{ substr($properties['regional'], 0, 2) }}">{{ __('site.title') }}</label>
@@ -57,7 +33,6 @@
                                 />
                         </div>
                         @endif
-
                         @if($showDescription && $richTextArea == 1)
                             <div class="fv-row">
                             <!--begin::Label-->
@@ -66,31 +41,24 @@
                                 <textarea rows="4" cols="30"
                                 id="description_{{ substr($properties['regional'], 0, 2) }}"
                                 name="description_{{ substr($properties['regional'], 0, 2) }}"
-                                class="editor @error('description_' . substr($properties['regional'], 0, 2)) is-invalid @enderror"/>{{ $columnvalues['description_'.substr($properties['regional'], 0, 2)] ?? '' }}</textarea>
+                                class="editor_{{ substr($properties['regional'], 0, 2) }} @error('description_' . substr($properties['regional'], 0, 2)) is-invalid @enderror"/>{{ $columnvalues['description_'.substr($properties['regional'], 0, 2)] ?? '' }}</textarea>
                         </div>
                         @elseif($showDescription && $richTextArea == 0)
                         <div class="d-flex flex-column">
                             <label class="form-label"
                             for="description-{{ substr($properties['regional'], 0, 2) }}">{{ __('site.description') }}</label>
-                            <textarea class="form-control form-control-solid" rows="4" name="application" placeholder="">{{ $columnvalues['description_'.substr($properties['regional'], 0, 2)] ?? '' }}</textarea>
+                            <textarea class="form-control form-control-solid" rows="4"                             
+                            id="description_{{ substr($properties['regional'], 0, 2) }}"
+                            name="description_{{ substr($properties['regional'], 0, 2) }}"
+                            placeholder="">{{ $columnvalues['description_'.substr($properties['regional'], 0, 2)] ?? '' }}</textarea>
                         </div>
-
-                        @endif
-                        
+                        @endif                        
                         @if(isset($showseo))
                         <x-backend.seo.LangInputs :properties="$properties" />                        
                         @endif
-
-
-
- 
-
-
                     </div>
                 </div>
             </div>
         </div>
     @endforeach
-
-
 </div>

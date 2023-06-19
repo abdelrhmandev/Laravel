@@ -19,36 +19,61 @@ class CategoryController extends Controller
 
     public function store(CategoryRequest $request){
 
+
+
+        // try {
+        //     DB::beginTransaction();
         
-        $validated = $request->validated();
-        $validated['published'] = isset($request->published) ? '1' : '0';       
-        $validated['image'] = (!empty($request->image)) ? $this->uploadOne($request->image, 'categories') : NULL;    
-        $validated['parent_id'] = isset($request->parent_id) ? $request->parent_id : NULL;
+            $validated = $request->validated();
 
 
-        $query = Category::create($validated);
-        DB::beginTransaction();
-        try{
-            $translatedArr = $this->HandleMultiLangdatabase(['title_','slug_','description_'],['category_id'=>$query->id]);
-            if(CategoryTranslation::insert($translatedArr)){
-                $arr = array('msg' => __('category.storeMessageSuccess'), 'status' => true);
-            }
-        DB::commit();
-        }
-        catch (\Exception $e) {
-            DB::rollback();
-            $arr = array('msg' => __('category.storeMessageError'), 'status' => false);
-         }
+            $image = $request->file('image');
 
-        return response()->json($arr);
-           
-      
 
-  
+            $validated['published'] = '1';       
 
+            
+            // $validated['published'] = isset($request->published) ? '1' : '0';       
+
+            // $validated['image'] = (!empty($image)) ? $this->uploadFile($image,'categories') : NULL;    
+
+
+            $validated['image'] = $this->uploadFile($image,'categories');   
+            $validated['parent_id'] = NULL;
+
+            // $validated['parent_id'] = isset($request->parent_id) ? $request->parent_id : NULL;
+
+            
+    
+            $query = Category::create($validated);
         
+            // if($query){
+            //     $arr = array('msg' => __('category.storeMessageSuccess'), 'status' => true);
+            // }
+
+ 
+            // all good
+            // DB::commit();
         
-     
+            $translatedArr = $this->HandleMultiLangdatabase(['title_','slug_','description_'],['category_id'=>$query->id]);           
+            
+            
+            dd($translatedArr);
+            // if(CategoryTranslation::create($translatedArr)){
+                
+               
+            //         $arr = array('msg' => __('category.storeMessageSuccess'), 'status' => true);
+              
+            //     }
+        
+        // } catch (\Exception $e) {
+        //     // something went wrong
+        //     DB::rollback();            
+        //     $arr = array('msg' => __('category.storeMessageError'), 'status' => false);
+        // }
+
+        // return response()->json($arr);
+        
 }
 
     public function index(){

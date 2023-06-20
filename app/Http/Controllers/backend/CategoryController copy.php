@@ -79,7 +79,7 @@ class CategoryController extends Controller
                 'redirectUrlAdd'          => route('admin.categories.create'),
                 'categories'              =>  Category::tree(),
                 'row'                     => $row,
-                'TrsanslatedColumnValues' => $this->getItemtranslatedllangs($row->gg(),['id','title','slug','description']),
+                'TrsanslatedColumnValues' => $this->getItemtranslatedllangs($row->gg(),['title','slug','description']),
   
             ];            
  
@@ -94,23 +94,29 @@ class CategoryController extends Controller
 
     public function update(CategoryRequest $request, $id)
     {
+
         $query = Category::findOrFail($id);
         $validated = $request->validated();
 
 
 
-        $translatedArr = $this->HandleMultiLangdatabase2(['title_','id_']);   
-        
-        
 
-        dd($translatedArr);
-      
+ 
+        (isset($request->drop_image_checkBox)  && $request->drop_image_checkBox == 1) ? $image_db = NULL : $image_db = $query->image;             
+          
 
-        if(CategoryTranslation::where('category_id',$id)->update($translatedArr)){              
-                $arr = array('msg' => __('category.updateMessageSuccess'), 'status' => true);
-                return response()->json($arr);
-           }
-           dd($translatedArr['en']);
+
+        (isset($request->drop_image_checkBox)  && $request->drop_image_checkBox == 1) ? $image_db = NULL : $image_db = $query->image;             
+  
+
+        if(!empty($request->file('image'))) {
+
+            $image_db =  $this->uploadFile($request->file('image'),'categories'); 
+        }
+        dd($image_db);
+
+
+        Category::where('id', $id)->update(['image' => $image_db]);
 
     }
     public function destroy(){

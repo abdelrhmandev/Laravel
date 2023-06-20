@@ -13,9 +13,10 @@ class Category extends Model
 
     protected $guarded = ['id'];
 
-     
+    protected $table = 'categories';
 
-
+   
+    
     public function scopePublished($query,$type) {
         return $query->where('published',$type);
     }

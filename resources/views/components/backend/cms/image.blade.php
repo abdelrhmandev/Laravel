@@ -48,7 +48,7 @@
 
         @if(isset($image))
         <div class="mt-5 form-check form-check-custom form-check-danger form-check-solid">
-            <input class="form-check-input" type="checkbox" name="delete_db_image" value="1" checked />
+            <input class="form-check-input" type="checkbox" name="drop_image_checkBox" value="1" checked />
             <label class="form-check-label text-danger" for="">
                <i>{{ __('site.remove_image')}}</i>
             </label>

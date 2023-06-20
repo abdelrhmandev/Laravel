@@ -62,10 +62,10 @@
             data-form-submit-error-message="{{ __('site.form_submit_error')}}"
             data-form-agree-label="{{ __('site.agree') }}" 
             enctype="multipart/form-data">
-            @csrf
             @method('PUT')          
             <div class="d-flex flex-column gap-7 gap-lg-10 w-100 mb-7 me-lg-10">
                 <x-backend.langs.ulTabs/>                
+
                 <x-backend.langs.LangInputs :showDescription="1" :richTextArea="0" :showSlug="1" :row="$row" :columnvalues="$TrsanslatedColumnValues" />
                 <x-backend.btns.create />
             </div>
@@ -104,7 +104,7 @@ KTUtil.onDOMContentLoaded(function() {
 });
    
 @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-tinymce.init({selector: ('#description_{{ substr($properties['regional'], 0, 2) }}'), height : "280"});
+tinymce.init({selector: ('.editor_{{ substr($properties['regional'], 0, 2) }}'), height : "280"});
 @endforeach
 </script>
 

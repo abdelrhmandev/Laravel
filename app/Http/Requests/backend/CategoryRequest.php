@@ -33,8 +33,8 @@ class CategoryRequest extends FormRequest
         ///MULTI Languages Inputs Validation///////////
         foreach(\LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
 
-              $rules['title_'.substr($properties['regional'],0,2)] = 'required|unique:category_translations,title|max:255'; 
-              $rules['slug_'.substr($properties['regional'],0,2)] = 'nullable|unique:category_translations,slug|max:255'; 
+              $rules['title_'.substr($properties['regional'],0,2)] = 'required|max:255'; 
+              $rules['slug_'.substr($properties['regional'],0,2)] = 'nullable|max:255'; 
 
 
               $rules['description_'.substr($properties['regional'],0,2)] = 'nullable|max:500'; 

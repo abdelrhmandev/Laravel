@@ -22,7 +22,7 @@ trait Functions
         return $arr;
     }
 
-    public function HandleMultiLangdatabase($array, $f=null){
+    public function HandleMultiLangdatabase($array, $f){
         $requestInputs = [];
         foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties) {
             $regional = substr($properties['regional'], 0, 2);
@@ -34,14 +34,10 @@ trait Functions
                 } else {
                     $requestInputs[$regional][$Column] = request()->get($dynamicRequest);
                     $requestInputs[$regional]['lang'] = substr($properties['regional'], 0, 2);
-                    if(isset($f)){
-                        $requestInputs[$regional][key($f)] = end($f);
-                    }
+                    $requestInputs[$regional][key($f)] = end($f);
                 }
             }
         }
-
-      
 
         return $requestInputs;
     }
@@ -54,26 +50,5 @@ trait Functions
             $arr[] = mb_substr($str, $i, $len, 'UTF-8');
         }
         return $arr[0];
-    }
-
-
-    public function HandleMultiLangdatabase2($array, $f=null){
-        $requestInputs = [];
- 
-        foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties) {
-            $regional = substr($properties['regional'], 0, 2);
-            foreach ($array as $value) {
-                $Column = substr($value, 0, -1);
-                $dynamicRequest = $value . substr($properties['regional'], 0, 2);
-    
-                    $requestInputs[$regional][$Column] = request()->get($dynamicRequest);
-
-                   
-                }
-             
-        }
-      
-
-        return $requestInputs;
     }
 }

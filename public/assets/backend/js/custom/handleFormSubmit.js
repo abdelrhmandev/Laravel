@@ -107,7 +107,7 @@ function handleFormSubmitFunc(formId) {
 
                     submitButton.setAttribute('data-kt-indicator', 'on');
                     // Disable submit button whilst loading
-                    submitButton.disabled = true;
+                    // submitButton.disabled = true;
                     setTimeout(function() {
                         submitButton.removeAttribute('data-kt-indicator');
                         $.ajaxSetup({
@@ -142,12 +142,12 @@ function handleFormSubmitFunc(formId) {
                                     }).then(function(result) {
                                         if (result.isConfirmed) {
                                             // Enable submit button after loading
-                                            submitButton.disabled = false;
+                                            //submitButton.disabled = false;
 
                                             // Redirect to customers list page
                                             window.location = form.getAttribute("data-kt-redirect");
                                         }else{
-                                            submitButton.disabled = false;
+                                            //submitButton.disabled = false;
                                             // Redirect to customers list page
                                             window.location = window.location.href;
 

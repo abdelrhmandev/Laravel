@@ -8,7 +8,12 @@ class CategoryTranslation extends Model
 {
     protected $table = 'category_translations';
 
+
+    public $timestamps = false;
+
+    
     protected $fillable = [
+        'id',
 		'category_id',
 		'title',
         'description',

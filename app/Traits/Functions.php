@@ -40,9 +40,6 @@ trait Functions
                 }
             }
         }
-
-      
-
         return $requestInputs;
     }
 
@@ -57,8 +54,11 @@ trait Functions
     }
 
 
-    public function HandleMultiLangdatabase2($array, $f=null){
+    public function HandleMultiLangdatabase2($array,$Tbl){
         $requestInputs = [];
+        $ids = [];
+        $cc=[];
+        $update=[];
  
         foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties) {
             $regional = substr($properties['regional'], 0, 2);
@@ -66,14 +66,93 @@ trait Functions
                 $Column = substr($value, 0, -1);
                 $dynamicRequest = $value . substr($properties['regional'], 0, 2);
     
-                    $requestInputs[$regional][$Column] = request()->get($dynamicRequest);
+ 
+                 if ($Column == 'id') {
+                    $ids[] = request()->get($dynamicRequest);
 
+
+
+                }else{
+                    $requestInputs[$regional][$Column] = request()->get($dynamicRequest);
+               
+                } 
+                  
                    
+               
+                // echo '<hr>';
+                // echo '<br/>';
+ 
+            
                 }
+
+              
+             
+                
+
+                
              
         }
       
 
+
+
+        $columnValues = [];
+        foreach ($requestInputs as $kBig => $v1) {
+           
+            foreach ($v1 as $kSmall => $v2) {
+                $columnValues[$kBig][$kSmall] = $v2;
+                // echo '<br>';
+            }
+        }
+
+
+        // $cXX = array_combine($array, $columnValues);
+
+        // dd($cXX);
+
+        dd($columnValues);
+        echo '<pre>';
+        // print_r($columnValues);
+
+        \App\Models\CategoryTranslation::whereIn("id",$ids)->update($columnValues);
+
+
+        dd();
+        echo '<pre>';
+        print_r($requestInputs);
+  
+   
+  
+   
+   
+      dd();
+
+
+       echo '<pre>';
+      print_r($ids);
+
+ 
+
+ 
+ 
+    dd();
+   
+
+
+    // $cXXXXXXXXXXXx = array_combine($ColumnKeys, $columnValues);
+
+        dd($columnValues);
+        dd();
+
+
+        \App\Models\CategoryTranslation::whereIn("id",['23','24'])
+        ->update([
+           'title' => $requestInputs
+        ]);
+
+
+        
+      
         return $requestInputs;
     }
 }

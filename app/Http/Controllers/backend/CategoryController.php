@@ -99,11 +99,9 @@ class CategoryController extends Controller
 
 
 
-        $translatedArr = $this->HandleMultiLangdatabase2(['title_','id_']);   
+        $translatedArr = $this->HandleMultiLangdatabase2(['title_','description_','id_'],'category_translation');   
         
-        
-
-        dd($translatedArr);
+        dd();
       
 
         if(CategoryTranslation::where('category_id',$id)->update($translatedArr)){              

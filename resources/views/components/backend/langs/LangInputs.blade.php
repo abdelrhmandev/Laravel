@@ -15,8 +15,10 @@
                         <div class="mb-5 fv-row fl">
                             <label class="required form-label"
                                 for="title-{{ substr($properties['regional'], 0, 2) }}">{{ __('site.title') }}</label>
-                            <input type="text" name="id_{{ substr($properties['regional'], 0, 2) }}" value="{{ $columnvalues['id_'.substr($properties['regional'], 0, 2)] ?? '' }}"/>
-                            <br/>
+                           
+                                @if(isset($columnvalues['id_'.substr($properties['regional'], 0, 2)]))
+                                <input type="hidden" name="id_{{ substr($properties['regional'], 0, 2) }}" value="{{ $columnvalues['id_'.substr($properties['regional'], 0, 2)] ?? '' }}"/>
+                                @endif
                                 <input type="text" id="title_{{ substr($properties['regional'], 0, 2) }}"
                                 name="title_{{ substr($properties['regional'], 0, 2) }}" class="form-control mb-2"
                                 required

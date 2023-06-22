@@ -148,8 +148,7 @@
 
 
         <form id="AddCategoryForm" data-route-url="{{ $storeUrl }}" class="form d-flex flex-column flex-lg-row"
-            data-kt-redirect="{{ $redirectUrl }}" data-kt-add-new-item-label="{{ __('category.add') }}"
-            data-kt-all-label="{{ __('category.plural') }}"
+            
             data-form-submit-error-message="{{ __('site.form_submit_error')}}"
             data-form-agree-label="{{ __('site.agree') }}" 
             enctype="multipart/form-data">

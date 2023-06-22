@@ -2,6 +2,7 @@
 namespace App\Traits;
 use Illuminate\Support\Str;
 use LaravelLocalization;
+use Illuminate\Support\Facades\DB;
 /**
  * Trait UploadAble
  * @package App\Traits
@@ -54,105 +55,23 @@ trait Functions
     }
 
 
-    public function HandleMultiLangdatabase2($array,$Tbl){
-        $requestInputs = [];
-        $ids = [];
-        $cc=[];
-        $update=[];
- 
+    public function UpdateMultiLangsQuery($array,$table){
+        $updateQurey = false;
         foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties) {
             $regional = substr($properties['regional'], 0, 2);
             foreach ($array as $value) {
                 $Column = substr($value, 0, -1);
-                $dynamicRequest = $value . substr($properties['regional'], 0, 2);
-    
- 
-                 if ($Column == 'id') {
-                    $ids[] = request()->get($dynamicRequest);
+                $dynamicRequest = $value . substr($properties['regional'], 0, 2);                
+                    $ids = request()->get('id_'.substr($properties['regional'], 0, 2));               
+                    $UpdatedArr = [
+                        substr($value, 0, -1)=>request()->get($dynamicRequest)
+                    ];
 
-
-
-                }else{
-                    $requestInputs[$regional][$Column] = request()->get($dynamicRequest);
-               
-                } 
-                  
-                   
-               
-                // echo '<hr>';
-                // echo '<br/>';
- 
-            
-                }
-
-              
-             
-                
-
-                
-             
+                    DB::table($table)->where("id",$ids)->update($UpdatedArr);
+                    $updateQurey = true;
+                    
+            } 
         }
-      
-
-
-
-        $columnValues = [];
-        foreach ($requestInputs as $kBig => $v1) {
-           
-            foreach ($v1 as $kSmall => $v2) {
-                $columnValues[$kBig][$kSmall] = $v2;
-                // echo '<br>';
-            }
-        }
-
-
-        // $cXX = array_combine($array, $columnValues);
-
-        // dd($cXX);
-
-        dd($columnValues);
-        echo '<pre>';
-        // print_r($columnValues);
-
-        \App\Models\CategoryTranslation::whereIn("id",$ids)->update($columnValues);
-
-
-        dd();
-        echo '<pre>';
-        print_r($requestInputs);
-  
-   
-  
-   
-   
-      dd();
-
-
-       echo '<pre>';
-      print_r($ids);
-
- 
-
- 
- 
-    dd();
-   
-
-
-    // $cXXXXXXXXXXXx = array_combine($ColumnKeys, $columnValues);
-
-        dd($columnValues);
-        dd();
-
-
-        \App\Models\CategoryTranslation::whereIn("id",['23','24'])
-        ->update([
-           'title' => $requestInputs
-        ]);
-
-
-        
-      
-        return $requestInputs;
+        return $updateQurey;        
     }
 }

@@ -57,8 +57,6 @@
 @section('content')
     <div class="container-xxl" id="kt_content_container">
         <form id="EditCategoryForm" data-route-url="{{ $updateUrl }}" class="form d-flex flex-column flex-lg-row"
-            data-kt-redirect="{{ $redirectUrl }}" data-kt-add-new-item-label="{{ __('category.add') }}"
-            data-kt-all-label="{{ __('category.plural') }}"
             data-form-submit-error-message="{{ __('site.form_submit_error')}}"
             data-form-agree-label="{{ __('site.agree') }}" 
             enctype="multipart/form-data">
@@ -70,9 +68,9 @@
                 <x-backend.btns.create />
             </div>
             <div class="d-flex flex-column flex-row-fluid gap-7 w-lg-400px gap-lg-10">
-                {{-- <x-backend.cms.image :image="$row->image"/> --}}
-                {{-- <x-backend.cms.select-single-option-parent :categories="$categories" :level="0" :parentid="$row->parent_id ?? ''" /> --}}
-                {{-- <x-backend.cms.publish :published="$row->published" /> --}}
+                <x-backend.cms.image :image="$row->image"/>
+                <x-backend.cms.select-single-option-parent :categories="$categories" :level="0" :parentid="$row->parent_id ?? ''" />
+                <x-backend.cms.publish :published="$row->published" />
             </div>
         </form>
     </div>

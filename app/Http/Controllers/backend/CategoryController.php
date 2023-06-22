@@ -27,8 +27,10 @@ class CategoryController extends Controller
             $validated['parent_id'] = isset($request->parent_id) ? $request->parent_id : NULL;
             $query = Category::create($validated);
             DB::commit();                
-              $translatedArr = $this->HandleMultiLangdatabase(['title_','slug_','description_'],['category_id'=>$query->id]);                      
-             if(CategoryTranslation::insert($translatedArr)){              
+            $translatedArr = $this->HandleMultiLangdatabase(['title_','slug_','description_'],['category_id'=>$query->id]);                      
+            
+       
+            if(CategoryTranslation::insert($translatedArr)){              
                      $arr = array('msg' => __('category.storeMessageSuccess'), 'status' => true);
               
                 }
@@ -58,8 +60,6 @@ class CategoryController extends Controller
         if (view()->exists('backend.categories.create')) {
             $compact = [
                 'storeUrl'   => route('admin.categories.store'), 
-                'redirectUrl'    => route('admin.categories.index'),
-                'redirectUrlAdd'    => route('admin.categories.create'),
                 'categories' =>  Category::tree()
   
             ];            
@@ -67,19 +67,18 @@ class CategoryController extends Controller
 
         }
     }
-     public function edit($id){
+     public function edit(Category $category){
+
 
 
  
         if (view()->exists('backend.categories.edit')) { 
-         $row = Category::findOrFail($id);
+        
             $compact = [
-                'updateUrl'               => route('admin.categories.update',$id), 
-                'redirectUrl'             => route('admin.categories.index'),
-                'redirectUrlAdd'          => route('admin.categories.create'),
+                'updateUrl'               => route('admin.categories.update',$category->id), 
                 'categories'              =>  Category::tree(),
-                'row'                     => $row,
-                'TrsanslatedColumnValues' => $this->getItemtranslatedllangs($row->gg(),['id','title','slug','description']),
+                'row'                     => $category,
+                'TrsanslatedColumnValues' => $this->getItemtranslatedllangs($category->gg(),['id','title','slug','description']),
   
             ];            
  
@@ -92,23 +91,28 @@ class CategoryController extends Controller
         }
     }
 
-    public function update(CategoryRequest $request, $id)
+    public function update(CategoryRequest $request, Category $category)
     {
-        $query = Category::findOrFail($id);
-        $validated = $request->validated();
+     
+        // $validated = $request->validated();
+
+        (isset($request->drop_image_checkBox)  && $request->drop_image_checkBox == 1) ? $image_db = NULL : $image_db = $category->image;             
+        (!empty($request->file('image'))) ? $image_db =  $this->uploadFile($request->file('image'),'categories') : $image_db; 
+ 
+
+        Category::where('id', $id)->update(['image' => $image_db]);
 
 
 
-        $translatedArr = $this->HandleMultiLangdatabase2(['title_','description_','id_'],'category_translation');   
-        
-        dd();
+
+         $translatedArr = $this->UpdateMultiLangsQuery(['title_','description_','slug_'],'category_translations');   
       
 
-        if(CategoryTranslation::where('category_id',$id)->update($translatedArr)){              
-                $arr = array('msg' => __('category.updateMessageSuccess'), 'status' => true);
-                return response()->json($arr);
+        if($translatedArr){              
+            $arr = array('msg' => __('category.updateMessageSuccess'), 'status' => true);
+            return response()->json($arr);
            }
-           dd($translatedArr['en']);
+           
 
     }
     public function destroy(){

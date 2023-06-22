@@ -130,15 +130,29 @@ function handleFormSubmitFunc(formId) {
                                 if (response["status"] == true) {
                                     Swal.fire({
                                         text: response["msg"],                            
-                                        icon: 'success',                                       
+                                        icon: 'success',
+                                        showCancelButton: true,
                                         buttonsStyling: false,
-                                        confirmButtonText: form.getAttribute("data-form-agree-label"),                                       
+                                        confirmButtonText: form.getAttribute("data-kt-all-label"),
+                                        cancelButtonText: form.getAttribute("data-kt-add-new-item-label"),
                                         customClass: {
-                                            confirmButton: "btn btn-light-success",                                             
+                                            confirmButton: "btn btn-light-success",
+                                            cancelButton: "btn btn-light-primary"
                                         }
-                                        }).then(function(result) {
+                                    }).then(function(result) {
+                                        if (result.isConfirmed) {
+                                            // Enable submit button after loading
+                                            //submitButton.disabled = false;
+
+                                            // Redirect to customers list page
+                                            window.location = form.getAttribute("data-kt-redirect");
+                                        }else{
+                                            //submitButton.disabled = false;
+                                            // Redirect to customers list page
                                             window.location = window.location.href;
-                                        });
+
+                                        }
+                                    });
                                 }
                                 if (response["status"] == false) {
                                     let msgError = "";

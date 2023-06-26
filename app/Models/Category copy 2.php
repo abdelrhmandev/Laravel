@@ -33,41 +33,11 @@ class Category extends Model
     }
 
 
-    public static function tree($category){
-
-        $allCategories = 
-         Category::select('id','parent_id')
-        ->published('1')
-        ->with('translate')
-        ->get();
-
+    public static function tree()
+    {
+        $allCategories = Category::select('id','parent_id')->published('1')->with('translate')->get();
 
         $rootCategories = $allCategories->whereNull('parent_id');
-
-
-
-        if(isset($category)){
-
-            if($category->parent_id == NULL){
-
-            $allCategories = 
-            Category::select('id','parent_id')
-           ->published('1')
-           ->with('translate')
-           ->whereNotNull('parent_id')
-           ->get();   
-            $rootCategories = '';    
-            }else{
-                $allCategories = 
-                Category::select('id','parent_id')
-               ->published('1')
-               ->with('translate')
-               ->where('id','<>',$category->id)
-               ->where('parent_id','<>',$category->id)
-               ->get();   
-    
-            }
-        }
 
         self::formatTree($rootCategories, $allCategories);
 
@@ -76,13 +46,11 @@ class Category extends Model
 
     private static function formatTree($categories, $allCategories)
     {
-        if($categories){
         foreach ($categories as $category) {
             $category->children = $allCategories->where('parent_id', $category->id)->values();
 
             if ($category->children->isNotEmpty()) {
                 self::formatTree($category->children, $allCategories);
-            }
             }
         }
     }

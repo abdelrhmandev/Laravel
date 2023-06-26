@@ -16,6 +16,7 @@
         <!--begin::Select2-->
         <select name="parent_id" class="form-select mb-2" data-control="select2" data-allow-clear="true">
                 <option value="">None</option>
+                @if(!(empty($categories)))
                 @foreach ($categories as $category)
                     <option value="{{ $category->id }}" @if(isset($parentid) && $parentid  == $category->id) {{ "selected" }} @endif>
                         {{ $category->translate->title }}
@@ -25,6 +26,7 @@
                         @endif
                     </option>
                 @endforeach
+                @endif
             </select>
     </div>
     <!--end::Card body-->

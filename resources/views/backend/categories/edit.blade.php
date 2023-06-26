@@ -65,7 +65,7 @@
                 <x-backend.langs.ulTabs/>                
 
                 <x-backend.langs.LangInputs :showDescription="1" :richTextArea="0" :showSlug="1" :row="$row" :columnvalues="$TrsanslatedColumnValues" />
-                <x-backend.btns.create />
+                {{-- <x-backend.btns.create /> --}}
             </div>
             <div class="d-flex flex-column flex-row-fluid gap-7 w-lg-400px gap-lg-10">
                 <x-backend.cms.image :image="$row->image"/>

@@ -19,7 +19,7 @@
                                 @if(isset($columnvalues['id_'.substr($properties['regional'], 0, 2)]))
                                 <input type="hidden" name="id_{{ substr($properties['regional'], 0, 2) }}" value="{{ $columnvalues['id_'.substr($properties['regional'], 0, 2)] ?? '' }}"/>
                                 @endif
-                                <input type="text" id="title_{{ substr($properties['regional'], 0, 2) }}"
+                                <input type="text" id="title{{ substr($properties['regional'], 0, 2) }}"
                                 name="title_{{ substr($properties['regional'], 0, 2) }}" class="form-control mb-2"
                                 required
                                 data-fv-not-empty___message="{{ __('validation.required', ['attribute' => 'title' . '&nbsp;' . substr($properties['regional'], 0, 2)]) }}"
@@ -31,7 +31,7 @@
                         <div class="mb-5 fv-row fl">
                             <label class="form-label"
                                 for="slug-{{ substr($properties['regional'], 0, 2) }}">{{ __('site.slug') }}</label>
-                            <input type="text" id="slug_{{ substr($properties['regional'], 0, 2) }}"
+                            <input type="text" id="slug{{ substr($properties['regional'], 0, 2) }}"
                                 name="slug_{{ substr($properties['regional'], 0, 2) }}" class="form-control mb-2"
                                 value="{{ $columnvalues['slug_'.substr($properties['regional'], 0, 2)] ?? '' }}"
                                 />
@@ -46,16 +46,16 @@
                             <label class="form-label"
                                 for="description-{{ substr($properties['regional'], 0, 2) }}">{{ __('site.description') }}</label>
                                 <textarea rows="4" cols="30"
-                                id="description_{{ substr($properties['regional'], 0, 2) }}"
+                                id="description{{ substr($properties['regional'], 0, 2) }}"
                                 name="description_{{ substr($properties['regional'], 0, 2) }}"
-                                class="editor_{{ substr($properties['regional'], 0, 2) }} @error('description_' . substr($properties['regional'], 0, 2)) is-invalid @enderror"/>{{ $columnvalues['description_'.substr($properties['regional'], 0, 2)] ?? '' }}</textarea>
+                                class="editor{{ substr($properties['regional'], 0, 2) }} @error('description_' . substr($properties['regional'], 0, 2)) is-invalid @enderror"/>{{ $columnvalues['description_'.substr($properties['regional'], 0, 2)] ?? '' }}</textarea>
                         </div>
                         @elseif($showDescription && $richTextArea == 0)
                         <div class="d-flex flex-column">
                             <label class="form-label"
                             for="description-{{ substr($properties['regional'], 0, 2) }}">{{ __('site.description') }}</label>
                             <textarea class="form-control form-control-solid" rows="4"                             
-                            id="description_{{ substr($properties['regional'], 0, 2) }}"
+                            id="description{{ substr($properties['regional'], 0, 2) }}"
                             name="description_{{ substr($properties['regional'], 0, 2) }}"
                             placeholder="">{{ $columnvalues['description_'.substr($properties['regional'], 0, 2)] ?? '' }}</textarea>
                         </div>

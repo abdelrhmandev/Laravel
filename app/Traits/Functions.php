@@ -12,14 +12,16 @@ trait Functions
 
     public function getItemtranslatedllangs($query,$ReturnCoumnArray){
         $requestInputs = [];
-
         $c_ = [];  
         $arr = [];
+
+
         foreach($ReturnCoumnArray as $va){     
-            foreach($query->get() as $v){
+            foreach($query as $v){
                 $arr[$va.'_'.$v->lang] =  $v->$va;
             }                
-        }         
+        }    
+        
         return $arr;
     }
 
@@ -55,7 +57,7 @@ trait Functions
     }
 
 
-    public function UpdateMultiLangsQuery($array,$table){
+    public function UpdateMultiLangsQuery($array,$table,$foreignKey){
         $updateQurey = false;
         foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties) {
             $regional = substr($properties['regional'], 0, 2);
@@ -67,7 +69,7 @@ trait Functions
                         substr($value, 0, -1)=>request()->get($dynamicRequest)
                     ];
 
-                    DB::table($table)->where("id",$ids)->update($UpdatedArr);
+                    DB::table($table)->where("id",$ids)->where($foreignKey)->update($UpdatedArr);
                     $updateQurey = true;
                     
             } 

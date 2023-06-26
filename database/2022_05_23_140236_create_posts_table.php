@@ -18,11 +18,9 @@ class CreatePostsTable extends Migration
             $table->enum('published', ['0','1'])->default(1);
             $table->boolean('featured')->default(0);
             $table->string('image',150)->nullable();
- 			$table->softDeletes(); //////Option 
-             $table->foreignId('post_category_id')->nullable()->constrained('post_categories')->onDelete('cascade');
-             $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); 
-             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-			 $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); 
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
        });
         Schema::create('post_translations', function (Blueprint $table) {                 
             $table->id();  

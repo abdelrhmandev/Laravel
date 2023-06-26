@@ -140,18 +140,13 @@ function handleFormSubmitFunc(formId) {
                                             window.location = window.location.href;
                                         });
                                 }
-                                if (response["status"] == false) {
+                                else if (response["status"] == 'RequestValidation') {
                                     let msgError = "";
                                     $.each(response["msg"], function(key, value) {
                                         msgError += "<p>" + value + "</p>";
                                         parentId = $("#" + key).parents('.tab-pane').attr("id");
                                         icon = $('a[href="#' + parentId + '"][data-bs-toggle="tab"]').parent().find('i');
                                         icon.removeClass('fa-check').addClass('fa-times');
-
-                                       
-
-                                        // $('#'+key).removeClass('my-field-success');
-                                        // $('#'+key).addClass('my-field-error');
                                     });
                                     Swal.fire({
                                         html: msgError, // respose from controller
@@ -160,6 +155,19 @@ function handleFormSubmitFunc(formId) {
                                         confirmButtonText: form.getAttribute("data-form-agree-label"),
                                         customClass: {
                                             confirmButton: "btn btn-light-warning"
+                                        }
+                                    })
+
+
+                                }else if (response["status"] == false) {
+                                    
+                                    Swal.fire({
+                                        html: response["msg"], // respose from controller
+                                        icon: "info",
+                                        buttonsStyling: false,
+                                        confirmButtonText: form.getAttribute("data-form-agree-label"),
+                                        customClass: {
+                                            confirmButton: "btn btn-light-info"
                                         }
                                     })
 

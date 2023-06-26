@@ -36,13 +36,11 @@ class CategoryRequest extends FormRequest
              
 
 
-            $id = 'category_id,'.$this->category->id ?? '';
-            
-        $cc = 'required|string|email|max:255|unique:category_translations'.$id;
+            $id = $this->request->get('id_'.substr($properties['regional'],0,2)) ? ',' . $this->request->get('id_'.substr($properties['regional'],0,2)) : '';
 
-         
-            $rules['title_'.substr($properties['regional'],0,2)] = $cc; //'unique:category_translations,title,'.$this->category->id;
-            // $rules['slug_'.substr($properties['regional'],0,2)] = 'nullable|unique:category_translations,slug,'.$this->category->id.'|max:255'; 
+
+            $rules['title_'.substr($properties['regional'],0,2)] = 'required|unique:category_translations,title'.$id;
+            $rules['slug_'.substr($properties['regional'],0,2)] = 'nullable|unique:category_translations,slug'.$id; 
 
  
 
@@ -53,7 +51,7 @@ class CategoryRequest extends FormRequest
 
         $rules['published'] = 'nullable|in:0,1'; 
         $rules['image'] =  'nullable|max:1000|mimes:jpeg,bmp,png,gif'; // max size 1 MB  
-        $rules['parent'] = 'nullable|exists:category,id';
+        $rules['parent_id'] = 'nullable|exists:categories,id';
         // $rules['start_date'] = 'required_with:special_price|date_format:Y-m-d';
 
         return $rules; 
@@ -67,7 +65,7 @@ class CategoryRequest extends FormRequest
     public function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([
-            'status'   => false,
+            'status'   => 'RequestValidation',
             'msg'      => $validator->errors()
         ]));
     }

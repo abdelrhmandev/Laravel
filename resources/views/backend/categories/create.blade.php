@@ -204,7 +204,7 @@ KTUtil.onDOMContentLoaded(function() {
 });
    
 @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-tinymce.init({selector: ('.editor_{{ substr($properties['regional'], 0, 2) }}'), height : "280"});
+tinymce.init({selector: ('.editor{{ substr($properties['regional'], 0, 2) }}'), height : "280"});
 @endforeach
 </script>
 

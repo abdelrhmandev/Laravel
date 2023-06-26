@@ -63,21 +63,12 @@ class CategoryController extends Controller
     }
      public function edit(Category $category){ 
         if (view()->exists('backend.categories.edit')) {         
-
-
-
-            $kk = CategoryTranslation::where('category_id',$category->id)->get();
-            
-            $TrsanslatedColumnValues = $this->getItemtranslatedllangs($kk,['title','slug','description']);
             $compact = [
                 'updateUrl'               => route('admin.categories.update',$category->id), 
-                'categories'              =>  Category::tree($category),
+                'categories'              =>  Category::tree(),
                 'row'                     => $category,
-                'TrsanslatedColumnValues' => $TrsanslatedColumnValues,
+                'TrsanslatedColumnValues' => $this->getItemtranslatedllangs($category->gg(),['id','title','slug','description']),
             ];            
-
-
-
              return view('backend.categories.edit',$compact);                    
             }
     }
@@ -89,42 +80,36 @@ class CategoryController extends Controller
         try {
             DB::beginTransaction();        
             $validated = $request->validated();
+            $validated['published'] = isset($request->published) ? '1' : '0';       
 
+            // if(isset($request->drop_image_checkBox)  && $request->drop_image_checkBox == 1) {
+            //     $validated['image'] = NULL;
+            // }else{
+            //     $validated['image'] = $category->image;
+            // }             
+    
+            $validated['image'] = 'ssssssssssss';    
+            $validated['parent_id'] = isset($request->parent_id) ? $request->parent_id : NULL;
 
-            $image = $category->image;
+    
+            Category::where('id', $category->id)->update($validated);
+            DB::commit();                
 
-            if(!empty($request->file('image'))) {
-               $image =  $this->uploadFile($request->file('image'),'categories');
-               $this->unlinkFile($category->image);
-             }
-
-            if(isset($request->drop_image_checkBox)  && $request->drop_image_checkBox == 1) {                
-                $this->unlinkFile($category->image);
-                $image = NULL;
-            }
-
-
-            $data = [
-                'published'     =>isset($request->published) ? '1' : '0',
-                'image'         => $image,
-                'parent_id'     => isset($request->parent_id) ? $request->parent_id : NULL,
-            ];
-
-            Category::findOrFail($category->id)->update($data);
-            $arr = array('msg' => __('category.updateMessageSuccess'), 'status' => true);
-            
-            DB::commit();
             
             
-            $this->UpdateMultiLangsQuery(['title_','description_','slug_'],'category_translations',['category_id'=>$category->id]);
+       
 
+            // $this->UpdateMultiLangsQuery(['title_','description_','slug_'],'category_translations');
+            // $arr = array('msg' => __('category.updateMessageSuccess'), 'status' => true);
+              
+                
+        
         } catch (\Exception $e) {
             DB::rollback();            
             $arr = array('msg' => __('category.updateMessageError'), 'status' => false);
         }
         return response()->json($arr);
-
-            
+           
            
 
     }

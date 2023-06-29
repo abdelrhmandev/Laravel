@@ -69,11 +69,12 @@ class CategoryController extends Controller
             $kk = CategoryTranslation::where('category_id',$category->id)->get();
             
             $TrsanslatedColumnValues = $this->getItemtranslatedllangs($kk,['title','slug','description']);
-            $compact = [
+            $compact = [                
                 'updateUrl'               => route('admin.categories.update',$category->id), 
                 'categories'              =>  Category::tree($category),
                 'row'                     => $category,
                 'TrsanslatedColumnValues' => $TrsanslatedColumnValues,
+                'destroy_route'           =>route('admin.categories.destroy',$category->id),
             ];            
 
 

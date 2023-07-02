@@ -13,15 +13,14 @@
     <button type="reset" id="cancel" class="btn btn-secondary me-5">{{ __('site.cancel') }}</button>
 
     
-    @if(isset($destroy_route))
-    <form id="DeleteItemForm" action="{{ $destroy_route }}">
-    @csrf
-    <a data-destroy-route="{{ $destroy_route}}" class="menu-link px-3"  data-kt-table-filter="delete_row">
+    @if(isset($destroyRoute))
+    {{-- <form id="DeleteItemForm" action="{{ $destroyRoute }}"> --}}
+    {{-- @csrf --}}
+    <a href="#" data-destroy-route="{{ $destroyRoute}}"  data-kt-table-filter="delete_row">
         {{ __('site.delete')}}    
       </a>
-
     {{-- <button type="submit" id="delete_btn_id" class="btn btn-danger me-5">{{ __('site.delete') }}</button> --}}
-    </form>
+    {{-- </form> --}}
     @endif
 
     <!--end::Button-->

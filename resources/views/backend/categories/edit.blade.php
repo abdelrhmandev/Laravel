@@ -65,7 +65,8 @@
                 <x-backend.langs.ulTabs/>                
 
                 <x-backend.langs.LangInputs :showDescription="1" :richTextArea="0" :showSlug="1" :row="$row" :columnvalues="$TrsanslatedColumnValues" />
-                <x-backend.btns.button :destroy_route="$destroy_route" :label="{{ __('site.delete') }}"/>
+                <x-backend.btns.button :destroyRoute="$destroy_route"/>
+
             </div>
             <div class="d-flex flex-column flex-row-fluid gap-7 w-lg-400px gap-lg-10">
                 <x-backend.cms.image :image="$row->image"/>

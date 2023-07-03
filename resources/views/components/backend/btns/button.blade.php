@@ -11,5 +11,8 @@
 
 
     <button type="reset" id="cancel" class="btn btn-secondary me-5">{{ __('site.cancel') }}</button>
+    @isset($destroyRoute)
+    <a href="javascript:JSconfimDelete('{{ $destroyRoute }}','sssss')" data-repeater-delete class="btn btn-sm btn-light-danger mt-3 mt-md-8"><i class="la la-trash-o"></i>Delete</a>
+    @endisset
     <!--end::Button-->
 </div>

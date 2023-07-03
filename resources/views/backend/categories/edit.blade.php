@@ -56,6 +56,18 @@
 @stop
 @section('content')
     <div class="container-xxl" id="kt_content_container">
+
+   
+
+        @isset($destroy_route)
+        <form method="post" id="sdasd" class="sdsad" action="{{ $destroy_route }}">
+            @csrf
+            @method('DELETE')
+            <button type="submit">{{ __('site.delete') }}</button>
+           
+        </form>
+        @endisset
+        
         <form id="EditCategoryForm" data-route-url="{{ $updateUrl }}" class="form d-flex flex-column flex-lg-row"
             data-form-submit-error-message="{{ __('site.form_submit_error')}}"
             data-form-agree-label="{{ __('site.agree') }}" 

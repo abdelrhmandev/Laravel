@@ -129,8 +129,20 @@ class CategoryController extends Controller
            
 
     }
-    public function destroy(){
-        dd('delete');
+    public function destroy(Category $category){
+        
+
+        // SET ALL childs to NULL 
+        $childs = $category->where('parent_id', $category->id);     
+        foreach ($childs->get() as $child) {
+            $child->id ? Category::where('id',$child->id)->update(['parent_id' => NULL]) : '';
+        }
+        
+        $category->image ? $this->unlinkFile($category->image) : '';
+        $item = Category::findOrFail($category->id);
+        $item ? $item->delete() : '';
+        
+
     }
 
 

@@ -162,7 +162,7 @@
                 <x-backend.langs.LangInputs :showDescription="1" :richTextArea="0" :showSlug="1" />
 
                 <!--end::Tab content-->
-                <x-backend.btns.create />
+                <x-backend.btns.button />
             </div>
             <div class="d-flex flex-column flex-row-fluid gap-7 w-lg-400px gap-lg-10">
                 <!--begin::Thumbnail settings-->

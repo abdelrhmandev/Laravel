@@ -33,7 +33,7 @@ class Category extends Model
     }
 
 
-    public static function tree($category){
+    public static function tree($category = null){
 
         $allCategories = 
          Category::select('id','parent_id')

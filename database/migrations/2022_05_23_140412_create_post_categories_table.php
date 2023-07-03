@@ -18,8 +18,7 @@ class CreatePostCategoriesTable extends Migration
             $table->unsignedInteger('category_id')->index(); 
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->foreignId('post_id')->constrained('posts')->onDelete('cascade');
-            $table->unique(['category_id','post_id']); 
-                 
+            $table->unique(['category_id','post_id']);                  
         });
     }
 

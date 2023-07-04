@@ -56,17 +56,9 @@
 @stop
 @section('content')
     <div class="container-xxl" id="kt_content_container">
+        
 
-   
-
-        @isset($destroy_route)
-        <form method="post" id="sdasd" class="sdsad" action="{{ $destroy_route }}">
-            @csrf
-            @method('DELETE')
-            <button type="submit">{{ __('site.delete') }}</button>
-           
-        </form>
-        @endisset
+ 
         
         <form id="EditCategoryForm" data-route-url="{{ $updateUrl }}" class="form d-flex flex-column flex-lg-row"
             data-form-submit-error-message="{{ __('site.form_submit_error')}}"
@@ -77,7 +69,7 @@
                 <x-backend.langs.ulTabs/>                
 
                 <x-backend.langs.LangInputs :showDescription="1" :richTextArea="0" :showSlug="1" :row="$row" :columnvalues="$TrsanslatedColumnValues" />
-                <x-backend.btns.button :destroyRoute="$destroy_route"/>
+                <x-backend.btns.button :destroyRoute="$destroy_route" :redirectRoute="$redirect_after_destroy" :trans="$trans"/>
 
             </div>
             <div class="d-flex flex-column flex-row-fluid gap-7 w-lg-400px gap-lg-10">

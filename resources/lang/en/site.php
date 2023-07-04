@@ -3,22 +3,7 @@
 return [
     'dashboard'             =>'Dashboard',
     'home'                  =>'Home',
-    'errors_detected'       =>'Sorry, some errors detected, please try again.',
-    'deleteMessageSuccess'  => 'sdsadadasds has been Deleted successfully',
-    'deleteMessageError'    => 'Error In delete this :',
-    'updateMessageSuccess'  => ': has been updated successfully',
-    'updateMessageError'    => 'Error in update this :',
-    'storeMessageSuccess'   =>  ': has been added successfully',
-    'storeMessageError'     => 'Error In store this :',
-    'deletingselecteditem'  => 'Deleting selected :',
-    'confirmButtonText'     =>'Yes, delete!',
-    'cancelButtonText'      =>'No, cancel',
-    'confirmButtonTextGotit'=>'Ok, got it!',
-    'notdeletedMessage'     =>'Selected customers admin was not deleted.',
-    'confirmDeleteMessage'  =>'Are you sure you want to delete ',
-    'deletingItemMessage'   =>'Deleting selected customers admin',
-    'confirmMultiDeleteMessage'  =>'Are you sure you want to delete selected customers admin',
-    'delete_selected'       =>'Delete Selecetd',
+
     'selected'              =>'Selecetd',
     'filter_options'        =>'Filter Options',
     
@@ -71,9 +56,20 @@ return [
     'input'                 => 'Input',
     'succeeded'             => 'Succeeded',
     'failed'                => 'Failed',
-    'delete_confirm'        => 'Are you sure to delete this item ?',
-    'delete_succeeded'      => 'Delete succeeded !',
-    'delete_failed'         => 'Delete failed !',
+    // Confirmation Delete
+    'deletingItemMessage'        =>'Deleting selected :item',
+    'delete_failed'              => 'Delete failed !',
+    'confirmButtonText'          =>'Yes, delete!',
+    'cancelButtonText'           =>'No, cancel',
+    'confirmButtonTextGotit'     =>'Ok, got it!',
+    'notdeletedMessage'          =>'Selected :item was not deleted.',
+    'confirmDeleteMessage'       =>'Are you sure you want to delete :item',    
+    'confirmMultiDeleteMessage'  =>'Are you sure you want to delete selected :item',
+    'delete_selected'            =>'Delete Selecetd :item',
+
+
+
+    // End Confirmation
     'update_succeeded'      => 'Update succeeded !',
     'save_succeeded'        => 'Save succeeded !',
     'refresh_succeeded'     => 'Refresh succeeded !',

@@ -75,6 +75,8 @@ class CategoryController extends Controller
                 'row'                     => $category,
                 'TrsanslatedColumnValues' => $TrsanslatedColumnValues,
                 'destroy_route'           =>route('admin.categories.destroy',$category->id),
+                'redirect_after_destroy'  =>route('admin.categories.index'),
+                'trans'                   =>'category',
             ];            
 
 
@@ -129,19 +131,28 @@ class CategoryController extends Controller
            
 
     }
-    public function destroy(Category $category){
-        
-
+    public function destroy(Category $category){        
         // SET ALL childs to NULL 
         $childs = $category->where('parent_id', $category->id);     
         foreach ($childs->get() as $child) {
             $child->id ? Category::where('id',$child->id)->update(['parent_id' => NULL]) : '';
         }
         
-        $category->image ? $this->unlinkFile($category->image) : '';
-        $item = Category::findOrFail($category->id);
-        $item ? $item->delete() : '';
+        $category->image ? $this->unlinkFile($category->image) : ''; // Unlink Image
+        $item = Category::findOrFail($category->id); // Check
         
+        // if($item->delete()){
+        //     $arr = array('msg' => __('category.deleteMessageSuccess'), 'status' => "success");
+        // }else{
+        //     $arr = array('msg' => __('category.deleteMessageError'), 'status' => false);
+
+        // }
+        
+
+
+    
+
+        // return response()->json($arr);
 
     }
 

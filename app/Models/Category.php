@@ -28,8 +28,18 @@ class Category extends Model
     // # single Item
 
 
-    public function translate(){
+    public function posts(){
+        return $this->belongsToMany(Post::class, 'post_categories'); // recipe_tag = table
+    }
+
+
+ 
+
+    public function translate($lang=null){
         return $this->hasOne(CategoryTranslation::class)->where('lang',app()->getLocale());
+        if($lang == 'all'){
+                return $this->hasMany(CategoryTranslation::class);
+        }
     }
 
 

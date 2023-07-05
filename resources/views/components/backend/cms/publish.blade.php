@@ -8,7 +8,7 @@
         <div class="form-check form-switch form-check-custom form-check-solid">
             <input class="form-check-input" type="checkbox" value="1" name="published" id="published" @if(isset($published) && $published == '1') checked="checked" @endif" />
             <label class="form-check-label" for="published">
-               {{ __('site.published')}}
+               {{ __('site.publish')}}
             </label>
         </div>
     </div>

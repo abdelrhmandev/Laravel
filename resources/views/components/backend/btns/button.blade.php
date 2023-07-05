@@ -11,9 +11,9 @@
     @isset($destroyRoute)
   
 
-
  
-    <button id="delete-id"
+
+   <button id="delete_item"
         data-back-list-text="{{ __('site.back_to_list') }}"        
         data-destroy-route = "{{ $destroyRoute }}"
         data-confirm-message = "{{ __('site.confirmDeleteMessage',['item'=>__($trans.'.singular')]) }}"
@@ -26,7 +26,7 @@
         data-not-deleted-message = "{{ __('site.notdeletedMessage',['item'=>__($trans.'.singular')]) }}"
         class="btn btn-danger font-weight-bold mr-2">
         {{ __('site.delete') }}
-    </button>
+    </button> 
      
     @endisset
   

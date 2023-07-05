@@ -68,7 +68,7 @@
             <div class="d-flex flex-column gap-7 gap-lg-10 w-100 mb-7 me-lg-10">
                 <x-backend.langs.ulTabs/>                
 
-                <x-backend.langs.LangInputs :showDescription="1" :richTextArea="0" :showSlug="1" :row="$row" :columnvalues="$TrsanslatedColumnValues" />
+                {{-- <x-backend.langs.LangInputs :showDescription="1" :richTextArea="0" :showSlug="1" :row="$row" :columnvalues="$TrsanslatedColumnValues" /> --}}
                 <x-backend.btns.button :destroyRoute="$destroy_route" :redirectRoute="$redirect_after_destroy" :trans="$trans"/>
 
             </div>
@@ -96,6 +96,9 @@
     <!--begin::Custom Javascript(used for this page only)-->
     <script src="{{ asset('assets/backend/js/widgets.bundle.js') }}"></script>
     <script src="{{ asset('assets/backend/js/custom/handleFormSubmit.js') }}"></script>
+
+    <script src="{{ asset('assets/backend/js/custom/deleteConfirmSwal.js') }}"></script>
+
     <script src="{{ asset('assets/backend/plugins/custom/tinymce/tinymce.bundle.js') }}"></script>
 
 

@@ -19,6 +19,8 @@ https://github.com/zizohassan/car/blob/master/app/Application/routes/web.php
 
  
 Route::resource('categories',CategoryController::class)->except('show'); // Post Categories
+Route::delete('categories/destroy/all', 'CategoryController@destroyMultiple')->name('categories.destroyMultiple');
+
 
 Route::resource('nutritions', NutritionController::class)->except('show');
 

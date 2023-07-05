@@ -1,15 +1,12 @@
 <?php
 
 return [
+    'status'                =>'Status',
     'dashboard'             =>'Dashboard',
     'home'                  =>'Home',
-
     'selected'              =>'Selecetd',
-    'filter_options'        =>'Filter Options',
-    
+    'filter_options'        =>'Filter Options',    
     'apply'                 =>'Apply',
-
-
     'online'                => 'Online',
     'login'                 => 'Login',
     'logout'                => 'Logout',
@@ -147,4 +144,6 @@ return [
     'allowed_file'          =>'allowed_file',
     'no_matched_records'    =>'No Matched Records',
     'form_submit_error'     =>'Sorry, looks like there are some errors detected, please try again.',
+    'publish'               =>'Publish',
+    
 ];

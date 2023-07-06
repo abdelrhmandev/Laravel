@@ -17,6 +17,13 @@ class CategoryController extends Controller
 {
     use UploadAble,Functions;
 
+    public function __construct() {
+
+        $this->TblForignKey = 'category_id';
+        $this->ROUTE_PREFIX = 'categories'; 
+        $this->TRANSLATECOLUMNS = ['title','slug','description'];
+
+    }
     public function store(CategoryRequest $request){
 
         try {
@@ -27,13 +34,12 @@ class CategoryController extends Controller
             $validated['parent_id']  = isset($request->parent_id) ? $request->parent_id : NULL;
             $query                   = MainModel::create($validated);
             DB::commit();                
-            $translatedArr           = $this->HandleMultiLangdatabase(['title_','slug_','description_'],['category_id'=>$query->id]);                      
-            
-       
+            $translatedArr           = $this->HandleMultiLangdatabase($this->TRANSLATECOLUMNS,[$this->TblForignKey=>$query->id]);                      
+           
             if(TransModel::insert($translatedArr)){              
                      $arr = array('msg' => __('category.storeMessageSuccess'), 'status' => true);
               
-                }
+            }
         
         } catch (\Exception $e) {
             DB::rollback();            
@@ -44,8 +50,6 @@ class CategoryController extends Controller
 }
 
 public function index(Request $request){    
-
-
     $query = MainModel::withCount('posts');
     if ($request->ajax()) {
   
@@ -98,8 +102,6 @@ public function index(Request $request){
                 ->rawColumns(['translate.title','created_at','actions'])    
                 ->make(true);    
     }  
-
-
         if (view()->exists('backend.categories.index')) {
             $compact = [
                 'storeUrl'   => route('admin.categories.store'), 
@@ -107,34 +109,30 @@ public function index(Request $request){
             ];            
             return view('backend.categories.index',$compact);
         }
-    }
+}
         public function create(){
-        if (view()->exists('backend.categories.create')) {
-            $compact = [
-                'storeUrl'   => route('admin.categories.store'), 
-                'categories' =>  MainModel::tree()  
-            ];            
-             return view('backend.categories.create',$compact);
+            if (view()->exists('backend.categories.create')) {
+                $compact = [
+                    'storeUrl'   => route('admin.categories.store'), 
+                    'categories' => MainModel::tree()  
+                ];            
+                return view('backend.categories.create',$compact);
+            }
         }
-    }
+
      public function edit(MainModel $category){ 
         if (view()->exists('backend.categories.edit')) {         
 
-
-        
-
-            $kk = TransModel::where('category_id',$category->id)->get();
-            
+          
 
 
-            //   $kk = $category->translate('all')->where('category_id',$category->id)->get();
 
             $TrsanslatedColumnValues = 
             $compact = [                
                 'updateUrl'               => route('admin.categories.update',$category->id), 
                 'categories'              => MainModel::tree($category),
                 'row'                     => $category,
-                'TrsanslatedColumnValues' => $this->getItemtranslatedllangs($kk,['title','slug','description']),
+                'TrsanslatedColumnValues' => $this->getItemtranslatedllangs($category,$this->TRANSLATECOLUMNS,$this->TblForignKey),
                 'destroy_route'           => route('admin.categories.destroy',$category->id),
                 'redirect_after_destroy'  => route('admin.categories.index'),
                 'trans'                   => 'category',
@@ -175,6 +173,10 @@ public function index(Request $request){
             ];
 
             MainModel::findOrFail($category->id)->update($data);
+
+            // https://laraveldaily.com/post/laravel-service-classes-injection
+            // $category->update($data);
+
             $arr = array('msg' => __('category.updateMessageSuccess'), 'status' => true);
             
             DB::commit();
@@ -194,6 +196,7 @@ public function index(Request $request){
     }
     public function destroy(MainModel $category){        
         // SET ALL childs to NULL 
+        /*
         $childs = $category->where('parent_id', $category->id);     
         foreach ($childs->get() as $child) {
             $child->id ? MainModel::where('id',$child->id)->update(['parent_id' => NULL]) : '';
@@ -208,8 +211,9 @@ public function index(Request $request){
             $arr = array('msg' => __('category.deleteMessageError'), 'status' => false);
 
         }
+        */
         
-
+        $arr = array('msg' => __('category.deleteMessageError'), 'status' => false);
         return response()->json($arr);
 
     }

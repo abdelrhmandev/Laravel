@@ -1,7 +1,7 @@
 <div class="d-flex justify-content">
     <button type="submit" id="btn-submit" class="btn btn-primary me-5">
-        <span class="indicator-label">{{ __('site.save') }}</span>
-        <span class="indicator-progress">{{ __('site.please_wait')}}...
+        <span class="indicator-label">{{ isset($destroyRoute) ? __('site.update') :  __('site.save') }}</span>
+        <span class="indicator-progress">{{ __('site.wait')}}...
         <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
     </button>
     <button type="reset" id="cancel" class="btn btn-secondary me-5">{{ __('site.cancel') }}</button>
@@ -9,10 +9,6 @@
 
 
     @isset($destroyRoute)
-  
-
- 
-
    <button id="delete_item"
         data-back-list-text="{{ __('site.back_to_list') }}"        
         data-destroy-route = "{{ $destroyRoute }}"

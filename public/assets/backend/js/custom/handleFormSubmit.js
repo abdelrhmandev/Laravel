@@ -81,7 +81,7 @@ function handleFormSubmitFunc(formId) {
                    //https://ckeditor.com/docs/ckeditor5/latest/installation/getting-started/getting-and-setting-data.html
                     submitButton.setAttribute('data-kt-indicator', 'on');
                     // Disable submit button whilst loading
-                    submitButton.disabled = true;
+                    // submitButton.disabled = true;
                     setTimeout(function() {
                         submitButton.removeAttribute('data-kt-indicator');
                         $.ajaxSetup({

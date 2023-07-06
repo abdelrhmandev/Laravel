@@ -145,5 +145,7 @@ return [
     'no_matched_records'    =>'No Matched Records',
     'form_submit_error'     =>'Sorry, looks like there are some errors detected, please try again.',
     'publish'               =>'Publish',
+    'wait'                  =>'Wait ...',
+    'update'                =>'Update',
     
 ];

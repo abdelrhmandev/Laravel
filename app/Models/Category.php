@@ -36,9 +36,11 @@ class Category extends Model
  
 
     public function translate($lang=null){
-        return $this->hasOne(CategoryTranslation::class)->where('lang',app()->getLocale());
-        if($lang == 'all'){
-                return $this->hasMany(CategoryTranslation::class);
+        
+        if($lang == 'getAll'){
+            return $this->hasMany(CategoryTranslation::class);
+        }else{
+            return $this->hasOne(CategoryTranslation::class)->where('lang',app()->getLocale());
         }
     }
 

@@ -10,18 +10,14 @@ use Illuminate\Support\Facades\DB;
 trait Functions
 {
 
-    public function getItemtranslatedllangs($query,$ReturnCoumnArray){
-        $requestInputs = [];
-        $c_ = [];  
+    public function getItemtranslatedllangs($Object,$ReturnCoumnArray,$Fkey){
+     
         $arr = [];
-
-
         foreach($ReturnCoumnArray as $va){     
-            foreach($query as $v){
-                $arr[$va.'_'.$v->lang] =  $v->$va;
-            }                
-        }    
-        
+                foreach($Object->translate('getAll')->where($Fkey,$Object->id)->get() as $v){
+                    $arr[$va.'_'.$v->lang] =  $v->$va;
+                }                
+        }   
         return $arr;
     }
 
@@ -30,8 +26,8 @@ trait Functions
         foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties) {
             $regional = substr($properties['regional'], 0, 2);
             foreach ($array as $value) {
-                $Column = substr($value, 0, -1);
-                $dynamicRequest = $value . substr($properties['regional'], 0, 2);
+                $Column = $value;
+                $dynamicRequest = $value .'_'. substr($properties['regional'], 0, 2);
                 if ($Column == 'slug') {
                     $requestInputs[$regional]['slug'] = request()->get($dynamicRequest) ?? Str::slug($requestInputs[$regional]['title']);
                 } else {

@@ -113,7 +113,7 @@
 												<x-backend.ecommerce.shippings />
 												<!--end::Shipping-->
 												<!--begin::Meta options-->
-												<x-backend.cms.seo />
+												<x-backend.seo.LangInputs />
 												<!--end::Meta options-->
 											</div>
 										</div>

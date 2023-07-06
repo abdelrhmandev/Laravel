@@ -76,9 +76,9 @@
                 <!--begin::Tab content-->
                 <x-backend.langs.LangInputs />
 
-                <x-backend.cms.single-select-category />
+                {{-- <x-backend.cms.single-select-category /> --}}
                 <!--end::Tab content-->
-                <x-backend.btns.create />
+                {{-- <x-backend.btns.create /> --}}
             </div>
             <div class="d-flex flex-column flex-row-fluid gap-7 w-lg-400px gap-lg-10">
                 <!--begin::Thumbnail settings-->

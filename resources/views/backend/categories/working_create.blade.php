@@ -96,7 +96,7 @@ color: #f1416c;
           </div>
           @endforeach
        </div>        
-       <x-backend.btns.create :label="'Add'" />
+       {{-- <x-backend.btns.create :label="'Add'" /> --}}
     </div>
  
  </form>

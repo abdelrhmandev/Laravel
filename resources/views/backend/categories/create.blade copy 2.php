@@ -229,7 +229,7 @@ outline: 0;
                 </ul>
 
 
-                {{-- <x-backend.cms.single-select-category :categories="$categories" :dashes="''"/> --}}
+                <!-- {{-- <x-backend.cms.single-select-category :categories="$categories" :dashes="''"/> --}} -->
 
 
 

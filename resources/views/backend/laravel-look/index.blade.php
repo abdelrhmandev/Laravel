@@ -1,4 +1,4 @@
-<x-base-layout>
+{{-- <x-base-layout>
 
     <!--begin::Card-->
     <div class="card">
@@ -10,4 +10,4 @@
     </div>
     <!--end::Card-->
 
-</x-base-layout>
+</x-base-layout> --}}

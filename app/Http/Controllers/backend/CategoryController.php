@@ -50,7 +50,7 @@ class CategoryController extends Controller
 }
 
 public function index(Request $request){    
-    $query = MainModel::withCount('posts');
+    $query = MainModel::where('id','>',0);
     if ($request->ajax()) {
   
             
@@ -127,7 +127,6 @@ public function index(Request $request){
 
 
 
-            $TrsanslatedColumnValues = 
             $compact = [                
                 'updateUrl'               => route('admin.categories.update',$category->id), 
                 'categories'              => MainModel::tree($category),
@@ -195,8 +194,7 @@ public function index(Request $request){
 
     }
     public function destroy(MainModel $category){        
-        // SET ALL childs to NULL 
-        /*
+        //SET ALL childs to NULL 
         $childs = $category->where('parent_id', $category->id);     
         foreach ($childs->get() as $child) {
             $child->id ? MainModel::where('id',$child->id)->update(['parent_id' => NULL]) : '';
@@ -206,14 +204,12 @@ public function index(Request $request){
         $item = MainModel::findOrFail($category->id); // Check
         
         if($item->delete()){
-            $arr = array('msg' => __('category.deleteMessageSuccess'), 'status' => "success");
+            $arr = array('msg' => __('category.deleteMessageSuccess'), 'status' => true);
         }else{
             $arr = array('msg' => __('category.deleteMessageError'), 'status' => false);
 
         }
-        */
         
-        $arr = array('msg' => __('category.deleteMessageError'), 'status' => false);
         return response()->json($arr);
 
     }

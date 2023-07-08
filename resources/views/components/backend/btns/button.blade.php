@@ -9,6 +9,8 @@
 
 
     @isset($destroyRoute)
+
+    
    <button id="delete_item"
         data-back-list-text="{{ __('site.back_to_list') }}"        
         data-destroy-route = "{{ $destroyRoute }}"

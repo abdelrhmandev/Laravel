@@ -10,14 +10,14 @@ use Illuminate\Support\Facades\DB;
 trait Functions
 {
 
-    public function getItemtranslatedllangs($Object,$ReturnCoumnArray,$Fkey){
-     
+    public function getItemtranslatedllangs($Object,$ReturnCoumnArray,$Fkey){     
         $arr = [];
-        foreach($ReturnCoumnArray as $va){     
                 foreach($Object->translate('getAll')->where($Fkey,$Object->id)->get() as $v){
-                    $arr[$va.'_'.$v->lang] =  $v->$va;
+                    foreach($ReturnCoumnArray as $va){     
+                        $arr['id_'.$v->lang] =  $v->id;
+                        $arr[$va.'_'.$v->lang] =  $v->$va;
+                    }
                 }                
-        }   
         return $arr;
     }
 

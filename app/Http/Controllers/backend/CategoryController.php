@@ -95,6 +95,7 @@ public function index(Request $request){
                 ->editColumn('actions', function ($row) {      
                                                  
                 return view('backend.partials.btns.edit-delete', [
+                    'trans'=>'category',
                     'edit_route'=>route('admin.categories.edit',$row->id),
                     'destroy_route'=>route('admin.categories.destroy',$row->id),
                     'id'=>$row->id]);

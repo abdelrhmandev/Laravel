@@ -22,10 +22,11 @@
         data-redirect-url = "{{ $redirectRoute }}"
         data-deleting-selected-items = "{{ __('site.deletingItemMessage',['item'=>__($trans.'.singular')]) }}"
         data-not-deleted-message = "{{ __('site.notdeletedMessage',['item'=>__($trans.'.singular')]) }}"
-        class="btn btn-danger font-weight-bold mr-2">
-        {{ __('site.delete') }}
+        class="btn btn-danger font-weight-bold">
+         {{ __('site.delete') }}       
     </button> 
-     
+  
+
     @endisset
   
 

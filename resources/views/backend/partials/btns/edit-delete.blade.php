@@ -16,7 +16,15 @@
       </a>
   </div>
   <div class="menu-item px-3">
-      <a data-destroy-route="{{ $destroy_route}}" class="menu-link px-3"  data-kt-table-filter="delete_row">
+      <a id="delete_item" data-destroy-route="{{ $destroy_route}}" class="menu-link px-3"  data-kt-table-filter="delete_row"      
+      data-back-list-text="{{ __('site.back_to_list') }}"        
+      data-confirm-message = "{{ __('site.confirmDeleteMessage',['item'=>__($trans.'.singular')]) }}"
+      data-confirm-button-text = "{{ __('site.confirmButtonText') }}"
+      data-cancel-button-text = "{{ __('site.cancelButtonText') }}"
+      data-confirm-button-textGotit = "{{ __('site.confirmButtonTextGotit') }}"
+      data-deleting-selected-items = "{{ __('site.deletingItemMessage',['item'=>__($trans.'.singular')]) }}"
+      data-not-deleted-message = "{{ __('site.notdeletedMessage',['item'=>__($trans.'.singular')]) }}"
+      >
         {{ __('site.delete')}}    
       </a>
   </div>

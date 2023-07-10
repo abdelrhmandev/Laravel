@@ -127,95 +127,91 @@
                         dt.column(3).search(regexStatus, true, false).column(2).search(CategoryValue).draw();                
                     });    
             }
-            // Delete customer
+            // Delete 
             var handleDeleteRows = () => {
                 // Select all delete buttons
                 const deleteButtons = document.querySelectorAll('[data-kt-table-filter="delete_row"]');
-
-               
-          
-                
+                const destroy = document.getElementById('delete_item');
 
                 deleteButtons.forEach(d => {
-                // Delete button on click
                 d.addEventListener('click', function (e) {
                     e.preventDefault();
-                    // Select parent row
                     const parent = e.target.closest('tr');
-                    // Get customer name
-                    const itemName = parent.querySelectorAll('td')[1].innerText;
+                    const itemName = '<strong><u>'+parent.querySelectorAll('td')[1].innerText+'</u></strong>';
 
-                    ///////////////
-  
-
-                //////////////////////////////
-
-
-                    // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
-                    Swal.fire({
-                        text: "{{ __('site.confirmDeleteMessage') }}" + itemName + "?",
-                        icon: "warning",
-                        showCancelButton: true,
-                        buttonsStyling: false,
-                        confirmButtonText: "{{ __('site.confirmButtonText') }}",
-                        cancelButtonText: "{{ __('site.cancelButtonText') }}",
-                        customClass: {
-                            confirmButton: "btn fw-bold btn-danger",
-                            cancelButton: "btn fw-bold btn-active-light-primary"
-                        }
-                    }).then((result) => {
-                        $.ajax({
+                    
+                Swal.fire({
+                html: destroy.getAttribute("data-confirm-message") + ' ' + itemName + '  ?',
+                icon: "warning",
+                showCancelButton: true,
+                buttonsStyling: false,
+                showLoaderOnConfirm: true,
+                confirmButtonText: destroy.getAttribute("data-confirm-button-text"),
+                cancelButtonText: destroy.getAttribute("data-cancel-button-text"),
+                customClass: {
+                    confirmButton: "btn fw-bold btn-danger",
+                    cancelButton: "btn fw-bold btn-active-secondary"
+                },
+            }).then(function(result) {
+                if (result.value) { // Yes Delete
+                    $.ajax({
                         type: 'post',
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
-                       
-                        url: $(this).attr("data-destroy-route"),
+                        url: destroy.getAttribute("data-destroy-route"),
                         data: {
-                            '_method': 'delete'
+                            '_method': 'delete',
                         },
-                        success: function (response, textStatus, xhr) {
-                            if (result.value) {
-                                // Simulate delete request -- for demo purpose only
-                                Swal.fire({
-                                    text: "{{ __('site.deletingItemMessage') }}",
-                                    icon: "info",
-                                    buttonsStyling: false,
-                                    showConfirmButton: false,
-                                    timer: 2000
-                                }).then(function () {
-
+                        success: function(response, textStatus, xhr) {
+                            Swal.fire({
+                                html: destroy.getAttribute("data-deleting-selected-items") + ' ' + itemName + '',
+                                icon: "info",
+                                buttonsStyling: false,
+                                showConfirmButton: false,
+                                timer: 2000
+                            }).then(function() {
+                                if (response["status"] == true) {
                                     Swal.fire({
-                                    text: response['msg'], // respose from controller
-                                    icon: response['status'],
-                                    buttonsStyling: false,
-                                    confirmButtonText: "{{ __('site.confirmButtonTextGotit') }}",
-                                    customClass: {
-                                        confirmButton: "btn fw-bold btn-primary",
-                                    }
-                                    }).then(function () {
-                                    // delete row data from server and re-draw datatable
-                                    dt.draw();
+                                        text: response['msg'], // respose from controller
+                                        icon: "success",
+                                        buttonsStyling: false,
+                                        confirmButtonText: destroy.getAttribute("data-back-list-text"),
+                                        customClass: {
+                                            confirmButton: "btn fw-bold btn-primary",
+                                        }
+                                    }).then(function() {
+                                        // delete row data from server and re-draw datatable
+                                       dt.draw();
                                     });
-                                    // Remove header checked box
-                                    const headerCheckbox = container.querySelectorAll('[type="checkbox"]')[0];
-                                    headerCheckbox.checked = false;
-                                });
-                            }else if (result.dismiss === 'cancel') {
-                                Swal.fire({
-                                    text: "{{ __('site.notdeletedMessage') }}",
-                                    icon: "error",
-                                    buttonsStyling: false,
-                                    confirmButtonText: "{{ __('site.confirmButtonTextGotit') }}",
-                                    customClass: {
-                                    confirmButton: "btn fw-bold btn-primary",
-                                    }
-                                });
-                            } // end of cancel case
+                                } else if (response["status"] == false) {
+                                    Swal.fire({
+                                        html: response["msg"], // respose from controller
+                                        icon: "error",
+                                        buttonsStyling: false,
+                                        confirmButtonText: destroy.getAttribute("data-back-list-text"),
+                                        customClass: {
+                                            confirmButton: "btn btn-light-danger"
+                                        }
+                                    }).then(function() {
+                                        document.location.href = destroy.getAttribute("data-redirect-url");
+                                    });
+                                }
+                            });
                         }
-                        });
-    
                     });
+                } else if (result.dismiss === 'cancel') {
+                    Swal.fire({
+                        text: destroy.getAttribute("data-not-deleted-message"),
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: destroy.getAttribute("data-confirm-button-textGotit"),
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary",
+                        }
+                    });
+                }
+            }); 
                 })
                 });
             }
@@ -242,7 +238,7 @@
 
 
 
-            // Init toggle toolbar "Delete Selected Items"
+            // Init toggle toolbar "Delete Selected , MULT SELECTED ITEMS" 
             var initToggleToolbar = function () {
                 // Toggle selected action toolbar
                 // Select all checkboxes

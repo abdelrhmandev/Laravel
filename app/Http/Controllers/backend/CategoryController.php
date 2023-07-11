@@ -105,7 +105,8 @@ public function index(Request $request){
     }  
         if (view()->exists('backend.categories.index')) {
             $compact = [
-                'storeUrl'   => route('admin.categories.store'), 
+                'trans'          =>'category',
+                'storeUrl'       => route('admin.categories.store'), 
                 'redirectUrl'    => route('admin.categories.index'),
             ];            
             return view('backend.categories.index',$compact);
@@ -202,13 +203,11 @@ public function index(Request $request){
         }
         
         $category->image ? $this->unlinkFile($category->image) : ''; // Unlink Image
-        $item = MainModel::findOrFail($category->id); // Check
         
-        if($item->delete()){
+        if($category->delete()){
             $arr = array('msg' => __('category.deleteMessageSuccess'), 'status' => true);
         }else{
             $arr = array('msg' => __('category.deleteMessageError'), 'status' => false);
-
         }
         
         return response()->json($arr);
@@ -216,8 +215,35 @@ public function index(Request $request){
     }
 
 
-    public function multi_delete(){
-        dd('multi_delete');
+    public function destroyMultiple(Request $request){   
+
+        /*
+        $ids = explode(',', $request->ids);
+        $childs = MainModel::whereIn('parent_id',$ids);     
+        foreach ($childs->get() as $child) {
+            $child->id ? MainModel::where('id',$child->id)->update(['parent_id' => NULL]) : '';
+            $child->image ? $this->unlinkFile($child->image) : ''; // Unlink Image 
+        }
+        
+
+ 
+        foreach (MainModel::whereIn('id',$ids)->get() as $selectedItems) {
+            $selectedItems->image ? $this->unlinkFile($selectedItems->image) : ''; // Unlink Image            
+        }
+     
+        $item = MainModel::whereIn('id',$ids); // Check
+        if($item->delete()){
+            $arr = array('msg' => __('category.MulideleteMessageSuccess'), 'status' => true);
+        }else{
+            $arr = array('msg' => __('category.MiltideleteMessageError'), 'status' => false);
+
+        }
+        */
+        
+
+        $arr = array('msg' => __('category.deleteMessageError'), 'status' => false);    
+        return response()->json($arr);
+
     }
 
 

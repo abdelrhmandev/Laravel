@@ -247,8 +247,10 @@
                 //https://www.itsolutionstuff.com/post/how-to-delete-multiple-records-using-checkbox-in-laravel-5-example.html
                 // Select elements
                 const deleteSelected = document.querySelector('[data-kt-table-select="delete_selected"]');
-               
+                const destroyMultipleRouteId = document.getElementById('destroyMultipleroute');
+                const destroyMultipleRoute = destroyMultipleRouteId.getAttribute('data-destroyMultiple-route');
              
+
                 // Toggle delete selected toolbar
                 checkboxes.forEach(c => {
                     // Checkbox on click event
@@ -261,32 +263,30 @@
                 });
                  
 
-                // Deleted selected rows
+                 // Deleted selected rows
                     deleteSelected.addEventListener('click', function () {
-
                     var checkedrows = [];
-                     $("#kt_datatable input:checkbox[name=ids]:checked").each(function() {
+                    $("#kt_datatable input:checkbox[name=ids]:checked").each(function() {
                         checkedrows.push($(this).val());
                     });
                     var join_selected_values = checkedrows.join(","); 
-                    
-                    // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
-                    Swal.fire({
-                        text: "{{ __('site.confirmMultiDeleteMessage') }}"+"?",
-                        icon: "warning",
-                        showCancelButton: true,
-                        buttonsStyling: false,
-                        showLoaderOnConfirm: true,
-                        confirmButtonText: "{{ __('site.confirmButtonText') }}",
-                        cancelButtonText: "{{ __('site.cancelButtonText') }}",
-                        customClass: {
-                            confirmButton: "btn fw-bold btn-danger",
-                            cancelButton: "btn fw-bold btn-active-light-primary"
-                        },
-                    }).then(function (result) {
-                        const destroyMultipleRouteId = document.getElementById('destroyMultipleroute');
-                        const destroyMultipleRoute = destroyMultipleRouteId.getAttribute('data-destroyMultiple-route');
-                        $.ajax({
+                   
+                    ////////////// body ///
+                Swal.fire({
+                html: destroyMultipleRouteId.getAttribute("data-confirm-message"),
+                icon: "warning",
+                showCancelButton: true,
+                buttonsStyling: false,
+                showLoaderOnConfirm: true,
+                confirmButtonText: destroyMultipleRouteId.getAttribute("data-confirm-button-text"),
+                cancelButtonText: destroyMultipleRouteId.getAttribute("data-cancel-button-text"),
+                customClass: {
+                    confirmButton: "btn fw-bold btn-danger",
+                    cancelButton: "btn fw-bold btn-active-secondary"
+                },
+            }).then(function(result) {
+                if (result.value) { // Yes Delete
+                    $.ajax({
                         type: 'post',
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -295,50 +295,65 @@
                         data: {
                             '_method': 'delete',
                             'ids': join_selected_values,
-                        },                    
-                        success: function (response, textStatus, xhr) {
-                            if (result.value) {
+                        }, 
+                        success: function(response, textStatus, xhr) {
+                            Swal.fire({
+                                html: destroyMultipleRouteId.getAttribute("data-deleting-selected-items"),
+                                icon: "info",
+                                buttonsStyling: false,
+                                showConfirmButton: false,
+                                timer: 2000
+                            }).then(function() {
+                                if (response["status"] == true) {
                                     Swal.fire({
-                                        text: "{{ __('site.deletingselecteditem') }}",
-                                        icon: "info",
+                                        text: response['msg'], // respose from controller
+                                        icon: "success",
                                         buttonsStyling: false,
-                                        showConfirmButton: false,
-                                        timer: 2000
-                                    }).then(function () {
-                                        Swal.fire({
-                                            text: response['msg'], // respose from controller
-                                            icon: response['status'],
-                                            buttonsStyling: false,
-                                            confirmButtonText: "{{ __('site.confirmButtonTextGotit') }}",
-                                            customClass: {
-                                                confirmButton: "btn fw-bold btn-primary",
-                                            }
-                                        }).then(function () {
-                                            // delete row data from server and re-draw datatable
-                                            dt.draw();
-                                        });
-                
-                                        // Remove header checked box
-                                        const headerCheckbox = container.querySelectorAll('[type="checkbox"]')[0];
-                                        headerCheckbox.checked = false;
-                                    });
-                                } else if (result.dismiss === 'cancel') {
-                                    Swal.fire({
-                                        text: "{{ __('site.notdeletedMessage') }}",
-                                        icon: "error",
-                                        buttonsStyling: false,
-                                        confirmButtonText: "{{ __('site.confirmButtonTextGotit') }}",
+                                        confirmButtonText: destroyMultipleRouteId.getAttribute("data-back-list-text"),
                                         customClass: {
                                             confirmButton: "btn fw-bold btn-primary",
-                    
                                         }
-                                });
-                                } // end of cancel case
-                            }
-                        });
+                                    }).then(function() {
+                                        // delete row data from server and re-draw datatable
+                                        dt.draw();
+                                    });
+
+                                    const headerCheckbox = container.querySelectorAll('[type="checkbox"]')[0];
+                                    headerCheckbox.checked = false;
+
+                                } else if (response["status"] == false) {
+                                    Swal.fire({
+                                        html: response["msg"], // respose from controller
+                                        icon: "error",
+                                        buttonsStyling: false,
+                                        confirmButtonText: destroyMultipleRouteId.getAttribute("data-back-list-text"),
+                                        customClass: {
+                                            confirmButton: "btn btn-light-danger"
+                                        }
+                                    }).then(function() {
+                                        document.location.href = destroy.getAttribute("data-redirect-url");
+                                    });
+                                }
+                            });
+                        }
                     });
-            })
-            }
+                } else if (result.dismiss === 'cancel') {
+                    Swal.fire({
+                        text: destroyMultipleRouteId.getAttribute("data-not-deleted-message"),
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: destroyMultipleRouteId.getAttribute("data-confirm-button-textGotit"),
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary",
+                        }
+                    });
+                }
+            });
+                    // end of body
+
+
+                })
+            } // End Of multi Delete selected
         
             // Toggle toolbars
             var toggleToolbars = function () {

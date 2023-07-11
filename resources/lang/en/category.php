@@ -10,9 +10,12 @@ return [
 'plural'                    => 'Categories',
 'singular'                  => 'Category',
 'deleteMessageSuccess'      => 'Category has been deleted successfully',
+'MulideleteMessageSuccess'  => 'Categories has been deleted successfully',
+'delete_selected'           => 'Delete Selected Category(ies)',
 'deleteMessageError'        => 'Error in delete Category',
+'MultideleteMessageError'   => 'Error in delete Categories',
 'updateMessageSuccess'      => 'Category has been updated successfully',
 'updateMessageError'        => 'Error in update Category',
-'storeMessageSuccess'       => 'Category has been added successfully',
+'storeMessageSuccess'       => 'Category has been created successfully',
 'storeMessageError'         => 'Error in Store Category',
 ];

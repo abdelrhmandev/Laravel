@@ -115,8 +115,7 @@
              data-cancel-button-text = "{{ __('site.cancelButtonText') }}"
              data-confirm-button-textGotit = "{{ __('site.confirmButtonTextGotit') }}"
              data-delete-selected-records-text = "{{ __($trans.'.delete_selected') }}"
-             data-deleting-selected-items = "{{ __('site.deletingItemMessage',['item'=>__($trans.'.singular')]) }}"
-             data-not-deleted-message = "{{ __('site.notdeletedMessage',['item'=>__($trans.'.singular')]) }}"
+             data-not-deleted-message = "{{ __($trans.'.not_delete_selected') }}"
 
 
              >{{ __('admin.delete_selected') }}</button>

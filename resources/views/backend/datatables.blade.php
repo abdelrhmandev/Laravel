@@ -141,7 +141,7 @@
 
                     
                 Swal.fire({
-                html: destroy.getAttribute("data-confirm-message") + ' ' + itemName + '  ?',
+                html: destroy.getAttribute("data-confirm-message") + ' ' + itemName + '?',
                 icon: "warning",
                 showCancelButton: true,
                 buttonsStyling: false,
@@ -266,14 +266,21 @@
                  // Deleted selected rows
                     deleteSelected.addEventListener('click', function () {
                     var checkedrows = [];
+                    var Itemsnames = [];
                     $("#kt_datatable input:checkbox[name=ids]:checked").each(function() {
-                        checkedrows.push($(this).val());
-                    });
+                        checkedrows.push($(this).val()); 
+                        var c = document.querySelector('[data-kt-item-filter'+$(this).val()+'="item"]');                    
+                        Itemsnames.push('<strong><u>'+c.innerText+'</strong></u>');
+                    });                    
                     var join_selected_values = checkedrows.join(","); 
                    
+
+
+               
+
                     ////////////// body ///
                 Swal.fire({
-                html: destroyMultipleRouteId.getAttribute("data-confirm-message"),
+                html: destroyMultipleRouteId.getAttribute("data-confirm-message")+' '+Itemsnames+' ?',
                 icon: "warning",
                 showCancelButton: true,
                 buttonsStyling: false,
@@ -298,7 +305,7 @@
                         }, 
                         success: function(response, textStatus, xhr) {
                             Swal.fire({
-                                html: destroyMultipleRouteId.getAttribute("data-deleting-selected-items"),
+                                html: destroyMultipleRouteId.getAttribute("data-delete-selected-records-text")+' '+Itemsnames+' ',
                                 icon: "info",
                                 buttonsStyling: false,
                                 showConfirmButton: false,
@@ -323,7 +330,7 @@
 
                                 } else if (response["status"] == false) {
                                     Swal.fire({
-                                        html: response["msg"], // respose from controller
+                                        html: response["msg"]+' '+Itemsnames+' ', // respose from controller
                                         icon: "error",
                                         buttonsStyling: false,
                                         confirmButtonText: destroyMultipleRouteId.getAttribute("data-back-list-text"),
@@ -331,7 +338,7 @@
                                             confirmButton: "btn btn-light-danger"
                                         }
                                     }).then(function() {
-                                        document.location.href = destroy.getAttribute("data-redirect-url");
+                                        document.location.href = destroyMultipleRouteId.getAttribute("data-redirect-url");
                                     });
                                 }
                             });

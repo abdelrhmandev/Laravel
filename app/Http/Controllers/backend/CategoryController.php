@@ -22,6 +22,8 @@ class CategoryController extends Controller
         $this->TblForignKey = 'category_id';
         $this->ROUTE_PREFIX = 'categories'; 
         $this->TRANSLATECOLUMNS = ['title','slug','description'];
+        $this->TRANS = 'category';
+
 
     }
     public function store(CategoryRequest $request){
@@ -37,13 +39,13 @@ class CategoryController extends Controller
             $translatedArr           = $this->HandleMultiLangdatabase($this->TRANSLATECOLUMNS,[$this->TblForignKey=>$query->id]);                      
            
             if(TransModel::insert($translatedArr)){              
-                     $arr = array('msg' => __('category.storeMessageSuccess'), 'status' => true);
+                     $arr = array('msg' => __($this->TRANS.'.'.'storeMessageSuccess'), 'status' => true);
               
             }
         
         } catch (\Exception $e) {
             DB::rollback();            
-            $arr = array('msg' => __('category.storeMessageError'), 'status' => false);
+            $arr = array('msg' => __($this->TRANS.'.'.'storeMessageError'), 'status' => false);
         }
         return response()->json($arr);
         
@@ -74,7 +76,7 @@ public function index(Request $request){
                     } 
                     $description = '';//"<div class=\"text-muted fs-7 fw-bold\">".Str::of($row->translate->description)->words(8,'...')."</div>";
                     $div.="<div class=\"ms-5\">
-                                <a href=".$route." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-categories-filter=\"item\">".$row->translate->title."</a>
+                                <a href=".$route." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".$row->translate->title."</a>
                             ".$description."</div>"; 
 
                     $div.= "</div>";
@@ -95,7 +97,7 @@ public function index(Request $request){
                 ->editColumn('actions', function ($row) {      
                                                  
                 return view('backend.partials.btns.edit-delete', [
-                    'trans'=>'category',
+                    'trans'=>$this->TRANS,
                     'edit_route'=>route('admin.categories.edit',$row->id),
                     'destroy_route'=>route('admin.categories.destroy',$row->id),
                     'id'=>$row->id]);
@@ -105,7 +107,7 @@ public function index(Request $request){
     }  
         if (view()->exists('backend.categories.index')) {
             $compact = [
-                'trans'          =>'category',
+                'trans'          => $this->TRANS,
                 'storeUrl'       => route('admin.categories.store'), 
                 'redirectUrl'    => route('admin.categories.index'),
             ];            
@@ -136,7 +138,7 @@ public function index(Request $request){
                 'TrsanslatedColumnValues' => $this->getItemtranslatedllangs($category,$this->TRANSLATECOLUMNS,$this->TblForignKey),
                 'destroy_route'           => route('admin.categories.destroy',$category->id),
                 'redirect_after_destroy'  => route('admin.categories.index'),
-                'trans'                   => 'category',
+                'trans'                   => $this->TRANS,
             ];            
 
 
@@ -147,6 +149,9 @@ public function index(Request $request){
 
     public function update(CategoryRequest $request, MainModel $category)
     {
+
+
+        
 
         
         try {
@@ -166,6 +171,8 @@ public function index(Request $request){
                 $image = NULL;
             }
 
+            dd($image);
+           
 
             $data = [
                 'published'     =>isset($request->published) ? '1' : '0',
@@ -175,19 +182,13 @@ public function index(Request $request){
 
             MainModel::findOrFail($category->id)->update($data);
 
-            // https://laraveldaily.com/post/laravel-service-classes-injection
-            // $category->update($data);
-
-            $arr = array('msg' => __('category.updateMessageSuccess'), 'status' => true);
-            
+            $arr = array('msg' => __($this->TRANS.'.'.'updateMessageSuccess'), 'status' => true);            
             DB::commit();
-            
-            
-            $this->UpdateMultiLangsQuery(['title_','description_','slug_'],'category_translations',['category_id'=>$category->id]);
+            $this->UpdateMultiLangsQuery($this->TRANSLATECOLUMNS,'category_translations',[$this->TblForignKey=>$category->id]);
 
         } catch (\Exception $e) {
             DB::rollback();            
-            $arr = array('msg' => __('category.updateMessageError'), 'status' => false);
+            $arr = array('msg' => __($this->TRANS.'.'.'updateMessageError'), 'status' => false);
         }
         return response()->json($arr);
 
@@ -205,9 +206,9 @@ public function index(Request $request){
         $category->image ? $this->unlinkFile($category->image) : ''; // Unlink Image
         
         if($category->delete()){
-            $arr = array('msg' => __('category.deleteMessageSuccess'), 'status' => true);
+            $arr = array('msg' => __($this->TRANS.'.'.'deleteMessageSuccess'), 'status' => true);
         }else{
-            $arr = array('msg' => __('category.deleteMessageError'), 'status' => false);
+            $arr = array('msg' => __($this->TRANS.'.'.'deleteMessageError'), 'status' => false);
         }
         
         return response()->json($arr);
@@ -217,7 +218,7 @@ public function index(Request $request){
 
     public function destroyMultiple(Request $request){   
 
-        /*
+       
         $ids = explode(',', $request->ids);
         $childs = MainModel::whereIn('parent_id',$ids);     
         foreach ($childs->get() as $child) {
@@ -231,18 +232,19 @@ public function index(Request $request){
             $selectedItems->image ? $this->unlinkFile($selectedItems->image) : ''; // Unlink Image            
         }
      
-        $item = MainModel::whereIn('id',$ids); // Check
-        if($item->delete()){
-            $arr = array('msg' => __('category.MulideleteMessageSuccess'), 'status' => true);
+        $items = MainModel::whereIn('id',$ids); // Check
+   
+       
+        if($items->delete()){
+            $arr = array('msg' => __($this->TRANS.'.'.'MulideleteMessageSuccess'), 'status' => true);
         }else{
-            $arr = array('msg' => __('category.MiltideleteMessageError'), 'status' => false);
+            $arr = array('msg' => __($this->TRANS.'.'.'MiltideleteMessageError'), 'status' => false);
 
         }
-        */
         
-
-        $arr = array('msg' => __('category.deleteMessageError'), 'status' => false);    
         return response()->json($arr);
+
+ 
 
     }
 

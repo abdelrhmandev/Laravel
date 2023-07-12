@@ -54,17 +54,18 @@ trait Functions
 
 
     public function UpdateMultiLangsQuery($array,$table,$foreignKey){
+        
+         
         $updateQurey = false;
         foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties) {
             $regional = substr($properties['regional'], 0, 2);
             foreach ($array as $value) {
                 $Column = substr($value, 0, -1);
-                $dynamicRequest = $value . substr($properties['regional'], 0, 2);                
+                $dynamicRequest = $value .'_'. substr($properties['regional'], 0, 2);           
                     $ids = request()->get('id_'.substr($properties['regional'], 0, 2));               
                     $UpdatedArr = [
-                        substr($value, 0, -1)=>request()->get($dynamicRequest)
-                    ];
-
+                        $value=>request()->get($dynamicRequest)
+                    ];                     
                     DB::table($table)->where("id",$ids)->where($foreignKey)->update($UpdatedArr);
                     $updateQurey = true;
                     

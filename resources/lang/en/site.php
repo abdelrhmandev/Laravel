@@ -148,5 +148,9 @@ return [
     'published'             =>'Published',
     'wait'                  =>'Wait ...',
     'update'                =>'Update',
+    'remove_image'          =>'Remove Image',
+    'image'                 =>'Image',
+    'agree'                 =>'Agree',
+    'count'                 =>'Count',
     
 ];

@@ -18,9 +18,9 @@ trait UploadAble
 
         $FilePath = public_path($FileUrl); // public folder
         if (File::exists($FilePath)) {
-            unlink($FilePath);
-            return true;
+            unlink($FilePath);            
         }
+        return true;
     }
     
 

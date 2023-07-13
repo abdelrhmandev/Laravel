@@ -9,6 +9,7 @@ use App\Models\CategoryTranslation as TransModel;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use App\Traits\UploadAble;
+use Illuminate\Support\Facades\File; 
 use App\Traits\Functions; 
 use DataTables;
 
@@ -52,7 +53,7 @@ class CategoryController extends Controller
 }
 
 public function index(Request $request){    
-    $query = MainModel::where('id','>',0);
+    $query = MainModel::where('id','>',0)->with('parent')->withCount('posts');
     if ($request->ajax()) {
   
             
@@ -62,54 +63,75 @@ public function index(Request $request){
  
                     
                     ->editColumn('translate.title', function ($row) {
-                     $route = route('admin.categories.edit',$row->id);   
-                    $div = "<div class=\"d-flex align-items-center\">";                            
-                    if($row->image){
-                        $div.= "<a href=".$route." title='".$row->translate->title."' class=\"symbol symbol-50px\">
-                                    <span class=\"symbol-label\" style=\"background-image:url(".asset("storage/".$row->image).")\" />
-                                    </span>
-                                </a>";                                                                
-                    }else{
-                        $div.="<a href=".$route." class=\"symbol symbol-50px\" title='".$row->translate->title."'>
-                                        <div class=\"symbol-label fs-3 bg-light-primary text-primary\">".$this->str_split($row->translate->title,1)."</div>
-                               </a>";  
-                    } 
-                    $description = '';//"<div class=\"text-muted fs-7 fw-bold\">".Str::of($row->translate->description)->words(8,'...')."</div>";
-                    $div.="<div class=\"ms-5\">
-                                <a href=".$route." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".$row->translate->title."</a>
-                            ".$description."</div>"; 
+                    //  $route = route('admin.categories.edit',$row->id);   
+                    //  $div ="<a href=".$route." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".$row->translate->title."</a>"; 
 
-                    $div.= "</div>";
-                    return $div;
+                    return '';
                 
+                })
+
+
+                                ->editColumn('posts', function ($row) {
+                    // $div = '<span aria-hidden="true">—</span>';
+                    // if($row->image){
+                    //     $div = "<a href=".route('admin.categories.edit',$row->id)." title='".$row->translate->title."' class=\"symbol symbol-50px\">
+                    //                 <span class=\"symbol-label\" style=\"background-image:url(".url(asset($row->image)).")\" />
+                    //                 </span>
+                    //             </a>";   
+                    // }
+                    return 'asdas';
                 })
 
  
                                                              
-  
+                ->editColumn('image', function ($row) {
+                    $div = '<span aria-hidden="true">—</span>';
+                    if($row->image){
+                        $div = "<a href=".route('admin.categories.edit',$row->id)." title='".$row->translate->title."' class=\"symbol symbol-50px\">
+                                    <span class=\"symbol-label\" style=\"background-image:url(".url(asset($row->image)).")\" />
+                                    </span>
+                                </a>";   
+                    }
+                    return 'asdsad';
+                })
          
                   ->editColumn('created_at', function ($row) {
                     return $row->created_at->format('d/m/Y');
                 })
                 
-        
+                ->editColumn('parent', function ($row) {
+                    return 'dasdas';//$row->parent->translate->title ?? "<span aria-hidden=\"true\">—</span>";
+                })
+
+
+                ->editColumn('count', function ($row) {
+                    return 'dasdas';
+                })
+
+
+                ->editColumn('published', function ($row) {
+                    return $row->published;
+                })
+
+
 
                 ->editColumn('actions', function ($row) {      
                                                  
                 return view('backend.partials.btns.edit-delete', [
-                    'trans'=>$this->TRANS,
-                    'edit_route'=>route('admin.categories.edit',$row->id),
-                    'destroy_route'=>route('admin.categories.destroy',$row->id),
+                    'trans'         =>$this->TRANS,
+                    'editRoute'     =>route('admin.categories.edit',$row->id),
+                    'destroyRoute'  =>route('admin.categories.destroy',$row->id),
                     'id'=>$row->id]);
                 })                           
-                ->rawColumns(['translate.title','created_at','actions'])    
+                ->rawColumns(['image','translate.title','created_at','parent','actions'])    
                 ->make(true);    
     }  
         if (view()->exists('backend.categories.index')) {
             $compact = [
                 'trans'          => $this->TRANS,
-                'storeUrl'       => route('admin.categories.store'), 
-                'redirectUrl'    => route('admin.categories.index'),
+                'createRoute'      =>route('admin.categories.create'),
+                'storeRoute'       => route('admin.categories.store'), 
+                'redirectRoute'    => route('admin.categories.index'),
             ];            
             return view('backend.categories.index',$compact);
         }
@@ -117,8 +139,8 @@ public function index(Request $request){
         public function create(){
             if (view()->exists('backend.categories.create')) {
                 $compact = [
-                    'storeUrl'   => route('admin.categories.store'), 
-                    'categories' => MainModel::tree()  
+                    'storeRoute'   => route('admin.categories.store'), 
+                    'categories'    => MainModel::tree()  
                 ];            
                 return view('backend.categories.create',$compact);
             }
@@ -132,11 +154,11 @@ public function index(Request $request){
 
 
             $compact = [                
-                'updateUrl'               => route('admin.categories.update',$category->id), 
+                'updateRoute'             => route('admin.categories.update',$category->id), 
                 'categories'              => MainModel::tree($category),
                 'row'                     => $category,
                 'TrsanslatedColumnValues' => $this->getItemtranslatedllangs($category,$this->TRANSLATECOLUMNS,$this->TblForignKey),
-                'destroy_route'           => route('admin.categories.destroy',$category->id),
+                'destroyRoute'            => route('admin.categories.destroy',$category->id),
                 'redirect_after_destroy'  => route('admin.categories.index'),
                 'trans'                   => $this->TRANS,
             ];            
@@ -153,25 +175,26 @@ public function index(Request $request){
 
         
 
+ 
         
-        try {
+        
+         try {
             DB::beginTransaction();        
             $validated = $request->validated();
 
 
-            $image = $category->image;
-
             if(!empty($request->file('image'))) {
-               $image =  $this->uploadFile($request->file('image'),'categories');
-               $this->unlinkFile($category->image);
-             }
 
+                $category->image && File::exists(public_path($category->image)) ? $this->unlinkFile($category->image): '';
+                $image =  $this->uploadFile($request->file('image'),'categories');
+             }
+    
             if(isset($request->drop_image_checkBox)  && $request->drop_image_checkBox == 1) {                
                 $this->unlinkFile($category->image);
                 $image = NULL;
             }
 
-            dd($image);
+            
            
 
             $data = [
@@ -190,7 +213,8 @@ public function index(Request $request){
             DB::rollback();            
             $arr = array('msg' => __($this->TRANS.'.'.'updateMessageError'), 'status' => false);
         }
-        return response()->json($arr);
+         return response()->json($arr);
+        
 
             
            

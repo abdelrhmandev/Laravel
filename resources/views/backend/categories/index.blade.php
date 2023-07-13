@@ -1,4 +1,11 @@
 @extends('backend.base.base')
+
+@section('breadcrumbs')
+ 
+    <li class="breadcrumb-item text-dark">Categories</li>
+@stop
+
+
 @section('style')
 
 @if(app()->getLocale() === 'ar')
@@ -21,9 +28,7 @@
       <div class="card-header border-0 pt-6">
         <!--begin::Card title-->
 
-        <h3 class="card-title align-items-start flex-column">
-          <span class="card-label fw-bold fs-3 mb-1">dasdsad</span>
-        </h3>
+    
 
         <div class="card-title">
           <!--begin::Search-->
@@ -97,7 +102,7 @@
             <!--end::Export-->
             <!--begin::Add-->
             
-            <a class="btn btn-primary" href="sada">dasdasd</a>
+            <a class="btn btn-primary" href="{{ $createRoute }}">{{ __($trans.'.add')}}</a>
             <!--end::Add-->
           </div>
           <!--end::Toolbar-->
@@ -142,9 +147,11 @@
                   <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_datatable .form-check-input" value="1" />
                 </div>
               </th>            
-              <th>{{ __('admin.title') }}</th>             
-              
-     
+              <th>{{ __('site.image') }}</th>  
+              <th>{{ __('site.title') }}</th>                                
+              <th>{{ __('site.parent_id') }}</th> 
+              <th>{{ __('site.count') }}</th> 
+              <th>{{ __('site.published') }}</th> 
               <th>{{ __('admin.created_at') }}</th>
               <th class="text-end min-w-70px noExport">{{ __('admin.actions') }}</th>  
             </tr>
@@ -191,7 +198,11 @@
 
 var dynamicColumns = [
 { data: 'id', name: 'id',exportable:false},
+{ data: 'image', name: 'image'},
 { data: 'translate.title', name: 'translate.title'},
+{ data: 'parent', name: 'parent'},
+{ data: 'count', name: 'count'},
+{ data: 'published', name: 'published'},
 { data: 'created_at', name: 'created_at'},
 { data: 'actions' , name : 'actions' },    
 ];

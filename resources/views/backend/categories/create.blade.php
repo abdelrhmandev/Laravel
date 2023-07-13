@@ -1,8 +1,8 @@
 @extends('backend.base.base')
 
 @section('breadcrumbs')
-    <li class="breadcrumb-item text-muted">Recipes</li>
-    <li class="breadcrumb-item text-dark">Listings</li>
+    <li class="breadcrumb-item text-muted">Categories</li>
+    <li class="breadcrumb-item text-dark">Add Category</li>
 @stop
 
 @section('style')
@@ -147,7 +147,7 @@
 
 
 
-        <form id="AddCategoryForm" data-route-url="{{ $storeUrl }}" class="form d-flex flex-column flex-lg-row"
+        <form id="AddCategoryForm" data-route-url="{{ $storeRoute }}" class="form d-flex flex-column flex-lg-row"
             
             data-form-submit-error-message="{{ __('site.form_submit_error')}}"
             data-form-agree-label="{{ __('site.agree') }}" 

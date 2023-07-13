@@ -60,7 +60,7 @@
 
  
         
-        <form id="EditCategoryForm" data-route-url="{{ $updateUrl }}" class="form d-flex flex-column flex-lg-row"
+        <form id="EditCategoryForm" data-route-url="{{ $updateRoute }}" class="form d-flex flex-column flex-lg-row"
             data-form-submit-error-message="{{ __('site.form_submit_error')}}"
             data-form-agree-label="{{ __('site.agree') }}" 
             enctype="multipart/form-data">
@@ -69,7 +69,7 @@
                 <x-backend.langs.ulTabs/>                
 
                 <x-backend.langs.LangInputs :showDescription="1" :richTextArea="0" :showSlug="1" :row="$row" :columnvalues="$TrsanslatedColumnValues" />
-                <x-backend.btns.button :destroyRoute="$destroy_route" :redirectRoute="$redirect_after_destroy" :row="$row" :trans="$trans"/>
+                <x-backend.btns.button :destroyRoute="$destroyRoute" :redirectRoute="$redirect_after_destroy" :row="$row" :trans="$trans"/>
 
             </div>
             <div class="d-flex flex-column flex-row-fluid gap-7 w-lg-400px gap-lg-10">

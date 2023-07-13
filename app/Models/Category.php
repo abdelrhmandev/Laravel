@@ -21,6 +21,9 @@ class Category extends Model
 
    
     
+
+    protected $with = ['translate'];
+
     public function scopePublished($query,$type) {
         return $query->where('published',$type);
     }

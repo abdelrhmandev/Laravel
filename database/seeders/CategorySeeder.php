@@ -43,7 +43,7 @@ class CategorySeeder extends Seeder
             ['title'=>'امن المعلومات','slug'=>'امن-المعلومات','lang'=>'ar','category_id'=>5],  
             
        ];
-       DB::table('category_translations')->insert($translated_items);  
+       DB::table('category_translation')->insert($translated_items);  
 
     }
 }

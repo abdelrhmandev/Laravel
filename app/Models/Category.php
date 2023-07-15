@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Carbon\Carbon;
 class Category extends Model
 {
 
@@ -15,8 +15,12 @@ class Category extends Model
 
     protected $table = 'categories';
 
+
+    public $appends = [
+        'created_at',
+     ];
     protected $fillable = [
-		'parent_id','image'
+		'parent_id','image','published'
 	];
 
    
@@ -104,8 +108,7 @@ class Category extends Model
 
  
 
-    public function isChild(): bool
-    {
+    public function isChild(): bool{
         return $this->parent_id !== null;
     }
 
@@ -116,5 +119,18 @@ class Category extends Model
             ->withDefault([
                 'name' => 'Default',
             ]);
+            
+    }
+    public function getCreatedAtAttribute($date){
+
+        
+        // $dataX =  Carbon::parse($date)->format('Y/m/d').' 
+        
+        // | '.$date->diffForHumans();
+        
+        //     // $date = Carbon::parse($date)->format('Y/m/d').' | '.Carbon::parse($date)->diffForHumans();
+
+        return 'Test'; 
+        // return  $dateX;        
     }
 }

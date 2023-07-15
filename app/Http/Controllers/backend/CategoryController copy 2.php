@@ -99,7 +99,7 @@ class CategoryController extends Controller
             
        
 
-            // $this->UpdateMultiLangsQuery(['title_','description_','slug_'],'category_translations');
+            // $this->UpdateMultiLangsQuery(['title_','description_','slug_'],'category_translation');
             // $arr = array('msg' => __('category.updateMessageSuccess'), 'status' => true);
               
                 

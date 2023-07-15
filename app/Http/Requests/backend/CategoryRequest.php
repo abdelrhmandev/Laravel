@@ -39,8 +39,8 @@ class CategoryRequest extends FormRequest
             $id = $this->request->get('id_'.substr($properties['regional'],0,2)) ? ',' . $this->request->get('id_'.substr($properties['regional'],0,2)) : '';
 
 
-            $rules['title_'.substr($properties['regional'],0,2)] = 'required|unique:category_translations,title'.$id;
-            $rules['slug_'.substr($properties['regional'],0,2)] = 'nullable|unique:category_translations,slug'.$id; 
+            $rules['title_'.substr($properties['regional'],0,2)] = 'required|unique:category_translation,title'.$id;
+            $rules['slug_'.substr($properties['regional'],0,2)] = 'nullable|unique:category_translation,slug'.$id; 
 
  
 

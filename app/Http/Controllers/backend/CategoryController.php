@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use App\Traits\UploadAble;
 use Illuminate\Support\Facades\File; 
+
 use App\Traits\Functions; 
 use DataTables;
 
@@ -24,6 +25,7 @@ class CategoryController extends Controller
         $this->ROUTE_PREFIX = 'categories'; 
         $this->TRANSLATECOLUMNS = ['title','slug','description'];
         $this->TRANS = 'category';
+
 
 
     }
@@ -53,35 +55,22 @@ class CategoryController extends Controller
 }
 
 public function index(Request $request){    
-    $query = MainModel::where('id','>',0)->with('parent')->withCount('posts');
+    $model = MainModel::with('parent')->where('id','>',0);
     if ($request->ajax()) {
   
             
 
-         return Datatables::of($query->latest())    
+         return Datatables::eloquent($model->latest())    
                     ->addIndexColumn()
  
-                    
-                    ->editColumn('translate.title', function ($row) {
-                    //  $route = route('admin.categories.edit',$row->id);   
-                    //  $div ="<a href=".$route." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".$row->translate->title."</a>"; 
-
-                    return '';
+                   
+                                        
+                    ->editColumn('title', function (MainModel $row) {
+                    $div ="<a href=".route('admin.categories.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".$row->translate->title."</a>"; 
+                    return $div;
                 
                 })
-
-
-                                ->editColumn('posts', function ($row) {
-                    // $div = '<span aria-hidden="true">—</span>';
-                    // if($row->image){
-                    //     $div = "<a href=".route('admin.categories.edit',$row->id)." title='".$row->translate->title."' class=\"symbol symbol-50px\">
-                    //                 <span class=\"symbol-label\" style=\"background-image:url(".url(asset($row->image)).")\" />
-                    //                 </span>
-                    //             </a>";   
-                    // }
-                    return 'asdas';
-                })
-
+ 
  
                                                              
                 ->editColumn('image', function ($row) {
@@ -92,38 +81,27 @@ public function index(Request $request){
                                     </span>
                                 </a>";   
                     }
-                    return 'asdsad';
-                })
-         
-                  ->editColumn('created_at', function ($row) {
-                    return $row->created_at->format('d/m/Y');
-                })
-                
-                ->editColumn('parent', function ($row) {
-                    return 'dasdas';//$row->parent->translate->title ?? "<span aria-hidden=\"true\">—</span>";
+                    return $div;
+                })         
+                 ->editColumn('parent', function (MainModel $row) {
+                    return $row->parent->translate->title ?? "<span aria-hidden=\"true\">—</span>";
                 })
 
-
-                ->editColumn('count', function ($row) {
-                    return 'dasdas';
-                })
-
-
-                ->editColumn('published', function ($row) {
-                    return $row->published;
-                })
-
+ 
 
 
                 ->editColumn('actions', function ($row) {      
                                                  
-                return view('backend.partials.btns.edit-delete', [
-                    'trans'         =>$this->TRANS,
-                    'editRoute'     =>route('admin.categories.edit',$row->id),
-                    'destroyRoute'  =>route('admin.categories.destroy',$row->id),
-                    'id'=>$row->id]);
+                    return view('backend.partials.btns.edit-delete', [
+                        'trans'         =>$this->TRANS,
+                        'editRoute'     =>route('admin.categories.edit',$row->id),
+                        'destroyRoute'  =>route('admin.categories.destroy',$row->id),
+                        'id'            =>$row->id
+                        ]);
                 })                           
-                ->rawColumns(['image','translate.title','created_at','parent','actions'])    
+
+ 
+                ->rawColumns(['image','title','parent','actions'])    
                 ->make(true);    
     }  
         if (view()->exists('backend.categories.index')) {
@@ -174,28 +152,20 @@ public function index(Request $request){
 
 
         
-
- 
-        
-        
          try {
             DB::beginTransaction();        
             $validated = $request->validated();
 
 
+            $image = $category->image; 
             if(!empty($request->file('image'))) {
-
                 $category->image && File::exists(public_path($category->image)) ? $this->unlinkFile($category->image): '';
                 $image =  $this->uploadFile($request->file('image'),'categories');
-             }
-    
+             }    
             if(isset($request->drop_image_checkBox)  && $request->drop_image_checkBox == 1) {                
                 $this->unlinkFile($category->image);
                 $image = NULL;
             }
-
-            
-           
 
             $data = [
                 'published'     =>isset($request->published) ? '1' : '0',
@@ -207,7 +177,10 @@ public function index(Request $request){
 
             $arr = array('msg' => __($this->TRANS.'.'.'updateMessageSuccess'), 'status' => true);            
             DB::commit();
-            $this->UpdateMultiLangsQuery($this->TRANSLATECOLUMNS,'category_translations',[$this->TblForignKey=>$category->id]);
+            $this->UpdateMultiLangsQuery($this->TRANSLATECOLUMNS,"category_translation",[$this->TblForignKey=>$category->id]);
+            
+            $arr = array('msg' => __('category.updateMessageSuccess'), 'status' => true);
+
 
         } catch (\Exception $e) {
             DB::rollback();            

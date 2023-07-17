@@ -55,7 +55,7 @@ class CategoryController extends Controller
 }
 
 public function index(Request $request){    
-    $model = MainModel::with('parent')->where('id','>',0);
+    $model = MainModel::with('parent')->withCount('posts')->where('id','>',0);
     if ($request->ajax()) {
   
             
@@ -87,7 +87,9 @@ public function index(Request $request){
                     return $row->parent->translate->title ?? "<span aria-hidden=\"true\">—</span>";
                 })
 
- 
+                ->editColumn('count', function (MainModel $row) {
+                    return $row->posts_count ?? '0';
+                })
 
 
                 ->editColumn('actions', function ($row) {      
@@ -101,7 +103,7 @@ public function index(Request $request){
                 })                           
 
  
-                ->rawColumns(['image','title','parent','actions'])    
+                ->rawColumns(['image','title','parent','count','actions'])    
                 ->make(true);    
     }  
         if (view()->exists('backend.categories.index')) {

@@ -16,9 +16,7 @@ class Category extends Model
     protected $table = 'categories';
 
 
-    public $appends = [
-        'created_at',
-     ];
+ 
     protected $fillable = [
 		'parent_id','image','published'
 	];
@@ -121,16 +119,14 @@ class Category extends Model
             ]);
             
     }
-    public function getCreatedAtAttribute($date){
-
-        
-        // $dataX =  Carbon::parse($date)->format('Y/m/d').' 
-        
-        // | '.$date->diffForHumans();
-        
-        //     // $date = Carbon::parse($date)->format('Y/m/d').' | '.Carbon::parse($date)->diffForHumans();
-
-        return 'Test'; 
-        // return  $dateX;        
+    public function getCreatedAtAttribute($date){                
+        return Carbon::parse($date)->format('Y/m/d').' | '.Carbon::parse($date)->diffForHumans();     
     }
+
+
+ 
+    
+    
+
+
 }

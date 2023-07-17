@@ -23,6 +23,7 @@
         data-deleting-selected-items = "{{ __('site.deletingItemMessage',['item'=>__($trans.'.singular')]) }}"
         data-not-deleted-message = "{{ __('site.notdeletedMessage',['item'=>__($trans.'.singular')]) }}"
         class="btn btn-danger font-weight-bold">
+        <i class="fa fa-trash-alt"></i>
          {{ __('site.delete') }}       
     </button> 
   

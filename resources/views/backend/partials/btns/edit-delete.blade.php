@@ -12,7 +12,8 @@
 <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
   <div class="menu-item px-3">
       <a href="{{ $editRoute }}" class="menu-link px-3" data-kt-table-filter="edit_row">
-          {{ __('site.edit')}}  
+        <i class="fa fa-pencil-alt m-1 w-1 h-1 mr-1 rtl:ml-1"></i>             
+        {{ __('site.edit')}}  
       </a>
   </div>
   <div class="menu-item px-3">
@@ -25,6 +26,7 @@
       data-deleting-selected-items = "{{ __('site.deletingItemMessage',['item'=>__($trans.'.singular')]) }}"
       data-not-deleted-message = "{{ __('site.notdeletedMessage',['item'=>__($trans.'.singular')]) }}"
       >
+      <i class="fa fa-trash-alt m-1 w-1 h-1 mr-1 rtl:ml-1"></i>
         {{ __('site.delete')}}    
       </a>
   </div>

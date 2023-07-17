@@ -102,7 +102,18 @@
             <!--end::Export-->
             <!--begin::Add-->
             
-            <a class="btn btn-primary" href="{{ $createRoute }}">{{ __($trans.'.add')}}</a>
+            <a class="btn btn-primary" href="{{ $createRoute }}">
+
+
+              <i class="bi bi-droplet-half fs"></i>
+
+              
+              <span class="svg-icon svg-icon-2">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z" fill="currentColor" />
+                </svg>
+              </span>
+              {{ __($trans.'.add')}}</a>
             <!--end::Add-->
           </div>
           <!--end::Toolbar-->
@@ -121,9 +132,7 @@
              data-confirm-button-textGotit = "{{ __('site.confirmButtonTextGotit') }}"
              data-delete-selected-records-text = "{{ __($trans.'.delete_selected') }}"
              data-not-deleted-message = "{{ __($trans.'.not_delete_selected') }}"
-
-
-             >{{ __('admin.delete_selected') }}</button>
+             ><i class="fa fa-trash-alt"></i>{{ __('admin.delete_selected') }}</button>
           </div>
           <!--end::Group actions-->
         </div>
@@ -150,8 +159,8 @@
               <th>{{ __('site.image') }}</th>  
               <th>{{ __('site.title') }}</th>                                
               <th>{{ __('site.parent_id') }}</th> 
-              {{-- <th>{{ __('site.count') }}</th>  --}}
-              {{-- <th>{{ __('site.published') }}</th>  --}}
+              <th>{{ __('site.count') }}</th> 
+              <th>{{ __('site.published') }}</th> 
               <th>{{ __('admin.created_at') }}</th>
               <th class="text-end min-w-70px noExport">{{ __('admin.actions') }}</th>  
             </tr>
@@ -201,8 +210,8 @@ var dynamicColumns = [
 { data: 'image', name: 'image'},
 { data: 'title', name: 'title'},
 { data: 'parent', name: 'parent'},
-// { data: 'count', name: 'count'},
-// { data: 'published', name: 'published'},
+{ data: 'count', name: 'count'},
+{ data: 'published', name: 'published'},
 { data: 'created_at', name: 'created_at'},
 { data: 'actions' , name : 'actions' },    
 ];

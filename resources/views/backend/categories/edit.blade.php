@@ -1,8 +1,8 @@
 @extends('backend.base.base')
 
 @section('breadcrumbs')
-    <li class="breadcrumb-item text-muted">Recipes</li>
-    <li class="breadcrumb-item text-dark">Listings</li>
+    <li class="breadcrumb-item text-muted"><a href="45454" class="text-muted">Categories</a></li>
+    <li class="breadcrumb-item text-dark">Edit Category</li>
 @stop
 
 @section('style')

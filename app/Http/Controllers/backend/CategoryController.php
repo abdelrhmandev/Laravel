@@ -25,10 +25,10 @@ class CategoryController extends Controller
         $this->ROUTE_PREFIX = 'categories'; 
         $this->TRANSLATECOLUMNS = ['title','slug','description'];
         $this->TRANS = 'category';
-
-
-
     }
+
+
+    
     public function store(CategoryRequest $request){
 
         try {
@@ -40,7 +40,7 @@ class CategoryController extends Controller
             $query                   = MainModel::create($validated);
             DB::commit();                
             $translatedArr           = $this->HandleMultiLangdatabase($this->TRANSLATECOLUMNS,[$this->TblForignKey=>$query->id]);                      
-           
+                     
             if(TransModel::insert($translatedArr)){              
                      $arr = array('msg' => __($this->TRANS.'.'.'storeMessageSuccess'), 'status' => true);
               
@@ -55,7 +55,7 @@ class CategoryController extends Controller
 }
 
 public function index(Request $request){    
-    $model = MainModel::with('parent')->withCount('posts')->where('id','>',0);
+    $model = MainModel::with(['parent','posts'])->withCount('posts')->where('id','>',0);
     if ($request->ajax()) {
   
             
@@ -87,8 +87,29 @@ public function index(Request $request){
                     return $row->parent->translate->title ?? "<span aria-hidden=\"true\">—</span>";
                 })
 
-                ->editColumn('count', function (MainModel $row) {
-                    return $row->posts_count ?? '0';
+                ->editColumn('count', function (MainModel $row) {                    
+                        $div = "<a href=".route('admin.posts.index',$row->id).">
+                                <span class=\"badge badge-success badge-circle badge-md\">".$row->posts_count ?? '0' ."</span>
+                                </a>";  
+                    return $div;
+                })
+
+
+                ->editColumn('created_at', function (MainModel $row) {                    
+                    $div = "<span class=\"text-dark font-weight-bolder d-block font-size-lg\">".$row->created_at."</span>";  
+                    return $div;
+            })
+
+
+
+
+                ->editColumn('published', function (MainModel $row) {                           
+                $checked = ""; 
+                if($row->published == 1){
+                        $checked = "checked";
+                }                    
+                $div = "<input type=\"checkbox\" ".$checked." class=\"changeuserstatus\" data-id=".$row->id.">";  
+                return $div;
                 })
 
 
@@ -103,7 +124,7 @@ public function index(Request $request){
                 })                           
 
  
-                ->rawColumns(['image','title','parent','count','actions'])    
+                ->rawColumns(['image','title','parent','count','published','actions','created_at'])    
                 ->make(true);    
     }  
         if (view()->exists('backend.categories.index')) {

@@ -103,14 +103,12 @@
             <!--begin::Add-->
             
             <a class="btn btn-primary" href="{{ $createRoute }}">
-
-
-              <i class="bi bi-droplet-half fs"></i>
-
-              
-              <span class="svg-icon svg-icon-2">
+              <span class="svg-icon svg-icon-2 svg-icon-primary me-0 me-md-2">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z" fill="currentColor" />
+                  <path opacity="0.3" d="M19 22H5C4.4 22 4 21.6 4 21V3C4 2.4 4.4 2 5 2H14L20 8V21C20 21.6 19.6 22 19 22ZM16 13.5L12.5 13V10C12.5 9.4 12.6 9.5 12 9.5C11.4 9.5 11.5 9.4 11.5 10L11 13L8 13.5C7.4 13.5 7 13.4 7 14C7 14.6 7.4 14.5 8 14.5H11V18C11 18.6 11.4 19 12 19C12.6 19 12.5 18.6 12.5 18V14.5L16 14C16.6 14 17 14.6 17 14C17 13.4 16.6 13.5 16 13.5Z" fill="currentColor"></path>
+                  <rect x="11" y="19" width="10" height="2" rx="1" transform="rotate(-90 11 19)" fill="currentColor"></rect>
+                  <rect x="7" y="13" width="10" height="2" rx="1" fill="currentColor"></rect>
+                  <path d="M15 8H20L14 2V7C14 7.6 14.4 8 15 8Z" fill="currentColor"></path>
                 </svg>
               </span>
               {{ __($trans.'.add')}}</a>
@@ -159,7 +157,7 @@
               <th>{{ __('site.image') }}</th>  
               <th>{{ __('site.title') }}</th>                                
               <th>{{ __('site.parent_id') }}</th> 
-              <th>{{ __('site.count') }}</th> 
+              <th>{{ __('post.plural') }}</th> 
               <th>{{ __('site.published') }}</th> 
               <th>{{ __('admin.created_at') }}</th>
               <th class="text-end min-w-70px noExport">{{ __('admin.actions') }}</th>  
@@ -220,4 +218,39 @@ KTUtil.onDOMContentLoaded(function () {
 });
 </script>
 <!--end::Custom Javascript-->
+
+<script>
+  // Change user status
+  $('#kt_datatable').on('click','.changeuserstatus',function(e){
+
+ 
+      var id = $(this).attr('data-id');
+      var status = 0;
+      if($(this).is(":checked")){
+            status = 1;    
+      }
+
+          $.ajax({
+      type: 'post',
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      url: '{{ route('admin.UpdatePublished')}}',
+      data: {
+          '_method': 'post',          
+          'status': status,
+          'table' :'categories',
+          'id'    : id
+      }, 
+      success: function(response){
+        console.log(response);
+      }
+      });
+
+ 
+
+});
+
+ 
+</script>
 @stop

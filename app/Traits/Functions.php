@@ -2,6 +2,7 @@
 namespace App\Traits;
 use Illuminate\Support\Str;
 use LaravelLocalization;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 /**
  * Trait UploadAble
@@ -9,6 +10,16 @@ use Illuminate\Support\Facades\DB;
  */
 trait Functions
 {
+
+
+    public function UpdatePublished(Request $request){       
+        
+        if(DB::table($request->table)->find($request->id)){
+            DB::table($request->table)->update(['published'=>$request->status]);
+        }
+
+    }
+
 
     public function getItemtranslatedllangs($Object,$ReturnCoumnArray,$Fkey){     
         $arr = [];

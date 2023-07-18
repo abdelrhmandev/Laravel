@@ -8,8 +8,7 @@
         <!--end::Card title-->
     </div>
  
-    <div class="card-body pt-0">
- 
+    <div class="card-body pt-0"> 
         <select name="parent_id" class="form-select mb-2" data-control="select2" data-allow-clear="true">
                 <option value="">None</option>
                 @if(!(empty($categories)))

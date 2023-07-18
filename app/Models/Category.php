@@ -67,13 +67,23 @@ class Category extends Model
 
             if($category->parent_id == NULL){
 
-            $allCategories = 
+
+            $allCategoriesX = 
             Category::select('id','parent_id')
            ->published('1')
            ->with('translate')
            ->whereNotNull('parent_id')
            ->get();   
-            $rootCategories = '';    
+            
+ 
+            $rootCategories =  
+            Category::select('id','parent_id')
+            ->published('1')
+            ->with('translate')
+            ->whereNull('parent_id')->get();
+
+
+
             }else{
                 $allCategories = 
                 Category::select('id','parent_id')

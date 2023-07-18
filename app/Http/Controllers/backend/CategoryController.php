@@ -62,14 +62,11 @@ public function index(Request $request){
 
          return Datatables::eloquent($model->latest())    
                     ->addIndexColumn()
- 
-                   
-                                        
                     ->editColumn('title', function (MainModel $row) {
-                    $div ="<a href=".route('admin.categories.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".$row->translate->title."</a>"; 
-                    return $div;
-                
-                })
+                        $div ="<a href=".route('admin.categories.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".$row->translate->title."</a>"; 
+                        return $div;
+                    
+                    })
  
  
                                                              
@@ -83,6 +80,7 @@ public function index(Request $request){
                     }
                     return $div;
                 })         
+
                  ->editColumn('parent', function (MainModel $row) {
                     return $row->parent->translate->title ?? "<span aria-hidden=\"true\">—</span>";
                 })
@@ -129,10 +127,11 @@ public function index(Request $request){
     }  
         if (view()->exists('backend.categories.index')) {
             $compact = [
-                'trans'          => $this->TRANS,
-                'createRoute'      =>route('admin.categories.create'),
-                'storeRoute'       => route('admin.categories.store'), 
-                'redirectRoute'    => route('admin.categories.index'),
+                'trans'                 => $this->TRANS,
+                'createRoute'           => route('admin.categories.create'),
+                'storeRoute'            => route('admin.categories.store'),
+                'destroyMultipleRoute'  => route('admin.categories.destroyMultiple'), 
+                'redirectRoute'         => route('admin.categories.index'),
             ];            
             return view('backend.categories.index',$compact);
         }
@@ -149,11 +148,6 @@ public function index(Request $request){
 
      public function edit(MainModel $category){ 
         if (view()->exists('backend.categories.edit')) {         
-
-          
-
-
-
             $compact = [                
                 'updateRoute'             => route('admin.categories.update',$category->id), 
                 'categories'              => MainModel::tree($category),
@@ -163,7 +157,6 @@ public function index(Request $request){
                 'redirect_after_destroy'  => route('admin.categories.index'),
                 'trans'                   => $this->TRANS,
             ];            
-
 
 
              return view('backend.categories.edit',$compact);                    

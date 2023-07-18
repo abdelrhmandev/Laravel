@@ -1,8 +1,6 @@
 @extends('backend.base.base')
-
 @section('breadcrumbs')
- 
-    <li class="breadcrumb-item text-dark">Categories</li>
+<li class="breadcrumb-item text-dark">Categories</li>
 @stop
 
 
@@ -121,7 +119,7 @@
             <span class="me-2" data-kt-table-select="selected_count"></span>{{ __('admin.selected') }}</div>
             <button type="button" class="btn btn-danger" id="destroyMultipleroute" 
              
-             data-destroyMultiple-route = "{{ route('admin.categories.destroyMultiple') }}"
+             data-destroyMultiple-route = "{{ $destroyMultipleRoute }}"
              data-kt-table-select="delete_selected"             
              data-back-list-text="{{ __('site.back_to_list') }}"        
              data-confirm-message = "{{ __($trans.'.delete_selected') }}"
@@ -217,19 +215,16 @@ KTUtil.onDOMContentLoaded(function () {
   loadDatatable('{{ route('admin.categories.index') }}',dynamicColumns);
 });
 </script>
-<!--end::Custom Javascript-->
+
 
 <script>
-  // Change user status
+  /*
   $('#kt_datatable').on('click','.changeuserstatus',function(e){
-
- 
       var id = $(this).attr('data-id');
       var status = 0;
       if($(this).is(":checked")){
             status = 1;    
       }
-
           $.ajax({
       type: 'post',
       headers: {
@@ -246,11 +241,7 @@ KTUtil.onDOMContentLoaded(function () {
         console.log(response);
       }
       });
-
- 
-
 });
-
- 
+*/
 </script>
 @stop

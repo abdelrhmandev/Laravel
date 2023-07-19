@@ -106,7 +106,9 @@ public function index(Request $request){
                 if($row->published == 1){
                         $checked = "checked";
                 }                    
-                $div = "<input type=\"checkbox\" ".$checked." class=\"changeuserstatus\" data-id=".$row->id.">";  
+                // $div = "<input name=\"changeuserstatus\" type=\"checkbox\" ".$checked." id=".$row->id." class=\"changeuserstatus\" data-id=".$row->id.">";  
+                
+                $div = "<div class=\"form-check form-switch form-check-custom form-check-solid\"><input class=\"form-check-input changeuserstatus\" name=\"changeuserstatus\" type=\"checkbox\" ".$checked." id=".$row->id." data-id=".$row->id." /></div>";                
                 return $div;
                 })
 

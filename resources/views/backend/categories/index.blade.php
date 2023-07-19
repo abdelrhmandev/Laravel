@@ -216,9 +216,9 @@ KTUtil.onDOMContentLoaded(function () {
 });
 </script>
 
-
+{{-- https://preview.keenthemes.com/metronic/demo3/features/miscellaneous/toastr.html --}}
 <script>
-  /*
+   
   $('#kt_datatable').on('click','.changeuserstatus',function(e){
       var id = $(this).attr('data-id');
       var status = 0;
@@ -242,6 +242,6 @@ KTUtil.onDOMContentLoaded(function () {
       }
       });
 });
-*/
+ 
 </script>
 @stop

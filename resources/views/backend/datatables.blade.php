@@ -371,7 +371,7 @@
                 const selectedCount = document.querySelector('[data-kt-table-select="selected_count"]');
         
                 // Select refreshed checkbox DOM elements
-                const allCheckboxes = container.querySelectorAll('tbody [type="checkbox"]');
+                const allCheckboxes = container.querySelectorAll('tbody [class="form-check-input"][type="checkbox"]');
         
                 // Detect checkboxes state & count
                 let checkedState = false;
@@ -469,9 +469,9 @@
         
          
                 handleSearchDatatable();
-                initToggleToolbar();
+                // initToggleToolbar();
                 handleFilterDatatable();
-                handleDeleteRows();
+                // handleDeleteRows();
                 handleResetForm();
                 table = document.querySelector('#kt_datatable');
                 if ( !table ) {

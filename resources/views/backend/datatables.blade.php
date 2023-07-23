@@ -57,7 +57,7 @@
                             render: function (data) {
                                 return `
                                     <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                        <input class="form-check-input" name="ids" class="sub_chk" value="${data}" type="checkbox" />
+                                        <input class="form-check-input AA" name="ids" class="sub_chk" value="${data}" type="checkbox" />
                                     </div>`;
                             }
                     },{
@@ -371,7 +371,7 @@
                 const selectedCount = document.querySelector('[data-kt-table-select="selected_count"]');
         
                 // Select refreshed checkbox DOM elements
-                const allCheckboxes = container.querySelectorAll('tbody [class="form-check-input"][type="checkbox"]');
+                const allCheckboxes = container.querySelectorAll('tbody [class="form-check-input AA"][type="checkbox"]');
         
                 // Detect checkboxes state & count
                 let checkedState = false;

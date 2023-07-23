@@ -15,7 +15,9 @@ trait Functions
     public function UpdatePublished(Request $request){       
         
         if(DB::table($request->table)->find($request->id)){
-            DB::table($request->table)->where('id',$request->id)->update(['published'=>$request->status]);
+            if(DB::table($request->table)->where('id',$request->id)->update(['published'=>$request->status])){
+                return 'DONE';
+            }
         }
 
     }

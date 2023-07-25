@@ -13,13 +13,15 @@ trait Functions
 
 
     public function UpdatePublished(Request $request){       
-        
         if(DB::table($request->table)->find($request->id)){
             if(DB::table($request->table)->where('id',$request->id)->update(['published'=>$request->status])){
-                return 'DONE';
-            }
-        }
-
+                $request->status == 1 ? $TRANS = 'site.been_published':$TRANS = 'site.been_unpublished';
+                $arr = array('msg' => __($TRANS,['item'=> $request->transItem]) , 'status' => true);
+            }else{
+                $arr = array('msg' => 'ERROR', 'status' => false);
+            }       
+            return response()->json($arr);
+      }
     }
 
 

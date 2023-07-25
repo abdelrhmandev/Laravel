@@ -30,6 +30,11 @@ class Category extends Model
         return $query->where('published',$type);
     }
 
+    public function scopePublishedCount($query,$type) {
+        return $query->where('published',$type)->count();
+    }
+
+
     // # single Item
 
 
@@ -37,6 +42,8 @@ class Category extends Model
         return $this->belongsToMany(Post::class, 'post_categories'); // recipe_tag = table
     }
 
+
+ 
 
  
 

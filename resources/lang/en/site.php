@@ -146,6 +146,8 @@ return [
     'form_submit_error'     =>'Sorry, looks like there are some errors detected, please try again.',
     'publish'               =>'Publish',
     'published'             =>'Published',
+    'been_published'        =>':item has been published successfully',
+    'been_unpublished'      =>':item has been unpublished successfully',
     'wait'                  =>'Wait ...',
     'update'                =>'Update',
     'remove_image'          =>'Remove Image',

@@ -26,7 +26,7 @@
             <div class="image-input-wrapper w-200px h-200px"></div>
             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change image">
                 <i class="bi bi-pencil-fill fs-7"></i>
-                <input type="file" name="image" id="image"
+                <input class="my-image-selector" type="file" name="image" id="image"
                 accept=".png, .jpg, .jpeg"
                 data-fv-file="true" 
                 data-fv-file___extension="jpeg,jpg,png" 
@@ -37,10 +37,10 @@
             </label>
 
             
-            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel image">
+            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" id="cancel_image" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel image">
                 <i class="bi bi-x fs-2"></i>
             </span>
-            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove image">
+            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" id="remove_image" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove image">
                 <i class="bi bi-x fs-2"></i>
             </span>
         </div>

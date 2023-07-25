@@ -75,7 +75,7 @@
                 <!--end::Input group-->
                 <!--begin::Input group-->
                {{-- @include('backend.partials.filter_optipns._category',['category'=>$categories->latest()->get(),'counter'=>$categories->count()]) --}}
-               {{-- @include('backend.partials.filter_optipns._status',['status'=>['published'=>$published_counter,'unpublished'=>$unpublished_counter,'scheduled'=>$scheduled_counter]]) --}}
+               @include('backend.partials.filter_optipns._status',['status'=>[1=>2]])
            
                 <!--end::Input group-->
                 <!--begin::Actions-->
@@ -151,13 +151,13 @@
                   <input class="form-check-input AA" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_datatable .AA" value="1" />
                 </div>
               </th>            
-              <th>{{ __('site.image') }}</th>  
+              {{-- <th>{{ __('site.image') }}</th>   --}}
               <th>{{ __('site.title') }}</th>                                
               <th>{{ __('site.parent_id') }}</th> 
-              <th>{{ __('post.plural') }}</th> 
+              {{-- <th>{{ __('post.plural') }}</th>  --}}
               <th>{{ __('site.published') }}</th> 
-              <th>{{ __('admin.created_at') }}</th>
-              <th class="text-end min-w-70px noExport">{{ __('admin.actions') }}</th>  
+              {{-- <th>{{ __('admin.created_at') }}</th> --}}
+              {{-- <th class="text-end min-w-70px noExport">{{ __('admin.actions') }}</th>   --}}
             </tr>
 
           
@@ -202,13 +202,13 @@
 
 var dynamicColumns = [
 { data: 'id', name: 'id',exportable:false},
-{ data: 'image', name: 'image'},
-{ data: 'title', name: 'title'},
-{ data: 'parent', name: 'parent'},
-{ data: 'count', name: 'count'},
+// { data: 'image', name: 'image'},
+{ data: 'translate.title', name: 'translate.title'},
+{ data: 'parent_id', name: 'parent_id'},
+// { data: 'count', name: 'count'},
 { data: 'published', name: 'published'},
-{ data: 'created_at', name: 'created_at'},
-{ data: 'actions' , name : 'actions' },    
+// { data: 'created_at', name: 'created_at'},
+// { data: 'actions' , name : 'actions' },    
 ];
 KTUtil.onDOMContentLoaded(function () {
   loadDatatable('{{ route('admin.categories.index') }}',dynamicColumns);
@@ -217,28 +217,54 @@ KTUtil.onDOMContentLoaded(function () {
 
 
 <script>
-  $('#kt_datatable').on('click','.changeuserstatus',function(e){
+  $('#kt_datatable').on('click','.changestatus',function(e){
       var id = $(this).attr('data-id');
+      var table = $(this).attr('data-table');
+      var transItem = $(this).attr('data-trans-item');
       var status = 0;
       if($(this).is(":checked")){
             status = 1;    
       }
-          $.ajax({
+      $.ajax({
       type: 'post',
       headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
       url: '{{ route('admin.UpdatePublished')}}',
       data: {
-          '_method': 'post',          
-          'status': status,
-          'table' :'categories',
-          'id'    : id
+          '_method'   : 'post',          
+          'status'    : status,
+          'table'     : table,
+          'transItem' : transItem,
+          'id'        : id
       }, 
-      success: function(response){
-        console.log(response);
-      }
-      });
-});
+        success: function(response){
+            toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-left",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+       };
+
+       if(response['status'] == true){ 
+         toastr.success(response['msg']);
+        }else{ 
+          toastr.error(response['msg']);      
+        }
+
+        }
+        });
+  });
 </script>
 @stop

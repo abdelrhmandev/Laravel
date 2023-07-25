@@ -1,16 +1,10 @@
 function handleFormSubmitFunc(formId) {
-
- 
-
-
-
     const target = document.getElementById('status');
     const select = document.getElementById('status_select');
     const statusClasses = ['bg-success', 'bg-warning', 'bg-danger'];
 
     $(select).on('change', function(e) {
         const value = e.target.value;
-
         switch (value) {
             case "published": {
                 target.classList.remove(...statusClasses);
@@ -34,17 +28,11 @@ function handleFormSubmitFunc(formId) {
                 break;
         }
     });
-
     // Define all elements for quill editor
-
     // Submit form handler
-
-
-
     let validator;
     let parentId;
     let icon;
-
     let keys;
     // Get elements
     const form = document.getElementById(formId);
@@ -53,7 +41,6 @@ function handleFormSubmitFunc(formId) {
     documentation: https: //formvalidation.io/
 
         validator = FormValidation.formValidation(form, {
-
             plugins: {
                 declarative: new FormValidation.plugins.Declarative({
                     html5Input: true,
@@ -72,9 +59,6 @@ function handleFormSubmitFunc(formId) {
                     invalid: 'fa fa-times',
                     validating: 'fa fa-refresh',
                 }),
-
-
-
             }
         }).on('core.field.invalid', function(data) {
             parentId = $("#" + data).parents('.tab-pane').attr("id");
@@ -86,25 +70,15 @@ function handleFormSubmitFunc(formId) {
             icon = $('a[href="#' + parentId + '"][data-bs-toggle="tab"]').parent().find('i');
             icon.removeClass('fa-times').addClass('fa-check');
         });
-
     // Handle submit button
     submitButton.addEventListener('click', e => {
-
-
-
-        e.preventDefault();
- 
-        
+        e.preventDefault();        
         // Validate form before submit
         if (validator) {
             validator.validate().then(function(status) {
                 //console.log('validated!');
-
                 if (status == 'Valid') {
-
                    //https://ckeditor.com/docs/ckeditor5/latest/installation/getting-started/getting-and-setting-data.html
-
-
                     submitButton.setAttribute('data-kt-indicator', 'on');
                     // Disable submit button whilst loading
                     // submitButton.disabled = true;
@@ -125,47 +99,33 @@ function handleFormSubmitFunc(formId) {
                             processData: false,
                             contentType: false,
                             cache: false,
-
                             success: function(response, textStatus, xhr) {
                                 if (response["status"] == true) {
                                     Swal.fire({
                                         text: response["msg"],                            
-                                        icon: 'success',
-                                        showCancelButton: true,
+                                        icon: 'success',                                       
                                         buttonsStyling: false,
-                                        confirmButtonText: form.getAttribute("data-kt-all-label"),
-                                        cancelButtonText: form.getAttribute("data-kt-add-new-item-label"),
+                                        confirmButtonText: form.getAttribute("data-form-agree-label"),                                       
                                         customClass: {
-                                            confirmButton: "btn btn-light-success",
-                                            cancelButton: "btn btn-light-primary"
+                                            confirmButton: "btn btn-light-success",                                             
                                         }
-                                    }).then(function(result) {
-                                        if (result.isConfirmed) {
-                                            // Enable submit button after loading
-                                            //submitButton.disabled = false;
-
-                                            // Redirect to customers list page
-                                            window.location = form.getAttribute("data-kt-redirect");
-                                        }else{
-                                            //submitButton.disabled = false;
-                                            // Redirect to customers list page
-                                            window.location = window.location.href;
-
-                                        }
-                                    });
+                                        }).then(function(result) {
+                                            $('#'+formId).trigger("reset");
+                                            var imageInputElement = document.querySelector("#kt_image_input_example_1");
+                                            var imageInput = KTImageInput.getInstance(imageInputElement);
+                                            imageInput.on("kt.image.canceled", function() {
+                                                // console.log("kt.imageinput.canceled event is fired");
+                                            });
+                                            // window.location = window.location.href;
+                                        });
                                 }
-                                if (response["status"] == false) {
+                                else if (response["status"] == 'RequestValidation') {
                                     let msgError = "";
                                     $.each(response["msg"], function(key, value) {
                                         msgError += "<p>" + value + "</p>";
                                         parentId = $("#" + key).parents('.tab-pane').attr("id");
                                         icon = $('a[href="#' + parentId + '"][data-bs-toggle="tab"]').parent().find('i');
                                         icon.removeClass('fa-check').addClass('fa-times');
-
-                                       
-
-                                        // $('#'+key).removeClass('my-field-success');
-                                        // $('#'+key).addClass('my-field-error');
                                     });
                                     Swal.fire({
                                         html: msgError, // respose from controller
@@ -176,14 +136,19 @@ function handleFormSubmitFunc(formId) {
                                             confirmButton: "btn btn-light-warning"
                                         }
                                     })
-
-
+                                }else if (response["status"] == false) {                                    
+                                    Swal.fire({
+                                        html: response["msg"], // respose from controller
+                                        icon: "error",
+                                        buttonsStyling: false,
+                                        confirmButtonText: form.getAttribute("data-form-agree-label"),
+                                        customClass: {
+                                            confirmButton: "btn btn-light-danger"
+                                        }
+                                    })
                                 }
                             },
-
                         });
-
-
                     }, 2000);
                 } else {
                     Swal.fire({
@@ -199,8 +164,7 @@ function handleFormSubmitFunc(formId) {
             });
         }
     })
-
-
-
-
 }
+
+
+    

@@ -74,7 +74,7 @@
                      // Add data-filter attribute
                      createdRow: function (row, data, dataIndex) {
                         // $(row).find('td:eq(2)').attr('data-filter', data.category_id);
-                        // $(row).find('td:eq(3)').attr('data-filter', data.status);
+                        $(row).find('td:eq(4)').attr('data-filter', data.published);
                         // $(row).find('td:eq(4)').attr('data-filter', data.created_at);
                     }
             });    
@@ -228,10 +228,10 @@
               
                 // Reset payment type
                 $("#status").val("all").change();
-                $("#category").val("all").change();
+                // $("#category").val("all").change();
     
                 // Reset datatable --- official docs reference: https://datatables.net/reference/api/search()
-                dt.column(3).search('').column(2).search('').draw();  
+                dt.column(5).draw();  
             });
             }
      

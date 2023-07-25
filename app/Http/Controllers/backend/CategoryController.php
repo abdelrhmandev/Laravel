@@ -1,6 +1,6 @@
 <?php
 namespace App\Http\Controllers\backend;
-use App\Http\Requests\backend\CategoryRequest;
+use App\Http\Requests\backend\CategoryRequest as ModuleRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use LaravelLocalization;
@@ -29,7 +29,7 @@ class CategoryController extends Controller
 
 
     
-    public function store(CategoryRequest $request){
+    public function store(ModuleRequest $request){
 
         try {
             DB::beginTransaction();        
@@ -38,13 +38,13 @@ class CategoryController extends Controller
             $validated['image']      = (!empty($request->file('image'))) ? $this->uploadFile($request->file('image'),'categories') : NULL;    
             $validated['parent_id']  = isset($request->parent_id) ? $request->parent_id : NULL;
             $query                   = MainModel::create($validated);
-            DB::commit();                
+                         
             $translatedArr           = $this->HandleMultiLangdatabase($this->TRANSLATECOLUMNS,[$this->TblForignKey=>$query->id]);                      
                      
             if(TransModel::insert($translatedArr)){              
-                     $arr = array('msg' => __($this->TRANS.'.'.'storeMessageSuccess'), 'status' => true);
-              
+                     $arr = array('msg' => __($this->TRANS.'.'.'storeMessageSuccess'), 'status' => true);              
             }
+            DB::commit();   
         
         } catch (\Exception $e) {
             DB::rollback();            
@@ -55,62 +55,55 @@ class CategoryController extends Controller
 }
 
 public function index(Request $request){    
-    $model = MainModel::with(['parent','posts'])->withCount('posts')->where('id','>',0);
+    $model = MainModel::with(['parent','posts'])->withCount('posts');
+
+    
+
     if ($request->ajax()) {
   
             
 
          return Datatables::eloquent($model->latest())    
                     ->addIndexColumn()
-                    ->editColumn('title', function (MainModel $row) {
-                        $div ="<a href=".route('admin.categories.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".$row->translate->title."</a>"; 
-                        return $div;
-                    
+                    ->editColumn('translate.title', function (MainModel $row) {
+                        return "<a href=".route('admin.categories.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".$row->translate->title."</a>";                     
                     })
  
  
                                                              
-                ->editColumn('image', function ($row) {
-                    $div = '<span aria-hidden="true">—</span>';
-                    if($row->image){
-                        $div = "<a href=".route('admin.categories.edit',$row->id)." title='".$row->translate->title."' class=\"symbol symbol-50px\">
-                                    <span class=\"symbol-label\" style=\"background-image:url(".url(asset($row->image)).")\" />
-                                    </span>
-                                </a>";   
-                    }
-                    return $div;
-                })         
+                // ->editColumn('image', function ($row) {
+                //     $div = '<span aria-hidden="true">—</span>';
+                //     if($row->image){
+                //         $div = "<a href=".route('admin.categories.edit',$row->id)." title='".$row->translate->title."' class=\"symbol symbol-50px\">
+                //                     <span class=\"symbol-label\" style=\"background-image:url(".url(asset($row->image)).")\" />
+                //                     </span>
+                //                 </a>";   
+                //     }
+                //     return $div;
+                // })         
 
-                 ->editColumn('parent', function (MainModel $row) {
+                 ->editColumn('parent_id', function (MainModel $row) {
                     return $row->parent->translate->title ?? "<span aria-hidden=\"true\">—</span>";
                 })
 
-                ->editColumn('count', function (MainModel $row) {                    
-                        $div = "<a href=".route('admin.posts.index',$row->id).">
-                                <span class=\"badge badge-success badge-circle badge-md\">".$row->posts_count ?? '0' ."</span>
-                                </a>";  
-                    return $div;
-                })
+                // ->editColumn('count', function (MainModel $row) {                    
+                //     return  "<a href=".route('admin.posts.index',$row->id).">
+                //                 <span class=\"badge badge-success badge-circle badge-md\">".$row->posts_count ?? '0' ."</span>
+                //                 </a>";  
+                 
+                // })
 
 
-                ->editColumn('created_at', function (MainModel $row) {                    
-                    $div = "<span class=\"text-dark font-weight-bolder d-block font-size-lg\">".$row->created_at."</span>";  
-                    return $div;
-            })
-
-
-
-
+            //     ->editColumn('created_at', function (MainModel $row) {                    
+            //         return "<span class=\"text-dark font-weight-bolder d-block font-size-lg\">".$row->created_at."</span>";  
+            // })
                 ->editColumn('published', function (MainModel $row) {                           
-                $checked = ""; 
-                if($row->published == 1){
-                        $checked = "checked";
-                }                    
-                // $div = "<input name=\"changeuserstatus\" type=\"checkbox\" ".$checked." id=".$row->id." class=\"changeuserstatus\" data-id=".$row->id.">";  
                 
-                $div = "<div class=\"form-check form-switch form-check-custom form-check-solid\"><input class=\"form-check-input changeuserstatus\" name=\"changeuserstatus\" type=\"checkbox\" ".$checked." id=".$row->id." data-id=".$row->id." /></div>";                
-                return $div;
-                })
+                // $row->published == 1 ? $checked = "checked" : $checked = "";
+                                                    
+                // return  "<div class=\"form-check form-switch form-check-custom form-check-solid\"><input class=\"form-check-input changestatus\" name=\"changestatus\" type=\"checkbox\" ".$checked." id=".$row->id." data-id=".$row->id." data-trans-item=".$this->TRANS." data-table=".$this->ROUTE_PREFIX." /></div>";                
+                    return $row->published;
+            })
 
 
                 ->editColumn('actions', function ($row) {      
@@ -124,7 +117,9 @@ public function index(Request $request){
                 })                           
 
  
-                ->rawColumns(['image','title','parent','count','published','actions','created_at'])    
+                // ->rawColumns(['image','translate.title','parent_id','count','published','actions','created_at']) 
+
+                ->rawColumns(['translate.title','parent_id','published'])    
                 ->make(true);    
     }  
         if (view()->exists('backend.categories.index')) {
@@ -149,6 +144,9 @@ public function index(Request $request){
         }
 
      public function edit(MainModel $category){ 
+
+
+        
         if (view()->exists('backend.categories.edit')) {         
             $compact = [                
                 'updateRoute'             => route('admin.categories.update',$category->id), 
@@ -165,10 +163,11 @@ public function index(Request $request){
             }
     }
 
-    public function update(CategoryRequest $request, MainModel $category)
+    public function update(ModuleRequest $request, MainModel $category)
     {
 
 
+        
         
          try {
             DB::beginTransaction();        
@@ -244,11 +243,10 @@ public function index(Request $request){
 
  
         foreach (MainModel::whereIn('id',$ids)->get() as $selectedItems) {
-            $selectedItems->image ? $this->unlinkFile($selectedItems->image) : ''; // Unlink Image            
+            $selectedItems->image ? $this->unlinkFile($selectedItems->image) : ''; // Unlink Images            
         }
      
-        $items = MainModel::whereIn('id',$ids); // Check
-   
+        $items = MainModel::whereIn('id',$ids); // Check   
        
         if($items->delete()){
             $arr = array('msg' => __($this->TRANS.'.'.'MulideleteMessageSuccess'), 'status' => true);

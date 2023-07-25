@@ -109,7 +109,7 @@ function handleFormSubmitFunc(formId) {
                                         customClass: {
                                             confirmButton: "btn btn-light-success",                                             
                                         }
-                                        }).then(function(result) {
+                                        }).then(function(result) {                                                                                    
                                             window.location = window.location.href;
                                         });
                                 }
@@ -130,15 +130,14 @@ function handleFormSubmitFunc(formId) {
                                             confirmButton: "btn btn-light-warning"
                                         }
                                     })
-                                }else if (response["status"] == false) {
-                                    
+                                }else if (response["status"] == false) {                                    
                                     Swal.fire({
                                         html: response["msg"], // respose from controller
-                                        icon: "info",
+                                        icon: "error",
                                         buttonsStyling: false,
                                         confirmButtonText: form.getAttribute("data-form-agree-label"),
                                         customClass: {
-                                            confirmButton: "btn btn-light-info"
+                                            confirmButton: "btn btn-light-danger"
                                         }
                                     })
                                 }

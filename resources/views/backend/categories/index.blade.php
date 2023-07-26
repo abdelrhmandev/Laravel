@@ -141,6 +141,8 @@
 
       <div class="card-body pt-0">
         <!--begin::Table-->
+
+        Counts {{ $Counts }}
         <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_datatable">
           <!--begin::Table head-->
           <thead>
@@ -157,7 +159,7 @@
               {{-- <th>{{ __('post.plural') }}</th>  --}}
               <th>{{ __('site.published') }}</th> 
               {{-- <th>{{ __('admin.created_at') }}</th> --}}
-              {{-- <th class="text-end min-w-70px noExport">{{ __('admin.actions') }}</th>   --}}
+              <th class="text-end min-w-70px noExport">{{ __('admin.actions') }}</th>  
             </tr>
 
           
@@ -208,7 +210,7 @@ var dynamicColumns = [
 // { data: 'count', name: 'count'},
 { data: 'published', name: 'published'},
 // { data: 'created_at', name: 'created_at'},
-// { data: 'actions' , name : 'actions' },    
+{ data: 'actions' , name : 'actions' },    
 ];
 KTUtil.onDOMContentLoaded(function () {
   loadDatatable('{{ route('admin.categories.index') }}',dynamicColumns);
@@ -262,6 +264,8 @@ KTUtil.onDOMContentLoaded(function () {
         }else{ 
           toastr.error(response['msg']);      
         }
+
+ 
 
         }
         });

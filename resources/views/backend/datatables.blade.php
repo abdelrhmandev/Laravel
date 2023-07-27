@@ -6,7 +6,10 @@
         var dt;
         var filterStatus;
     
-  
+        // var tglA = document.getElementById("published_counter").innerHTML;
+
+        // $("#published_counter").DataTable().ajax.reload();
+      
             var lang = document.dir == 'rtl' ? 'ar' : 'en-GB';        
             dt = $("#kt_datatable").DataTable({
                 searchDelay: 500,
@@ -43,7 +46,7 @@
                     selector: 'td:first-child input[type="checkbox"]',
                     className: 'row-selected'
                 },
-                ajax: {
+                ajax: {                   
                     url: RouteListing,
                 },
                 columns: dynamicColumns,  
@@ -127,7 +130,7 @@
                         dt.column(3).search(regexStatus, true, false).column(2).search(CategoryValue).draw();                
                     });    
             }
-            // Delete 
+            // Delete one records
             var handleDeleteRows = () => {
                 // Select all delete buttons
                 const deleteButtons = document.querySelectorAll('[data-kt-table-filter="delete_row"]');
@@ -238,7 +241,7 @@
 
 
 
-            // Init toggle toolbar "Delete Selected , MULT SELECTED ITEMS" 
+            /////////////////////////// Init toggle toolbar "Delete Selected , MULT SELECTED ITEMS" //////////////////////////
             var initToggleToolbar = function () {
                 // Toggle selected action toolbar
                 // Select all checkboxes
@@ -469,9 +472,9 @@
         
          
                 handleSearchDatatable();
-                // initToggleToolbar();
+                initToggleToolbar();
                 handleFilterDatatable();
-                // handleDeleteRows();
+                handleDeleteRows();
                 handleResetForm();
                 table = document.querySelector('#kt_datatable');
                 if ( !table ) {

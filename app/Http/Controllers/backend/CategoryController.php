@@ -64,10 +64,10 @@ public function index(Request $request){
             
 
          return Datatables::eloquent($model->latest())    
-                    ->addIndexColumn()
+                    ->addIndexColumn()                 
                     ->editColumn('translate.title', function (MainModel $row) {
-                       return $row->translate->title;
-                        // return "<a href=".route('admin.categories.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".$row->translate->title."</a>";                     
+                    //    return $row->translate->title;
+                        return "<a href=".route('admin.categories.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".$row->translate->title."</a>";                     
                     })
  
  
@@ -103,14 +103,14 @@ public function index(Request $request){
                 $row->published == 1 ? $checked = "checked" : $checked = "";
                                                     
                 return  "<div class=\"form-check form-switch form-check-custom form-check-solid\"><input class=\"form-check-input changestatus\" name=\"changestatus\" type=\"checkbox\" ".$checked." id=".$row->id." data-id=".$row->id." data-trans-item=".$this->TRANS." data-table=".$this->ROUTE_PREFIX." /></div>";                
-                    return $row->published;
+                    // return $row->published;
             })
 
 
                 ->editColumn('actions', function ($row) {      
                                                  
                     return view('backend.partials.btns.edit-delete', [
-                        'trans'         =>$this->TRANS,
+                        'trans'         =>$this->TRANS,                       
                         'editRoute'     =>route('admin.categories.edit',$row->id),
                         'destroyRoute'  =>route('admin.categories.destroy',$row->id),
                         'id'            =>$row->id
@@ -126,11 +126,11 @@ public function index(Request $request){
         if (view()->exists('backend.categories.index')) {
             $compact = [
                 'trans'                 => $this->TRANS,
-                'createRoute'           => route('admin.categories.create'),
-                'Counts'                 => MainModel::count(),
+                'createRoute'           => route('admin.categories.create'),                
                 'storeRoute'            => route('admin.categories.store'),
                 'destroyMultipleRoute'  => route('admin.categories.destroyMultiple'), 
                 'redirectRoute'         => route('admin.categories.index'),
+                'published_counter' => MainModel::where('published','1')->count(),
             ];            
             return view('backend.categories.index',$compact);
         }

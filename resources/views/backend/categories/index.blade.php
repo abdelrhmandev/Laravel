@@ -142,7 +142,8 @@
       <div class="card-body pt-0">
         <!--begin::Table-->
 
-        Counts {{ $Counts }}
+        
+        <div id="published_counter">{{ $published_counter }}</div>
         <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_datatable">
           <!--begin::Table head-->
           <thead>
@@ -265,7 +266,7 @@ KTUtil.onDOMContentLoaded(function () {
           toastr.error(response['msg']);      
         }
 
- 
+        oTable.api().ajax.reload();
 
         }
         });

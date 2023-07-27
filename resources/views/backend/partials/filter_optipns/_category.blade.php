@@ -3,7 +3,7 @@
   <select class="form-select form-select-solid fw-bold" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-table-filter="category" id="category" name="category" data-hide-search="false">       
     <option value="all">{{ __('admin.all')}}</option>
     @foreach ($categories->latest()->get() as $value)      
-    <option value="{{ $value->id }}">{{ $value->translate->title }} {{ $value->recipes->count() }}</option> 
+    sssssssss
     @endforeach
   </select>
 </div> 

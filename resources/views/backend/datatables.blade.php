@@ -15,7 +15,7 @@
                 searchDelay: 500,
                 processing: true,
                 serverSide: true,                
-                info: false, 
+                info: true, 
                 oLanguage: {
                     "zeroRecords" : '@include("backend.partials.no_matched_records")',
                     "sEmptyTable": '@include("backend.partials.empty")',
@@ -57,7 +57,12 @@
                         printable: false,
                         searchable: false,
                         orderable: false,
-                            render: function (data) {
+                            render: function (data,type,row) {
+                                
+                    alert(table.ajax.json());
+                    // alert( json.published_count +' row(s) were loaded' );
+
+
                                 return `
                                     <div class="form-check form-check-sm form-check-custom form-check-solid">
                                         <input class="form-check-input AA" name="ids" class="sub_chk" value="${data}" type="checkbox" />

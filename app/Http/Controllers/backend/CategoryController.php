@@ -121,6 +121,12 @@ public function index(Request $request){
                 // ->rawColumns(['image','translate.title','parent_id','count','published','actions','created_at']) 
 
                 ->rawColumns(['translate.title','parent_id','actions','published'])    
+
+
+                ->withQuery('published_count', function($filteredQuery) {
+                    return $filteredQuery->where('published','1')->count();
+                })
+
                 ->make(true);    
     }  
         if (view()->exists('backend.categories.index')) {

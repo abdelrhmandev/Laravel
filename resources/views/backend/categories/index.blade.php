@@ -143,8 +143,9 @@
         <!--begin::Table-->
 
         
-        <div id="published_counter">{{ $published_counter }}</div>
+        
         <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_datatable">
+          <caption><div id="published_counter"></div></caption>
           <!--begin::Table head-->
           <thead>
             <!--begin::Table row-->
@@ -221,7 +222,9 @@ KTUtil.onDOMContentLoaded(function () {
 
 <script>
   $('#kt_datatable').on('click','.changestatus',function(e){
-      var id = $(this).attr('data-id');
+
+
+    var id = $(this).attr('data-id');
       var table = $(this).attr('data-table');
       var transItem = $(this).attr('data-trans-item');
       var status = 0;
@@ -234,14 +237,19 @@ KTUtil.onDOMContentLoaded(function () {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
       url: '{{ route('admin.UpdatePublished')}}',
-      data: {
+      data: function(d) {
           '_method'   : 'post',          
           'status'    : status,
           'table'     : table,
           'transItem' : transItem,
-          'id'        : id
-      }, 
+          'id'        : id      
+        }, 
+
+ 
+
         success: function(response){
+
+          table.draw();
             toastr.options = {
             "closeButton": false,
             "debug": false,
@@ -266,10 +274,18 @@ KTUtil.onDOMContentLoaded(function () {
           toastr.error(response['msg']);      
         }
 
-        oTable.api().ajax.reload();
 
-        }
+
+        const refreshData = function (dt){
+        $(dt).DataTable().ajax.reload(null, false);
+      }
+
+        
+      }
         });
   });
-</script>
+
+  
+
+ </script>
 @stop

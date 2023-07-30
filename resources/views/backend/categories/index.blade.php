@@ -274,12 +274,7 @@ KTUtil.onDOMContentLoaded(function () {
           toastr.error(response['msg']);      
         }
 
-
-
-        const refreshData = function (dt){
-        $(dt).DataTable().ajax.reload(null, false);
-      }
-
+ 
         
       }
         });

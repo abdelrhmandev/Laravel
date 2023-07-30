@@ -57,12 +57,7 @@
                         printable: false,
                         searchable: false,
                         orderable: false,
-                            render: function (data,type,row) {
-                                
-                    alert(table.ajax.json());
-                    // alert( json.published_count +' row(s) were loaded' );
-
-
+                        render: function (data) {
                                 return `
                                     <div class="form-check form-check-sm form-check-custom form-check-solid">
                                         <input class="form-check-input AA" name="ids" class="sub_chk" value="${data}" type="checkbox" />

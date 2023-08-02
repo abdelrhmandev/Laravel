@@ -14,7 +14,13 @@
             dt = $("#kt_datatable").DataTable({
                 searchDelay: 500,
                 processing: true,
-                serverSide: true,                
+                serverSide: true,   
+                drawCallback:function(settings){
+                    //settings.json.recordsTotal
+                    $('#published_counter').val(settings.json.PublishedCounter);
+                    $('#unpublished_counter').val(settings.json.UnPublishedCounter);
+                },
+
                 info: true, 
                 oLanguage: {
                     "zeroRecords" : '@include("backend.partials.no_matched_records")',
@@ -65,17 +71,25 @@
                             }
                     },{
                         targets: -1,
-                        data: null,
+                        data: function(data) {
+                            data.published_counter = $('#published_counter').val();                  
+                        },
+                        
                         exportable: false,
                         printable: false,
                         searchable: false,                    
                         orderable: false,
                         className: 'text-end',                        
                     },
+
+                    
                 ],
                 // Add data-filter attribute
                      // Add data-filter attribute
+                     
+
                      createdRow: function (row, data, dataIndex) {
+                        
                         // $(row).find('td:eq(2)').attr('data-filter', data.category_id);
                         $(row).find('td:eq(4)').attr('data-filter', data.published);
                         // $(row).find('td:eq(4)').attr('data-filter', data.created_at);

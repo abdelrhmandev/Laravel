@@ -64,6 +64,10 @@ public function index(Request $request){
             
 
          return Datatables::eloquent($model->latest())    
+
+         
+
+
                     ->addIndexColumn()                 
                     ->editColumn('translate.title', function (MainModel $row) {
                     //    return $row->translate->title;
@@ -123,10 +127,13 @@ public function index(Request $request){
                 ->rawColumns(['translate.title','parent_id','actions','published'])    
 
 
-                ->withQuery('published_count', function($filteredQuery) {
-                    return $filteredQuery->where('published','1')->count();
+                ->withQuery('PublishedCounter', function($filteredQuery) {
+                    return $filteredQuery->Published('1')->count();
                 })
-
+                ->withQuery('UnPublishedCounter', function($filteredQuery) {
+                    return $filteredQuery->Published('0')->count();
+                })
+                
                 ->make(true);    
     }  
         if (view()->exists('backend.categories.index')) {
@@ -136,7 +143,6 @@ public function index(Request $request){
                 'storeRoute'            => route('admin.categories.store'),
                 'destroyMultipleRoute'  => route('admin.categories.destroyMultiple'), 
                 'redirectRoute'         => route('admin.categories.index'),
-                'published_counter' => MainModel::where('published','1')->count(),
             ];            
             return view('backend.categories.index',$compact);
         }
@@ -267,6 +273,22 @@ public function index(Request $request){
 
  
 
+    }
+
+
+
+    public function UpdatePublished(Request $request){       
+
+        
+        if(DB::table($request->table)->find($request->id)){
+            if(DB::table($request->table)->where('id',$request->id)->update(['published'=>$request->status])){
+                $request->status == 1 ? $TRANS = 'site.been_published':$TRANS = 'site.been_unpublished';
+                $arr = array('msg' => __($TRANS,['item'=> $request->transItem]) , 'status' => true);
+            }else{
+                $arr = array('msg' => 'ERROR', 'status' => false);
+            }       
+            return response()->json($arr);
+      }
     }
 
 

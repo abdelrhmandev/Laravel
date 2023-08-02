@@ -142,13 +142,7 @@
       <div class="card-body pt-0">
         <!--begin::Table-->
 
-        Published Counter
-        <input type="text" id="published_counter">
-
-
-        UnPublished Counter
-        <input type="text" id="unpublished_counter">
-
+        
         
         <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_datatable">         
           <!--begin::Table head-->
@@ -228,9 +222,9 @@ KTUtil.onDOMContentLoaded(function () {
 <script>
  
 
- $('#kt_datatable').on('click','.changestatus',function(e){
+    $('.changestatus').change(function() { 
 
-
+      
     var id = $(this).attr('data-id');
       var table = $(this).attr('data-table');
       var transItem = $(this).attr('data-trans-item');
@@ -238,24 +232,26 @@ KTUtil.onDOMContentLoaded(function () {
       if($(this).is(":checked")){
             status = 1;    
       }
-
       $.ajax({
-            type: 'post',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-           
-            url: '{{ route('admin.UpdatePublished')}}',
-            data: {
-                '_method'   : 'post',          
-                'status'    : status,
-                'table'     : table,
-                'transItem' : transItem,
-                'id'        : id 
-            },
+      type: 'post',
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      url: '{{ route('admin.UpdatePublished')}}',
+      data: function(d) {
+          '_method'   : 'post',          
+          'status'    : status,
+          'table'     : table,
+          'transItem' : transItem,
+          'id'        : id      
+        }, 
 
-            success: function(response){
-              toastr.options = {
+ 
+
+        success: function(response){
+
+  
+            toastr.options = {
             "closeButton": false,
             "debug": false,
             "newestOnTop": false,
@@ -273,24 +269,16 @@ KTUtil.onDOMContentLoaded(function () {
             "hideMethod": "fadeOut"
        };
 
-              if(response['status'] == true){ 
-              toastr.success(response['msg']);
-              }else{ 
-              toastr.error(response['msg']);      
-              }
+       if(response['status'] == true){ 
+         toastr.success(response['msg']);
+        }else{ 
+          toastr.error(response['msg']);      
+        }
 
-
-              $('#kt_datatable').DataTable().ajax.reload();
-
-              
-
-              
-            }
-         
-      });
-      
+ 
         
-        
+      }
+        });
   });
 
   

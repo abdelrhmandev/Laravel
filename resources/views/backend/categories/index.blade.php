@@ -142,15 +142,19 @@
       <div class="card-body pt-0">
         <!--begin::Table-->
 
-        Published Counter
-        <input type="text" id="published_counter">
+ 
+         <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_datatable">         
+          <p>
+            Published Counter 
+          <input type="text" id="published_counter">
+          </p>
 
+          <p>
+            UnPublished Counter 
+          <input type="text" id="unpublished_counter">
+          </p>
 
-        UnPublished Counter
-        <input type="text" id="unpublished_counter">
-
-        
-        <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_datatable">         
+          
           <!--begin::Table head-->
           <thead>
             <!--begin::Table row-->

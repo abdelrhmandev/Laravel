@@ -55,7 +55,7 @@ class CategoryController extends Controller
 }
 
 public function index(Request $request){    
-    $model = MainModel::with(['parent','posts'])->withCount('posts');
+    $model = MainModel::select('id','image','published')->with(['parent','posts'])->withCount('posts');
 
     
 
@@ -127,11 +127,11 @@ public function index(Request $request){
                 ->rawColumns(['translate.title','parent_id','actions','published'])    
 
 
-                ->withQuery('PublishedCounter', function($filteredQuery) {
-                    return $filteredQuery->Published('1')->count();
+                ->withQuery('PublishedCounter', function($model) {
+                    return MainModel::Published('1')->count();
                 })
-                ->withQuery('UnPublishedCounter', function($filteredQuery) {
-                    return $filteredQuery->Published('0')->count();
+                ->withQuery('UnPublishedCounter', function($model) {
+                    return  MainModel::Published('0')->count();
                 })
                 
                 ->make(true);    

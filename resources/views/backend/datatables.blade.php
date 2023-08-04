@@ -122,26 +122,35 @@
                 // Select filter options
                 const filterForm = document.querySelector('[data-kt-table-filter="form"]');
                 filterStatus = document.querySelectorAll('[data-kt-table-filter="status"][name="status"]');
-                const filterCategory =  document.querySelectorAll('[data-kt-table-filter="category"][name="category"]');
+                // const filterCategory =  document.querySelectorAll('[data-kt-table-filter="category"][name="category"]');
                 const filterButton = filterForm.querySelector('[data-kt-table-filter="filter"]');
                 //const selectOptions = filterForm.querySelectorAll('select');
                 // Filter datatable on submit
                 filterButton.addEventListener('click', function () {
                     let  StatusValue = '';
-                    let  CategoryValue =  '';
+                    // let  CategoryValue =  '';
                     // Get filter Status Values
                     filterStatus.forEach(r => {
                         r.value === 'all' ? StatusValue = '' : StatusValue = r.value;                
                     });
-                    //Get filter Categories Values
+                    
+                    /*Get filter Categories Values
                     filterCategory.forEach(c => {
                         c.value === 'all' ? CategoryValue = '' : CategoryValue = c.value;                
-                    });            
+                    });
+                    */
+                    
+                    
                     // Filter datatable --- official docs reference: https://datatables.net/reference/api/search()            
-                    const filterString = StatusValue + ' ' + CategoryValue;
+                    // const filterString = StatusValue + ' ' + CategoryValue;
+
+                    const filterString = StatusValue;
+
+
                     //dt.search(filterString).draw(); // Original Code
                         var searchStatus = StatusValue.toLowerCase(),regexStatus = '\\b' + searchStatus + '\\b';                    
-                        dt.column(3).search(regexStatus, true, false).column(2).search(CategoryValue).draw();                
+                        // dt.column(3).search(regexStatus, true, false).column(2).search(CategoryValue).draw();                
+                        dt.column(3).search(regexStatus, true, false).draw();                
                     });    
             }
             // Delete one records

@@ -17,11 +17,11 @@
                 serverSide: true,   
                 drawCallback:function(settings){
                     //settings.json.recordsTotal
-                    $('#published_counter').val(settings.json.PublishedCounter);
-                    $('#unpublished_counter').val(settings.json.UnPublishedCounter);
+                    // $('#published_counter').val(settings.json.PublishedCounter);
+                    // $('#unpublished_counter').val(settings.json.UnPublishedCounter);
                 },
 
-                info: true, 
+                info: false, 
                 oLanguage: {
                     "zeroRecords" : '@include("backend.partials.no_matched_records")',
                     "sEmptyTable": '@include("backend.partials.empty")',
@@ -71,10 +71,7 @@
                             }
                     },{
                         targets: -1,
-                        data: function(data) {
-                            data.published_counter = $('#published_counter').val();                  
-                        },
-                        
+                        data: null,                        
                         exportable: false,
                         printable: false,
                         searchable: false,                    

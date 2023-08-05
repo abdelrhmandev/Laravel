@@ -149,10 +149,10 @@
           <input type="text" id="published_counter">
           </p>
 
-          <p>
+          {{-- <p>
             UnPublished Counter 
-          <input type="text" id="unpublished_counter">
-          </p>
+          <input type="text" id="published_counter">
+          </p> --}}
 
           
           <!--begin::Table head-->

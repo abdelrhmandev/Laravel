@@ -150,6 +150,21 @@
                         dt.column(3).search(regexStatus, true, false).draw();                
                     });    
             }
+
+
+            var handleStatusFilter = () => {
+                const filterStatus = document.querySelector('[data-kt-filter="status"]');
+                $(filterStatus).on('change', e => {
+                    let value = e.target.value;
+                    if (value === 'all') {
+                        value = '';
+                    }
+                    dt.column(3).search(value).draw();
+                    
+                });
+            }
+
+
             // Delete one records
             var handleDeleteRows = () => {
                 // Select all delete buttons
@@ -490,10 +505,10 @@
         //// abdo
       
         
-         
+                handleStatusFilter();
                 handleSearchDatatable();
                 initToggleToolbar();
-                handleFilterDatatable();
+                handleFilterDatatable(); // Holded use by pop filter option
                 handleDeleteRows();
                 handleResetForm();
                 table = document.querySelector('#kt_datatable');

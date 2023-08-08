@@ -16,7 +16,7 @@
     <!--begin::Card body-->
     <div class="card-body pt-0">
         <!--begin::Select2-->
-        <select name="status" class="form-select mb-2" data-control="select2" data-hide-search="true" data-placeholder="Select an option" id="status_select">
+        <select name="status" class="form-select mb-2" data-control="select2" data-hide-search="true" data-kt-filter="status" data-placeholder="Select an option" id="status_select">
             <option></option>
             <option value="published" selected="selected">Published</option>
             <option value="unpublished">UnPublished</option>

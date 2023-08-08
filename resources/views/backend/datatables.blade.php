@@ -115,41 +115,42 @@
             }
     
             // Filter Datatable
-            var handleFilterDatatable = function () {
-                // Select filter options
-                const filterForm = document.querySelector('[data-kt-table-filter="form"]');
-                filterStatus = document.querySelectorAll('[data-kt-table-filter="status"][name="status"]');
-                // const filterCategory =  document.querySelectorAll('[data-kt-table-filter="category"][name="category"]');
-                const filterButton = filterForm.querySelector('[data-kt-table-filter="filter"]');
-                //const selectOptions = filterForm.querySelectorAll('select');
-                // Filter datatable on submit
-                filterButton.addEventListener('click', function () {
-                    let  StatusValue = '';
-                    // let  CategoryValue =  '';
-                    // Get filter Status Values
-                    filterStatus.forEach(r => {
-                        r.value === 'all' ? StatusValue = '' : StatusValue = r.value;                
-                    });
+            // var handleFilterDatatable = function () {
+            //     // Select filter options
+            //     const filterForm = document.querySelector('[data-kt-table-filter="form"]');
+            //     filterStatus = document.querySelectorAll('[data-kt-table-filter="status"][name="status"]');
+            //     // const filterCategory =  document.querySelectorAll('[data-kt-table-filter="category"][name="category"]');
+            //     const filterButton = filterForm.querySelector('[data-kt-table-filter="filter"]');
+            //     //const selectOptions = filterForm.querySelectorAll('select');
+            //     // Filter datatable on submit
+            //     filterButton.addEventListener('click', function () {
+            //         let  StatusValue = '';
+            //         // let  CategoryValue =  '';
+            //         // Get filter Status Values
+            //         filterStatus.forEach(r => {
+            //             r.value === 'all' ? StatusValue = '' : StatusValue = r.value;                
+            //         });
                     
-                    /*Get filter Categories Values
-                    filterCategory.forEach(c => {
-                        c.value === 'all' ? CategoryValue = '' : CategoryValue = c.value;                
-                    });
-                    */
+            //         /*Get filter Categories Values
+            //         filterCategory.forEach(c => {
+            //             c.value === 'all' ? CategoryValue = '' : CategoryValue = c.value;                
+            //         });
+            //         */
                     
                     
-                    // Filter datatable --- official docs reference: https://datatables.net/reference/api/search()            
-                    // const filterString = StatusValue + ' ' + CategoryValue;
+            //         // Filter datatable --- official docs reference: https://datatables.net/reference/api/search()            
+            //         // const filterString = StatusValue + ' ' + CategoryValue;
 
-                    const filterString = StatusValue;
+            //         const filterString = StatusValue;
 
 
-                    //dt.search(filterString).draw(); // Original Code
-                        var searchStatus = StatusValue.toLowerCase(),regexStatus = '\\b' + searchStatus + '\\b';                    
-                        // dt.column(3).search(regexStatus, true, false).column(2).search(CategoryValue).draw();                
-                        dt.column(3).search(regexStatus, true, false).draw();                
-                    });    
-            }
+            //         //dt.search(filterString).draw(); // Original Code
+            //             var searchStatus = StatusValue.toLowerCase(),regexStatus = '\\b' + searchStatus + '\\b';                    
+            //             // dt.column(3).search(regexStatus, true, false).column(2).search(CategoryValue).draw();                
+            //             dt.column(3).search(regexStatus, true, false).draw();                
+            //         });    
+            // }
+
 
 
             var handleStatusFilter = () => {
@@ -255,23 +256,7 @@
             }
      
             // Reset Filter
-            var handleResetForm = () => {
-                // Select reset button
-                const resetButton = document.querySelector('[data-kt-table-filter="reset"]');
-        
-                // Reset datatable
-                resetButton.addEventListener('click', function () {
-                // Reset month
-                // filterMonth.val(null).trigger('change');
-              
-                // Reset payment type
-                $("#status").val("all").change();
-                // $("#category").val("all").change();
-    
-                // Reset datatable --- official docs reference: https://datatables.net/reference/api/search()
-                dt.column(5).draw();  
-            });
-            }
+            
      
 
 
@@ -435,6 +420,7 @@
             }
             // Handle Export 
             var exportButtons = function (){
+                
                 const documentTitle = 'بسم الله الرحمن الرحيم';
                 var buttons = new $.fn.dataTable.Buttons(table, {
                     buttons: [
@@ -477,11 +463,11 @@
                         }
                     ]
                 }).container().appendTo($('#kt_datatable_buttons'));
-    
-                // Hook dropdown menu click event to datatable export buttons
+                    // Hook dropdown menu click event to datatable export buttons
                 const exportButtons = document.querySelectorAll('#kt_datatable_export_menu [data-kt-export]');
                 exportButtons.forEach(exportButton => {
                     exportButton.addEventListener('click', e => {
+                       
                         e.preventDefault();
                         // Get clicked export value
                         const exportValue = e.target.getAttribute('data-kt-export');
@@ -508,13 +494,14 @@
                 handleStatusFilter();
                 handleSearchDatatable();
                 initToggleToolbar();
-                handleFilterDatatable(); // Holded use by pop filter option
+                //handleFilterDatatable(); // Holded use by pop filter option
                 handleDeleteRows();
-                handleResetForm();
+                //handleResetForm();
                 table = document.querySelector('#kt_datatable');
                 if ( !table ) {
                 return;
                 }
+                
                 exportButtons();    
     }
     

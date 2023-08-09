@@ -55,7 +55,7 @@ class CategoryController extends Controller
 }
 
 public function index(Request $request){    
-    $model = MainModel::select('id','parent_id','image','status','created_at')->with(['parent','posts'])->withCount('posts');
+    $model = MainModel::with(['parent','posts'])->withCount('posts');
 
     
 

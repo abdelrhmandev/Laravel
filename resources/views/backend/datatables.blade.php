@@ -419,16 +419,8 @@
                 }
             }
             // Handle Export 
-            var exportButtons = function (){
-                
-
-               
-
-               
-
-                
-
-                const documentTitle = 'بسم الله الرحمن الرحيم';
+            var exportButtons = function (){            
+                const documentTitle = document.getElementById('kt_datatable_export_menu').getAttribute("data-export-file-title");
                 var buttons = new $.fn.dataTable.Buttons(table, {
                     buttons: [
                         {

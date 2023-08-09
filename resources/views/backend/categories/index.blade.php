@@ -99,7 +99,7 @@
               <th>{{ __('post.plural') }}</th> 
               <th>{{ __('site.status') }}</th> 
               <th>{{ __('admin.created_at') }}</th>
-              <th class="text-end min-w-70px noExport">{{ __('admin.actions') }}</th>  
+              <th class="text-end min-w-50px noExport">{{ __('admin.actions') }}</th>  
             </tr>
           </thead>
           <tbody class="fw-semibold text-gray-600"> 

@@ -421,6 +421,13 @@
             // Handle Export 
             var exportButtons = function (){
                 
+
+               
+
+               
+
+                
+
                 const documentTitle = 'بسم الله الرحمن الرحيم';
                 var buttons = new $.fn.dataTable.Buttons(table, {
                     buttons: [
@@ -464,6 +471,8 @@
                     ]
                 }).container().appendTo($('#kt_datatable_buttons'));
                     // Hook dropdown menu click event to datatable export buttons
+
+                    
                 const exportButtons = document.querySelectorAll('#kt_datatable_export_menu [data-kt-export]');
                 exportButtons.forEach(exportButton => {
                     exportButton.addEventListener('click', e => {

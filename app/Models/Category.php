@@ -18,7 +18,7 @@ class Category extends Model
 
  
     protected $fillable = [
-		'parent_id','image','published'
+		'parent_id','image','status'
 	];
 
    
@@ -27,7 +27,7 @@ class Category extends Model
     protected $with = ['translate'];
 
     public function scopePublished($query,$type) {
-        return $query->where('published',$type);
+        return $query->where('status',$type);
     }
 
  
@@ -134,9 +134,9 @@ class Category extends Model
             ]);
             
     }
-    public function getCreatedAtAttribute($date){                
-        return Carbon::parse($date)->format('Y/m/d').' | '.Carbon::parse($date)->diffForHumans();     
-    }
+    // public function getCreatedAtAttribute($date){                
+    //     return Carbon::parse($date)->format('Y/m/d').' | '.Carbon::parse($date)->diffForHumans();     
+    // }
 
 
  

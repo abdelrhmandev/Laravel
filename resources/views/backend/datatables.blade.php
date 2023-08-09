@@ -1,5 +1,5 @@
 <script>
-    function loadDatatable(RouteListing,dynamicColumns){
+    function loadDatatable(RouteListing,dynamicColumns,StatusColumn=null){
  
         // Shared variables
         var table;
@@ -88,7 +88,7 @@
                      createdRow: function (row, data, dataIndex) {
                         
                         // $(row).find('td:eq(2)').attr('data-filter', data.category_id);
-                        $(row).find('td:eq(4)').attr('data-filter', data.published);
+                        $(row).find('td:eq(4)').attr('data-filter', data.status);
                         // $(row).find('td:eq(4)').attr('data-filter', data.created_at);
                     }
             });    
@@ -160,7 +160,7 @@
                     if (value === 'all') {
                         value = '';
                     }
-                    dt.column(3).search(value).draw();
+                    dt.column(StatusColumn).search(value).draw();
                     
                 });
             }

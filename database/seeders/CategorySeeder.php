@@ -14,11 +14,11 @@ class CategorySeeder extends Seeder
 
 
        $items = [
-        ['image'=>'uploads/categories/it.jpg','published'=>'1'],
-        ['image'=>'uploads/categories/programing.jpg','published'=>'1'],
-        ['image'=>'uploads/categories/design.jpg','published'=>'0'],
-        ['image'=>'uploads/categories/social-net-work.jpg','published'=>'0'],
-        ['image'=>'uploads/categories/security.jpg','published'=>'0'],
+        ['image'=>'uploads/categories/it.jpg','status'=>'1'],
+        ['image'=>'uploads/categories/programing.jpg','status'=>'1'],
+        ['image'=>'uploads/categories/design.jpg','status'=>'0'],
+        ['image'=>'uploads/categories/social-net-work.jpg','status'=>'0'],
+        ['image'=>'uploads/categories/security.jpg','status'=>'0'],
   
        ];
        DB::table('categories')->insert($items);      

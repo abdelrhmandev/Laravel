@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use App\Traits\UploadAble;
 use Illuminate\Support\Facades\File; 
-
+use Carbon\Carbon;
 use App\Traits\Functions; 
 use DataTables;
 
@@ -55,59 +55,46 @@ class CategoryController extends Controller
 }
 
 public function index(Request $request){    
-    $model = MainModel::select('id','image','published')->with(['parent','posts'])->withCount('posts');
+    $model = MainModel::select('id','parent_id','image','status','created_at')->with(['parent','posts'])->withCount('posts');
 
     
 
-    if ($request->ajax()) {
-  
-            
-
+    if ($request->ajax()) {              
          return Datatables::eloquent($model->latest())    
-
-         
-
-
-                    ->addIndexColumn()                 
-                    ->editColumn('translate.title', function (MainModel $row) {
-                    //    return $row->translate->title;
-                        return "<a href=".route('admin.categories.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".$row->translate->title."</a>";                     
-                    })
- 
- 
-                                                             
-                // ->editColumn('image', function ($row) {
-                //     $div = '<span aria-hidden="true">—</span>';
-                //     if($row->image){
-                //         $div = "<a href=".route('admin.categories.edit',$row->id)." title='".$row->translate->title."' class=\"symbol symbol-50px\">
-                //                     <span class=\"symbol-label\" style=\"background-image:url(".url(asset($row->image)).")\" />
-                //                     </span>
-                //                 </a>";   
-                //     }
-                //     return $div;
-                // })         
-
+                ->addIndexColumn()                 
+                ->editColumn('translate.title', function (MainModel $row) {
+                    return "<a href=".route('admin.categories.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".$row->translate->title."</a>";                     
+                })                                                              
+                ->editColumn('image', function ($row) {
+                    $div = '<span aria-hidden="true">—</span>';
+                    if($row->image){
+                        $div = "<a href=".route('admin.categories.edit',$row->id)." title='".$row->translate->title."' class=\"symbol symbol-50px\">
+                                    <span class=\"symbol-label\" style=\"background-image:url(".url(asset($row->image)).")\" />
+                                    </span>
+                                </a>";   
+                    }
+                    return $div;
+                })         
                  ->editColumn('parent_id', function (MainModel $row) {
                     return $row->parent->translate->title ?? "<span aria-hidden=\"true\">—</span>";
                 })
-
-                // ->editColumn('count', function (MainModel $row) {                    
-                //     return  "<a href=".route('admin.posts.index',$row->id).">
-                //                 <span class=\"badge badge-success badge-circle badge-md\">".$row->posts_count ?? '0' ."</span>
-                //                 </a>";  
-                 
-                // })
-
-
-            //     ->editColumn('created_at', function (MainModel $row) {                    
-            //         return "<span class=\"text-dark font-weight-bolder d-block font-size-lg\">".$row->created_at."</span>";  
-            // })
-                ->editColumn('published', function (MainModel $row) {                           
-                
-                $row->published == 1 ? $checked = "checked" : $checked = "";
-                                                    
-                return  "<div class=\"form-check form-switch form-check-custom form-check-solid\"><input class=\"form-check-input changestatus\" name=\"changestatus\" type=\"checkbox\" ".$checked." id=".$row->id." data-id=".$row->id." data-trans-item=".$this->TRANS." data-table=".$this->ROUTE_PREFIX." /></div>";                
-                    // return $row->published;
+                ->AddColumn('count', function (MainModel $row) {                    
+                    return  "<a href=".route('admin.posts.index',$row->id).">
+                                <span class=\"badge badge-success badge-circle badge-md\">".$row->posts_count ?? '0' ."</span>
+                                </a>";                   
+                })
+                ->editColumn('created_at', function (MainModel $row) {                    
+                    return "<span class=\"text-dark font-weight-bolder d-block font-size-lg\">". Carbon::parse($row->created_at)->format('Y/m/d').'<br>'.Carbon::parse($row->created_at)->diffForHumans()."</span>";  
+                })                
+                ->editColumn('status', function (MainModel $row) {                                                           
+                if($row->status == 1){
+                    $checked = "checked";
+                    $statusLabel  = "<span class=\"text-success\">".__('site.published')."</span>";                                                   
+                }else{
+                    $checked = "";
+                    $statusLabel  ="<span class=\"text-danger\">".__('site.unpublished')."</span>";   
+                }                    
+                return  "<div class=\"form-check form-switch form-check-custom form-check-solid\"><input class=\"form-check-input changestatus\" name=\"changestatus\" type=\"checkbox\" ".$checked." id=".$row->id." data-id=".$row->id." data-trans-item=".$this->TRANS." data-table=".$this->ROUTE_PREFIX." />&nbsp;".$statusLabel."</div>";                
             })
 
 
@@ -122,9 +109,9 @@ public function index(Request $request){
                 })                           
 
  
-                // ->rawColumns(['image','translate.title','parent_id','count','published','actions','created_at']) 
+                ->rawColumns(['image','translate.title','parent_id','count','status','actions','created_at']) 
 
-                ->rawColumns(['translate.title','parent_id','actions','published'])    
+
 
 
                 ->withQuery('PublishedCounter', function($model) {
@@ -281,7 +268,7 @@ public function index(Request $request){
 
         
         if(DB::table($request->table)->find($request->id)){
-            if(DB::table($request->table)->where('id',$request->id)->update(['published'=>$request->status])){
+            if(DB::table($request->table)->where('id',$request->id)->update(['status'=>$request->status])){
                 $request->status == 1 ? $TRANS = 'site.been_published':$TRANS = 'site.been_unpublished';
                 $arr = array('msg' => __($TRANS,['item'=> $request->transItem]) , 'status' => true);
             }else{

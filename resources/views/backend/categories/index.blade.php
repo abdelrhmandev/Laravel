@@ -71,15 +71,35 @@
       <div class="card-body pt-0">
         <!--begin::Table-->
 
-
-   
-
-
  
-        <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_datatable">
-          <thead>     
-            <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-            <th>id</th>             
+         <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_datatable">         
+          {{-- <p>
+            Published Counter 
+          <input type="text" id="published_counter">
+          </p> --}}
+
+          {{-- <p>
+            UnPublished Counter 
+          <input type="text" id="published_counter">
+          </p> --}}
+
+          
+          <!--begin::Table head-->
+          <thead>
+            <!--begin::Table row-->
+            <tr class="text-start text-bold-400 fw-bold fs-7 text-uppercase gs-0">
+              <th class="w-10px pe-2 noExport">
+                <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
+                  <input class="form-check-input AA" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_datatable .AA" value="1" />
+                </div>
+              </th>            
+              <th>{{ __('site.image') }}</th>  
+              <th>{{ __('site.title') }}</th>                                
+              <th>{{ __('site.parent_id') }}</th> 
+              <th>{{ __('post.plural') }}</th> 
+              <th>{{ __('site.status') }}</th> 
+              <th>{{ __('admin.created_at') }}</th>
+              <th class="text-end min-w-50px noExport">{{ __('admin.actions') }}</th>  
             </tr>
           </thead>
           <tbody class="fw-semibold text-gray-600"> 
@@ -100,13 +120,13 @@
 
 var dynamicColumns = [ //as an array start from 0
 { data: 'id', name: 'id',exportable:false}, 
-// { data: 'image', name: 'image'},
-// { data: 'translate.title', name: 'translate.title'},
-// { data: 'parent_id', name: 'parent_id'},
-// { data: 'count', name: 'count'}, 
-// { data: 'status', name: 'status'}, // 5
-// { data: 'created_at', name: 'created_at'},
-// { data: 'actions' , name : 'actions' },    
+{ data: 'image', name: 'image'},
+{ data: 'translate.title', name: 'translate.title'},
+{ data: 'parent_id', name: 'parent_id'},
+{ data: 'count', name: 'count'}, 
+{ data: 'status', name: 'status'}, // 5
+{ data: 'created_at', name: 'created_at'},
+{ data: 'actions' , name : 'actions' },    
 ];
 KTUtil.onDOMContentLoaded(function () {
   loadDatatable('{{ route('admin.categories.index') }}',dynamicColumns,'5');

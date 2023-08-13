@@ -26,7 +26,7 @@ class Category extends Model
 
     protected $with = ['translate'];
 
-    public function scopePublished($query,$type) {
+    public function scopeStatus($query,$type) {
         return $query->where('status',$type);
     }
 
@@ -57,11 +57,7 @@ class Category extends Model
 
     public static function tree($category = null){
 
-        $allCategories = 
-         Category::select('id','parent_id')
-        ->published('1')
-        ->with('translate')
-        ->get();
+        $allCategories = Category::select('id','parent_id')->Status('1')->with('translate')->get();
 
 
         $rootCategories = $allCategories->whereNull('parent_id');
@@ -73,30 +69,11 @@ class Category extends Model
             if($category->parent_id == NULL){
 
 
-            $allCategoriesX = 
-            Category::select('id','parent_id')
-           ->published('1')
-           ->with('translate')
-           ->whereNotNull('parent_id')
-           ->get();   
-            
- 
-            $rootCategories =  
-            Category::select('id','parent_id')
-            ->published('1')
-            ->with('translate')
-            ->whereNull('parent_id')->get();
-
-
+            $allCategoriesX = Category::select('id','parent_id')->Status('1')->with('translate')->whereNotNull('parent_id')->get();               
+            $rootCategories = Category::select('id','parent_id')->Status('1')->with('translate')->whereNull('parent_id')->get();
 
             }else{
-                $allCategories = 
-                Category::select('id','parent_id')
-               ->published('1')
-               ->with('translate')
-               ->where('id','<>',$category->id)
-               ->where('parent_id','<>',$category->id)
-               ->get();   
+                $allCategories = Category::select('id','parent_id') ->Status('1')->with('translate')->where('id','<>',$category->id)->where('parent_id','<>',$category->id)->get();   
     
             }
         }

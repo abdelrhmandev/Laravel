@@ -9,6 +9,7 @@ return [
 'parent'                    => 'Parent Category',
 'plural'                    => 'Categories',
 'singular'                  => 'Category',
+'exportMessageSuccess'      => 'Categories has been exported successfully',
 'deleteMessageSuccess'      => 'Category has been deleted successfully',
 'MulideleteMessageSuccess'  => 'Categories has been deleted successfully',
 'delete_selected'           => 'Delete Selected Categor(ies)',

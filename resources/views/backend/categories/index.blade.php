@@ -32,7 +32,15 @@
         </div>
         <div class="card-toolbar">
           <div class="d-flex justify-content-end" data-kt-table-toolbar="base">
-            @include('backend.partials.filter_options._status',['status'=>['published'=>'1','unpublished'=>'0']])
+           
+            <div class="w-150px me-3">
+              <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" id="status" name="status" data-placeholder="Status" data-kt-filter="status">
+                <option></option>
+                <option value="all">{{ __('site.all') }}  ({{ $allrecords }})</option>
+                <option value="1">{{ __('site.published') }} ({{ $publishedCounter}})</option>
+                <option value="0">{{ __('site.unpublished') }} ({{ $publishedCounter}})</option>
+              </select>
+            </div>
             
             @include('backend.partials.modals._exportlisting')
             
@@ -88,18 +96,17 @@
           <thead>
             <!--begin::Table row-->
             <tr class="text-start text-bold-400 fw-bold fs-7 text-uppercase gs-0">
-              <th class="w-10px pe-2 noExport">
-                ID
-                {{-- <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
+              <th class="w-10px pe-2 noExport">             
+                <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
                   <input class="form-check-input AA" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_datatable .AA" value="1" />
-                </div> --}}
+                </div>
               </th>            
-              {{-- <th>{{ __('site.image') }}</th>   --}}
+              <th>{{ __('site.image') }}</th>  
               <th>{{ __('site.title') }}</th>                                
-              {{-- <th>{{ __('site.parent_id') }}</th>  --}}
-              {{-- <th>{{ __('post.plural') }}</th>  --}}
-              {{-- <th>{{ __('site.status') }}</th>  --}}
-              {{-- <th>{{ __('admin.created_at') }}</th> --}}
+              <th>{{ __('site.parent_id') }}</th> 
+              <th>{{ __('post.plural') }}</th> 
+              <th>{{ __('site.status') }}</th> 
+              <th class="w-50px">{{ __('admin.created_at') }}</th>
               <th class="text-end min-w-50px noExport">{{ __('admin.actions') }}</th>  
             </tr>
           </thead>
@@ -121,16 +128,16 @@
 
 var dynamicColumns = [ //as an array start from 0
 { data: 'id', name: 'id',exportable:false}, 
-// { data: 'image', name: 'image'},
-{ data: 'translate.title', name: 'translate.title'},
-// { data: 'parent_id', name: 'parent_id'},
-// { data: 'count', name: 'count'}, 
-// { data: 'status', name: 'status'}, // 5
-// { data: 'created_at', name: 'created_at'},
-{ data: 'actions' , name : 'actions' },    
+{ data: 'image', name: 'image' ,orderable: false,searchable: false},
+{ data: 'translate.title', name: 'translate.title',orderable: false}, // 2
+{ data: 'parent_id', name: 'parent_id',orderable: false,searchable: false},
+{ data: 'count', name: 'count',orderable: false,searchable: false}, 
+{ data: 'status', name: 'status',orderable: false,searchable: true}, // 5
+{ data: 'created_at',name :'created_at', type: 'num', render: { _: 'display', sort: 'timestamp'}},
+{ data: 'actions' , name : 'actions' ,exportable:false,orderable: false,searchable: false},    
 ];
 KTUtil.onDOMContentLoaded(function () {
-  loadDatatable('{{ route('admin.categories.index') }}',dynamicColumns,'5');
+  loadDatatable('{{ $redirectRoute }}',dynamicColumns,'5','2');
 });
 </script>
 

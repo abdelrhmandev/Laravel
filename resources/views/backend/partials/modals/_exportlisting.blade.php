@@ -14,19 +14,19 @@
    </button>
    <!--begin::Menu-->
  
-   <div data-export-file-title="{{ __($trans.'.plural') }}" id="kt_datatable_export_menu" class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-200px py-4" data-kt-menu="true">
+   <div data-export-file-alert-msg="{{ __($trans.'.exportMessageSuccess') }}" data-export-file-title="{{ __($trans.'.plural') }}" id="kt_datatable_export_menu" class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-200px py-4" data-kt-menu="true">
       <div class="menu-item px-3"><a href="#" class="menu-link px-3" data-kt-export="copy"> <span class="navi-icon">
          <i class="la la-copy"></i>
-      </span>  {{ __('admin.copy') }}</a></div>
+      </span>   {{ __('admin.copy') }}</a></div>
       <div class="menu-item px-3"><a href="#" class="menu-link px-3" data-kt-export="excel"> <span class="navi-icon">
          <i class="la la-file-excel-o"></i>
-      </span>  {{ __('admin.excel') }}</a></div>
+      </span>   {{ __('admin.excel') }}</a></div>
       <div class="menu-item px-3"><a href="#" class="menu-link px-3" data-kt-export="csv"> <span class="navi-icon">
          <i class="la la-file-text-o"></i>
-      </span>  {{ __('admin.csv') }}</a></div>
+      </span>   {{ __('admin.csv') }}</a></div>
       <div class="menu-item px-3"><a href="#" class="menu-link px-3" data-kt-export="pdf"> <span class="navi-icon">
          <i class="la la-file-pdf-o"></i>
-      </span>  {{ __('admin.pdf') }}</a></div>
+      </span>   {{ __('admin.pdf') }}</a></div>
    </div>
    <div id="kt_datatable_buttons" class="d-none"></div>
 </div>

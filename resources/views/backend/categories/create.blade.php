@@ -169,7 +169,7 @@
                   <x-backend.cms.image />
 
                     <x-backend.cms.select-single-option-parent :categories="$categories" :level="0" />
-                    <x-backend.cms.publish :published="1" />
+                    <x-backend.cms.status :published="1" />
                 
                 <!--end::Thumbnail settings-->
                 <!--begin::Status-->         

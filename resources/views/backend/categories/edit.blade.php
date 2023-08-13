@@ -75,7 +75,7 @@
             <div class="d-flex flex-column flex-row-fluid gap-7 w-lg-400px gap-lg-10">
                 <x-backend.cms.image :image="$row->image"/>
                 <x-backend.cms.select-single-option-parent :categories="$categories" :level="0" :parentid="$row->parent_id ?? ''" />
-                <x-backend.cms.publish :published="$row->published" />
+                <x-backend.cms.status :status="$row->status" />
             </div>
         </form>
     </div>

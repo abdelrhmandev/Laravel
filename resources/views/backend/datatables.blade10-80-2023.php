@@ -33,7 +33,7 @@
                 },    
                 pagingType: "full_numbers",
                 language: {
-                url: "//cdn.datatables.net/plug-ins/1.12.1/i18n/"+lang+".json",
+                     url: "//cdn.datatables.net/plug-ins/1.12.1/i18n/"+lang+".json",
                 },
                 fnDrawCallback: function() {
                     if (Math.ceil((this.fnSettings().fnRecordsDisplay()) / this.fnSettings()._iDisplayLength) < 1) {

@@ -130,4 +130,8 @@ return [
     'under-procedure'       => 'تحت الإجراء',
     'supported'             => 'مدعومة',
     'do-action'             => 'نفذ',
+    'copy'                  =>'Copy',
+    'excel'                 =>'Excel',
+    'csv'                   =>'CSV',
+    'pdf'                   =>'PDF',
 ];

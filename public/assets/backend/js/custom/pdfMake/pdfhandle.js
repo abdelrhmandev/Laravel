@@ -1,4 +1,14 @@
 function proccessdoc(doc) {
+    var arr2 = $('.img-fluid').map(function(){
+        return this.src;
+   }).get();
+
+for (var i = 0, c = 1; i < arr2.length; i++, c++) {
+         doc.content[1].table.body[c][0] = {
+           image: arr2[i],
+           width: 70
+         }
+           }
     var dir = document.dir == 'rtl' ? 'right' : 'left';
     var lang = document.dir == 'rtl' ? 'ar' : 'left';
     dir = 'center'; // look better in view

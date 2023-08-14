@@ -106,7 +106,7 @@
               <th>{{ __('site.parent_id') }}</th> 
               <th>{{ __('post.plural') }}</th> 
               <th>{{ __('site.status') }}</th> 
-              <th class="w-50px">{{ __('admin.created_at') }}</th>
+              <th>{{ __('admin.created_at') }}</th>
               <th class="text-end min-w-50px noExport">{{ __('admin.actions') }}</th>  
             </tr>
           </thead>

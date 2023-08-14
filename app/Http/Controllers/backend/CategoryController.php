@@ -68,10 +68,16 @@ public function index(Request $request){
                 ->editColumn('image', function ($row) {
                     $div = '<span aria-hidden="true">—</span>';
                     if($row->image){
-                        $div = "<a href=".route('admin.categories.edit',$row->id)." title='".$row->translate->title."' class=\"symbol symbol-50px\">
-                                    <span class=\"symbol-label\" style=\"background-image:url(".url(asset($row->image)).")\" />
-                                    </span>
-                                </a>";   
+
+                        $imagePath = url(asset($row->image));
+                        $base64 = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
+
+                        $div = "<a href=".route('admin.categories.edit',$row->id)." title='".$row->translate->title."'>
+                                <div class=\"symbol symbol-50px\"><img class=\"img-fluid\" src=".$base64."></div>     
+                                </a>";
+
+                        // $div = "<img class=\"img-fluid\" src=".$base64." style=\"width:80px;\">";
+                        //   $div.= $base64;         
                     }
                     return $div;
                 })         
@@ -83,9 +89,7 @@ public function index(Request $request){
                                 <span class=\"badge badge-success badge-circle badge-md\">".$row->posts_count ?? '0' ."</span>
                                 </a>";                   
                 })
-                ->editColumn('created_at', function (MainModel $row) {                    
-                    return "<span class=\"text-dark font-weight-bolder d-block font-size-lg\">". Carbon::parse($row->created_at)->format('Y/m/d').'<br>'.Carbon::parse($row->created_at)->diffForHumans()."</span>";  
-                })                
+
                 ->editColumn('status', function (MainModel $row) {                                                           
                 if($row->status == 1){
                     $checked = "checked";
@@ -99,8 +103,9 @@ public function index(Request $request){
 
 
             ->editColumn('created_at', function (MainModel $row) {
+                $t = "<div class=\"font-weight-bolder text-primary mb-0\">". Carbon::parse($row->created_at)->format('Y/m/d').'</div><div class=\"text-muted\">'.Carbon::parse($row->created_at)->diffForHumans()."</div>";
                 return [
-                   'display' => $row->created_at->format('d/m/Y'),
+                   'display' => $t, 
                    'timestamp' => $row->created_at->timestamp
                 ];
              })
@@ -121,7 +126,7 @@ public function index(Request $request){
                 })                           
 
  
-                ->rawColumns(['image','translate.title','parent_id','count','status','actions','created_at']) 
+                ->rawColumns(['image','translate.title','parent_id','count','status','actions','created_at','created_at.display']) 
 
 
 

@@ -311,7 +311,11 @@
             }
             // Handle Export 
             var exportButtons = function (){            
-                const ExporteddocumentTitle = document.getElementById('kt_datatable_export_menu').getAttribute("data-export-file-title");
+
+            var now = new Date();
+            var jsDate = now.getDate() + '-' + (now.getMonth() + 1) + '-' + now.getFullYear();
+
+            const ExporteddocumentTitle = document.getElementById('kt_datatable_export_menu').getAttribute("data-export-file-title")+' '+jsDate.toString();
 
                 const ExporteddocumentAlertMessage = document.getElementById('kt_datatable_export_menu').getAttribute("data-export-file-alert-msg");
 
@@ -350,8 +354,8 @@
                             },
                             charset: 'utf-8',
                             bom: 'true', 
-                            customize: function(doc) {                           
-                                proccessdoc(doc);
+                            customize: function(doc) {                                                                                       
+                            proccessdoc(doc);
                             },                            
                         }
                     ]

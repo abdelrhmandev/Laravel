@@ -1,7 +1,7 @@
-<div class="card card-flush py-4">
+<div class="card card-flush">
     <div class="card-header">
         <div class="card-title">
-            <h2>Image</h2>     
+            <h2>{{ __('site.image')}}</h2>     
         </div>
     </div>
     <div class="card-body text-center pt-0 fl">
@@ -37,17 +37,17 @@
             </label>
 
             
-            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" id="cancel_image" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel image">
+            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" id="cancel_image" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="{{ __('site.cancel') }}">
                 <i class="bi bi-x fs-2"></i>
             </span>
-            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" id="remove_image" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove image">
+            <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" id="remove_image" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="{{ __('remove.cancel') }}">
                 <i class="bi bi-x fs-2"></i>
             </span>
         </div>
-        <div class="text-muted fs-7">Only *.png, *.jpg and *.jpeg image files are accepted</div>
+        <div class="text-muted fs-7">{{ __('site.uploadOnlyImages')}}</div>
 
         @if(isset($image))
-        <div class="mt-5 form-check form-check-custom form-check-danger form-check-solid">
+        <div class="mt-2 form-check form-check-custom form-check-danger form-check-solid">
             <input class="form-check-input" type="checkbox" name="drop_image_checkBox" value="1" />
             <label class="form-check-label text-danger" for="">
                <i>{{ __('site.remove_image')}}</i>

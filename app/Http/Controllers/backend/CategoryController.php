@@ -74,10 +74,7 @@ public function index(Request $request){
 
                         $div = "<a href=".route('admin.categories.edit',$row->id)." title='".$row->translate->title."'>
                                 <div class=\"symbol symbol-50px\"><img class=\"img-fluid\" src=".$base64."></div>     
-                                </a>";
-
-                        // $div = "<img class=\"img-fluid\" src=".$base64." style=\"width:80px;\">";
-                        //   $div.= $base64;         
+                                </a>";                      
                     }
                     return $div;
                 })         
@@ -103,9 +100,9 @@ public function index(Request $request){
 
 
             ->editColumn('created_at', function (MainModel $row) {
-                $t = "<div class=\"font-weight-bolder text-primary mb-0\">". Carbon::parse($row->created_at)->format('Y/m/d').'</div><div class=\"text-muted\">'.Carbon::parse($row->created_at)->diffForHumans()."</div>";
+ 
                 return [
-                   'display' => $t, 
+                   'display' => "<div class=\"font-weight-bolder text-primary mb-0\">". Carbon::parse($row->created_at)->format('Y/m/d').'</div><div class=\"text-muted\">'.Carbon::parse($row->created_at)->diffForHumans()."</div>", 
                    'timestamp' => $row->created_at->timestamp
                 ];
              })
@@ -152,8 +149,10 @@ public function index(Request $request){
         public function create(){
             if (view()->exists('backend.categories.create')) {
                 $compact = [
-                    'storeRoute'   => route('admin.categories.store'), 
-                    'categories'    => MainModel::tree()  
+                    'trans'              => $this->TRANS,
+                    'listingRoute'       => route('admin.categories.index'),
+                    'storeRoute'         => route('admin.categories.store'), 
+                    'categories'         => MainModel::tree()  
                 ];            
                 return view('backend.categories.create',$compact);
             }
@@ -200,8 +199,10 @@ public function index(Request $request){
                 $image = NULL;
             }
 
+       
+
             $data = [
-                'published'     =>isset($request->published) ? '1' : '0',
+                'status'        =>isset($request->status) ? '1' : '0',
                 'image'         => $image,
                 'parent_id'     => isset($request->parent_id) ? $request->parent_id : NULL,
             ];

@@ -64,11 +64,13 @@ function handleFormSubmitFunc(formId) {
             parentId = $("#" + data).parents('.tab-pane').attr("id");
             icon = $('a[href="#' + parentId + '"][data-bs-toggle="tab"]').parent().find('i');
             icon.removeClass('fa-check').addClass('fa-times');
+            icon.attr('style', 'padding:5px; color:#f1416c !important');
         }).on('core.field.valid', function(data) {
 
             parentId = $("#" + data).parents('.tab-pane').attr("id");
             icon = $('a[href="#' + parentId + '"][data-bs-toggle="tab"]').parent().find('i');
             icon.removeClass('fa-times').addClass('fa-check');
+            icon.attr('style', 'padding:5px; color:#00afaf !important');
         });
     // Handle submit button
     submitButton.addEventListener('click', e => {
@@ -120,6 +122,7 @@ function handleFormSubmitFunc(formId) {
                                         parentId = $("#" + key).parents('.tab-pane').attr("id");
                                         icon = $('a[href="#' + parentId + '"][data-bs-toggle="tab"]').parent().find('i');
                                         icon.removeClass('fa-check').addClass('fa-times');
+                                        icon.attr('style', 'padding:5px; color:#f1416c !important');
                                     });
                                     Swal.fire({
                                         html: msgError, // respose from controller

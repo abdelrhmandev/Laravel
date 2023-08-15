@@ -1,4 +1,4 @@
-<div id="kt_datatable_example_1_export" class="d-none"></div>
+<div id="{{ __($trans.'.plural') }}_example_1_export" class="d-none"></div>
 <!--end::Export buttons-->
 <div>
    <button type="button" class="btn btn-light-primary me-3" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
@@ -14,7 +14,7 @@
    </button>
    <!--begin::Menu-->
  
-   <div data-export-file-alert-msg="{{ __($trans.'.exportMessageSuccess') }}" data-export-file-title="{{ __($trans.'.plural') }}" id="kt_datatable_export_menu" class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-200px py-4" data-kt-menu="true">
+   <div data-export-file-alert-msg="{{ __($trans.'.exportMessageSuccess') }}" data-export-file-title="{{ __($trans.'.plural') }}" id="{{ __($trans.'.plural') }}_export_menu" class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-200px py-4" data-kt-menu="true">
       <div class="menu-item px-3"><a href="#" class="menu-link px-3" data-kt-export="copy"> <span class="navi-icon">
          <i class="la la-copy"></i>
       </span>   {{ __('admin.copy') }}</a></div>
@@ -28,5 +28,5 @@
          <i class="la la-file-pdf-o"></i>
       </span>   {{ __('admin.pdf') }}</a></div>
    </div>
-   <div id="kt_datatable_buttons" class="d-none"></div>
+   <div id="{{ __($trans.'.plural') }}_buttons" class="d-none"></div>
 </div>

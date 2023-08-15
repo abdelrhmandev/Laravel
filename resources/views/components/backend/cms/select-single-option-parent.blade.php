@@ -1,4 +1,4 @@
-<div class="card card-flush py-4">
+<div class="card card-flush">
    
     <div class="card-header">
  

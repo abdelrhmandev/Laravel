@@ -1,14 +1,14 @@
 <script>
-    function loadDatatable(RouteListing,dynamicColumns,StatusColumn=null,TitleColumnOrder=null){
+    function loadDatatable(tableId,RouteListing,dynamicColumns,StatusColumn=null,TitleColumnOrder=null){
         var table;
         var dt;
         var filterStatus;      
-            var lang = document.dir == 'rtl' ? 'ar' : 'en-GB';        
-            dt = $("#kt_datatable").DataTable({
+         var lang = document.dir == 'rtl' ? 'ar' : 'en-GB';        
+            dt = $("#"+tableId).DataTable({
                 searchDelay: 500,
                 processing: true,
                 serverSide: true,   
-                info: false, 
+                info: true, 
                 oLanguage: {
                     "zeroRecords" : '@include("backend.partials.no_matched_records")',
                     "sEmptyTable": '@include("backend.partials.empty")',
@@ -20,9 +20,16 @@
                 },    
                 pagingType: "full_numbers",
                 language: {
-                     url: "//cdn.datatables.net/plug-ins/1.12.1/i18n/"+lang+".json",
+                    /*
+                    oPaginate: {
+                        sNext: '<i class="fa fa-forward"></i>',
+                        sPrevious: '<i class="fa fa-backward"></i>',
+                        sFirst: '<i class="fa fa-step-backward"></i>',
+                        sLast: '<i class="fa fa-step-forward"></i>'
+                    }*/
+                     url: "//cdn.datatables.net/plug-ins/1.12.1/i18n/"+lang+".json",                   
                 },
-                fnDrawCallback: function() {
+                fnDrawCallback: function() {                    
                     if (Math.ceil((this.fnSettings().fnRecordsDisplay()) / this.fnSettings()._iDisplayLength) < 1) {
                         $('.dataTables_paginate').css("display", "none"); $('.dataTables_length').css("display", "none"); $('.dataTables_info').css("display", "none");            
                     }else{
@@ -69,6 +76,7 @@
 
             });    
             table = dt.$;    
+
             // Re-init functions on every table re-draw -- more info: https://datatables.net/reference/event/draw
             dt.on('draw', function () {
                 initToggleToolbar();
@@ -183,7 +191,7 @@
             // Reset Filter
             /////////////////////////// Init toggle toolbar "Delete Selected , MULT SELECTED ITEMS" //////////////////////////
             var initToggleToolbar = function () {
-                const container = document.querySelector('#kt_datatable');
+                const container = document.querySelector('#'+tableId);
                 const checkboxes = container.querySelectorAll('[type="checkbox"]');
                 const deleteSelected = document.querySelector('[data-kt-table-select="delete_selected"]');
                 const destroyMultipleRouteId = document.getElementById('destroyMultipleroute');
@@ -200,7 +208,7 @@
                     deleteSelected.addEventListener('click', function () {
                     var checkedrows = [];
                     var Itemsnames = [];
-                    $("#kt_datatable input:checkbox[name=ids]:checked").each(function() {
+                    $("#"+tableId+" input:checkbox[name=ids]:checked").each(function() {
                         checkedrows.push($(this).val()); 
                         var c = document.querySelector('[data-kt-item-filter'+$(this).val()+'="item"]');                    
                         Itemsnames.push('<strong><u>'+c.innerText+'</strong></u>');
@@ -287,7 +295,7 @@
             } // End Of multi Delete selected
         
             var toggleToolbars = function () {
-                const container = document.querySelector('#kt_datatable');
+                const container = document.querySelector('#'+tableId);
                 const toolbarBase = document.querySelector('[data-kt-table-toolbar="base"]');
                 const toolbarSelected = document.querySelector('[data-kt-table-toolbar="selected"]');
                 const selectedCount = document.querySelector('[data-kt-table-select="selected_count"]');
@@ -314,10 +322,8 @@
 
             var now = new Date();
             var jsDate = now.getDate() + '-' + (now.getMonth() + 1) + '-' + now.getFullYear();
-
-            const ExporteddocumentTitle = document.getElementById('kt_datatable_export_menu').getAttribute("data-export-file-title")+' '+jsDate.toString();
-
-                const ExporteddocumentAlertMessage = document.getElementById('kt_datatable_export_menu').getAttribute("data-export-file-alert-msg");
+            const ExporteddocumentTitle = document.getElementById(tableId+'_export_menu').getAttribute("data-export-file-title")+' '+jsDate.toString();
+            const ExporteddocumentAlertMessage = document.getElementById(tableId+'_export_menu').getAttribute("data-export-file-alert-msg");
 
                 var buttons = new $.fn.dataTable.Buttons(table, {
                     buttons: [
@@ -359,11 +365,11 @@
                             },                            
                         }
                     ]
-                }).container().appendTo($('#kt_datatable_buttons'));
+                }).container().appendTo($('#'+tableId+'_buttons'));
                     // Hook dropdown menu click event to datatable export buttons
 
                     
-                const exportButtons = document.querySelectorAll('#kt_datatable_export_menu [data-kt-export]');
+                const exportButtons = document.querySelectorAll('#'+tableId+'_export_menu [data-kt-export]');
                 exportButtons.forEach(exportButton => {
                 exportButton.addEventListener('click', e => {
                 e.preventDefault();
@@ -386,7 +392,7 @@
                 handleSearchDatatable();
                 initToggleToolbar();
                 handleDeleteRows();
-                table = document.querySelector('#kt_datatable');
+                table = document.querySelector('#'+tableId);
                 if ( !table ) {
                 return;
                 }                
@@ -394,3 +400,53 @@
     }    
     // On document ready
 </script>
+<script>
+    $('#'+'{{ __($trans.".plural") }}').on('click','.changestatus',function(e){
+       var id = $(this).attr('data-id');
+         var table = $(this).attr('data-table');
+         var transItem = $(this).attr('data-trans-item');
+         var status = 0;
+         if($(this).is(":checked")){
+               status = 1;    
+         }
+         $.ajax({
+               type: 'post',
+               headers: {
+                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+               },           
+               url: '{{ route('admin.UpdatePublished')}}',
+               data: {
+                   '_method'   : 'post',          
+                   'status'    : status,
+                   'table'     : table,
+                   'transItem' : transItem,
+                   'id'        : id 
+               },
+                 success: function(response){
+                   toastr.options = {
+                     "closeButton": false,
+                     "debug": false,
+                     "newestOnTop": false,
+                     "progressBar": false,
+                     "positionClass": "toast-top-left",
+                     "preventDuplicates": false,
+                     "onclick": null,
+                     "showDuration": "300",
+                     "hideDuration": "1000",
+                     "timeOut": "5000",
+                     "extendedTimeOut": "1000",
+                     "showEasing": "swing",
+                     "hideEasing": "linear",
+                     "showMethod": "fadeIn",
+                     "hideMethod": "fadeOut"
+                 };
+                 if(response['status'] == true){ 
+                 toastr.success(response['msg']);
+                 }else{ 
+                 toastr.error(response['msg']);      
+                 }
+                 $('#'+'{{ __($trans.".plural") }}').DataTable().ajax.reload();
+               }         
+         });
+   });
+   </script>

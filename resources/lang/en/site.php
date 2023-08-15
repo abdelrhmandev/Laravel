@@ -156,5 +156,5 @@ return [
     'image'                 =>'Image',
     'agree'                 =>'Agree',
     'count'                 =>'Count',
-    
+    'uploadOnlyImages'      =>'Only *.png, *.jpg and *.jpeg image files are accepted',
 ];

@@ -1,8 +1,8 @@
 @extends('backend.base.base')
 
 @section('breadcrumbs')
-    <li class="breadcrumb-item text-muted">Categories</li>
-    <li class="breadcrumb-item text-dark">Add Category</li>
+    <li class="breadcrumb-item text-muted"><a href="{{ $listingRoute}}" class="text-muted"> {{ __($trans.".plural") }}</a></li>
+    <li class="breadcrumb-item text-dark">{{ __($trans.".add") }}</li>
 @stop
 
 @section('style')
@@ -169,7 +169,7 @@
                   <x-backend.cms.image />
 
                     <x-backend.cms.select-single-option-parent :categories="$categories" :level="0" />
-                    <x-backend.cms.status :published="1" />
+                    <x-backend.cms.status :published="1"/>
                 
                 <!--end::Thumbnail settings-->
                 <!--begin::Status-->         

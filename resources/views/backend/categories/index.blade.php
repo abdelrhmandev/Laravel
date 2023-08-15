@@ -1,6 +1,6 @@
 @extends('backend.base.base')
 @section('breadcrumbs')
-<li class="breadcrumb-item text-dark">Categories</li>
+<li class="breadcrumb-item text-dark">{{ __($trans.".plural") }}</li>
 @stop
 
 
@@ -27,25 +27,20 @@
                 <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor" />
               </svg>
             </span>
-            <input type="text" data-kt-table-filter="search" class="form-control form-control-solid w-200px ps-15" placeholder="{{ __('admin.search') }} ......" />
+            <input type="text" data-kt-table-filter="search" class="form-control form-control-solid w-210px ps-15" placeholder="{{ __('admin.search') }} {{ __($trans.'.plural') }} ......" />
           </div>
         </div>
         <div class="card-toolbar">
-          <div class="d-flex justify-content-end" data-kt-table-toolbar="base">
-           
+          <div class="d-flex justify-content-end" data-kt-table-toolbar="base">           
             <div class="w-150px me-3">
-              <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" id="status" name="status" data-placeholder="Status" data-kt-filter="status">
+              <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" id="status" name="status" data-placeholder="{{ __('site.status')}}" data-kt-filter="status">
                 <option></option>
                 <option value="all">{{ __('site.all') }}  ({{ $allrecords }})</option>
                 <option value="1">{{ __('site.published') }} ({{ $publishedCounter}})</option>
-                <option value="0">{{ __('site.unpublished') }} ({{ $publishedCounter}})</option>
+                <option value="0">{{ __('site.unpublished') }} ({{ $unpublishedCounter}})</option>
               </select>
-            </div>
-            
+            </div>            
             @include('backend.partials.modals._exportlisting')
-            
- 
-
             <a class="btn btn-primary" href="{{ $createRoute }}">
               <span class="svg-icon svg-icon-2 svg-icon-primary me-0 me-md-2">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -56,7 +51,6 @@
                 </svg>
               </span>
               {{ __($trans.'.add')}}</a>
-
           </div>
           <div class="d-flex justify-content-end align-items-center d-none" data-kt-table-toolbar="selected">
             <div class="fw-bold me-5">
@@ -73,32 +67,15 @@
              data-not-deleted-message = "{{ __($trans.'.not_delete_selected') }}"
              ><i class="fa fa-trash-alt"></i>{{ __('admin.delete_selected') }}</button>
           </div>
-
         </div>
       </div>
       <div class="card-body pt-0">
-        <!--begin::Table-->
-
- 
-         <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_datatable">         
-          {{-- <p>
-            Published Counter 
-          <input type="text" id="published_counter">
-          </p> --}}
-
-          {{-- <p>
-            UnPublished Counter 
-          <input type="text" id="published_counter">
-          </p> --}}
-
-          
-          <!--begin::Table head-->
+         <table class="table align-middle table-row-dashed fs-6 gy-5" id="{{ __($trans.'.plural') }}">         
           <thead>
-            <!--begin::Table row-->
             <tr class="text-start text-bold-400 fw-bold fs-7 text-uppercase gs-0">
               <th class="w-10px pe-2 noExport">             
                 <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                  <input class="form-check-input AA" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_datatable .AA" value="1" />
+                  <input class="form-check-input AA" type="checkbox" data-kt-check="true" data-kt-check-target="#{{ __($trans.".plural") }} .AA" value="1" />
                 </div>
               </th>            
               <th>{{ __('site.image') }}</th>  
@@ -137,59 +114,59 @@ var dynamicColumns = [ //as an array start from 0
 { data: 'actions' , name : 'actions' ,exportable:false,orderable: false,searchable: false},    
 ];
 KTUtil.onDOMContentLoaded(function () {
-  loadDatatable('{{ $redirectRoute }}',dynamicColumns,'5','2');
+  loadDatatable('{{ __($trans.".plural") }}','{{ $redirectRoute }}',dynamicColumns,'5','2');
 });
 </script>
-
 
 <script>
- $('#kt_datatable').on('click','.changestatus',function(e){
-    var id = $(this).attr('data-id');
-      var table = $(this).attr('data-table');
-      var transItem = $(this).attr('data-trans-item');
-      var status = 0;
-      if($(this).is(":checked")){
-            status = 1;    
-      }
-      $.ajax({
-            type: 'post',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },           
-            url: '{{ route('admin.UpdatePublished')}}',
-            data: {
-                '_method'   : 'post',          
-                'status'    : status,
-                'table'     : table,
-                'transItem' : transItem,
-                'id'        : id 
-            },
-              success: function(response){
-                toastr.options = {
-                  "closeButton": false,
-                  "debug": false,
-                  "newestOnTop": false,
-                  "progressBar": false,
-                  "positionClass": "toast-top-left",
-                  "preventDuplicates": false,
-                  "onclick": null,
-                  "showDuration": "300",
-                  "hideDuration": "1000",
-                  "timeOut": "5000",
-                  "extendedTimeOut": "1000",
-                  "showEasing": "swing",
-                  "hideEasing": "linear",
-                  "showMethod": "fadeIn",
-                  "hideMethod": "fadeOut"
-              };
-              if(response['status'] == true){ 
-              toastr.success(response['msg']);
-              }else{ 
-              toastr.error(response['msg']);      
-              }
-              $('#kt_datatable').DataTable().ajax.reload();
-            }         
-      });
-});
-</script>
+  $('#'+'{{ __($trans.".plural") }}').on('click','.changestatus',function(e){
+     var id = $(this).attr('data-id');
+       var table = $(this).attr('data-table');
+       var transItem = $(this).attr('data-trans-item');
+       var status = 0;
+       if($(this).is(":checked")){
+             status = 1;    
+       }
+       $.ajax({
+             type: 'post',
+             headers: {
+                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+             },           
+             url: '{{ route('admin.UpdatePublished')}}',
+             data: {
+                 '_method'   : 'post',          
+                 'status'    : status,
+                 'table'     : table,
+                 'transItem' : transItem,
+                 'id'        : id 
+             },
+               success: function(response){
+                 toastr.options = {
+                   "closeButton": false,
+                   "debug": false,
+                   "newestOnTop": false,
+                   "progressBar": false,
+                   "positionClass": "toast-top-left",
+                   "preventDuplicates": false,
+                   "onclick": null,
+                   "showDuration": "300",
+                   "hideDuration": "1000",
+                   "timeOut": "5000",
+                   "extendedTimeOut": "1000",
+                   "showEasing": "swing",
+                   "hideEasing": "linear",
+                   "showMethod": "fadeIn",
+                   "hideMethod": "fadeOut"
+               };
+                if(response['status'] == true){ 
+                toastr.success(response['msg']);
+                }else{ 
+                toastr.error(response['msg']);      
+                }
+               $('#'+'{{ __($trans.".plural") }}').DataTable().ajax.reload();
+             }         
+       });
+ });
+ </script>
+ 
 @stop

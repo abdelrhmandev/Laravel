@@ -1,8 +1,8 @@
 @extends('backend.base.base')
 
 @section('breadcrumbs')
-    <li class="breadcrumb-item text-muted"><a href="45454" class="text-muted">Categories</a></li>
-    <li class="breadcrumb-item text-dark">Edit Category</li>
+<li class="breadcrumb-item text-muted"><a href="{{ $redirect_after_destroy}}" class="text-muted"> {{ __($trans.".plural") }}</a></li>
+<li class="breadcrumb-item text-dark">{{ __($trans.".edit") }}</li>
 @stop
 
 @section('style')
@@ -73,6 +73,8 @@
 
             </div>
             <div class="d-flex flex-column flex-row-fluid gap-7 w-lg-400px gap-lg-10">
+                created at 
+                last update at
                 <x-backend.cms.image :image="$row->image"/>
                 <x-backend.cms.select-single-option-parent :categories="$categories" :level="0" :parentid="$row->parent_id ?? ''" />
                 <x-backend.cms.status :status="$row->status" />

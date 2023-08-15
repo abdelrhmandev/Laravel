@@ -1,4 +1,7 @@
 /* Global css for first and last link */
+.div.dataTables_wrapper span.select-info, div.dataTables_wrapper span.select-item{
+  display: none;
+}
 .page-item .page-link .previous,
 .page-item .page-link .next,
 .page-item .page-link .first,

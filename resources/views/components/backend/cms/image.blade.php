@@ -19,9 +19,6 @@
             }
             </style>
         @endif
-
- 
- 
         <div class="image-input image-input-empty image-input-outline image-input-placeholder mb-3" data-kt-image-input="true">
             <div class="image-input-wrapper w-200px h-200px"></div>
             <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change image">
@@ -34,9 +31,7 @@
                 data-fv-file___message="{{  __('validation.mimetypes',['attribute'=>'image','values'=>'*.png, *.jpg and *.jpeg']) }}"
                 />
                 <input type="hidden" name="image_remove" />
-            </label>
-
-            
+            </label>            
             <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" id="cancel_image" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="{{ __('site.cancel') }}">
                 <i class="bi bi-x fs-2"></i>
             </span>
@@ -45,7 +40,6 @@
             </span>
         </div>
         <div class="text-muted fs-7">{{ __('site.uploadOnlyImages')}}</div>
-
         @if(isset($image))
         <div class="mt-2 form-check form-check-custom form-check-danger form-check-solid">
             <input class="form-check-input" type="checkbox" name="drop_image_checkBox" value="1" />

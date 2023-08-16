@@ -150,6 +150,7 @@ return [
     'unpublished'           =>'UnPublished',
     'been_published'        =>':item has been published successfully',
     'been_unpublished'      =>':item has been unpublished successfully',
+    'status_updated'        =>'Status has been Updated successfully',
     'wait'                  =>'Wait ...',
     'update'                =>'Update',
     'remove_image'          =>'Remove Image',

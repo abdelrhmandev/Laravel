@@ -95,7 +95,7 @@ public function index(Request $request){
                     $checked = "";
                     $statusLabel  ="<span class=\"text-danger\">".__('site.unpublished')."</span>";   
                 }                    
-                return  "<div class=\"form-check form-switch form-check-custom form-check-solid\"><input class=\"form-check-input changestatus\" name=\"changestatus\" type=\"checkbox\" ".$checked." id=".$row->id." data-id=".$row->id." data-trans-item=".$this->TRANS." data-table=".$this->ROUTE_PREFIX." />&nbsp;".$statusLabel."</div>";                
+                return  "<div class=\"form-check form-switch form-check-custom form-check-solid\"><input class=\"form-check-input UpdateStatus\" name=\"Updatetatus\" type=\"checkbox\" ".$checked." id=\"Status".$row->id."\" onclick=\"UpdateStatus($row->id,'".__($this->TRANS.'.plural')."','$this->ROUTE_PREFIX','".route('admin.UpdateStatus')."')\" />&nbsp;".$statusLabel."</div>";                
             })
 
 
@@ -280,13 +280,13 @@ public function index(Request $request){
 
 
 
-    public function UpdatePublished(Request $request){       
+    public function UpdateStatus(Request $request){       
 
         
         if(DB::table($request->table)->find($request->id)){
             if(DB::table($request->table)->where('id',$request->id)->update(['status'=>$request->status])){
-                $request->status == 1 ? $TRANS = 'site.been_published':$TRANS = 'site.been_unpublished';
-                $arr = array('msg' => __($TRANS,['item'=> $request->transItem]) , 'status' => true);
+                //$request->status == 1 ? $TRANS = 'site.been_published':$TRANS = 'site.been_unpublished';
+                $arr = array('msg' => __('site.status_updated') , 'status' => true);
             }else{
                 $arr = array('msg' => 'ERROR', 'status' => false);
             }       

@@ -14,7 +14,7 @@ Route::get('/', 'DashboardController@index')->name('dashboard');
 https://github.com/zizohassan/car/blob/master/app/Application/routes/web.php
 
 
-Route::post('UpdatePublished', 'CategoryController@UpdatePublished')->name('UpdatePublished');
+Route::post('UpdateStatus', 'CategoryController@UpdateStatus')->name('UpdateStatus');
  
 
  

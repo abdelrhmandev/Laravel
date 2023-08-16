@@ -117,56 +117,5 @@ KTUtil.onDOMContentLoaded(function () {
   loadDatatable('{{ __($trans.".plural") }}','{{ $redirectRoute }}',dynamicColumns,'5','2');
 });
 </script>
-
-<script>
-  $('#'+'{{ __($trans.".plural") }}').on('click','.changestatus',function(e){
-     var id = $(this).attr('data-id');
-       var table = $(this).attr('data-table');
-       var transItem = $(this).attr('data-trans-item');
-       var status = 0;
-       if($(this).is(":checked")){
-             status = 1;    
-       }
-       $.ajax({
-             type: 'post',
-             headers: {
-                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-             },           
-             url: '{{ route('admin.UpdatePublished')}}',
-             data: {
-                 '_method'   : 'post',          
-                 'status'    : status,
-                 'table'     : table,
-                 'transItem' : transItem,
-                 'id'        : id 
-             },
-               success: function(response){
-                 toastr.options = {
-                   "closeButton": false,
-                   "debug": false,
-                   "newestOnTop": false,
-                   "progressBar": false,
-                   "positionClass": "toast-top-left",
-                   "preventDuplicates": false,
-                   "onclick": null,
-                   "showDuration": "300",
-                   "hideDuration": "1000",
-                   "timeOut": "5000",
-                   "extendedTimeOut": "1000",
-                   "showEasing": "swing",
-                   "hideEasing": "linear",
-                   "showMethod": "fadeIn",
-                   "hideMethod": "fadeOut"
-               };
-                if(response['status'] == true){ 
-                toastr.success(response['msg']);
-                }else{ 
-                toastr.error(response['msg']);      
-                }
-               $('#'+'{{ __($trans.".plural") }}').DataTable().ajax.reload();
-             }         
-       });
- });
- </script>
- 
+<script src="{{ asset('assets/backend/js/custom/updateStatus.js')}}"></script>
 @stop

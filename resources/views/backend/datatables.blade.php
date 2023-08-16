@@ -414,7 +414,7 @@
                headers: {
                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                },           
-               url: '{{ route('admin.UpdatePublished')}}',
+               url: '{{ route('admin.UpdateStatus')}}',
                data: {
                    '_method'   : 'post',          
                    'status'    : status,

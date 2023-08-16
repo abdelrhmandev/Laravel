@@ -12,7 +12,7 @@
       
         <ul class="breadcrumb fw-semibold fs-base my-1">
           <li class="breadcrumb-item text-muted">
-            <a href="../../demo7/dist/index.html" class="text-muted">{{ __('site.home') }}</a>
+            <a href="{{ route('admin.dashboard')}}" class="text-muted">{{ __('site.home') }}</a>
           </li>
           @yield('breadcrumbs')
            

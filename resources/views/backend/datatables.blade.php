@@ -354,6 +354,7 @@
                             title: ExporteddocumentTitle,
                             exportOptions: {
                                 columns: "thead th:not(.noExport)",
+                                orthogonal: "display",
                             },
                             charset: 'utf-8',
                             bom: 'true', 

@@ -94,7 +94,8 @@ public function index(Request $request){
             ->editColumn('created_at', function (MainModel $row) {
  
                 return [
-                   'display' => "<div class=\"font-weight-bolder text-primary mb-0\">". Carbon::parse($row->created_at)->format('d/m/Y').'</div><div class=\"text-muted\">'.Carbon::parse($row->created_at)->diffForHumans()."</div>", 
+                    //Carbon::parse($row->created_at)->diffForHumans()
+                   'display' => "<div class=\"font-weight-bolder text-primary mb-0\">". Carbon::parse($row->created_at)->format('d/m/Y').'</div><div class=\"text-muted\">'."</div>", 
                    'timestamp' => $row->created_at->timestamp
                 ];
              })

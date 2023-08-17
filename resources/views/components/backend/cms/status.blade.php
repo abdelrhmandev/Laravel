@@ -15,7 +15,7 @@
                 @elseif(isset($status) && $status == '0') 
                    <span class="text-danger"> {{ __('site.unpublished')}}</span>
                 @else
-                     <span class="text-success">{{ __('site.published')}}</span>
+                     <span>{{ __('site.published')}}</span>
                 @endif 
                             
             </label>

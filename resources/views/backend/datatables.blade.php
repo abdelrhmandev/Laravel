@@ -1,5 +1,5 @@
 <script>
-    function loadDatatable(tableId,RouteListing,dynamicColumns,StatusColumn=null,TitleColumnOrder=null){
+    function loadDatatable(tableId,RouteListing,dynamicColumns,StatusColumn=null,TitleColumnOrder=null,CREATEDat){
         var table;
         var dt;
         var filterStatus;      
@@ -7,7 +7,7 @@
             dt = $("#"+tableId).DataTable({
                 searchDelay: 500,
                 processing: true,
-                serverSide: true,   
+                serverSide: true,                  
                 info: true, 
                 oLanguage: {
                     "zeroRecords" : '@include("backend.partials.no_matched_records")',
@@ -49,8 +49,9 @@
                 ajax: {                   
                     url: RouteListing,
                 },
+                order: [[CREATEDat ?? '', 'desc']],
                 columns: dynamicColumns,  
-                columnDefs: [
+                columnDefs: [ 
                     {
                         targets: 0,
                         exportable: false,
@@ -76,7 +77,6 @@
 
             });    
             table = dt.$;    
-
             // Re-init functions on every table re-draw -- more info: https://datatables.net/reference/event/draw
             dt.on('draw', function () {
                 initToggleToolbar();
@@ -84,7 +84,6 @@
                 handleDeleteRows();
                 KTMenu.createInstances();
             }); 
-              // Search Datatable --- official docs reference: https://datatables.net/reference/api/search() 
              // Search Datatable --- official docs reference: https://datatables.net/reference/api/search()
             // Filter Datatable
             var handleSearchDatatable = function () {
@@ -105,7 +104,6 @@
             }
             // Delete one records
             var handleDeleteRows = () => {
-                // Select all delete buttons
                 const deleteButtons = document.querySelectorAll('[data-kt-table-filter="delete_row"]');
                 const destroy = document.getElementById('delete_item');
                 deleteButtons.forEach(d => {
@@ -319,7 +317,6 @@
             }
             // Handle Export 
             var exportButtons = function (){            
-
             var now = new Date();
             var jsDate = now.getDate() + '-' + (now.getMonth() + 1) + '-' + now.getFullYear();
             const ExporteddocumentTitle = document.getElementById(tableId+'_export_menu').getAttribute("data-export-file-title")+' '+jsDate.toString();
@@ -361,14 +358,12 @@
                             charset: 'utf-8',
                             bom: 'true', 
                             customize: function(doc) {                                                                                       
-                            proccessdoc(doc);
+                             proccessdoc(doc);
                             },                            
                         }
                     ]
                 }).container().appendTo($('#'+tableId+'_buttons'));
-                    // Hook dropdown menu click event to datatable export buttons
-
-                    
+                    // Hook dropdown menu click event to datatable export buttons                    
                 const exportButtons = document.querySelectorAll('#'+tableId+'_export_menu [data-kt-export]');
                 exportButtons.forEach(exportButton => {
                 exportButton.addEventListener('click', e => {
@@ -400,53 +395,3 @@
     }    
     // On document ready
 </script>
-<script>
-    $('#'+'{{ __($trans.".plural") }}').on('click','.changestatus',function(e){
-       var id = $(this).attr('data-id');
-         var table = $(this).attr('data-table');
-         var transItem = $(this).attr('data-trans-item');
-         var status = 0;
-         if($(this).is(":checked")){
-               status = 1;    
-         }
-         $.ajax({
-               type: 'post',
-               headers: {
-                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-               },           
-               url: '{{ route('admin.UpdateStatus')}}',
-               data: {
-                   '_method'   : 'post',          
-                   'status'    : status,
-                   'table'     : table,
-                   'transItem' : transItem,
-                   'id'        : id 
-               },
-                 success: function(response){
-                   toastr.options = {
-                     "closeButton": false,
-                     "debug": false,
-                     "newestOnTop": false,
-                     "progressBar": false,
-                     "positionClass": "toast-top-left",
-                     "preventDuplicates": false,
-                     "onclick": null,
-                     "showDuration": "300",
-                     "hideDuration": "1000",
-                     "timeOut": "5000",
-                     "extendedTimeOut": "1000",
-                     "showEasing": "swing",
-                     "hideEasing": "linear",
-                     "showMethod": "fadeIn",
-                     "hideMethod": "fadeOut"
-                 };
-                 if(response['status'] == true){ 
-                 toastr.success(response['msg']);
-                 }else{ 
-                 toastr.error(response['msg']);      
-                 }
-                 $('#'+'{{ __($trans.".plural") }}').DataTable().ajax.reload();
-               }         
-         });
-   });
-   </script>

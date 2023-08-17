@@ -54,13 +54,10 @@ class CategoryController extends Controller
         
 }
 
-public function index(Request $request){    
+public function index(Request $request){     
     $model = MainModel::with(['parent','posts'])->withCount('posts');
-
-    
-
     if ($request->ajax()) {              
-         return Datatables::of($model)    
+         return Datatables::of($model)
                 ->addIndexColumn()                 
                 ->editColumn('translate.title', function (MainModel $row) {
                     return "<a href=".route('admin.categories.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".$row->translate->title."</a>";                     
@@ -68,10 +65,8 @@ public function index(Request $request){
                 ->editColumn('image', function ($row) {
                     $div = '<span aria-hidden="true">—</span>';
                     if($row->image){
-
                         $imagePath = url(asset($row->image));
-                        $base64 = "data:image/png;base64,".base64_encode(file_get_contents($imagePath));
-
+                        $base64 = "data:image/png;base64,".base64_encode(file_get_contents($imagePath)); // for exporting issue
                         $div = "<a href=".route('admin.categories.edit',$row->id)." title='".$row->translate->title."'>
                                 <div class=\"symbol symbol-50px\"><img class=\"img-fluid\" src=".$base64."></div>     
                                 </a>";                      
@@ -86,7 +81,6 @@ public function index(Request $request){
                                 <span class=\"badge badge-success badge-circle badge-md\">".$row->posts_count ?? '0' ."</span>
                                 </a>";                   
                 })
-
                 ->editColumn('status', function (MainModel $row) {                                                           
                 if($row->status == 1){
                     $checked = "checked";
@@ -97,21 +91,16 @@ public function index(Request $request){
                 }                    
                 return  "<div class=\"form-check form-switch form-check-custom form-check-solid\"><input class=\"form-check-input UpdateStatus\" name=\"Updatetatus\" type=\"checkbox\" ".$checked." id=\"Status".$row->id."\" onclick=\"UpdateStatus($row->id,'".__($this->TRANS.'.plural')."','$this->ROUTE_PREFIX','".route('admin.UpdateStatus')."')\" />&nbsp;".$statusLabel."</div>";                
             })
-
-
             ->editColumn('created_at', function (MainModel $row) {
  
                 return [
-                   'display' => "<div class=\"font-weight-bolder text-primary mb-0\">". Carbon::parse($row->created_at)->format('Y/m/d').'</div><div class=\"text-muted\">'.Carbon::parse($row->created_at)->diffForHumans()."</div>", 
+                   'display' => "<div class=\"font-weight-bolder text-primary mb-0\">". Carbon::parse($row->created_at)->format('d/m/Y').'</div><div class=\"text-muted\">'.Carbon::parse($row->created_at)->diffForHumans()."</div>", 
                    'timestamp' => $row->created_at->timestamp
                 ];
              })
              ->filterColumn('created_at', function ($query, $keyword) {
                 $query->whereRaw("DATE_FORMAT(created_at,'%d/%m/%Y') LIKE ?", ["%$keyword%"]);
-             })
-
-             
-
+             })             
                 ->editColumn('actions', function ($row) {      
                                                  
                     return view('backend.partials.btns.edit-delete', [
@@ -120,15 +109,8 @@ public function index(Request $request){
                         'destroyRoute'  =>route('admin.categories.destroy',$row->id),
                         'id'            =>$row->id
                         ]);
-                })                           
-
- 
-                ->rawColumns(['image','translate.title','parent_id','count','status','actions','created_at','created_at.display']) 
-
-
-
- 
-                
+                })                            
+                ->rawColumns(['image','translate.title','parent_id','count','status','actions','created_at','created_at.display'])                  
                 ->make(true);    
     }  
         if (view()->exists('backend.categories.index')) {

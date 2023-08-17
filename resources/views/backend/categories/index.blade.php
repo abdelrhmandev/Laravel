@@ -110,11 +110,11 @@ var dynamicColumns = [ //as an array start from 0
 { data: 'parent_id', name: 'parent_id',orderable: false,searchable: false},
 { data: 'count', name: 'count',orderable: false,searchable: false}, 
 { data: 'status', name: 'status',orderable: false,searchable: true}, // 5
-{ data: 'created_at',name :'created_at', type: 'num', render: { _: 'display', sort: 'timestamp'}},
+{ data: 'created_at',name :'created_at', type: 'num', render: { _: 'display', sort: 'timestamp', order: 'desc'}}, // 6
 { data: 'actions' , name : 'actions' ,exportable:false,orderable: false,searchable: false},    
 ];
 KTUtil.onDOMContentLoaded(function () {
-  loadDatatable('{{ __($trans.".plural") }}','{{ $redirectRoute }}',dynamicColumns,'5','2');
+  loadDatatable('{{ __($trans.".plural") }}','{{ $redirectRoute }}',dynamicColumns,'5','2','6');
 });
 </script>
 <script src="{{ asset('assets/backend/js/custom/updateStatus.js')}}"></script>

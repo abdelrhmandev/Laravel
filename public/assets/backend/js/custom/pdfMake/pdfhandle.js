@@ -1,4 +1,12 @@
 function proccessdoc(doc) {
+
+
+
+    //////////
+   
+
+ 
+    ///////////
     var arr2 = $('.img-fluid').map(function(){
         return this.src;
    }).get();
@@ -26,16 +34,14 @@ for (var i = 0, c = 1; i < arr2.length; i++, c++) {
      
     var font = 'Cairo';
     doc.defaultStyle.font = font;
-    doc.content[0]['text'] = doc.content[0]['text'].split(' ').reverse().join(' '); // Header Label
-    if (lang == 'ar') {
-        for (var i = 0; i < doc.content[1].table.body.length; i++) {
-            doc.content[1].table.body[i] = doc.content[1].table.body[i].reverse();
-            for (var j = 0; j < doc.content[1].table.body[i].length; j++) {
-                doc.content[1].table.body[i][j]['text'] = doc.content[1].table.body[i][j]['text'].split(' ').reverse().join(' ');
-            }
-        }
-    }
-    doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split('');
+
+         
+    
+    
+         
+
+
+    
     var now = new Date();
     var jsDate = now.getDate() + '-' + (now.getMonth() + 1) + '-' + now.getFullYear();
     doc.header = (function() {

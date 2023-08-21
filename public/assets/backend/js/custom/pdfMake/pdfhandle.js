@@ -32,8 +32,7 @@ for (var i = 0, c = 1; i < arr2.length; i++, c++) {
             }
         };
      
-    var font = 'Cairo';
-    doc.defaultStyle.font = font;
+    var font = 'Cairo'; 
 
          
     

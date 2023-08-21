@@ -84,6 +84,7 @@ return [
     'choose'                => 'اختر',
     'choose_file'           => 'اختر الملف',
     'choose_image'          => 'اختر الصورة',
+    'image'                 => 'الصورة',
     'more'                  => 'المزيد',
     'deny'                  => 'ليس لديك الاذن',
     'administrator'         => 'مسئول',

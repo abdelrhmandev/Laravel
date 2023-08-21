@@ -12,8 +12,7 @@
 <link href="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
 @endif
  
-
-
+ 
 @stop
 @section('content')
   <div class="container-xxl" id="kt_content_container">

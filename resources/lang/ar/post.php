@@ -1,0 +1,22 @@
+<?php
+return [
+'title'                     => 'خير Title',
+'edit'                      => 'Edit خير',
+'add'                       => 'Add خير',
+'delete'                    => 'Delete خير',
+'select'                    => 'Select خير',
+'select_multi'              =>' Select الأخبار',
+'parent'                    => 'Parent خير',
+'plural'                    => 'الأخبار',
+'singular'                  => 'خير',
+'deleteMessageSuccess'      => 'خير has been deleted successfully',
+'MulideleteMessageSuccess'  => 'الأخبار has been deleted successfully',
+'delete_selected'           => 'Delete Selected Categor(ies)',
+'not_delete_selected'       => 'Categor(ies) not deleted',
+'deleteMessageError'        => 'Error in delete خير',
+'MultideleteMessageError'   => 'Error in delete الأخبار',
+'updateMessageSuccess'      => 'خير has been updated successfully',
+'updateMessageError'        => 'Error in update خير',
+'storeMessageSuccess'       => 'خير has been created successfully',
+'storeMessageError'         => 'Error in Store خير',
+];

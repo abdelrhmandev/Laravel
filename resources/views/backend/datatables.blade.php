@@ -358,8 +358,8 @@
                             },
                             charset: 'utf-8',
                             bom: 'true', 
-                            customize: function(doc) {                                                                                       
-                             proccessdoc(doc);
+                            customize: function(doc) {                    
+                              proccessdoc(doc);
                             },                            
                         }
                     ]

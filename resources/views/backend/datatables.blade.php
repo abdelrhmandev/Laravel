@@ -357,25 +357,9 @@
                                 orthogonal: "display",
 
 
-////////////////////////////////
-format: {
- 
-                    header: function (data, row, column, node) {
-                        const arabic = /[\u0600-\u06FF]/;
-
-                        if (arabic.test(data)) {
-                            return data.split(' ').reverse().join(' ');
-                        }
-                        return data;
-                    }
-                },
-
-                body: function (data, row, column, node) {
-                   
-                   
-                },
-                
-////////////////////////////////
+                    ////////////////////////////////
+                            
+                    ////////////////////////////////
 
 
 
@@ -385,7 +369,7 @@ format: {
                             bom: 'true', 
                             customize: function(doc) {                    
                               proccessdoc(doc);
-
+                              doc.content[0].alignment = 'right';
  
 
 

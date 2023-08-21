@@ -1,12 +1,4 @@
 function proccessdoc(doc) {
-
-
-
-    //////////
-   
-
- 
-    ///////////
     var arr2 = $('.img-fluid').map(function(){
         return this.src;
    }).get();
@@ -32,15 +24,24 @@ for (var i = 0, c = 1; i < arr2.length; i++, c++) {
             }
         };
      
-    var font = 'Cairo'; 
+    var font = 'Cairo';
+    doc.defaultStyle.font = font;
 
-         
-    
-    
-         
+     for (var i = 0; i < doc.content[1].table.body.length; i++) {
+             doc.content[1].table.body[i] = doc.content[1].table.body[i].reverse();
+      
+    }
+ 
+    doc.content[0]['text'] = doc.content[0]['text'].split(' ').reverse().join(' ');
+ 
+   
+ 
+ 
+
+   
 
 
-    
+
     var now = new Date();
     var jsDate = now.getDate() + '-' + (now.getMonth() + 1) + '-' + now.getFullYear();
     doc.header = (function() {

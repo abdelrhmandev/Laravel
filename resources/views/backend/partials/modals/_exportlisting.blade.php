@@ -16,16 +16,19 @@
  
    <div data-export-file-alert-msg="{{ __($trans.'.exportMessageSuccess') }}" data-export-file-title="{{ __($trans.'.plural') }}" id="{{ __($trans.'.plural') }}_export_menu" class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-200px py-4" data-kt-menu="true">
       <div class="menu-item px-3"><a href="#" class="menu-link px-3" data-kt-export="copy"> <span class="navi-icon">
-         <i class="la la-copy"></i>
+         <i class="la la-copy fs-2x  text-info"></i>
+
+
+         
       </span>   {{ __('admin.copy') }}</a></div>
       <div class="menu-item px-3"><a href="#" class="menu-link px-3" data-kt-export="excel"> <span class="navi-icon">
-         <i class="la la-file-excel-o"></i>
+         <i class="la la-file-excel-o fs-2x  text-primary"></i>
       </span>   {{ __('admin.excel') }}</a></div>
       <div class="menu-item px-3"><a href="#" class="menu-link px-3" data-kt-export="csv"> <span class="navi-icon">
-         <i class="la la-file-text-o"></i>
+         <i class="la la-file-text-o fs-2x  text-success"></i>
       </span>   {{ __('admin.csv') }}</a></div>
       <div class="menu-item px-3"><a href="#" class="menu-link px-3" data-kt-export="pdf"> <span class="navi-icon">
-         <i class="la la-file-pdf-o"></i>
+         <i class="la la-file-pdf-o fs-2x  text-danger"></i>
       </span>   {{ __('admin.pdf') }}</a></div>
    </div>
    <div id="{{ __($trans.'.plural') }}_buttons" class="d-none"></div>

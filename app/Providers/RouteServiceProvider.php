@@ -70,6 +70,7 @@ class RouteServiceProvider extends ServiceProvider
                 'middleware'    => ['web'],                
                 ], function() {
                     require_once base_path('routes/admin.php');
+                    require_once base_path('routes/admin.ecommerce.php');
             });
          });
         });

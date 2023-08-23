@@ -77,7 +77,7 @@
                   <input class="form-check-input AA" type="checkbox" data-kt-check="true" data-kt-check-target="#{{ __($trans.".plural") }} .AA" value="1" />
                 </div>
               </th>            
-              <th class="noExport"> {{ __('site.image') }}</th>  
+              <th>{{ __('site.image') }}</th>  
               <th>{{ __('site.title') }}</th>                                
               <th>{{ __('site.parent_id') }}</th> 
               <th>{{ __('post.plural') }}</th> 

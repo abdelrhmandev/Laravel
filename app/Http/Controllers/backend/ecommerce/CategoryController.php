@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\backend;
+namespace App\Http\Controllers\backend\ecommerce;
 use App\Http\Requests\backend\CategoryRequest as ModuleRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -55,7 +55,9 @@ class CategoryController extends Controller
 }
 
 public function index(Request $request){     
-    $model = MainModel::where('taxonomy','posts')->with(['parent','posts'])->withCount('posts');
+
+    dd('welcome to ecommerce page categories');
+    $model = MainModel::with(['parent','posts'])->withCount('posts');
     if ($request->ajax()) {              
          return Datatables::of($model)
                 ->addIndexColumn()                 
@@ -93,8 +95,9 @@ public function index(Request $request){
             })
             ->editColumn('created_at', function (MainModel $row) {
  
-                return [                    
-                   'display' => "<div class=\"font-weight-bolder text-primary mb-0\">". Carbon::parse($row->created_at)->format('d/m/Y').'</div><div class=\"text-muted\">'.''."</div>", 
+                return [
+                    //Carbon::parse($row->created_at)->diffForHumans()
+                   'display' => "<div class=\"font-weight-bolder text-primary mb-0\">". Carbon::parse($row->created_at)->format('d/m/Y').'</div><div class=\"text-muted\">'."</div>", 
                    'timestamp' => $row->created_at->timestamp
                 ];
              })
@@ -120,9 +123,9 @@ public function index(Request $request){
                 'storeRoute'            => route('admin.categories.store'),
                 'destroyMultipleRoute'  => route('admin.categories.destroyMultiple'), 
                 'redirectRoute'         => route('admin.categories.index'),
-                'allrecords'            => MainModel::where('taxonomy','posts')->count(),
-                'publishedCounter'      => MainModel::where('taxonomy','posts')->Status('1')->count(),
-                'unpublishedCounter'    => MainModel::where('taxonomy','posts')->Status('0')->count(),
+                'allrecords'            => MainModel::count(),
+                'publishedCounter'      => MainModel::Status('1')->count(),
+                'unpublishedCounter'    => MainModel::Status('0')->count(),
                 
             ];            
             return view('backend.categories.index',$compact);

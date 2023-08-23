@@ -18,7 +18,7 @@ class Category extends Model
 
  
     protected $fillable = [
-		'parent_id','image','status'
+		'parent_id','image','status','taxonomy'
 	];
 
    
@@ -58,25 +58,20 @@ class Category extends Model
     public static function tree($category = null){
 
         $allCategories = Category::select('id','parent_id')->Status('1')->with('translate')->get();
-
-
         $rootCategories = $allCategories->whereNull('parent_id');
 
 
-
         if(isset($category)){
-
             if($category->parent_id == NULL){
-
-
-            $allCategoriesX = Category::select('id','parent_id')->Status('1')->with('translate')->whereNotNull('parent_id')->get();               
-            $rootCategories = Category::select('id','parent_id')->Status('1')->with('translate')->whereNull('parent_id')->get();
-
-            }else{
+                $allCategories = Category::select('id','parent_id')->Status('1')->with('translate')->where('id','<>',$category->id)->whereNotNull('parent_id')->get();               
+                $rootCategories = Category::select('id','parent_id')->Status('1')->with('translate')->where('id','<>',$category->id)->whereNull('parent_id')->get();             
+        }else{
                 $allCategories = Category::select('id','parent_id') ->Status('1')->with('translate')->where('id','<>',$category->id)->where('parent_id','<>',$category->id)->get();   
-    
-            }
         }
+
+        }
+
+
 
         self::formatTree($rootCategories, $allCategories);
 

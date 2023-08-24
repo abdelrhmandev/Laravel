@@ -155,4 +155,9 @@ return [
     'empty_records'         =>'لا توجد سجلات',
     'no_matched_records'    =>'لا توجد سجلات متطابقة',
     'form_submit_error'     =>'معذرة ، يبدو أنه تم اكتشاف بعض الأخطاء ، يرجى المحاولة مرة أخرى.',
+
+    'publish'               =>'نشر',
+    'published'             =>'منشور',
+    'unpublish'             =>'لا تنشر',
+    'unpublished'           =>'غير منشور',
 ];

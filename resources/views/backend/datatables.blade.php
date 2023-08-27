@@ -1,5 +1,5 @@
 <script>
-    function loadDatatable(tableId,RouteListing,dynamicColumns,StatusColumn=null,TitleColumnOrder=null,CREATEDat){
+    function loadDatatable(tableId,RouteListing,dynamicColumns,StatusColumn=null,TitleColumnOrder=null,CREATED_at,imageToBase64){
         var table;
         var dt;
         var filterStatus;      
@@ -49,7 +49,7 @@
                 ajax: {                   
                     url: RouteListing,
                 },
-                order: [[CREATEDat ?? '', 'desc']],
+                order: [[CREATED_at ?? '', 'desc']],
                 columns: dynamicColumns,  
                 columnDefs: [ 
                     {
@@ -355,26 +355,11 @@
                             exportOptions: {
                                 columns: "thead th:not(.noExport)",
                                 orthogonal: "display",
-
-
-                    ////////////////////////////////
-                            
-                    ////////////////////////////////
-
-
-
-
                             },
                             charset: 'utf-8',
                             bom: 'true', 
                             customize: function(doc) {                    
-                              proccessdoc(doc);
-                              doc.content[0].alignment = 'right';
- 
-
-
-                              
-
+                              proccessdoc(doc,imageToBase64);
                             },                            
                         }
                     ]

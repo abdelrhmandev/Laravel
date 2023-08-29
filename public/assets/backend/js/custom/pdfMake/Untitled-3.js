@@ -1,13 +1,22 @@
+https://stackoverflow.com/questions/72356985/how-to-export-data-table-with-images-as-pdf
+
+
 function proccessdoc(doc,imageToBase64) {
-
-
-    
- 
 
 
     var arr2 = $('.img-fluid').map(function(){
         return this.src;
    }).get();
+
+   var ch = 0; 
+   for (var i = 0, c = 1; i < arr2.length; i++, c++) {
+        ch+= c;
+    }
+
+ 
+
+
+
  
     
         loadFont();
@@ -24,34 +33,53 @@ function proccessdoc(doc,imageToBase64) {
     doc.defaultStyle.font = font;
 
 
-   
+    
 
     if (document.dir = 'rtl') {
         
-         for (var i = 0; i < doc.content[1].table.body.length; i++) {
-            doc.content[1].table.body[i] = doc.content[1].table.body[i].reverse();
+
+  
+            
+        doc.content[0]['text'] = doc.content[0]['text'].split(' ').reverse().join(' '); // Header Label
+        for (var i = 0; i < doc.content[1].table.body.length; i++) {
+            doc.content[1].table.body[i] = doc.content[1].table.body[i].reverse();               
+                  
+        }                
+            
+        for (var i = 0, c = 1; i < arr2.length; i++, c++) {
+            doc.content[1].table.body[c][0] = {
+              image: arr2[i],
+              width: 80,
+              class:'img-fluid',
+            }
+         }
+         
+        doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split('');
+
+       
+            
+
+    
+
+    }else if (document.dir = 'ltr') {
+
+        doc.content[0]['text'] = doc.content[0]['text'].split(' ').reverse().join(' '); // Header Label
+        for (var i = 0; i < doc.content[1].table.body.length; i++) {
+            doc.content[1].table.body[i] = doc.content[1].table.body[i].reverse();               
             for (var j = 0; j < doc.content[1].table.body[i].length; j++) {
                 doc.content[1].table.body[i][j]['text'] = doc.content[1].table.body[i][j]['text'].split(' ').reverse().join(' ');
-            }
-        }    
- 
-
-        doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split('');
- 
-
-    } 
-
-
-    for (var i = 0, c = 1; i < arr2.length; i++, c++) {
-         
-        doc.content[1].table.body[c][0] = {
-          image: arr2[i],
-          width: 80,
-          class:'img-fluid',
+            }            
         }
+
+
+
+
+
+
+
+ 
+
     }
-
-
 
     var now = new Date();
     var jsDate = now.getDate() + '-' + (now.getMonth() + 1) + '-' + now.getFullYear();

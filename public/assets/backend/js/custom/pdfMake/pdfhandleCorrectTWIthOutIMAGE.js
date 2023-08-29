@@ -1,3 +1,8 @@
+// // لو مافيش صور في اللوب يرن ده
+// for (var j = 0; j < doc.content[1].table.body[i].length; j++) {
+//     doc.content[1].table.body[i][j]['text'] = doc.content[1].table.body[i][j]['text'].split(' ').reverse().join(' ');
+// }
+
 function proccessdoc(doc) {
     var arr2 = $('.img-fluid').map(function(){
         return this.src;

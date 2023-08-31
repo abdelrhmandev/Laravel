@@ -68,7 +68,7 @@ public function index(Request $request){
                         $imagePath = url(asset($row->image));
                         $base64 = "data:image/png;base64,".base64_encode(file_get_contents($imagePath)); // for exporting issue
                         $div = "<a href=".route('admin.categories.edit',$row->id)." title='".$row->translate->title."'>
-                                <div class=\"symbol symbol-50px\"><img class=\"img-fluid\" src=".$base64."></div>     
+                                <div class=\"symbol symbol-50px\"><img id=\"imgToExport".$row->id."\" class=\"img-fluid\" src=".$imagePath."></div>     
                                 </a>";                      
                     }
                     return $div;

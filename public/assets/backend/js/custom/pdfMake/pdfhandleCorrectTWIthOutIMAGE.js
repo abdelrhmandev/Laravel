@@ -46,13 +46,13 @@ for (var i = 0, c = 1; i < arr2.length; i++, c++) {
     doc.header = (function() {
         // Done on http://codebeautify.org/image-to-base64-converter
         // var logo = 'data:image/jpeg;base64,{{ Base64 String CODE}}';
-        // return {
-        //     columns: [{
-        //         image: logo,
-        //         width: 50
-        //     }],
-        //     margin: 20
-        // };
+        return {
+            columns: [{
+                image: logo,
+                width: 50
+            }],
+            margin: 20
+        };
     });
     doc.footer = function(page, pages) {
         return {

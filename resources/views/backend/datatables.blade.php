@@ -359,7 +359,7 @@
                             charset: 'utf-8',
                             bom: 'true', 
                             customize: function(doc) {                    
-                              proccessdoc(doc,imageToBase64);
+                              proccessdoc(doc,'{{ asset("assets/frontend/logo.jpg")}}');
                             },                            
                         }
                     ]

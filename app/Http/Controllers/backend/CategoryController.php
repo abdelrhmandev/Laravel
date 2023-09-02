@@ -55,6 +55,9 @@ class CategoryController extends Controller
 }
 
 public function index(Request $request){     
+
+
+
     $model = MainModel::where('taxonomy','posts')->with(['parent','posts'])->withCount('posts');
     if ($request->ajax()) {              
          return Datatables::of($model)

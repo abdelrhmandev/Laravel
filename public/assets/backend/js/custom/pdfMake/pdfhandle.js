@@ -1,42 +1,22 @@
-//convert img to base64
-function getBase64Image(url, callback) {
+function toDataURL(src, callback, outputFormat) {
     var img = new Image();
-    img.crossOrigin = "anonymous";
-    var x = img.onload = function () {
-        var canvas = document.createElement("canvas");
-        canvas.width =this.width;
-        canvas.height =this.height;
-        var ctx = canvas.getContext("2d");
-        ctx.drawImage(this, 0, 0);
-        var dataURL = canvas.toDataURL("image/png");
-        callback(dataURL);
-        
-    };
-    img.src = url;
-  }
-  function getBase64Image2(img) {  
-    // Create an empty canvas element  
-    var canvas = document.createElement("canvas");  
-    canvas.width = img.width;  
-    canvas.height = img.height;  
+        img.setAttribute("crossOrigin", "anonymous");
+        img.onload = function() {
+            var canvas = document.createElement('canvas');
+                canvas.height = this.naturalHeight;
+                canvas.width = this.naturalWidth;
+ 
+            var ctx = canvas.getContext('2d');
+                ctx.drawImage(this, 0, 0);
+            var dataURL;
+            dataURL = canvas.toDataURL(outputFormat);
+            callback(dataURL);
+        };
+        img.src = src;
+}
 
-    // Copy the image contents to the canvas  
-    var ctx = canvas.getContext("2d");  
-    ctx.drawImage(img, 0, 0);  
-
-    // Get the data-URL formatted image  
-    // Firefox supports PNG and JPEG. You could check img.src to  
-    // guess the original format, but be aware the using "image/jpg"  
-    // will re-encode the image.  
-    var dataURL = canvas.toDataURL("image/png");  
-
-    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");  
-}  
-
-function proccessdoc(doc,logo) { 
-    var arr2 = $('.img-fluid').map(function(){
-        return this.src;
-   }).get();
+function proccessdoc(doc) { 
+ 
  
     
         loadFont();
@@ -73,21 +53,37 @@ function proccessdoc(doc,logo) {
     else if(document.dir == 'ltr' ){        
         doc.content[0]['text'] = doc.content[0]['text'].split(' ').reverse().join(' '); // Header Label
         doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split('');
-        for (var i = 0, c = 1; i < arr2.length; i++, c++) {
 
 
-            
-                doc.content[1].table.body[c][0]  = {
-                image: getBase64Image2(arr2[i]),
-                width: 70,
-                class:'img-fluid',
-              }
-            
-          
-            
-          
+    //     var arr2 = $('.img-fluid').map(function(){
+    //         return this.src;
+    //    }).get();
+     
+
+ /////////
+ $.each($('.img-fluid'), function(index, val) {
+    var that = $(this);
+    var url = $(this).attr('src');
  
-   }
+    toDataURL(url, function(dataUrl) {
+        that.attr('src', dataUrl)
+    });
+});
+
+var arr2 = $('.img-fluid').map(function(){
+    return this.src;
+}).get();
+
+
+        for (var i = 0, c = 1; i < arr2.length; i++, c++) {
+            doc.content[1].table.body[c][0]  = {
+              image:   ''  ,
+            }
+        }
+////////      
+ 
+       
+       
 }
    
  

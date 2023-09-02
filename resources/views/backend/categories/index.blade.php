@@ -100,10 +100,6 @@
 <script src="{{ asset('assets/backend/js/custom/pdfMake/pdfhandle.js')}}"></script>
 <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js')}}"></script>
 @include('backend.datatables')
-
-<?php 
-$base64 = "data:image/png;base64,".base64_encode(file_get_contents(url(asset('/assets/frontend/img/logo.png')))); 
-?>
 <script>
 
 var dynamicColumns = [ //as an array start from 0
@@ -117,7 +113,7 @@ var dynamicColumns = [ //as an array start from 0
 { data: 'actions' , name : 'actions' ,exportable:false,orderable: false,searchable: false},    
 ];
 KTUtil.onDOMContentLoaded(function () {
-  loadDatatable('{{ __($trans.".plural") }}','{{ $redirectRoute }}',dynamicColumns,'5','2','6','{{ $base64 }}');
+  loadDatatable('{{ __($trans.".plural") }}','{{ $redirectRoute }}',dynamicColumns,'5','2','6');
 });
 </script>
 <script src="{{ asset('assets/backend/js/custom/updateStatus.js')}}"></script>

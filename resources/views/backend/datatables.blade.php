@@ -1,5 +1,5 @@
 <script>
-    function loadDatatable(tableId,RouteListing,dynamicColumns,StatusColumn=null,TitleColumnOrder=null,CREATED_at,imageToBase64){
+    function loadDatatable(tableId,RouteListing,dynamicColumns,StatusColumn=null,TitleColumnOrder=null,CREATED_at){
         var table;
         var dt;
         var filterStatus;      
@@ -359,7 +359,7 @@
                             charset: 'utf-8',
                             bom: 'true', 
                             customize: function(doc) {                    
-                              proccessdoc(doc,'{{ asset("assets/frontend/logo.jpg")}}');
+                              proccessdoc(doc)
                             },                            
                         }
                     ]

@@ -1,19 +1,22 @@
-function toDataURL(src, callback, outputFormat) {
-    var img = new Image();
-        img.setAttribute("crossOrigin", "anonymous");
-        img.onload = function() {
-            var canvas = document.createElement('canvas');
-                canvas.height = this.naturalHeight;
-                canvas.width = this.naturalWidth;
- 
-            var ctx = canvas.getContext('2d');
-                ctx.drawImage(this, 0, 0);
-            var dataURL;
-            dataURL = canvas.toDataURL(outputFormat);
-            callback(dataURL);
-        };
-        img.src = src;
-}
+function  getBase64ImageFromURL(url) {
+    return new Promise((resolve, reject) => {
+      var img = new Image();
+      img.setAttribute("crossOrigin", "anonymous");
+      img.onload = () => {
+        var canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0);
+        var dataURL = canvas.toDataURL("image/png");
+        resolve(dataURL);
+      };
+      img.onerror = error => {
+        reject(error);
+      };
+      img.src = url;
+    });
+  }
 
 function proccessdoc(doc) { 
  
@@ -61,30 +64,31 @@ function proccessdoc(doc) {
      
 
  /////////
- $.each($('.img-fluid'), function(index, val) {
-    var that = $(this);
-    var url = $(this).attr('src');
- 
-    toDataURL(url, function(dataUrl) {
-        that.attr('src', dataUrl)
-    });
-});
 
+ 
 var arr2 = $('.img-fluid').map(function(){
-    return this.src;
+    return this.id;
 }).get();
 
 
+        // var base64 = getBase64Image(document.getElementById(arr2[i]));
         for (var i = 0, c = 1; i < arr2.length; i++, c++) {
+
+            
             doc.content[1].table.body[c][0]  = {
-              image:   ''  ,
+                image: getBase64ImageFromURL('https://www.ngdevelop.tech/wp-content/uploads/2017/12/cropped-NgDevelopLogo_400X100.png'),
+                width: 100,
+                height: 100,
+                alignment: 'left'
             }
         }
+    }
+    
 ////////      
  
        
        
-}
+ 
    
  
 

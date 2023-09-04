@@ -1,7 +1,3 @@
-var PdfPrinter = require('src/printer');
-var printer = new PdfPrinter(fonts);
-var fs = require('fs');
-
 function  getBase64ImageFromURL(url) {
     return new Promise((resolve, reject) => {
       var img = new Image();
@@ -22,15 +18,9 @@ function  getBase64ImageFromURL(url) {
     });
   }
 
-
-
-
-
 function proccessdoc(doc) { 
  
  
-
-    
     
         loadFont();
         pdfMake.fonts = {
@@ -77,7 +67,7 @@ function proccessdoc(doc) {
 
  
 var arr2 = $('.img-fluid').map(function(){
-    return this.src;
+    return this.id;
 }).get();
 
 
@@ -85,36 +75,14 @@ var arr2 = $('.img-fluid').map(function(){
         for (var i = 0, c = 1; i < arr2.length; i++, c++) {
 
             
-//   WORKING BUT IMAGES NOT CORRECTLY PIXL
-
  
-// var imgToExport = document.getElementById(arr2[i]);
-// var canvas = document.createElement('canvas');
-//         canvas.width = imgToExport.width; 
-//         canvas.height = imgToExport.height; 
-
-//         canvas.getContext('2d').webkitImageSmoothingEnabled = false;
-//         canvas.getContext('2d').mozImageSmoothingEnabled = false;
-//         canvas.getContext('2d').imageSmoothingEnabled = false;
-
-//         canvas.getContext('2d').drawImage(imgToExport, 0, 0);
-   
- 
-     
- 
-
- 
-//       console.log(canvas.toDataURL("image/jpeg"));
-
-          
-
- 
-
-
-
-        doc.content[1].table.body[c][0] = {
-        image: arr2[i],
-        width: 80, 
+var imgToExport = document.getElementById(arr2[i]);
+var canvas = document.createElement('canvas');
+        canvas.width = imgToExport.width; 
+        canvas.height = imgToExport.height; 
+        canvas.getContext('2d').drawImage(imgToExport, 0, 0);
+doc.content[1].table.body[c][0] = {
+    image: canvas.toDataURL('image/png')         
 }    
  
             
@@ -129,12 +97,7 @@ var arr2 = $('.img-fluid').map(function(){
        
  
    
-var now = new Date();
-var pdfDoc = printer.createPdfKitDocument(docDefinition);
-pdfDoc.pipe(fs.createWriteStream('pdfs/images.pdf'));
-pdfDoc.end();
-console.log(new Date() - now);
-
+ 
 
     /*
   getBase64Image(logo, function(result){ 

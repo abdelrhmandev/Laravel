@@ -69,7 +69,7 @@ public function index(Request $request){
                     $div = '<span aria-hidden="true">—</span>';
                     if($row->image && File::exists(public_path($row->image))) {
                         $imagePath = url(asset($row->image));
-                        $base64 = "data:image/png;base64,".base64_encode(file_get_contents($imagePath)); // for exporting issue
+                        $base64 = "data:image/jpg;base64,".base64_encode(file_get_contents($imagePath)); // for exporting issue
                         $div = "<a href=".route('admin.categories.edit',$row->id)." title='".$row->translate->title."'>
                                 <div class=\"symbol symbol-50px\"><img id=\"imgToExport".$row->id."\" class=\"img-fluid\" src=".$imagePath."></div>     
                                 </a>";                      

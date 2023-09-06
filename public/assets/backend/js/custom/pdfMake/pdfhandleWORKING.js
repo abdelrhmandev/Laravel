@@ -1,22 +1,14 @@
-function  getBase64ImageFromURL(url) {
-    return new Promise((resolve, reject) => {
-      var img = new Image();
-      img.setAttribute("crossOrigin", "anonymous");
-      img.onload = () => {
-        var canvas = document.createElement("canvas");
-        canvas.width = img.width;
-        canvas.height = img.height;
-        var ctx = canvas.getContext("2d");
-        ctx.drawImage(img, 0, 0);
-        var dataURL = canvas.toDataURL("image/jpeg");
-        resolve(dataURL);
-      };
-      img.onerror = error => {
-        reject(error);
-      };
-      img.src = url;
-    });
+function getBase64Image(img) {
+    var canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+    return canvas.toDataURL("image/png");
   }
+  
+
+
 
 function proccessdoc(doc) { 
  
@@ -42,13 +34,20 @@ function proccessdoc(doc) {
             }
         }    
         doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split(''); 
-        // for (var i = 0, c = 1; i < arr2.length; i++, c++) {
-        //     doc.content[1].table.body[c][doc.content[1].table.body[0].length-1] = {
-        //       image: arr2[i],
-        //       width: 60,
-        //       class:'img-fluid',
-        //     }
-        // }
+
+        for (var i = 0, c = 1; i < arr2.length; i++, c++) {        
+            doc.images = doc.images || {};
+            //build dictionary
+            var myGlyph = new Image();
+            myGlyph.src = arr2[i];
+            doc.images['myGlyph'] = getBase64Image(myGlyph);            
+                 doc.content[1].table.body[c][doc.content[1].table.body[0].length-1] = {
+                image: 'myGlyph',
+                fit:[80,80]
+              }
+            }
+
+
     } 
 
     // https://stackoverflow.com/questions/72356985/how-to-export-data-table-with-images-as-pdf
@@ -58,37 +57,29 @@ function proccessdoc(doc) {
         doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split('');
 
 
-    //     var arr2 = $('.img-fluid').map(function(){
-    //         return this.src;
-    //    }).get();
-     
-
- /////////
-
  
-var arr2 = $('.img-fluid').map(function(){
-    return this.id;
-}).get();
-
-
-        // var base64 = getBase64Image(document.getElementById(arr2[i]));
-        for (var i = 0, c = 1; i < arr2.length; i++, c++) {
-
-            
  
-var imgToExport = document.getElementById(arr2[i]);
-var canvas = document.createElement('canvas');
-        canvas.width = imgToExport.width; 
-        canvas.height = imgToExport.height; 
-        canvas.getContext('2d').drawImage(imgToExport, 0, 0);
-doc.content[1].table.body[c][0] = {
-    image: canvas.toDataURL('image/png')         
-}    
- 
-            
+        var arr2 = $('.img-fluid').map(function(){
+            return this.src;
+        }).get();
+        
+        
+        
+         
+         
+        for (var i = 0, c = 1; i < arr2.length; i++, c++) {        
+                doc.images = doc.images || {};
+                //build dictionary
+                var myGlyph = new Image();
+                myGlyph.src = arr2[i];
+                doc.images['myGlyph'] = getBase64Image(myGlyph);            
+                  doc.content[1].table.body[c][0]  = {   
+                    image: 'myGlyph',
+                    fit:[80,80]
+                  }
+                }
+                
 
-
-        }
     }
     
 ////////      

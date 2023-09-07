@@ -140,7 +140,7 @@ return [
     'end_date'              =>'end_date',
     'ksa_currency'          =>'R.S',
     'with_days'             =>'with_days',
-    'empty_records'         =>'No Records Founds',
+    'empty_records'         =>'No Records Added Yet',
     'allowed_file'          =>'allowed_file',
     'no_matched_records'    =>'No Matched Records With Your Search',
     'form_submit_error'     =>'Sorry, looks like there are some errors detected, please try again.',
@@ -158,4 +158,9 @@ return [
     'agree'                 =>'Agree',
     'count'                 =>'Count',
     'uploadOnlyImages'      =>'Only *.png, *.jpg and *.jpeg image files are accepted',
+    'copy'                  =>'Copy',
+    'excel'                 =>'Excel',
+    'csv'                   =>'CSV',
+    'pdf'                   =>'PDF',  
+    'sort_by'               =>'Sort by'  
 ];

@@ -15,19 +15,18 @@ class CreateTagsTable extends Migration
     {
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
-            $table->enum('published', ['0','1'])->default(1);
+            $table->enum('taxonomy', ['posts','products','recipes'])->default('posts');
 			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
-
-       });
+        });
         Schema::create('tag_translations', function (Blueprint $table) {                 
-            $table->id();  
+            $table->id();               
             $table->string('title');
             $table->string('slug')->unique();
-            $table->string('lang')->index();	
+			$table->string('lang')->index();			
 			$table->unique(['tag_id','lang']);  
             $table->index(['title','slug']);
-            $table->foreignId('tag_id')->nullable()->constrained('tags')->onDelete('cascade');
+            $table->foreignId('tag_id')->constrained('tags')->onDelete('cascade');
         });	
     }
 

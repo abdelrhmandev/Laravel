@@ -10,68 +10,77 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Carbon\Carbon;
 class Category extends Model
 {
-
     protected $guarded = ['id'];
 
     protected $table = 'categories';
 
-
- 
-    protected $fillable = [
-		'parent_id','image','status','taxonomy'
-	];
-
-   
-    
+    protected $fillable = ['parent_id', 'image', 'status', 'taxonomy'];
 
     protected $with = ['translate'];
 
-    public function scopeStatus($query,$type) {
-        return $query->where('status',$type);
+    public function scopeStatus($query, $type)
+    {
+        return $query->where('status', $type);
     }
-
- 
-
+    public function scopeTaxonomy($query, $type)
+    {
+        return $query->where('taxonomy', $type);
+    }
 
     // # single Item
 
-
-    public function posts(){
+    public function posts()
+    {
         return $this->belongsToMany(Post::class, 'post_categories'); // recipe_tag = table
     }
 
-
- 
-
- 
-
-    public function translate($lang=null){
-        
-        if($lang == 'getAll'){
+    public function translate($lang = null)
+    {
+        if ($lang == 'getAll') {
             return $this->hasMany(CategoryTranslation::class);
-        }else{
-            return $this->hasOne(CategoryTranslation::class)->where('lang',app()->getLocale());
+        } else {
+            return $this->hasOne(CategoryTranslation::class)->where('lang', app()->getLocale());
         }
     }
 
+    public static function tree($tax, $category = null)
+    {
+ 
 
-    public static function tree($category = null){
-
-        $allCategories = Category::select('id','parent_id')->Status('1')->with('translate')->get();
+        $allCategories = Category::select('id', 'parent_id')
+            ->Taxonomy($tax)
+            ->Status('1')
+            ->with('translate')
+            ->get();
         $rootCategories = $allCategories->whereNull('parent_id');
 
+        if (isset($category)) {
+            if ($category->parent_id == null) {
+                $allCategories = Category::select('id', 'parent_id')
+                    ->Taxonomy($tax)
+                    ->Status('1')
+                    ->with('translate')
+                    ->where('id', '<>', $category->id)
+                    ->whereNotNull('parent_id')
+                    ->get();
 
-        if(isset($category)){
-            if($category->parent_id == NULL){
-                $allCategories = Category::select('id','parent_id')->Status('1')->with('translate')->where('id','<>',$category->id)->whereNotNull('parent_id')->get();               
-                $rootCategories = Category::select('id','parent_id')->Status('1')->with('translate')->where('id','<>',$category->id)->whereNull('parent_id')->get();             
-        }else{
-                $allCategories = Category::select('id','parent_id') ->Status('1')->with('translate')->where('id','<>',$category->id)->where('parent_id','<>',$category->id)->get();   
+                $rootCategories = Category::select('id', 'parent_id')
+                    ->Taxonomy($tax)
+                    ->Status('1')
+                    ->with('translate')
+                    ->where('id', '<>', $category->id)
+                    ->whereNull('parent_id')
+                    ->get();
+            } else {
+                $allCategories = Category::select('id', 'parent_id')
+                    ->Taxonomy($tax)
+                    ->Status('1')
+                    ->with('translate')
+                    ->where('id', '<>', $category->id)
+                    ->where('parent_id', '<>', $category->id)
+                    ->get();
+            }
         }
-
-        }
-
-
 
         self::formatTree($rootCategories, $allCategories);
 
@@ -80,40 +89,29 @@ class Category extends Model
 
     private static function formatTree($categories, $allCategories)
     {
-        if($categories){
-        foreach ($categories as $category) {
-            $category->children = $allCategories->where('parent_id', $category->id)->values();
+        if ($categories) {
+            foreach ($categories as $category) {
+                $category->children = $allCategories->where('parent_id', $category->id)->values();
 
-            if ($category->children->isNotEmpty()) {
-                self::formatTree($category->children, $allCategories);
-            }
+                if ($category->children->isNotEmpty()) {
+                    self::formatTree($category->children, $allCategories);
+                }
             }
         }
     }
 
- 
-
-    public function isChild(): bool{
+    public function isChild(): bool
+    {
         return $this->parent_id !== null;
     }
 
-
     public function parent(): BelongsTo
     {
-        return $this->belongsTo(Category::class, 'parent_id')
-            ->withDefault([
-                'name' => 'Default',
-            ]);
-            
+        return $this->belongsTo(Category::class, 'parent_id')->withDefault([
+            'name' => 'Default',
+        ]);
     }
-    // public function getCreatedAtAttribute($date){                
-    //     return Carbon::parse($date)->format('Y/m/d').' | '.Carbon::parse($date)->diffForHumans();     
+    // public function getCreatedAtAttribute($date){
+    //     return Carbon::parse($date)->format('Y/m/d').' | '.Carbon::parse($date)->diffForHumans();
     // }
-
-
- 
-    
-    
-
-
 }

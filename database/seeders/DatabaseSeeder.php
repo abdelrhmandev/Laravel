@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             // AreaSeeder::class,
             // DistrictSeeder::class,
             // SlideSeeder::class,   
-            // TagSeeder::class,
+            TagSeeder::class,
             // PageSeeder::class,
             // ProductCategorySeeder::class,
             // ProductSeeder::class,

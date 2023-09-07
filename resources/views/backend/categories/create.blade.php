@@ -147,7 +147,7 @@
             <div class="d-flex flex-column flex-row-fluid gap-7 w-lg-400px gap-lg-10">
                   <x-backend.cms.image />
                     <x-backend.cms.select-single-option-parent :categories="$categories" :level="0" />
-                    <x-backend.cms.status :published="1"/>
+                    <x-backend.cms.status :published="1" :action="'create'"/>
             </div>
         </form>
     </div>

@@ -23,20 +23,22 @@ class CategoryController extends Controller
 
         $this->TblForignKey = 'category_id';
         $this->ROUTE_PREFIX = 'categories'; 
-        $this->TRANSLATECOLUMNS = ['title','slug','description'];
+        $this->TRANSLATECOLUMNS = ['title','slug','description']; // Columns To be Trsanslated
         $this->TRANS = 'category';
+        $this->UPLOADFOLDER = 'categories';
+        $this->Taxonomy  = 'posts';
     }
 
 
     
     public function store(ModuleRequest $request){
-
         try {
             DB::beginTransaction();        
             $validated               = $request->validated();
             $validated['published']  = isset($request->published) ? '1' : '0';       
-            $validated['image']      = (!empty($request->file('image'))) ? $this->uploadFile($request->file('image'),'categories') : NULL;    
+            $validated['image']      = (!empty($request->file('image'))) ? $this->uploadFile($request->file('image'),$this->UPLOADFOLDER) : NULL;    
             $validated['parent_id']  = isset($request->parent_id) ? $request->parent_id : NULL;
+            $validated['taxonomy']   = $this->Taxonomy;
             $query                   = MainModel::create($validated);
                          
             $translatedArr           = $this->HandleMultiLangdatabase($this->TRANSLATECOLUMNS,[$this->TblForignKey=>$query->id]);                      
@@ -56,22 +58,20 @@ class CategoryController extends Controller
 
 public function index(Request $request){     
 
-
-
-    $model = MainModel::where('taxonomy','posts')->with(['parent','posts'])->withCount('posts');
+    $model = MainModel::Taxonomy($this->Taxonomy)->with(['parent',$this->Taxonomy])->withCount($this->Taxonomy);
     if ($request->ajax()) {              
          return Datatables::of($model)
                 ->addIndexColumn()                 
                 ->editColumn('translate.title', function (MainModel $row) {
-                    return "<a href=".route('admin.categories.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".$row->translate->title."</a>";                     
+                    return "<a href=".route('admin.'.$this->ROUTE_PREFIX.'.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 mb-1\" data-kt-item-filter".$row->id."=\"item\">".Str::words($row->translate->title, '5')."</a>";                     
                 })                                                              
                 ->editColumn('image', function ($row) {
                     $div = '<span aria-hidden="true">—</span>';
                     if($row->image && File::exists(public_path($row->image))) {
                         $imagePath = url(asset($row->image));
-                        $base64 = "data:image/jpg;base64,".base64_encode(file_get_contents($imagePath)); // for exporting issue
-                        $div = "<a href=".route('admin.categories.edit',$row->id)." title='".$row->translate->title."'>
-                                <div class=\"symbol symbol-50px\"><img id=\"imgToExport".$row->id."\" class=\"img-fluid\" src=".$imagePath."></div>     
+                        
+                        $div = "<a href=".route('admin.'.$this->ROUTE_PREFIX.'.edit',$row->id)." title='".$row->translate->title."'>
+                                <div class=\"symbol symbol-50px\"><img class=\"img-fluid\" src=".$imagePath."></div>     
                                 </a>";                      
                     }
                     return $div;
@@ -108,8 +108,8 @@ public function index(Request $request){
                                                  
                     return view('backend.partials.btns.edit-delete', [
                         'trans'         =>$this->TRANS,                       
-                        'editRoute'     =>route('admin.categories.edit',$row->id),
-                        'destroyRoute'  =>route('admin.categories.destroy',$row->id),
+                        'editRoute'     =>route('admin.'.$this->ROUTE_PREFIX.'.edit',$row->id),
+                        'destroyRoute'  =>route('admin.'.$this->ROUTE_PREFIX.'.destroy',$row->id),
                         'id'            =>$row->id
                         ]);
                 })                            
@@ -119,13 +119,13 @@ public function index(Request $request){
         if (view()->exists('backend.categories.index')) {
             $compact = [
                 'trans'                 => $this->TRANS,
-                'createRoute'           => route('admin.categories.create'),                
-                'storeRoute'            => route('admin.categories.store'),
-                'destroyMultipleRoute'  => route('admin.categories.destroyMultiple'), 
-                'redirectRoute'         => route('admin.categories.index'),
-                'allrecords'            => MainModel::where('taxonomy','posts')->count(),
-                'publishedCounter'      => MainModel::where('taxonomy','posts')->Status('1')->count(),
-                'unpublishedCounter'    => MainModel::where('taxonomy','posts')->Status('0')->count(),
+                'createRoute'           => route('admin.'.$this->ROUTE_PREFIX.'.create'),                
+                'storeRoute'            => route('admin.'.$this->ROUTE_PREFIX.'.store'),
+                'destroyMultipleRoute'  => route('admin.'.$this->ROUTE_PREFIX.'.destroyMultiple'), 
+                'redirectRoute'         => route('admin.'.$this->ROUTE_PREFIX.'.index'),
+                'allrecords'            => MainModel::Taxonomy($this->Taxonomy)->count(),
+                'publishedCounter'      => MainModel::Taxonomy($this->Taxonomy)->Status('1')->count(),
+                'unpublishedCounter'    => MainModel::Taxonomy($this->Taxonomy)->Status('0')->count(),
                 
             ];            
             return view('backend.categories.index',$compact);
@@ -135,138 +135,97 @@ public function index(Request $request){
             if (view()->exists('backend.categories.create')) {
                 $compact = [
                     'trans'              => $this->TRANS,
-                    'listingRoute'       => route('admin.categories.index'),
-                    'storeRoute'         => route('admin.categories.store'), 
-                    'categories'         => MainModel::tree()  
+                    'listingRoute'       => route('admin.'.$this->ROUTE_PREFIX.'.index'),
+                    'storeRoute'         => route('admin.'.$this->ROUTE_PREFIX.'.store'), 
+                    'categories'         => MainModel::tree($this->Taxonomy)  
                 ];            
                 return view('backend.categories.create',$compact);
             }
         }
 
      public function edit(MainModel $category){ 
-
-
         if (view()->exists('backend.categories.edit')) {         
             $compact = [                
-                'updateRoute'             => route('admin.categories.update',$category->id), 
-                'categories'              => MainModel::tree($category),
+                'updateRoute'             => route('admin.'.$this->ROUTE_PREFIX.'.update',$category->id), 
+                'categories'              => MainModel::tree($this->Taxonomy,$category),
                 'row'                     => $category,
                 'TrsanslatedColumnValues' => $this->getItemtranslatedllangs($category,$this->TRANSLATECOLUMNS,$this->TblForignKey),
-                'destroyRoute'            => route('admin.categories.destroy',$category->id),
-                'redirect_after_destroy'  => route('admin.categories.index'),
+                'destroyRoute'            => route('admin.'.$this->ROUTE_PREFIX.'.destroy',$category->id),
+                'redirect_after_destroy'  => route('admin.'.$this->ROUTE_PREFIX.'.index'),
                 'trans'                   => $this->TRANS,
             ];            
-
-
              return view('backend.categories.edit',$compact);                    
             }
     }
 
-    public function update(ModuleRequest $request, MainModel $category)
-    {
-
-
-        
-        
+    public function update(ModuleRequest $request, MainModel $category){        
          try {
             DB::beginTransaction();        
             $validated = $request->validated();
-
-
             $image = $category->image; 
             if(!empty($request->file('image'))) {
                 $category->image && File::exists(public_path($category->image)) ? $this->unlinkFile($category->image): '';
-                $image =  $this->uploadFile($request->file('image'),'categories');
+                $image =  $this->uploadFile($request->file('image'),$this->UPLOADFOLDER);
              }    
             if(isset($request->drop_image_checkBox)  && $request->drop_image_checkBox == 1) {                
                 $this->unlinkFile($category->image);
                 $image = NULL;
             }
-
-       
-
             $data = [
                 'status'        =>isset($request->status) ? '1' : '0',
                 'image'         => $image,
                 'parent_id'     => isset($request->parent_id) ? $request->parent_id : NULL,
             ];
-
             MainModel::findOrFail($category->id)->update($data);
-
             $arr = array('msg' => __($this->TRANS.'.'.'updateMessageSuccess'), 'status' => true);            
             DB::commit();
-            $this->UpdateMultiLangsQuery($this->TRANSLATECOLUMNS,"category_translation",[$this->TblForignKey=>$category->id]);
-            
+            $this->UpdateMultiLangsQuery($this->TRANSLATECOLUMNS,"category_translation",[$this->TblForignKey=>$category->id]);            
             $arr = array('msg' => __('category.updateMessageSuccess'), 'status' => true);
-
-
         } catch (\Exception $e) {
             DB::rollback();            
             $arr = array('msg' => __($this->TRANS.'.'.'updateMessageError'), 'status' => false);
         }
          return response()->json($arr);
-        
-
-            
-           
-
     }
     public function destroy(MainModel $category){        
         //SET ALL childs to NULL 
         $childs = $category->where('parent_id', $category->id);     
         foreach ($childs->get() as $child) {
             $child->id ? MainModel::where('id',$child->id)->update(['parent_id' => NULL]) : '';
-        }
-        
-        $category->image ? $this->unlinkFile($category->image) : ''; // Unlink Image
-        
+        }        
+        $category->image ? $this->unlinkFile($category->image) : ''; // Unlink Image        
         if($category->delete()){
             $arr = array('msg' => __($this->TRANS.'.'.'deleteMessageSuccess'), 'status' => true);
         }else{
             $arr = array('msg' => __($this->TRANS.'.'.'deleteMessageError'), 'status' => false);
-        }
-        
+        }        
         return response()->json($arr);
 
     }
 
 
-    public function destroyMultiple(Request $request){   
-
-       
+    public function destroyMultiple(Request $request){  
         $ids = explode(',', $request->ids);
         $childs = MainModel::whereIn('parent_id',$ids);     
         foreach ($childs->get() as $child) {
             $child->id ? MainModel::where('id',$child->id)->update(['parent_id' => NULL]) : '';
             $child->image ? $this->unlinkFile($child->image) : ''; // Unlink Image 
         }
-        
-
- 
         foreach (MainModel::whereIn('id',$ids)->get() as $selectedItems) {
             $selectedItems->image ? $this->unlinkFile($selectedItems->image) : ''; // Unlink Images            
-        }
-     
-        $items = MainModel::whereIn('id',$ids); // Check   
-       
+        }     
+        $items = MainModel::whereIn('id',$ids); // Check          
         if($items->delete()){
             $arr = array('msg' => __($this->TRANS.'.'.'MulideleteMessageSuccess'), 'status' => true);
         }else{
             $arr = array('msg' => __($this->TRANS.'.'.'MiltideleteMessageError'), 'status' => false);
-
-        }
-        
+        }        
         return response()->json($arr);
-
- 
-
     }
 
 
 
-    public function UpdateStatus(Request $request){       
-
-        
+    public function UpdateStatus(Request $request){               
         if(DB::table($request->table)->find($request->id)){
             if(DB::table($request->table)->where('id',$request->id)->update(['status'=>$request->status])){
                 //$request->status == 1 ? $TRANS = 'site.been_published':$TRANS = 'site.been_unpublished';

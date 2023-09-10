@@ -13,7 +13,6 @@ class CategoryTranslation extends Model
 
     
     protected $fillable = [
-        'id',
 		'category_id',
 		'title',
         'description',

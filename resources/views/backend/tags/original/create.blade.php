@@ -26,14 +26,10 @@
             enctype="multipart/form-data">
             <div class="d-flex flex-column gap-7 gap-lg-10 w-100 mb-7 me-lg-10">
                 <x-backend.langs.ulTabs/>
-                <x-backend.langs.LangInputs :showDescription="1" :richTextArea="0" :showSlug="1" />
+                <x-backend.langs.LangInputs :showDescription="0" :richTextArea="0" :showSlug="1" />
                 <x-backend.btns.button />
             </div>
-            <div class="d-flex flex-column flex-row-fluid gap-7 w-lg-400px gap-lg-10">
-                  <x-backend.cms.image />
-                    <x-backend.cms.select-single-option-parent :categories="$categories" :level="0" />
-                    <x-backend.cms.status :published="1" :action="'create'"/>
-            </div>
+          
         </form>
     </div>
 @stop

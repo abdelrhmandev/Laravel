@@ -29,15 +29,11 @@
             <div class="d-flex flex-column gap-7 gap-lg-10 w-100 mb-7 me-lg-10">
                 <x-backend.langs.ulTabs/>                
 
-                <x-backend.langs.LangInputs :showDescription="1" :richTextArea="0" :showSlug="1" :row="$row" :columnvalues="$TrsanslatedColumnValues" />
+                <x-backend.langs.LangInputs :showDescription="0" :richTextArea="0" :showSlug="1" :row="$row" :columnvalues="$TrsanslatedColumnValues" />
                 <x-backend.btns.button :destroyRoute="$destroyRoute" :redirectRoute="$redirect_after_destroy" :row="$row" :trans="$trans"/>
 
             </div>
-            <div class="d-flex flex-column flex-row-fluid gap-7 w-lg-400px gap-lg-10">
-                <x-backend.cms.image :image="$row->image"/>
-                <x-backend.cms.select-single-option-parent :categories="$categories" :level="0" :parentid="$row->parent_id ?? ''" />
-                <x-backend.cms.status :status="$row->status" :action="'edit'" />
-            </div>
+             
         </form>
     </div>
 @stop

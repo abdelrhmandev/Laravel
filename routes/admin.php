@@ -54,8 +54,13 @@ Route::resource('districts', DistrictController::class)->except('show');
 
 
 Route::resource('tags', TagController::class)->except('show');
+Route::delete('tags/destroy/all', 'TagController@destroyMultiple')->name('tags.destroyMultiple');
+
+
+
 Route::resource('careers', CareerController::class)->except('show');
 Route::resource('faqs', FaqController::class)->except('show');
+
 Route::resource('pages', PageController::class)->except('show');
 Route::resource('posts', PostController::class)->except('show');
 Route::resource('slides', SlideController::class)->except('show');

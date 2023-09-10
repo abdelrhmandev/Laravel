@@ -8,20 +8,28 @@ class Tag extends Model
 
     protected $with = ['translate'];
     
-    protected $fillable = [		
-		'id',
-	];
+    protected $fillable = ['taxonomy'];
+
+
+    public function scopeTaxonomy($query, $type)
+    {
+        return $query->where('taxonomy', $type);
+    }
 
 
     public function translations(){
         return $this->hasMany(TagTranslation::class);
     }
-    # Translation method
-    public function translate(){
-        return $this->hasOne(TagTranslation::class)->where('lang',app()->getLocale());
+    public function translate($lang = null)
+    {
+        if ($lang == 'getAll') {
+            return $this->hasMany(TagTranslation::class);
+        } else {
+            return $this->hasOne(TagTranslation::class)->where('lang', app()->getLocale());
+        }
     }
-    public function recipe(){
-        return $this->belongsToMany(Recipe::class, 'recipe_tag', 'tag_id', 'recipe_id'); // recipe_tag = table
+    public function posts(){
+        return $this->belongsToMany(Post::class, 'post_tag', 'tag_id', 'post_id'); // post_tag = table
     }
 
 

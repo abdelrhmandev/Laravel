@@ -50,14 +50,7 @@
             </a>
         </div>
 
-        <div class="menu-item">
-            <a class="menu-link" href="{{ route('admin.categories.create') }}">
-                <span class="menu-bullet">
-                    <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title">{{ __('category.add') }}</span>
-            </a>
-        </div>
+ 
 
 
         <div class="menu-item">
@@ -69,14 +62,7 @@
             </a>
         </div>
 
-        <div class="menu-item">
-            <a class="menu-link" href="{{ route('admin.tags.create') }}">
-                <span class="menu-bullet">
-                    <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title">{{ __('tag.add') }}</span>
-            </a>
-        </div>
+ 
 
 
     </div>

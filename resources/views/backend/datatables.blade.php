@@ -3,7 +3,14 @@
         var table;
         var dt;
         var filterStatus;      
-         var lang = document.dir == 'rtl' ? 'ar' : 'en-GB';        
+        var lang = document.dir == 'rtl' ? 'ar' : 'en-GB';  
+        var s = '';
+
+         if(CREATED_at) { 
+            s = [[CREATED_at , 'desc']];
+         }
+
+
             dt = $("#"+tableId).DataTable({
                 searchDelay: 500,
                 processing: true,
@@ -49,7 +56,7 @@
                 ajax: {                   
                     url: RouteListing,
                 },
-                order: [[CREATED_at ?? '', 'desc']],
+                order: s,
                 columns: dynamicColumns,  
                 columnDefs: [ 
                     {

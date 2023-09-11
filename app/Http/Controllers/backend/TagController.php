@@ -42,23 +42,22 @@ class TagController extends Controller
                 ->AddColumn('count', function (MainModel $row) {
                     return '<a href=' .
                         route('admin.posts.index', $row->id) .
-                        ">
-                                    <span class=\"badge badge-success badge-circle badge-md\">" .
+                        " class=\"text-primary fw-bold me-1\">" .
                         $row->posts_count ??
                         '0' .
-                            "</span>
-                                    </a>";
+                            "</a>";
                 })
-
                 ->editColumn('created_at', function (MainModel $row) {
-                    return [
-                        'display' => "<div class=\"font-weight-bolder text-primary mb-0\">" . Carbon::parse($row->created_at)->format('d/m/Y') . '</div><div class=\"text-muted\">' . '' . '</div>',
-                        'timestamp' => $row->created_at->timestamp,
+ 
+                    return [                    
+                       'display' => "<span class=\"text-gray-800 fw-bold\">". Carbon::parse($row->created_at)->format('d/m/Y').'</div><div class=\"text-muted\">'.''."</div>", 
+                       'timestamp' => $row->created_at->timestamp
                     ];
-                })
-                ->filterColumn('created_at', function ($query, $keyword) {
+                 })
+                 ->filterColumn('created_at', function ($query, $keyword) {
                     $query->whereRaw("DATE_FORMAT(created_at,'%d/%m/%Y') LIKE ?", ["%$keyword%"]);
-                })
+                 })             
+    
                 ->editColumn('actions', function ($row) {
                     return view('backend.partials.btns.edit-delete', [
                         'trans' => $this->TRANS,
@@ -67,7 +66,8 @@ class TagController extends Controller
                         'id' => $row->id,
                     ]);
                 })
-                ->rawColumns(['translate.title', 'count', 'actions', 'created_at', 'created_at.display'])
+
+                ->rawColumns(['image','translate.title','count','actions','created_at','created_at.display'])                  
                 ->make(true);
         }
         if (view()->exists('backend.tags.index')) {
@@ -94,6 +94,30 @@ class TagController extends Controller
             return view('backend.tags.create', $compact);
         }
     }
+
+
+
+    public function store(ModuleRequest $request){
+        try {
+            DB::beginTransaction();        
+            $validated               = $request->validated();
+            $validated['taxonomy']   = $this->Taxonomy;
+            $query                   = MainModel::create($validated);                         
+            $translatedArr           = $this->HandleMultiLangdatabase($this->TRANSLATECOLUMNS,[$this->TblForignKey=>$query->id]);                      
+                     
+            if(TransModel::insert($translatedArr)){              
+                     $arr = array('msg' => __($this->TRANS.'.'.'storeMessageSuccess'), 'status' => true);              
+            }
+            DB::commit();   
+        
+        } catch (\Exception $e) {
+            DB::rollback();            
+            $arr = array('msg' => __($this->TRANS.'.'.'storeMessageError'), 'status' => false);
+        }
+        return response()->json($arr);
+        
+}
+
 
     public function edit(MainModel $tag)
     {

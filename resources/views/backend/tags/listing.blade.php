@@ -1,5 +1,5 @@
 <div class="d-flex flex-column flex-lg-row-fluid gap-7 gap-lg-10">
-  <!--begin::Order details-->
+    <!--begin::Order details-->
   <div class="card card-flush py-4">
     <!--begin::Card header-->
     <div class="card-header">
@@ -30,139 +30,36 @@
         </div>
         <!--end::Search products-->
         <!--begin::Table-->
-        <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_edit_order_product_table">
-          <!--begin::Table head-->
+
+        <table class="table align-middle table-row-bordered fs-6 gy-5" id="{{ __($trans.'.plural') }}">         
           <thead>
-            <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-              <th class="w-25px pe-2"></th>
-              <th class="min-w-200px">Product</th>
-              <th class="min-w-100px text-end pe-5">Qty Remaining</th>
+            <tr class="text-start fw-bold fs-7 text-uppercase gs-0">
+              <th class="w-10px pe-2 noExport">             
+                <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
+                  <input class="form-check-input AA" type="checkbox" data-kt-check="true" data-kt-check-target="#{{ __($trans.".plural") }} .AA" value="1" />
+                </div>
+              </th>            
+      
+              <th>{{ __('site.title') }}</th>                                
+              <th>{{ __('post.plural') }}</th> 
+              <th ><span class="text-primary">{{ __('admin.created_at') }}</span></th>
+              <th class="text-end min-w-50px noExport">{{ __('admin.actions') }}</th>  
             </tr>
           </thead>
-          <!--end::Table head-->
-          <!--begin::Table body-->
-          <tbody class="fw-semibold text-gray-600">
-            <!--begin::Table row-->
+          <tbody class="text-gray-600"> 
+          @for($i=1;$i<=10;$i++)
             <tr>
-              <!--begin::Checkbox-->
-              <td>
-                <div class="form-check form-check-sm form-check-custom form-check-solid">
-                  <input class="form-check-input" type="checkbox" value="1" />
-                </div>
-              </td>
-              <!--end::Checkbox-->
-              <!--begin::Product=-->
-              <td>
-                <div class="d-flex align-items-center" data-kt-ecommerce-edit-order-filter="product" data-kt-ecommerce-edit-order-id="product_1">
-                  <!--begin::Thumbnail-->
-                  <a href="../../demo6/dist/apps/ecommerce/catalog/edit-product.html" class="symbol symbol-50px">
-                    <span class="symbol-label" style="background-image:url(assets/media//stock/ecommerce/1.gif);"></span>
-                  </a>
-                  <!--end::Thumbnail-->
-                  <div class="ms-5">
-                    <!--begin::Title-->
-                    <a href="../../demo6/dist/apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary fs-5 fw-bold">Product 1</a>
-                    <!--end::Title-->
-                    <!--begin::Price-->
-                    <div class="fw-semibold fs-7">Price: $
-                    <span data-kt-ecommerce-edit-order-filter="price">173.00</span></div>
-                    <!--end::Price-->
-                    <!--begin::SKU-->
-                    <div class="text-muted fs-7">SKU: 01186004</div>
-                    <!--end::SKU-->
-                  </div>
-                </div>
-              </td>
-              <!--end::Product=-->
-              <!--begin::Qty=-->
-              <td class="text-end pe-5" data-order="28">
-                <span class="fw-bold ms-3">28</span>
-              </td>
-              <!--end::Qty=-->
-            </tr>
-            <!--end::Table row-->
-            <!--begin::Table row-->
-            <tr>
-              <!--begin::Checkbox-->
-              <td>
-                <div class="form-check form-check-sm form-check-custom form-check-solid">
-                  <input class="form-check-input" type="checkbox" value="1" />
-                </div>
-              </td>
-              <!--end::Checkbox-->
-              <!--begin::Product=-->
-              <td>
-                <div class="d-flex align-items-center" data-kt-ecommerce-edit-order-filter="product" data-kt-ecommerce-edit-order-id="product_2">
-                  <!--begin::Thumbnail-->
-                  <a href="../../demo6/dist/apps/ecommerce/catalog/edit-product.html" class="symbol symbol-50px">
-                    <span class="symbol-label" style="background-image:url(assets/media//stock/ecommerce/2.gif);"></span>
-                  </a>
-                  <!--end::Thumbnail-->
-                  <div class="ms-5">
-                    <!--begin::Title-->
-                    <a href="../../demo6/dist/apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary fs-5 fw-bold">Product 2</a>
-                    <!--end::Title-->
-                    <!--begin::Price-->
-                    <div class="fw-semibold fs-7">Price: $
-                    <span data-kt-ecommerce-edit-order-filter="price">59.00</span></div>
-                    <!--end::Price-->
-                    <!--begin::SKU-->
-                    <div class="text-muted fs-7">SKU: 01577008</div>
-                    <!--end::SKU-->
-                  </div>
-                </div>
-              </td>
-              <!--end::Product=-->
-              <!--begin::Qty=-->
-              <td class="text-end pe-5" data-order="22">
-                <span class="fw-bold ms-3">22</span>
-              </td>
-              <!--end::Qty=-->
-            </tr>
-            <!--end::Table row-->
-            <!--begin::Table row-->
-            <tr>
-              <!--begin::Checkbox-->
-              <td>
-                <div class="form-check form-check-sm form-check-custom form-check-solid">
-                  <input class="form-check-input" type="checkbox" value="1" />
-                </div>
-              </td>
-              <!--end::Checkbox-->
-              <!--begin::Product=-->
-              <td>
-                <div class="d-flex align-items-center" data-kt-ecommerce-edit-order-filter="product" data-kt-ecommerce-edit-order-id="product_3">
-                  <!--begin::Thumbnail-->
-                  <a href="../../demo6/dist/apps/ecommerce/catalog/edit-product.html" class="symbol symbol-50px">
-                    <span class="symbol-label" style="background-image:url(assets/media//stock/ecommerce/3.gif);"></span>
-                  </a>
-                  <!--end::Thumbnail-->
-                  <div class="ms-5">
-                    <!--begin::Title-->
-                    <a href="../../demo6/dist/apps/ecommerce/catalog/edit-product.html" class="text-gray-800 text-hover-primary fs-5 fw-bold">Product 3</a>
-                    <!--end::Title-->
-                    <!--begin::Price-->
-                    <div class="fw-semibold fs-7">Price: $
-                    <span data-kt-ecommerce-edit-order-filter="price">147.00</span></div>
-                    <!--end::Price-->
-                    <!--begin::SKU-->
-                    <div class="text-muted fs-7">SKU: 01345005</div>
-                    <!--end::SKU-->
-                  </div>
-                </div>
-              </td>
-              <!--end::Product=-->
-              <!--begin::Qty=-->
-              <td class="text-end pe-5" data-order="10">
-                <span class="fw-bold ms-3">10</span>
-              </td>
-              <!--end::Qty=-->
-            </tr>
- 
-            <!--end::Table row-->
+            <td><input type="checkbox"></td>
+             <td>PHP LANGUAGE </td>
+             <td>15</td>
+            <td>15/4/2021</td>
+            <td>Edit / Delete</td>
+          </tr>
+          @endfor
           </tbody>
-          <!--end::Table body-->
         </table>
+
+
         <!--end::Table-->
       </div>
     </div>

@@ -110,7 +110,7 @@ class TagSeeder extends Seeder
  
 
        ];
-       DB::table('tag_translations')->insert($translated_items);  
+       DB::table('tag_translation')->insert($translated_items);  
 
     }
 }

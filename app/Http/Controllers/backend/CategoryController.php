@@ -125,6 +125,7 @@ public function index(Request $request){
                 'storeRoute'            => route($this->ROUTE_PREFIX.'.store'),
                 'destroyMultipleRoute'  => route($this->ROUTE_PREFIX.'.destroyMultiple'), 
                 'redirectRoute'         => route($this->ROUTE_PREFIX.'.index'),
+                'categories'            => MainModel::tree($this->Taxonomy),  
                 'allrecords'            => MainModel::Taxonomy($this->Taxonomy)->count(),
                 'publishedCounter'      => MainModel::Taxonomy($this->Taxonomy)->Status('1')->count(),
                 'unpublishedCounter'    => MainModel::Taxonomy($this->Taxonomy)->Status('0')->count(),

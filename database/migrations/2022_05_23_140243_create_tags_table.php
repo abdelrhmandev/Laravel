@@ -23,6 +23,7 @@ class CreateTagsTable extends Migration
             $table->id();               
             $table->string('title');
             $table->string('slug')->unique();
+            $table->longText('description')->nullable();
 			$table->string('lang')->index();			
 			$table->unique(['tag_id','lang']);  
             $table->index(['title','slug']);

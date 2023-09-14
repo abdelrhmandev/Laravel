@@ -4,7 +4,7 @@
     <!--begin::Card header-->
     <div class="card-header">
       <div class="card-title">
-        <h2>Categories lisgting (56)</h2>
+        <h2>Tags lisgting (56)</h2>
       </div>
     </div>
     <!--end::Card header-->

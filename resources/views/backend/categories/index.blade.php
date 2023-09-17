@@ -16,37 +16,10 @@
     <div class="container-xxl" id="kt_content_container">
         <div class="row">
             <div class="col-5">
-                <form id="Add{{ $trans }}" data-route-url="{{ $storeRoute }}"
-                    data-form-submit-error-message="{{ __('site.form_submit_error') }}"
-                    data-form-agree-label="{{ __('site.agree') }}" enctype="multipart/form-data">
-                    <div class="card card-flush py-2">
-                        <div class="card-header">
-                            <div class="card-title">
-                                <h2>{{ __($trans.'.add')}}</h2>
-                            </div>
-                        </div>
-                        <div class="card-body pt-0">
-                            <div class="d-flex flex-column gap-5">
-                                <div class="separator"></div>
-                                
-                                <x-backend.langs.ulTabs/>
-                                <x-backend.langs.LangInputs :showDescription="1" :richTextArea="0" :showSlug="1" />
-                                
-                                <x-backend.cms.select-single-option-parent :categories="$categories" :level="0" />
-                                
-                                <x-backend.cms.image />
-
-                                <x-backend.cms.status />
-                                
-                                <div class="separator mb-6"></div>
-                                <x-backend.btns.button />
-                            </div>
-                        </div>
-                    </div>
-                </form>
+                @include('backend.categories.create')
             </div>
             <div class="col-7">
-                @include('backend.tags.listing')
+                @include('backend.categories.listing')
             </div>
         </div>
     </div>
@@ -66,4 +39,26 @@
     tinymce.init({selector: ('.editor{{ substr($properties['regional'], 0, 2) }}'), height : "280"});
     @endforeach
     </script>
+    <script src="{{ asset('assets/backend/js/custom/pdfMake/pdfmake.min.js')}}"></script> 
+    <script src="{{ asset('assets/backend/js/custom/pdfMake/vfs_load_fonts.js')}}"></script>
+    <script src="{{ asset('assets/backend/js/custom/pdfMake/pdfhandle.js')}}"></script>
+    <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+    @include('backend.datatables')
+
+    <script>
+    var dynamicColumns = [ //as an array start from 0
+    { data: 'id', name: 'id',exportable:false}, 
+    { data: 'image', name: 'image' ,orderable: false,searchable: false},
+    { data: 'translate.title', name: 'translate.title',orderable: false}, // 2
+    { data: 'parent_id', name: 'parent_id',orderable: false,searchable: false},
+    { data: 'count', name: 'count',orderable: false,searchable: false}, 
+    { data: 'status', name: 'status',orderable: false,searchable: true}, // 5
+    { data: 'created_at',name :'created_at', type: 'num', render: { _: 'display', sort: 'timestamp', order: 'desc'}}, // 6
+    { data: 'actions' , name : 'actions' ,exportable:false,orderable: false,searchable: false},    
+    ];
+    KTUtil.onDOMContentLoaded(function () {
+      loadDatatable('{{ __($trans.".plural") }}','{{ $redirectRoute }}',dynamicColumns,'5','2','6');
+    });
+    </script>
+
     @stop

@@ -99,7 +99,6 @@
 <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js')}}"></script>
 @include('backend.datatables')
 <script>
-
 var dynamicColumns = [ //as an array start from 0
 { data: 'id', name: 'id',exportable:false}, 
 { data: 'image', name: 'image' ,orderable: false,searchable: false},

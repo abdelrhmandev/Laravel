@@ -1,15 +1,4 @@
-<div class="fv-row fv-plugins-icon-container">
-    <label class="form-label">Status</label>
-    <div class="form-check form-switch form-check-custom form-check-solid">
-        <input class="form-check-input" type="checkbox" value="1" name="status"
-            id="status" checked="checked" />
-        <label class="form-check-label" for="status">
-            {{ __('site.published') }}
-        </label>
-    </div>
-</div>
-
-{{-- <div class="card card-flush">
+<div class="card card-flush">
     <div class="card-header">
         <div class="card-title">
             <h2>{{ __('site.status')}}</h2>
@@ -19,11 +8,11 @@
         <div class="form-check form-switch form-check-custom form-check-solid">
 
           
-            @if($action == 'create')
+            {{-- @if($action == 'create') --}}
                 <input class="form-check-input" type="checkbox" value="1" name="status" id="status" checked="checked" />
-            @elseif($action == 'edit')
-                <input class="form-check-input" type="checkbox" value="1" name="status" id="status" @if(isset($status) && $status == '1') checked="checked" @endif />
-            @endif
+            {{-- @elseif($action == 'edit') --}}
+                {{-- <input class="form-check-input" type="checkbox" value="1" name="status" id="status" @if(isset($status) && $status == '1') checked="checked" @endif /> --}}
+            {{-- @endif --}}
             <label class="form-check-label" for="status">
                 @if(isset($status) && $status == '1') 
                     <span>{{ __('site.published')}}</span>
@@ -36,4 +25,4 @@
             </label>
         </div>
     </div>
-</div> --}}
+</div>

@@ -23,7 +23,7 @@ class CreateCategoriesTable extends Migration
 			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
 
-        Schema::create('category_translation', function (Blueprint $table) {                 
+        Schema::create('category_translations', function (Blueprint $table) {                 
             $table->id();               
             $table->string('title');
             $table->string('slug')->unique();
@@ -43,6 +43,6 @@ class CreateCategoriesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('categories');
-        Schema::dropIfExists('category_translation');
+        Schema::dropIfExists('category_translations');
     }
 }

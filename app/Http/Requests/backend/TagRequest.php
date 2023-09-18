@@ -33,8 +33,8 @@ class TagRequest extends FormRequest
         ///MULTI Languages Inputs Validation///////////
         foreach(\LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
             $id = $this->request->get('id_'.substr($properties['regional'],0,2)) ? ',' . $this->request->get('id_'.substr($properties['regional'],0,2)) : '';
-            $rules['title_'.substr($properties['regional'],0,2)] = 'required|unique:tag_translation,title'.$id;
-            $rules['slug_'.substr($properties['regional'],0,2)] = 'nullable|unique:tag_translation,slug'.$id; 
+            $rules['title_'.substr($properties['regional'],0,2)] = 'required|unique:tag_translations,title'.$id;
+            $rules['slug_'.substr($properties['regional'],0,2)] = 'nullable|unique:tag_translations,slug'.$id; 
          } 
         return $rules; 
     }

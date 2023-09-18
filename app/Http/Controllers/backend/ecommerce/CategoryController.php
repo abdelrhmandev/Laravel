@@ -195,7 +195,7 @@ public function index(Request $request){
 
             $arr = array('msg' => __($this->TRANS.'.'.'updateMessageSuccess'), 'status' => true);            
             DB::commit();
-            $this->UpdateMultiLangsQuery($this->TRANSLATECOLUMNS,"category_translation",[$this->TblForignKey=>$category->id]);
+            $this->UpdateMultiLangsQuery($this->TRANSLATECOLUMNS,"category_translations",[$this->TblForignKey=>$category->id]);
             
             $arr = array('msg' => __('category.updateMessageSuccess'), 'status' => true);
 

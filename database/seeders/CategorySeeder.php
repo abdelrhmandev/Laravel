@@ -14,7 +14,7 @@ class CategorySeeder extends Seeder
     public function run()
     {
    
-        $TransTbl = 'category_translation';
+        $TransTbl = 'category_translations';
        
 
 

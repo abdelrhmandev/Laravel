@@ -65,7 +65,7 @@ public function index(Request $request){
          return Datatables::of($model)
                 ->addIndexColumn()                 
                 ->editColumn('translate.title', function (MainModel $row) {
-                    return "<a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 mb-1\" data-kt-item-filter".$row->id."=\"item\">".Str::words($row->translate->title, '5')."</a>";                     
+                    return "<a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".Str::words($row->translate->title, '5')."</a>";                     
                 })                                                              
                 ->editColumn('image', function ($row) {
                     $div = '<span aria-hidden="true">—</span>';

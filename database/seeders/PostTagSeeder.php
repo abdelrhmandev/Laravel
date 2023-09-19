@@ -23,7 +23,6 @@ class PostTagSeeder extends Seeder
         $items = [
         
             ['post_id'=>'1','tag_id'=>'1'], 
-            ['post_id'=>'1','tag_id'=>'2'], 
             ['post_id'=>'1','tag_id'=>'3'], 
 
 
@@ -33,13 +32,11 @@ class PostTagSeeder extends Seeder
 
 
             ['post_id'=>'3','tag_id'=>'1'], 
-            ['post_id'=>'3','tag_id'=>'3'], 
+            ['post_id'=>'4','tag_id'=>'3'], 
             ['post_id'=>'3','tag_id'=>'4'], 
 
 
-            ['post_id'=>'4','tag_id'=>'2'], 
-            ['post_id'=>'4','tag_id'=>'3'], 
-            ['post_id'=>'4','tag_id'=>'5'], 
+ 
 
 
 

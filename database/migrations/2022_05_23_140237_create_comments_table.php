@@ -20,7 +20,7 @@ class CreateCommentsTable extends Migration
             $table->enum('status', ['pending','approved','spam','rejected'])->default('pending');            
             $table->text('replied_comment')->nullable();
             $table->unsignedBigInteger('parent_id')->nullable();
-            $table->foreignId('_id')->nullable()->constrained('s')->onDelete('cascade');
+            $table->foreignId('post_id')->nullable()->constrained('posts')->onDelete('cascade');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); 
            $table->timestamps();
         });

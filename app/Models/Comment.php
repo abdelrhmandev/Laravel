@@ -18,7 +18,7 @@ class Comment extends Model
  
 
     protected $fillable = [
-		'comment','rate','user_id','recipe_id','parent_id'
+		'comment','rating','user_id','post_id','parent_id'
 	];
 
     /**

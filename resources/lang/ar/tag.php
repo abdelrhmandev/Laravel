@@ -1,0 +1,22 @@
+<?php
+return [
+'title'                     => 'وسم عنوان',
+'edit'                      => 'تعديل وسم',
+'add'                       => 'أضافه وسم',
+'delete'                    => 'حذف وسم',
+'select'                    => 'أختر وسم',
+'select_multi'              =>' أختر الوسوم',
+'plural'                    => 'الوسوم',
+'singular'                  => 'وسم',
+'exportMessageSuccess'      => 'تم تصدير الوسوم بنجاح',
+'deleteMessageSuccess'      => 'وسم تم حذف الوسم بنجاح',
+'MulideleteMessageSuccess'  => 'تم حذف الوسوم بنجاح',
+'delete_selected'           => 'حذف الوسوم المختاره',
+'not_delete_selected'       => 'لم يتم حذف الوسوم',
+'deleteMessageError'        => 'خطأ في حذف الوسم',
+'MultideleteMessageError'   => 'خطأ في حذف الوسوم',
+'updateMessageSuccess'      => 'وسم تم تحديث بنجاح',
+'updateMessageError'        => 'خطأ في حذف الوسم',
+'storeMessageSuccess'       => 'تم أنشاء الوسم بنجاح',
+'storeMessageError'         => 'خطأ في أضافه الوسم',
+];

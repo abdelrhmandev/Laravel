@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 class PostCategory extends Model
 {
  
-    protected $table = 'post_categories';
+    protected $table = 'post_category';
  
     protected $fillable = [
 		'post_id','category_id'

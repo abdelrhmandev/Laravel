@@ -1,0 +1,23 @@
+<?php
+return [
+'title'                     => 'Comment Title',
+'edit'                      => 'Edit Comment',
+'add'                       => 'Add Comment',
+'delete'                    => 'Delete Comment',
+'select'                    => 'Select Comment',
+'select_multi'              =>' Select Comments',
+'parent'                    => 'Parent Comment',
+'plural'                    => 'Comments',
+'singular'                  => 'Comment',
+'exportMessageSuccess'      => 'Comments has been exported successfully',
+'deleteMessageSuccess'      => 'Comment has been deleted successfully',
+'MulideleteMessageSuccess'  => 'Comments has been deleted successfully',
+'delete_selected'           => 'Delete Selected Categor(ies)',
+'not_delete_selected'       => 'Categor(ies) not deleted',
+'deleteMessageError'        => 'Error in delete Comment',
+'MultideleteMessageError'   => 'Error in delete Comments',
+'updateMessageSuccess'      => 'Comment has been updated successfully',
+'updateMessageError'        => 'Error in update Comment',
+'storeMessageSuccess'       => 'Comment has been created successfully',
+'storeMessageError'         => 'Error in Store Comment',
+];

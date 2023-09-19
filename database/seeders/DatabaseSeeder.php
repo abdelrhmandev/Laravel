@@ -30,7 +30,9 @@ class DatabaseSeeder extends Seeder
             /* CMS SEEDER */            
             CategorySeeder::class,
             PostSeeder::class,
+            PostCategorySeeder::class,
             TagSeeder::class,
+            PostTagSeeder::class,
             CommentSeeder::class,  
             PageSeeder::class,
             /* CMS SEEDER */

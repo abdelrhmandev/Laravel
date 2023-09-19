@@ -37,7 +37,7 @@ class CategoryController extends Controller
         try {
             DB::beginTransaction();        
             $validated               = $request->validated();
-            $validated['published']  = isset($request->published) ? '1' : '0';       
+            $validated['status']      = isset($request->status) ? '1' : '0';       
             $validated['image']      = (!empty($request->file('image'))) ? $this->uploadFile($request->file('image'),$this->UPLOADFOLDER) : NULL;    
             $validated['parent_id']  = isset($request->parent_id) ? $request->parent_id : NULL;
             $validated['taxonomy']   = $this->Taxonomy;
@@ -81,7 +81,7 @@ public function index(Request $request){
                     return $row->parent->translate->title ?? "<span aria-hidden=\"true\">—</span>";
                 })
                 ->AddColumn('count', function (MainModel $row) {                    
-                    return  "<a href=".route('admin.posts.index',$row->id).">
+                    return  "<a href=".route(config('custom.route_prefix').'.posts.index',$row->id).">
                                 <span class=\"badge badge-circle badge-primary\">".$row->posts_count ?? '0' ."</span>
                                 </a>";                   
                 })
@@ -93,7 +93,7 @@ public function index(Request $request){
                     $checked = "";
                     $statusLabel  ="<span class=\"text-danger\">".__('site.unpublished')."</span>";   
                 }                    
-                return  "<div class=\"form-check form-switch form-check-custom form-check-solid\"><input class=\"form-check-input UpdateStatus\" name=\"Updatetatus\" type=\"checkbox\" ".$checked." id=\"Status".$row->id."\" onclick=\"UpdateStatus($row->id,'".__($this->TRANS.'.plural')."','$this->Tbl','".route('admin.UpdateStatus')."')\" />&nbsp;".$statusLabel."</div>";                
+                return  "<div class=\"form-check form-switch form-check-custom form-check-solid\"><input class=\"form-check-input UpdateStatus\" name=\"Updatetatus\" type=\"checkbox\" ".$checked." id=\"Status".$row->id."\" onclick=\"UpdateStatus($row->id,'".__($this->TRANS.'.plural')."','$this->Tbl','".route(config('custom.route_prefix').'.UpdateStatus')."')\" />&nbsp;".$statusLabel."</div>";                
             })
             ->editColumn('created_at', function (MainModel $row) {
  
@@ -230,7 +230,7 @@ public function index(Request $request){
     public function UpdateStatus(Request $request){               
         if(DB::table($request->table)->find($request->id)){
             if(DB::table($request->table)->where('id',$request->id)->update(['status'=>$request->status])){
-                //$request->status == 1 ? $TRANS = 'site.been_published':$TRANS = 'site.been_unpublished';
+                //$request->status == 1 ? $TRANS = 'site.been_status':$TRANS = 'site.been_unstatus';
                 $arr = array('msg' => __('site.status_updated') , 'status' => true);
             }else{
                 $arr = array('msg' => 'ERROR', 'status' => false);

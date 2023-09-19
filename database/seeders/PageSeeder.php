@@ -20,12 +20,12 @@ class PageSeeder extends Seeder
         
 
        $items = [
-        ['published'=>'1'],
-        ['published'=>'1'],
-        ['published'=>'0'],
-        ['published'=>'1'],
-        ['published'=>'0'],
-        ['published'=>'0']
+        ['status'=>'1'],
+        ['status'=>'1'],
+        ['status'=>'0'],
+        ['status'=>'1'],
+        ['status'=>'0'],
+        ['status'=>'0']
        ];
        DB::table('pages')->insert($items);      
 

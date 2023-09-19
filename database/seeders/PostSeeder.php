@@ -19,11 +19,11 @@ class PostSeeder extends Seeder
  
 
        $items = [
-        ['status'=>'1','image'=>'uploads/posts/google.jpg','user_id'=>'1','featured'=>'1'],
-        ['status'=>'1','image'=>'uploads/posts/facebook.jpg','user_id'=>'2','featured'=>'1'],
-        ['status'=>'0','image'=>'uploads/posts/instagram.jpg','user_id'=>'2','featured'=>'0'],
-        ['status'=>'1','image'=>'uploads/posts/tiktok.jpg','user_id'=>'3','featured'=>'1'],
-        ['status'=>'0','image'=>'uploads/posts/youtube.jpg','user_id'=>'4','featured'=>'1'],
+        ['status'=>'1','image'=>'uploads/posts/google.jpg','user_id'=>'1','featured'=>'1','allow_comments'=>'1'],
+        ['status'=>'1','image'=>'uploads/posts/facebook.jpg','user_id'=>'2','featured'=>'1','allow_comments'=>'0'],
+        ['status'=>'0','image'=>'uploads/posts/instagram.jpg','user_id'=>'2','featured'=>'0','allow_comments'=>'1'],
+        ['status'=>'1','image'=>'uploads/posts/tiktok.jpg','user_id'=>'3','featured'=>'1','allow_comments'=>'1'],
+        ['status'=>'0','image'=>'uploads/posts/youtube.jpg','user_id'=>'4','featured'=>'1','allow_comments'=>'0'],
        ];
        DB::table('posts')->insert($items);      
 

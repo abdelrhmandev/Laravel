@@ -13,6 +13,11 @@ class TagSeeder extends Seeder
     {
 
 
+        DB::table('tags')->delete();
+        DB::table('tag_translations')->delete();
+
+ 
+        
         $items = [
 
             // Posts Tags

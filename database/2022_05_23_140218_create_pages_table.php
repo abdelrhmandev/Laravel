@@ -15,7 +15,7 @@ class CreatePagesTable extends Migration
     {
         Schema::create('pages', function (Blueprint $table) {
             $table->id();
-            $table->enum('published', ['0','1'])->default(1);
+            $table->enum('status', ['0','1'])->default(1);
             $table->string('image',150)->nullable();
              $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 			 $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));

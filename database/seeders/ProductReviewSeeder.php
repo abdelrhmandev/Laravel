@@ -11,6 +11,10 @@ class ProductReviewSeeder extends Seeder
      */
     public function run()
     {
+
+
+        DB::table('product_reviews')->delete();
+        
         $items = [
         
             ['product_id'=>'1','user_id'=>'1','comment'=>'Good product'], 

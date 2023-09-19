@@ -12,6 +12,12 @@ class PageSeeder extends Seeder
     public function run()
     {
 
+ 
+
+        DB::table('pages')->delete();
+        DB::table('page_translations')->delete();
+
+        
 
        $items = [
         ['published'=>'1'],

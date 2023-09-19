@@ -59,7 +59,6 @@ class CategoryController extends Controller
 }
 
 public function index(Request $request){     
-
     $model = MainModel::Taxonomy($this->Taxonomy)->with(['parent',$this->Taxonomy])->withCount($this->Taxonomy);
     if ($request->ajax()) {              
          return Datatables::of($model)
@@ -83,7 +82,7 @@ public function index(Request $request){
                 })
                 ->AddColumn('count', function (MainModel $row) {                    
                     return  "<a href=".route('admin.posts.index',$row->id).">
-                                <span class=\"badge badge-success badge-circle badge-md\">".$row->posts_count ?? '0' ."</span>
+                                <span class=\"badge badge-circle badge-primary\">".$row->posts_count ?? '0' ."</span>
                                 </a>";                   
                 })
                 ->editColumn('status', function (MainModel $row) {                                                           
@@ -182,7 +181,7 @@ public function index(Request $request){
             MainModel::findOrFail($category->id)->update($data);
             $arr = array('msg' => __($this->TRANS.'.'.'updateMessageSuccess'), 'status' => true);            
             DB::commit();
-            $this->UpdateMultiLangsQuery($this->TRANSLATECOLUMNS,$this->TRANS."_translation",[$this->TblForignKey=>$category->id]);            
+            $this->UpdateMultiLangsQuery($this->TRANSLATECOLUMNS,$this->TRANS."_translations",[$this->TblForignKey=>$category->id]);            
             $arr = array('msg' => __($this->TRANS.'.updateMessageSuccess'), 'status' => true);
         } catch (\Exception $e) {
             DB::rollback();            

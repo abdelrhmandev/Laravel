@@ -13,6 +13,11 @@ class FaqSeeder extends Seeder
     {
 
 
+        DB::table('faqs')->delete();
+        DB::table('faq_translations')->delete();
+ 
+        
+
        $items = [
         [],
         [],

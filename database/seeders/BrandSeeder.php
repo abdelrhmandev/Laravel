@@ -13,6 +13,12 @@ class BrandSeeder extends Seeder
     {
 
 
+        DB::table('brands')->delete();
+        DB::table('brand_translations')->delete();
+
+
+ 
+
        $items = [
         ['published'=>'1','image'=>'uploads/brands/adidas.png'],
         ['published'=>'1','image'=>'uploads/brands/nike.png'],

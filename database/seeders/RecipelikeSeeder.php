@@ -13,6 +13,8 @@ class RecipelikeSeeder extends Seeder
     {
 
 
+        DB::table('recipe_like')->delete();
+ 
        $items = [
         
         ['user_id'=>'1','recipe_id'=>'1','likes'=>'1'], 

@@ -12,6 +12,11 @@ class CopounSeeder extends Seeder
      */
     public function run()
     {
+
+    
+        DB::table('coupons')->delete();
+
+        
         $data=array(
             array(
                 'code'=>'abc123',

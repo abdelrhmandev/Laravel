@@ -12,6 +12,12 @@ class RecipeSeeder extends Seeder
     public function run()
     {
 
+
+        DB::table('recipes')->delete();
+        DB::table('recipe_translations')->delete();
+ 
+        
+
         //category_id 1 Snacks
         //category_id 2 Soups
         //category_id 3 Chicken

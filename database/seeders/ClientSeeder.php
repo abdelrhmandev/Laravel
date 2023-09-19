@@ -13,6 +13,13 @@ class ClientSeeder extends Seeder
     {
 
 
+        DB::table('clients')->delete();
+        DB::table('client_translations')->delete();
+
+
+ 
+        
+
        $items = [
         ['published'=>'1','image'=>'uploads/clients/adidas.png'],
         ['published'=>'1','image'=>'uploads/clients/nike.png'],

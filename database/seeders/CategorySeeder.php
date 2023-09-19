@@ -14,6 +14,11 @@ class CategorySeeder extends Seeder
     public function run()
     {
    
+
+        DB::table('categories')->delete();
+        DB::table('category_translations')->delete();
+
+        
         $TransTbl = 'category_translations';
        
 

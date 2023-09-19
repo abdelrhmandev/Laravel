@@ -19,7 +19,7 @@ class TagController extends Controller
     {
         $this->TblForignKey = 'tag_id';
         $this->ROUTE_PREFIX = config('custom.route_prefix') . '.tags';
-        $this->TRANSLATECOLUMNS = ['title', 'slug']; // Columns To be Trsanslated
+        $this->TRANSLATECOLUMNS = ['title', 'slug','description']; // Columns To be Trsanslated
         $this->TRANS = 'tag';
         $this->UPLOADFOLDER = 'tags';
         $this->Tbl = 'tags';
@@ -36,21 +36,18 @@ class TagController extends Controller
             return Datatables::of($model)
                 ->addIndexColumn()
                 ->editColumn('translate.title', function (MainModel $row) {
-                    return '<a href=' . route($this->ROUTE_PREFIX . '.edit', $row->id) . " class=\"text-gray-800 text-hover-primary fs-5 mb-1\" data-kt-item-filter" . $row->id . "=\"item\">" . Str::words($row->translate->title, '5') . '</a>';
+                    return '<a href=' . route($this->ROUTE_PREFIX . '.edit', $row->id) . " class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter" . $row->id . "=\"item\">" . Str::words($row->translate->title, '5') . '</a>';
                 })
 
-                ->AddColumn('count', function (MainModel $row) {
-                    return '<a href=' .
-                        route('admin.posts.index', $row->id) .
-                        " class=\"text-primary fw-bold me-1\">" .
-                        $row->posts_count ??
-                        '0' .
-                            "</a>";
+                ->AddColumn('count', function (MainModel $row) {                    
+                    return  "<a href=".route('admin.posts.index',$row->id).">
+                                <span class=\"badge badge-circle badge-primary\">".$row->posts_count ?? '0' ."</span>
+                                </a>";                   
                 })
                 ->editColumn('created_at', function (MainModel $row) {
  
                     return [                    
-                       'display' => "<span class=\"text-gray-800 fw-bold\">". Carbon::parse($row->created_at)->format('d/m/Y').'</div><div class=\"text-muted\">'.''."</div>", 
+                       'display' => "<div class=\"font-weight-bolder text-primary mb-0\">". Carbon::parse($row->created_at)->format('d/m/Y').'</div><div class=\"text-muted\">'.''."</div>", 
                        'timestamp' => $row->created_at->timestamp
                     ];
                  })
@@ -147,7 +144,7 @@ class TagController extends Controller
             MainModel::findOrFail($tag->id)->update($data);
             $arr = ['msg' => __($this->TRANS . '.' . 'updateMessageSuccess'), 'status' => true];
             DB::commit();
-            $this->UpdateMultiLangsQuery($this->TRANSLATECOLUMNS, $this->TRANS . '_translation', [$this->TblForignKey => $tag->id]);
+            $this->UpdateMultiLangsQuery($this->TRANSLATECOLUMNS, $this->TRANS . '_translations', [$this->TblForignKey => $tag->id]);
             $arr = ['msg' => __($this->TRANS.'.updateMessageSuccess'), 'status' => true];
         } catch (\Exception $e) {
             DB::rollback();
@@ -157,4 +154,29 @@ class TagController extends Controller
     }
 
     /////////
+
+
+    public function destroy(MainModel $tag){        
+        //SET ALL childs to NULL 
+        if($tag->delete()){
+            $arr = array('msg' => __($this->TRANS.'.'.'deleteMessageSuccess'), 'status' => true);
+        }else{
+            $arr = array('msg' => __($this->TRANS.'.'.'deleteMessageError'), 'status' => false);
+        }        
+        return response()->json($arr);
+    }
+
+    public function destroyMultiple(Request $request){  
+        $ids = explode(',', $request->ids);
+        $items = MainModel::whereIn('id',$ids); // Check          
+        if($items->delete()){
+            $arr = array('msg' => __($this->TRANS.'.'.'MulideleteMessageSuccess'), 'status' => true);
+        }else{
+            $arr = array('msg' => __($this->TRANS.'.'.'MiltideleteMessageError'), 'status' => false);
+        }        
+        return response()->json($arr);
+    }
+
+
+
 }

@@ -13,6 +13,11 @@ class RecipeCategorySeeder extends Seeder
     {
 
 
+        DB::table('recipe_categories')->delete();
+        DB::table('recipe_categories_translations')->delete();
+
+
+
        $items = [
         ['image'=>'uploads/recipe_categories/snack.jpg','published'=>'1'], 
         ['image'=>'uploads/recipe_categories/soup.jpg','published'=>'1'],

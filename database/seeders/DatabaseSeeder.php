@@ -1,6 +1,9 @@
 <?php
 namespace Database\Seeders;
 use Illuminate\Database\Seeder;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\File as FileFacade;
+use Illuminate\Support\Facades\Storage;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -10,36 +13,73 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
+
+     
+
+
         $this->call([
-            // RolesAndPermissionsSeeder::class,
-            // UserSeeder::class,
-            
+
+            /* Start User Management SEEDER */
+            RolesAndPermissionsSeeder::class,
+
+            UserSeeder::class,
+            /* Start User Management SEEDER */
+
+
+            /* CMS SEEDER */            
+            CategorySeeder::class,
+            PostSeeder::class,
+            TagSeeder::class,
+            CommentSeeder::class,  
+            PageSeeder::class,
+            /* CMS SEEDER */
+
+
+            // Start Miscellaneous SEEDER
+
             // CountrySeeder::class,
             // CitySeeder::class,
             // AreaSeeder::class,
             // DistrictSeeder::class,
             // SlideSeeder::class,   
-            TagSeeder::class,
-            // PageSeeder::class,
+            // FaqSeeder::class,
+            // ClientSeeder::class,
+
+            // End Miscellaneous SEEDER
+
+
+
+            // Start E-commerce SEEDER
             // ProductCategorySeeder::class,
             // ProductSeeder::class,
             // ProductReviewSeeder::class,  
-            CategorySeeder::class,
-            // PostSeeder::class,
-            // PostCommentSeeder::class,  
-            // FaqSeeder::class,
-            // ClientSeeder::class,
             // BannerSeeder::class,
-            // RecipeCategorySeeder::class,
+            // BrandSeeder::class,
+            // CopounSeeder::class,
+
+            // End E-commerce SEEDER
+
+
+            // Start Fooding SEEDER
+
+                        // RecipeCategorySeeder::class,
             // RecipeSeeder::class,
             // RecipeReviewSeeder::class,
             // RecipeTagSeeder::class,
             // RecipelikeSeeder::class,
-            // BrandSeeder::class,
-            // CopounSeeder::class,
-            // SettingSeeder::class,
             // NutritionSeeder::class,
             // RecipeNutritionSeeder::class,
+
+
+            // End Fooding SEEDER
+
+
+            // PageSeeder::class,
+
+            // SettingSeeder::class,
+
+
         ]); 
     }
 }

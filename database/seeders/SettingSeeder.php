@@ -11,6 +11,13 @@ class SettingSeeder extends Seeder
      */
     public function run()
     {
+
+        DB::table('settings')->delete();
+        DB::table('setting_translations')->delete();
+
+
+ 
+
         //
     }
 }

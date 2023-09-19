@@ -12,13 +12,16 @@ class UserSeeder extends Seeder
     public function run()
     {
 
+
+        DB::table('users')->delete();
+
           \App\Models\User::create([     
                 'username'         =>'admin',
                 'password'         =>bcrypt('12345678'),
                 'email'            =>'admin@domain.com',
                 'name'             =>'Abdelrahman Magdy',
                 'is_admin'         =>'1',
-                'avatar'           =>'uploads/avatars/1.jpg',
+                'avatar'           =>'uploads/avatars/admin.jpg',
             ])->assignRole(1);
 
             \App\Models\User::create([    
@@ -27,7 +30,7 @@ class UserSeeder extends Seeder
                 'email'            =>'johndoe@domain.com',
                 'name'             =>'John Doe',
                 'is_admin'         =>'1',
-                'avatar'           =>'uploads/avatars/2.jpg',
+                'avatar'           =>'uploads/avatars/johndoe.jpg',
             ])->assignRole(2);
 
             \App\Models\User::create([    
@@ -52,7 +55,7 @@ class UserSeeder extends Seeder
                 'email'            =>'dany@domain.com',
                 'name'             =>'Dany oliver',
                 'is_admin'         =>'1',
-                'avatar'           =>'uploads/avatars/5.jpg',
+                'avatar'           =>'uploads/avatars/dany.jpg',
             ])->assignRole(4);
 
        

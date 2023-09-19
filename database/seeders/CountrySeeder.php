@@ -13,6 +13,12 @@ class CountrySeeder extends Seeder
     {
 
 
+        DB::table('countries')->delete();
+ 
+ 
+ 
+        
+
        $items = [
         ['title_en'=>'Afghanistan','title_ar'=>'أفغانستان','code'=>'AF'],
         ['title_en'=>'Albania','title_ar'=>'ألبانيا','code'=>'AL'],

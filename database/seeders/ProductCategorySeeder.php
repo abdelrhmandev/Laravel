@@ -13,6 +13,10 @@ class ProductCategorySeeder extends Seeder
     {
 
 
+        DB::table('product_categories')->delete();
+        DB::table('product_categories_translations')->delete();
+
+
        $items = [
         ['published'=>'1'],
         ['published'=>'1'],

@@ -15,8 +15,9 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->enum('published', ['0','1'])->default(1);
-            $table->boolean('featured')->default(0);
+            $table->enum('status', ['0','1'])->default(1);
+            $table->enum('featured', ['0','1'])->default(1);
+            $table->enum('allow_comments', ['0','1'])->default(1);
             $table->string('image',150)->nullable();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); 
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

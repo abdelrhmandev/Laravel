@@ -12,6 +12,12 @@ class SlideSeeder extends Seeder
     public function run()
     {
 
+        DB::table('slides')->delete();
+        DB::table('slide_translations')->delete();
+
+
+ 
+        
 
        $items = [
         ['image'=>'uploads/slides/facebook.jpg','featured'=>'1','published'=>'1'], 

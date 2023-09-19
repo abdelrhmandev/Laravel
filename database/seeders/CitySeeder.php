@@ -13,6 +13,12 @@ class CitySeeder extends Seeder
     {
 
 
+        DB::table('cities')->delete();
+        DB::table('city_translations')->delete();
+
+ 
+        
+
        $items = [
         ['country_id'=>'62'],
         ['country_id'=>'62'],

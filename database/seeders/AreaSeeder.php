@@ -14,6 +14,12 @@ class AreaSeeder extends Seeder
     {
 
 
+        DB::table('areas')->delete();
+        DB::table('area_translations')->delete();
+
+
+ 
+
        $items = [
         ['city_id'=>'1'], // cairo
         ['city_id'=>'1'], // cairo

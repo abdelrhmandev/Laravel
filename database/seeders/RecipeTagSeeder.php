@@ -11,6 +11,12 @@ class RecipeTagSeeder extends Seeder
      */
     public function run()
     {
+
+
+        DB::table('recipe_post')->delete();
+
+ 
+        
        $items = [        
         ['recipe_id'=>'1','tag_id'=>'1'], 
         ['recipe_id'=>'1','tag_id'=>'2'],

@@ -13,6 +13,12 @@ class BannerSeeder extends Seeder
     {
 
 
+        DB::table('banners')->delete();
+        DB::table('banner_translations')->delete();
+
+ 
+        
+
        $items = [
         ['published'=>'1','image'=>'uploads/banners/1.jpg'],
         ['published'=>'1','image'=>'uploads/banners/2.jpg'],

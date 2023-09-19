@@ -21,24 +21,42 @@
 
  
         
-        <form id="Edit{{ $trans }}" data-route-url="{{ $updateRoute }}" class="form d-flex flex-column flex-lg-row"
-            data-form-submit-error-message="{{ __('site.form_submit_error')}}"
-            data-form-agree-label="{{ __('site.agree') }}" 
-            enctype="multipart/form-data">
-            @method('PUT')          
-            <div class="d-flex flex-column gap-7 gap-lg-10 w-100 mb-7 me-lg-10">
-                <x-backend.langs.ulTabs/>                
+        <form id="Edit{{ $trans }}" data-route-url="{{ $updateRoute }}" class="form d-flex flex-column flex-lg-row"            
+        data-form-submit-error-message="{{ __('site.form_submit_error')}}"
+        data-form-agree-label="{{ __('site.agree') }}" 
+        enctype="multipart/form-data">    
+        
+        @method('PUT') 
 
-                <x-backend.langs.LangInputs :showDescription="1" :richTextArea="0" :showSlug="1" :row="$row" :columnvalues="$TrsanslatedColumnValues" />
-                <x-backend.btns.button :destroyRoute="$destroyRoute" :redirectRoute="$redirect_after_destroy" :row="$row" :trans="$trans"/>
+        <div class="d-flex flex-column gap-3 gap-lg-7 w-100 mb-2 me-lg-5">
+            <div class="card card-flush py-0">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3>{{ __($trans.'.edit')}}</h3>
+                    </div>
+                </div>
+              <div class="card-body pt-0">
+                <div class="d-flex flex-column gap-5">
+                    <div class="separator"></div>                        
+                    <x-backend.langs.ulTabs/>                
 
-            </div>
-            <div class="d-flex flex-column flex-row-fluid gap-7 w-lg-400px gap-lg-10">
-                <x-backend.cms.image :image="$row->image"/>
-                <x-backend.cms.select-single-option-parent :categories="$categories" :level="0" :parentid="$row->parent_id ?? ''" />
-                <x-backend.cms.status :status="$row->status" :action="'edit'" />
-            </div>
-        </form>
+                    <x-backend.langs.LangInputs :showDescription="1" :richTextArea="0" :showSlug="1" :row="$row" :columnvalues="$TrsanslatedColumnValues" />
+                    <div class="separator mb-6"></div>
+                    <x-backend.btns.button :destroyRoute="$destroyRoute" :redirectRoute="$redirect_after_destroy" :row="$row" :trans="$trans"/>
+                  
+                </div>
+            </div>               
+        </div>
+        </div>
+        <div class="d-flex flex-column flex-row-fluid gap-0 w-lg-400px gap-lg-5">
+            <x-backend.cms.image :image="$row->image"/>
+            <x-backend.cms.select-single-option-parent :categories="$categories" :level="0" :parentid="$row->parent_id ?? ''" />
+            <x-backend.cms.status :status="$row->status" :action="'edit'" />
+        
+        </div>
+    </form>
+
+
     </div>
 @stop
 
@@ -74,5 +92,4 @@ tinymce.init({selector: ('.editor_{{ substr($properties['regional'], 0, 2) }}'),
 </script>
 
 
-    {{-- @include('backend.form') --}}
 @stop

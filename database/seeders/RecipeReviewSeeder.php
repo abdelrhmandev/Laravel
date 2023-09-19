@@ -12,6 +12,10 @@ class RecipeReviewSeeder extends Seeder
     public function run()
     {
 
+ 
+        DB::table('comment_recipe')->delete();
+
+
 
        $items = [
         ['user_id'=>'1','recipe_id'=>'1','comment'=>'Good recipe i like it much','rate'=>'1'], 

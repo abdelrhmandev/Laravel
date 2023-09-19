@@ -11,6 +11,10 @@ class RecipenutritionSeeder extends Seeder
      */
     public function run()
     {
+
+        DB::table('nutrition_recipe')->delete();
+
+        
        $items = [
         ['nutrition_id'=>'1','recipe_id'=>'1','value'=>'30'], 
         ['nutrition_id'=>'1','recipe_id'=>'2','value'=>'45'], 

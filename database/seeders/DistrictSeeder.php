@@ -12,7 +12,12 @@ class DistrictSeeder extends Seeder
     public function run()
     {
 
+        DB::table('districts')->delete();
+        DB::table('district_translations')->delete();
 
+
+ 
+        
        $items = [
         ['area_id'=>'1'], // cairo , Zamalek
  

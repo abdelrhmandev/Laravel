@@ -13,6 +13,13 @@ class NutritionSeeder extends Seeder
     {
 
 
+        DB::table('nutritions')->delete();
+        DB::table('nutrition_translations')->delete();
+
+
+ 
+        
+
         $items = [
             [],
             [],

@@ -13,6 +13,12 @@ class ProductSeeder extends Seeder
     {
 
 
+        DB::table('products')->delete();
+        DB::table('product_translations')->delete();
+
+ 
+
+
        $items = [
         ['published'=>'1','price'=>'160.65','manage_stock'=>'0','in_stock'=>'1','featured'=>'1'],
         ['published'=>'1','price'=>'254.66','manage_stock'=>'0','in_stock'=>'1','featured'=>'1'],

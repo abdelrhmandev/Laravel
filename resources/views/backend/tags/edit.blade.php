@@ -21,20 +21,37 @@
 
  
         
-        <form id="Edit{{ $trans }}" data-route-url="{{ $updateRoute }}" class="form d-flex flex-column flex-lg-row"
-            data-form-submit-error-message="{{ __('site.form_submit_error')}}"
-            data-form-agree-label="{{ __('site.agree') }}" 
-            enctype="multipart/form-data">
-            @method('PUT')          
-            <div class="d-flex flex-column gap-7 gap-lg-10 w-100 mb-7 me-lg-10">
-                <x-backend.langs.ulTabs/>                
+        <form id="Edit{{ $trans }}" data-route-url="{{ $updateRoute }}" class="form d-flex flex-column flex-lg-row"            
+        data-form-submit-error-message="{{ __('site.form_submit_error')}}"
+        data-form-agree-label="{{ __('site.agree') }}" 
+        enctype="multipart/form-data">    
+        
+        @method('PUT') 
 
-                <x-backend.langs.LangInputs :showDescription="0" :richTextArea="0" :showSlug="1" :row="$row" :columnvalues="$TrsanslatedColumnValues" />
-                <x-backend.btns.button :destroyRoute="$destroyRoute" :redirectRoute="$redirect_after_destroy" :row="$row" :trans="$trans"/>
+        <div class="d-flex flex-column gap-3 gap-lg-7 w-100 mb-2 me-lg-5">
+            <div class="card card-flush py-0">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h3>{{ __($trans.'.edit')}}</h3>
+                    </div>
+                </div>
+              <div class="card-body pt-0">
+                <div class="d-flex flex-column gap-5">
+                    <div class="separator"></div>                        
+                    <x-backend.langs.ulTabs/>                
 
-            </div>
-             
-        </form>
+                    <x-backend.langs.LangInputs :showDescription="1" :richTextArea="0" :showSlug="1" :row="$row" :columnvalues="$TrsanslatedColumnValues" />
+                    <div class="separator mb-6"></div>
+                    <x-backend.btns.button :destroyRoute="$destroyRoute" :redirectRoute="$redirect_after_destroy" :row="$row" :trans="$trans"/>
+                  
+                </div>
+            </div>               
+        </div>
+        </div>
+
+    </form>
+
+
     </div>
 @stop
 
@@ -54,7 +71,7 @@
     <script src="{{ asset('assets/backend/js/widgets.bundle.js') }}"></script>
     <script src="{{ asset('assets/backend/js/custom/handleFormSubmit.js') }}"></script>
     <script src="{{ asset('assets/backend/js/custom/deleteConfirmSwal.js') }}"></script>
- 
+    <script src="{{ asset('assets/backend/plugins/custom/tinymce/tinymce.bundle.js') }}"></script>
 
 
 
@@ -70,5 +87,4 @@ tinymce.init({selector: ('.editor_{{ substr($properties['regional'], 0, 2) }}'),
 </script>
 
 
-    {{-- @include('backend.form') --}}
 @stop

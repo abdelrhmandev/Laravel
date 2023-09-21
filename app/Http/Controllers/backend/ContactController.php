@@ -14,7 +14,7 @@ use DB;
 class ContactController extends Controller
 
 {
-    
+    sssssssssss
     public function __invoke()
     {
         // return view('user.profile', ['user' => User::findOrFail($id)]);

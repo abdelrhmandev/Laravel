@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use LaravelLocalization;
 use App\Models\Comment;
+use App\Models\Category;
 use App\Models\Post as MainModel;
 use App\Models\PostTranslation as TransModel;
 use Illuminate\Support\Str;
@@ -83,9 +84,9 @@ public function index(Request $request){
                     $categories = '';
                     if(count($row->categories)) {
                         foreach($row->categories as $value){
-                            $categories.="<a title=".$value->translate->title.">".$value->translate->title."</a><br>";                     
+                            $categories.="<a href=".route(config('custom.route_prefix').'.categories.edit',$value->id)." class=\"text-hover-primary fs-6 fw-bold mb-1\" data-kt-item-filter".$value->id."=\"item\" title=".$value->translate->title.">".$value->translate->title."</a>, ";                     
                         }
-                        $categories= $categories;
+                        $categories= substr($categories, 0, -2);
                     }else{
                         $categories = '<span aria-hidden="true">—</span>';
                     }
@@ -163,6 +164,8 @@ public function index(Request $request){
                 'destroyMultipleRoute'  => route($this->ROUTE_PREFIX.'.destroyMultiple'), 
                 'redirectRoute'         => route($this->ROUTE_PREFIX.'.index'),
     
+                'categories'            => Category::Taxonomy('posts')->get(),  
+
                 'allrecords'            => MainModel::count(),
                 'publishedCounter'      => MainModel::Status('1')->count(),
                 'unpublishedCounter'    => MainModel::Status('0')->count(),
@@ -177,7 +180,7 @@ public function index(Request $request){
                     'trans'              => $this->TRANS,
                     'listingRoute'       => route($this->ROUTE_PREFIX.'.index'),
                     'storeRoute'         => route($this->ROUTE_PREFIX.'.store'), 
-                    'posts'         => MainModel::tree($this->Taxonomy)  
+                    'posts'              =>MainModel::tree($this->Taxonomy)  
                 ];            
                 return view('backend.posts.create',$compact);
             }

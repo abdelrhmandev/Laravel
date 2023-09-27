@@ -60,7 +60,18 @@ class PostController extends Controller
 }
 
 public function index(Request $request){     
+
     $model = MainModel::with(['tags','categories'])->withCount('comments');
+
+
+
+    if (!empty($request->get('cat_id'))) {
+        $cat_id = $request->get('cat_id');
+        $model = MainModel::with(['tags','categories'])->whereHas('categories', function($q){
+            $q->where('id',$cat_id);
+        })->withCount('comments');
+   }
+
     if ($request->ajax()) {              
          return Datatables::of($model)
                 ->addIndexColumn()                 

@@ -36,11 +36,10 @@
           </div> --}}
           
           <div class="w-200px me-3">
-          <select name="categories" class="form-select mb-2" data-control="select2" data-placeholder="Select an option" data-allow-clear="true" multiple="multiple">
+          <select name="cat_id" class="form-select mb-2" data-control="select2" data-placeholder="Select an option" data-allow-clear="true">
             <option></option>
            @foreach ($categories as $category)
-           <option value="{{ $category->id}}">{{ $category->translate->title }}</option>
-             
+           <option value="{{ $category->id}}">{{ $category->translate->title }}</option>             
            @endforeach
  
           </select>

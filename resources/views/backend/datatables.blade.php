@@ -1,5 +1,6 @@
 <script>
-    function loadDatatable(tableId,RouteListing,dynamicColumns,StatusColumn=null,TitleColumnOrder=null,CREATED_at){
+//table.ajax.json().recordsTotal
+function loadDatatable(tableId,RouteListing,dynamicColumns,StatusColumn=null,TitleColumnOrder=null,CREATED_at){
         var table;
         var dt;
         var filterStatus;      

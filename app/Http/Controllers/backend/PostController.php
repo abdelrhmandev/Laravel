@@ -62,19 +62,26 @@ class PostController extends Controller
 public function index(Request $request){     
 
     $model = MainModel::with(['tags','categories'])->withCount('comments');
+ 
+   
 
 
+    //https://github.com/yajra/laravel-datatables-demo/blob/master/resources/views/datatables/collection/custom-filter.blade.php
 
-    if (!empty($request->get('cat_id'))) {
-        $cat_id = $request->get('cat_id');
-        $model = MainModel::with(['tags','categories'])->whereHas('categories', function($q){
-            $q->where('id',$cat_id);
-        })->withCount('comments');
-   }
-
-    if ($request->ajax()) {              
+if ($request->ajax()) {              
          return Datatables::of($model)
-                ->addIndexColumn()                 
+
+         ->filter(function ($instance) use ($request) {
+            if ($request->get('cat_id')) {
+                $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+                    return Str::contains($row['id'], $request->get('cat_id')) ? true : false;
+                });        
+            } 
+        })
+
+        
+
+                ->addIndexColumn()   
                 ->editColumn('translate.title', function (MainModel $row) {
                     return "<a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".Str::words($row->translate->title, '5')."</a>";                     
                 })                                                              
@@ -163,7 +170,16 @@ public function index(Request $request){
                         'destroyRoute'  =>route($this->ROUTE_PREFIX.'.destroy',$row->id),
                         'id'            =>$row->id
                         ]);
-                })                            
+                })            
+                
+                
+
+
+
+
+
+
+
                 ->rawColumns(['image','translate.title','tags','categories','comments','status','actions','created_at','created_at.display'])                  
                 ->make(true);    
     }  

@@ -36,10 +36,10 @@
           </div> --}}
           
           <div class="w-200px me-3">
-          <select name="cat_id" class="form-select mb-2" data-control="select2" data-placeholder="Select an option" data-allow-clear="true">
+          <select name="cat_id" id="cat_id" class="form-select mb-2" data-control="select2" data-placeholder="Select an option" data-allow-clear="true">
             <option></option>
            @foreach ($categories as $category)
-           <option value="{{ $category->id}}">{{ $category->translate->title }}</option>             
+           <option value="{{ $category->id}}">{{ $category->id}}----{{ $category->translate->title }}</option>             
            @endforeach
  
           </select>
@@ -130,4 +130,39 @@ KTUtil.onDOMContentLoaded(function () {
 });
 </script>
 <script src="{{ asset('assets/backend/js/custom/updateStatus.js')}}"></script>
+<script>
+  $(document).ready(function()
+{
+$("#cat_id").change(function()
+{
+var id=$(this).val();
+console.log(id);
+var dataString = 'cat_id='+ id;
+$.ajax
+({
+type: "GET",
+url: "{{ route('admin.posts.index')}}",
+data: dataString,
+cache: false,
+success: function(data)
+{
+
+  
+  $('#cat_id').change(function(){
+         empTable.draw();
+      });
+
+        oTable.draw();
+        e.preventDefault();
+        
+} 
+});
+
+});
+
+
+
+
+});
+</script>
 @stop

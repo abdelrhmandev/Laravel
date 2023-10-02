@@ -61,7 +61,7 @@ class PostController extends Controller
 
 public function index(Request $request){     
 
-    $model = MainModel::with(['tags','categories'])->withCount('comments');
+
  
    
 
@@ -69,15 +69,10 @@ public function index(Request $request){
     //https://github.com/yajra/laravel-datatables-demo/blob/master/resources/views/datatables/collection/custom-filter.blade.php
 
 if ($request->ajax()) {              
-         return Datatables::of($model)
+    $model = MainModel::with(['tags','categories'])->withCount('comments');
+    return Datatables::of($model)
 
-         ->filter(function ($instance) use ($request) {
-            if ($request->get('cat_id')) {
-                $instance->collection = $instance->collection->filter(function ($row) use ($request) {
-                    return Str::contains($row['id'], $request->get('cat_id')) ? true : false;
-                });        
-            } 
-        })
+
 
         
 
@@ -161,7 +156,19 @@ if ($request->ajax()) {
              })
              ->filterColumn('created_at', function ($query, $keyword) {
                 $query->whereRaw("DATE_FORMAT(created_at,'%d/%m/%Y') LIKE ?", ["%$keyword%"]);
-             })             
+             })
+             
+             //////////////DONE/////////////////////////////////////
+            //  ->filter(function ($instance) use ($request) {
+            //     if ($request->get('cat_id')) {
+            //         $instance->where('id',$request->get('cat_id'));
+            //     } 
+            // })
+            //////////////////////////////////////////////////////////
+
+
+            
+
                 ->editColumn('actions', function ($row) {      
                                                  
                     return view('backend.partials.btns.edit-delete', [

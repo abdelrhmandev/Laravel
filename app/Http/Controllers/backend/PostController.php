@@ -158,14 +158,20 @@ if ($request->ajax()) {
                 $query->whereRaw("DATE_FORMAT(created_at,'%d/%m/%Y') LIKE ?", ["%$keyword%"]);
              })
              
-             //////////////DONE/////////////////////////////////////
-            //  ->filter(function ($instance) use ($request) {
-            //     if ($request->get('cat_id')) {
-            //         $instance->where('id',$request->get('cat_id'));
-            //     } 
-            // })
+             //////////////Category Search Filter////////////////////////
+             ->filter(function ($instance) use ($request) {
+                if ($request->get('cat_id')) {              
+                    $cat_id = $request->get('cat_id');
+                        $instance->whereHas('categories', function ($q) use ($cat_id) {
+                            $q->where('id',$cat_id);
+                        });
+                } 
+            })
             //////////////////////////////////////////////////////////
 
+
+
+ 
 
             
 

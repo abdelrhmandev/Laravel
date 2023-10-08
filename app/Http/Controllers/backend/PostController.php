@@ -160,7 +160,8 @@ if ($request->ajax()) {
              
              //////////////Category Search Filter////////////////////////
              ->filter(function ($instance) use ($request) {
-                if ($request->get('cat_id')) {              
+                if ($request->get('cat_id')) {
+                    dd('HHH');              
                     $cat_id = $request->get('cat_id');
                         $instance->whereHas('categories', function ($q) use ($cat_id) {
                             $q->where('id',$cat_id);

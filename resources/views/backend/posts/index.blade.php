@@ -129,9 +129,10 @@ KTUtil.onDOMContentLoaded(function () {
   loadDatatable('{{ __($trans.".plural") }}','{{ $redirectRoute }}',dynamicColumns,'','2','7');
 });
 </script>
-<script src="{{ asset('assets/backend/js/custom/updateStatus.js')}}"></script>
+ 
 <script>
-  $(document).ready(function()
+//https://datatables.net/forums/discussion/56571/refresh-data-from-a-select-drop-down
+$(document).ready(function()
 {
 $("#cat_id").change(function()
 {
@@ -148,14 +149,20 @@ success: function(data)
 {
 
  
-  var table = $('#Posts').DataTable();
+  $('#Posts').DataTable().fnFilterClear();
  
-    table.rows.add(data).draw();
-  
+        
+},
+error: function(data)
+{
+
+ 
+ alert('error');
 
 
         
 } 
+
 });
 
 });

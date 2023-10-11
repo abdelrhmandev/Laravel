@@ -147,10 +147,11 @@ data: 'cat_id='+ id,
 cache: false,
 success: function(data)
 {
+  // https://datatables.net/forums/discussion/38969/reload-refresh-table-after-event
 
- 
-  $('#Posts').DataTable().fnFilterClear();
- 
+  // $('#Posts').DataTable().ajax.reload();
+               $('#Posts').data.reload();
+               table.reload();
         
 },
 error: function(data)

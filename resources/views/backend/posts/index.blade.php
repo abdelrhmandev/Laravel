@@ -132,41 +132,48 @@ KTUtil.onDOMContentLoaded(function () {
  
 <script>
 //https://datatables.net/forums/discussion/56571/refresh-data-from-a-select-drop-down
-$(document).ready(function()
-{
-$("#cat_id").change(function()
-{
-var id=$(this).val();
+// https://www.tutsmake.com/laravel-datatables-custom-filter-and-search-example/
+$(document).ready(function(){
+
+
+
+
+  // var dt = $('#Posts').DataTable();
+
+
+
+
+  $("#cat_id").change(function(){
+  var id=$(this).val();
  
  
-$.ajax
-({
-type: "GET",
-url: "{{ route('admin.posts.index')}}",
-data: 'cat_id='+ id,
-cache: false,
-success: function(data)
-{
-  // https://datatables.net/forums/discussion/38969/reload-refresh-table-after-event
-
-  // $('#Posts').DataTable().ajax.reload();
-               $('#Posts').data.reload();
-               table.reload();
-        
-},
-error: function(data)
-{
-
- 
- alert('error');
+      $.ajax
+              ({
+              type: "GET",
+              url: "{{ route('admin.posts.index')}}",
+              data: 'cat_id='+ id,
+              success: function(data){
 
 
-        
-} 
+                // $('#Posts').DataTable().destroy();
+                $('#Posts').DataTable().draw();
 
-});
 
-});
+                return true;
+                },
+              error: function(data){
+                alert('error');
+              } 
+
+
+
+
+              });
+          
+
+
+
+      });
 
 
 

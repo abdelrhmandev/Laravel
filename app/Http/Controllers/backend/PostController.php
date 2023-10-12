@@ -93,6 +93,17 @@ if ($request->ajax()) {
                 })         
   
 
+                             //////////////Category Search Filter////////////////////////
+             ->filter(function ($instance) use ($request) {
+                if ($request->get('cat_id')) {
+                    $cat_id = $request->get('cat_id');
+                        $instance->whereHas('categories', function ($q) use ($cat_id) {
+                            $q->where('id',$cat_id);
+                        });
+                } 
+            })
+            //////////////////////////////////////////////////////////
+            
                 ->editColumn('categories', function (MainModel $row) {                                                                              
                     $categories = '';
                     if(count($row->categories)) {
@@ -158,16 +169,7 @@ if ($request->ajax()) {
                 $query->whereRaw("DATE_FORMAT(created_at,'%d/%m/%Y') LIKE ?", ["%$keyword%"]);
              })
              
-             //////////////Category Search Filter////////////////////////
-             ->filter(function ($instance) use ($request) {
-                if ($request->get('cat_id')) {
-                    $cat_id = $request->get('cat_id');
-                        $instance->whereHas('categories', function ($q) use ($cat_id) {
-                            $q->where('id',$cat_id);
-                        });
-                } 
-            })
-            //////////////////////////////////////////////////////////
+
 
 
 

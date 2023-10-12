@@ -1,5 +1,12 @@
 <script>
 //table.ajax.json().recordsTotal
+/*
+var table = $('#example').DataTable();
+ 
+var data = table.rows().data();
+ 
+alert( 'The table has '+data.length+' records' );
+*/
 function loadDatatable(tableId,RouteListing,dynamicColumns,StatusColumn=null,TitleColumnOrder=null,CREATED_at){
         var table;
         var dt;
@@ -11,7 +18,11 @@ function loadDatatable(tableId,RouteListing,dynamicColumns,StatusColumn=null,Tit
             s = [[CREATED_at , 'desc']];
          }
 
-
+            $.ajaxSetup({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
             dt = $("#"+tableId).DataTable({
                 searchDelay: 500,
                 processing: true,

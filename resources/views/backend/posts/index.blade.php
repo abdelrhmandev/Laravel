@@ -133,6 +133,7 @@ KTUtil.onDOMContentLoaded(function () {
 <script>
 //https://datatables.net/forums/discussion/56571/refresh-data-from-a-select-drop-down
 // https://www.tutsmake.com/laravel-datatables-custom-filter-and-search-example/
+https://www.webslesson.info/2019/07/how-to-implement-date-range-filter-in-laravel-58-datatable.html
 $(document).ready(function(){
 
 
@@ -154,9 +155,8 @@ $(document).ready(function(){
               data: 'cat_id='+ id,
               success: function(data){
 
-
-                // $('#Posts').DataTable().destroy();
-                $('#Posts').DataTable().draw();
+                $('#posts').DataTable().destroy();
+               
 
 
                 return true;

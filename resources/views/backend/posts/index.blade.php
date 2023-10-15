@@ -21,7 +21,7 @@
               <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor" />
             </svg>
           </span>
-          <input type="text" data-kt-table-filter="search" class="form-control form-control-solid w-210px ps-15" placeholder="{{ __('admin.search') }} {{ __($trans.'.plural') }} ......" />
+          <input type="text" name="search" id="search" data-kt-table-filter="search" class="form-control form-control-solid w-210px ps-15" placeholder="{{ __('admin.search') }} {{ __($trans.'.plural') }} ......" />
         </div>
       </div>
       <div class="card-toolbar">
@@ -36,15 +36,13 @@
           </div> --}}
           
           <div class="w-200px me-3">
-          <select name="category_id" id="category_id" class="form-select mb-2" data-control="select2" data-placeholder="Select an option" data-allow-clear="true">
-            <option></option>
-           @foreach ($categories as $category)
-           <option value="{{ $category->id}}">{{ $category->id}}----{{ $category->translate->title }}</option>             
-           @endforeach
- 
-          </select>
-
-        </div>
+              <select class="form-select form-select-solid" data-control="select2" name="category_id" id="category_id" data-placeholder="{{ __('site.filter_by')}} {{ __('category.singular')}} " data-allow-clear="true">
+                <option></option>
+                  @foreach ($categories as $category)
+                    <option value="{{ $category->id}}">{{ $category->translate->title }} ({{ $category->posts_count }})</option>             
+                  @endforeach
+              </select>
+           </div>
 
           @include('backend.partials.modals._exportlisting')
           <a class="btn btn-primary" href="{{ $createRoute }}">
@@ -105,7 +103,6 @@
 
 
 @section('scripts')
-
 <script src="{{ asset('assets/backend/js/custom/pdfMake/pdfmake.min.js')}}"></script> 
 <script src="{{ asset('assets/backend/js/custom/pdfMake/vfs_load_fonts.js')}}"></script>
 <script src="{{ asset('assets/backend/js/custom/pdfMake/pdfhandle.js')}}"></script>
@@ -118,30 +115,14 @@ var dynamicColumns = [ //as an array start from 0
 { data: 'translate.title', name: 'translate.title',orderable: false}, // 2
 { data: 'categories', name: 'categories',orderable: false,searchable: false},
 { data: 'tags', name: 'tags',orderable: false,searchable: false},
-
 { data: 'comments', name: 'comments',orderable: false,searchable: false},
-
 // { data: 'status', name: 'status',orderable: false,searchable: true}, // 6
 { data: 'created_at',name :'created_at', type: 'num', render: { _: 'display', sort: 'timestamp', order: 'desc'}}, // 6
 { data: 'actions' , name : 'actions' ,exportable:false,orderable: false,searchable: false},    
 ];
 KTUtil.onDOMContentLoaded(function () {
-  loadDatatable('{{ __($trans.".plural") }}','{{ $redirectRoute }}',dynamicColumns,'','2','7');
+  loadDatatable('{{ __($trans.".plural") }}','{{ $redirectRoute }}',dynamicColumns,'','2');
 });
 </script>
  
-<script>
-//https://datatables.net/forums/discussion/56571/refresh-data-from-a-select-drop-down
-// https://www.tutsmake.com/laravel-datatables-custom-filter-and-search-example/
-// https://www.webslesson.info/2019/07/how-to-implement-date-range-filter-in-laravel-58-datatable.html
- 
-
-
-/*
-        $('#filter_gender').val('');
-        $('#filter_country').val('');
-        $('#customer_data').DataTable().destroy();
-        fill_datatable();
-        */
-</script>
 @stop

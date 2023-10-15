@@ -38,6 +38,7 @@ return [
     'expand'                => 'Expand',
     'collapse'              => 'Collapse',
     'filter'                => 'Filter',
+    'filter_by'             => 'Filter by',
     'search'                => 'Search',
     'close'                 => 'Close',
     'show'                  => 'Show',

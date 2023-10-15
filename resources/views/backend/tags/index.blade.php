@@ -99,7 +99,7 @@ var dynamicColumns = [ //as an array start from 0
 { data: 'actions' , name : 'actions' ,exportable:false,orderable: false,searchable: false},    
 ];
 KTUtil.onDOMContentLoaded(function () {
-  loadDatatable('{{ __($trans.".plural") }}','{{ $redirectRoute }}',dynamicColumns,'','1','4');
+  loadDatatable('{{ __($trans.".plural") }}','{{ $redirectRoute }}',dynamicColumns,'','1');
 });
 </script>
 @stop

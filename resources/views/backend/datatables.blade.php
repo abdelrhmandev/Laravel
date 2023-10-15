@@ -7,22 +7,20 @@ var data = table.rows().data();
  
 alert( 'The table has '+data.length+' records' );
 */
-function loadDatatable(tableId,RouteListing,dynamicColumns,StatusColumn=null,TitleColumnOrder=null,CREATED_at){
+function loadDatatable(tableId,RouteListing,dynamicColumns,StatusColumn=null,TitleColumnOrder=null){
         var table;
         var dt;
         var filterStatus;      
         var lang = document.dir == 'rtl' ? 'ar' : 'en-GB';  
-        var s = '';
+        var sorting = '';
 
+        var CREATED_at = $('#'+tableId+' thead th').length-2;
          if(CREATED_at) { 
-            s = [[CREATED_at , 'desc']];
+            sorting = [[CREATED_at , 'desc']];
          }
 
-            $.ajaxSetup({
-                headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+         
+         
             dt = $("#"+tableId).DataTable({
                 searchDelay: 500,
                 processing: true,
@@ -37,15 +35,9 @@ function loadDatatable(tableId,RouteListing,dynamicColumns,StatusColumn=null,Tit
                 exportOptions: {
                     orthogonal: "myExport",
                 },    
-                pagingType: "full_numbers",
+                pagingType: "full",
                 language: {
-                    /*
-                    oPaginate: {
-                        sNext: '<i class="fa fa-forward"></i>',
-                        sPrevious: '<i class="fa fa-backward"></i>',
-                        sFirst: '<i class="fa fa-step-backward"></i>',
-                        sLast: '<i class="fa fa-step-forward"></i>'
-                    }*/
+ 
                      url: "//cdn.datatables.net/plug-ins/1.12.1/i18n/"+lang+".json",                   
                 },
                 fnDrawCallback: function() {                    
@@ -67,11 +59,8 @@ function loadDatatable(tableId,RouteListing,dynamicColumns,StatusColumn=null,Tit
                 },
                 ajax: {                   
                     url: RouteListing,
-                    data: function (d) {
-                        d.category_id = $('#category_id').val()                       
-                    }
                 },
-                order: s,
+                order: sorting,
                 columns: dynamicColumns,  
                 columnDefs: [ 
                     {
@@ -415,14 +404,6 @@ function loadDatatable(tableId,RouteListing,dynamicColumns,StatusColumn=null,Tit
                 return;
                 }                
                 exportButtons();    
-
-//////////
-        $("#category_id").change(function(){
-            dt.draw();
-        });
-        ///////////////////
-
     }    
-
     // On document ready
 </script>

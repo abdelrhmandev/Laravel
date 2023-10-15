@@ -12,17 +12,15 @@ function loadDatatable(tableId,RouteListing,dynamicColumns,StatusColumn=null,Tit
         var dt;
         var filterStatus;      
         var lang = document.dir == 'rtl' ? 'ar' : 'en-GB';  
-        var s = '';
+        var sorting = '';
 
+        var CREATED_at = $('#'+tableId+' thead th').length-2;
          if(CREATED_at) { 
-            s = [[CREATED_at , 'desc']];
+            sorting = [[CREATED_at , 'desc']];
          }
 
-            $.ajaxSetup({
-                headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+         
+ 
             dt = $("#"+tableId).DataTable({
                 searchDelay: 500,
                 processing: true,
@@ -68,10 +66,11 @@ function loadDatatable(tableId,RouteListing,dynamicColumns,StatusColumn=null,Tit
                 ajax: {                   
                     url: RouteListing,
                     data: function (d) {
-                        d.category_id = $('#category_id').val()                       
+                        d.category_id = $('#category_id').val(),
+                        d.search = $('#search').val()                                             
                     }
                 },
-                order: s,
+                order: sorting,
                 columns: dynamicColumns,  
                 columnDefs: [ 
                     {

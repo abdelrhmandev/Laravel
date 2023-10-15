@@ -69,7 +69,13 @@ public function index(Request $request){
     //https://github.com/yajra/laravel-datatables-demo/blob/master/resources/views/datatables/collection/custom-filter.blade.php
 
 if ($request->ajax()) {              
+    
+    
     $model = MainModel::with(['tags','categories'])->withCount('comments');
+    
+ 
+   
+
     return Datatables::of($model)
 
 
@@ -91,24 +97,30 @@ if ($request->ajax()) {
                     }
                     return $div;
                 })         
-  
-
-                             //////////////Category Search Filter////////////////////////
-             ->filter(function ($instance) use ($request) {
+              //////////////Category Search Filter Original Code////////////////////////
+              ->filter(function ($instance) use ($request) {
                 if ($request->get('category_id')) {
                     $category_id = $request->get('category_id');
                         $instance->whereHas('categories', function ($q) use ($category_id) {
                             $q->where('id',$category_id);
                         });
                 } 
-            })
+                 ////////////////////Custom Search////////////////////////////////
+                if ($request->get('search')) {
+                    $search = $request->get('search');
+                    $instance->whereHas('translate', function ($q) use ($search) {
+                        $q->where('title','LIKE', '%'.$search.'%');
+                    });
+                    
+                } 
+            })          
             //////////////////////////////////////////////////////////
             
                 ->editColumn('categories', function (MainModel $row) {                                                                              
                     $categories = '';
                     if(count($row->categories)) {
                         foreach($row->categories as $value){
-                            $categories.="<a href=".route(config('custom.route_prefix').'.categories.edit',$value->id)." class=\"text-hover-primary fs-6 fw-bold mb-1\" data-kt-item-filter".$value->id."=\"item\" title=".$value->translate->title.">".$value->translate->title."</a>, ";                     
+                            $categories.="<a href=".route(config('custom.route_prefix').'.categories.edit',$value->id)." class=\"text-hover-success fs-6 fw-bold mb-1\" data-kt-item-filter".$value->id."=\"item\" title=".$value->translate->title.">".$value->translate->title."</a>, ";                     
                         }
                         $categories= substr($categories, 0, -2);
                     }else{
@@ -117,18 +129,11 @@ if ($request->ajax()) {
                     return $categories;
                 })
 
-
- 
-
- 
-
-                
-
                 ->editColumn('tags', function (MainModel $row) {                                                                              
                     $tags = '';
                     if(count($row->tags)) {
                         foreach($row->tags as $value){
-                            $tags.="<a href=".route(config('custom.route_prefix').'.tags.edit',$value->id)." class=\"text-hover-primary fs-6 fw-bold mb-1\" data-kt-item-filter".$value->id."=\"item\" title=".$value->translate->title.">".$value->translate->title."</a>, ";                     
+                            $tags.="<a href=".route(config('custom.route_prefix').'.tags.edit',$value->id)." class=\"text-hover-success fs-6 fw-bold mb-1\" data-kt-item-filter".$value->id."=\"item\" title=".$value->translate->title.">".$value->translate->title."</a>, ";                     
                         }
                         $tags= substr($tags, 0, -2);
                     }else{
@@ -141,7 +146,7 @@ if ($request->ajax()) {
 
 
                 ->AddColumn('comments', function (MainModel $row) {                    
-                    return  "<a href=".route('admin.posts.index',$row->id).">
+                    return  "<a href=".route(config('custom.route_prefix').'.posts.index',$row->id).">
                                 <span class=\"badge badge-circle badge-info\">".$row->comments_count ?? '0' ."</span>
                                 </a>";                   
                 })
@@ -159,9 +164,8 @@ if ($request->ajax()) {
                 return  "<div class=\"form-check form-switch form-check-custom form-check-solid\"><input class=\"form-check-input UpdateStatus\" name=\"Updatetatus\" type=\"checkbox\" ".$checked." id=\"Status".$row->id."\" onclick=\"UpdateStatus($row->id,'".__($this->TRANS.'.plural')."','$this->Tbl','".route('admin.UpdateStatus')."')\" />&nbsp;".$statusLabel."</div>";                
             })*/
             ->editColumn('created_at', function (MainModel $row) {
- 
                 return [                    
-                   'display' => "<div class=\"font-weight-bolder text-primary mb-0\">". Carbon::parse($row->created_at)->format('d/m/Y').'</div><div class=\"text-muted\">'.''."</div>", 
+                   'display'   => "<div class=\"font-weight-bolder text-primary mb-0\">". Carbon::parse($row->created_at)->format('d/m/Y').'</div><div class=\"text-muted\">'.''."</div>", 
                    'timestamp' => $row->created_at->timestamp
                 ];
              })
@@ -206,13 +210,15 @@ if ($request->ajax()) {
                 'destroyMultipleRoute'  => route($this->ROUTE_PREFIX.'.destroyMultiple'), 
                 'redirectRoute'         => route($this->ROUTE_PREFIX.'.index'),
     
-                'categories'            => Category::Taxonomy('posts')->get(),  
+                'categories'            => Category::withCount(['posts'])->Taxonomy('posts')->get(),  
 
                 'allrecords'            => MainModel::count(),
                 'publishedCounter'      => MainModel::Status('1')->count(),
                 'unpublishedCounter'    => MainModel::Status('0')->count(),
                 
             ];            
+
+           
             return view('backend.posts.index',$compact);
         }
 }

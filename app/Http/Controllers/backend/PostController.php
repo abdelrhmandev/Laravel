@@ -95,10 +95,10 @@ if ($request->ajax()) {
 
                              //////////////Category Search Filter////////////////////////
              ->filter(function ($instance) use ($request) {
-                if ($request->get('cat_id')) {
-                    $cat_id = $request->get('cat_id');
-                        $instance->whereHas('categories', function ($q) use ($cat_id) {
-                            $q->where('id',$cat_id);
+                if ($request->get('category_id')) {
+                    $category_id = $request->get('category_id');
+                        $instance->whereHas('categories', function ($q) use ($category_id) {
+                            $q->where('id',$category_id);
                         });
                 } 
             })

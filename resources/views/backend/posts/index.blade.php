@@ -36,7 +36,7 @@
           </div> --}}
           
           <div class="w-200px me-3">
-          <select name="cat_id" id="cat_id" class="form-select mb-2" data-control="select2" data-placeholder="Select an option" data-allow-clear="true">
+          <select name="category_id" id="category_id" class="form-select mb-2" data-control="select2" data-placeholder="Select an option" data-allow-clear="true">
             <option></option>
            @foreach ($categories as $category)
            <option value="{{ $category->id}}">{{ $category->id}}----{{ $category->translate->title }}</option>             
@@ -110,7 +110,7 @@
 <script src="{{ asset('assets/backend/js/custom/pdfMake/vfs_load_fonts.js')}}"></script>
 <script src="{{ asset('assets/backend/js/custom/pdfMake/pdfhandle.js')}}"></script>
 <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js')}}"></script>
-@include('backend.datatables')
+@include('backend.datatables.posts')
 <script>
 var dynamicColumns = [ //as an array start from 0
 { data: 'id', name: 'id',exportable:false}, 
@@ -134,51 +134,7 @@ KTUtil.onDOMContentLoaded(function () {
 //https://datatables.net/forums/discussion/56571/refresh-data-from-a-select-drop-down
 // https://www.tutsmake.com/laravel-datatables-custom-filter-and-search-example/
 // https://www.webslesson.info/2019/07/how-to-implement-date-range-filter-in-laravel-58-datatable.html
-$(document).ready(function(){
-
-
-
-
-  // var dt = $('#Posts').DataTable();
-
-
-
-
-  $("#cat_id").change(function(){
-  var id=$(this).val();
  
- 
-      $.ajax
-              ({
-              type: "GET",
-              url: "{{ route('admin.posts.index')}}",
-              data: 'cat_id='+ id,
-              success: function(data){
-
-                $('#posts').DataTable().destroy();
-               
-
-
-                return true;
-                },
-              error: function(data){
-                alert('error');
-              } 
-
-
-
-
-              });
-          
-
-
-
-      });
-
-
-
-
-});
 
 
 /*

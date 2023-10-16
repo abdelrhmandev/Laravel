@@ -7,7 +7,7 @@ var data = table.rows().data();
  
 alert( 'The table has '+data.length+' records' );
 */
-function loadDatatable(tableId,RouteListing,dynamicColumns,StatusColumn=null,TitleColumnOrder=null,CREATED_at){
+function loadDatatable(tableId,RouteListing,dynamicColumns,StatusColumn=null,TitleColumnOrder=null){
         var table;
         var dt;
         var filterStatus;      

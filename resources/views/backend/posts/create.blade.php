@@ -63,35 +63,9 @@
 
     <div class="container-xxl" id="kt_content_container">
 
-
-
-        <form id="PostCategoryForm" data-route-url="{{ $storeUrl }}" class="form d-flex flex-column flex-lg-row"
-            data-kt-redirect="{{ $redirectUrl }}"
-            data-form-submit-error="{{ __('site.form_submit_error')}}"
-            enctype="multipart/form-data">
-            <div class="d-flex flex-column gap-7 gap-lg-10 w-100 mb-7 me-lg-10">
-                <!--begin:::Tabs-->
-                <x-backend.langs.ulTabs />
-                <!--end:::Tabs-->
-                <!--begin::Tab content-->
-                <x-backend.langs.LangInputs />
-
-                {{-- <x-backend.cms.single-select-category /> --}}
-                <!--end::Tab content-->
-                {{-- <x-backend.btns.create /> --}}
-            </div>
-            <div class="d-flex flex-column flex-row-fluid gap-7 w-lg-400px gap-lg-10">
-                <!--begin::Thumbnail settings-->
-                <x-backend.cms.image />
-                <x-backend.cms.categories-multi-select :categories="$categories" :level="0" />
-
-                <x-backend.cms.publish />
-
-                
-                <!--end::Thumbnail settings-->
-                <!--begin::Status-->         
-            </div>
-        </form>
+        @foreach($tags as $tag)
+        <p>{{  $tag->translate->title }}</p>
+        @endforeach
     </div>
 @stop
 

@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use LaravelLocalization;
 use App\Models\Comment;
+use App\Models\Tag;
 use App\Models\Category;
 use App\Models\Post as MainModel;
 use App\Models\PostTranslation as TransModel;
@@ -228,7 +229,8 @@ if ($request->ajax()) {
                     'trans'              => $this->TRANS,
                     'listingRoute'       => route($this->ROUTE_PREFIX.'.index'),
                     'storeRoute'         => route($this->ROUTE_PREFIX.'.store'), 
-                    'posts'              =>MainModel::tree($this->Taxonomy)  
+                    'categories'         => Category::tree('posts'),
+                    'tags'               => Tag::Taxonomy('posts')->get(),
                 ];            
                 return view('backend.posts.create',$compact);
             }
@@ -238,12 +240,15 @@ if ($request->ajax()) {
         if (view()->exists('backend.posts.edit')) {         
             $compact = [                
                 'updateRoute'             => route($this->ROUTE_PREFIX.'.update',$post->id), 
-                'posts'              => MainModel::tree($this->Taxonomy,$post),
                 'row'                     => $post,
                 'TrsanslatedColumnValues' => $this->getItemtranslatedllangs($post,$this->TRANSLATECOLUMNS,$this->TblForignKey),
                 'destroyRoute'            => route($this->ROUTE_PREFIX.'.destroy',$post->id),
-                'redirect_after_destroy'  => route($this->ROUTE_PREFIX.'.index'),
+
                 'trans'                   => $this->TRANS,
+
+                'categories'         => Category::tree('posts'),
+                'tags'               => Tag::Taxonomy('posts')->get(),
+
             ];            
              return view('backend.posts.edit',$compact);                    
             }

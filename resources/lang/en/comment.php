@@ -1,5 +1,6 @@
 <?php
 return [
+'allow'                     =>'Allow Comments',   
 'title'                     => 'Comment Title',
 'edit'                      => 'Edit Comment',
 'add'                       => 'Add Comment',

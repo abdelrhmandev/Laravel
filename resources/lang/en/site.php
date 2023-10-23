@@ -80,7 +80,7 @@ return [
     'deny'                  => 'Permission denied',
     'administrator'         => 'Administrator',
   
- 
+    'gallery'               =>'Gallery',
     'slug'                  => 'Slug',
     'created_at'            => 'Created At',
     'updated_at'            => 'Updated At',

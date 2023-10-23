@@ -1,7 +1,7 @@
 .uppy-Root {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -2884,7 +2884,8 @@ a.uppy-Dashboard-poweredBy {
   background-color: #fff;
   cursor: pointer;
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
-  max-width: 100%; }
+  max-width: 100%; 
+}
 
 .uppy-DragDrop-container:focus {
   outline: none;
@@ -3659,3 +3660,310 @@ a.uppy-Dashboard-poweredBy {
 .uppy-ImageCropper-controls button:focus {
   outline: none;
   background-color: rgba(34, 117, 215, 0.8); }
+/* //////////////////////////////////////////////////////////////// */
+ 
+.uppy .uppy-Root {
+  font-family: Inter; }
+  .uppy .uppy-Root.uppy-DragDrop--is-dragdrop-supported {
+    border: 2px dashed #EBEDF3; }
+
+.uppy .uppy-Dashboard-inner {
+  background-color: #F3F6F9;
+  border: 1px solid #EBEDF3; }
+  .uppy .uppy-Dashboard-inner .uppy-DashboardContent-bar,
+  .uppy .uppy-Dashboard-inner .uppy-Dashboard-AddFilesPanel,
+  .uppy .uppy-Dashboard-inner .uppy-DashboardContent-panel,
+  .uppy .uppy-Dashboard-inner .uppy-DashboardItem-progress,
+  .uppy .uppy-Dashboard-inner .uppy-DashboardItem-action,
+  .uppy .uppy-Dashboard-inner .uppy-DashboardItem-previewLink {
+    z-index: 1; }
+  .uppy .uppy-Dashboard-inner .uppy-DashboardContent-title {
+    color: #3F4254;
+    font-size: 1rem;
+    font-weight: 500; }
+  .uppy .uppy-Dashboard-inner .uppy-DashboardContent-addMoreCaption {
+    font-size: 0.9rem; }
+  .uppy .uppy-Dashboard-inner .uppy-DashboardTabs .uppy-Dashboard-dropFilesTitle {
+    color: #3F4254;
+    font-size: 1.3rem;
+    font-weight: 500; }
+  .uppy .uppy-Dashboard-inner .uppy-DashboardTabs .uppy-DashboardTab-name {
+    color: #3F4254; }
+  .uppy .uppy-Dashboard-inner .uppy-DashboardItem.is-complete .progress {
+    stroke: #1BC5BD;
+    fill: #1BC5BD; }
+  .uppy .uppy-Dashboard-inner .uppy-StatusBar-statusSecondary {
+    overflow: visible; }
+
+.uppy .uppy-DragDrop-container:focus {
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  border-color: #3699FF !important; }
+
+.uppy .uppy-DashboardAddFiles-info {
+  bottom: 20px !important; }
+
+.uppy .uppy-Dashboard-note {
+  color: #3F4254;
+  font-size: 0.9rem;
+  font-weight: 400; }
+
+.uppy .uppy-btn-primary {
+  font-size: 1rem;
+  font-weight: 400;
+  background: #3699FF;
+  color: #ffffff;
+  outline: none !important; }
+  .uppy .uppy-btn-primary:focus, .uppy .uppy-btn-primary:hover {
+    background-color: #1789ff; }
+
+.uppy .uppy-DashboardContent-back {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #3699FF;
+  outline: none !important; }
+  .uppy .uppy-DashboardContent-back:focus, .uppy .uppy-DashboardContent-back:hover {
+    color: #1789ff; }
+
+.uppy .uppy-Dashboard-browse {
+  color: #3699FF; }
+  .uppy .uppy-Dashboard-browse:focus, .uppy .uppy-Dashboard-browse:hover {
+    color: #1789ff; }
+
+.uppy .uppy-DashboardContent-addMore svg {
+  stroke: #3699FF;
+  fill: #3699FF; }
+
+.uppy .uppy-ProgressBar {
+  z-index: 1; }
+  .uppy .uppy-ProgressBar .uppy-ProgressBar-inner {
+    background-color: #3699FF;
+    -webkit-box-shadow: none;
+    box-shadow: none; }
+  .uppy .uppy-ProgressBar .uppy-ProgressBar-percentage {
+    color: #3F4254;
+    font-size: 0.9rem;
+    font-weight: 400; }
+
+.uppy .uppy-DragDrop-label {
+
+  font-size: 1rem;
+  font-weight: 500;
+  color: #3F4254; }
+  .uppy .uppy-DragDrop-label .uppy-DragDrop-dragText {
+    color: #3699FF; }
+    .uppy .uppy-DragDrop-label .uppy-DragDrop-dragText:focus, .uppy .uppy-DragDrop-label .uppy-DragDrop-dragText:hover {
+      color: #1789ff; }
+
+.uppy .uppy-StatusBar {
+  z-index: 1; }
+  .uppy .uppy-StatusBar .uppy-StatusBar-status {
+    overflow-x: visible;
+    display: none; }
+  .uppy .uppy-StatusBar .uppy-StatusBar-progress {
+    background-color: #3699FF; }
+  .uppy .uppy-StatusBar .uppy-StatusBar-content .uppy-StatusBar-statusPrimary {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #3F4254; }
+  .uppy .uppy-StatusBar .uppy-StatusBar-content .uppy-StatusBar-spinner svg {
+    fill: #3699FF; }
+  .uppy .uppy-StatusBar .uppy-StatusBar-actions .uppy-StatusBar-actionCircleBtn .UppyIcon circle {
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    fill: #EBEDF3; }
+  .uppy .uppy-StatusBar .uppy-StatusBar-actions .uppy-StatusBar-actionCircleBtn .UppyIcon path {
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    fill: #3F4254; }
+  .uppy .uppy-StatusBar .uppy-StatusBar-actions .uppy-StatusBar-actionCircleBtn .UppyIcon:hover circle {
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    fill: #3699FF; }
+  .uppy .uppy-StatusBar .uppy-StatusBar-actions .uppy-StatusBar-actionCircleBtn .UppyIcon:hover path {
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    fill: #ffffff; }
+  .uppy .uppy-StatusBar.is-complete .uppy-StatusBar-progress {
+    background-color: #1BC5BD; }
+  .uppy .uppy-StatusBar.uppy-Root .uppy-StatusBar-content {
+    padding-left: 0 !important; }
+  .uppy .uppy-StatusBar.uppy-Root .uppy-StatusBar-actions {
+    right: 0 !important; }
+
+.uppy .uppy.uppy-Informer p {
+  background-color: rgba(246, 78, 96, 0.1);
+  color: #F64E60;
+  border-radius: 0.42rem; }
+
+.uppy .uppy-progress {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
+
+.uppy .uppy-status {
+  -webkit-transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, -webkit-box-shadow 0.15s ease;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, -webkit-box-shadow 0.15s ease;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, -webkit-box-shadow 0.15s ease; }
+  .uppy .uppy-status.uppy-status-ongoing {
+    height: 40px;
+    opacity: 1; }
+  .uppy .uppy-status.uppy-status-hidden {
+    display: none; }
+
+.uppy .uppy-btn {
+  margin-top: 10px; }
+
+.uppy .uppy-thumbnails {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  width: 100%;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between; }
+  
+
+
+
+
+
+.uppy-thumbnails .uppy-thumbnail-container {
+    width: calc(50% - 5px);
+    margin: 10px 5px 0;
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 50px;
+    background-color: #F3F6F9;
+    border-radius: 0.42rem;
+    overflow: hidden; }
+    .uppy .uppy-thumbnails .uppy-thumbnail-container .uppy-thumbnail {
+      width: 60px;
+      height: 50px;
+      overflow: hidden;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center; }
+      .uppy .uppy-thumbnails .uppy-thumbnail-container .uppy-thumbnail img {
+        height: 100%;
+        width: auto; }
+    .uppy .uppy-thumbnails .uppy-thumbnail-container .uppy-thumbnail-label {
+      font-weight: 400;
+      color: #3F4254;
+      margin-left: 10px;
+      padding-right: 10px; }
+    .uppy .uppy-thumbnails .uppy-thumbnail-container .uppy-remove-thumbnail {
+      margin: auto 10px auto auto;
+      cursor: pointer; }
+      .uppy .uppy-thumbnails .uppy-thumbnail-container .uppy-remove-thumbnail i {
+        font-size: 0.7rem;
+        color: #7E8299;
+        -webkit-transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, -webkit-box-shadow 0.15s ease;
+        transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, -webkit-box-shadow 0.15s ease;
+        transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+        transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, -webkit-box-shadow 0.15s ease; }
+      .uppy .uppy-thumbnails .uppy-thumbnail-container .uppy-remove-thumbnail:hover i {
+        color: #3699FF;
+        -webkit-transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, -webkit-box-shadow 0.15s ease;
+        transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, -webkit-box-shadow 0.15s ease;
+        transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+        transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, -webkit-box-shadow 0.15s ease; }
+    .uppy .uppy-thumbnails .uppy-thumbnail-container:nth-child(odd) {
+      margin-left: 0; }
+    .uppy .uppy-thumbnails .uppy-thumbnail-container:nth-child(even) {
+      margin-right: 0; }
+    @media (max-width: 1199.98px) {
+      .uppy .uppy-thumbnails .uppy-thumbnail-container {
+        width: 100%;
+        margin: 10px 0 0; } }
+
+.uppy .uppy-list .uppy-list-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: #F3F6F9;
+  margin-top: 0.75rem;
+  border-radius: 0.42rem; }
+  .uppy .uppy-list .uppy-list-item:last-child {
+    margin-bottom: 0.75rem; }
+  .uppy .uppy-list .uppy-list-item .uppy-list-label {
+    font-weight: 500;
+    color: #7E8299; }
+  .uppy .uppy-list .uppy-list-item .uppy-list-remove {
+    cursor: pointer;
+    margin-left: 1rem; }
+    .uppy .uppy-list .uppy-list-item .uppy-list-remove i {
+      -webkit-transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, -webkit-box-shadow 0.15s ease;
+      transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, -webkit-box-shadow 0.15s ease;
+      transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+      transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, -webkit-box-shadow 0.15s ease;
+      font-size: 0.7rem;
+      color: #7E8299; }
+    .uppy .uppy-list .uppy-list-item .uppy-list-remove:hover i {
+      -webkit-transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, -webkit-box-shadow 0.15s ease;
+      transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, -webkit-box-shadow 0.15s ease;
+      transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+      transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, -webkit-box-shadow 0.15s ease;
+      color: #3699FF; }
+
+.uppy .uppy-wrapper .uppy-FileInput-container {
+  margin-bottom: 0rem; }
+
+.uppy .uppy-input-control {
+  position: relative;
+  z-index: 1;
+  height: 0;
+  width: 0;
+  opacity: 0; }
+
+.uppy .uppy-informer-min .uppy-Informer {
+  position: static !important;
+  top: auto;
+  bottom: auto;
+  -webkit-transform: none;
+  transform: none;
+  z-index: 0; }
+  .uppy .uppy-informer-min .uppy-Informer[aria-hidden="true"] {
+    display: none; }
+  .uppy .uppy-informer-min .uppy-Informer p {
+    display: block;
+    max-width: none; }
+
+.draggable {
+  -webkit-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
+  outline: none !important; }
+  .draggable.draggable-mirror {
+    opacity: 0.8;
+    -webkit-transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease;
+    border: 2px dashed #E4E6EF !important; }
+  .draggable.draggable--original {
+    opacity: 0 !important; }
+  .draggable.draggable-source--is-dragging.draggable--over {
+    opacity: 0 !important; }
+  .draggable .draggable-handle {
+    cursor: move; }

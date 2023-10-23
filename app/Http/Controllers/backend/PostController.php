@@ -1,21 +1,22 @@
 <?php
 namespace App\Http\Controllers\backend;
-use App\Http\Requests\backend\postRequest as ModuleRequest;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use LaravelLocalization;
-use App\Models\Comment;
-use App\Models\Tag;
-use App\Models\Category;
-use App\Models\Post as MainModel;
-use App\Models\PostTranslation as TransModel;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\DB;
-use App\Traits\UploadAble;
-use Illuminate\Support\Facades\File; 
-use Carbon\Carbon;
-use App\Traits\Functions; 
 use DataTables;
+use Carbon\Carbon;
+use App\Models\Tag;
+use App\Models\User;
+use App\Models\Comment;
+use App\Models\Category;
+use LaravelLocalization;
+use App\Traits\Functions; 
+use App\Traits\UploadAble;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Models\Post as MainModel;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File; 
+use App\Models\PostTranslation as TransModel;
+use App\Http\Requests\backend\postRequest as ModuleRequest;
 
 
 class PostController extends Controller
@@ -230,7 +231,8 @@ if ($request->ajax()) {
                     'listingRoute'       => route($this->ROUTE_PREFIX.'.index'),
                     'storeRoute'         => route($this->ROUTE_PREFIX.'.store'), 
                     'categories'         => Category::tree('posts'),
-                    'tags'               => Tag::Taxonomy('posts')->get(),
+                    'tags'               => Tag::get(),
+                    'authors'            => User::get(),
                 ];            
                 return view('backend.posts.create',$compact);
             }

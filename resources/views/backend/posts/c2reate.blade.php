@@ -36,6 +36,9 @@
                         <div class="separator"></div>                        
                         <x-backend.langs.ulTabs/>
                         <x-backend.langs.LangInputs :showDescription="1" :richTextArea="0" :showSlug="1" />
+
+                        {{-- <x-backend.cms.tags :tags="$tags" /> --}}
+                  
                         <div class="separator mb-6"></div>
                         <x-backend.btns.button />                    
                     </div>
@@ -44,8 +47,11 @@
             </div>
             <div class="d-flex flex-column flex-row-fluid gap-0 w-lg-400px gap-lg-5">
                   <x-backend.cms.image />
-                  <x-backend.cms.select-single-option-parent :categories="$categories" :level="0" />
-                  <x-backend.cms.status :published="1" :action="'create'"/>
+
+                  <x-backend.cms.categories-multi-select :categories="$categories" :level="0" />
+                  {{-- <x-backend.cms.authors :authors="$authors"/> --}}
+                  {{-- <x-backend.cms.status :published="1" :action="'create'"/> --}}
+                  
             
             </div>
         </form>
@@ -58,6 +64,10 @@
 <script src="{{ asset('assets/backend/js/widgets.bundle.js') }}"></script>
 <script src="{{ asset('assets/backend/js/custom/handleFormSubmit.js') }}"></script>
 <script src="{{ asset('assets/backend/plugins/custom/tinymce/tinymce.bundle.js') }}"></script>
+
+
+<script src="https://preview.keenthemes.com/metronic/theme/html/demo1/dist/assets/js/pages/crud/forms/widgets/bootstrap-select.js?v=7.2.9"></script>
+
 <script>
 KTUtil.onDOMContentLoaded(function() {
    handleFormSubmitFunc('Add{{ $trans }}');

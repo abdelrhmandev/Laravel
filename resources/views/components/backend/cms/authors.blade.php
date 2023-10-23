@@ -1,0 +1,15 @@
+<div class="card card-flush py-4">
+    <div class="card-header">
+        <div class="card-title">
+            <h2>{{ __('site.author')}}</h2>
+        </div>
+    </div>
+    <div class="card-body pt-0">
+        <select class="form-select form-select-solid" data-hide-search="false" data-control="select2" data-close-on-select="true" data-placeholder="Select an author" data-allow-clear="true">
+        <option></option>
+        @foreach($authors as $author)          
+        <option value="{{  $author->id }}">{{  $author->name }}</option>
+        @endforeach  
+        </select>
+    </div>
+</div>

@@ -9,13 +9,17 @@
     <div class="card-body pt-0">
         
         {{-- <input type="file" name="files[]">
+        <input type="file" name="files[]">
+        <input type="file" name="files[]">
         <input type="file" name="files[]"> --}}
 
+ 
+
         <div class="uppy" id="kt_uppy_3">
-            <div class="uppy-drag"></div>
-            <div class="uppy-informer"></div>
-            <div class="uppy-progress"></div>
-            <div class="uppy-thumbnails"></div>
+            <div class="uppy-wrapper"></div>
+            <div class="uppy-list"></div>
+            <div class="uppy-status"></div>
+            <div class="uppy-informer uppy-informer-min"></div>
         </div>
     </div>
 </div>

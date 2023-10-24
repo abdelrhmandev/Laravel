@@ -38,64 +38,23 @@ class PostController extends Controller
     
     public function store(ModuleRequest $request){
 
+
+        $files = $request->hasFile('files');
+        if (!empty($files)) { 
+
+
  
-   
-        try {
-            DB::beginTransaction();        
-            $validated                     = $request->validated();
-            $validated['status']           = isset($request->status) ? '1' : '0';  
-            $validated['allow_comments']   = isset($request->allow_comments) ? '1' : '0';
-            $validated['featured']         = isset($request->featured) ? '1' : '0';  
+
             
-
-            $validated['image']             = (!empty($request->file('image'))) ? 
-            $this->uploadFile($request->file('image'),$this->UPLOADFOLDER) : NULL;    
-
-            // $validated['files'] = $request->file('files');
-         
-            // dd(  $validated['file']);
-
-            #manage gallery images
-
-                $files = $_FILES['files'];
-                $file_path = $files['tmp_name'][0]; // temporary upload path of the first file
-                move_uploaded_file($file_path,$this->UPLOADFOLDER); // save the file at `img/img.png`
-
-
-
-            $files = $request->hasFile('files');
-            if (!empty($files)) { 
-
-                header('Access-Control-Allow-Origin: *');
-                header('Content-type: application/json');
-
-                
-            foreach($request->file('files') as $file){
-                $this->uploadFile($file,$this->UPLOADFOLDER);  
-                echo '<br>';
-            }
-            
-            }   
-
-
-            dd();
-
-            $query                   = MainModel::create($validated);
-                         
-            $translatedArr           = $this->HandleMultiLangdatabase($this->TRANSLATECOLUMNS,[$this->TblForignKey=>$query->id]);                      
-                     
-            if(TransModel::insert($translatedArr)){              
-                     $arr = array('msg' => __($this->TRANS.'.'.'storeMessageSuccess'), 'status' => true);              
-            }
-            DB::commit();   
-        
-        } catch (\Exception $e) {
-            DB::rollback();            
-            $arr = array('msg' => __($this->TRANS.'.'.'storeMessageError'), 'status' => false);
+        foreach($request->file('files') as $file){
+            $this->uploadFile($file,$this->UPLOADFOLDER);  
+            echo '<br>';
         }
-        return response()->json($arr);
         
-}
+        }   
+    }
+        
+
 
 public function index(Request $request){     
 

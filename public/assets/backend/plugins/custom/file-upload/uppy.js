@@ -15,74 +15,92 @@ var KTUppy = function () {
 	const Instagram = Uppy.Instagram;
 	const Webcam = Uppy.Webcam;
 
-	// Private functions
  
- 
-	var initUppy3 = function(){
-		var id = '#kt_uppy_3';
 
-		var uppyDrag = Uppy.Core({
-			autoProceed: true,
+	var initUppy5 = function(){
+		// Uppy variables
+        // For more info refer: https://uppy.io/
+		var elemId = 'kt_uppy_3';
+		var id = '#' + elemId;
+		var $statusBar = $(id + ' .uppy-status');
+		var $uploadedList = $(id + ' .uppy-list');
+		var timeout;
+
+		var uppyMin = Uppy.Core({
+			debug: true,
+			autoProceed: false,
+			showProgressDetails: true,
 			restrictions: {
+				submitOnSuccess:false,
 				maxFileSize: 1000000, // 1mb
 				maxNumberOfFiles: 5,
-				minNumberOfFiles: 1,
-				allowedFileTypes: ['image/*'],
-				
+				minNumberOfFiles: 1
 			}
 		});
 
-		
-		uppyDrag.use(Uppy.DragDrop, { target: id + ' .uppy-drag' });
-		uppyDrag.use(ProgressBar, {
-			target: id + ' .uppy-progress',
-			hideUploadButton: false,
-			hideAfterFinish: false,
-		});
-		uppyDrag.use(Informer, { target: id + ' .uppy-informer'  });
-		uppyDrag.use(Tus, { endpoint: 'https://master.tus.io/files/' });
+		uppyMin.use(FileInput, { target: id + ' .uppy-wrapper', pretty: false });
+		uppyMin.use(Informer, { target: id + ' .uppy-informer'  });
 
-		uppyDrag.on('complete', function(file) {
-			var imagePreview = "";
+		// demo file upload server
+	
+		uppyMin.use(Uppy.XHRUpload, {
+			endpoint: 'upload',
+			formData: true,
+			bundle: true,
+			headers: {
+			'X-CSRF-Token': " {{ csrf_token() }} "
+			},
+			});
+		uppyMin.use(StatusBar, {
+			target: id + ' .uppy-status',
+			hideUploadButton: true,
+			hideAfterFinish: false
+		});
+
+		$(id + ' .uppy-FileInput-input').addClass('uppy-input-control').attr('id', elemId + '_input_control');
+		$(id + ' .uppy-FileInput-container').append('<label class="uppy-input-label btn btn-light-primary btn-sm btn-bold" for="' + (elemId + '_input_control') + '">Attach files</label>');
+
+		var $fileLabel = $(id + ' .uppy-input-label');
+
+ 
+
+		uppyMin.on('complete', function(file) {
 			$.each(file.successful, function(index, value){
-				var imageType = /image/;
-				var thumbnail = "";
-				if (imageType.test(value.type)){
-					thumbnail = '<div class="uppy-thumbnail"><img src="'+value.uploadURL+'"/></div>';
-				}
 				var sizeLabel = "bytes";
 				var filesize = value.size;
 				if (filesize > 1024){
 					filesize = filesize / 1024;
 					sizeLabel = "kb";
+
 					if(filesize > 1024){
 						filesize = filesize / 1024;
 						sizeLabel = "MB";
 					}
 				}
-				imagePreview += '<div class="uppy-thumbnail-container" data-id="'+value.id+'">'+thumbnail+' <span class="uppy-thumbnail-label">'+value.name+' ('+ Math.round(filesize, 2) +' '+sizeLabel+')</span><span data-id="'+value.id+'" class="uppy-remove-thumbnail"><i class="fa fa-close" style="font-size:15px"></i></span></div>';
+				var uploadListHtml = '<div class="uppy-list-item" data-id="'+value.id+'"><div class="uppy-list-label">'+value.name+' ('+ Math.round(filesize, 2) +' '+sizeLabel+')</div><span class="uppy-list-remove" data-id="'+value.id+'"><i class="flaticon2-cancel-music"></i></span></div>';
+				$uploadedList.append(uploadListHtml);
 			});
 
-			$(id + ' .uppy-thumbnails').append(imagePreview);
+			$fileLabel.text("Add more files");
+
+			$statusBar.addClass('uppy-status-hidden');
+			$statusBar.removeClass('uppy-status-ongoing');
 		});
 
-		$(document).on('click', id + ' .uppy-thumbnails .uppy-remove-thumbnail', function(){
-			var imageId = $(this).attr('data-id');
-			uppyDrag.removeFile(imageId);
-			$(id + ' .uppy-thumbnail-container[data-id="'+imageId+'"').remove();
+		$(document).on('click', id + ' .uppy-list .uppy-list-remove', function(){
+			var itemId = $(this).attr('data-id');
+			uppyMin.removeFile(itemId);
+			$(id + ' .uppy-list-item[data-id="'+itemId+'"').remove();
 		});
 	}
 
- 
-
- 
+	 
 
 	return {
 		// public functions
 		init: function() {
-			initUppy3();
-	 
-
+ 
+			initUppy5();
  
 		}
 	};

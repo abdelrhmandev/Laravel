@@ -7,6 +7,8 @@
     </div>
 
     <div class="card-body pt-0">
+
+        <input type="hidden" name="uppyResult">
         
         {{-- <input type="file" name="files[]">
         <input type="file" name="files[]">

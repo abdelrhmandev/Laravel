@@ -67,6 +67,7 @@ type="text/css" />
                   <x-backend.cms.categories-multi-select :categories="$categories" :level="0" />
                   <x-backend.cms.authors :authors="$authors"/>
                   <x-backend.cms.status :published="1" :action="'create'"/>
+                  <x-backend.cms.featured :featured="1" :action="'create'"/>
                   <x-backend.cms.allowComments :allow_comments="1" :action="'create'"/>
                   
             

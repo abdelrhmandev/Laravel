@@ -79,7 +79,7 @@ return [
     'more'                  => 'More',
     'deny'                  => 'Permission denied',
     'administrator'         => 'Administrator',
-  
+    'featured'              =>'Featured',
     'gallery'               =>'Gallery',
     'slug'                  => 'Slug',
     'created_at'            => 'Created At',

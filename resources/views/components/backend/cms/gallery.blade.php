@@ -7,6 +7,10 @@
     </div>
 
     <div class="card-body pt-0">
+        
+        {{-- <input type="file" name="files[]">
+        <input type="file" name="files[]"> --}}
+
         <div class="uppy" id="kt_uppy_3">
             <div class="uppy-drag"></div>
             <div class="uppy-informer"></div>

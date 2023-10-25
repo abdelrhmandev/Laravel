@@ -35,23 +35,29 @@ class PostController extends Controller
     }
 
 
+    function reArrayFiles($file_post) {
+
+        $file_ary = array();
+        $file_count = count($file_post['name']);
+        $file_keys = array_keys($file_post);
     
+        for ($i=0; $i<$file_count; $i++) {
+            foreach ($file_keys as $key) {
+                $file_ary[$i][$key] = $file_post[$key][$i];
+            }
+        }
+    
+        return $file_ary;
+    }
+
     public function store(ModuleRequest $request){
 
 
-        $files = $request->hasFile('files');
-        if (!empty($files)) { 
-
-
- 
-
-            
-        foreach($request->file('files') as $file){
-            $this->uploadFile($file,$this->UPLOADFOLDER);  
-            echo '<br>';
+        $file_ary = ($request->file('gallery'));
+        foreach ($file_ary as $file) {
+            $this->uploadFile($file,$this->UPLOADFOLDER);
         }
-        
-        }   
+
     }
         
 

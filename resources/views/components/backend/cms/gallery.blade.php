@@ -7,21 +7,13 @@
     </div>
 
     <div class="card-body pt-0">
-
-        <input type="hidden" name="uppyResult">
-        
-        {{-- <input type="file" name="files[]">
-        <input type="file" name="files[]">
-        <input type="file" name="files[]">
-        <input type="file" name="files[]"> --}}
-
- 
-
-        <div class="uppy" id="kt_uppy_3">
-            <div class="uppy-wrapper"></div>
-            <div class="uppy-list"></div>
-            <div class="uppy-status"></div>
-            <div class="uppy-informer uppy-informer-min"></div>
+        <div class="input-field">
+            <div class="gallery" style="padding-top: .5rem;"></div>
         </div>
+
+        @error('gallery.*')
+        <div class="fv-plugins-message-container invalid-feedback">{{ $message }}</div>
+        @enderror
+
     </div>
 </div>

@@ -20,9 +20,8 @@ type="text/css" />
 
 
     
-    <link href="{{ asset('assets/backend/plugins/custom/file-upload/uppy.bundle.css') }}" rel="stylesheet">
-
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="{{ asset('assets/backend/plugins/custom/file-upload/image-uploader.min.css') }}">
 
 </style>
 @stop
@@ -89,12 +88,17 @@ type="text/css" />
 
 
 
-<script src="{{ asset('assets/backend/plugins/custom/file-upload/uppy.bundle.js') }}"></script>
-<script src="{{ asset('assets/backend/plugins/custom/file-upload/uppy.js') }}"></script>
 
-
-
+<script src="{{ asset('assets/backend/plugins/custom/file-upload/image-uploader.min.js') }}"></script>
 <script>
+$('.gallery').imageUploader({
+    label: 'Drag & Drop files here or click to browse',
+    imagesInputName: 'gallery',
+    preloadedInputName: 'old',
+    maxSize: 1 * 1024 * 1024,
+    maxFiles: 5
+});
+
 KTUtil.onDOMContentLoaded(function() {
    handleFormSubmitFunc('Add{{ $trans }}');
 });

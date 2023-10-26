@@ -52,24 +52,17 @@ class PostController extends Controller
 
             $query                   = MainModel::create($validated);                    
             $translatedArr           = $this->HandleMultiLangdatabase($this->TRANSLATECOLUMNS,[$this->TblForignKey=>$query->id]);                                           
-            if(TransModel::insert($translatedArr)){   
-                
-                
+            if(TransModel::insert($translatedArr)){                   
             $query->categories()->sync((array)$request->input('category_id'));
             $query->tags()->sync((array)$request->input('tag_id'));
-
-
-
-
             $gallery = $request->file('gallery');
-            if(!(empty($gallery))){
-               
+
+            if(!(empty($gallery))){               
                 foreach ($gallery as $file) {
-                    $this->uploadFile($file,$this->UPLOADFOLDER);
-                    MediaModel::create(['post_id'=>$id,' assigned_for'=>'gallery','file'=>$file]);
+                    $fileUpload = $this->uploadFile($file,$this->UPLOADFOLDER);
+                    MediaModel::create(['post_id'=>$query->id,'assigned_for'=>'gallery','file'=>$fileUpload]);
                 }
             }    
-                   
 
                 $arr = array('msg' => __($this->TRANS.'.'.'storeMessageSuccess'), 'status' => true);              
             }
@@ -272,11 +265,16 @@ if ($request->ajax()) {
                 'destroyRoute'            => route($this->ROUTE_PREFIX.'.destroy',$post->id),
 
                 'trans'                   => $this->TRANS,
-
+                'listingRoute'          =>route($this->ROUTE_PREFIX.'.index'),
                 'categories'         => Category::tree('posts'),
-                'tags'               => Tag::Taxonomy('posts')->get(),
+                'redirect_after_destroy'  => route($this->ROUTE_PREFIX.'.index'),
+                'tags'               => Tag::get(),
+                'authors'            => User::get(),
 
             ];            
+
+
+    
              return view('backend.posts.edit',$compact);                    
             }
     }

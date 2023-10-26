@@ -6,7 +6,6 @@
     </div>
     <div class="card-body pt-0">
         <select name="user_id" id="user_id" class="form-select form-select-solid" data-hide-search="false" data-control="select2" data-close-on-select="true" data-placeholder="Select an author" data-allow-clear="true">
-        <option></option>
         @foreach($authors as $author)          
         <option value="{{  $author->id }}">{{  $author->name }}</option>
         @endforeach  

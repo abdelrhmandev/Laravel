@@ -33,35 +33,27 @@ class PostRequest extends FormRequest
         ///MULTI Languages Inputs Validation///////////
         foreach(\LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
 
-             
-
-
             $id = $this->request->get('id_'.substr($properties['regional'],0,2)) ? ',' . $this->request->get('id_'.substr($properties['regional'],0,2)) : '';
-
-
             $rules['title_'.substr($properties['regional'],0,2)] = 'required|unique:post_translations,title'.$id;
             $rules['slug_'.substr($properties['regional'],0,2)] = 'nullable|unique:post_translations,slug'.$id; 
-
- 
-
-              $rules['description_'.substr($properties['regional'],0,2)] = 'nullable|max:500'; 
+            $rules['description_'.substr($properties['regional'],0,2)] = 'nullable|max:500'; 
         } 
 
 
 
-        $rules['published']      = 'nullable|in:0,1'; 
+        $rules['status']      = 'nullable|in:0,1'; 
         $rules['allow_comments'] = 'nullable|in:0,1';
         $rules['featured']       = 'nullable|in:0,1'; 
 
         $rules['image'] =  'nullable|max:1000|mimes:jpeg,bmp,png,gif'; // max size 1 MB  
 
 
-        $rules['user_id'] =  'exists:users,id'; // max size 1 MB  
+        $rules['user_id'] =  'exists:users,id';   
        
 
-        // $rules['files.*'] =  'nullable|max:1000|mimes:jpeg,bmp,png,gif'; // max size 1 MB  
+        $rules['gallery.*'] =  'nullable|max:1000|mimes:jpeg,bmp,png,gif'; // max size 1 MB  
 
-        // $rules['start_date'] = 'required_with:special_price|date_format:Y-m-d';
+
 
         return $rules; 
 

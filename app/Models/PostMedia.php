@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class PostMedia extends Model
 {
 
-
+    public $timestamps = false;
     protected $guarded = ['id'];
 
     protected $table = 'post_media';
 
-    protected $fillable = ['post_id',' assigned_for','file'];
+    protected $fillable = ['post_id','assigned_for','file'];
 
 
  

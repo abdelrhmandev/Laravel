@@ -7,16 +7,16 @@
     <div class="card-body pt-0">
         <div class="form-check form-switch form-check-custom form-check-solid">
 
-          
+  
             @if($action == 'create')
                 <input class="form-check-input" type="checkbox" value="1" name="allow_comments" id="allow_comments" checked="checked" />
             @elseif($action == 'edit')
-                <input class="form-check-input" type="checkbox" value="1" name="allow_comments" id="allow_comments" @if(isset($allow_comments) && $allow_comments == '1') checked="checked" @endif />
+                <input class="form-check-input" type="checkbox" value="1" name="allow_comments" id="allow_comments" @if(isset($allowcomments) && $allowcomments == '1') checked="checked" @endif />
             @endif
             <label class="form-check-label" for="allow_comments">
-                @if(isset($allow_comments) && $allow_comments == '1') 
+                @if(isset($allowcomments) && $allowcomments == '1') 
                     <span>{{ __('site.yes')}}</span>
-                @elseif(isset($allow_comments) && $allow_comments == '0') 
+                @elseif(isset($allowcomments) && $allowcomments == '0') 
                    <span> {{ __('site.no')}}</span>
                 @else
                      <span>{{ __('site.yes')}}</span>

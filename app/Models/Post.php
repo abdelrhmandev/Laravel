@@ -12,7 +12,7 @@ class Post extends Model
 
     protected $table = 'posts';
 
-    protected $fillable = ['image', 'status', 'allow_comments'];
+    protected $fillable = ['status','featured','allow_comments','image','user_id'];
 
     protected $with = ['translate'];
 
@@ -29,8 +29,10 @@ class Post extends Model
         return $this->belongsToMany(Tag::class);
     }
 
-    public function comments()
-    {
+    public function media(){
+        return $this->hasMany(PostMedia::class);
+    }
+    public function comments(){
         return $this->hasMany(Comment::class);
     }
 

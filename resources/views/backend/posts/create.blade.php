@@ -17,8 +17,6 @@
 
 <link href="{{ asset('assets/backend/css/custom.css') }}" rel="stylesheet"
 type="text/css" />
-
-
     
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="{{ asset('assets/backend/plugins/custom/file-upload/image-uploader.min.css') }}">
@@ -54,7 +52,7 @@ type="text/css" />
                         
                     </div>
                 </div>
-                {{-- <x-backend.cms.tags :tags="$tags"/> --}}
+                <x-backend.cms.tags :tags="$tags"/>
                 <x-backend.cms.gallery/>
                 <x-backend.btns.button />
             </div>
@@ -62,12 +60,12 @@ type="text/css" />
             
             
             <div class="d-flex flex-column flex-row-fluid gap-0 w-lg-400px gap-lg-5">
-                  {{-- <x-backend.cms.image /> --}}
-                  {{-- <x-backend.cms.categories-multi-select :categories="$categories" :level="0" /> --}}
-                  {{-- <x-backend.cms.authors :authors="$authors"/> --}}
-                  {{-- <x-backend.cms.status :published="1" :action="'create'"/> --}}
-                  {{-- <x-backend.cms.featured :featured="1" :action="'create'"/> --}}
-                  {{-- <x-backend.cms.allowComments :allow_comments="1" :action="'create'"/> --}}
+                  <x-backend.cms.image />
+                  <x-backend.cms.categories-multi-select :categories="$categories" :level="0" />
+                  <x-backend.cms.authors :authors="$authors"/>
+                  <x-backend.cms.status :published="1" :action="'create'"/>
+                  <x-backend.cms.featured :featured="1" :action="'create'"/>
+                  <x-backend.cms.allowComments :allow_comments="1" :action="'create'"/>
                   
             
             </div>
@@ -95,7 +93,9 @@ $('.gallery').imageUploader({
     label: 'Drag & Drop files here or click to browse',
     imagesInputName: 'gallery',
     preloadedInputName: 'old',
-    maxSize: 1 * 1024 * 1024,
+    extensions: ['.jpg', '.jpeg', '.png', '.gif', '.svg'],
+    mimes: ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml'],
+    maxSize: 1 * 1024 * 1024, // 1 Mega
     maxFiles: 5
 });
 

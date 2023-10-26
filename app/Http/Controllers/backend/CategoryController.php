@@ -37,7 +37,7 @@ class CategoryController extends Controller
         try {
             DB::beginTransaction();        
             $validated               = $request->validated();
-            $validated['status']      = isset($request->status) ? '1' : '0';       
+            $validated['status']     = isset($request->status) ? '1' : '0';       
             $validated['image']      = (!empty($request->file('image'))) ? $this->uploadFile($request->file('image'),$this->UPLOADFOLDER) : NULL;    
             $validated['parent_id']  = isset($request->parent_id) ? $request->parent_id : NULL;
             $validated['taxonomy']   = $this->Taxonomy;

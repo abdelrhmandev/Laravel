@@ -12,6 +12,7 @@ use App\Traits\UploadAble;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Post as MainModel;
+use App\Models\PostMedia as MediaModel;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File; 
@@ -35,28 +36,51 @@ class PostController extends Controller
     }
 
 
-    function reArrayFiles($file_post) {
-
-        $file_ary = array();
-        $file_count = count($file_post['name']);
-        $file_keys = array_keys($file_post);
-    
-        for ($i=0; $i<$file_count; $i++) {
-            foreach ($file_keys as $key) {
-                $file_ary[$i][$key] = $file_post[$key][$i];
-            }
-        }
-    
-        return $file_ary;
-    }
+ 
 
     public function store(ModuleRequest $request){
 
+        try {
+            DB::beginTransaction();        
+            $validated                     = $request->validated();
+            $validated['status']           = isset($request->status) ? '1' : '0'; 
+            $validated['featured']         = isset($request->featured) ? '1' : '0';   
+            $validated['allow_comments']   = isset($request->allow_comments) ? '1' : '0';                        
+            $validated['image']            = (!empty($request->file('image'))) ? $this->uploadFile($request->file('image'),$this->UPLOADFOLDER) : NULL;    
+            $validated['user_id']          = $request->user_id;  
 
-        $file_ary = ($request->file('gallery'));
-        foreach ($file_ary as $file) {
-            $this->uploadFile($file,$this->UPLOADFOLDER);
+
+            $query                   = MainModel::create($validated);                    
+            $translatedArr           = $this->HandleMultiLangdatabase($this->TRANSLATECOLUMNS,[$this->TblForignKey=>$query->id]);                                           
+            if(TransModel::insert($translatedArr)){   
+                
+                
+            $query->categories()->sync((array)$request->input('category_id'));
+            $query->tags()->sync((array)$request->input('tag_id'));
+
+
+
+
+            $gallery = $request->file('gallery');
+            if(!(empty($gallery))){
+               
+                foreach ($gallery as $file) {
+                    $this->uploadFile($file,$this->UPLOADFOLDER);
+                    MediaModel::create(['post_id'=>$id,' assigned_for'=>'gallery','file'=>$file]);
+                }
+            }    
+                   
+
+                $arr = array('msg' => __($this->TRANS.'.'.'storeMessageSuccess'), 'status' => true);              
+            }
+            DB::commit();   
+        
+        } catch (\Exception $e) {
+            DB::rollback();            
+            $arr = array('msg' => __($this->TRANS.'.'.'storeMessageError'), 'status' => false);
         }
+        return response()->json($arr);
+
 
     }
         

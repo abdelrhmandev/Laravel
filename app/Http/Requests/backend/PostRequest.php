@@ -54,6 +54,9 @@ class PostRequest extends FormRequest
         $rules['featured']       = 'nullable|in:0,1'; 
 
         $rules['image'] =  'nullable|max:1000|mimes:jpeg,bmp,png,gif'; // max size 1 MB  
+
+
+        $rules['user_id'] =  'exists:users,id'; // max size 1 MB  
        
 
         // $rules['files.*'] =  'nullable|max:1000|mimes:jpeg,bmp,png,gif'; // max size 1 MB  

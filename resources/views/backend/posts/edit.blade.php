@@ -65,11 +65,7 @@ type="text/css" />
                 <x-backend.cms.authors :authors="$authors"/>
                 <x-backend.cms.status :status="$row->status" :action="'edit'" />
                 <x-backend.cms.featured :featured="$row->featured" :action="'edit'" />
-                <x-backend.cms.allowComments :allowcomments="$row->allow_comments" :action="'edit'" />
-
-       
-                  
-            
+                <x-backend.cms.allowComments :allowcomments="$row->allow_comments" :action="'edit'" />            
             </div>
 
 
@@ -89,10 +85,15 @@ type="text/css" />
 
 
 
-
+<script src="{{ asset('assets/backend/plugins/custom/fslightbox/fslightbox.bundle.js') }}"></script>
 <script src="{{ asset('assets/backend/plugins/custom/file-upload/image-uploader.min.js') }}"></script>
 <script>
+    let preloaded = [
+    {id: 1, src: 'https://picsum.photos/500/500?random=1'},
+    {id: 2, src: 'https://picsum.photos/500/500?random=2'},
+];
 $('.gallery').imageUploader({
+    preloaded: preloaded,
     label: 'Drag & Drop files here or click to browse',
     imagesInputName: 'gallery',
     preloadedInputName: 'old',

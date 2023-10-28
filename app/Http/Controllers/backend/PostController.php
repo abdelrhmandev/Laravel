@@ -97,11 +97,6 @@ if ($request->ajax()) {
    
 
     return Datatables::of($model)
-
-
-
-        
-
                 ->addIndexColumn()   
                 ->editColumn('translate.title', function (MainModel $row) {
                     return "<a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".Str::words($row->translate->title, '5')."</a>";                     
@@ -130,12 +125,10 @@ if ($request->ajax()) {
                     $search = $request->get('search');
                     $instance->whereHas('translate', function ($q) use ($search) {
                         $q->where('title','LIKE', '%'.$search.'%');
-                    });
-                    
+                    });                    
                 } 
             })          
-            //////////////////////////////////////////////////////////
-            
+            //////////////////////////////////////////////////////////            
                 ->editColumn('categories', function (MainModel $row) {                                                                              
                     $categories = '';
                     if(count($row->categories)) {
@@ -148,7 +141,6 @@ if ($request->ajax()) {
                     }
                     return $categories;
                 })
-
                 ->editColumn('tags', function (MainModel $row) {                                                                              
                     $tags = '';
                     if(count($row->tags)) {
@@ -161,17 +153,11 @@ if ($request->ajax()) {
                     }
                     return $tags;
                 })
-
-          
-
-
                 ->AddColumn('comments', function (MainModel $row) {                    
                     return  "<a href=".route(config('custom.route_prefix').'.posts.index',$row->id).">
                                 <span class=\"badge badge-circle badge-info\">".$row->comments_count ?? '0' ."</span>
                                 </a>";                   
                 })
-
-
                /*
                 ->editColumn('status', function (MainModel $row) {                                                           
                 if($row->status == 1){
@@ -191,18 +177,8 @@ if ($request->ajax()) {
              })
              ->filterColumn('created_at', function ($query, $keyword) {
                 $query->whereRaw("DATE_FORMAT(created_at,'%d/%m/%Y') LIKE ?", ["%$keyword%"]);
-             })
-             
-
-
-
-
- 
-
-            
-
-                ->editColumn('actions', function ($row) {      
-                                                 
+             })             
+                ->editColumn('actions', function ($row) {                                                       
                     return view('backend.partials.btns.edit-delete', [
                         'trans'         =>$this->TRANS,                       
                         'editRoute'     =>route($this->ROUTE_PREFIX.'.edit',$row->id),
@@ -210,15 +186,6 @@ if ($request->ajax()) {
                         'id'            =>$row->id
                         ]);
                 })            
-                
-                
-
-
-
-
-
-
-
                 ->rawColumns(['image','translate.title','tags','categories','comments','status','actions','created_at','created_at.display'])                  
                 ->make(true);    
     }  
@@ -228,17 +195,12 @@ if ($request->ajax()) {
                 'createRoute'           => route($this->ROUTE_PREFIX.'.create'),                
                 'storeRoute'            => route($this->ROUTE_PREFIX.'.store'),
                 'destroyMultipleRoute'  => route($this->ROUTE_PREFIX.'.destroyMultiple'), 
-                'redirectRoute'         => route($this->ROUTE_PREFIX.'.index'),
-    
+                'redirectRoute'         => route($this->ROUTE_PREFIX.'.index'),    
                 'categories'            => Category::withCount(['posts'])->Taxonomy('posts')->get(),  
-
                 'allrecords'            => MainModel::count(),
                 'publishedCounter'      => MainModel::Status('1')->count(),
-                'unpublishedCounter'    => MainModel::Status('0')->count(),
-                
-            ];            
-
-           
+                'unpublishedCounter'    => MainModel::Status('0')->count(),                
+            ];                       
             return view('backend.posts.index',$compact);
         }
 }
@@ -255,7 +217,6 @@ if ($request->ajax()) {
                 return view('backend.posts.create',$compact);
             }
         }
-
      public function edit(MainModel $post){ 
         if (view()->exists('backend.posts.edit')) {         
             $compact = [                
@@ -263,18 +224,12 @@ if ($request->ajax()) {
                 'row'                     => $post,
                 'TrsanslatedColumnValues' => $this->getItemtranslatedllangs($post,$this->TRANSLATECOLUMNS,$this->TblForignKey),
                 'destroyRoute'            => route($this->ROUTE_PREFIX.'.destroy',$post->id),
-
                 'trans'                   => $this->TRANS,
-                'listingRoute'          =>route($this->ROUTE_PREFIX.'.index'),
-                'categories'         => Category::tree('posts'),
+                'categories'              => Category::tree('posts'),
                 'redirect_after_destroy'  => route($this->ROUTE_PREFIX.'.index'),
-                'tags'               => Tag::get(),
-                'authors'            => User::get(),
-
-            ];            
-
-
-    
+                'tags'                    => Tag::get(),
+                'authors'                 => User::get(),
+            ];                
              return view('backend.posts.edit',$compact);                    
             }
     }
@@ -321,7 +276,6 @@ if ($request->ajax()) {
             $arr = array('msg' => __($this->TRANS.'.'.'deleteMessageError'), 'status' => false);
         }        
         return response()->json($arr);
-
     }
 
 
@@ -343,9 +297,6 @@ if ($request->ajax()) {
         }        
         return response()->json($arr);
     }
-
-
-
     public function UpdateStatus(Request $request){               
         if(DB::table($request->table)->find($request->id)){
             if(DB::table($request->table)->where('id',$request->id)->update(['status'=>$request->status])){

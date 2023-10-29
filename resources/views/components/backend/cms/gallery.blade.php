@@ -12,60 +12,60 @@
             <div class="uppy uppy-Informer" id="galleryMessageJsResponse"></div>            
         </div>
     </div>
-///////////
+ 
 
 
 
-<div class="py-5">
-    <!--begin::Wrapper-->
-    <div class="rounded border p-10 p-lg-20">
-        <!--begin::Row-->
+<div class="py-5"> 
+    <div class="rounded border p-10 p-lg-20">   
         <div class="row">
-            <!--begin::Col-->
-            
-            <!--end::Col-->
+ 
+            <div class="row g-2 g-xl-4 mb-xl-1">
+                <!--begin::Col-->
+                @if(isset($media) && count($media)>0)
+                @foreach ($media as $gallery) 
+                <div class="col-sm-3">
+                    <!--begin::Player card-->
+                    <div class="m-0">
+                        <!--begin::User pic-->
+                        <div class="card-rounded position-relative">
+                            <!--begin::Img-->
+                            <div class="bgi-position-center bgi-no-repeat bgi-size-cover h-150px card-rounded" style="background-image:url('{{ asset($gallery->file) }}')"></div>
+                            <!--end::Img-->
+                            <!--begin::Play-->
+                            <button class="btn btn-icon h-auto w-auto p-0 ms-4 mb-4 position-absolute bottom-0 right-0" data-kt-element="list-play-button">                              
+                                <div class="form-check form-check-custom form-check-danger form-check-solid">
+                                    <input class="form-check-input" type="checkbox" name="delete_media[]" value="{{ $media->id}}" id="delete_gallery{{ $media->id}}" checked="checked">
+                                    <label class="form-check-label" for="same_as_billing">Delete</label>
+                                </div>
 
-            <!--begin::Col-->
-            
-            
-            <!--end::Col-->
-
-            <!--begin::Col-->
-            <div class="col-lg-4">
-                <!--begin::Overlay-->
-                <a class="d-block overlay" data-fslightbox="lightbox-basic" href="https://fastly.picsum.photos/id/272/500/500.jpg?hmac=n179Emd03KzUox2ubo8LY3cEdvAdYtu5zLpR9bW9QqA">       
-                    <!--begin::Image-->
-                    <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-175px" style="background-image:url('https://fastly.picsum.photos/id/272/500/500.jpg?hmac=n179Emd03KzUox2ubo8LY3cEdvAdYtu5zLpR9bW9QqA')">                       
+                            </button>
+                            <!--end::Play-->
+                        </div>
+                        <!--end::User pic-->
+                        <!--begin::Info-->
+                        
+                        <!--end::Info-->
                     </div>
-                    <!--end::Image-->
-
-                    <!--begin::Action-->
-                    <div class="overlay-layer card-rounded bg-dark bg-opacity-25 shadow">
-                        <i class="bi bi-eye-fill text-white fs-3x"></i>     
-                    </div>  
-                    <!--end::Action-->      
-                </a>  
-                <!--end::Overlay--> 
+                    <!--end::Player card-->
+                </div>
+                @endforeach
+                @endif
+                
+                <!--end::Col-->
+                <!--begin::Col-->
+                
+                <!--end::Col-->
+                <!--begin::Col-->
+                
+                <!--end::Col-->
+                <!--begin::Col-->
+              
+                <!--end::Col-->
             </div>
-            <!--end::Col-->
-        </div>
-        <!--end::Row-->            
+      
+        </div>           
     </div>
-    <!--end::Wrapper-->
-</div>
-
-/////////////
-    
-    {{-- @if(isset($media) && count($media)>0)
-    @foreach ($media as $gallery) 
-    <p>
-        {{  $gallery->id }}
-    <input type="checkbox" name="delete_gallery_image[]" value="{{  $gallery->id }}">
-    <img width="60" src="{{ asset($gallery->file) }}">
-    </p>
-    @endforeach
-    @endif --}}
-    
-
+ </div>
 
 </div>

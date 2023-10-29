@@ -95,26 +95,13 @@ function removeCustomAlert() {
                 e.preventDefault(), e.stopPropagation();
             },
             l = function (t, i, o) {
-                let l = e("<div>", { class: "uploaded-image" });
-
-                
+                let l = e("<div>", { class: "uploaded-image" }),
+                    r = (e("<img>", { src: t }).appendTo(l), e("<button>", { class: "delete-image" }).appendTo(l));
+                e("<i>", { class: "iui-close" }).appendTo(r);
                 if (o) {
-
-
-                    r = (e("<img>", {  class: "databaseimageClass",src: t }).appendTo(l), e("", { class: "delete-database-image" }).appendTo(l));
-                    e("<i>", { class: "iui-close" }).appendTo(r);
-
                     l.attr("data-preloaded", !0);
-                    e("<input>", { type: "checkbox", class: "delete-checkbox-image",name: a.settings.preloadedInputName + "[]", value: i }).appendTo(l);
-                
-                } else {
-
-                    r = (e("<img>",{ class: "New",src: t }).appendTo(l), e("<button>", { class: "delete-image" }).appendTo(l));
-                    e("<i>", { class: "iui-close" }).appendTo(r);
-
-                    l.attr("data-index", i);
-                }
-
+                    e("<input>", { type: "hidden", name: a.settings.preloadedInputName + "[]", value: i }).appendTo(l);
+                } else l.attr("data-index", i);
                 return (
                     l.on("click", function (e) {
                         d(e);

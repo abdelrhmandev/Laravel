@@ -1,7 +1,7 @@
 @extends('backend.base.base')
 
 @section('breadcrumbs')
-    <li class="breadcrumb-item text-muted"><a href="{{ $listingRoute}}" class="text-muted"> {{ __($trans.".plural") }}</a></li>
+    <li class="breadcrumb-item text-muted"><a href="{{ $redirect_after_destroy}}" class="text-muted"> {{ __($trans.".plural") }}</a></li>
     <li class="breadcrumb-item text-dark">{{ __($trans.".edit") }}</li>
 @stop
 
@@ -34,6 +34,7 @@ type="text/css" />
             
             <div class="d-flex flex-column gap-3 gap-lg-7 w-100 mb-2 me-lg-5">
                 <!--begin::General options-->
+                
                 <div class="card card-flush py-0">
                     <div class="card-header">
                         <div class="card-title">
@@ -45,27 +46,27 @@ type="text/css" />
                     <div class="card-body pt-0">
                           <div class="d-flex flex-column gap-5">
                             <div class="separator"></div>                        
-                            <x-backend.langs.ulTabs/>
-                            <x-backend.langs.LangInputs :showDescription="1" :richTextArea="0" :showSlug="1" :row="$row" :columnvalues="$TrsanslatedColumnValues" />
+                            {{-- <x-backend.langs.ulTabs/> --}}
+                            {{-- <x-backend.langs.LangInputs :showDescription="1" :richTextArea="0" :showSlug="1" :row="$row" :columnvalues="$TrsanslatedColumnValues" /> --}}
                         </div>
  
                         
                     </div>
                 </div>
-                <x-backend.cms.tags :tags="$tags"/>
+                {{-- <x-backend.cms.tags :tags="$tags"/> --}}
                 <x-backend.cms.gallery :media="$row->media"/>
-                <x-backend.btns.button :destroyRoute="$destroyRoute" :redirectRoute="$redirect_after_destroy" :row="$row" :trans="$trans"/>
+                {{-- <x-backend.btns.button :destroyRoute="$destroyRoute" :redirectRoute="$redirect_after_destroy" :row="$row" :trans="$trans"/> --}}
             </div>
             
             
             
             <div class="d-flex flex-column flex-row-fluid gap-0 w-lg-400px gap-lg-5">
-                <x-backend.cms.image :image="$row->image"/>
+                {{-- <x-backend.cms.image :image="$row->image"/>
                 <x-backend.cms.categories-multi-select :categories="$categories" :level="0" />
                 <x-backend.cms.authors :authors="$authors"/>
                 <x-backend.cms.status :status="$row->status" :action="'edit'" />
                 <x-backend.cms.featured :featured="$row->featured" :action="'edit'" />
-                <x-backend.cms.allowComments :allowcomments="$row->allow_comments" :action="'edit'" />            
+                <x-backend.cms.allowComments :allowcomments="$row->allow_comments" :action="'edit'" />             --}}
             </div>
 
 
@@ -89,8 +90,8 @@ type="text/css" />
 <script src="{{ asset('assets/backend/plugins/custom/file-upload/image-uploader.min.js') }}"></script>
 <script>
     let preloaded = [
-    {id: 1, src: 'https://picsum.photos/500/500?random=1'},
-    {id: 2, src: 'https://picsum.photos/500/500?random=2'},
+    {id: 1454, src: 'https://picsum.photos/500/500?random=1'},
+    {id: 2555, src: 'https://picsum.photos/500/500?random=2'},
 ];
 $('.gallery').imageUploader({
     preloaded: preloaded,

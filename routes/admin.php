@@ -5,6 +5,9 @@ use App\Http\Controllers\backend\CategoryController;
 //     return Category::tree();
 // });
 
+
+
+
 Route::get('/', 'DashboardController@index')->name('dashboard');
 // Route::get('/', DashboardController::class,'index')->name('dashboard');
 // Route::get('/', function () {
@@ -67,6 +70,12 @@ Route::delete('pages/destroy/all', 'TagController@destroyMultiple')->name('pages
 
 Route::resource('posts', PostController::class)->except('show');
 Route::delete('posts/destroy/all', 'PostController@destroyMultiple')->name('posts.destroyMultiple');
+
+
+Route::get('/AjaxLoadGallery/{post}','PostController@edit')->name('AjaxLoadGallery'); 
+Route::delete('/DeleteAjaxGallery/{id}','PostController@delete_gallery_image')->name('delete_gallery_image'); 
+
+
 
 
 Route::resource('slides', SlideController::class)->except('show');

@@ -38,7 +38,7 @@ type="text/css" />
                 <div class="card card-flush py-0">
                     <div class="card-header">
                         <div class="card-title">
-                            <h3>{{ __($trans.'.edit')}}</h3>
+                            {{-- <h3>{{ __($trans.'.edit')}}</h3> --}}
                         </div>
                     </div>
                     <!--end::Card header-->
@@ -48,19 +48,25 @@ type="text/css" />
                             <div class="separator"></div>                        
                             {{-- <x-backend.langs.ulTabs/> --}}
                             {{-- <x-backend.langs.LangInputs :showDescription="1" :richTextArea="0" :showSlug="1" :row="$row" :columnvalues="$TrsanslatedColumnValues" /> --}}
-                        </div>
+                        
+                            <div id="galleryAjaxJsResponse" style="background: red;"></div>
+                    
+                    </div>
  
+                        
                         
                     </div>
                 </div>
                 {{-- <x-backend.cms.tags :tags="$tags"/> --}}
-                <x-backend.cms.gallery :media="$row->media"/>
+                {{-- <x-backend.cms.gallery :media="$row->media"/> --}}
                 {{-- <x-backend.btns.button :destroyRoute="$destroyRoute" :redirectRoute="$redirect_after_destroy" :row="$row" :trans="$trans"/> --}}
             </div>
             
             
-            
             <div class="d-flex flex-column flex-row-fluid gap-0 w-lg-400px gap-lg-5">
+
+                 
+
                 {{-- <x-backend.cms.image :image="$row->image"/>
                 <x-backend.cms.categories-multi-select :categories="$categories" :level="0" />
                 <x-backend.cms.authors :authors="$authors"/>
@@ -89,15 +95,64 @@ type="text/css" />
 <script src="{{ asset('assets/backend/plugins/custom/fslightbox/fslightbox.bundle.js') }}"></script>
 <script src="{{ asset('assets/backend/plugins/custom/file-upload/image-uploader.min.js') }}"></script>
 <script>
-    let preloaded = [
-    {id: 1454, src: 'https://picsum.photos/500/500?random=1'},
-    {id: 2555, src: 'https://picsum.photos/500/500?random=2'},
-];
+
+
+    $(document).ready(function()
+    {
+        fetchcategory();
+
+        function fetchcategory(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+            }
+        });     
+        $.ajax
+        ({
+            url: '{{ route('admin.AjaxLoadGallery',$row) }}',
+            type:"GET",
+            dataType: "json",
+            success:function(response){     
+                $("#galleryAjaxJsResponse").append(response.html);
+
+                alert(response.counter);
+                if(response.counter){
+                    document.getElementById("galleryCounter").innerHTML=response.counter;                    
+                }else{
+                    document.getElementById("EmptygalleryMsg").innerHTML='No Gallery foundsds';   
+                }
+
+            }            
+        });
+    }
+
+
+    });
+//https://www.itsolutionstuff.com/post/laravel-ajax-delete-request-example-tutorialexample.html#google_vignette
+function delete_gallery_image(id){ 
+    $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+            }
+        });            
+        var url = '{{ route("admin.delete_gallery_image", ":id") }}';
+        url = url.replace(':id', id); 
+        $.ajax
+        ({
+            url: url,
+            type:"DELETE",
+            dataType: "json",
+            success:function(result){                
+                // alert(result.msg);                
+                // $("#"+result['tr']).remove();  
+                fetchcategory();           
+            }            
+        });
+}
+ 
 $('.gallery').imageUploader({
-    preloaded: preloaded,
     label: 'Drag & Drop files here or click to browse',
     imagesInputName: 'gallery',
-    preloadedInputName: 'old',
     extensions: ['.jpg', '.jpeg', '.png', '.gif', '.svg'],
     mimes: ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml'],
     maxSize: 1 * 1024 * 1024, // 1 Mega

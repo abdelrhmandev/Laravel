@@ -217,7 +217,12 @@ if ($request->ajax()) {
                 return view('backend.posts.create',$compact);
             }
         }
-     public function edit(MainModel $post){ 
+     public function edit(Request $request,MainModel $post){ 
+        if ($request->ajax()) {
+            $media         = $post->media;
+            $view = view('backend.posts.galleryload',compact('media'),)->render();
+            return response()->json(['html'=>$view,'counter'=>$post->media->count()]);
+        }
         if (view()->exists('backend.posts.edit')) {         
             $compact = [                
                 'updateRoute'             => route($this->ROUTE_PREFIX.'.update',$post->id), 
@@ -277,6 +282,20 @@ if ($request->ajax()) {
         }        
         return response()->json($arr);
     }
+
+    public function delete_gallery_image($id){        
+        $file = MediaModel::where('id',$id)->first(); 
+        $this->unlinkFile($file->file);
+        if(MediaModel::find($id)->delete()){            
+            $arr = array('msg' => 'IMAGE DELETED SUCCESSFULLY', 'status' => true,'tr'=>'tr_'.$id);
+        }else{
+            $arr = array('msg' => 'ERROR IMAGE DELETED ', 'status' => false);
+        }
+            return response()->json($arr);       
+    }
+    
+
+
 
 
     public function destroyMultiple(Request $request){  

@@ -73,7 +73,7 @@ Route::delete('posts/destroy/all', 'PostController@destroyMultiple')->name('post
 
 
 Route::get('/AjaxLoadGallery/{post}','PostController@edit')->name('AjaxLoadGallery'); 
-Route::delete('/DeleteAjaxGallery/{id}','PostController@delete_gallery_image')->name('delete_gallery_image'); 
+Route::post('/DeleteAjaxGallery','PostController@delete_gallery_image')->name('delete_gallery_image'); 
 
 
 

@@ -49,7 +49,7 @@ type="text/css" />
                             {{-- <x-backend.langs.ulTabs/> --}}
                             {{-- <x-backend.langs.LangInputs :showDescription="1" :richTextArea="0" :showSlug="1" :row="$row" :columnvalues="$TrsanslatedColumnValues" /> --}}
                         
-                            <div id="galleryAjaxJsResponse" style="background: red;"></div>
+                            <div id="galleryAjaxJsResponse"></div>
                     
                     </div>
  
@@ -81,75 +81,93 @@ type="text/css" />
     </div>
 @stop
 @section('scripts')
-<script src="{{ asset('assets/backend/js/custom/Tachyons.min.js') }}"></script>
-<script src="{{ asset('assets/backend/js/custom/es6-shim.min.js') }}"></script>
+{{-- <script src="{{ asset('assets/backend/js/custom/Tachyons.min.js') }}"></script> --}}
+{{-- <script src="{{ asset('assets/backend/js/custom/es6-shim.min.js') }}"></script> --}}
 <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js') }}"></script>
 <script src="{{ asset('assets/backend/js/widgets.bundle.js') }}"></script>
-<script src="{{ asset('assets/backend/js/custom/handleFormSubmit.js') }}"></script>
-<script src="{{ asset('assets/backend/js/custom/deleteConfirmSwal.js') }}"></script>
-<script src="{{ asset('assets/backend/plugins/custom/tinymce/tinymce.bundle.js') }}"></script>
+{{-- <script src="{{ asset('assets/backend/js/custom/handleFormSubmit.js') }}"></script> --}}
+{{-- <script src="{{ asset('assets/backend/js/custom/deleteConfirmSwal.js') }}"></script> --}}
+{{-- <script src="{{ asset('assets/backend/plugins/custom/tinymce/tinymce.bundle.js') }}"></script> --}}
 
 
 
 
-<script src="{{ asset('assets/backend/plugins/custom/fslightbox/fslightbox.bundle.js') }}"></script>
+
 <script src="{{ asset('assets/backend/plugins/custom/file-upload/image-uploader.min.js') }}"></script>
 <script>
 
 
-    $(document).ready(function()
-    {
-        fetchcategory();
-
+    $(document).ready(function(){
+        
         function fetchcategory(){
+            console.log('LOOO');
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
             }
         });     
-        $.ajax
-        ({
+        $.ajax({
             url: '{{ route('admin.AjaxLoadGallery',$row) }}',
             type:"GET",
+            cache: false,
             dataType: "json",
             success:function(response){     
-                $("#galleryAjaxJsResponse").append(response.html);
+                
+                // $("#galleryAjaxJsResponse").append(response.html);
+                $('#galleryAjaxJsResponse').html(response.html);
 
-                alert(response.counter);
                 if(response.counter){
                     document.getElementById("galleryCounter").innerHTML=response.counter;                    
                 }else{
                     document.getElementById("EmptygalleryMsg").innerHTML='No Gallery foundsds';   
                 }
-
             }            
         });
     }
-
-
+    fetchcategory();
     });
+
+
 //https://www.itsolutionstuff.com/post/laravel-ajax-delete-request-example-tutorialexample.html#google_vignette
-function delete_gallery_image(id){ 
-    $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
-            }
-        });            
+//https://laracasts.com/discuss/channels/general-discussion/ajax-delete-function
+
+///////////////////////////////////
+    $(document).on('click', '.delete_category_btn', function (e) {
+        e.preventDefault();
+        var id = $(this).val();
         var url = '{{ route("admin.delete_gallery_image", ":id") }}';
         url = url.replace(':id', id); 
-        $.ajax
-        ({
-            url: url,
-            type:"DELETE",
-            dataType: "json",
-            success:function(result){                
-                // alert(result.msg);                
-                // $("#"+result['tr']).remove();  
-                fetchcategory();           
-            }            
+        $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
         });
-}
- 
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                id:id,
+                post_id: '{{ $row->id }}',
+            },
+            dataType: "json",
+            success: function(data) {
+                $("#"+data['tr']).remove();      
+
+                if(data['counter']){
+                    document.querySelector('#galleryCounter').innerHTML = data['counter']; 
+                }else{
+                    $("#gallery").hide();   
+                }
+
+            },
+            error: function() {
+                alert('Error occured');
+            }
+        });
+    });
+////////////
+
+/*
 $('.gallery').imageUploader({
     label: 'Drag & Drop files here or click to browse',
     imagesInputName: 'gallery',
@@ -165,5 +183,6 @@ KTUtil.onDOMContentLoaded(function() {
 @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
 tinymce.init({selector: ('.editor{{ substr($properties['regional'], 0, 2) }}'), height : "280"});
 @endforeach
+*/
 </script>
 @stop

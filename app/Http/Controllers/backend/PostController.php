@@ -283,11 +283,16 @@ if ($request->ajax()) {
         return response()->json($arr);
     }
 
-    public function delete_gallery_image($id){        
+    public function delete_gallery_image(Request $request){        
+
+        $id = $request->id;
         $file = MediaModel::where('id',$id)->first(); 
         $this->unlinkFile($file->file);
         if(MediaModel::find($id)->delete()){            
-            $arr = array('msg' => 'IMAGE DELETED SUCCESSFULLY', 'status' => true,'tr'=>'tr_'.$id);
+
+            $cc = MainModel::withCount('media')->where('id',$request->post_id)->first();
+     
+            $arr = array('msg' => 'IMAGE DELETED SUCCESSFULLY', 'status' => true,'tr'=>'tr_'.$id,'counter'=>$cc->media_count);
         }else{
             $arr = array('msg' => 'ERROR IMAGE DELETED ', 'status' => false);
         }

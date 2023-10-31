@@ -1,22 +1,23 @@
 
-<div id="galleryCounter"></div>
+<div id="galleryCounter" style="background: green;"></div>
 <br>
 <br>
 <br>
 @if(count($media))
-<table id="gallery">
+<table id="gallery" border="1">
   <tr>
     <th>ID</th>
-    <th>Image</th>
+    <th>IMAGE</th>
   </tr>
   @foreach ($media as $gallery)
   <tr id="tr_{{ $gallery->id }}">
     <td>
       
-      {{ $gallery->id }} <input id="{{ $gallery->id }}" onclick="delete_gallery_image({{ $gallery->id }})" name="deletegallery" value="{{ $gallery->id }}" class="form-check-input" type="checkbox"/>
+      {{ $gallery->id }}       
     </td>
     <td>
-      <img src="{{ asset($gallery->file) }}" width="100">  
+      <button id="delete_cat_id" value="{{ $gallery->id }}" class="delete_category_btn">DELETE</button>
+      {{-- <img src="{{ asset($gallery->file) }}" width="100">   --}}
     </td> 
   </tr>
   @endforeach   

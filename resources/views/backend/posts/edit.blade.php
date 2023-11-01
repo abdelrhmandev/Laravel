@@ -21,7 +21,7 @@ type="text/css" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="{{ asset('assets/backend/plugins/custom/file-upload/image-uploader.min.css') }}">
 
-</style>
+ 
 @stop
 @section('content')
 
@@ -38,7 +38,7 @@ type="text/css" />
                 <div class="card card-flush py-0">
                     <div class="card-header">
                         <div class="card-title">
-                            {{-- <h3>{{ __($trans.'.edit')}}</h3> --}}
+                            <h3>{{ __($trans.'.edit')}}</h3>
                         </div>
                     </div>
                     <!--end::Card header-->
@@ -46,33 +46,29 @@ type="text/css" />
                     <div class="card-body pt-0">
                           <div class="d-flex flex-column gap-5">
                             <div class="separator"></div>                        
-                            {{-- <x-backend.langs.ulTabs/> --}}
-                            {{-- <x-backend.langs.LangInputs :showDescription="1" :richTextArea="0" :showSlug="1" :row="$row" :columnvalues="$TrsanslatedColumnValues" /> --}}
-                        
-                            <div id="galleryAjaxJsResponse"></div>
-                    
+                            <x-backend.langs.ulTabs/>
+                            <x-backend.langs.LangInputs :showDescription="1" :richTextArea="0" :showSlug="1" :row="$row" :columnvalues="$TrsanslatedColumnValues" />                    
                     </div>
  
                         
                         
                     </div>
                 </div>
-                {{-- <x-backend.cms.tags :tags="$tags"/> --}}
-                {{-- <x-backend.cms.gallery :media="$row->media"/> --}}
-                {{-- <x-backend.btns.button :destroyRoute="$destroyRoute" :redirectRoute="$redirect_after_destroy" :row="$row" :trans="$trans"/> --}}
+                <x-backend.cms.tags :tags="$tags"/>
+                <x-backend.cms.gallery :media="$row->media"/>
+              
+                <div id="galleryAjaxJsResponse"></div>
+                <x-backend.btns.button :destroyRoute="$destroyRoute" :redirectRoute="$redirect_after_destroy" :row="$row" :trans="$trans"/>
             </div>
             
             
             <div class="d-flex flex-column flex-row-fluid gap-0 w-lg-400px gap-lg-5">
-
-                 
-
-                {{-- <x-backend.cms.image :image="$row->image"/>
+                <x-backend.cms.image :image="$row->image"/>
                 <x-backend.cms.categories-multi-select :categories="$categories" :level="0" />
                 <x-backend.cms.authors :authors="$authors"/>
                 <x-backend.cms.status :status="$row->status" :action="'edit'" />
                 <x-backend.cms.featured :featured="$row->featured" :action="'edit'" />
-                <x-backend.cms.allowComments :allowcomments="$row->allow_comments" :action="'edit'" />             --}}
+                <x-backend.cms.allowComments :allowcomments="$row->allow_comments" :action="'edit'" />            
             </div>
 
 
@@ -81,13 +77,16 @@ type="text/css" />
     </div>
 @stop
 @section('scripts')
-{{-- <script src="{{ asset('assets/backend/js/custom/Tachyons.min.js') }}"></script> --}}
-{{-- <script src="{{ asset('assets/backend/js/custom/es6-shim.min.js') }}"></script> --}}
+<script src="{{ asset('assets/backend/js/custom/Tachyons.min.js') }}"></script>
+<script src="{{ asset('assets/backend/js/custom/es6-shim.min.js') }}"></script>
 <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js') }}"></script>
 <script src="{{ asset('assets/backend/js/widgets.bundle.js') }}"></script>
-{{-- <script src="{{ asset('assets/backend/js/custom/handleFormSubmit.js') }}"></script> --}}
-{{-- <script src="{{ asset('assets/backend/js/custom/deleteConfirmSwal.js') }}"></script> --}}
-{{-- <script src="{{ asset('assets/backend/plugins/custom/tinymce/tinymce.bundle.js') }}"></script> --}}
+<script src="{{ asset('assets/backend/js/custom/handleFormSubmit.js') }}"></script>
+<script src="{{ asset('assets/backend/js/custom/deleteConfirmSwal.js') }}"></script>
+<script src="{{ asset('assets/backend/plugins/custom/tinymce/tinymce.bundle.js') }}"></script>
+
+
+
 
 
 
@@ -117,9 +116,9 @@ type="text/css" />
                 $('#galleryAjaxJsResponse').html(response.html);
 
                 if(response.counter){
-                    document.getElementById("galleryCounter").innerHTML=response.counter;                    
+                    document.querySelector("#galleryCounter").innerHTML=response.counter;                    
                 }else{
-                    document.getElementById("EmptygalleryMsg").innerHTML='No Gallery foundsds';   
+                    document.querySelector("#EmptygalleryMsg").innerHTML='No Gallery foundsds';   
                 }
             }            
         });
@@ -152,13 +151,12 @@ type="text/css" />
             dataType: "json",
             success: function(data) {
                 $("#"+data['tr']).remove();      
-
-                if(data['counter']){
-                    document.querySelector('#galleryCounter').innerHTML = data['counter']; 
-                }else{
-                    $("#gallery").hide();   
-                }
-
+                
+                document.querySelector('#galleryCounter').innerHTML = data['counter']; 
+                if(data['counter'] < 1){
+                    $("#gallery").hide();  
+                    document.querySelector("#EmptygalleryMsg1").innerHTML='No Gaaaaaa222aaallery foundsds';  
+                } 
             },
             error: function() {
                 alert('Error occured');
@@ -167,7 +165,7 @@ type="text/css" />
     });
 ////////////
 
-/*
+ 
 $('.gallery').imageUploader({
     label: 'Drag & Drop files here or click to browse',
     imagesInputName: 'gallery',
@@ -183,6 +181,6 @@ KTUtil.onDOMContentLoaded(function() {
 @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
 tinymce.init({selector: ('.editor{{ substr($properties['regional'], 0, 2) }}'), height : "280"});
 @endforeach
-*/
+ 
 </script>
 @stop

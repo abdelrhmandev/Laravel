@@ -220,7 +220,7 @@ if ($request->ajax()) {
      public function edit(Request $request,MainModel $post){ 
         if ($request->ajax()) {
             $media         = $post->media;
-            $view = view('backend.posts.galleryload',compact('media'),)->render();
+            $view           = view('backend.posts.galleryload',compact('media'))->render();
             return response()->json(['html'=>$view,'counter'=>$post->media->count()]);
         }
         if (view()->exists('backend.posts.edit')) {         
@@ -286,13 +286,20 @@ if ($request->ajax()) {
     public function delete_gallery_image(Request $request){        
 
         $id = $request->id;
-        $file = MediaModel::where('id',$id)->first(); 
+        $file = MediaModel::select('id','file')->where('id',$id)->first(); 
         $this->unlinkFile($file->file);
-        if(MediaModel::find($id)->delete()){            
 
-            $cc = MainModel::withCount('media')->where('id',$request->post_id)->first();
+        if(MediaModel::select('id','file')->find($id)->delete()){            
+
+          $cc = MainModel::withCount('media')->where('id',$request->post_id)->first();
      
-            $arr = array('msg' => 'IMAGE DELETED SUCCESSFULLY', 'status' => true,'tr'=>'tr_'.$id,'counter'=>$cc->media_count);
+     
+            $arr = array(
+                'msg'       => 'IMAGE DELETED SUCCESSFULLY', 
+                'status'    => true,
+                'tr'        =>'tr_'.$id,
+                'counter'   =>$cc->media_count
+            );
         }else{
             $arr = array('msg' => 'ERROR IMAGE DELETED ', 'status' => false);
         }

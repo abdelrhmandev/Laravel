@@ -29,13 +29,11 @@ class Category extends Model
 
     // # single Item
 
-    public function posts()
-    {
+    public function posts(){
         return $this->belongsToMany(Post::class, 'post_category'); // recipe_tag = table
     }
 
-    public function translate($lang = null)
-    {
+    public function translate($lang = null){
         if ($lang == 'getAll') {
             return $this->hasMany(CategoryTranslation::class);
         } else {
@@ -43,10 +41,8 @@ class Category extends Model
         }
     }
 
-    public static function tree($tax, $category = null)
-    {
+    public static function tree($tax, $category = null){
  
-
         $allCategories = Category::select('id', 'parent_id')
             ->Taxonomy($tax)
             ->Status('1')
@@ -87,8 +83,7 @@ class Category extends Model
         return $rootCategories;
     }
 
-    private static function formatTree($categories, $allCategories)
-    {
+    private static function formatTree($categories, $allCategories){
         if ($categories) {
             foreach ($categories as $category) {
                 $category->children = $allCategories->where('parent_id', $category->id)->values();
@@ -100,13 +95,11 @@ class Category extends Model
         }
     }
 
-    public function isChild(): bool
-    {
+    public function isChild(): bool{
         return $this->parent_id !== null;
     }
 
-    public function parent(): BelongsTo
-    {
+    public function parent(): BelongsTo{
         return $this->belongsTo(Category::class, 'parent_id')->withDefault([
             'name' => 'Default',
         ]);

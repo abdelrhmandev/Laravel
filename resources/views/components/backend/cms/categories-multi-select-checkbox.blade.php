@@ -9,11 +9,15 @@
                 @foreach ($categories as $category)
                 <div class="form-check form-check-custom form-check-solid mb-2">
                     <input type="checkbox" name="category_id[]" class="form-check-input" value="{{ $category->id }}" 
-                    @if(isset($parentid) && $parentid  == $category->id) {{ "checked" }} @endif>                    
+                    @if(isset($row) && in_array($category->id,$row->categories->pluck('id')->toArray()))
+                    {{ "checked" }}
+                    @endif>
                     <label class="form-check-label" for="flexCheckDefault">    
                         {{ $category->translate->title }}
                     </label>
                 </div>  
+
+                 
                         @if ($category->children->isNotEmpty())
                             <x-backend.cms.select-single-checkbox-childs 
                             :childs="$category->children" :parentid="$parentid ?? ''"

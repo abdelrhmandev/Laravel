@@ -31,7 +31,7 @@ type="text/css" />
             data-form-agree-label="{{ __('site.agree') }}" 
             enctype="multipart/form-data">            
 
-            
+            @method('PUT') 
             <div class="d-flex flex-column gap-3 gap-lg-7 w-100 mb-2 me-lg-5">
                 <!--begin::General options-->
                 
@@ -51,16 +51,16 @@ type="text/css" />
                             </div>                        
                     </div>
                 </div>
-                <x-backend.cms.tags :tags="$tags"/>
+                <x-backend.cms.tags :tags="$tags" :row="$row"/>
                 <x-backend.cms.gallery :media="$row->media"/>                
                 <x-backend.btns.button :destroyRoute="$destroyRoute" :redirectRoute="$redirect_after_destroy" :row="$row" :trans="$trans"/>
             </div>
             
             
             <div class="d-flex flex-column flex-row-fluid gap-0 w-lg-400px gap-lg-5">
-                <x-backend.cms.image :image="$row->image"/>
-                <x-backend.cms.categories-multi-select-checkbox :categories="$categories" :level="0" />
-                <x-backend.cms.authors :authors="$authors"/>
+                <x-backend.cms.image :image="$row->image"/>                    
+                <x-backend.cms.categories-multi-select-checkbox :categories="$categories" :row="$row" :level="0" />
+                <x-backend.cms.authors :authors="$authors" :id="$row->user_id" />
                 <x-backend.cms.status :status="$row->status" :action="'edit'" />
                 <x-backend.cms.featured :featured="$row->featured" :action="'edit'" />
                 <x-backend.cms.allowComments :allowcomments="$row->allow_comments" :action="'edit'" />            

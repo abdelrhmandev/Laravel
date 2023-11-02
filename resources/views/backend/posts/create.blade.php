@@ -61,7 +61,7 @@ type="text/css" />
             
             <div class="d-flex flex-column flex-row-fluid gap-0 w-lg-400px gap-lg-5">
                   <x-backend.cms.image />
-                  <x-backend.cms.categories-multi-select :categories="$categories" :level="0" />
+                  <x-backend.cms.categories-multi-select-checkbox :categories="$categories" :level="0" />
                   <x-backend.cms.authors :authors="$authors"/>
                   <x-backend.cms.status :published="1" :action="'create'"/>
                   <x-backend.cms.featured :featured="1" :action="'create'"/>

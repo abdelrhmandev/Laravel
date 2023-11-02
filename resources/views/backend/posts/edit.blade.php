@@ -46,25 +46,20 @@ type="text/css" />
                     <div class="card-body pt-0">
                           <div class="d-flex flex-column gap-5">
                             <div class="separator"></div>                        
-                            <x-backend.langs.ulTabs/>
-                            <x-backend.langs.LangInputs :showDescription="1" :richTextArea="0" :showSlug="1" :row="$row" :columnvalues="$TrsanslatedColumnValues" />                    
-                    </div>
- 
-                        
-                        
+                                <x-backend.langs.ulTabs/>
+                                <x-backend.langs.LangInputs :showDescription="1" :richTextArea="0" :showSlug="1" :row="$row" :columnvalues="$TrsanslatedColumnValues" />                    
+                            </div>                        
                     </div>
                 </div>
                 <x-backend.cms.tags :tags="$tags"/>
-                <x-backend.cms.gallery :media="$row->media"/>
-              
-                <div id="galleryAjaxJsResponse"></div>
+                <x-backend.cms.gallery :media="$row->media"/>                
                 <x-backend.btns.button :destroyRoute="$destroyRoute" :redirectRoute="$redirect_after_destroy" :row="$row" :trans="$trans"/>
             </div>
             
             
             <div class="d-flex flex-column flex-row-fluid gap-0 w-lg-400px gap-lg-5">
                 <x-backend.cms.image :image="$row->image"/>
-                <x-backend.cms.categories-multi-select :categories="$categories" :level="0" />
+                <x-backend.cms.categories-multi-select-checkbox :categories="$categories" :level="0" />
                 <x-backend.cms.authors :authors="$authors"/>
                 <x-backend.cms.status :status="$row->status" :action="'edit'" />
                 <x-backend.cms.featured :featured="$row->featured" :action="'edit'" />
@@ -84,22 +79,13 @@ type="text/css" />
 <script src="{{ asset('assets/backend/js/custom/handleFormSubmit.js') }}"></script>
 <script src="{{ asset('assets/backend/js/custom/deleteConfirmSwal.js') }}"></script>
 <script src="{{ asset('assets/backend/plugins/custom/tinymce/tinymce.bundle.js') }}"></script>
-
-
-
-
-
-
-
-
 <script src="{{ asset('assets/backend/plugins/custom/file-upload/image-uploader.min.js') }}"></script>
 <script>
 
 
     $(document).ready(function(){
         
-        function fetchcategory(){
-            console.log('LOOO');
+        function fetchmedia(){
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
@@ -118,12 +104,13 @@ type="text/css" />
                 if(response.counter){
                     document.querySelector("#galleryCounter").innerHTML=response.counter;                    
                 }else{
-                    document.querySelector("#EmptygalleryMsg").innerHTML='No Gallery foundsds';   
+                    document.querySelector("#EmptygalleryMsg").innerHTML='{{ __('site.listbox.text_empty')}}'; 
+                    document.querySelector("#galleryCounter").innerHTML=0;   
                 }
             }            
         });
     }
-    fetchcategory();
+    fetchmedia();
     });
 
 
@@ -131,10 +118,10 @@ type="text/css" />
 //https://laracasts.com/discuss/channels/general-discussion/ajax-delete-function
 
 ///////////////////////////////////
-    $(document).on('click', '.delete_category_btn', function (e) {
+    $(document).on('click', '.delete_media_btn', function (e) {
         e.preventDefault();
         var id = $(this).val();
-        var url = '{{ route("admin.delete_gallery_image", ":id") }}';
+        var url = '{{ route("admin.delete_media_image", ":id") }}';
         url = url.replace(':id', id); 
         $.ajaxSetup({
         headers: {
@@ -150,12 +137,11 @@ type="text/css" />
             },
             dataType: "json",
             success: function(data) {
-                $("#"+data['tr']).remove();      
-                
+                $("#"+data['div']).fadeOut(300, function(){ $(this).remove();});                
                 document.querySelector('#galleryCounter').innerHTML = data['counter']; 
                 if(data['counter'] < 1){
                     $("#gallery").hide();  
-                    document.querySelector("#EmptygalleryMsg1").innerHTML='No Gaaaaaa222aaallery foundsds';  
+                    document.querySelector("#EmptygalleryMsg").innerHTML='{{ __('site.listbox.text_empty')}}'; 
                 } 
             },
             error: function() {

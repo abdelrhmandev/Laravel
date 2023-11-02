@@ -11,7 +11,15 @@
             <div class="gallery" style="padding-top: .5rem;"></div>
             <div class="uppy uppy-Informer" id="galleryMessageJsResponse"></div>            
         </div>
+        
     </div>
  </div>
+
+ <div id="galleryAjaxJsResponse"></div> 
+
+
+
+
+ 
 
  

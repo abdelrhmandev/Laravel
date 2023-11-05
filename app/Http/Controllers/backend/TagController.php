@@ -132,22 +132,10 @@ class TagController extends Controller
     }
 
     /////////////
-    public function update(ModuleRequest $request, MainModel $tag)
-    {
-        try {
-            DB::beginTransaction();
-            $validated = $request->validated();
-
-            $data = [
-                'taxonomy' => 'posts',
-            ];
-            MainModel::findOrFail($tag->id)->update($data);
-            $arr = ['msg' => __($this->TRANS . '.' . 'updateMessageSuccess'), 'status' => true];
-            DB::commit();
-            $this->UpdateMultiLangsQuery($this->TRANSLATECOLUMNS, $this->TRANS . '_translations', [$this->TblForignKey => $tag->id]);
+    public function update(ModuleRequest $request, MainModel $tag){
+        if($this->UpdateMultiLangsQuery($this->TRANSLATECOLUMNS, $this->TRANS . '_translations', [$this->TblForignKey => $tag->id])){
             $arr = ['msg' => __($this->TRANS.'.updateMessageSuccess'), 'status' => true];
-        } catch (\Exception $e) {
-            DB::rollback();
+        }else{
             $arr = ['msg' => __($this->TRANS . '.' . 'updateMessageError'), 'status' => false];
         }
         return response()->json($arr);

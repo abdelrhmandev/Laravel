@@ -252,12 +252,26 @@ if ($request->ajax()) {
                 $this->unlinkFile($post->image);
                 $image = NULL;
             }
-            $data = [
-                'status'        =>isset($request->status) ? '1' : '0',
-                'image'         => $image,
-                'parent_id'     => isset($request->parent_id) ? $request->parent_id : NULL,
-            ];
-            MainModel::findOrFail($post->id)->update($data);
+            $gallery = $request->file('gallery');
+            if(!(empty($gallery))){               
+                foreach ($gallery as $file) {
+                    $fileUpload = $this->uploadFile($file,$this->UPLOADFOLDER);
+                    MediaModel::create(['post_id'=>$post->id,'assigned_for'=>'gallery','file'=>$fileUpload]);
+                }
+            }
+
+            $validated['status']           = isset($request->status) ? '1' : '0'; 
+            $validated['featured']         = isset($request->featured) ? '1' : '0';   
+            $validated['allow_comments']   = isset($request->allow_comments) ? '1' : '0';                        
+            $validated['image']            = $image;
+            $validated['user_id']          = $request->user_id;  
+
+
+            MainModel::findOrFail($post->id)->update($validated);
+
+            $post->tags()->sync((array)$request->input('tag_id'));
+            $post->categories()->sync((array)$request->input('category_id'));
+
             $arr = array('msg' => __($this->TRANS.'.'.'updateMessageSuccess'), 'status' => true);            
             DB::commit();
             $this->UpdateMultiLangsQuery($this->TRANSLATECOLUMNS,$this->TRANS."_translations",[$this->TblForignKey=>$post->id]);            
@@ -269,12 +283,16 @@ if ($request->ajax()) {
          return response()->json($arr);
     }
     public function destroy(MainModel $post){        
-        //SET ALL childs to NULL 
-        $childs = $post->where('parent_id', $post->id);     
-        foreach ($childs->get() as $child) {
-            $child->id ? MainModel::where('id',$child->id)->update(['parent_id' => NULL]) : '';
-        }        
-        $post->image ? $this->unlinkFile($post->image) : ''; // Unlink Image        
+      
+
+        foreach ($post->media()->get() as $media) {            
+            $this->unlinkFile($media->file); // Unlink Media  
+        }
+        $post->media()->delete(); 
+        $post->image ? $this->unlinkFile($post->image) : ''; // Unlink Image   
+        
+        #categories comments , and tags deleted automatic 
+
         if($post->delete()){
             $arr = array('msg' => __($this->TRANS.'.'.'deleteMessageSuccess'), 'status' => true);
         }else{

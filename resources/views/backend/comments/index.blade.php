@@ -36,31 +36,20 @@
           </div> --}}
           
           <div class="w-200px me-3">
-              <select class="form-select form-select-solid" data-control="select2" name="category_id" id="category_id" data-placeholder="{{ __('site.filter_by')}} {{ __('category.singular')}} " data-allow-clear="true">
+              <select class="form-select form-select-solid" data-control="select2" name="category_id" id="category_id" data-placeholder="{{ __('site.filter_by')}} {{ __('site.status')}} " data-allow-clear="true">
                 <option></option>
-                  @foreach ($categories as $category)
-                    <option value="{{ $category->id}}">{{ $category->translate->title }} ({{ $category->posts_count }})</option>             
-                  @endforeach
+                <option>dasdsadasd</option>
               </select>
            </div>
 
           @include('backend.partials.modals._exportlisting')
-          <a class="btn btn-primary" href="{{ $createRoute }}">
-            <span class="svg-icon svg-icon-2 svg-icon-primary me-0 me-md-2">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path opacity="0.3" d="M19 22H5C4.4 22 4 21.6 4 21V3C4 2.4 4.4 2 5 2H14L20 8V21C20 21.6 19.6 22 19 22ZM16 13.5L12.5 13V10C12.5 9.4 12.6 9.5 12 9.5C11.4 9.5 11.5 9.4 11.5 10L11 13L8 13.5C7.4 13.5 7 13.4 7 14C7 14.6 7.4 14.5 8 14.5H11V18C11 18.6 11.4 19 12 19C12.6 19 12.5 18.6 12.5 18V14.5L16 14C16.6 14 17 14.6 17 14C17 13.4 16.6 13.5 16 13.5Z" fill="currentColor"></path>
-                <rect x="11" y="19" width="10" height="2" rx="1" transform="rotate(-90 11 19)" fill="currentColor"></rect>
-                <rect x="7" y="13" width="10" height="2" rx="1" fill="currentColor"></rect>
-                <path d="M15 8H20L14 2V7C14 7.6 14.4 8 15 8Z" fill="currentColor"></path>
-              </svg>
-            </span>
-            {{ __($trans.'.add')}}</a>
+ 
         </div>
         <div class="d-flex justify-content-end align-items-center d-none" data-kt-table-toolbar="selected">
           <div class="fw-bold me-5">
           <span class="me-2" data-kt-table-select="selected_count"></span>{{ __('admin.selected') }}</div>          
           <button type="button" class="btn btn-danger" id="destroyMultipleroute"              
-          data-destroyMultiple-route = "{{ $destroyMultipleRoute }}"
+          data-destroyMultiple-route = "121212212"
           data-kt-table-select="delete_selected"             
           data-back-list-text="{{ __('site.back_to_list') }}"        
           data-confirm-message = "{{ __($trans.'.delete_selected') }}"
@@ -82,12 +71,10 @@
                 <input class="form-check-input AA" type="checkbox" data-kt-check="true" data-kt-check-target="#{{ __($trans.".plural") }} .AA" value="1" />
               </div>
             </th>            
-            <th>{{ __('site.image') }}</th>  
-            <th>{{ __('site.title') }}</th>                                
-            <th>{{ __('category.plural') }}</th>
-            <th>{{ __('tag.plural') }}</th>            
-            <th>{{ __('comment.plural') }}</th> 
-            {{-- <th>{{ __('site.status') }}</th>  --}}
+            <th>{{ __('comment.singular') }}</th>  
+            <th>{{ __('site.author') }}</th>                                
+            <th>{{ __('post.singular') }}</th>
+            <th>{{ __('site.status') }}</th>            
             <th class="text-primary">{{ __('admin.created_at') }}</th>
             <th class="text-end min-w-50px noExport">{{ __('admin.actions') }}</th>  
           </tr>
@@ -107,20 +94,19 @@
 <script src="{{ asset('assets/backend/js/custom/pdfMake/vfs_load_fonts.js')}}"></script>
 <script src="{{ asset('assets/backend/js/custom/pdfMake/pdfhandle.js')}}"></script>
 <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js')}}"></script>
-@include('backend.datatables.posts')
+@include('backend.datatables.comments')
 <script>
 var dynamicColumns = [ //as an array start from 0
 { data: 'id', name: 'id',exportable:false}, 
-{ data: 'image', name: 'image' ,orderable: false,searchable: false},
-{ data: 'translate.title', name: 'translate.title',orderable: false}, // 2
-{ data: 'categories', name: 'categories',orderable: false,searchable: false},
-{ data: 'tags', name: 'tags',orderable: false,searchable: false},
-{ data: 'comments', name: 'comments',orderable: false,searchable: false},
+{ data: 'comment', name: 'comment',orderable: false}, // 2
+{ data: 'user_id', name: 'user_id',orderable: false,searchable: false},
+{ data: 'post', name: 'post',orderable: false,searchable: false},
+{ data: 'status', name: 'status',orderable: false,searchable: true}, // 6
 { data: 'created_at',name :'created_at', type: 'num', render: { _: 'display', sort: 'timestamp', order: 'desc'}}, // 6
 { data: 'actions' , name : 'actions' ,exportable:false,orderable: false,searchable: false},    
 ];
 KTUtil.onDOMContentLoaded(function () {
-  loadDatatable('{{ __($trans.".plural") }}','{{ $redirectRoute }}',dynamicColumns,'','2');
+  loadDatatable('{{ __($trans.".plural") }}','{{ $redirectRoute }}',dynamicColumns,'','1');
 });
 </script>
  

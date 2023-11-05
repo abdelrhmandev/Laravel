@@ -8,7 +8,6 @@ class Post extends Model
 {
 
 
-    protected $guarded = ['id'];
 
     protected $table = 'posts';
 
@@ -16,8 +15,9 @@ class Post extends Model
 
     protected $with = ['translate'];
 
-    public function scopeStatus($query, $type)
-    {
+    protected $guarded = ['id'];
+
+    public function scopeStatus($query, $type){
         return $query->where('status', $type);
     }
 

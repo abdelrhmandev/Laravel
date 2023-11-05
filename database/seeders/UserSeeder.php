@@ -77,5 +77,31 @@ class UserSeeder extends Seeder
             ])->assignRole(5);
 
 
+        ////////////////////
+
+        \App\Models\User::create([    
+            'username'         =>'Amanda',
+            'password'         =>bcrypt('12345678'),
+            'email'            =>'Amanda@domain.com',
+            'name'             =>'Amanda lam',
+            'is_admin'         =>'1',
+        ])->assignRole(3);
+
+
+        \App\Models\User::create([    
+            'username'         =>'famu',
+            'password'         =>bcrypt('12345678'),
+            'email'            =>'famu@domain.com',
+            'name'             =>'famu liver',
+            'is_admin'         =>'1',
+        ])->assignRole(4);
+
+        \App\Models\User::create([    
+            'username'         =>'vhupo',
+            'password'         =>bcrypt('12345678'),
+            'email'            =>'vhupo@domain.com',
+            'name'             =>'vhupo oliver',
+            'is_admin'         =>'1',
+        ])->assignRole(2);
     }
 }

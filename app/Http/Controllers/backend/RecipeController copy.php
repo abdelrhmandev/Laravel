@@ -196,7 +196,7 @@ DB::commit();
 
 
     public function reviews(){
-        if (view()->exists('admin.recipes.reviews.index')) {
+        if (view()->exists('admin.recipes.  ')) {
             return view('admin.recipes.reviews.index');
         }
     }

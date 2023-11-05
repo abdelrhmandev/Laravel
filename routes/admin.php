@@ -77,6 +77,15 @@ Route::post('/DeleteAjaxGallery','PostController@delete_media_image')->name('del
 
 
 
+Route::get('/comments', 'CommentController@index')->name('comments.index');
+Route::get('/comments/processHandling', 'CommentController@processHandling')->name('comments.processHandling');
+
+Route::get('/comments/edit/{id}', 'CommentController@edit')->name('comments.edit');
+
+Route::delete('comments/destroy', 'CommentController@destroy')->name('comments.destroy');
+
+Route::delete('comments/destroy/all', 'CommentController@destroyMultiple')->name('comments.destroyMultiple');
+
 
 Route::resource('slides', SlideController::class)->except('show');
 

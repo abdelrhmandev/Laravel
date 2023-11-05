@@ -168,17 +168,24 @@ public function index(Request $request){
             if(!empty($request->file('image'))) {
                 $category->image && File::exists(public_path($category->image)) ? $this->unlinkFile($category->image): '';
                 $image =  $this->uploadFile($request->file('image'),$this->UPLOADFOLDER);
-             }    
+             }   
+             
+             
+            
             if(isset($request->drop_image_checkBox)  && $request->drop_image_checkBox == 1) {                
                 $this->unlinkFile($category->image);
                 $image = NULL;
             }
-            $data = [
-                'status'        =>isset($request->status) ? '1' : '0',
-                'image'         => $image,
-                'parent_id'     => isset($request->parent_id) ? $request->parent_id : NULL,
-            ];
-            MainModel::findOrFail($category->id)->update($data);
+
+            $validated['status']     = isset($request->status) ? '1' : '0';       
+            $validated['image']      = $image;
+            $validated['parent_id']  = isset($request->parent_id) ? $request->parent_id : NULL;
+            $validated['taxonomy']   = $this->Taxonomy;
+
+
+            MainModel::findOrFail($category->id)->update($validated);
+
+           
             $arr = array('msg' => __($this->TRANS.'.'.'updateMessageSuccess'), 'status' => true);            
             DB::commit();
             $this->UpdateMultiLangsQuery($this->TRANSLATECOLUMNS,$this->TRANS."_translations",[$this->TblForignKey=>$category->id]);            

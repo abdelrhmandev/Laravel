@@ -11,24 +11,31 @@ class Comment extends Model
      * @var array
      */
 
-    public $timestamps = false;
+ 
  
     protected $table = 'comments';
 
- 
+    
 
     protected $fillable = [
-		'comment','rating','user_id','post_id','parent_id'
+		'comment','rating','status','user_id','post_id','parent_id'
 	];
+    
+    protected $guarded = ['id'];
 
     /**
-     * A comment has an owner.
+     * A comment has an user.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function owner()
+    public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function post()
+    {
+        return $this->belongsTo(Post::class, 'post_id');
     }
 
     /**

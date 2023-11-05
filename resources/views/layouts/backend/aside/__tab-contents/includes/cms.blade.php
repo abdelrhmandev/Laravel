@@ -26,7 +26,7 @@
     </span>
     <div class="menu-sub menu-sub-accordion menu-active-bg">
         <div class="menu-item">
-            <a class="menu-link" href="{{ route('admin.posts.index') }}">
+            <a class="menu-link" href="{{ route(config('custom.route_prefix').'.posts.index') }}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -34,7 +34,7 @@
             </a>
         </div>
         <div class="menu-item">
-            <a class="menu-link" href="{{ route('admin.posts.create') }}">
+            <a class="menu-link" href="{{ route(config('custom.route_prefix').'.posts.create') }}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -42,7 +42,7 @@
             </a>
         </div>
         <div class="menu-item">
-            <a class="menu-link @if(Route::currentRouteName() == 'admin.categories.index') active @endif" href="{{ route('admin.categories.index') }}">
+            <a class="menu-link @if(Route::currentRouteName() == config('custom.route_prefix').'.categories.index') active @endif" href="{{ route(config('custom.route_prefix').'.categories.index') }}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -54,7 +54,7 @@
 
 
         <div class="menu-item">
-            <a class="menu-link" href="{{ route('admin.tags.index') }}">
+            <a class="menu-link" href="{{ route(config('custom.route_prefix').'.tags.index') }}">
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
@@ -63,6 +63,16 @@
         </div>
 
  
+
+        <div class="menu-item">
+            <a class="menu-link" href="{{ route(config('custom.route_prefix').'.comments.index') }}">
+                <span class="menu-bullet">
+                    <span class="bullet bullet-dot"></span>
+                </span>
+                <span class="menu-title">{{ __('comment.plural') }}</span>
+            </a>
+        </div>
+
 
 
     </div>

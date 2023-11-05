@@ -27,8 +27,11 @@ class UserController extends Controller
     public function index(Request $request){    
          
  
+        ?>
+        <h1>لما تمسح اليوزر اساله نمسح كل الحاجات اللي متعلقه بيه زي المقالات و التعليقات و اي شيء مرتبط بيه </h1>
+        <?php
 
- 
+        dd('dasd');
              
             
        

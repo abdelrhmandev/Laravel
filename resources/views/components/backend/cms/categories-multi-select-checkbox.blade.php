@@ -15,12 +15,10 @@
                     <label class="form-check-label" for="flexCheckDefault">    
                         {{ $category->translate->title }}
                     </label>
-                </div>  
-
-                 
+                </div>                   
                         @if ($category->children->isNotEmpty())
                             <x-backend.cms.select-single-checkbox-childs 
-                            :childs="$category->children" :parentid="$parentid ?? ''"
+                            :childs="$category->children" :pluckarr="$row->categories->pluck('id')->toArray()" :parentid="$parentid ?? ''"
                                 level="{{ $level + 1 }}" />
                         @endif                
                 @endforeach

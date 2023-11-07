@@ -36,20 +36,23 @@
           </div> --}}
           
           <div class="w-200px me-3">
-              <select class="form-select form-select-solid" data-control="select2" name="category_id" id="category_id" data-placeholder="{{ __('site.filter_by')}} {{ __('site.status')}} " data-allow-clear="true">
-                <option></option>
-                <option>dasdsadasd</option>
+              <select class="form-select form-select-solid" data-control="select2" name="status" id="status" data-placeholder="{{ __('site.filter_by')}} {{ __('category.singular')}} " data-allow-clear="true">
+                <option value="all">{{ __('site.all') }}  ({{ $allrecords }})</option>
+                <option value="pending">{{ __('site.pending') }}  ({{ $allrecords }})</option>
+                <option value="approved">{{ __('site.approved') }}  ({{ $allrecords }})</option>
+                <option value="rejected">{{ __('site.rejected') }}  ({{ $allrecords }})</option>
               </select>
            </div>
 
-          @include('backend.partials.modals._exportlisting')
- 
+
+          
         </div>
         <div class="d-flex justify-content-end align-items-center d-none" data-kt-table-toolbar="selected">
           <div class="fw-bold me-5">
           <span class="me-2" data-kt-table-select="selected_count"></span>{{ __('admin.selected') }}</div>          
+          
           <button type="button" class="btn btn-danger" id="destroyMultipleroute"              
-          data-destroyMultiple-route = "121212212"
+          data-destroyMultiple-route = "dsadsadasd"
           data-kt-table-select="delete_selected"             
           data-back-list-text="{{ __('site.back_to_list') }}"        
           data-confirm-message = "{{ __($trans.'.delete_selected') }}"
@@ -59,6 +62,50 @@
           data-delete-selected-records-text = "{{ __($trans.'.delete_selected') }}"
           data-not-deleted-message = "{{ __($trans.'.not_delete_selected') }}"
           ><i class="fa fa-trash-alt"></i>{{ __('admin.delete_selected') }}</button>
+
+
+<button type="button" class="btn btn-primary" id="destroyMultipleroute"              
+          data-destroyMultiple-route = "dsadsadasd"
+          data-kt-table-select="delete_selected"             
+          data-back-list-text="{{ __('site.back_to_list') }}"        
+          data-confirm-message = "{{ __($trans.'.delete_selected') }}"
+          data-confirm-button-text = "{{ __('site.confirmButtonText') }}"
+          data-cancel-button-text = "{{ __('site.cancelButtonText') }}"
+          data-confirm-button-textGotit = "{{ __('site.confirmButtonTextGotit') }}"
+          data-delete-selected-records-text = "{{ __($trans.'.delete_selected') }}"
+          data-not-deleted-message = "{{ __($trans.'.not_approve_selected') }}"
+          ><i class="bi bi-patch-check"></i> {{ __('admin.approve_selected') }}</button>
+
+
+          <button type="button" class="btn btn-secondary" id="destroyMultipleroute"              
+          data-destroyMultiple-route = "dsadsadasd"
+          data-kt-table-select="delete_selected"             
+          data-back-list-text="{{ __('site.back_to_list') }}"        
+          data-confirm-message = "{{ __($trans.'.delete_selected') }}"
+          data-confirm-button-text = "{{ __('site.confirmButtonText') }}"
+          data-cancel-button-text = "{{ __('site.cancelButtonText') }}"
+          data-confirm-button-textGotit = "{{ __('site.confirmButtonTextGotit') }}"
+          data-delete-selected-records-text = "{{ __($trans.'.delete_selected') }}"
+          data-not-deleted-message = "{{ __($trans.'.not_approve_selected') }}"
+          ><i class="bi bi-exclamation-octagon"></i>{{ __('admin.spam_selected') }}</button>
+
+
+
+          <button type="button" class="btn btn-warning" id="destroyMultipleroute"              
+          data-destroyMultiple-route = "dsadsadasd"
+          data-kt-table-select="reject_selected"             
+          data-back-list-text="{{ __('site.back_to_list') }}"        
+          data-confirm-message = "{{ __($trans.'.reject_selected') }}"
+          data-confirm-button-text = "{{ __('site.confirmButtonText') }}"
+          data-cancel-button-text = "{{ __('site.cancelButtonText') }}"
+          data-confirm-button-textGotit = "{{ __('site.confirmButtonTextGotit') }}"
+          data-reject-selected-records-text = "{{ __($trans.'.reject_selected') }}"
+          data-not-rejectd-message = "{{ __($trans.'.reject_selected') }}"
+          ><i class="bi bi-x-circle-fill"></i>{{ __('admin.reject_selected') }}</button>
+
+
+
+
         </div>
       </div>
     </div>
@@ -71,10 +118,10 @@
                 <input class="form-check-input AA" type="checkbox" data-kt-check="true" data-kt-check-target="#{{ __($trans.".plural") }} .AA" value="1" />
               </div>
             </th>            
-            <th>{{ __('comment.singular') }}</th>  
-            <th>{{ __('site.author') }}</th>                                
+            <th>{{ __('site.author') }}</th>
+            <th>{{ __('comment.singular') }}</th>                                              
             <th>{{ __('post.singular') }}</th>
-            <th>{{ __('site.status') }}</th>            
+            {{-- <th>{{ __('site.status') }}</th>             --}}
             <th class="text-primary">{{ __('admin.created_at') }}</th>
             <th class="text-end min-w-50px noExport">{{ __('admin.actions') }}</th>  
           </tr>
@@ -98,15 +145,15 @@
 <script>
 var dynamicColumns = [ //as an array start from 0
 { data: 'id', name: 'id',exportable:false}, 
-{ data: 'comment', name: 'comment',orderable: false}, // 2
-{ data: 'user_id', name: 'user_id',orderable: false,searchable: false},
-{ data: 'post', name: 'post',orderable: false,searchable: false},
-{ data: 'status', name: 'status',orderable: false,searchable: true}, // 6
+{ data: 'author', name: 'author',orderable: false},
+{ data: 'comment', name: 'comment',orderable: false},
+{ data: 'post', name: 'post',orderable: false},
+// { data: 'status', name: 'status',orderable: false},
 { data: 'created_at',name :'created_at', type: 'num', render: { _: 'display', sort: 'timestamp', order: 'desc'}}, // 6
 { data: 'actions' , name : 'actions' ,exportable:false,orderable: false,searchable: false},    
 ];
 KTUtil.onDOMContentLoaded(function () {
-  loadDatatable('{{ __($trans.".plural") }}','{{ $redirectRoute }}',dynamicColumns,'','1');
+  loadDatatable('{{ __($trans.".plural") }}','{{ $redirectRoute }}',dynamicColumns,'','2');
 });
 </script>
  

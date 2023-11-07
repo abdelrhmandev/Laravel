@@ -92,10 +92,6 @@ if ($request->ajax()) {
     
     
     $model = MainModel::with(['tags','categories'])->withCount('comments');
-    
- 
-   
-
     return Datatables::of($model)
                 ->addIndexColumn()   
                 ->editColumn('translate.title', function (MainModel $row) {

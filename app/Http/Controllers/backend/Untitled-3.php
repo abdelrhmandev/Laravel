@@ -31,6 +31,18 @@ if ($request->ajax()) {
                 ->addIndexColumn()   
 
 
+                ->editColumn('comment', function (MainModel $row) {
+                    $div = "<div class=\"d-flex\">                                                    
+                    <div class=\"ms-5 text-gray-800 text-hover-primary\">
+                     <a href=\"#\">".Str::words($row->comment, '10')."</a>
+                        <div class=\"text-muted fs-7 fw-bold\">
+                            dasdass 
+                        </div>                                
+                    </div>
+                </div>";                               
+        return $div;
+                })
+
                 ->editColumn('author', function (MainModel $row) {
                     $div = '<span aria-hidden="true">—</span>';
                     if($row->user->avatar) {
@@ -38,41 +50,27 @@ if ($request->ajax()) {
                     }else{
                         $avatarPath = '';
                     }
-
-                    $div = "<div class=\"d-flex\">
-                    <a href=\"ssdasd\" class=\"symbol symbol-50px\">
-                        <span class=\"symbol-label\" style=\"background-image:url(".$avatarPath.");\"></span>
-                    </a>
-                    <div class=\"ms-5\">
-                        <div class=\"text-muted fs-7 fw-bold\">".$row->user->name."</div>
-                        <a href='mailto:".$row->user->email."' class=\"text-gray-800 text-hover-primary fw-bold mb-1\">".$row->user->email."</a>
-                    </div>
-                </div>";                               
-        return $div;
+                    $div = "<div class=\"d-flex\">                                
+                                <div class=\"symbol symbol-50px\">
+                                    <span class=\"symbol-label\" style=\"background-image:url(".$avatarPath.");\"></span>
+                                </div>
+                                <div class=\"ms-5\">
+                                 ".$row->user->name."
+                                    <div class=\"text-muted fs-7 fw-bold\">
+                                        <a href='mailto:".$row->user->email."'>".$row->user->email."</a>
+                                    </div>                                
+                                </div>
+                            </div>";                               
+                    return $div;
                 })
-
-
-                ->editColumn('comment', function (MainModel $row) {
-                    $div = "<div class=\"d-flex\">
-                    <div>                         
-                    <div class=\"text-muted fs-7 fw-bold\">
-                    <a href=\"#\">".Str::words($row->comment, '10')."</a></div>
-                    </div>
-                </div>";                               
-        return $div;
-                })
-
                 
                 ->editColumn('post', function (MainModel $row) {
-                    $div = "<div class=\"d-flex\">
-                    <div>                         
-                    <div class=\"text-muted fs-7 fw-bold\"><a href=\"#\">".Str::words($row->post->translate->title, '10')."</a></div>                    
-                    </div>
-                </div>";                               
-        return $div;
+                    return "<a href=".route(config('custom.route_prefix').'.posts.edit',$row->id)." class=\"text-gray-800 text-hover-primary\" data-kt-item-filter".$row->id."=\"item\">".Str::words($row->post->translate->title, '5')."</a>";                     
                 })
 
-
+                ->editColumn('status', function (MainModel $row) {
+                    return $row->status;                     
+                })
 
                 ->filter(function ($instance) use ($request) {
                     if ($request->get('search')) {
@@ -82,7 +80,7 @@ if ($request->ajax()) {
 
                 ->editColumn('created_at', function (MainModel $row) {
                     return [                    
-                       'display'   => "<div class=\"font-weight-bolder text-primary mb-0\">". Carbon::parse($row->created_at)->format('d/m/Y').'</div><div class=\"text-muted\">'.$row->created_at->diffForHumans()."</div>", 
+                       'display'   => "<div class=\"font-weight-bolder text-primary mb-0\">". Carbon::parse($row->created_at)->format('d/m/Y').'</div><div class=\"text-muted\">'.''."</div>", 
                        'timestamp' => $row->created_at->timestamp
                     ];
                  })                 

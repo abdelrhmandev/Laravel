@@ -4,20 +4,10 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 class PostSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-
-
         DB::table('posts')->delete();
         DB::table('post_translations')->delete();
-
- 
-
        $items = [
         ['status'=>'1','image'=>'uploads/posts/1.jpg','user_id'=>'1','featured'=>'1','allow_comments'=>'1'],
         ['status'=>'1','image'=>'uploads/posts/2.jpg','user_id'=>'2','featured'=>'1','allow_comments'=>'0'],
@@ -33,13 +23,11 @@ class PostSeeder extends Seeder
        DB::table('posts')->insert($items);      
 
        for($i=1;$i<=10;$i++){
-       $translated_items = [        
-            ['title'=>'Post '.$i,'slug'=>'post-'.$i,'description'=>'Lorem ipsum, or lipsum as it is sometimes known','lang'=>'en','post_id'=>$i],
-            ['title'=>$i.' مقال','slug'=>$i.'-مقال','description'=>'وريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل','lang'=>'ar','post_id'=>$i],
-        ];
-        DB::table('post_translations')->insert($translated_items);     
-    }
-      
-
+            $translated_items = [        
+                    ['title'=>'Post '.$i,'slug'=>'post-'.$i,'description'=>'Lorem ipsum, or lipsum as it is sometimes known','lang'=>'en','post_id'=>$i],
+                    ['title'=>$i.' مقال','slug'=>$i.'-مقال','description'=>'وريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل','lang'=>'ar','post_id'=>$i],
+                ];
+            DB::table('post_translations')->insert($translated_items);     
+         }      
     }
 }

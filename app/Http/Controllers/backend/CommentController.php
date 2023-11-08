@@ -32,44 +32,25 @@ if ($request->ajax()) {
 
 
                 ->editColumn('author', function (MainModel $row) {
-                    $div = '<span aria-hidden="true">—</span>';
-                    if($row->user->avatar) {
-                        $avatarPath = asset($row->user->avatar);
-                    }else{
-                        $avatarPath = '';
-                    }
-
-                    $div = "<div class=\"d-flex\">
-                    <a href=\"ssdasd\" class=\"symbol symbol-50px\">
-                        <span class=\"symbol-label\" style=\"background-image:url(".$avatarPath.");\"></span>
-                    </a>
-                    <div class=\"ms-5\">
-                        <div class=\"text-muted fs-7 fw-bold\">".$row->user->name."</div>
-                        <a href='mailto:".$row->user->email."' class=\"text-gray-800 text-hover-primary fw-bold mb-1\">".$row->user->email."</a>
-                    </div>
-                </div>";                               
-        return $div;
+                                                    
+                    $div = $row->user->name;                            
+                    return $div;
                 })
 
 
                 ->editColumn('comment', function (MainModel $row) {
-                    $div = "<div class=\"d-flex\">
-                    <div>                         
-                    <div class=\"text-muted fs-7 fw-bold\">
-                    <a href=\"#\">".Str::words($row->comment, '10')."</a></div>
-                    </div>
-                </div>";                               
-        return $div;
+                    return "<a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".Str::words($row->comment, '5')."</a>";                     
+
+
+
+ 
+
                 })
 
                 
                 ->editColumn('post', function (MainModel $row) {
-                    $div = "<div class=\"d-flex\">
-                    <div>                         
-                    <div class=\"text-muted fs-7 fw-bold\"><a href=\"#\">".Str::words($row->post->translate->title, '10')."</a></div>                    
-                    </div>
-                </div>";                               
-        return $div;
+                    $div = $row->post->translate->title;                                 
+                    return $div;
                 })
 
 
@@ -89,10 +70,17 @@ if ($request->ajax()) {
                  ->filterColumn('created_at', function ($query, $keyword) {
                     $query->whereRaw("DATE_FORMAT(created_at,'%d/%m/%Y') LIKE ?", ["%$keyword%"]);
                  })             
-                ->editColumn('actions', function ($row) {                                                       
-                    return 'actions';
-                })                            
-                ->rawColumns(['comment','author','status','post','actions','created_at','created_at.display'])                  
+
+                 ->editColumn('actions', function ($row) {                                                       
+                    return view('backend.partials.btns.edit-delete', [
+                        'trans'         =>$this->TRANS,                       
+                        'editRoute'     =>route($this->ROUTE_PREFIX.'.edit',$row->id),
+                        'destroyRoute'  =>route($this->ROUTE_PREFIX.'.destroy',$row->id),
+                        'id'            =>$row->id
+                        ]);
+                }) 
+                                         
+                ->rawColumns(['author','comment','posts','status','created_at','created_at.display','actions'])                  
                 ->make(true);    
 
 
@@ -103,13 +91,26 @@ if ($request->ajax()) {
                 'trans'                 => $this->TRANS,                
                 'redirectRoute'         => route($this->ROUTE_PREFIX.'.index'),    
                 'allrecords'            => MainModel::count(),
-               
+                'destroyMultipleRoute'  => route($this->ROUTE_PREFIX.'.destroyMultiple'), 
+
+                'ChangeStatusRoute'     => route($this->ROUTE_PREFIX.'.changeStatus'),
+                'approved'              => MainModel::Status('approved')->count(),
+                'spam'                  => MainModel::Status('spam')->count(),
+                'pending'               => MainModel::Status('pending')->count(),
+                'rejected'              => MainModel::Status('rejected')->count(),               
             ];                       
             return view('backend.comments.index',$compact);
         }
 }
         
 
+
+
+public function  ChangeStatus(Request $request){
+    print_r($request->ids);
+
+    echo ($request->status);
+}
     public function edit(MainModel $comment){        
     
         dd($comment);
@@ -117,8 +118,11 @@ if ($request->ajax()) {
 
  
     public function destroy(MainModel $comment){   
+        dd('comment destroy');
     }
     public function destroyMultiple(Request $request){  
+    
+        dd('destroyMultiple');
     }
  
     

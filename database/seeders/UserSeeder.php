@@ -50,10 +50,10 @@ class UserSeeder extends Seeder
             ])->assignRole(3);
 
             \App\Models\User::create([    
-                'username'         =>'dany',
+                'username'         =>'Kevin',
                 'password'         =>bcrypt('12345678'),
-                'email'            =>'dany@domain.com',
-                'name'             =>'Dany oliver',
+                'email'            =>'Kevin@domain.com',
+                'name'             =>'Kevin Leonard',
                 'is_admin'         =>'1',
                 'avatar'           =>'uploads/avatars/dany.jpg',
             ])->assignRole(4);
@@ -69,10 +69,10 @@ class UserSeeder extends Seeder
 
 
             \App\Models\User::create([    
-                'username'         =>'vgo',
+                'username'         =>'Natali',
                 'password'         =>bcrypt('12345678'),
-                'email'            =>'vgo@domain.com',
-                'name'             =>'vgo oliver',
+                'email'            =>'Natali@domain.com',
+                'name'             =>'Natali Trump',
                 'is_admin'         =>'1',
             ])->assignRole(5);
 
@@ -80,27 +80,27 @@ class UserSeeder extends Seeder
         ////////////////////
 
         \App\Models\User::create([    
-            'username'         =>'Amanda',
+            'username'         =>'Lebron',
             'password'         =>bcrypt('12345678'),
-            'email'            =>'Amanda@domain.com',
-            'name'             =>'Amanda lam',
+            'email'            =>'Lebron@domain.com',
+            'name'             =>'Lebron Wayde',
             'is_admin'         =>'1',
         ])->assignRole(3);
 
 
         \App\Models\User::create([    
-            'username'         =>'famu',
+            'username'         =>'Jessie',
             'password'         =>bcrypt('12345678'),
-            'email'            =>'famu@domain.com',
-            'name'             =>'famu liver',
+            'email'            =>'Jessie@domain.com',
+            'name'             =>'Jessie Clarcson',
             'is_admin'         =>'1',
         ])->assignRole(4);
 
         \App\Models\User::create([    
-            'username'         =>'vhupo',
+            'username'         =>'Brad',
             'password'         =>bcrypt('12345678'),
-            'email'            =>'vhupo@domain.com',
-            'name'             =>'vhupo oliver',
+            'email'            =>'Brad@domain.com',
+            'name'             =>'Brad Simmons',
             'is_admin'         =>'1',
         ])->assignRole(2);
     }

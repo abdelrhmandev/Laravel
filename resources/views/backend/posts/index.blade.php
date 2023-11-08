@@ -116,6 +116,7 @@ var dynamicColumns = [ //as an array start from 0
 { data: 'categories', name: 'categories',orderable: false,searchable: false},
 { data: 'tags', name: 'tags',orderable: false,searchable: false},
 { data: 'comments', name: 'comments',orderable: false,searchable: false},
+// { data: 'status', name: 'status',orderable: false,searchable: true}, // 6
 { data: 'created_at',name :'created_at', type: 'num', render: { _: 'display', sort: 'timestamp', order: 'desc'}}, // 6
 { data: 'actions' , name : 'actions' ,exportable:false,orderable: false,searchable: false},    
 ];

@@ -70,7 +70,7 @@
             &nbsp;
           <button type="button" class="btn btn-success" id="approveBtn"              
           data-action-label = "approve"
-          data-changestatus-route = "{{ $ChangeStatusRoute}}"
+          data-changestatus-approve-route = "{{ $ChangeStatusRoute}}"
           data-kt-table-select="approve_selected"             
           data-back-list-text="{{ __('site.back_to_list') }}"        
           data-confirm-message = "{{ __($trans.'.approve_selected') }}"
@@ -84,7 +84,7 @@
           &nbsp;
           <button type="button" class="btn btn-success" id="rejectBtn"              
           data-action-label = "reject"
-          data-changestatus-route = "{{ $ChangeStatusRoute}}"
+          data-changestatus-reject-route = "{{ $ChangeStatusRoute}}"
           data-kt-table-select="reject_selected"             
           data-back-list-text="{{ __('site.back_to_list') }}"        
           data-confirm-message = "{{ __($trans.'.reject_selected') }}"

@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'change'                =>'Change',
     'status'                =>'Status',
     'dashboard'             =>'Dashboard',
     'home'                  =>'Home',

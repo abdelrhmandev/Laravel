@@ -41,10 +41,6 @@ if ($request->ajax()) {
                 ->editColumn('comment', function (MainModel $row) {
                     return "<a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".Str::words($row->comment, '5')."</a>";                     
 
-
-
- 
-
                 })
 
                 
@@ -92,7 +88,6 @@ if ($request->ajax()) {
                 'redirectRoute'         => route($this->ROUTE_PREFIX.'.index'),    
                 'allrecords'            => MainModel::count(),
                 'destroyMultipleRoute'  => route($this->ROUTE_PREFIX.'.destroyMultiple'), 
-
                 'ChangeStatusRoute'     => route($this->ROUTE_PREFIX.'.changeStatus'),
                 'approved'              => MainModel::Status('approved')->count(),
                 'spam'                  => MainModel::Status('spam')->count(),
@@ -107,22 +102,49 @@ if ($request->ajax()) {
 
 
 public function  ChangeStatus(Request $request){
-    print_r($request->ids);
 
-    echo ($request->status);
+    $ids = explode(',', $request->ids);
+    if(MainModel::whereIn('id',$ids)->update(['status'=>$request->status])){
+        $arr = array('msg' => __($this->TRANS.'.'.'UpdateStatusMessageSuccess'), 'status' => true);           
+    }else{
+        $arr = array('msg' => __($this->TRANS.'.'.'updateMessageError'), 'status' => true);
+    }
+        return response()->json($arr);
+
 }
-    public function edit(MainModel $comment){        
+    public function edit($id){        
     
-        dd($comment);
+
+        $compact = [
+            'trans'               => $this->TRANS, 
+            'updateRoute'         => route($this->ROUTE_PREFIX . '.update', $id),
+            'row'                 => MainModel::findOrFail($id),                
+            'redirectRoute'       => route($this->ROUTE_PREFIX.'.update'),    
+        ];                       
+
+
+        return view('backend.comments.edit',$compact);
+
     }
 
  
-    public function destroy(MainModel $comment){   
-        dd('comment destroy');
+    public function destroy($id){   
+        if(MainModel::select('id')->find($id)->delete()){    
+            $arr = array('msg' => __($this->TRANS.'.'.'deleteMessageSuccess'), 'status' => true);
+        }else{
+            $arr = array('msg' => __($this->TRANS.'.'.'deleteMessageError'), 'status' => false);
+        }        
+        return response()->json($arr);
     }
-    public function destroyMultiple(Request $request){  
-    
-        dd('destroyMultiple');
+    public function destroyMultiple(Request $request){   
+        $ids = explode(',', $request->ids);
+        $items = MainModel::whereIn('id',$ids); // Check          
+        if($items->delete()){
+            $arr = array('msg' => __($this->TRANS.'.'.'MulideleteMessageSuccess'), 'status' => true);
+        }else{
+            $arr = array('msg' => __($this->TRANS.'.'.'MiltideleteMessageError'), 'status' => false);
+        } 
+            return response()->json($arr);
     }
  
     

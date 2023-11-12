@@ -65,16 +65,23 @@
           ><i class="fa fa-trash-alt"></i>{{ __('admin.delete_selected') }}</button>
             &nbsp;
 
-            <div class="w-150px me-5">
-            <select class="form-select form-select-solid w-120" data-control="select2" data-hide-search="true" id="status" name="status" data-placeholder="{{ __('site.change')}} {{ __('site.status')}}">
-              <option value="pending">{{ __('site.pending') }}  </option>
+            <div class="w-170px me-5">
+            <select class="form-select form-select-solid w-150" data-control="select2" data-hide-search="true" id="changestatus" name="changestatus" data-placeholder="{{ __('site.change')}} {{ __('site.status')}}">
+              <option value=""></option>
               <option value="pending">{{ __('site.pending') }}  </option>
               <option value="approved">{{ __('site.approve') }}  </option>
               <option value="rejected">{{ __('site.reject') }}  </option>
               <option value="spam">{{ __('site.spam') }}  </option>
             </select>             
           </div>
-          <button type="button" class="btn btn-success me-5" id="applyChange">XXX{{ __('site.apply') }}</button>
+          <button type="button" class="btn btn-success me-5" id="ChangeStatusId"
+          data-kt-table-select="change_status_selected"
+          data-confirm-message = "{{ __($trans.'.change_status') }}"
+          data-ChangeStatus-route = "{{ $ChangeStatusRoute }}"
+          data-confirm-message = "{{ __($trans.'.delete_selected') }}"
+          data-confirm-button-text = "{{ __('site.yes') }}"
+          data-cancel-button-text = "{{ __('site.cancelButtonText') }}"
+          >{{ __('site.apply') }}</button>
             
 
 

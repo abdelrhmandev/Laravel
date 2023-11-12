@@ -60,7 +60,7 @@
                     $('.dataTables_info').css("display", "block");
                 }
             },
-            iDisplayLength: 1,
+            iDisplayLength: 10,
             bLengthChange: true,
             stateSave: false,
             lengthMenu: [
@@ -244,11 +244,18 @@
         var initToggleToolbar = function() {
             const container = document.querySelector('#' + tableId);
             const checkboxes = container.querySelectorAll('[type="checkbox"]');
-
-
             const deleteSelected = document.querySelector('[data-kt-table-select="delete_selected"]');
+
+
             const destroyMultipleRouteId = document.getElementById('destroyMultipleroute');
             const destroyMultipleRoute = destroyMultipleRouteId.getAttribute('data-destroyMultiple-route');
+
+
+            const changestatusSelected = document.querySelector('[data-kt-table-select="change_status_selected"]');
+            const ChangeStatusId = document.getElementById('ChangeStatusId');
+            const ChangeStatusRoute = ChangeStatusId.getAttribute('data-ChangeStatus-route');
+
+
             checkboxes.forEach(c => {
                 c.addEventListener('click', function() {
                     setTimeout(function() {
@@ -370,18 +377,10 @@
             }) // End Of multi Delete selected
 
 
-            //////// Start Of Approve Comments ///////////////
-            const approveSelected = document.querySelector('[data-kt-table-select="approve_selected"]');
-            const approveBtn = document.getElementById('approveBtn');
-            const changestatusMultipleRoute = approveBtn.getAttribute('data-changestatus-route');
-            checkboxes.forEach(c => {
-                c.addEventListener('click', function() {
-                    setTimeout(function() {
-                        toggleToolbars();
-                    }, 50);
-                });
-            });
-            approveSelected.addEventListener('click', function() {
+            //////// Start Of Change Comments Status ///////////////
+ 
+                
+                      changestatusSelected.addEventListener('click', function() {
                 var checkedrows = [];
                 var Itemsnames = [];
                 $("#" + tableId + " input:checkbox[name=ids]:checked").each(function() {
@@ -391,36 +390,50 @@
                     Itemsnames.push('<strong><u>' + c.innerText + '</strong></u>');
                 });
                 var join_selected_values = checkedrows.join(",");
+                
+                if($('#changestatus').val() == 'pending') {
+                    icon = 'warning';   labelCommentJsConfirm = '{{ __("comment.pending") }}';
+                }
+                else if($('#changestatus').val() == 'approved') {
+                    icon = 'success';  labelCommentJsConfirm = '{{ __("comment.approve") }}';
+                }
+                else if($('#changestatus').val() == 'rejected') {
+                    icon = 'error';  labelCommentJsConfirm = '{{ __("comment.reject") }}';
+                }
+                else if($('#changestatus').val() == 'spam') {
+                    icon = 'question';  labelCommentJsConfirm = '{{ __("comment.spam") }}';
+                }
+               
                 ////////////// body ///
                 Swal.fire({
-                    html: approveBtn.getAttribute("data-confirm-message") + ' ' + Itemsnames + ' ?',
-                    icon: "success",
+                    html: labelCommentJsConfirm+' ? ',
+                    icon: icon,
                     showCancelButton: true,
                     buttonsStyling: false,
                     showLoaderOnConfirm: true,
-                    confirmButtonText: approveBtn.getAttribute("data-confirm-button-text"),
-                    cancelButtonText: approveBtn.getAttribute("data-cancel-button-text"),
+                    confirmButtonText: ChangeStatusId.getAttribute("data-confirm-button-text"),
+                    cancelButtonText: ChangeStatusId.getAttribute("data-cancel-button-text"),
+
                     customClass: {
-                        confirmButton: "btn fw-bold btn-danger",
+                        confirmButton: "btn btn-light-primary",
                         cancelButton: "btn fw-bold btn-active-secondary"
                     },
                 }).then(function(result) {
-                    if (result.value) {
+                    if (result.value) { // Yes Delete
                         $.ajax({
                             type: 'post',
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             },
-                            url: changestatusMultipleRoute,
+                            url: ChangeStatusRoute,
                             data: {
-                                'status': approveBtn.getAttribute("data-kt-status"),
+                                '_method': 'post',
+                                'status': $('#changestatus').val(),
                                 'ids': join_selected_values,
                             },
                             success: function(response, textStatus, xhr) {
                                 Swal.fire({
-                                    html: approveBtn.getAttribute(
-                                            "data-delete-selected-records-text"
-                                            ) + ' ' + Itemsnames + ' ',
+                                    html: labelCommentJsConfirm+'......',
                                     icon: "info",
                                     buttonsStyling: false,
                                     showConfirmButton: false,
@@ -432,10 +445,7 @@
                                             'msg'], // respose from controller
                                             icon: "success",
                                             buttonsStyling: false,
-                                            confirmButtonText: approveBtn
-                                                .getAttribute(
-                                                    "data-back-list-text"
-                                                    ),
+                                            confirmButtonText: '{{ __("site.yes")}}',
                                             customClass: {
                                                 confirmButton: "btn fw-bold btn-primary",
                                             }
@@ -455,18 +465,12 @@
                                                 ' ', // respose from controller
                                             icon: "error",
                                             buttonsStyling: false,
-                                            confirmButtonText: approveBtn
-                                                .getAttribute(
-                                                    "data-back-list-text"
-                                                    ),
+                                            confirmButtonText: '{{ __("site.yes")}}',
                                             customClass: {
                                                 confirmButton: "btn btn-light-danger"
                                             }
                                         }).then(function() {
-                                            document.location.href =
-                                                approveBtn.getAttribute(
-                                                    "data-redirect-url"
-                                                    );
+                                            document.location.href = window.location.href;
                                         });
                                     }
                                 });
@@ -474,138 +478,21 @@
                         });
                     } else if (result.dismiss === 'cancel') {
                         Swal.fire({
-                            text: approveBtn.getAttribute("data-not-approved-message"),
-                            icon: "error",
+                           
+                            icon: icon,
                             buttonsStyling: false,
-                            confirmButtonText: approveBtn.getAttribute(
-                                "data-confirm-button-textGotit"),
+                            confirmButtonText: "{{ __('site.cancel')}}",
                             customClass: {
                                 confirmButton: "btn fw-bold btn-primary",
                             }
                         });
                     }
                 });
-            })
-            /////////////////// End Of Approve Comments ///////////
+            }) // End Of multi Delete selected
+            /////////////////// End Of Change Comments Status///////////
 
 
-                        //////// Start Of reject Comments ///////////////
-                        const rejectSelected = document.querySelector('[data-kt-table-select="reject_selected"]');
-            const rejectBtn = document.getElementById('rejectBtn');
-            const rejectMultipleRoute = rejectBtn.getAttribute('data-changestatus-reject-route');
-            checkboxes.forEach(c => {
-                c.addEventListener('click', function() {
-                    setTimeout(function() {
-                        toggleToolbars();
-                    }, 50);
-                });
-            });
-            rejectSelected.addEventListener('click', function() {
-                var checkedrows = [];
-                var Itemsnames = [];
-                $("#" + tableId + " input:checkbox[name=ids]:checked").each(function() {
-                    checkedrows.push($(this).val());
-                    var c = document.querySelector('[data-kt-item-filter' + $(this).val() +
-                        '="item"]');
-                    Itemsnames.push('<strong><u>' + c.innerText + '</strong></u>');
-                });
-                var join_selected_values = checkedrows.join(",");
-                ////////////// body ///
-                Swal.fire({
-                    html: rejectBtn.getAttribute("data-confirm-message") + ' ' + Itemsnames + ' ?',
-                    icon: "success",
-                    showCancelButton: true,
-                    buttonsStyling: false,
-                    showLoaderOnConfirm: true,
-                    confirmButtonText: rejectBtn.getAttribute("data-confirm-button-text"),
-                    cancelButtonText: rejectBtn.getAttribute("data-cancel-button-text"),
-                    customClass: {
-                        confirmButton: "btn fw-bold btn-danger",
-                        cancelButton: "btn fw-bold btn-active-secondary"
-                    },
-                }).then(function(result) {
-                    if (result.value) {
-                        $.ajax({
-                            type: 'post',
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
-                            url: rejectMultipleRoute,
-                            data: {
-                                'status': rejectBtn.getAttribute("data-kt-status"),
-                                'ids': join_selected_values,
-                            },
-                            success: function(response, textStatus, xhr) {
-                                Swal.fire({
-                                    html: rejectBtn.getAttribute(
-                                            "data-delete-selected-records-text"
-                                            ) + ' ' + Itemsnames + ' ',
-                                    icon: "info",
-                                    buttonsStyling: false,
-                                    showConfirmButton: false,
-                                    timer: 2000
-                                }).then(function() {
-                                    if (response["status"] == true) {
-                                        Swal.fire({
-                                            text: response[
-                                            'msg'], // respose from controller
-                                            icon: "success",
-                                            buttonsStyling: false,
-                                            confirmButtonText: rejectBtn
-                                                .getAttribute(
-                                                    "data-back-list-text"
-                                                    ),
-                                            customClass: {
-                                                confirmButton: "btn fw-bold btn-primary",
-                                            }
-                                        }).then(function() {
-                                            // delete row data from server and re-draw datatable
-                                            dt.draw();
-                                        });
-                                        const headerCheckbox = container
-                                            .querySelectorAll(
-                                                '[type="checkbox"]')[0];
-                                        headerCheckbox.checked = false;
-
-                                    } else if (response["status"] == false) {
-                                        Swal.fire({
-                                            html: response["msg"] +
-                                                ' ' + Itemsnames +
-                                                ' ', // respose from controller
-                                            icon: "error",
-                                            buttonsStyling: false,
-                                            confirmButtonText: rejectBtn
-                                                .getAttribute(
-                                                    "data-back-list-text"
-                                                    ),
-                                            customClass: {
-                                                confirmButton: "btn btn-light-danger"
-                                            }
-                                        }).then(function() {
-                                            document.location.href =
-                                                rejectBtn.getAttribute(
-                                                    "data-redirect-url"
-                                                    );
-                                        });
-                                    }
-                                });
-                            }
-                        });
-                    } else if (result.dismiss === 'cancel') {
-                        Swal.fire({
-                            text: rejectBtn.getAttribute("data-not-rejected-message"),
-                            icon: "error",
-                            buttonsStyling: false,
-                            confirmButtonText: rejectBtn.getAttribute(
-                                "data-confirm-button-textGotit"),
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary",
-                            }
-                        });
-                    }
-                });
-            })
-            /////////////////// End Of reject Comments ///////////
+ 
 
 
 

@@ -64,34 +64,6 @@
           data-not-deleted-message = "{{ __($trans.'.not_delete_selected') }}"
           ><i class="fa fa-trash-alt"></i>{{ __('admin.delete_selected') }}</button>
             &nbsp;
-<<<<<<< HEAD
-          <button type="button" class="btn btn-success" id="approveBtn"              
-          data-action-label = "approve"
-          data-changestatus-approve-route = "{{ $ChangeStatusRoute}}"
-          data-kt-table-select="approve_selected"             
-          data-back-list-text="{{ __('site.back_to_list') }}"        
-          data-confirm-message = "{{ __($trans.'.approve_selected') }}"
-          data-confirm-button-text = "{{ __('site.confirmButtonText') }}"
-          data-cancel-button-text = "{{ __('site.cancelButtonText') }}"
-          data-confirm-button-textGotit = "{{ __('site.confirmButtonTextGotit') }}"
-          data-delete-selected-records-text = "{{ __($trans.'.approve_selected') }}"
-          data-not-approved-message = "{{ __($trans.'.not_approve_selected') }}"
-          ><i class="fa fa-trash-alt"></i>{{ __('site.approve') }} {{ __('site.selected') }}</button> 
-
-          &nbsp;
-          <button type="button" class="btn btn-success" id="rejectBtn"              
-          data-action-label = "reject"
-          data-changestatus-reject-route = "{{ $ChangeStatusRoute}}"
-          data-kt-table-select="reject_selected"             
-          data-back-list-text="{{ __('site.back_to_list') }}"        
-          data-confirm-message = "{{ __($trans.'.reject_selected') }}"
-          data-confirm-button-text = "{{ __('site.confirmButtonText') }}"
-          data-cancel-button-text = "{{ __('site.cancelButtonText') }}"
-          data-confirm-button-textGotit = "{{ __('site.confirmButtonTextGotit') }}"
-          data-delete-selected-records-text = "{{ __($trans.'.reject_selected') }}"
-          data-not-rejected-message = "{{ __($trans.'.not_reject_selected') }}"
-          ><i class="fa fa-trash-alt"></i>{{ __('site.reject') }} {{ __('site.selected') }}</button> 
-=======
 
             <div class="w-150px me-5">
             <select class="form-select form-select-solid w-120" data-control="select2" data-hide-search="true" id="status" name="status" data-placeholder="{{ __('site.change')}} {{ __('site.status')}}">
@@ -105,7 +77,6 @@
           <button type="button" class="btn btn-success me-5" id="applyChange">{{ __('site.apply') }}</button>
             
 
->>>>>>> 7daf4d3ad054bc5c11d6fb6525c30c756e5cd463
 
           
         </div>

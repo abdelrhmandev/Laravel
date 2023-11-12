@@ -60,7 +60,7 @@
                     $('.dataTables_info').css("display", "block");
                 }
             },
-            iDisplayLength: 10,
+            iDisplayLength: 1,
             bLengthChange: true,
             stateSave: false,
             lengthMenu: [
@@ -373,7 +373,7 @@
             //////// Start Of Approve Comments ///////////////
             const approveSelected = document.querySelector('[data-kt-table-select="approve_selected"]');
             const approveBtn = document.getElementById('approveBtn');
-            const ApproveMultipleRoute = approveBtn.getAttribute('data-changestatus-approve-route');
+            const changestatusMultipleRoute = approveBtn.getAttribute('data-changestatus-route');
             checkboxes.forEach(c => {
                 c.addEventListener('click', function() {
                     setTimeout(function() {
@@ -411,7 +411,7 @@
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             },
-                            url: ApproveMultipleRoute,
+                            url: changestatusMultipleRoute,
                             data: {
                                 'status': approveBtn.getAttribute("data-kt-status"),
                                 'ids': join_selected_values,

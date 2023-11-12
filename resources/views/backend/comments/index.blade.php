@@ -36,7 +36,7 @@
           </div> --}}
           
           <div class="w-200px me-3">
-            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" id="status" name="status" data-placeholder="{{ __('site.sort_by')}} {{ __('site.status')}}" data-kt-filter="status">
+            <select class="form-select form-select-solid" data-control="select2" name="status" id="status" data-placeholder="{{ __('site.filter_by')}} {{ __('site.status')}} " data-allow-clear="true" data-kt-filter="status">            
               <option value="all">{{ __('site.all') }}  ({{ $allrecords }})</option>
               <option value="pending">{{ __('site.pending') }}  ({{ $pending }})</option>
               <option value="approved">{{ __('site.approved') }}  ({{ $approved }})</option>
@@ -51,12 +51,8 @@
         <div class="d-flex justify-content-end align-items-center d-none" data-kt-table-toolbar="selected">
           <div class="fw-bold me-5">
           <span class="me-2" data-kt-table-select="selected_count"></span>{{ __('admin.selected') }}</div>
-                    
-
-         
-
           
-          <button type="button" class="btn btn-danger" id="destroyMultipleroute"              
+          <button type="button" class="btn btn-danger me-5" id="destroyMultipleroute"              
           data-destroyMultiple-route = "{{ $destroyMultipleRoute }}"
           data-kt-table-select="delete_selected"             
           data-back-list-text="{{ __('site.back_to_list') }}"        
@@ -68,6 +64,7 @@
           data-not-deleted-message = "{{ __($trans.'.not_delete_selected') }}"
           ><i class="fa fa-trash-alt"></i>{{ __('admin.delete_selected') }}</button>
             &nbsp;
+<<<<<<< HEAD
           <button type="button" class="btn btn-success" id="approveBtn"              
           data-action-label = "approve"
           data-changestatus-approve-route = "{{ $ChangeStatusRoute}}"
@@ -94,19 +91,22 @@
           data-delete-selected-records-text = "{{ __($trans.'.reject_selected') }}"
           data-not-rejected-message = "{{ __($trans.'.not_reject_selected') }}"
           ><i class="fa fa-trash-alt"></i>{{ __('site.reject') }} {{ __('site.selected') }}</button> 
+=======
 
-          &nbsp;
-          {{-- <button type="button" class="btn btn-warning btn-sm" id="ActionBtn"              
-          data-action-label = "{{ $ActionBtn }}"
-          data-kt-table-select="spam_selected"             
-          data-back-list-text="{{ __('site.back_to_list') }}"        
-          data-confirm-message = "{{ __($trans.'.spam_selected') }}"
-          data-confirm-button-text = "{{ __('site.confirmButtonText') }}"
-          data-cancel-button-text = "{{ __('site.cancelButtonText') }}"
-          data-confirm-button-textGotit = "{{ __('site.confirmButtonTextGotit') }}"
-          data-delete-selected-records-text = "{{ __($trans.'.spam_selected') }}"
-          data-not-spam-message = "{{ __($trans.'.not_spam_selected') }}"
-          ><i class="fa fa-trash-alt"></i>{{ __('site.spam') }} {{ __('site.selected') }}</button> --}}
+            <div class="w-150px me-5">
+            <select class="form-select form-select-solid w-120" data-control="select2" data-hide-search="true" id="status" name="status" data-placeholder="{{ __('site.change')}} {{ __('site.status')}}">
+              <option value="pending">{{ __('site.pending') }}  </option>
+              <option value="pending">{{ __('site.pending') }}  </option>
+              <option value="approved">{{ __('site.approve') }}  </option>
+              <option value="rejected">{{ __('site.reject') }}  </option>
+              <option value="spam">{{ __('site.spam') }}  </option>
+            </select>             
+          </div>
+          <button type="button" class="btn btn-success me-5" id="applyChange">{{ __('site.apply') }}</button>
+            
+
+>>>>>>> 7daf4d3ad054bc5c11d6fb6525c30c756e5cd463
+
           
         </div>
       </div>

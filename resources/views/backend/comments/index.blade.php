@@ -74,7 +74,7 @@
               <option value="spam">{{ __('site.spam') }}  </option>
             </select>             
           </div>
-          <button type="button" class="btn btn-success me-5" id="applyChange">{{ __('site.apply') }}</button>
+          <button type="button" class="btn btn-success me-5" id="applyChange">XXX{{ __('site.apply') }}</button>
             
 
 

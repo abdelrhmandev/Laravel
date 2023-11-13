@@ -2,6 +2,7 @@
 return [
 'title'                     => 'Post Title',
 'edit'                      => 'Edit Post',
+'view'                      => 'View Post',
 'add'                       => 'Add Post',
 'delete'                    => 'Delete Post',
 'select'                    => 'Select Post',

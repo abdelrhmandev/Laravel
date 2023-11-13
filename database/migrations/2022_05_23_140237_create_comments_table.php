@@ -16,7 +16,6 @@ class CreateCommentsTable extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->text('comment');
-            $table->tinyInteger('rating')->nullable()->comment('Rating From 1 to 5');
             $table->enum('status', ['pending','approved','spammed','rejected'])->default('pending');            
             $table->text('replied_comment')->nullable();
             $table->unsignedBigInteger('parent_id')->nullable();

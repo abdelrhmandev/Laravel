@@ -149,10 +149,13 @@ if ($request->ajax()) {
                     }
                     return $tags;
                 })
-                ->AddColumn('comments', function (MainModel $row) {                    
-                    return  "<a href=".route(config('custom.route_prefix').'.posts.index',$row->id).">
-                                <span class=\"badge badge-circle badge-info\">".$row->comments_count ?? '0' ."</span>
-                                </a>";                   
+                ->AddColumn('comments', function (MainModel $row) {   
+                    if($row->comments_count>0){                      
+                        $div = "<a href=".route(config('custom.route_prefix').'.comments.index',$row->id).">
+                        <span class=\"badge badge-circle badge-info\">".$row->comments_count ?? '0' ."</span>
+                        </a>" ;
+                    }                 
+                    return  $div ?? '<span aria-hidden="true">—</span>';                   
                 })
                /*
                 ->editColumn('status', function (MainModel $row) {                                                           

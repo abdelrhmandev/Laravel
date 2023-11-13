@@ -56,6 +56,8 @@ type="text/css" />
                 <x-backend.btns.button :destroyRoute="$destroyRoute" :redirectRoute="$redirect_after_destroy" :row="$row" :trans="$trans"/>
             </div>
             
+
+     
             
             <div class="d-flex flex-column flex-row-fluid gap-0 w-lg-400px gap-lg-5">
                 <x-backend.cms.image :image="$row->image"/>                    
@@ -63,7 +65,7 @@ type="text/css" />
                 <x-backend.cms.authors :authors="$authors" :id="$row->user_id" />
                 <x-backend.cms.status :status="$row->status" :action="'edit'" />
                 <x-backend.cms.featured :featured="$row->featured" :action="'edit'" />
-                <x-backend.cms.allowComments :allowcomments="$row->allow_comments" :action="'edit'" />            
+                <x-backend.cms.allowComments :allowcomments="$row->allow_comments" :commentscount="$row->comments->count()" :postid="$row->id" :action="'edit'" />            
             </div>
 
 

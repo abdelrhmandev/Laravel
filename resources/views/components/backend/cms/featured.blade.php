@@ -14,14 +14,7 @@
                 <input class="form-check-input" type="checkbox" value="1" name="featured" id="featured" @if(isset($featured) && $featured == '1') checked="checked" @endif />
             @endif
             <label class="form-check-label" for="featured">
-                @if(isset($featured) && $featured == '1') 
-                    <span>{{ __('site.yes')}}</span>
-                @elseif(isset($featured) && $featured == '0') 
-                   <span> {{ __('site.no')}}</span>
-                @else
-                     <span>{{ __('site.yes')}}</span>
-                @endif 
-                            
+                     <span>{{ __('site.yes')}}</span>                            
             </label>
         </div>
     </div>

@@ -77,9 +77,9 @@ Route::post('/DeleteAjaxGallery','PostController@delete_media_image')->name('del
 
 
 
-Route::get('/comments', 'CommentController@index')->name('comments.index');
+Route::get('/comments/{post_id?}', 'CommentController@index')->name('comments.index');
 Route::post('/comments/changeStatus', 'CommentController@ChangeStatus')->name('comments.changeStatus');
-Route::post('/comments/update', 'CommentController@update')->name('comments.update');
+Route::put('/comments/update/{id}', 'CommentController@update')->name('comments.update');
 Route::get('/comments/edit/{id}', 'CommentController@edit')->name('comments.edit');
 Route::delete('comments/destroy/{id}', 'CommentController@destroy')->name('comments.destroy');
 Route::delete('comments/destroyAll', 'CommentController@destroyMultiple')->name('comments.destroyMultiple');

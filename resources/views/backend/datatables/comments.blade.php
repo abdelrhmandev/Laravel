@@ -7,7 +7,7 @@
      
     alert( 'The table has '+data.length+' records' );
     */
-    function loadDatatable(tableId, RouteListing, dynamicColumns, StatusColumn = null, TitleColumnOrder = null) {
+    function loadDatatable(tableId, RouteListing, dynamicColumns, StatusColumn = null, TitleColumnOrder = null,post_id) {
         var table;
         var dt;
         var filterStatus;
@@ -76,7 +76,8 @@
             ajax: {
                 url: RouteListing,
                 data: function(d) {
-                    d.search = $('#search').val()
+                    d.search = $('#search').val(),
+                    d.post_id = post_id
                 }
             },
             order: sorting,

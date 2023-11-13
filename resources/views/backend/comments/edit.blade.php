@@ -1,10 +1,10 @@
 @extends('backend.base.base')
 
 @section('breadcrumbs')
-    <li class="breadcrumb-item text-muted"><a href="5454545" class="text-muted"> 1111111111{{ __($trans . '.plural') }}</a></li>
+    <li class="breadcrumb-item text-muted"><a href="5454545" class="text-muted"> 1111111111{{ __($trans . '.plural') }}</a>
+    </li>
     <li class="breadcrumb-item text-dark">{{ __($trans . '.edit') }}</li>
 @stop
-
 @section('style')
 
     @if (app()->getLocale() === 'ar')
@@ -15,60 +15,47 @@
             type="text/css" />
     @endif
     <link href="{{ asset('assets/backend/css/custom.css') }}" rel="stylesheet" type="text/css" />
-
-
-
-
-
 @stop
 @section('content')
 
-    <div class="container-xxl" id="kt_content_container">
-        <form id="Edit{{ $trans }}" data-route-url="{{ $updateRoute }}" class="form d-flex flex-column flex-lg-row"
+    <div class="container-xxl" id="kt_content_container">        
+        <form id="Edit{{ $trans }}" action="{{ $updateRoute }}" class="form d-flex flex-column flex-lg-row"
             data-form-submit-error-message="{{ __('site.form_submit_error') }}"
-            data-form-agree-label="{{ __('site.agree') }}" enctype="multipart/form-data">
-
+            data-form-agree-label="{{ __('site.agree') }}" enctype="multipart/form-data"
+            method="post">
+            @csrf
             @method('PUT')
             <div class="d-flex flex-column gap-3 gap-lg-7 w-100 mb-2 me-lg-5">
                 <!--begin::General options-->
-
                 <div class="card card-flush py-0">
                     <div class="card-header">
-                        <div class="card-title">
+                        <div class="card-title">                        
                             <h3>{{ __('site.author') }}</h3>
                         </div>
                     </div>
-                    <!--end::Card header-->
-                    <!--begin::Card body-->
                     <div class="card-body pt-0">
                         <div class="d-flex flex-column gap-5">
                             <div class="separator"></div>
-
-                        
-
-                        <div class="d-flex flex-wrap flex-sm-nowrap">
-                            <!--begin: Pic-->
-                            <div class="me-7 mb-4">
-                                <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-                                    <img src="{{ (!empty($row->user->avatar)) ? asset($row->user->avatar) : asset('assets/backend/media/avatars/blank.png') }}" alt="{{ $row->user->name}}" />
-                                    <div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-body h-20px w-20px"></div>
-                                </div>
-                            </div>
-                            <!--end::Pic-->
-                            <!--begin::Info-->
-                            <div class="flex-grow-1">
-                                <!--begin::Title-->
-                                <div class="d-flex justify-content-between align-items-start flex-wrap mb-2">
-                                    <!--begin::User-->
-                                    <div class="d-flex flex-column">
-                                        <!--begin::Name-->
-                                        <div class="d-flex align-items-center mb-2">
-                                            <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">{{ $row->user->name}}</a>                                         
+                            <div class="d-flex flex-wrap flex-sm-nowrap">
+                                <!--begin: Pic-->
+                                <div class="me-7">
+                                    <div class="symbol symbol-100px symbol-lg-120px symbol-fixed position-relative">
+                                        <img src="{{ !empty($row->user->avatar) ? asset($row->user->avatar) : asset('assets/backend/media/avatars/blank.png') }}"
+                                            title="{{ $row->user->name }}" alt="{{ $row->user->name }}" />
+                                        <div
+                                            class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-body h-20px w-20px">
                                         </div>
-                                        <!--end::Name-->
-                                        <!--begin::Info-->
-                                        <div class="d-flex flex-wrap fw-semibold fs-6 mb-4 pe-2">
-                                            {{-- <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <div class="d-flex justify-content-between align-items-start flex-wrap mb-2">
+                                        <div class="d-flex flex-column">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <a href="#"
+                                                    class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">{{ $row->user->name }}</a>
+                                            </div>
+                                            <div class="d-flex flex-wrap fw-semibold fs-6 mb-4 pe-2">
+                                                {{-- <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
                                             <!--begin::Svg Icon | path: icons/duotune/communication/com006.svg-->
                                             <span class="svg-icon svg-icon-4 me-1">
                                                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -78,7 +65,7 @@
                                                 </svg>
                                             </span>
                                             <!--end::Svg Icon-->Developer</a> --}}
-                                            {{-- <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
+                                                {{-- <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
                                             <!--begin::Svg Icon | path: icons/duotune/general/gen018.svg-->
                                             <span class="svg-icon svg-icon-4 me-1">
                                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -87,141 +74,102 @@
                                                 </svg>
                                             </span>
                                             <!--end::Svg Icon-->SF, Bay Area</a> --}}
-                                            <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary mb-2">
-                                            <!--begin::Svg Icon | path: icons/duotune/communication/com011.svg-->
-                                            <span class="svg-icon svg-icon-4 me-1">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path opacity="0.3" d="M21 19H3C2.4 19 2 18.6 2 18V6C2 5.4 2.4 5 3 5H21C21.6 5 22 5.4 22 6V18C22 18.6 21.6 19 21 19Z" fill="currentColor" />
-                                                    <path d="M21 5H2.99999C2.69999 5 2.49999 5.10005 2.29999 5.30005L11.2 13.3C11.7 13.7 12.4 13.7 12.8 13.3L21.7 5.30005C21.5 5.10005 21.3 5 21 5Z" fill="currentColor" />
-                                                </svg>
-                                            </span>
-                                            <!--end::Svg Icon-->{{ $row->user->email}}</a>
+                                                <a href="mailto:{{ $row->user->email }}"
+                                                    class="d-flex align-items-center text-gray-400 text-hover-primary mb-2">
+                                                    <!--begin::Svg Icon | path: icons/duotune/communication/com011.svg-->
+                                                    <span class="svg-icon svg-icon-4 me-1">
+                                                        <svg width="24" height="24" viewBox="0 0 24 24"
+                                                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path opacity="0.3"
+                                                                d="M21 19H3C2.4 19 2 18.6 2 18V6C2 5.4 2.4 5 3 5H21C21.6 5 22 5.4 22 6V18C22 18.6 21.6 19 21 19Z"
+                                                                fill="currentColor" />
+                                                            <path
+                                                                d="M21 5H2.99999C2.69999 5 2.49999 5.10005 2.29999 5.30005L11.2 13.3C11.7 13.7 12.4 13.7 12.8 13.3L21.7 5.30005C21.5 5.10005 21.3 5 21 5Z"
+                                                                fill="currentColor" />
+                                                        </svg>
+                                                    </span>
+                                                    <!--end::Svg Icon-->{{ $row->user->email }}</a>
+                                            </div>
                                         </div>
-                                        <!--end::Info-->
                                     </div>
- 
                                 </div>
- 
                             </div>
-                           
-                        </div>
-
-                       
-                            
-
                         </div>
                     </div>
                 </div>
-
-
-
-
                 <div class="card card-flush py-0">
                     <div class="card-header">
                         <div class="card-title">
                             <h3>{{ __('post.singular') }}</h3>
                         </div>
                     </div>
-                    <!--end::Card header-->
-                    <!--begin::Card body-->
                     <div class="card-body pt-0">
                         <div class="d-flex flex-column gap-5">
                             <div class="separator"></div>
                             {{ $row->post->translate->title }}
+                            <a target="_new" class="badge badge-light-success fw-bold me-auto px-4 py-3"
+                                href="{{ route(config('custom.route_prefix') . '.posts.edit', $row->post->id) }}">{{ __('post.view') }}</a>
                         </div>
                     </div>
                 </div>
-                
-                
                 <div class="d-flex flex-column">
-                    <label class="form-label"
-                        for="comment">{{ __('comment.singular') }}</label>
-                    <textarea class="form-control form-control" rows="4"
-                        id="descriptio"
-                        name="comment" placeholder="">{{ $row->comment}}</textarea>
-
-                        file:///C:/Users/abdel/Desktop/demo7/dist/pages/user-profile/overview.html [reply box]
+                    <label class="form-label" for="comment">{{ __('comment.singular') }}</label>
+                    <textarea class="form-control form-control" rows="4" id="comment" name="comment" placeholder="">{{ $row->comment }}</textarea>
+                    {{-- file:///C:/Users/abdel/Desktop/demo7/dist/pages/user-profile/overview.html [reply box] --}}
+                    
                 </div>
 
+                <div class="d-flex justify">                     
+                    {{-- // SHOW CONFIRM BOX WITH TITLE --}}
+                    <input type="hidden" id="title_{{ app()->getLocale() }}" value="{{ $row->comment }}"/>
+                    <x-backend.btns.button :destroyRoute="$destroyRoute" :redirectRoute="$redirect_after_destroy" :trans="$trans"/>                     
+                </div>
             </div>
-
-
             <div class="d-flex flex-column flex-row-fluid gap-0 w-lg-300px gap-lg-5">
-
-
-
-
-                <div class="card card-flush">                    
+                <div class="card card-flush">
                     <div class="card-header">
                         <div class="card-title">
                             <h2>{{ __('site.created_at') }}</h2>
                         </div>
                     </div>
                     <div class="card-body pt-0">
-                        
-                        <span class="text-success-400 fw-bold"> {{ Carbon\Carbon::createFromFormat('m-d-Y H:i:s',$row->created_at) }}
+                        <span class="text-success-400 fw-bold">
+                            {{ $row->created_at->format('d-m-Y') }}
                         </span>
-
-
-
-                       
-
-                        
-
                         <p>
-                        {{ $row->created_at->diffForHumans() }}
+                            {{ $row->created_at->diffForHumans() }}
                         </p>
-
-                        
-
-
-
-
                     </div>
                 </div>
-
-
-                <div class="card card-flush">                    
+                <div class="card card-flush">
                     <div class="card-header">
                         <div class="card-title">
-                            <h2>{{ __('site.status') }}</h2>
+                            <span class="m-1"> {{ __('site.status') }} :</span> <h2>{{ __('site.'.$row->status) }}</h2>
+                            <input type="hidden" name="old_status" value="{{ $row->status }}"/> 
                         </div>
                     </div>
                     <div class="card-body pt-0">
                         <label class="d-flex flex-stack mb-5 cursor-pointer">
                             <span class="d-flex align-items-center">
-                                <span class="symbol symbol-50px me-4">
-                                    <span class="svg-icon svg-icon-1 svg-icon-info">
-
-                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                            width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <span class="symbol symbol-50px me-4">
+                                        <span class="svg-icon svg-icon-primary svg-icon-2x"><!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo8/dist/../src/media/svg/icons/Home/Timer.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <rect x="0" y="0" width="24" height="24" />
-                                                <path
-                                                    d="M12,21 C7.581722,21 4,17.418278 4,13 C4,8.581722 7.581722,5 12,5 C16.418278,5 20,8.581722 20,13 C20,17.418278 16.418278,21 12,21 Z"
-                                                    fill="#000000" opacity="0.3" />
-                                                <path
-                                                    d="M13,5.06189375 C12.6724058,5.02104333 12.3386603,5 12,5 C11.6613397,5 11.3275942,5.02104333 11,5.06189375 L11,4 L10,4 C9.44771525,4 9,3.55228475 9,3 C9,2.44771525 9.44771525,2 10,2 L14,2 C14.5522847,2 15,2.44771525 15,3 C15,3.55228475 14.5522847,4 14,4 L13,4 L13,5.06189375 Z"
-                                                    fill="#000000" />
-                                                <path
-                                                    d="M16.7099142,6.53272645 L17.5355339,5.70710678 C17.9260582,5.31658249 18.5592232,5.31658249 18.9497475,5.70710678 C19.3402718,6.09763107 19.3402718,6.73079605 18.9497475,7.12132034 L18.1671361,7.90393167 C17.7407802,7.38854954 17.251061,6.92750259 16.7099142,6.53272645 Z"
-                                                    fill="#000000" />
-                                                <path
-                                                    d="M11.9630156,7.5 L12.0369844,7.5 C12.2982526,7.5 12.5154733,7.70115317 12.5355117,7.96165175 L12.9585886,13.4616518 C12.9797677,13.7369807 12.7737386,13.9773481 12.4984096,13.9985272 C12.4856504,13.9995087 12.4728582,14 12.4600614,14 L11.5399386,14 C11.2637963,14 11.0399386,13.7761424 11.0399386,13.5 C11.0399386,13.4872031 11.0404299,13.4744109 11.0414114,13.4616518 L11.4644883,7.96165175 C11.4845267,7.70115317 11.7017474,7.5 11.9630156,7.5 Z"
-                                                    fill="#000000" />
+                                                <rect x="0" y="0" width="24" height="24"/>
+                                                <path d="M12,21 C7.581722,21 4,17.418278 4,13 C4,8.581722 7.581722,5 12,5 C16.418278,5 20,8.581722 20,13 C20,17.418278 16.418278,21 12,21 Z" fill="#000000" opacity="0.3"/>
+                                                <path d="M13,5.06189375 C12.6724058,5.02104333 12.3386603,5 12,5 C11.6613397,5 11.3275942,5.02104333 11,5.06189375 L11,4 L10,4 C9.44771525,4 9,3.55228475 9,3 C9,2.44771525 9.44771525,2 10,2 L14,2 C14.5522847,2 15,2.44771525 15,3 C15,3.55228475 14.5522847,4 14,4 L13,4 L13,5.06189375 Z" fill="#000000"/>
+                                                <path d="M16.7099142,6.53272645 L17.5355339,5.70710678 C17.9260582,5.31658249 18.5592232,5.31658249 18.9497475,5.70710678 C19.3402718,6.09763107 19.3402718,6.73079605 18.9497475,7.12132034 L18.1671361,7.90393167 C17.7407802,7.38854954 17.251061,6.92750259 16.7099142,6.53272645 Z" fill="#000000"/>
+                                                <path d="M11.9630156,7.5 L12.0369844,7.5 C12.2982526,7.5 12.5154733,7.70115317 12.5355117,7.96165175 L12.9585886,13.4616518 C12.9797677,13.7369807 12.7737386,13.9773481 12.4984096,13.9985272 C12.4856504,13.9995087 12.4728582,14 12.4600614,14 L11.5399386,14 C11.2637963,14 11.0399386,13.7761424 11.0399386,13.5 C11.0399386,13.4872031 11.0404299,13.4744109 11.0414114,13.4616518 L11.4644883,7.96165175 C11.4845267,7.70115317 11.7017474,7.5 11.9630156,7.5 Z" fill="#000000"/>
                                             </g>
-                                        </svg>
+                                        </svg><!--end::Svg Icon--></span>
                                     </span>
-                                </span>
                                 <span class="d-flex flex-column">
-                                    <span class="fw-bold fs-6">{{ __('site.pending')}}</span>
+                                    <span class="fw-bold fs-6">{{ __('site.pending') }}</span>
                                 </span>
                             </span>
                             <span class="form-check form-check-custom form-check-solid">
                                 <input class="form-check-input" type="radio" name="status" value="pending" />
                             </span>
                         </label>
-
                         <label class="d-flex flex-stack mb-5 cursor-pointer">
                             <span class="d-flex align-items-center">
                                 <span class="symbol symbol-50px me-4">
@@ -238,23 +186,17 @@
                                     </span>
                                 </span>
                                 <span class="d-flex flex-column">
-                                    <span class="fw-bold fs-6">{{ __('site.approve')}}</span>
+                                    <span class="fw-bold fs-6">{{ __('site.approve') }}</span>
                                 </span>
                             </span>
                             <span class="form-check form-check-custom form-check-solid">
                                 <input class="form-check-input" type="radio" name="status" value="approved" />
                             </span>
                         </label>
-
-
-
-
-
                         <label class="d-flex flex-stack mb-5 cursor-pointer">
                             <span class="d-flex align-items-center">
                                 <span class="symbol symbol-50px me-4">
                                     <span class="svg-icon svg-icon-1 svg-icon-primary">
-
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                             width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -267,26 +209,20 @@
                                                     fill="#000000" />
                                             </g>
                                         </svg>
-
-
                                     </span>
                                 </span>
                                 <span class="d-flex flex-column">
-                                    <span class="fw-bold fs-6">{{ __('site.reject')}}</span>
+                                    <span class="fw-bold fs-6">{{ __('site.reject') }}</span>
                                 </span>
                             </span>
                             <span class="form-check form-check-custom form-check-solid">
-                                <input class="form-check-input" type="radio" name="status" value="reject" />
+                                <input class="form-check-input" type="radio" name="status" value="rejected" />
                             </span>
                         </label>
-
-
-
                         <label class="d-flex flex-stack mb-5 cursor-pointer">
                             <span class="d-flex align-items-center">
                                 <span class="symbol symbol-50px me-4">
                                     <span class="svg-icon svg-icon-1 svg-icon-primary">
-
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                             width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -299,50 +235,31 @@
                                     </span>
                                 </span>
                                 <span class="d-flex flex-column">
-                                    <span class="fw-bold fs-6">{{ __('site.spam')}}</span>
+                                    <span class="fw-bold fs-6">{{ __('site.spam') }}</span>
                                 </span>
                             </span>
                             <span class="form-check form-check-custom form-check-solid">
                                 <input class="form-check-input" type="radio" name="status" value="spam" />
                             </span>
                         </label>
-
-
-
-
                     </div>
                 </div>
-
-
-
-
-
-
-
-
-
             </div>
-
-
-
+            
         </form>
     </div>
 @stop
 @section('scripts')
-    <script src="{{ asset('assets/backend/js/custom/Tachyons.min.js') }}"></script>
-    <script src="{{ asset('assets/backend/js/custom/es6-shim.min.js') }}"></script>
-    <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js') }}"></script>
-    <script src="{{ asset('assets/backend/js/widgets.bundle.js') }}"></script>
-    <script src="{{ asset('assets/backend/js/custom/handleFormSubmit.js') }}"></script>
+<script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+<script src="{{ asset('assets/backend/js/widgets.bundle.js') }}"></script>
+<script src="{{ asset('assets/backend/js/custom/deleteConfirmSwal.js') }}"></script>
+<script>
 
-    <script src="{{ asset('assets/backend/plugins/custom/tinymce/tinymce.bundle.js') }}"></script>
 
-    <script>
-        @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-            tinymce.init({
-                selector: ('.edito'),
-                height: "280"
-            });
-        @endforeach
-    </script>
+ 
+
+ 
+ 
+ 
+</script>
 @stop

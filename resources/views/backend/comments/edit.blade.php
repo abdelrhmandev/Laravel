@@ -134,10 +134,11 @@
                     </div>
                     <div class="card-body pt-0">
                         <span class="text-success-400 fw-bold">
-                            {{ $row->created_at->format('d-m-Y') }}
+                            {{  (Carbon\Carbon::parse($row->created_at)->format('j F, Y') )  }}
                         </span>
                         <p>
-                            {{ $row->created_at->diffForHumans() }}
+
+                            {{  (Carbon\Carbon::parse($row->created_at)->format('D h:i a') )  }}
                         </p>
                     </div>
                 </div>

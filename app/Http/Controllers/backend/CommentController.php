@@ -101,7 +101,7 @@ if ($request->ajax()) {
                 'pending'               => $pending->count(),
                 'rejected'              => $rejected->count(),   
                 'post_id'               => $post_id ?? '',    
-                'post'                  => Post::where('id',$post_id)->first() ?? '',        
+                'post'                  => $post_id ? Post::findOrFail($post_id) :'',        
             ];                       
 
 

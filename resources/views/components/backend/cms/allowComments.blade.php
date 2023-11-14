@@ -17,13 +17,13 @@
         </div>
         @if($commentscount)
         <div class="my-1 mt-5">
-            <span class="svg-icon svg-icon-primary svg-icon-2 me-1">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path opacity="0.3" d="M2 4V16C2 16.6 2.4 17 3 17H13L16.6 20.6C17.1 21.1 18 20.8 18 20V17H21C21.6 17 22 16.6 22 16V4C22 3.4 21.6 3 21 3H3C2.4 3 2 3.4 2 4Z" fill="currentColor"></path>
-                    <path d="M18 9H6C5.4 9 5 8.6 5 8C5 7.4 5.4 7 6 7H18C18.6 7 19 7.4 19 8C19 8.6 18.6 9 18 9ZM16 12C16 11.4 15.6 11 15 11H6C5.4 11 5 11.4 5 12C5 12.6 5.4 13 6 13H15C15.6 13 16 12.6 16 12Z" fill="currentColor"></path>
+            <span class="svg-icon svg-icon-2tx svg-icon-success me-4"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.3" d="M20 3H4C2.89543 3 2 3.89543 2 5V16C2 17.1046 2.89543 18 4 18H4.5C5.05228 18 5.5 18.4477 5.5 19V21.5052C5.5 22.1441 6.21212 22.5253 6.74376 22.1708L11.4885 19.0077C12.4741 18.3506 13.6321 18 14.8167 18H20C21.1046 18 22 17.1046 22 16V5C22 3.89543 21.1046 3 20 3Z" fill="currentColor"/>
+                <rect x="6" y="12" width="7" height="2" rx="1" fill="currentColor"/>
+                <rect x="6" y="7" width="12" height="2" rx="1" fill="currentColor"/>
                 </svg>
-            </span>
-            <a href="{{ route(config('custom.route_prefix').'.comments.index',$postid)}}"><span class="fw-bold text-gray-400">{{ $commentscount }} {{ __('comment.plural')}}</span></a>
+                </span>
+            <a href="{{ route(config('custom.route_prefix').'.comments.index',$postid)}}"><span class="text-gray-900 fw-bolder fs-6">{{ $commentscount }} {{ __('comment.plural')}}</span></a>
         </div>
         @endif
     </div>

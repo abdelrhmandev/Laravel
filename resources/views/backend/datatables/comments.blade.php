@@ -480,7 +480,7 @@
                     } else if (result.dismiss === 'cancel') {
                         Swal.fire({
                            
-                            icon: icon,
+                            icon: 'warning',
                             buttonsStyling: false,
                             confirmButtonText: "{{ __('site.cancel')}}",
                             customClass: {

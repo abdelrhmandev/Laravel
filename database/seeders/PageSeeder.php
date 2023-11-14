@@ -33,7 +33,7 @@ class PageSeeder extends Seeder
 
 
             ['title'=>'About Us','slug'=>'about-us','lang'=>'en','page_id'=>'1'],
-            ['title'=>'عن الشركه','slug'=>'عن-الشركه','lang'=>'ar','page_id'=>'1'],
+            ['title'=>'نبذه عن الشركه','slug'=>'نبذه-عن-الشركه','lang'=>'ar','page_id'=>'1'],
 
 
             ['title'=>'Services','slug'=>'services','lang'=>'en','page_id'=>'2'],

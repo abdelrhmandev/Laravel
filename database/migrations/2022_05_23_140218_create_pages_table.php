@@ -17,20 +17,18 @@ class CreatePagesTable extends Migration
             $table->id();
             $table->enum('status', ['0','1'])->default(1);
             $table->string('image',150)->nullable();
-             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-			 $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
        });
         Schema::create('page_translations', function (Blueprint $table) {                 
             $table->id();  
             $table->string('title');
             $table->string('slug')->unique();
             $table->longText('description')->nullable();
-            $table->string('meta_title')->nullable();
-            $table->longText('meta_description')->nullable();
 			$table->string('lang')->index();			
-			$table->unique(['page_id','lang']);  
+			$table->unique(['post_id','lang']);  
             $table->index(['title','slug']);
-            $table->foreignId('page_id')->constrained('pages')->onDelete('cascade');
+            $table->foreignId('post_id')->constrained('posts')->onDelete('cascade');
         });	
     }
 

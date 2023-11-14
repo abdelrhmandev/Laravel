@@ -12,45 +12,32 @@
 @section('content')
 <div class="container-xxl" id="kt_content_container">
 
+  @if(!empty($post_id))
   <div class="card-body pt-2">
-    <!--begin::Notice-->
     <div class="notice d-flex bg-light-success rounded border-success border border-dashed mb-9 p-6">
-      <!--begin::Icon-->
-      <!--begin::Svg Icon | path: icons/duotune/art/art006.svg-->
-      <span class="svg-icon svg-icon-2tx svg-icon-success me-4">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path opacity="0.3" d="M22 19V17C22 16.4 21.6 16 21 16H8V3C8 2.4 7.6 2 7 2H5C4.4 2 4 2.4 4 3V19C4 19.6 4.4 20 5 20H21C21.6 20 22 19.6 22 19Z" fill="currentColor"></path>
-          <path d="M20 5V21C20 21.6 19.6 22 19 22H17C16.4 22 16 21.6 16 21V8H8V4H19C19.6 4 20 4.4 20 5ZM3 8H4V4H3C2.4 4 2 4.4 2 5V7C2 7.6 2.4 8 3 8Z" fill="currentColor"></path>
+      <span class="svg-icon svg-icon-2tx svg-icon-success me-4"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path opacity="0.3" d="M20 3H4C2.89543 3 2 3.89543 2 5V16C2 17.1046 2.89543 18 4 18H4.5C5.05228 18 5.5 18.4477 5.5 19V21.5052C5.5 22.1441 6.21212 22.5253 6.74376 22.1708L11.4885 19.0077C12.4741 18.3506 13.6321 18 14.8167 18H20C21.1046 18 22 17.1046 22 16V5C22 3.89543 21.1046 3 20 3Z" fill="currentColor"/>
+        <rect x="6" y="12" width="7" height="2" rx="1" fill="currentColor"/>
+        <rect x="6" y="7" width="12" height="2" rx="1" fill="currentColor"/>
         </svg>
-      </span>
-      <!--end::Svg Icon-->
-      <!--end::Icon-->
-      <!--begin::Wrapper-->
+        </span>            
       <div class="d-flex flex-stack flex-grow-1">
-        <!--begin::Content-->
         <div class="fw-semibold">
-
-          <h3 class="fw-bold m-0">Comments on</h3>
-
-
-         
-          " <a href="{{  route(config('custom.route_prefix').'.posts.edit',$post_id) }}" class="me-1"> {{ $post->translate->title }} </a> "
-          <a href="{{  route(config('custom.route_prefix').'.posts.edit',$post_id) }}"> {{ __('post.view')}}</a></div>
-
-
-
-         asdsa
-
-      
-        <!--end::Content-->
+          <h3 class="fw-bold m-0">{{ __('comment.on') }}</h3>         
+          " <a href="{{  route(config('custom.route_prefix').'.posts.edit',$post_id) }}" class="me-1"> {{ $post->translate->title }}</a>"
+           <a href="{{ route(config('custom.route_prefix').'.posts.edit',$post_id) }}"> {{ __('post.view')}}</a></div>         
+          <a href="{{  route(config('custom.route_prefix').'.comments.index') }}"><span class="svg-icon svg-icon-muted svg-icon-2hx"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor"/>
+            <rect x="7" y="15.3137" width="12" height="2" rx="1" transform="rotate(-45 7 15.3137)" fill="currentColor"/>
+            <rect x="8.41422" y="7" width="12" height="2" rx="1" transform="rotate(45 8.41422 7)" fill="currentColor"/>
+            </svg>
+            </span></a>
       </div>
-      <!--end::Wrapper-->
     </div>
-    <!--end::Notice-->
-    <!--begin::Items-->
-    
-    <!--end::Items-->
+
   </div>
+  @endif
+  
   <div class="card">
     <div class="card-header border-0 pt-6">      
       <div class="card-title">
@@ -72,14 +59,6 @@
 
 
         <div class="d-flex justify-content-end" data-kt-table-toolbar="base">   
-          {{-- <div class="w-150px me-3">
-            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" id="status" name="status" data-placeholder="{{ __('site.sort_by')}} {{ __('site.status')}}" data-kt-filter="status">
-              <option></option>
-              <option value="all">{{ __('site.all') }}  ({{ $allrecords }})</option>
-              <option value="1">{{ __('site.published') }} ({{ $publishedCounter}})</option>
-              <option value="0">{{ __('site.unpublished') }} ({{ $unpublishedCounter}})</option>
-            </select>
-          </div> --}}
           
           <div class="w-200px me-3">
             <select class="form-select form-select-solid" data-control="select2" name="status" id="status" data-placeholder="{{ __('site.filter_by')}} {{ __('site.status')}} " data-allow-clear="true" data-kt-filter="status">            
@@ -95,10 +74,9 @@
  
         </div>
         <div class="d-flex justify-content-end align-items-center d-none" data-kt-table-toolbar="selected">
-          <div class="fw-bold me-5">
-          <span class="me-2" data-kt-table-select="selected_count"></span>{{ __('admin.selected') }}</div>
-          
-          <button type="button" class="btn btn-danger me-5" id="destroyMultipleroute"              
+          <div class="fw-bold me-2">
+          <span class="me-2" data-kt-table-select="selected_count"></span>{{ __('admin.selected') }}</div>          
+          <button type="button" class="btn btn-danger me-2" id="destroyMultipleroute"              
           data-destroyMultiple-route = "{{ $destroyMultipleRoute }}"
           data-kt-table-select="delete_selected"             
           data-back-list-text="{{ __('site.back_to_list') }}"        

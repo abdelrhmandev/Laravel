@@ -72,17 +72,32 @@ Route::resource('posts', PostController::class)->except('show');
 Route::delete('posts/destroy/all', 'PostController@destroyMultiple')->name('posts.destroyMultiple');
 
 
+
+
+Route::resource('sliders', SliderController::class)->except('show');
+Route::delete('slider/destroy/all', 'SliderController@destroyMultiple')->name('sliders.destroyMultiple');
+
+
+Route::resource('careers', CareerController::class)->except('show');
+Route::delete('career/destroy/all', 'CareerController@destroyMultiple')->name('careers.destroyMultiple');
+
+
+
 Route::get('/AjaxLoadGallery/{post}','PostController@edit')->name('AjaxLoadGallery'); 
 Route::post('/DeleteAjaxGallery','PostController@delete_media_image')->name('delete_media_image'); 
 
 
+Route::controller(CommentController::class)->group(function () {
+    Route::get('/comments/{post_id?}','index')->name('comments.index');
+    Route::post('/comments/changeStatus', 'ChangeStatus')->name('comments.changeStatus');
+    Route::put('/comments/update/{id}', 'update')->name('comments.update');
+    Route::get('/comments/edit/{id}', 'edit')->name('comments.edit');
+    Route::delete('comments/destroy/{id}', 'destroy')->name('comments.destroy');
+    Route::delete('comments/destroyAll', 'destroyMultiple')->name('comments.destroyMultiple');
+});
 
-Route::get('/comments/{post_id?}', 'CommentController@index')->name('comments.index');
-Route::post('/comments/changeStatus', 'CommentController@ChangeStatus')->name('comments.changeStatus');
-Route::put('/comments/update/{id}', 'CommentController@update')->name('comments.update');
-Route::get('/comments/edit/{id}', 'CommentController@edit')->name('comments.edit');
-Route::delete('comments/destroy/{id}', 'CommentController@destroy')->name('comments.destroy');
-Route::delete('comments/destroyAll', 'CommentController@destroyMultiple')->name('comments.destroyMultiple');
+
+
 
 
 Route::resource('slides', SlideController::class)->except('show');

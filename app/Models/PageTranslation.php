@@ -8,14 +8,15 @@ class PageTranslation extends Model
 {
     protected $table = 'page_translations';
 
+
+    public $timestamps = false;
+
+    
     protected $fillable = [
+		'page_id',
 		'title',
+        'description',
         'slug',
 		'lang',
-	];
-
-    public function page_translated(){
-        return $this->belongsTo(Page::class);
-    }
-
+	];  
 }

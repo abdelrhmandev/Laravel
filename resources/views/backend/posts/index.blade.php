@@ -124,5 +124,5 @@ KTUtil.onDOMContentLoaded(function () {
   loadDatatable('{{ __($trans.".plural") }}','{{ $redirectRoute }}',dynamicColumns,'','2');
 });
 </script>
- 
+<script src="{{ asset('assets/backend/js/custom/updateStatus.js')}}"></script>
 @stop

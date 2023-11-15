@@ -18,10 +18,5 @@ class PostTranslation extends Model
         'description',
         'slug',
 		'lang',
-	];
-
-
- 
- 
-
+	];  
 }

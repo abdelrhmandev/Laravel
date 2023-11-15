@@ -65,7 +65,7 @@ Route::resource('careers', CareerController::class)->except('show');
 Route::resource('faqs', FaqController::class)->except('show');
 
 Route::resource('pages', PageController::class)->except('show');
-Route::delete('pages/destroy/all', 'TagController@destroyMultiple')->name('pages.destroyMultiple');
+Route::delete('pages/destroy/all', 'PageController@destroyMultiple')->name('pages.destroyMultiple');
 
 
 Route::resource('posts', PostController::class)->except('show');

@@ -1,7 +1,9 @@
 <?php
 namespace Database\Seeders;
+use App\Models\Tag;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+
 class TagSeeder extends Seeder
 {
     /**
@@ -11,111 +13,76 @@ class TagSeeder extends Seeder
      */
     public function run()
     {
-
-
         DB::table('tags')->delete();
         DB::table('tag_translations')->delete();
 
- 
-        
-        $items = [
+        //1
+        $id = DB::table('tags')->insertGetId([
+            'id' => NULL,
+        ]);
+        $translated_items = [['title' => 'Protection', 'slug' => 'protection', 'description' => 'Protection', 'lang' => 'en', 'tag_id' => $id], ['title' => 'الحمايه', 'slug' => 'الحمايه', 'description' => 'الحمايه', 'lang' => 'ar', 'tag_id' => $id]];
+        DB::table('tag_translations')->insert($translated_items);
 
-            // Posts Tags
-            ['taxonomy'=>'posts'],
-            ['taxonomy'=>'posts'],
-            ['taxonomy'=>'posts'],
-            ['taxonomy'=>'posts'],
-            ['taxonomy'=>'posts'],        
-            
-            // Ecommerce Tags
-            ['taxonomy'=>'products'],
-            ['taxonomy'=>'products'],
-            ['taxonomy'=>'products'],
-            ['taxonomy'=>'products'],
-            ['taxonomy'=>'products'],        
+        //2
+        $id = DB::table('tags')->insertGetId([
+            'id' => NULL,
+        ]);
+        $translated_items = [['title' => 'Data', 'slug' => 'data', 'description' => 'Data', 'lang' => 'en', 'tag_id' => $id], ['title' => 'البيانات', 'slug' => 'البيانات', 'description' => 'البيانات', 'lang' => 'ar', 'tag_id' => $id]];
+        DB::table('tag_translations')->insert($translated_items);
 
-            // Recipes Tags      
-            ['taxonomy'=>'recipes'],
-            ['taxonomy'=>'recipes'],
-            ['taxonomy'=>'recipes'],
-            ['taxonomy'=>'recipes'],
-            ['taxonomy'=>'recipes'],        
-        ];
+        //3
+        $id = DB::table('tags')->insertGetId([
+            'id' => NULL,
+        ]);
+        $translated_items = [['title' => 'Budget', 'slug' => 'budget', 'description' => 'Budget', 'lang' => 'en', 'tag_id' => $id], ['title' => 'الميزانيه', 'slug' => 'الميزانيه', 'description' => 'الميزانيه', 'lang' => 'ar', 'tag_id' => $id]];
+        DB::table('tag_translations')->insert($translated_items);
 
-       DB::table('tags')->insert($items);      
+        //4
+        $id = DB::table('tags')->insertGetId([
+            'id' => NULL,
+        ]);
+        $translated_items = [['title' => 'Shipping', 'slug' => 'shipping', 'description' => 'Shipping', 'lang' => 'en', 'tag_id' => $id], ['title' => 'الشحن', 'slug' => 'الشحن', 'description' => 'الشحن', 'lang' => 'ar', 'tag_id' => $id]];
+        DB::table('tag_translations')->insert($translated_items);
 
-       $translated_items = [
+        //5
+        $id = DB::table('tags')->insertGetId([
+            'id' => NULL,
+        ]);
+        $translated_items = [['title' => 'Delivery', 'slug' => 'delivery', 'description' => 'Delivery', 'lang' => 'en', 'tag_id' => $id], ['title' => 'التوصيل', 'slug' => 'التوصيل', 'description' => 'التوصيل', 'lang' => 'ar', 'tag_id' => $id]];
+        DB::table('tag_translations')->insert($translated_items);
 
+        //6
+        $id = DB::table('tags')->insertGetId([
+            'id' => NULL,
+        ]);
+        $translated_items = [['title' => 'Science', 'slug' => 'science', 'description' => 'Science', 'lang' => 'en', 'tag_id' => $id], ['title' => 'العلوم', 'slug' => 'العلوم', 'description' => 'العلوم', 'lang' => 'ar', 'tag_id' => $id]];
+        DB::table('tag_translations')->insert($translated_items);
 
+        //7
+        $id = DB::table('tags')->insertGetId([
+            'id' => NULL,
+        ]);
+        $translated_items = [['title' => 'Fashion', 'slug' => 'Fashion', 'description' => 'Fashion', 'lang' => 'en', 'tag_id' => $id], ['title' => 'الموضه', 'slug' => 'الموضه', 'description' => 'الموضه', 'lang' => 'ar', 'tag_id' => $id]];
+        DB::table('tag_translations')->insert($translated_items);
+        //8
+        $id = DB::table('tags')->insertGetId([
+            'id' => NULL,
+        ]);
+        $translated_items = [['title' => 'Health', 'slug' => 'health', 'description' => 'Health', 'lang' => 'en', 'tag_id' => $id], ['title' => 'صحه', 'slug' => 'صحه', 'description' => 'صحه', 'lang' => 'ar', 'tag_id' => $id]];
+        DB::table('tag_translations')->insert($translated_items);
 
+        //9
+        $id = DB::table('tags')->insertGetId([
+            'id' => NULL,
+        ]);
+        $translated_items = [['title' => 'Accessories', 'slug' => 'accessories', 'description' => 'Accessories', 'lang' => 'en', 'tag_id' => $id], ['title' => 'أكسسوارات', 'slug' => 'أكسسوارات', 'description' => 'أكسسوارات', 'lang' => 'ar', 'tag_id' => $id]];
+        DB::table('tag_translations')->insert($translated_items);
 
-               // Posts Tags
-               ['title'=>'Protection','description'=>'Protection','slug'=>'protection','lang'=>'en','tag_id'=>1],
-               ['title'=>'الحمايه','description'=>'الحمايه','slug'=>'الحمايه','lang'=>'ar','tag_id'=>1],
-       
-       
-               ['title'=>'Hacking','description'=>'Hacking','slug'=>'hacking','lang'=>'en','tag_id'=>2],
-               ['title'=>'الأختراق','description'=>'الأختراق','slug'=>'الأختراق','lang'=>'ar','tag_id'=>2],
-       
-               ['title'=>'Servers','description'=>'Servers','slug'=>'servers','lang'=>'en','tag_id'=>3],
-               ['title'=>'خوادم','description'=>'خوادم','slug'=>'خوادم','lang'=>'ar','tag_id'=>3],      
-       
-       
-               ['title'=>'Data','description'=>'Data','slug'=>'data','lang'=>'en','tag_id'=>4],
-               ['title'=>'البيانات','description'=>'البيانات','slug'=>'البيانات','lang'=>'ar','tag_id'=>4],      
-       
-       
-               ['title'=>'NetWork','description'=>'NetWork','slug'=>'network','lang'=>'en','tag_id'=>5],
-               ['title'=>'الشبكات','description'=>'الشبكات','slug'=>'الشبكات','lang'=>'ar','tag_id'=>5],
-
-
-               
-                // Products Tags
-                ['title'=>'Fashion','description'=>'Fashion','slug'=>'fashion','lang'=>'en','tag_id'=>6],
-                ['title'=>'الموضه','description'=>'الموضه','slug'=>'الموضه','lang'=>'ar','tag_id'=>6],
-        
-        
-                ['title'=>'Budget','description'=>'Budget','slug'=>'budget','lang'=>'en','tag_id'=>7],
-                ['title'=>'الميزانيه','description'=>'الميزانيه','slug'=>'الميزانيه','lang'=>'ar','tag_id'=>7],
-        
-                ['title'=>'PayPal','description'=>'PayPal','slug'=>'paypal','lang'=>'en','tag_id'=>8],
-                ['title'=>'باي بال','description'=>'باي بال','slug'=>'باي-بال','lang'=>'ar','tag_id'=>8],      
-        
-        
-                ['title'=>'Shipping','description'=>'Shipping','slug'=>'shipping','lang'=>'en','tag_id'=>9],
-                ['title'=>'الشحن','description'=>'الشحن','slug'=>'الشحن','lang'=>'ar','tag_id'=>9],      
-        
-        
-                ['title'=>'Delivery','description'=>'Delivery','slug'=>'delivery','lang'=>'en','tag_id'=>10],
-                ['title'=>'التوصيل','description'=>'التوصيل','slug'=>'التوصيل','lang'=>'ar','tag_id'=>10],
-
-
-
-       // Recipes Tags
-        ['title'=>'Healthy Food','description'=>'Healthy Food','slug'=>'healthy-food','lang'=>'en','tag_id'=>11],
-        ['title'=>'طعام صحي','description'=>'طعام صحي','slug'=>'طعام-صحي','lang'=>'ar','tag_id'=>11],
-
-
-        ['title'=>'Dessert','description'=>'Dessert','slug'=>'dessert','lang'=>'en','tag_id'=>12],
-        ['title'=>'حلوى','description'=>'حلوى','slug'=>'حلوى','lang'=>'ar','tag_id'=>12],
-
-        ['title'=>'Chicken Wings','description'=>'Chicken Wings','slug'=>'chicken-wings','lang'=>'en','tag_id'=>13],
-        ['title'=>'أجنحه دجاج','description'=>'أجنحه دجاج','slug'=>'أجنحه-دجاج','lang'=>'ar','tag_id'=>13],      
-
-
-        ['title'=>'Rice','description'=>'Rice','slug'=>'rice','lang'=>'en','tag_id'=>14],
-        ['title'=>'أرز','description'=>'أرز','slug'=>'أرز','lang'=>'ar','tag_id'=>14],      
-
-
-        ['title'=>'Beef','description'=>'Beef','slug'=>'beef','lang'=>'en','tag_id'=>15],
-        ['title'=>'لحم بيف','description'=>'لحم بيف','slug'=>'لحم-بيف','lang'=>'ar','tag_id'=>15],
-
-
-
- 
-
-       ];
-       DB::table('tag_translations')->insert($translated_items);  
-
+        //10
+        $id = DB::table('tags')->insertGetId([
+            'id' => NULL,
+        ]);
+        $translated_items = [['title' => 'Technologies', 'slug' => 'technologies', 'description' => 'Technologies', 'lang' => 'en', 'tag_id' => $id], ['title' => 'التكنولوجيا', 'slug' => 'التكنولوجيا', 'description' => 'التكنولوجيا', 'lang' => 'ar', 'tag_id' => $id]];
+        DB::table('tag_translations')->insert($translated_items);
     }
 }

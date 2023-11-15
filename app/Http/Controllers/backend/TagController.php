@@ -23,14 +23,11 @@ class TagController extends Controller
         $this->TRANS = 'tag';
         $this->UPLOADFOLDER = 'tags';
         $this->Tbl = 'tags';
-        $this->Taxonomy = 'posts';
     }
 
     public function index(Request $request)
     {
-        $model = MainModel::Taxonomy($this->Taxonomy)
-            ->with([$this->Taxonomy])
-            ->withCount($this->Taxonomy);
+        $model = MainModel::with(['posts'])->withCount('posts');
 
         if ($request->ajax()) {
             return Datatables::of($model)
@@ -74,7 +71,7 @@ class TagController extends Controller
                 'storeRoute' => route($this->ROUTE_PREFIX . '.store'),
                 'destroyMultipleRoute' => route($this->ROUTE_PREFIX . '.destroyMultiple'),
                 'redirectRoute' => route($this->ROUTE_PREFIX . '.index'),
-                'allrecords' => MainModel::Taxonomy($this->Taxonomy)->count(),
+                'allrecords' => MainModel::with('posts')->count(),
             ];
             return view('backend.tags.index', $compact);
         }
@@ -86,7 +83,7 @@ class TagController extends Controller
                 'trans' => $this->TRANS,
                 'listingRoute' => route($this->ROUTE_PREFIX . '.index'),
                 'storeRoute' => route($this->ROUTE_PREFIX . '.store'),
-                'tags' => MainModel::Taxonomy($this->Taxonomy),
+                'tags' => MainModel::with('posts'),
             ];
             return view('backend.tags.create', $compact);
         }
@@ -98,7 +95,6 @@ class TagController extends Controller
         try {
             DB::beginTransaction();        
             $validated               = $request->validated();
-            $validated['taxonomy']   = $this->Taxonomy;
             $query                   = MainModel::create($validated);                         
             $translatedArr           = $this->HandleMultiLangdatabase($this->TRANSLATECOLUMNS,[$this->TblForignKey=>$query->id]);                      
                      

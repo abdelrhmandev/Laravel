@@ -8,13 +8,10 @@ class Tag extends Model
 
     protected $with = ['translate'];
     
-    protected $fillable = ['taxonomy'];
+ 
 
 
-    public function scopeTaxonomy($query, $type)
-    {
-        return $query->where('taxonomy', $type);
-    }
+ 
 
 
     public function translations(){

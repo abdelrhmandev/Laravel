@@ -28,7 +28,7 @@ class CategoryController extends Controller
         $this->TRANS                = 'category';
         $this->UPLOADFOLDER         = 'categories';
         $this->Tbl                  = 'categories';
-        $this->Taxonomy             = 'posts';
+    
     }
 
 
@@ -40,7 +40,7 @@ class CategoryController extends Controller
             $validated['status']     = isset($request->status) ? '1' : '0';       
             $validated['image']      = (!empty($request->file('image'))) ? $this->uploadFile($request->file('image'),$this->UPLOADFOLDER) : NULL;    
             $validated['parent_id']  = isset($request->parent_id) ? $request->parent_id : NULL;
-            $validated['taxonomy']   = $this->Taxonomy;
+          
             $query                   = MainModel::create($validated);
                          
             $translatedArr           = $this->HandleMultiLangdatabase($this->TRANSLATECOLUMNS,[$this->TblForignKey=>$query->id]);                      
@@ -59,7 +59,7 @@ class CategoryController extends Controller
 }
 
 public function index(Request $request){     
-    $model = MainModel::Taxonomy($this->Taxonomy)->with(['parent',$this->Taxonomy])->withCount($this->Taxonomy);
+    $model = MainModel::with(['parent','posts'])->withCount('posts');
     if ($request->ajax()) {              
          return Datatables::of($model)
                 ->addIndexColumn()                 
@@ -124,10 +124,10 @@ public function index(Request $request){
                 'storeRoute'            => route($this->ROUTE_PREFIX.'.store'),
                 'destroyMultipleRoute'  => route($this->ROUTE_PREFIX.'.destroyMultiple'), 
                 'redirectRoute'         => route($this->ROUTE_PREFIX.'.index'),
-                'categories'            => MainModel::tree($this->Taxonomy),  
-                'allrecords'            => MainModel::Taxonomy($this->Taxonomy)->count(),
-                'publishedCounter'      => MainModel::Taxonomy($this->Taxonomy)->Status('1')->count(),
-                'unpublishedCounter'    => MainModel::Taxonomy($this->Taxonomy)->Status('0')->count(),
+                'categories'            => MainModel::tree(),  
+                'allrecords'            => MainModel::count(),
+                'publishedCounter'      => MainModel::Status('1')->count(),
+                'unpublishedCounter'    => MainModel::Status('0')->count(),
                 
             ];            
             return view('backend.categories.index',$compact);
@@ -139,7 +139,7 @@ public function index(Request $request){
                     'trans'              => $this->TRANS,
                     'listingRoute'       => route($this->ROUTE_PREFIX.'.index'),
                     'storeRoute'         => route($this->ROUTE_PREFIX.'.store'), 
-                    'categories'         => MainModel::tree($this->Taxonomy)  
+                    'categories'         => MainModel::tree('posts')  
                 ];            
                 return view('backend.categories.create',$compact);
             }
@@ -149,7 +149,7 @@ public function index(Request $request){
         if (view()->exists('backend.categories.edit')) {         
             $compact = [                
                 'updateRoute'             => route($this->ROUTE_PREFIX.'.update',$category->id), 
-                'categories'              => MainModel::tree($this->Taxonomy,$category),
+                'categories'              => MainModel::tree('posts',$category),
                 'row'                     => $category,
                 'TrsanslatedColumnValues' => $this->getItemtranslatedllangs($category,$this->TRANSLATECOLUMNS,$this->TblForignKey),
                 'destroyRoute'            => route($this->ROUTE_PREFIX.'.destroy',$category->id),
@@ -180,7 +180,7 @@ public function index(Request $request){
             $validated['status']     = isset($request->status) ? '1' : '0';       
             $validated['image']      = $image;
             $validated['parent_id']  = isset($request->parent_id) ? $request->parent_id : NULL;
-            $validated['taxonomy']   = $this->Taxonomy;
+            $validated['']   = 'posts';
 
 
             MainModel::findOrFail($category->id)->update($validated);

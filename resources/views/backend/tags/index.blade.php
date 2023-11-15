@@ -88,7 +88,7 @@
 <script src="{{ asset('assets/backend/js/custom/pdfMake/vfs_load_fonts.js')}}"></script>
 <script src="{{ asset('assets/backend/js/custom/pdfMake/pdfhandle.js')}}"></script>
 <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js')}}"></script>
-@include('backend.datatables')
+@include('backend.Classicdatatables')
 <script>
 var dynamicColumns = [ //as an array start from 0
 { data: 'id', name: 'id',exportable:false}, 

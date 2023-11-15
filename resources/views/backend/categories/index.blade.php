@@ -73,8 +73,8 @@
               </div>
             </th>            
             <th>{{ __('site.image') }}</th>  
-            <th>{{ __('site.title') }}</th>                                
-            <th>{{ __('site.parent_id') }}</th> 
+            <th class="w-240px">{{ __('site.title') }}</th>                                
+            <th class="w-240px">{{ __('site.parent_id') }}</th> 
             <th>{{ __('post.plural') }}</th> 
             <th>{{ __('site.status') }}</th> 
             <th class="text-primary">{{ __('admin.created_at') }}</th>
@@ -97,7 +97,7 @@
 <script src="{{ asset('assets/backend/js/custom/pdfMake/vfs_load_fonts.js')}}"></script>
 <script src="{{ asset('assets/backend/js/custom/pdfMake/pdfhandle.js')}}"></script>
 <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js')}}"></script>
-@include('backend.datatables')
+@include('backend.Classicdatatables')
 <script>
 var dynamicColumns = [ //as an array start from 0
 { data: 'id', name: 'id',exportable:false}, 

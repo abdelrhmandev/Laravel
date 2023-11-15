@@ -25,27 +25,27 @@ class UserSeeder extends Seeder
             ])->assignRole(1);
 
             \App\Models\User::create([    
-                'username'         =>'johndoe',
+                'username'         =>'NickLogan',
                 'password'         =>bcrypt('12345678'),
-                'email'            =>'johndoe@domain.com',
-                'name'             =>'John Doe',
+                'email'            =>'NickLogan@domain.com',
+                'name'             =>'Nick Logan',
                 'is_admin'         =>'1',
-                'avatar'           =>'uploads/avatars/johndoe.jpg',
+                'avatar'           =>'uploads/avatars/nick.jpg',
             ])->assignRole(2);
 
             \App\Models\User::create([    
-                'username'         =>'vigo',
+                'username'         =>'DanWilson',
                 'password'         =>bcrypt('12345678'),
-                'email'            =>'vigo@domain.com',
-                'name'             =>'vigo mavy',
+                'email'            =>'DanWilson@domain.com',
+                'name'             =>'Dan Wilson',
                 'is_admin'         =>'1',
             ])->assignRole(2);
 
             \App\Models\User::create([    
-                'username'         =>'lary',
+                'username'         =>'FrancisMitcham',
                 'password'         =>bcrypt('12345678'),
-                'email'            =>'lary@domain.com',
-                'name'             =>'lary Mat',
+                'email'            =>'FrancisMitcham@domain.com',
+                'name'             =>'Francis Mitcham',
                 'is_admin'         =>'1',
             ])->assignRole(3);
 
@@ -55,15 +55,15 @@ class UserSeeder extends Seeder
                 'email'            =>'Kevin@domain.com',
                 'name'             =>'Kevin Leonard',
                 'is_admin'         =>'1',
-                'avatar'           =>'uploads/avatars/dany.jpg',
+                'avatar'           =>'uploads/avatars/kevin.jpg',
             ])->assignRole(4);
 
        
             \App\Models\User::create([    
-                'username'         =>'Tam',
+                'username'         =>'JessieClarcson',
                 'password'         =>bcrypt('12345678'),
-                'email'            =>'tam@domain.com',
-                'name'             =>'Tam oliver',
+                'email'            =>'JessieClarcson@domain.com',
+                'name'             =>'Jessie Clarcson',
                 'is_admin'         =>'1',
             ])->assignRole(3);
 
@@ -89,10 +89,10 @@ class UserSeeder extends Seeder
 
 
         \App\Models\User::create([    
-            'username'         =>'Jessie',
+            'username'         =>'AliceDanchik',
             'password'         =>bcrypt('12345678'),
-            'email'            =>'Jessie@domain.com',
-            'name'             =>'Jessie Clarcson',
+            'email'            =>'AliceDanchik@domain.com',
+            'name'             =>'Alice Danchik',
             'is_admin'         =>'1',
         ])->assignRole(4);
 
@@ -102,6 +102,7 @@ class UserSeeder extends Seeder
             'email'            =>'Brad@domain.com',
             'name'             =>'Brad Simmons',
             'is_admin'         =>'1',
+            'avatar'           =>'uploads/avatars/brad.jpg',
         ])->assignRole(2);
     }
 }

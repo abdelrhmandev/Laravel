@@ -47,13 +47,10 @@ type="text/css" />
                             <div class="separator"></div>                        
                             <x-backend.langs.ulTabs/>
                             <x-backend.langs.LangInputs :showDescription="1" :richTextArea="0" :showSlug="1" />
-                        </div>
- 
-                        
+                        </div>                        
                     </div>
                 </div>
-                <x-backend.cms.tags :tags="$tags"/>
-                <x-backend.cms.gallery/>
+ 
                 <x-backend.btns.button />
             </div>
             
@@ -61,13 +58,7 @@ type="text/css" />
             
             <div class="d-flex flex-column flex-row-fluid gap-0 w-lg-400px gap-lg-5">
                   <x-backend.cms.image />
-                  <x-backend.cms.categories-multi-select-checkbox :categories="$categories" :level="0" />
-                  <x-backend.cms.authors :authors="$authors"/>
-                  <x-backend.cms.status :published="1" :action="'create'"/>
-                  <x-backend.cms.featured :featured="1" :action="'create'"/>
-                  <x-backend.cms.allowComments :allow_comments="1" :action="'create'"/>
-                  
-            
+                  <x-backend.cms.status :published="1" :action="'create'"/>            
             </div>
 
 

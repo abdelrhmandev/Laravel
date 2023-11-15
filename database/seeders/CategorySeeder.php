@@ -13,212 +13,86 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-   
-
         DB::table('categories')->delete();
         DB::table('category_translations')->delete();
 
-        
-        $TransTbl = 'category_translations';
-       
-
-
-        ////////////POSTS////
-        $Taxonomy  = 'posts';
-        ///1
+        //1
         $id = DB::table('categories')->insertGetId([
-            'image'     => 'uploads/categories/it.jpg',
-            'status'    => '1',
-            'taxonomy'  => $Taxonomy
-         ]);
-        $translated_items = [
-            ['title'=>'IT','slug'=>'it','description'=>'IT','lang'=>'en','category_id'=>$id],
-            ['title'=>'نظم المعلومات','slug'=>'نظم-المعلومات','description'=>'نظم المعلومات','lang'=>'ar','category_id'=>$id],
-        ];
-        DB::table($TransTbl)->insert($translated_items);  
+            'image' => 'uploads/categories/sports.jpg',
+            'status' => '1',
+        ]);
+        $translated_items = [['title' => 'Sports', 'slug' => 'sports', 'description' => 'Sports', 'lang' => 'en', 'category_id' => $id], ['title' => 'الرياضه', 'slug' => 'الرياضه', 'description' => 'الرياضه', 'lang' => 'ar', 'category_id' => $id]];
+        DB::table('category_translations')->insert($translated_items);
 
         //2
         $id = DB::table('categories')->insertGetId([
-            'image'     => 'uploads/categories/programing.jpg',
-            'status'    => '1',
-            'taxonomy'  => $Taxonomy
-         ]);
-        $translated_items = [
-            ['title'=>'Programing','slug'=>'programing','description'=>'Programing','lang'=>'en','category_id'=>2],
-            ['title'=>'البرمجه','slug'=>'البرمجه','description'=>'البرمجه','lang'=>'ar','category_id'=>2],
-        ];
-        DB::table($TransTbl)->insert($translated_items);  
-
-       //3 
-        $id = DB::table('categories')->insertGetId([
-            'image'     => 'uploads/categories/design.jpg',
-            'status'    => '1',
-            'taxonomy'  => $Taxonomy
-         ]);
-        $translated_items = [
-            ['title'=>'Design','slug'=>'design','description'=>'Design','lang'=>'en','category_id'=>3],
-            ['title'=>'التصميم','slug'=>'التصميم','description'=>'التصميم','lang'=>'ar','category_id'=>3],
-        ];
-        DB::table($TransTbl)->insert($translated_items);  
-
-        //4
-        $id = DB::table('categories')->insertGetId([
-            'image'     => 'uploads/categories/social-net-work.jpg',
-            'status'    => '1',
-            'taxonomy'  => $Taxonomy
-         ]);
-        $translated_items = [
-            ['title'=>'Social Net Work','slug'=>'social-net-work','description'=>'Social Net Work','lang'=>'en','category_id'=>4],
-            ['title'=>'شبكات التواصل الأجتماعي','slug'=>'شبكات-التواصل-الأجتماعي','description'=>'شبكات التواصل الأجتماعي','lang'=>'ar','category_id'=>4],
-        ];
-        DB::table($TransTbl)->insert($translated_items);  
-
-        //5        
-        $id = DB::table('categories')->insertGetId([
-            'image'     => 'uploads/categories/security.jpg',
-            'status'    => '1',
-            'taxonomy'  => $Taxonomy
-         ]);
-        $translated_items = [
-            ['title'=>'Security','slug'=>'security','description'=>'Security','lang'=>'en','category_id'=>5],
-            ['title'=>'امن المعلومات','slug'=>'امن-المعلومات','description'=>'امن المعلومات','lang'=>'ar','category_id'=>5],  
-        ];
-        DB::table($TransTbl)->insert($translated_items);  
-
-
-    ////////////PRODUCTS//// 
-    $Taxonomy  = 'products';
-
-    ///1
-    $id = DB::table('categories')->insertGetId([
-        'image'     => 'uploads/ecommerce/categories/computers.png',
-        'status'    => '1',
-        'taxonomy'  => $Taxonomy
-     ]);
-    $translated_items = [
-        ['title'=>'Computers','slug'=>'computers','description'=>'Computers','lang'=>'en','category_id'=>$id],
-        ['title'=>'كمبيوتر','slug'=>'كمبيوتر','description'=>'كمبيوتر','lang'=>'ar','category_id'=>$id],
-    ];
-    DB::table($TransTbl)->insert($translated_items);  
-
-    //2
-    $id = DB::table('categories')->insertGetId([
-        'image'     => 'uploads/ecommerce/categories/watches.png',
-        'status'    => '1',
-        'taxonomy'  => $Taxonomy
-     ]);
-    $translated_items = [
-        ['title'=>'Watches','slug'=>'watches','description'=>'Watches','lang'=>'en','category_id'=>$id],
-        ['title'=>'ساعات','slug'=>'ساعات','description'=>'ساعات','lang'=>'ar','category_id'=>$id],
-    ];
-    DB::table($TransTbl)->insert($translated_items);  
-
-   //3 
-    $id = DB::table('categories')->insertGetId([
-        'image'     => 'uploads/ecommerce/categories/headphones.png',
-        'status'    => '1',
-        'taxonomy'  => $Taxonomy
-     ]);
-    $translated_items = [
-        ['title'=>'HeadPhones','slug'=>'head-phones','description'=>'HeadPhones','lang'=>'en','category_id'=>$id],
-        ['title'=>'سماعات رأس','slug'=>'سماعات-رأس','description'=>'سماعات رأس','lang'=>'ar','category_id'=>$id],
-    ];
-    DB::table($TransTbl)->insert($translated_items);  
-
-    //4
-    $id = DB::table('categories')->insertGetId([
-        'image'     => 'uploads/ecommerce/categories/t-shirts.png',
-        'status'    => '1',
-        'taxonomy'  => $Taxonomy
-     ]);
-    $translated_items = [
-        ['title'=>'Shirts','slug'=>'shirts','description'=>'Shirts','lang'=>'en','category_id'=>$id],
-        ['title'=>'تيشرت','slug'=>'تيشرت','description'=>'تيشرت','lang'=>'ar','category_id'=>$id],
-    ];
-    DB::table($TransTbl)->insert($translated_items);  
-
-    //5        
-    $id = DB::table('categories')->insertGetId([
-        'image'     => 'uploads/ecommerce/categories/handbags.png',
-        'status'    => '1',
-        'taxonomy'  => $Taxonomy
-     ]);
-    $translated_items = [
-        ['title'=>'HandBags','slug'=>'hand-bags','description'=>'HandBags','lang'=>'en','category_id'=>$id],
-        ['title'=>'حقائب يد','slug'=>'حقائب يد','description'=>'حقائب يد','lang'=>'ar','category_id'=>$id],  
-    ];
-    DB::table($TransTbl)->insert($translated_items);  
-
-        ////////////Recipes////
-        $Taxonomy = 'recipes';
-
-        ///1
-        $id = DB::table('categories')->insertGetId([
-        'image' => 'uploads/fooding/categories/snack.jpg',
-        'status' => '1',
-        'taxonomy' => $Taxonomy
+            'image' => 'uploads/categories/nature.jpg',
+            'status' => '1',
         ]);
-        $translated_items = [
-        ['title'=>'Snacks','slug'=>'Snacks','description'=>'Snacks','lang'=>'en','category_id'=>$id],
-        ['title'=>'وجبات خفيفة','slug'=>'وجبات-خفيفة','description'=>'وجبات خفيفة','lang'=>'ar','category_id'=>$id],
-        ];
-        DB::table($TransTbl)->insert($translated_items);
-    
-        //2
-        $id = DB::table('categories')->insertGetId([
-        'image' => 'uploads/ecommerce/categories/soup.jpg',
-        'status' => '1',
-        'taxonomy' => $Taxonomy
-        ]);
-        $translated_items = [
-        ['title'=>'Soups','slug'=>'soups','description'=>'Soups','lang'=>'en','category_id'=>$id],
-        ['title'=>'شوربه','slug'=>'شوربه','description'=>'شوربه ','lang'=>'ar','category_id'=>$id],
-        ];
-        DB::table($TransTbl)->insert($translated_items);
-    
+        $translated_items = [['title' => 'Nature', 'slug' => 'nature', 'description' => 'Nature', 'lang' => 'en', 'category_id' => $id], ['title' => 'الطبيعه', 'slug' => 'الطبيعه', 'description' => 'الطبيعه', 'lang' => 'ar', 'category_id' => $id]];
+        DB::table('category_translations')->insert($translated_items);
+
         //3
         $id = DB::table('categories')->insertGetId([
-        'image' => 'uploads/ecommerce/categories/chicken.jpg',
-        'status' => '1',
-        'taxonomy' => $Taxonomy
+            'image' => 'uploads/categories/design.jpg',
+            'status' => '1',
         ]);
-        $translated_items = [
-        ['title'=>'Chicken','slug'=>'chicken','description'=>'Chicken Chicken','lang'=>'en','category_id'=>$id],
-        ['title'=>'دجاج','slug'=>'دجاج','description'=>'دجاج','lang'=>'ar','category_id'=>$id],
-        ];
-        DB::table($TransTbl)->insert($translated_items);
-    
+        $translated_items = [['title' => 'Design', 'slug' => 'design', 'description' => 'Design', 'lang' => 'en', 'category_id' => $id], ['title' => 'التصميم', 'slug' => 'التصميم', 'description' => 'التصميم', 'lang' => 'ar', 'category_id' => $id]];
+        DB::table('category_translations')->insert($translated_items);
+
         //4
         $id = DB::table('categories')->insertGetId([
-        'image' => 'uploads/ecommerce/categories/beef.jpg',
-        'status' => '1',
-        'taxonomy' => $Taxonomy
+            'image' => 'uploads/categories/education.jpg',
+            'status' => '1',
         ]);
-        $translated_items = [
-        ['title'=>'Beef','slug'=>'beef','description'=>'Beef Beef ','lang'=>'en','category_id'=>$id],
-        ['title'=>'لحم بقري','slug'=>'لحم-بقري','description'=> 'لحم بقري','lang'=>'ar','category_id'=>$id],
-        ];
-        DB::table($TransTbl)->insert($translated_items);
-    
+        $translated_items = [['title' => 'Education', 'slug' => 'education', 'description' => 'Education', 'lang' => 'en', 'category_id' => $id], ['title' => 'التعليم', 'slug' => 'التعليم', 'description' => 'التعليم', 'lang' => 'ar', 'category_id' => $id]];
+        DB::table('category_translations')->insert($translated_items);
+
         //5
         $id = DB::table('categories')->insertGetId([
-        'image' => 'uploads/ecommerce/categories/pasta.jpg',
-        'status' => '1',
-        'taxonomy' => $Taxonomy
+            'image' => NULL,
+            'status' => '1',
         ]);
-        $translated_items = [
-        ['title'=>'Pasta','slug'=>'pasta','description'=>'Pasta ','lang'=>'en','category_id'=>$id],
-        ['title'=>'مكرونه','slug'=>'مكرونه','description'=>'مكرونه','lang'=>'ar','category_id'=>$id],
-        ];
-        DB::table($TransTbl)->insert($translated_items);
-    
+        $translated_items = [['title' => 'Marketing', 'slug' => 'marketing', 'description' => 'Marketing', 'lang' => 'en', 'category_id' => $id], ['title' => 'التسويق', 'slug' => 'التسويق', 'description' => 'التسويق', 'lang' => 'ar', 'category_id' => $id]];
+        DB::table('category_translations')->insert($translated_items);
 
+        //6
+        $id = DB::table('categories')->insertGetId([
+            'image' => 'uploads/categories/history.jpg',
+            'status' => '1',
+        ]);
+        $translated_items = [['title' => 'History', 'slug' => 'history', 'description' => 'History', 'lang' => 'en', 'category_id' => $id], ['title' => 'التاريخ', 'slug' => 'التاريخ', 'description' => 'التاريخ', 'lang' => 'ar', 'category_id' => $id]];
+        DB::table('category_translations')->insert($translated_items);
 
+        //7
+        $id = DB::table('categories')->insertGetId([
+            'image' => 'uploads/categories/food.jpg',
+            'status' => '1',
+        ]);
+        $translated_items = [['title' => 'food', 'slug' => 'Food', 'description' => 'Food', 'lang' => 'en', 'category_id' => $id], ['title' => 'طعام', 'slug' => 'طعام', 'description' => 'طعام', 'lang' => 'ar', 'category_id' => $id]];
+        DB::table('category_translations')->insert($translated_items);
+        //8
+        $id = DB::table('categories')->insertGetId([
+            'image' => NULL,
+            'status' => '1',
+        ]);
+        $translated_items = [['title' => 'Health', 'slug' => 'health', 'description' => 'Health', 'lang' => 'en', 'category_id' => $id], ['title' => 'صحه', 'slug' => 'صحه', 'description' => 'صحه', 'lang' => 'ar', 'category_id' => $id]];
+        DB::table('category_translations')->insert($translated_items);
 
+        //9
+        $id = DB::table('categories')->insertGetId([
+            'image' => 'uploads/categories/travel.jpg',
+            'status' => '1',
+        ]);
+        $translated_items = [['title' => 'Travel', 'slug' => 'travel', 'description' => 'Travel', 'lang' => 'en', 'category_id' => $id], ['title' => 'السفر', 'slug' => 'السفر', 'description' => 'السفر', 'lang' => 'ar', 'category_id' => $id]];
+        DB::table('category_translations')->insert($translated_items);
 
-
-
-
+        //10
+        $id = DB::table('categories')->insertGetId([
+            'image' => NULL,
+            'status' => '1',
+        ]);
+        $translated_items = [['title' => 'Industry', 'slug' => 'industry', 'description' => 'industry', 'lang' => 'en', 'category_id' => $id], ['title' => 'الصناعه', 'slug' => 'الصناعه', 'description' => 'الصناعه', 'lang' => 'ar', 'category_id' => $id]];
+        DB::table('category_translations')->insert($translated_items);
     }
- 
 }

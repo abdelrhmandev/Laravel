@@ -14,7 +14,7 @@ class Category extends Model
 
     protected $table = 'categories';
 
-    protected $fillable = ['parent_id', 'image', 'status', 'taxonomy'];
+    protected $fillable = ['parent_id', 'image', 'status'];
 
     protected $with = ['translate'];
 
@@ -22,10 +22,7 @@ class Category extends Model
     {
         return $query->where('status', $type);
     }
-    public function scopeTaxonomy($query, $type)
-    {
-        return $query->where('taxonomy', $type);
-    }
+ 
 
     // # single Item
 
@@ -41,10 +38,9 @@ class Category extends Model
         }
     }
 
-    public static function tree($tax, $category = null){
+    public static function tree($category = null){
  
-        $allCategories = Category::select('id', 'parent_id')
-            ->Taxonomy($tax)
+        $allCategories = Category::select('id', 'parent_id')            
             ->Status('1')
             ->with('translate')
             ->get();
@@ -52,24 +48,21 @@ class Category extends Model
 
         if (isset($category)) {
             if ($category->parent_id == null) {
-                $allCategories = Category::select('id', 'parent_id')
-                    ->Taxonomy($tax)
+                $allCategories = Category::select('id', 'parent_id')                    
                     ->Status('1')
                     ->with('translate')
                     ->where('id', '<>', $category->id)
                     ->whereNotNull('parent_id')
                     ->get();
 
-                $rootCategories = Category::select('id', 'parent_id')
-                    ->Taxonomy($tax)
+                $rootCategories = Category::select('id', 'parent_id')                    
                     ->Status('1')
                     ->with('translate')
                     ->where('id', '<>', $category->id)
                     ->whereNull('parent_id')
                     ->get();
             } else {
-                $allCategories = Category::select('id', 'parent_id')
-                    ->Taxonomy($tax)
+                $allCategories = Category::select('id', 'parent_id')                    
                     ->Status('1')
                     ->with('translate')
                     ->where('id', '<>', $category->id)
@@ -87,7 +80,6 @@ class Category extends Model
         if ($categories) {
             foreach ($categories as $category) {
                 $category->children = $allCategories->where('parent_id', $category->id)->values();
-
                 if ($category->children->isNotEmpty()) {
                     self::formatTree($category->children, $allCategories);
                 }

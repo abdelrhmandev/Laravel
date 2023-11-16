@@ -14,10 +14,7 @@ class DistrictSeeder extends Seeder
 
         DB::table('districts')->delete();
         DB::table('district_translations')->delete();
-
-
- 
-        
+         
        $items = [
         ['area_id'=>'1'], // cairo , Zamalek
  
@@ -61,8 +58,6 @@ class DistrictSeeder extends Seeder
             ['title'=>'Al-Ismailia Square','slug'=>'al-ismailia-square','lang'=>'en','district_id'=>'6'],
             ['title'=>'ميدان الإسماعيلية','slug'=>'ميدان-الإسماعيلية','lang'=>'ar','district_id'=>'6'],    
 
-            
-
 
             ['title'=>'Abbas al-Aqqad','slug'=>'abbas-al-aqqad','lang'=>'en','district_id'=>'7'],
             ['title'=>'عباس العقاد','slug'=>'عباس-العقاد','lang'=>'ar','district_id'=>'7'],
@@ -74,14 +69,8 @@ class DistrictSeeder extends Seeder
             ['title'=>'Mostafa El-Nahas','slug'=>'mostafa-el-nahas','lang'=>'en','district_id'=>'9'],
             ['title'=>'مصطفي النحاس','slug'=>'مصطفي-النحاس','lang'=>'ar','district_id'=>'9'],      
 
-
-
-
             ['title'=>'Salah Salem','slug'=>'salah-salem','lang'=>'en','district_id'=>'10'],
             ['title'=>'صلاح سالم','slug'=>'صلاح-سالم','lang'=>'ar','district_id'=>'10'],    
-
-
-
 
        ];
        DB::table('district_translations')->insert($translated_items);  

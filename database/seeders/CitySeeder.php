@@ -4,20 +4,9 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 class CitySeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
-    {
-
-
+    public function run(){
         DB::table('cities')->delete();
-        DB::table('city_translations')->delete();
-
- 
-        
+        DB::table('city_translations')->delete();        
 
        $items = [
         ['country_id'=>'62'],
@@ -65,7 +54,6 @@ class CitySeeder extends Seeder
 
             ['title'=>'Zagazig','slug'=>'zagazig','lang'=>'en','city_id'=>'10'],
             ['title'=>'الزقازيق','slug'=>'الزقازيق','lang'=>'ar','city_id'=>'10'],
-
             
        ];
        DB::table('city_translations')->insert($translated_items);  

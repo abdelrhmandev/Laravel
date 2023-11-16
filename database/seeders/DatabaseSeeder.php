@@ -41,11 +41,11 @@ class DatabaseSeeder extends Seeder
 
             // Start Miscellaneous SEEDER
 
-            // CountrySeeder::class,
-            // CitySeeder::class,
-            // AreaSeeder::class,
-            // DistrictSeeder::class,
-            SlideSeeder::class,   
+            CountrySeeder::class,
+            CitySeeder::class,
+            AreaSeeder::class,
+            DistrictSeeder::class,
+            SliderSeeder::class,   
             FaqSeeder::class,
             // ClientSeeder::class,
 

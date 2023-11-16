@@ -11,14 +11,7 @@ class CountrySeeder extends Seeder
      */
     public function run()
     {
-
-
         DB::table('countries')->delete();
- 
- 
- 
-        
-
        $items = [
         ['title_en'=>'Afghanistan','title_ar'=>'أفغانستان','code'=>'AF'],
         ['title_en'=>'Albania','title_ar'=>'ألبانيا','code'=>'AL'],
@@ -266,9 +259,7 @@ class CountrySeeder extends Seeder
         ['title_en'=>'Zimbabwe','title_ar'=>'زيمبابوي','code'=>'ZW']        
        ];
        DB::table('countries')->insert($items);   
-
        DB::table('countries')->where('id',62)->update(['flag'=>'uploads/flags/eg.svg']);
        DB::table('countries')->where('id',186)->update(['flag'=>'uploads/flags/sa.svg']);
-
     }
 }

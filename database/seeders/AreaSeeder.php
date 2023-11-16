@@ -17,10 +17,7 @@ class AreaSeeder extends Seeder
         DB::table('areas')->delete();
         DB::table('area_translations')->delete();
 
-
- 
-
-       $items = [
+      $items = [
         ['city_id'=>'1'], // cairo
         ['city_id'=>'1'], // cairo
         ['city_id'=>'1'], // cairo
@@ -71,8 +68,6 @@ class AreaSeeder extends Seeder
 
             ['title'=>'Agouza','slug'=>'agouza','lang'=>'en','area_id'=>'10'],
             ['title'=>'العجوزة','slug'=>'العجوزة','lang'=>'ar','area_id'=>'10'],            
-
-
 
        ];
        DB::table('area_translations')->insert($translated_items);  

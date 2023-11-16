@@ -195,7 +195,7 @@ if ($request->ajax()) {
                 'storeRoute'            => route($this->ROUTE_PREFIX.'.store'),
                 'destroyMultipleRoute'  => route($this->ROUTE_PREFIX.'.destroyMultiple'), 
                 'redirectRoute'         => route($this->ROUTE_PREFIX.'.index'),    
-                'categories'            => Category::withCount(['posts'])->Taxonomy('posts')->get(),  
+                'categories'            => Category::withCount(['posts'])->get(),  
                 'allrecords'            => MainModel::count(),
                 'publishedCounter'      => MainModel::Status('1')->count(),
                 'unpublishedCounter'    => MainModel::Status('0')->count(),                

@@ -9,13 +9,8 @@ class PostMedia extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
-
-
-        DB::table('post_media')->delete();
-
-        
+    public function run(){
+        DB::table('post_media')->delete();        
             $items = [
                 ['post_id'=>'1','assigned_for'=>'gallery','file'=>'uploads/posts/p1-g1.jpg'],
                 ['post_id'=>'1','assigned_for'=>'gallery','file'=>'uploads/posts/p1-g2.jpg'],
@@ -26,8 +21,5 @@ class PostMedia extends Seeder
                 ['post_id'=>'1','assigned_for'=>'gallery','file'=>'uploads/posts/p1-g7.jpg'],
                ];
                DB::table('post_media')->insert($items);    
-        
-       
-
     }
 }

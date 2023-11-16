@@ -45,8 +45,8 @@ class DatabaseSeeder extends Seeder
             // CitySeeder::class,
             // AreaSeeder::class,
             // DistrictSeeder::class,
-            // SlideSeeder::class,   
-            // FaqSeeder::class,
+            SlideSeeder::class,   
+            FaqSeeder::class,
             // ClientSeeder::class,
 
             // End Miscellaneous SEEDER

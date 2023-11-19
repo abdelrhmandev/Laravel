@@ -1,5 +1,6 @@
 <?php
 return [
+'on'                        => 'Posts On',
 'title'                     => 'Post Title',
 'edit'                      => 'Edit Post',
 'view'                      => 'View Post',

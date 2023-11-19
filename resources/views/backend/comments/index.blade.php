@@ -26,12 +26,7 @@
           <h3 class="fw-bold m-0">{{ __('comment.on') }}</h3>         
           " <a href="{{  route(config('custom.route_prefix').'.posts.edit',$post_id) }}" class="me-1"> {{ $post->translate->title }}</a>"
            <a href="{{ route(config('custom.route_prefix').'.posts.edit',$post_id) }}"> {{ __('post.view')}}</a></div>         
-          <a href="{{  route(config('custom.route_prefix').'.comments.index') }}"><span class="svg-icon svg-icon-muted svg-icon-2hx"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor"/>
-            <rect x="7" y="15.3137" width="12" height="2" rx="1" transform="rotate(-45 7 15.3137)" fill="currentColor"/>
-            <rect x="8.41422" y="7" width="12" height="2" rx="1" transform="rotate(45 8.41422 7)" fill="currentColor"/>
-            </svg>
-            </span></a>
+          <a href="{{  route(config('custom.route_prefix').'.comments.index') }}">{{ __('site.all')}} {{ __('comment.plural')}}</a>
       </div>
     </div>
 

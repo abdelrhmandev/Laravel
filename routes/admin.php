@@ -28,8 +28,8 @@ Route::delete('categories/destroy/all', 'CategoryController@destroyMultiple')->n
 Route::resource('nutritions', NutritionController::class)->except('show');
 
 
-Route::resource('recipes', RecipeController::class)->except('show');
-Route::delete('recipes/destroy/all', 'RecipeController@destroyMultiple')->name('recipes.destroyMultiple');
+// Route::resource('recipes', RecipeController::class)->except('show');
+// Route::delete('recipes/destroy/all', 'RecipeController@destroyMultiple')->name('recipes.destroyMultiple');
  
 
 Route::resource('users', UserController::class)->except('show');
@@ -37,11 +37,11 @@ Route::delete('users/destroy/all', 'UserController@destroyMultiple')->name('user
 
 
 Route::resource('roles', RoleController::class)->except('show');
-Route::delete('recipes/destroy/all', 'RecipeController@destroyMultiple')->name('recipes.destroyMultiple');
+// Route::delete('recipes/destroy/all', 'RecipeController@destroyMultiple')->name('recipes.destroyMultiple');
 
 
 Route::resource('permissions', PermissionController::class)->except('show');
-Route::delete('recipes/destroy/all', 'RecipeController@destroyMultiple')->name('recipes.destroyMultiple');
+// Route::delete('recipes/destroy/all', 'RecipeController@destroyMultiple')->name('recipes.destroyMultiple');
 
 
 Route::resource('recipe-categories',RecipeCategoryController::class)->except('show'); // Recipe Categories
@@ -70,6 +70,7 @@ Route::resource('pages', PageController::class)->except('show');
 Route::delete('pages/destroy/all', 'PageController@destroyMultiple')->name('pages.destroyMultiple');
 
 
+Route::get('/posts/tags/{tag_id}', 'PostController@index')->name('posts.SortBytag');
 Route::resource('posts', PostController::class)->except('show');
 Route::delete('posts/destroy/all', 'PostController@destroyMultiple')->name('posts.destroyMultiple');
 

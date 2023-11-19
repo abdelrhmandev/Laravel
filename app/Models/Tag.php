@@ -4,14 +4,12 @@ use Illuminate\Database\Eloquent\Model;
 class Tag extends Model
 {
     protected $table = 'tags';
-
-
     protected $with = ['translate'];
-    
- 
+    protected $guarded = ['id'];
 
 
- 
+
+    public $timestamps = true;
 
 
     public function translations(){

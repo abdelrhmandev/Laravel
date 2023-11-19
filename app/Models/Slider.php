@@ -1,18 +1,15 @@
 <?php
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
-class Slide extends Model
+class Slider extends Model
 {
-    protected $table = 'slides';
+    protected $table = 'sliders';
 
+
+    public $timestamps = true;
+    
     protected $fillable = [
-		'slide_category_id',
+		'image','order','featured','published','created_at'
 	];
-    public function slide_translation(){
-        return $this->hasMany(slideTranslation::class);
-    }
-    # Translation method
-    public function slide(){
-        return $this->hasOne(slideTranslation::class)->where('lang',app()->getLocale());
-    }
+ 
 }

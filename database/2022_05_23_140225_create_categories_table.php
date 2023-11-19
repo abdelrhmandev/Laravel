@@ -18,8 +18,8 @@ class CreateCategoriesTable extends Migration
             $table->unsignedBigInteger('parent_id')->default(0)->nullable();
 			$table->string('image',150)->nullable();
 			$table->enum('published', ['0','1'])->default(1);
-			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+			$table->timestamp('created_at');
+			$table->timestamp('updated_at');
         });
 
         Schema::create('category_translations', function (Blueprint $table) {                 

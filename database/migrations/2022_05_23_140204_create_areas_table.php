@@ -14,8 +14,6 @@ class CreateAreasTable extends Migration {
 		Schema::create('areas', function (Blueprint $table) {
             $table->id();
 			$table->foreignId('city_id')->nullable()->constrained('cities')->onDelete('cascade');
-			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
 			});
 		Schema::create('area_translations', function (Blueprint $table) {            
 			$table->id();

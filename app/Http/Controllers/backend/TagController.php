@@ -36,10 +36,15 @@ class TagController extends Controller
                     return '<a href=' . route($this->ROUTE_PREFIX . '.edit', $row->id) . " class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter" . $row->id . "=\"item\">" . Str::words($row->translate->title, '5') . '</a>';
                 })
 
-                ->AddColumn('count', function (MainModel $row) {                    
-                    return  "<a href=".route('admin.posts.index',$row->id).">
-                                <span class=\"badge badge-circle badge-primary\">".$row->posts_count ?? '0' ."</span>
-                                </a>";                   
+                ->AddColumn('count', function (MainModel $row) {                                        
+                    $count = '<span aria-hidden="true">—</span>'; 
+                    if($row->posts_count>0){    
+                    $count = "<a href=".route(config('custom.route_prefix').'.posts.SortBytag',$row->id).">
+                                <span class=\"badge badge-circle badge-info\">".$row->posts_count ?? '0' ."</span>
+                                </a>"; 
+                    }
+                    return $count;
+
                 })
                 ->editColumn('created_at', function (MainModel $row) {
  

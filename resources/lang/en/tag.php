@@ -3,6 +3,7 @@ return [
 'title'                     => 'Tag Title',
 'edit'                      => 'Edit Tag',
 'add'                       => 'Add Tag',
+'view'                      => 'View Tag',
 'delete'                    => 'Delete Tag',
 'select'                    => 'Select Tag',
 'select_multi'              =>' Select Tags',

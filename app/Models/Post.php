@@ -19,6 +19,11 @@ class Post extends Model
         return $this->belongsToMany(Category::class,'post_category');
     }
 
+
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     public function tags(){
         return $this->belongsToMany(Tag::class);
     }
@@ -29,6 +34,7 @@ class Post extends Model
     public function comments(){
         return $this->hasMany(Comment::class);
     }
+
 
     public function translate($lang = null){
         if ($lang == 'getAll') {

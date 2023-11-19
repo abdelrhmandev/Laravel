@@ -4,6 +4,7 @@ use DataTables;
 use Carbon\Carbon;
 use LaravelLocalization;
 use Illuminate\Support\Str;
+use App\Traits\Functions; 
 use Illuminate\Http\Request;
 use App\Models\Faq as MainModel;
 use Illuminate\Support\Facades\DB;
@@ -14,36 +15,26 @@ use App\Http\Requests\backend\FaqRequest as ModuleRequest;
 
 class FaqController extends Controller
 {
-
-
-    public function __construct() {
-
-        
+    use Functions;
+    public function __construct() {        
         $this->TblForignKey         = 'faq_id';
         $this->ROUTE_PREFIX         = config('custom.route_prefix').'.faqs'; 
         $this->TRANSLATECOLUMNS     = ['question','answer']; // Columns To be Trsanslated
         $this->TRANS                = 'faq';
         $this->Tbl                  = 'faqs';
     }
-
-
- 
-
     public function store(ModuleRequest $request){
 
         try {
             DB::beginTransaction();        
             $validated               = $request->validated();            
-            $id = DB::table('tags')->insertGetId([
+            $id = DB::table($this->Tbl)->insertGetId([
                 'id' => NULL,
-            ]);
-                
+            ]);                                  
             $translatedArr = $this->HandleMultiLangdatabase($this->TRANSLATECOLUMNS,[$this->TblForignKey=>$id]);                                           
             if(TransModel::insert($translatedArr)){                   
                 $arr = array('msg' => __($this->TRANS.'.'.'storeMessageSuccess'), 'status' => true);              
-            }
-            
-            dd($translatedArr);
+            }            
             DB::commit();          
         } catch (\Exception $e) {
             DB::rollback();            
@@ -67,17 +58,7 @@ if ($request->ajax()) {
                     $div.=  "<p>".Str::words($row->translate->answer, '20')."</p>";                  
                     return $div;   
                 })                                                              
-      
-         
-            ->editColumn('created_at', function (MainModel $row) {
-                return [                    
-                   'display'   => "<div class=\"font-weight-bolder text-primary mb-0\">". Carbon::parse($row->created_at)->format('d/m/Y').'</div><div class=\"text-muted\">'.''."</div>", 
-                   'timestamp' => $row->created_at->timestamp
-                ];
-             })
-             ->filterColumn('created_at', function ($query, $keyword) {
-                $query->whereRaw("DATE_FORMAT(created_at,'%d/%m/%Y') LIKE ?", ["%$keyword%"]);
-             })             
+             
                 ->editColumn('actions', function ($row) {                                                       
                     return view('backend.partials.btns.edit-delete', [
                         'trans'         =>$this->TRANS,                       

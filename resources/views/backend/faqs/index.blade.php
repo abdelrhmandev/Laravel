@@ -25,8 +25,7 @@
         </div>
       </div>
       <div class="card-toolbar">
-        <div class="d-flex justify-content-end" data-kt-table-toolbar="base">   
-          @include('backend.partials.modals._exportlisting')
+        <div class="d-flex justify-content-end" data-kt-table-toolbar="base">             
           <a class="btn btn-primary" href="{{ $createRoute }}">
             <span class="svg-icon svg-icon-2 svg-icon-primary me-0 me-md-2">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -64,8 +63,7 @@
                 <input class="form-check-input AA" type="checkbox" data-kt-check="true" data-kt-check-target="#{{ __($trans.".plural") }} .AA" value="1" />
               </div>
             </th>            
-            <th class="w-500px ">{{ __('faq.plural') }}</th>                                
-            <th class="text-primary">{{ __('admin.created_at') }}</th>
+            <th class="w-500px">{{ __('faq.plural') }}</th>                                
             <th class="text-end min-w-50px noExport">{{ __('admin.actions') }}</th>  
           </tr>
         </thead>
@@ -80,21 +78,16 @@
 
 
 @section('scripts')
-<script src="{{ asset('assets/backend/js/custom/pdfMake/pdfmake.min.js')}}"></script> 
-<script src="{{ asset('assets/backend/js/custom/pdfMake/vfs_load_fonts.js')}}"></script>
-<script src="{{ asset('assets/backend/js/custom/pdfMake/pdfhandle.js')}}"></script>
 <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js')}}"></script>
 @include('backend.Classicdatatables')
 <script>
 var dynamicColumns = [ //as an array start from 0
 { data: 'id', name: 'id',exportable:false}, 
 { data: 'translate.question', name: 'translate.question',orderable: false}, // 2
-{ data: 'created_at',name :'created_at', type: 'num', render: { _: 'display', sort: 'timestamp', order: 'desc'}}, // 6
 { data: 'actions' , name : 'actions' ,exportable:false,orderable: false,searchable: false},    
 ];
 KTUtil.onDOMContentLoaded(function () {
-  loadDatatable('{{ __($trans.".plural") }}','{{ $redirectRoute }}',dynamicColumns,'3','2');
+  loadDatatable('{{ __($trans.".plural") }}','{{ $redirectRoute }}',dynamicColumns,'','1');
 });
 </script>
- 
 @stop

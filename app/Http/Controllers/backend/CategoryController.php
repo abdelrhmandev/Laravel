@@ -40,15 +40,13 @@ class CategoryController extends Controller
             $validated['status']     = isset($request->status) ? '1' : '0';       
             $validated['image']      = (!empty($request->file('image'))) ? $this->uploadFile($request->file('image'),$this->UPLOADFOLDER) : NULL;    
             $validated['parent_id']  = isset($request->parent_id) ? $request->parent_id : NULL;
-          
-            $query                   = MainModel::create($validated);
-                         
-            $translatedArr           = $this->HandleMultiLangdatabase($this->TRANSLATECOLUMNS,[$this->TblForignKey=>$query->id]);                      
-                     
+            $query                   = MainModel::create($validated);                         
+            $translatedArr           = $this->HandleMultiLangdatabase($this->TRANSLATECOLUMNS,[$this->TblForignKey=>$query->id]);                                           
             if(TransModel::insert($translatedArr)){              
                      $arr = array('msg' => __($this->TRANS.'.'.'storeMessageSuccess'), 'status' => true);              
             }
             DB::commit();   
+
         
         } catch (\Exception $e) {
             DB::rollback();            
@@ -139,7 +137,7 @@ public function index(Request $request){
                     'trans'              => $this->TRANS,
                     'listingRoute'       => route($this->ROUTE_PREFIX.'.index'),
                     'storeRoute'         => route($this->ROUTE_PREFIX.'.store'), 
-                    'categories'         => MainModel::tree('posts')  
+                    'categories'         => MainModel::tree()  
                 ];            
                 return view('backend.categories.create',$compact);
             }
@@ -168,23 +166,16 @@ public function index(Request $request){
             if(!empty($request->file('image'))) {
                 $category->image && File::exists(public_path($category->image)) ? $this->unlinkFile($category->image): '';
                 $image =  $this->uploadFile($request->file('image'),$this->UPLOADFOLDER);
-             }   
-             
-             
-            
+             }               
             if(isset($request->drop_image_checkBox)  && $request->drop_image_checkBox == 1) {                
                 $this->unlinkFile($category->image);
                 $image = NULL;
             }
-
             $validated['status']     = isset($request->status) ? '1' : '0';       
             $validated['image']      = $image;
             $validated['parent_id']  = isset($request->parent_id) ? $request->parent_id : NULL;
             $validated['']   = 'posts';
-
-
             MainModel::findOrFail($category->id)->update($validated);
-
            
             $arr = array('msg' => __($this->TRANS.'.'.'updateMessageSuccess'), 'status' => true);            
             DB::commit();
@@ -211,7 +202,6 @@ public function index(Request $request){
         return response()->json($arr);
 
     }
-
 
     public function destroyMultiple(Request $request){  
         $ids = explode(',', $request->ids);

@@ -79,114 +79,118 @@ class PostController extends Controller
         
 
 
-public function index(Request $request){     
-
-
- 
-   
-
-
-    //https://github.com/yajra/laravel-datatables-demo/blob/master/resources/views/datatables/collection/custom-filter.blade.php
+    public function index(Request $request,$tag_id=null){     
 
 if ($request->ajax()) {              
+    $model = MainModel::with(['user','tags','categories'])->withCount('comments');
+
+    if(!(empty(request('tag_id')))) {
+        $question_ids = request('tag_id');
+        $model =  $model->whereHas('tags', function($qry) use($question_ids){
+            $qry->where('tags.id', $question_ids);
+        });
+    }
     
-    
-    $model = MainModel::with(['tags','categories'])->withCount('comments');
+
+ 
     return Datatables::of($model)
-                ->addIndexColumn()   
-                ->editColumn('translate.title', function (MainModel $row) {
-                    return "<a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".Str::words($row->translate->title, '5')."</a>";                     
-                })                                                              
-                ->editColumn('image', function ($row) {
-                    $div = '<span aria-hidden="true">—</span>';
-                    if($row->image && File::exists(public_path($row->image))) {
-                        $imagePath = url(asset($row->image));
-                        
-                        $div = "<a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." title='".$row->translate->title."'>
-                                <div class=\"symbol symbol-50px\"><img class=\"img-fluid\" src=".$imagePath."></div>     
-                                </a>";                      
-                    }
-                    return $div;
-                })         
-              //////////////Category Search Filter Original Code////////////////////////
-              ->filter(function ($instance) use ($request) {
-                if ($request->get('category_id')) {
-                    $category_id = $request->get('category_id');
-                        $instance->whereHas('categories', function ($q) use ($category_id) {
-                            $q->where('id',$category_id);
-                        });
-                } 
-                 ////////////////////Custom Search////////////////////////////////
-                if ($request->get('search')) {
-                    $search = $request->get('search');
-                    $instance->whereHas('translate', function ($q) use ($search) {
-                        $q->where('title','LIKE', '%'.$search.'%');
-                    });                    
-                } 
+            ->addIndexColumn()   
+            ->editColumn('translate.title', function (MainModel $row) {
+                $divComment =   '<span aria-hidden="true">—</span>'; 
+                if($row->comments_count>0){    
+                    $divCommentCounter = "<a href=".route(config('custom.route_prefix').'.comments.index',$row->id).">
+                    <span class=\"badge badge-circle badge-info\">".$row->comments_count ?? '0' ."</span>
+                    </a>" ;                  
+                    $divComment = "<div class=\"text-muted fs-7\">".__('comment.plural') .$divCommentCounter."</div>";
+                }                 
+                return "<a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".Str::words($row->translate->title, '5')."</a>".$divComment;    
+
+            })                                                              
+            ->editColumn('image', function ($row) {
+                $div = '<span aria-hidden="true">—</span>';
+                if($row->image && File::exists(public_path($row->image))) {
+                    $imagePath = url(asset($row->image));
+                    
+                    $div = "<a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." title='".$row->translate->title."'>
+                            <div class=\"symbol symbol-50px\"><img class=\"img-fluid\" src=".$imagePath."></div>     
+                            </a>";                      
+                }
+                return $div;
+            })         
+            //////////////Category Search Filter Original Code////////////////////////
+            ->filter(function ($instance) use ($request) {
+            if ($request->get('category_id')) {
+                $category_id = $request->get('category_id');
+                    $instance->whereHas('categories', function ($q) use ($category_id) {
+                        $q->where('id',$category_id);
+                    });
+            } 
+                ////////////////////Custom Search////////////////////////////////
+            if ($request->get('search')) {
+                $search = $request->get('search');
+                $instance->whereHas('translate', function ($q) use ($search) {
+                    $q->where('title','LIKE', '%'.$search.'%');
+                });                    
+            } 
             })          
             //////////////////////////////////////////////////////////            
-                ->editColumn('categories', function (MainModel $row) {                                                                              
-                    $categories = '';
-                    if(count($row->categories)) {
-                        foreach($row->categories as $value){
-                            $categories.="<a href=".route(config('custom.route_prefix').'.categories.edit',$value->id)." class=\"text-hover-success fs-6 fw-bold mb-1\" data-kt-item-filter".$value->id."=\"item\" title=".$value->translate->title.">".$value->translate->title."</a>, ";                     
-                        }
-                        $categories= substr($categories, 0, -2);
-                    }else{
-                        $categories = '<span aria-hidden="true">—</span>';
+            ->editColumn('categories', function (MainModel $row) {                                                                              
+                $categories = '';
+                if(count($row->categories)) {
+                    foreach($row->categories as $value){
+                        $CClass = (!empty(request('category_id')) && request('category_id') == $value->id) ? 'badge badge-light-primary': '';
+
+                        $categories.="<a href=".route(config('custom.route_prefix').'.categories.edit',$value->id)." class=\"text-hover-success ".$CClass."\" data-kt-item-filter".$value->id."=\"item\" title=".$value->translate->title.">".$value->translate->title."</a>, ";                     
                     }
-                    return $categories;
-                })
-                ->editColumn('tags', function (MainModel $row) {                                                                              
-                    $tags = '';
-                    if(count($row->tags)) {
-                        foreach($row->tags as $value){
-                            $tags.="<a href=".route(config('custom.route_prefix').'.tags.edit',$value->id)." class=\"text-hover-success fs-6 fw-bold mb-1\" data-kt-item-filter".$value->id."=\"item\" title=".$value->translate->title.">".$value->translate->title."</a>, ";                     
-                        }
-                        $tags= substr($tags, 0, -2);
-                    }else{
-                        $tags = '<span aria-hidden="true">—</span>';
+                    $categories= substr($categories, 0, -2);
+                }else{
+                    $categories = '<span aria-hidden="true">—</span>';
+                }
+                return $categories;
+            })
+            ->editColumn('tags', function (MainModel $row) {                                                                              
+                $tags = '';
+                if(count($row->tags)) {
+                    foreach($row->tags as $value){
+                        $TClass = (!empty(request('tag_id')) && request('tag_id') == $value->id) ? 'badge badge-light-primary': '';
+                        $tags.="<a href=".route(config('custom.route_prefix').'.tags.edit',$value->id)." class=\"text-hover-success ".$TClass."\" data-kt-item-filter".$value->id."=\"item\" title=".$value->translate->title.">".$value->translate->title."</a>, ";                     
                     }
-                    return $tags;
-                })
-                ->AddColumn('comments', function (MainModel $row) {   
-                    if($row->comments_count>0){                      
-                        $div = "<a href=".route(config('custom.route_prefix').'.comments.index',$row->id).">
-                        <span class=\"badge badge-circle badge-info\">".$row->comments_count ?? '0' ."</span>
-                        </a>" ;
-                    }                 
-                    return  $div ?? '<span aria-hidden="true">—</span>';                   
-                })
-               /*
-                ->editColumn('status', function (MainModel $row) {                                                           
+                    $tags= substr($tags, 0, -2);
+                }else{
+                    $tags = '<span aria-hidden="true">—</span>';
+                }
+                return $tags;
+            })
+            ->editColumn('user_id', function (MainModel $row) {                                                    
+                return '<div class="\text-muted fs-7\">'.$row->user->name ?? '<span aria-hidden="true">—</span>'.'<div>';                                                
+            })  
+            ->editColumn('created_at', function (MainModel $row) {
                 if($row->status == 1){
                     $checked = "checked";
-                    $statusLabel  = "<span class=\"text-success\">".__('site.published')."</span>";                                                   
+                    $statusLabel  = "<span class=\"badge py-3 px-4 fs-7 badge-light-primary\">".__('site.published')."</span>";                                                   
                 }else{
                     $checked = "";
-                    $statusLabel  ="<span class=\"text-danger\">".__('site.unpublished')."</span>";   
+                    $statusLabel  ="<span class=\"badge py-3 px-4 fs-7 badge-light-danger\">".__('site.unpublished')."</span>";   
                 }                    
-                return  "<div class=\"form-check form-switch form-check-custom form-check-solid\"><input class=\"form-check-input UpdateStatus\" name=\"Updatetatus\" type=\"checkbox\" ".$checked." id=\"Status".$row->id."\" onclick=\"UpdateStatus($row->id,'".__($this->TRANS.'.plural')."','$this->Tbl','".route('admin.UpdateStatus')."')\" />&nbsp;".$statusLabel."</div>";                
-            })*/
-            ->editColumn('created_at', function (MainModel $row) {
+                $status =   "<div class=\"form-check form-switch form-check-custom form-check-solid\"><input class=\"form-check-input h-20px w-30px UpdateStatus\" name=\"Updatetatus\" type=\"checkbox\" ".$checked." id=\"Status".$row->id."\" onclick=\"UpdateStatus($row->id,'".__($this->TRANS.'.plural')."','$this->Tbl','".route('admin.UpdateStatus')."')\" />&nbsp;".$statusLabel."</div>";                
                 return [                    
-                   'display'   => "<div class=\"font-weight-bolder text-primary mb-0\">". Carbon::parse($row->created_at)->format('d/m/Y').'</div><div class=\"text-muted\">'.''."</div>", 
+                   'display'   => "<div class=\"font-weight-bolder text-primary mb-0\">". Carbon::parse($row->created_at)->format('d/m/Y').'</div><div class=\"text-muted\">'.$status."</div>", 
                    'timestamp' => $row->created_at->timestamp
                 ];
              })
              ->filterColumn('created_at', function ($query, $keyword) {
                 $query->whereRaw("DATE_FORMAT(created_at,'%d/%m/%Y') LIKE ?", ["%$keyword%"]);
              })             
-                ->editColumn('actions', function ($row) {                                                       
-                    return view('backend.partials.btns.edit-delete', [
-                        'trans'         =>$this->TRANS,                       
-                        'editRoute'     =>route($this->ROUTE_PREFIX.'.edit',$row->id),
-                        'destroyRoute'  =>route($this->ROUTE_PREFIX.'.destroy',$row->id),
-                        'id'            =>$row->id
-                        ]);
-                })            
-                ->rawColumns(['image','translate.title','tags','categories','comments','status','actions','created_at','created_at.display'])                  
-                ->make(true);    
+            ->editColumn('actions', function ($row) {                                                       
+                return view('backend.partials.btns.edit-delete', [
+                    'trans'         =>$this->TRANS,                       
+                    'editRoute'     =>route($this->ROUTE_PREFIX.'.edit',$row->id),
+                    'destroyRoute'  =>route($this->ROUTE_PREFIX.'.destroy',$row->id),
+                    'id'            =>$row->id
+                    ]);
+            })            
+            ->rawColumns(['image','translate.title','tags','categories','user_id','status','actions','created_at','created_at.display'])                  
+            ->make(true);    
     }  
         if (view()->exists('backend.posts.index')) {
             $compact = [
@@ -198,7 +202,11 @@ if ($request->ajax()) {
                 'categories'            => Category::withCount(['posts'])->get(),  
                 'allrecords'            => MainModel::count(),
                 'publishedCounter'      => MainModel::Status('1')->count(),
-                'unpublishedCounter'    => MainModel::Status('0')->count(),                
+                'unpublishedCounter'    => MainModel::Status('0')->count(),   
+                
+                'tag_id'               => $tag_id ?? '',    
+                'tag'                  => $tag_id ? Tag::findOrFail($tag_id) :'',   
+
             ];                       
             return view('backend.posts.index',$compact);
         }
@@ -229,7 +237,7 @@ if ($request->ajax()) {
                 'TrsanslatedColumnValues' => $this->getItemtranslatedllangs($post,$this->TRANSLATECOLUMNS,$this->TblForignKey),
                 'destroyRoute'            => route($this->ROUTE_PREFIX.'.destroy',$post->id),
                 'trans'                   => $this->TRANS,
-                'categories'              => Category::tree('posts'),
+                'categories'              => Category::tree($post),
                 'redirect_after_destroy'  => route($this->ROUTE_PREFIX.'.index'),
                 'tags'                    => Tag::get(),
                 'authors'                 => User::get(),

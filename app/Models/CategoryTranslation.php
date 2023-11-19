@@ -19,9 +19,6 @@ class CategoryTranslation extends Model
         'slug',
 		'lang',
 	];
-
-
- 
  
 
 }

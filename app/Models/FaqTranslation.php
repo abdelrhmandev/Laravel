@@ -17,10 +17,6 @@ class FaqTranslation extends Model
 
     public $timestamps = true;
 
- 
-
-
-
     public function faq(){
         return $this->belongsTo(faq::class);
     }

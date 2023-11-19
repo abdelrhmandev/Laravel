@@ -62,7 +62,7 @@ class TagSeeder extends Seeder
         $id = DB::table('tags')->insertGetId([
             'id' => NULL,
         ]);
-        $translated_items = [['title' => 'Fashion', 'slug' => 'Fashion', 'description' => 'Fashion', 'lang' => 'en', 'tag_id' => $id], ['title' => 'الموضه', 'slug' => 'الموضه', 'description' => 'الموضه', 'lang' => 'ar', 'tag_id' => $id]];
+        $translated_items = [['title' => 'Marketing', 'slug' => 'marketing', 'description' => 'Marketing', 'lang' => 'en', 'tag_id' => $id], ['title' => 'التسويق', 'slug' => 'التسويق', 'description' => 'التسويق', 'lang' => 'ar', 'tag_id' => $id]];
         DB::table('tag_translations')->insert($translated_items);
         //8
         $id = DB::table('tags')->insertGetId([
@@ -75,7 +75,7 @@ class TagSeeder extends Seeder
         $id = DB::table('tags')->insertGetId([
             'id' => NULL,
         ]);
-        $translated_items = [['title' => 'Accessories', 'slug' => 'accessories', 'description' => 'Accessories', 'lang' => 'en', 'tag_id' => $id], ['title' => 'أكسسوارات', 'slug' => 'أكسسوارات', 'description' => 'أكسسوارات', 'lang' => 'ar', 'tag_id' => $id]];
+        $translated_items = [['title' => 'Quality', 'slug' => 'quality', 'description' => 'Quality', 'lang' => 'en', 'tag_id' => $id], ['title' => 'الجوده', 'slug' => 'الجوده', 'description' => 'الجوده', 'lang' => 'ar', 'tag_id' => $id]];
         DB::table('tag_translations')->insert($translated_items);
 
         //10

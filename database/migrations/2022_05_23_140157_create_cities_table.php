@@ -14,8 +14,6 @@ class CreateCitiesTable extends Migration {
 		Schema::create('cities', function (Blueprint $table) {
             $table->id();
 			$table->foreignId('country_id')->constrained('countries')->onDelete('cascade');
-			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
 			});
 		Schema::create('city_translations', function (Blueprint $table) {            
 			$table->id();

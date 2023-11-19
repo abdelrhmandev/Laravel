@@ -6,11 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class SlideTranslation extends Model
 {
-    protected $table = 'slide_translations';
+    protected $table = 'slider_translations';
+
+    public $timestamps = false;
 
     protected $fillable = [
 		'slide_id',
 		'title',
+        'description',
         'slug',
 		'lang',
 	];

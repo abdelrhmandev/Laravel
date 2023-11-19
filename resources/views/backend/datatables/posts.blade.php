@@ -7,7 +7,7 @@ var data = table.rows().data();
  
 alert( 'The table has '+data.length+' records' );
 */
-function loadDatatable(tableId,RouteListing,dynamicColumns,StatusColumn=null,TitleColumnOrder=null){
+function loadDatatable(tableId,RouteListing,dynamicColumns,StatusColumn=null,TitleColumnOrder=null,tag_id){
         var table;
         var dt;
         var filterStatus;      
@@ -67,6 +67,7 @@ function loadDatatable(tableId,RouteListing,dynamicColumns,StatusColumn=null,Tit
                     url: RouteListing,
                     data: function (d) {
                         d.category_id = $('#category_id').val(),
+                        d.tag_id = tag_id,
                         d.search = $('#search').val()                                             
                     }
                 },

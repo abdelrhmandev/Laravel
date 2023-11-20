@@ -16,7 +16,7 @@ class CreateCommentsTable extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->text('comment');
-            $table->enum('status', ['pending','approved','spammed','rejected'])->default('pending');            
+            $table->enum('status', ['pending','approved','spam','rejected'])->default('pending');            
             $table->text('replied_comment')->nullable();
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->foreignId('post_id')->nullable()->constrained('posts')->onDelete('cascade');

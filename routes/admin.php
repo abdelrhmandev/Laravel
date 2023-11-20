@@ -116,7 +116,6 @@ Route::get('/contacts', 'ContactController@index')->name('contacts');
 
 
 Route::get('/lodassadsadsadgout', 'ProfileController@logout')->name('logout');
-
 Route::group(['prefix' => 'profile'], function () {
     Route::get('/', 'ProfileController@index')->name('profile');
     Route::get('/edit', 'ProfileController@edit')->name('edit.profile');

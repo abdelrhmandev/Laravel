@@ -147,7 +147,7 @@ public function index(Request $request){
         if (view()->exists('backend.categories.edit')) {         
             $compact = [                
                 'updateRoute'             => route($this->ROUTE_PREFIX.'.update',$category->id), 
-                'categories'              => MainModel::tree('posts',$category),
+                'categories'              => MainModel::tree($category),
                 'row'                     => $category,
                 'TrsanslatedColumnValues' => $this->getItemtranslatedllangs($category,$this->TRANSLATECOLUMNS,$this->TblForignKey),
                 'destroyRoute'            => route($this->ROUTE_PREFIX.'.destroy',$category->id),

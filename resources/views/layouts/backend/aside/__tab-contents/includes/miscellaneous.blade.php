@@ -62,7 +62,7 @@
             </span>
 
         </span>
-        <span class="menu-title">{{ __('faqs.plural') }}</span>
+        <span class="menu-title">{{ __('faq.plural') }}</span>
         <span class="menu-arrow"></span>
     </span>
     <div class="menu-sub menu-sub-accordion menu-active-bg">
@@ -79,7 +79,7 @@
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
-                <span class="menu-title">{{ __('faq.create') }}</span>
+                <span class="menu-title">{{ __('faq.add') }}</span>
             </a>
         </div>
     </div>

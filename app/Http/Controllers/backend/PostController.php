@@ -217,7 +217,7 @@ if ($request->ajax()) {
                     'trans'              => $this->TRANS,
                     'listingRoute'       => route($this->ROUTE_PREFIX.'.index'),
                     'storeRoute'         => route($this->ROUTE_PREFIX.'.store'), 
-                    'categories'         => Category::tree('posts'),
+                    'categories'         => Category::tree(),
                     'tags'               => Tag::get(),
                     'authors'            => User::get(),
                 ];            

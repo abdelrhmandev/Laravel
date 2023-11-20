@@ -11,6 +11,6 @@
         </label>        
     </div>
     @if (count($child->children))        
-        <x-backend.cms.select-single-checkbox-childs :childs="$child->children" :pluckarr="$pluckarr" level="{{ $level + 25 }}" :parentid="$parentid" />
+        <x-backend.cms.select-single-checkbox-childs :childs="$child->children" :pluckarr="$pluckarr" :level="$level + 25" :parentid="$parentid" />
     @endif    
 @endforeach

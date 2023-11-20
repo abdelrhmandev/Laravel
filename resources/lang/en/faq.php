@@ -9,7 +9,6 @@ return [
 'delete'                    => 'Delete FAQ',
 'select'                    => 'Select FAQ',
 'select_multi'              =>' Select FAQs',
-'parent'                    => 'Parent FAQ',
 'plural'                    => 'FAQs',
 'singular'                  => 'FAQ',
 'deleteMessageSuccess'      => 'FAQ has been deleted successfully',

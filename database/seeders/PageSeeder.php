@@ -25,7 +25,8 @@ class PageSeeder extends Seeder
         ['status'=>'0'],
         ['status'=>'1'],
         ['status'=>'0'],
-        ['status'=>'0']
+        ['status'=>'0'],
+        ['status'=>'1']
        ];
        DB::table('pages')->insert($items);      
 
@@ -52,7 +53,10 @@ class PageSeeder extends Seeder
 
             ['title'=>'Products','slug'=>'products','lang'=>'en','page_id'=>'6'],
             ['title'=>'المنتجات','slug'=>'المنتجات','lang'=>'ar','page_id'=>'6'],
-       ];
+
+            ['title'=>'FAQs','slug'=>'faqs','lang'=>'en','page_id'=>'7'],
+            ['title'=>'سؤال و جواب','slug'=>'سؤال-و-جواب','lang'=>'ar','page_id'=>'7'],
+        ];
        DB::table('page_translations')->insert($translated_items);  
 
     }

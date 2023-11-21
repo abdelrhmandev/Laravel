@@ -70,7 +70,8 @@ Route::resource('pages', PageController::class)->except('show');
 Route::delete('pages/destroy/all', 'PageController@destroyMultiple')->name('pages.destroyMultiple');
 
 
-Route::get('/posts/tags/{tag_id}', 'PostController@index')->name('posts.SortBytag');
+// Route::get('/posts/sortBy/{key?}/{tag_id?}{category_id?}', 'PostController@index')->name('posts.SortBy');
+Route::get('/posts/category/{category_id}', 'PostController@index')->name('posts.SortBycategory');
 Route::resource('posts', PostController::class)->except('show');
 Route::delete('posts/destroy/all', 'PostController@destroyMultiple')->name('posts.destroyMultiple');
 

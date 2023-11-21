@@ -79,19 +79,14 @@ class PostController extends Controller
         
 
 
-    public function index(Request $request,$tag_id=null){     
+    public function index(Request $request,$category_id=null){    
+        
 
 if ($request->ajax()) {              
     $model = MainModel::with(['user','tags','categories'])->withCount('comments');
 
-    if(!(empty(request('tag_id')))) {
-        $question_ids = request('tag_id');
-        $model =  $model->whereHas('tags', function($qry) use($question_ids){
-            $qry->where('tags.id', $question_ids);
-        });
-    }
+  
     
-
  
     return Datatables::of($model)
             ->addIndexColumn()   
@@ -148,11 +143,11 @@ if ($request->ajax()) {
                 }
                 return $categories;
             })
-            ->editColumn('tags', function (MainModel $row) {                                                                              
+            ->editColumn('tags', function (MainModel $row) use ($request) {                                                                              
                 $tags = '';
                 if(count($row->tags)) {
                     foreach($row->tags as $value){
-                        $TClass = (!empty(request('tag_id')) && request('tag_id') == $value->id) ? 'badge badge-light-primary': '';
+                        $TClass = ($request->has('tag_id') && !empty($request->tag_id) && $request->tag_id == $value->id) ? 'badge badge-light-primary': '';
                         $tags.="<a href=".route(config('custom.route_prefix').'.tags.edit',$value->id)." class=\"text-hover-success ".$TClass."\" data-kt-item-filter".$value->id."=\"item\" title=".$value->translate->title.">".$value->translate->title."</a>, ";                     
                     }
                     $tags= substr($tags, 0, -2);
@@ -204,8 +199,11 @@ if ($request->ajax()) {
                 'publishedCounter'      => MainModel::Status('1')->count(),
                 'unpublishedCounter'    => MainModel::Status('0')->count(),   
                 
-                'tag_id'               => $tag_id ?? '',    
-                'tag'                  => $tag_id ? Tag::findOrFail($tag_id) :'',   
+  
+
+
+                'category_id'               =>  $category_id ?? '',    
+                // 'cat'                  => ($request->has('category_id')) ? Category::findOrFail($category_id) : '',   
 
             ];                       
             return view('backend.posts.index',$compact);
@@ -237,7 +235,7 @@ if ($request->ajax()) {
                 'TrsanslatedColumnValues' => $this->getItemtranslatedllangs($post,$this->TRANSLATECOLUMNS,$this->TblForignKey),
                 'destroyRoute'            => route($this->ROUTE_PREFIX.'.destroy',$post->id),
                 'trans'                   => $this->TRANS,
-                'categories'              => Category::tree($post),
+                'categories'              => Category::tree(),
                 'redirect_after_destroy'  => route($this->ROUTE_PREFIX.'.index'),
                 'tags'                    => Tag::get(),
                 'authors'                 => User::get(),
@@ -337,11 +335,7 @@ if ($request->ajax()) {
 
     public function destroyMultiple(Request $request){  
         $ids = explode(',', $request->ids);
-        $childs = MainModel::whereIn('parent_id',$ids);     
-        foreach ($childs->get() as $child) {
-            $child->id ? MainModel::where('id',$child->id)->update(['parent_id' => NULL]) : '';
-            $child->image ? $this->unlinkFile($child->image) : ''; // Unlink Image 
-        }
+
         foreach (MainModel::whereIn('id',$ids)->get() as $selectedItems) {
             $selectedItems->image ? $this->unlinkFile($selectedItems->image) : ''; // Unlink Images            
         }     

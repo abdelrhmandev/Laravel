@@ -12,11 +12,9 @@
 @section('content')
 <div class="container-xxl" id="kt_content_container">
 
-  @if(!empty($tag_id))
+  {{-- @if(!empty($tag_id))
   <div class="card-body pt-2">
     <div class="notice d-flex bg-light-success rounded border-success border border-dashed mb-9 p-6">
-
-        
         <span class="svg-icon svg-icon-2tx svg-icon-success me-4">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path opacity="0.3" fill-rule="evenodd" clip-rule="evenodd" d="M2 4.63158C2 3.1782 3.1782 2 4.63158 2H13.47C14.0155 2 14.278 2.66919 13.8778 3.04006L12.4556 4.35821C11.9009 4.87228 11.1726 5.15789 10.4163 5.15789H7.1579C6.05333 5.15789 5.15789 6.05333 5.15789 7.1579V16.8421C5.15789 17.9467 6.05333 18.8421 7.1579 18.8421H16.8421C17.9467 18.8421 18.8421 17.9467 18.8421 16.8421V13.7518C18.8421 12.927 19.1817 12.1387 19.7809 11.572L20.9878 10.4308C21.3703 10.0691 22 10.3403 22 10.8668V19.3684C22 20.8218 20.8218 22 19.3684 22H4.63158C3.1782 22 2 20.8218 2 19.3684V4.63158Z" fill="currentColor"/>
@@ -26,16 +24,14 @@
         </span>          
       <div class="d-flex flex-stack flex-grow-1">
         <div class="fw-semibold">
-          <h3 class="fw-bold m-0">{{ __('post.on') }}</h3>   
-                
-          " <a href="{{  route(config('custom.route_prefix').'.posts.edit',$tag_id) }}" class="me-1"> {{ $tag->translate->title }}</a>"
+          <h3 class="fw-bold m-0">{{ __('post.on') }}</h3>                   
+          " <a href="{{ route(config('custom.route_prefix').'.posts.edit',$tag_id) }}" class="me-1"> {{ $tag->translate->title }}</a>"
            <a href="{{ route(config('custom.route_prefix').'.posts.edit',$tag_id) }}"> {{ __('tag.view')}}</a></div>         
           <a href="{{  route(config('custom.route_prefix').'.posts.index') }}">{{ __('site.all')}} {{ __('post.plural')}}</a>
       </div>
     </div>
-
   </div>
-  @endif
+  @endif --}}
 
 
   <div class="card">
@@ -135,6 +131,8 @@
 <script src="{{ asset('assets/backend/js/custom/pdfMake/vfs_load_fonts.js')}}"></script>
 <script src="{{ asset('assets/backend/js/custom/pdfMake/pdfhandle.js')}}"></script>
 <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js')}}"></script>
+
+
 @include('backend.datatables.posts')
 <script>
 var dynamicColumns = [ //as an array start from 0
@@ -148,7 +146,7 @@ var dynamicColumns = [ //as an array start from 0
 { data: 'actions' , name : 'actions' ,exportable:false,orderable: false,searchable: false},    
 ];
 KTUtil.onDOMContentLoaded(function () {
-  loadDatatable('{{ __($trans.".plural") }}','{{ $redirectRoute }}',dynamicColumns,'','2','{{ $tag_id }}');
+  loadDatatable('{{ __($trans.".plural") }}','{{ $redirectRoute }}',dynamicColumns,'','2','{{ $category_id }}');
 });
 </script>
 <script src="{{ asset('assets/backend/js/custom/updateStatus.js')}}"></script>

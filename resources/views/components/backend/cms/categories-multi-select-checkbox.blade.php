@@ -17,8 +17,20 @@
                     </label>
                 </div>                   
                         @if ($category->children->isNotEmpty())
+
+                        @if(isset($row))
+                            @if(isset($row->categories))
+                                @php $pluckarr = $row->categories->pluck('id')->toArray(); @endphp
+                            @endif
+                        @else
+                            @php $pluckarr = ''; @endphp
+                        @endif
+
+                        
+                         
+
                             <x-backend.cms.select-single-checkbox-childs 
-                            :childs="$category->children" :pluckarr="$row->categories->pluck('id')->toArray()" :parentid="$parentid ?? ''"
+                            :childs="$category->children" :pluckarr="$pluckarr" :parentid="$parentid ?? ''"
                                 level="{{ $level + 1 }}" />
                         @endif                
                 @endforeach

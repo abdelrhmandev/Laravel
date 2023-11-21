@@ -79,7 +79,7 @@ public function index(Request $request){
                     return $row->parent->translate->title ?? "<span aria-hidden=\"true\">—</span>";
                 })
                 ->AddColumn('count', function (MainModel $row) {                    
-                    return  "<a href=".route(config('custom.route_prefix').'.posts.index',$row->id).">
+                    return  "<a href=".route(config('custom.route_prefix').'.posts.SortBycategory',['category_id'=>$row->id]).">
                                 <span class=\"badge badge-circle badge-primary\">".$row->posts_count ?? '0' ."</span>
                                 </a>";                   
                 })

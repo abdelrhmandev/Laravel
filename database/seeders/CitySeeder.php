@@ -1,6 +1,7 @@
 <?php
 namespace Database\Seeders;
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 class CitySeeder extends Seeder
 {
@@ -9,16 +10,16 @@ class CitySeeder extends Seeder
         DB::table('city_translations')->delete();        
 
        $items = [
-        ['country_id'=>'62'],
-        ['country_id'=>'62'],
-        ['country_id'=>'62'],
-        ['country_id'=>'62'],
-        ['country_id'=>'62'],
-        ['country_id'=>'62'],
-        ['country_id'=>'62'],
-        ['country_id'=>'62'],
-        ['country_id'=>'62'],
-        ['country_id'=>'62'],
+        ['country_id'=>'62','created_at'=>Carbon::now()],
+        ['country_id'=>'62','created_at'=>Carbon::now()],
+        ['country_id'=>'62','created_at'=>Carbon::now()],
+        ['country_id'=>'62','created_at'=>Carbon::now()],
+        ['country_id'=>'62','created_at'=>Carbon::now()],
+        ['country_id'=>'62','created_at'=>Carbon::now()],
+        ['country_id'=>'62','created_at'=>Carbon::now()],
+        ['country_id'=>'62','created_at'=>Carbon::now()],
+        ['country_id'=>'62','created_at'=>Carbon::now()],
+        ['country_id'=>'62','created_at'=>Carbon::now()],
        ];
        DB::table('cities')->insert($items);      
        

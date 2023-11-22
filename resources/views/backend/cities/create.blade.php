@@ -18,8 +18,6 @@
 <link href="{{ asset('assets/backend/css/custom.css') }}" rel="stylesheet"
 type="text/css" />
     
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="{{ asset('assets/backend/plugins/custom/file-upload/image-uploader.min.css') }}">
 
 </style>
 @stop
@@ -46,7 +44,7 @@ type="text/css" />
                           <div class="d-flex flex-column gap-5">
                             <div class="separator"></div>                        
                             <x-backend.langs.ulTabs/>
-                            <x-backend.langs.LangInputs :showDescription="1" :richTextArea="0" :showSlug="0" />
+                            <x-backend.langs.LangInputs :showDescription="0" :richTextArea="0" :showSlug="0" />
                         </div>
  
                         
@@ -60,8 +58,6 @@ type="text/css" />
             <div class="d-flex flex-column flex-row-fluid gap-0 w-lg-400px gap-lg-5">
                   <x-backend.cms.image />
                   <x-backend.cms.featured :featured="1" :action="'create'"/>
-                  
-            
             </div>
 
 
@@ -75,29 +71,4 @@ type="text/css" />
 <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js') }}"></script>
 <script src="{{ asset('assets/backend/js/widgets.bundle.js') }}"></script>
 <script src="{{ asset('assets/backend/js/custom/handleFormSubmit.js') }}"></script>
-<script src="{{ asset('assets/backend/plugins/custom/tinymce/tinymce.bundle.js') }}"></script>
-
-
-
-
-
-<script src="{{ asset('assets/backend/plugins/custom/file-upload/image-uploader.min.js') }}"></script>
-<script>
-$('.gallery').imageUploader({
-    label: 'Drag & Drop files here or click to browse',
-    imagesInputName: 'gallery',
-    preloadedInputName: 'old',
-    extensions: ['.jpg', '.jpeg', '.png', '.gif', '.svg'],
-    mimes: ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml'],
-    maxSize: 1 * 1024 * 1024, // 1 Mega
-    maxFiles: 5
-});
-
-KTUtil.onDOMContentLoaded(function() {
-   handleFormSubmitFunc('Add{{ $trans }}');
-});
-@foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-tinymce.init({selector: ('.editor{{ substr($properties['regional'], 0, 2) }}'), height : "280"});
-@endforeach
-</script>
 @stop

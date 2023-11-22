@@ -113,7 +113,7 @@
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
-                <span class="menu-title">{{ __('slider.create') }}</span>
+                <span class="menu-title">{{ __('slider.add') }}</span>
             </a>
         </div>
     </div>

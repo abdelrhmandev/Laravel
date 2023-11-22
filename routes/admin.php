@@ -51,8 +51,16 @@ Route::resource('recipe-categories',RecipeCategoryController::class)->except('sh
 
 
 Route::resource('cities', CityController::class)->except('show');
+Route::delete('cities/destroy/all', 'CityController@destroyMultiple')->name('cities.destroyMultiple');
+
+
 Route::resource('areas', AreaController::class)->except('show');
+Route::delete('areas/destroy/all', 'AreaController@destroyMultiple')->name('areas.destroyMultiple');
+
+
+
 Route::resource('districts', DistrictController::class)->except('show');
+Route::delete('districts/destroy/all', 'DistrictController@destroyMultiple')->name('districts.destroyMultiple');
 
 
 
@@ -104,7 +112,7 @@ Route::controller(CommentController::class)->group(function () {
 
 
 
-Route::resource('slides', SlideController::class)->except('show');
+ 
 
 
 Route::resource('clients', ClientController::class)->except('show');

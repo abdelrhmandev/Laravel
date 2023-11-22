@@ -35,7 +35,6 @@ class SliderRequest extends FormRequest
 
             $id = $this->request->get('id_'.substr($properties['regional'],0,2)) ? ',' . $this->request->get('id_'.substr($properties['regional'],0,2)) : '';
             $rules['title_'.substr($properties['regional'],0,2)] = 'required|unique:slider_translations,title'.$id;
-            $rules['slug_'.substr($properties['regional'],0,2)] = 'nullable|unique:slider_translations,slug'.$id; 
             $rules['description_'.substr($properties['regional'],0,2)] = 'nullable|max:500'; 
         } 
 

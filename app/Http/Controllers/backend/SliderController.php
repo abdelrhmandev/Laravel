@@ -24,7 +24,7 @@ class SliderController extends Controller
         
         $this->TblForignKey         = 'slider_id';
         $this->ROUTE_PREFIX         = config('custom.route_prefix').'.sliders'; 
-        $this->TRANSLATECOLUMNS     = ['title','slug','description']; // Columns To be Trsanslated
+        $this->TRANSLATECOLUMNS     = ['title','description']; // Columns To be Trsanslated
         $this->TRANS                = 'slider';
         $this->UPLOADFOLDER         = 'sliders';
         $this->Tbl                  = 'sliders';
@@ -106,7 +106,7 @@ if ($request->ajax()) {
                 // }                    
                 // $status =   "<div class=\"form-check form-switch form-check-custom form-check-solid\"><input class=\"form-check-input h-20px w-30px UpdateStatus\" name=\"Updatetatus\" type=\"checkbox\" ".$checked." id=\"Status".$row->id."\" onclick=\"UpdateStatus($row->id,'".__($this->TRANS.'.plural')."','$this->Tbl','".route('admin.UpdateStatus')."')\" />&nbsp;".$statusLabel."</div>";                
                 return [                    
-                   'display'   => "<div class=\"font-weight-bolder text-primary mb-0\">". Carbon::parse($row->created_at)->format('d/m/Y').'</div><div class=\"text-muted\">'.'444'."</div>", 
+                   'display'   => "<div class=\"font-weight-bolder text-primary mb-0\">". Carbon::parse($row->created_at)->format('d/m/Y')."</div>", 
                    'timestamp' => $row->created_at->timestamp
                 ];
              })

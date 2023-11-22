@@ -1,49 +1,210 @@
 <?php
 namespace App\Http\Controllers\backend;
-
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use DataTables;
+use Carbon\Carbon;
 use LaravelLocalization;
-use App\Models\City;
+use App\Traits\Functions; 
+use App\Traits\UploadAble;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Models\City as MainModel;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File; 
+use App\Models\CityTranslation as TransModel;
+use App\Http\Requests\backend\CityRequest as ModuleRequest;
+
+
 class CityController extends Controller
 {
-    protected $model;
-    protected $resource;
-    protected $trans_file;
+    use Functions;
 
-    public function __construct(Recipe $model){
-        $this->model = $model;
-        $this->resource = 'recipes';
-        $this->trans_file = 'recipe';
+    public function __construct() {
+
+        
+        $this->TblForignKey         = 'city_id';
+        $this->ROUTE_PREFIX         = config('custom.route_prefix').'.cities'; 
+        $this->TRANSLATECOLUMNS     = ['title','description']; // Columns To be Trsanslated
+        $this->TRANS                = 'city';
+        $this->UPLOADFOLDER         = 'cities';
+        $this->Tbl                  = 'cities';
     }
+
+
+ 
+
+    public function store(ModuleRequest $request){
+
+        try {
+            DB::beginTransaction();        
+            $validated                     = $request->validated(); 
+            $validated['country_id']         = isset($request->country_id) ? '1' : '0';                          
+
+ 
+
+
+            $query                   = MainModel::create($validated);                    
+            $translatedArr           = $this->HandleMultiLangdatabase($this->TRANSLATECOLUMNS,[$this->TblForignKey=>$query->id]);                                           
+            if(TransModel::insert($translatedArr)){                   
+ 
+
+                $arr = array('msg' => __($this->TRANS.'.'.'storeMessageSuccess'), 'status' => true);              
+            }
+            DB::commit();   
+        
+        } catch (\Exception $e) {
+            DB::rollback();            
+            $arr = array('msg' => __($this->TRANS.'.'.'storeMessageError'), 'status' => false);
+        }
+        return response()->json($arr);
+
+
+    }
+        
+
+
+    public function index(Request $request){    
+        
+
+if ($request->ajax()) {              
+    $model = MainModel::with('country');
 
     
-    public function index(){
-        if (view()->exists('admin.cities.index')) {
-            $cities = City::with(['city','area','country'])->get();
-            return view('admin.cities.index',['cities'=>$cities]);
+ 
+    
+ 
+    return Datatables::of($model)
+            ->addIndexColumn()   
+            ->editColumn('translate.title', function (MainModel $row) {
+                return "<a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".$row->translate->title."</a>";    
+            })                                                              
+    
+
+            ->editColumn('country_id', function (MainModel $row) {
+                return $row->country->{'title_'.app()->getLocale()};    
+            })                                                              
+
+
+ 
+ 
+            ->editColumn('created_at', function (MainModel $row) {
+                return [                    
+                   'display'   => "<div class=\"font-weight-bolder text-primary mb-0\">". Carbon::parse($row->created_at)->format('d/m/Y')."</div>", 
+                   'timestamp' => $row->created_at->timestamp
+                ];
+             })
+             ->filterColumn('created_at', function ($query, $keyword) {
+                $query->whereRaw("DATE_FORMAT(created_at,'%d/%m/%Y') LIKE ?", ["%$keyword%"]);
+             })             
+            ->editColumn('actions', function ($row) {                                                       
+                return view('backend.partials.btns.edit-delete', [
+                    'trans'         =>$this->TRANS,                       
+                    'editRoute'     =>route($this->ROUTE_PREFIX.'.edit',$row->id),
+                    'destroyRoute'  =>route($this->ROUTE_PREFIX.'.destroy',$row->id),
+                    'id'            =>$row->id
+                    ]);
+            })            
+            ->rawColumns(['translate.title','country_id','actions','created_at','created_at.display'])                  
+            ->make(true);    
+    }  
+        if (view()->exists('backend.cities.index')) {
+            $compact = [
+                'trans'                 => $this->TRANS,
+                'createRoute'           => route($this->ROUTE_PREFIX.'.create'),                
+                'storeRoute'            => route($this->ROUTE_PREFIX.'.store'),
+                'destroyMultipleRoute'  => route($this->ROUTE_PREFIX.'.destroyMultiple'), 
+                'redirectRoute'         => route($this->ROUTE_PREFIX.'.index'),    
+                'allrecords'            => MainModel::count(),
+            ];                       
+            return view('backend.cities.index',$compact);
         }
-    }
+}
         public function create(){
-        if (view()->exists('admin.cities.create')) {
-            return view('admin.cities.create');
+            if (view()->exists('backend.cities.create')) {
+                $compact = [
+                    'trans'              => $this->TRANS,
+                    'listingRoute'       => route($this->ROUTE_PREFIX.'.index'),
+                    'storeRoute'         => route($this->ROUTE_PREFIX.'.store'), 
+                ];            
+                return view('backend.cities.create',$compact);
+            }
         }
+     public function edit(Request $request,MainModel $city){ 
+       
+        if (view()->exists('backend.cities.edit')) {         
+            $compact = [                
+                'updateRoute'             => route($this->ROUTE_PREFIX.'.update',$city->id), 
+                'row'                     => $city,
+                'TrsanslatedColumnValues' => $this->getItemtranslatedllangs($city,$this->TRANSLATECOLUMNS,$this->TblForignKey),
+                'destroyRoute'            => route($this->ROUTE_PREFIX.'.destroy',$city->id),
+                'trans'                   => $this->TRANS,
+                'redirect_after_destroy'  => route($this->ROUTE_PREFIX.'.index'),
+            ];                
+             return view('backend.cities.edit',$compact);                    
+            }
     }
-     public function edit(){
-        if (view()->exists('admin.cities.index')) {
-            return view('admin.cities.edit');
+
+    public function update(ModuleRequest $request, MainModel $city){        
+         try {
+            DB::beginTransaction();        
+            $validated = $request->validated();
+            $image = $city->image; 
+            if(!empty($request->file('image'))) {
+                $city->image && File::exists(public_path($city->image)) ? $this->unlinkFile($city->image): '';
+                $image =  $this->uploadFile($request->file('image'),$this->UPLOADFOLDER);
+             }    
+            if(isset($request->drop_image_checkBox)  && $request->drop_image_checkBox == 1) {                
+                $this->unlinkFile($city->image);
+                $image = NULL;
+            }
+         
+
+
+            $validated['country_id']         = isset($request->country_id) ? '1' : '0';   
+            $validated['image']            = $image;
+
+
+            MainModel::findOrFail($city->id)->update($validated);
+
+
+            $arr = array('msg' => __($this->TRANS.'.'.'updateMessageSuccess'), 'status' => true);            
+            DB::commit();
+            $this->UpdateMultiLangsQuery($this->TRANSLATECOLUMNS,$this->TRANS."_translations",[$this->TblForignKey=>$city->id]);            
+            $arr = array('msg' => __($this->TRANS.'.updateMessageSuccess'), 'status' => true);
+        } catch (\Exception $e) {
+            DB::rollback();            
+            $arr = array('msg' => __($this->TRANS.'.'.'updateMessageError'), 'status' => false);
         }
+         return response()->json($arr);
+    }
+    public function destroy(MainModel $city){        
+      
+
+
+        if($city->delete()){
+            $arr = array('msg' => __($this->TRANS.'.'.'deleteMessageSuccess'), 'status' => true);
+        }else{
+            $arr = array('msg' => __($this->TRANS.'.'.'deleteMessageError'), 'status' => false);
+        }        
+        return response()->json($arr);
     }
 
 
-    public function destroy(){
-        dd('delete');
+    public function destroyMultiple(Request $request){  
+        $ids = explode(',', $request->ids);
+
+        foreach (MainModel::whereIn('id',$ids)->get() as $selectedItems) {
+            $selectedItems->image ? $this->unlinkFile($selectedItems->image) : ''; // Unlink Images            
+        }     
+        $items = MainModel::whereIn('id',$ids); // Check          
+        if($items->delete()){
+            $arr = array('msg' => __($this->TRANS.'.'.'MulideleteMessageSuccess'), 'status' => true);
+        }else{
+            $arr = array('msg' => __($this->TRANS.'.'.'MiltideleteMessageError'), 'status' => false);
+        }        
+        return response()->json($arr);
     }
 
-
-    public function multi_delete(){
-        dd('multi_delete');
-    }
 
 
 }

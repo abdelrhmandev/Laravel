@@ -38,12 +38,12 @@ class TagController extends Controller
 
                 ->AddColumn('count', function (MainModel $row) {                                        
                     $count = '<span aria-hidden="true">—</span>'; 
-                    // if($row->posts_count>0){    
-                    // $count = "<a href=".route(config('custom.route_prefix').'.posts.SortBy',['key'=>'TAGS','tag_id'=>$row->id]).">
-                    //             <span class=\"badge badge-circle badge-info\">".$row->posts_count ?? '0' ."</span>
-                    //             </a>"; 
-                    // }
-                    return $row->posts_count ?? '0';
+                    if($row->posts_count >0){    
+                    $count = "<a href=".route(config('custom.route_prefix').'.posts.SortBytag',['tag_id'=>$row->id]).">
+                                <span class=\"badge badge-circle badge-info\">".$row->posts_count ?? '0' ."</span>
+                                </a>"; 
+                    }
+                    return $count;
 
                 })
                 ->editColumn('created_at', function (MainModel $row) {

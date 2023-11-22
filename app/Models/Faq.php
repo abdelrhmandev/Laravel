@@ -7,7 +7,7 @@ class Faq extends Model
     protected $with = ['translate'];
     protected $guarded = ['id'];
 
-    public $timestamps = false;
+    public $timestamps = true;
  
     public function translate($lang = null){
         if ($lang == 'getAll') {

@@ -3,6 +3,7 @@
         @if (isset($columnvalues['id_' . substr($properties['regional'], 0, 2)]))
             <input type="hidden" name="id_{{ substr($properties['regional'], 0, 2) }}"
                 value="{{ $columnvalues['id_' . substr($properties['regional'], 0, 2)] ?? '' }}" />
+                <input type="hidden" id="title_{{ app()->getLocale() }}" value="{{ $columnvalues['question_' . substr($properties['regional'], 0, 2)] ?? '' }}"/>
         @endif
         <div class="tab-pane fade {{ LaravelLocalization::getCurrentLocaleName() == $properties['name'] ? 'show active' : '' }}"
             id="{{ substr($properties['regional'], 0, 2) }}" role="tabpanel">

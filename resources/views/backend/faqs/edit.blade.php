@@ -30,7 +30,6 @@ type="text/css" />
             data-form-submit-error-message="{{ __('site.form_submit_error')}}"
             data-form-agree-label="{{ __('site.agree') }}" 
             enctype="multipart/form-data">            
-
             @method('PUT') 
             <div class="d-flex flex-column gap-3 gap-lg-7 w-100 mb-2 me-lg-5">
                 <!--begin::General options-->
@@ -46,8 +45,8 @@ type="text/css" />
                     <div class="card-body pt-0">
                           <div class="d-flex flex-column gap-5">
                             <div class="separator"></div>                        
-                                <x-backend.langs.ulTabs/>
-                                <x-backend.langs.LangInputs :showDescription="1" :richTextArea="0" :showSlug="1" :row="$row" :columnvalues="$TrsanslatedColumnValues" />                    
+                                <x-backend.langs.ulTabs/>                               
+                                <x-backend.langs.FAQLangInputs :showDescription="1" :richTextArea="0" :showSlug="1" :row="$row" :columnvalues="$TrsanslatedColumnValues" />                    
                             </div>                        
                     </div>
                 </div>
@@ -57,10 +56,7 @@ type="text/css" />
 
      
             
-            <div class="d-flex flex-column flex-row-fluid gap-0 w-lg-400px gap-lg-5">
-                <x-backend.cms.image :image="$row->image"/>                    
-                <x-backend.cms.status :status="$row->status" :action="'edit'" />
-            </div>
+ 
 
 
             
@@ -80,9 +76,7 @@ type="text/css" />
 KTUtil.onDOMContentLoaded(function() {
    handleFormSubmitFunc('Edit{{ $trans }}');
 });
-@foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-tinymce.init({selector: ('.editor{{ substr($properties['regional'], 0, 2) }}'), height : "280"});
-@endforeach
+ 
  
 </script>
 @stop

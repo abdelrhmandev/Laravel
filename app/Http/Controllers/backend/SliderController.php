@@ -11,28 +11,28 @@ use App\Traits\Functions;
 use App\Traits\UploadAble;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Models\Post as MainModel;
-use App\Models\PostMedia as MediaModel;
+use App\Models\slider as MainModel;
+use App\Models\sliderMedia as MediaModel;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File; 
-use App\Models\PostTranslation as TransModel;
-use App\Http\Requests\backend\PostRequest as ModuleRequest;
+use App\Models\SliderTranslation as TransModel;
+use App\Http\Requests\backend\SliderRequest as ModuleRequest;
 
 
-class PostController extends Controller
+class SliderController extends Controller
 {
     use UploadAble,Functions;
 
     public function __construct() {
 
         
-        $this->TblForignKey         = 'post_id';
-        $this->ROUTE_PREFIX         = config('custom.route_prefix').'.posts'; 
+        $this->TblForignKey         = 'slide_id';
+        $this->ROUTE_PREFIX         = config('custom.route_prefix').'.sliders'; 
         $this->TRANSLATECOLUMNS     = ['title','slug','description']; // Columns To be Trsanslated
-        $this->TRANS                = 'post';
-        $this->UPLOADFOLDER         = 'posts';
-        $this->Tbl                  = 'posts';
+        $this->TRANS                = 'slider';
+        $this->UPLOADFOLDER         = 'sliders';
+        $this->Tbl                  = 'sliders';
     }
 
 
@@ -60,7 +60,7 @@ class PostController extends Controller
             if(!(empty($gallery))){               
                 foreach ($gallery as $file) {
                     $fileUpload = $this->uploadFile($file,$this->UPLOADFOLDER);
-                    MediaModel::create(['post_id'=>$query->id,'assigned_for'=>'gallery','file'=>$fileUpload]);
+                    MediaModel::create(['slide_id'=>$query->id,'assigned_for'=>'gallery','file'=>$fileUpload]);
                 }
             }    
 
@@ -194,7 +194,7 @@ if ($request->ajax()) {
             ->rawColumns(['image','translate.title','tags','categories','user_id','status','actions','created_at','created_at.display'])                  
             ->make(true);    
     }  
-        if (view()->exists('backend.posts.index')) {
+        if (view()->exists('backend.sliders.index')) {
             $compact = [
                 'trans'                 => $this->TRANS,
                 'createRoute'           => route($this->ROUTE_PREFIX.'.create'),                
@@ -214,11 +214,11 @@ if ($request->ajax()) {
                 // 'cat'                  => ($request->has('category_id')) ? Category::findOrFail($category_id) : '',   
 
             ];                       
-            return view('backend.posts.index',$compact);
+            return view('backend.sliders.index',$compact);
         }
 }
         public function create(){
-            if (view()->exists('backend.posts.create')) {
+            if (view()->exists('backend.sliders.create')) {
                 $compact = [
                     'trans'              => $this->TRANS,
                     'listingRoute'       => route($this->ROUTE_PREFIX.'.index'),
@@ -227,49 +227,49 @@ if ($request->ajax()) {
                     'tags'               => Tag::get(),
                     'authors'            => User::get(),
                 ];            
-                return view('backend.posts.create',$compact);
+                return view('backend.sliders.create',$compact);
             }
         }
-     public function edit(Request $request,MainModel $post){ 
+     public function edit(Request $request,MainModel $slider){ 
         if ($request->ajax()) {
-            $media         = $post->media;
-            $view           = view('backend.posts.galleryload',compact('media'))->render();
-            return response()->json(['html'=>$view,'counter'=>$post->media->count()]);
+            $media         = $slider->media;
+            $view           = view('backend.sliders.galleryload',compact('media'))->render();
+            return response()->json(['html'=>$view,'counter'=>$slider->media->count()]);
         }
-        if (view()->exists('backend.posts.edit')) {         
+        if (view()->exists('backend.sliders.edit')) {         
             $compact = [                
-                'updateRoute'             => route($this->ROUTE_PREFIX.'.update',$post->id), 
-                'row'                     => $post,
-                'TrsanslatedColumnValues' => $this->getItemtranslatedllangs($post,$this->TRANSLATECOLUMNS,$this->TblForignKey),
-                'destroyRoute'            => route($this->ROUTE_PREFIX.'.destroy',$post->id),
+                'updateRoute'             => route($this->ROUTE_PREFIX.'.update',$slider->id), 
+                'row'                     => $slider,
+                'TrsanslatedColumnValues' => $this->getItemtranslatedllangs($slider,$this->TRANSLATECOLUMNS,$this->TblForignKey),
+                'destroyRoute'            => route($this->ROUTE_PREFIX.'.destroy',$slider->id),
                 'trans'                   => $this->TRANS,
                 'categories'              => Category::tree(),
                 'redirect_after_destroy'  => route($this->ROUTE_PREFIX.'.index'),
                 'tags'                    => Tag::get(),
                 'authors'                 => User::get(),
             ];                
-             return view('backend.posts.edit',$compact);                    
+             return view('backend.sliders.edit',$compact);                    
             }
     }
 
-    public function update(ModuleRequest $request, MainModel $post){        
+    public function update(ModuleRequest $request, MainModel $slider){        
          try {
             DB::beginTransaction();        
             $validated = $request->validated();
-            $image = $post->image; 
+            $image = $slider->image; 
             if(!empty($request->file('image'))) {
-                $post->image && File::exists(public_path($post->image)) ? $this->unlinkFile($post->image): '';
+                $slider->image && File::exists(public_path($slider->image)) ? $this->unlinkFile($slider->image): '';
                 $image =  $this->uploadFile($request->file('image'),$this->UPLOADFOLDER);
              }    
             if(isset($request->drop_image_checkBox)  && $request->drop_image_checkBox == 1) {                
-                $this->unlinkFile($post->image);
+                $this->unlinkFile($slider->image);
                 $image = NULL;
             }
             $gallery = $request->file('gallery');
             if(!(empty($gallery))){               
                 foreach ($gallery as $file) {
                     $fileUpload = $this->uploadFile($file,$this->UPLOADFOLDER);
-                    MediaModel::create(['post_id'=>$post->id,'assigned_for'=>'gallery','file'=>$fileUpload]);
+                    MediaModel::create(['slide_id'=>$slider->id,'assigned_for'=>'gallery','file'=>$fileUpload]);
                 }
             }
 
@@ -280,14 +280,14 @@ if ($request->ajax()) {
             $validated['user_id']          = $request->user_id;  
 
 
-            MainModel::findOrFail($post->id)->update($validated);
+            MainModel::findOrFail($slider->id)->update($validated);
 
-            $post->tags()->sync((array)$request->input('tag_id'));
-            $post->categories()->sync((array)$request->input('category_id'));
+            $slider->tags()->sync((array)$request->input('tag_id'));
+            $slider->categories()->sync((array)$request->input('category_id'));
 
             $arr = array('msg' => __($this->TRANS.'.'.'updateMessageSuccess'), 'status' => true);            
             DB::commit();
-            $this->UpdateMultiLangsQuery($this->TRANSLATECOLUMNS,$this->TRANS."_translations",[$this->TblForignKey=>$post->id]);            
+            $this->UpdateMultiLangsQuery($this->TRANSLATECOLUMNS,$this->TRANS."_translations",[$this->TblForignKey=>$slider->id]);            
             $arr = array('msg' => __($this->TRANS.'.updateMessageSuccess'), 'status' => true);
         } catch (\Exception $e) {
             DB::rollback();            
@@ -295,18 +295,18 @@ if ($request->ajax()) {
         }
          return response()->json($arr);
     }
-    public function destroy(MainModel $post){        
+    public function destroy(MainModel $slider){        
       
 
-        foreach ($post->media()->get() as $media) {            
+        foreach ($slider->media()->get() as $media) {            
             $this->unlinkFile($media->file); // Unlink Media  
         }
-        $post->media()->delete(); 
-        $post->image ? $this->unlinkFile($post->image) : ''; // Unlink Image   
+        $slider->media()->delete(); 
+        $slider->image ? $this->unlinkFile($slider->image) : ''; // Unlink Image   
         
         #categories comments , and tags deleted automatic 
 
-        if($post->delete()){
+        if($slider->delete()){
             $arr = array('msg' => __($this->TRANS.'.'.'deleteMessageSuccess'), 'status' => true);
         }else{
             $arr = array('msg' => __($this->TRANS.'.'.'deleteMessageError'), 'status' => false);
@@ -322,7 +322,7 @@ if ($request->ajax()) {
 
         if(MediaModel::select('id','file')->find($id)->delete()){            
 
-          $cc = MainModel::withCount('media')->where('id',$request->post_id)->first();
+          $cc = MainModel::withCount('media')->where('id',$request->slide_id)->first();
      
      
             $arr = array(

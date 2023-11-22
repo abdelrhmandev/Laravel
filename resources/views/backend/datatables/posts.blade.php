@@ -7,7 +7,7 @@ var data = table.rows().data();
  
 alert( 'The table has '+data.length+' records' );
 */
-function loadDatatable(tableId,RouteListing,dynamicColumns,StatusColumn=null,TitleColumnOrder=null,category_id){
+function loadDatatable(tableId,RouteListing,dynamicColumns,StatusColumn=null,TitleColumnOrder=null,category_id,tag_id){
         var table;
         var dt;
         var filterStatus;      
@@ -66,15 +66,14 @@ function loadDatatable(tableId,RouteListing,dynamicColumns,StatusColumn=null,Tit
                 ajax: {                   
                     url: RouteListing,
                     data: function (d) {
-                        if(category_id){
-                            cId = category_id;
-                            $('#category_id').val(cId);
+                        if($('#category_id').val() > 0){   
+                            cId = $('#category_id').val();                       
                         }else{
-                            $('#category_id').val('');
-                            cId = $('#category_id').val();
+                            cId = category_id;                              
                         }
                         d.category_id = cId,
-                        d.search = $('#search').val()
+                        d.search = $('#search').val(),
+                        d.tag_id = tag_id
                     }
                 },
                 order: sorting,
@@ -422,13 +421,13 @@ function loadDatatable(tableId,RouteListing,dynamicColumns,StatusColumn=null,Tit
                 }                
                 exportButtons();    
 
-//////////
+ 
 
  
-        $("#category_id").change(function(){
-            dt.draw();
-        });
-        ///////////////////
+            $("#category_id").change(function(){
+                dt.draw();
+            });
+            
 
     }    
 

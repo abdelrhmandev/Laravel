@@ -13,6 +13,7 @@ class CreateAreasTable extends Migration {
 	public function up() {
 		Schema::create('areas', function (Blueprint $table) {
             $table->id();
+			$table->timestamps();
 			$table->foreignId('city_id')->nullable()->constrained('cities')->onDelete('cascade');
 			});
 		Schema::create('area_translations', function (Blueprint $table) {            

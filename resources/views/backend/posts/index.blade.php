@@ -12,6 +12,7 @@
 @section('content')
 <div class="container-xxl" id="kt_content_container">
 
+
   {{-- @if(!empty($tag_id))
   <div class="card-body pt-2">
     <div class="notice d-flex bg-light-success rounded border-success border border-dashed mb-9 p-6">
@@ -60,13 +61,8 @@
           
 
           
-          <div class="w-200px me-3">
-              <select class="form-select form-select-solid" data-control="select2" name="category_id" id="category_id" data-placeholder="{{ __('site.filter_by')}} {{ __('category.singular')}} " data-allow-clear="true">
-                <option></option>
-                  @foreach ($categories as $category)
-                    <option value="{{ $category->id}}">{{ $category->translate->title }} ({{ $category->posts_count }})</option>             
-                  @endforeach
-              </select>
+          <div class="w-200px me-3"> 
+                <x-backend.cms.select-single-option-parent-child :categories="$categories" :level="0" :categoryid="$category_id" />
            </div>
 
           @include('backend.partials.modals._exportlisting')
@@ -146,7 +142,7 @@ var dynamicColumns = [ //as an array start from 0
 { data: 'actions' , name : 'actions' ,exportable:false,orderable: false,searchable: false},    
 ];
 KTUtil.onDOMContentLoaded(function () {
-  loadDatatable('{{ __($trans.".plural") }}','{{ $redirectRoute }}',dynamicColumns,'','2','{{ $category_id }}');
+  loadDatatable('{{ __($trans.".plural") }}','{{ $redirectRoute }}',dynamicColumns,'','2','{{ $category_id }}','{{ $tag_id }}');
 });
 </script>
 <script src="{{ asset('assets/backend/js/custom/updateStatus.js')}}"></script>

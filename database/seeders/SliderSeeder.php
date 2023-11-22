@@ -17,11 +17,11 @@ class SliderSeeder extends Seeder
         
 
        $items = [
-        ['image'=>'uploads/sliders/facebook.jpg','featured'=>'1','published'=>'1'], 
-        ['image'=>'uploads/sliders/twitter.jpg','featured'=>'0','published'=>'0'], 
-        ['image'=>'uploads/sliders/amazon.jpg','featured'=>'1','published'=>'1'], 
-        ['image'=>'uploads/sliders/google.jpg','featured'=>'0','published'=>'0'], 
-        ['image'=>'uploads/sliders/youtube.jpg','featured'=>'1','published'=>'1'], 
+        ['image'=>'uploads/sliders/facebook.jpg','featured'=>'1'], 
+        ['image'=>'uploads/sliders/twitter.jpg','featured'=>'0'], 
+        ['image'=>'uploads/sliders/amazon.jpg','featured'=>'1'], 
+        ['image'=>'uploads/sliders/google.jpg','featured'=>'0'], 
+        ['image'=>'uploads/sliders/youtube.jpg','featured'=>'1'], 
     ];
        DB::table('sliders')->insert($items);      
 

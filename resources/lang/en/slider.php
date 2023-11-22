@@ -1,0 +1,23 @@
+<?php
+return [
+'title'                     => 'Slider Title',
+'edit'                      => 'Edit Slider',
+'view'                      => 'View Slider',
+'add'                       => 'Add Slider',
+'delete'                    => 'Delete Slider',
+'select'                    => 'Select Slider',
+'select_multi'              =>' Select Sliders',
+'parent'                    => 'Parent Slider',
+'plural'                    => 'Sliders',
+'singular'                  => 'Slider',
+'deleteMessageSuccess'      => 'Slider has been deleted successfully',
+'MulideleteMessageSuccess'  => 'Sliders has been deleted successfully',
+'delete_selected'           => 'Delete Selected Slider(s)',
+'not_delete_selected'       => 'Slider(s) not deleted',
+'deleteMessageError'        => 'Error in delete Slider',
+'MultideleteMessageError'   => 'Error in delete Sliders',
+'updateMessageSuccess'      => 'Slider has been updated successfully',
+'updateMessageError'        => 'Error in update Slider',
+'storeMessageSuccess'       => 'Slider has been created successfully',
+'storeMessageError'         => 'Error in Store Slider',
+];

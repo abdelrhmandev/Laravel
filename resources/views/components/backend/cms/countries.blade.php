@@ -1,19 +1,28 @@
 <div class="card card-flush py-4">
     <div class="card-header">
         <div class="card-title">
-            <h2>{{ __('country.plural')}} sadasd</h2>
+         <label class="required form-label"
+                for="country_id">{{ __('country.singular') }}</label>                
         </div>
     </div>
-    <div class="card-body pt-0">      
-            <div class="row row-cols-1 row-cols-md-0 row-cols-lg-1 row-cols-xl-5 g-2" data-kt-buttons="true" data-kt-buttons-target="[data-kt-button='true']">
-                @foreach ($countires as $country)               
-                <div class="form-check form-check-custom form-check-solid mb-2">
-                    <input class="form-check-input" type="checkbox" name="country_id[]" value="{{ $country->id }}" @if(isset($row) && in_array($country->id,$row->countires->pluck('id')->toArray())) checked @endif />                  
-                    <label class="form-check-label" for="flexCheckDefault">    
-                     qqqqqqqqqq
-                    </label>
-                </div>
-                @endforeach
-            </div>       
+    <div class="card-body pt-0">
+    
+    
+    
+ 
+
+
+    
+        <div class="fv-row fl">            
+                <select name="country_id" id="country_id" class="form-select form-select-solid" data-hide-search="false" data-control="select2" data-close-on-select="true" data-placeholder="{{ __('country.select')}}" data-allow-clear="true" required data-fv-not-empty___message="
+                {{ __('validation.required', ['attribute' => 'country_id']) }}">
+                <option></option>
+                @foreach($countries as $country)          
+                <option value="{{ $country->id }}" {{ isset($id) && $id == $country->id ? 'selected':'' }}>
+                    {{  $country->{'title_'.app()->getLocale()} }}
+                </option>
+                @endforeach  
+            </select>
+        </div>
     </div>
 </div>

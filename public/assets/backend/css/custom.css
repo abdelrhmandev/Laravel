@@ -82,24 +82,13 @@ margin-left: -20px;
 margin-right: 0;
 }
 
-.ribbon.ribbon-right .ribbon-target {
-border-top-left-radius: 0.42rem;
-border-bottom-left-radius: 0.42rem;
+ 
+
+.fv-plugins-tachyons .fv-plugins-icon[data-field='country_id'] {
+    top: 38px;
 }
-.ribbon .ribbon-target {
-display: -webkit-box;
-display: -ms-flexbox;
-display: flex;
--webkit-box-pack: center;
--ms-flex-pack: center;
-justify-content: center;
--webkit-box-align: center;
--ms-flex-align: center;
-align-items: center;
-padding: 5px 10px;
-position: absolute;
-z-index: 1;
-}
+
+
 .my-field-error .fv-plugins-message-container,
 .my-field-error .fv-plugins-icon {
 font-size: 0.925rem;

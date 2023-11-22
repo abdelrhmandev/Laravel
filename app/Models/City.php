@@ -28,10 +28,7 @@ class City extends Model
 		return $this->belongsTo(Country::class);
 	}
  
-    # Translation method
-    public function city(){
-        return $this->hasOne(CityTranslation::class)->where('lang',app()->getLocale());
-    }
+ 
  
 
 }

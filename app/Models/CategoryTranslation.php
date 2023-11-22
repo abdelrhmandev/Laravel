@@ -9,7 +9,7 @@ class CategoryTranslation extends Model
     protected $table = 'category_translations';
 
 
-    public $timestamps = false;
+    public $timestamps = true;
 
     
     protected $fillable = [

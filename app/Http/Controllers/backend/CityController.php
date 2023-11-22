@@ -7,6 +7,7 @@ use App\Traits\Functions;
 use App\Traits\UploadAble;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\Country;
 use App\Models\City as MainModel;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -24,7 +25,7 @@ class CityController extends Controller
         
         $this->TblForignKey         = 'city_id';
         $this->ROUTE_PREFIX         = config('custom.route_prefix').'.cities'; 
-        $this->TRANSLATECOLUMNS     = ['title','description']; // Columns To be Trsanslated
+        $this->TRANSLATECOLUMNS     = ['title','slug']; // Columns To be Trsanslated
         $this->TRANS                = 'city';
         $this->UPLOADFOLDER         = 'cities';
         $this->Tbl                  = 'cities';
@@ -38,16 +39,11 @@ class CityController extends Controller
         try {
             DB::beginTransaction();        
             $validated                     = $request->validated(); 
-            $validated['country_id']         = isset($request->country_id) ? '1' : '0';                          
-
- 
-
+            $validated['country_id']        = $request->country_id;                          
 
             $query                   = MainModel::create($validated);                    
             $translatedArr           = $this->HandleMultiLangdatabase($this->TRANSLATECOLUMNS,[$this->TblForignKey=>$query->id]);                                           
             if(TransModel::insert($translatedArr)){                   
- 
-
                 $arr = array('msg' => __($this->TRANS.'.'.'storeMessageSuccess'), 'status' => true);              
             }
             DB::commit();   
@@ -123,6 +119,7 @@ if ($request->ajax()) {
             if (view()->exists('backend.cities.create')) {
                 $compact = [
                     'trans'              => $this->TRANS,
+                    'countries'          => Country::get(),
                     'listingRoute'       => route($this->ROUTE_PREFIX.'.index'),
                     'storeRoute'         => route($this->ROUTE_PREFIX.'.store'), 
                 ];            
@@ -139,6 +136,7 @@ if ($request->ajax()) {
                 'destroyRoute'            => route($this->ROUTE_PREFIX.'.destroy',$city->id),
                 'trans'                   => $this->TRANS,
                 'redirect_after_destroy'  => route($this->ROUTE_PREFIX.'.index'),
+                'countries'                => Country::get(),
             ];                
              return view('backend.cities.edit',$compact);                    
             }
@@ -148,25 +146,8 @@ if ($request->ajax()) {
          try {
             DB::beginTransaction();        
             $validated = $request->validated();
-            $image = $city->image; 
-            if(!empty($request->file('image'))) {
-                $city->image && File::exists(public_path($city->image)) ? $this->unlinkFile($city->image): '';
-                $image =  $this->uploadFile($request->file('image'),$this->UPLOADFOLDER);
-             }    
-            if(isset($request->drop_image_checkBox)  && $request->drop_image_checkBox == 1) {                
-                $this->unlinkFile($city->image);
-                $image = NULL;
-            }
-         
-
-
-            $validated['country_id']         = isset($request->country_id) ? '1' : '0';   
-            $validated['image']            = $image;
-
-
+            $validated['country_id']         = $request->country_id;   
             MainModel::findOrFail($city->id)->update($validated);
-
-
             $arr = array('msg' => __($this->TRANS.'.'.'updateMessageSuccess'), 'status' => true);            
             DB::commit();
             $this->UpdateMultiLangsQuery($this->TRANSLATECOLUMNS,$this->TRANS."_translations",[$this->TblForignKey=>$city->id]);            
@@ -180,6 +161,7 @@ if ($request->ajax()) {
     public function destroy(MainModel $city){        
       
 
+        
 
         if($city->delete()){
             $arr = array('msg' => __($this->TRANS.'.'.'deleteMessageSuccess'), 'status' => true);

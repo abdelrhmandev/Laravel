@@ -3,7 +3,7 @@ namespace App\Http\Requests\backend;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
-class PageRequest extends FormRequest
+class CityRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -34,16 +34,16 @@ class PageRequest extends FormRequest
         foreach(\LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
 
             $id = $this->request->get('id_'.substr($properties['regional'],0,2)) ? ',' . $this->request->get('id_'.substr($properties['regional'],0,2)) : '';
-            $rules['title_'.substr($properties['regional'],0,2)] = 'required|unique:page_translations,title'.$id;
-            $rules['slug_'.substr($properties['regional'],0,2)] = 'nullable|unique:page_translations,slug'.$id; 
-            $rules['description_'.substr($properties['regional'],0,2)] = 'nullable|max:500'; 
+            $rules['title_'.substr($properties['regional'],0,2)] = 'required|unique:city_translations,title'.$id;
+            $rules['slug_'.substr($properties['regional'],0,2)] = 'required|unique:city_translations,slug'.$id;
         } 
 
 
+            $rules['country_id'] =  'exists:countries,id';   
 
-        $rules['status']      = 'nullable|in:0,1'; 
 
-        $rules['image'] =  'nullable|max:1000|mimes:jpeg,bmp,png,gif'; // max size 1 MB  
+
+
 
 
 

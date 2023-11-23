@@ -8,7 +8,6 @@ class Slider extends Model
   protected $with = ['translate'];
   protected $guarded = ['id'];
 
-
     public $timestamps = true;
     
  

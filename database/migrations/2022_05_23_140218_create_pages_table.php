@@ -1,18 +1,10 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
 class CreatePagesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
+    public function up(){
         Schema::create('pages', function (Blueprint $table) {
             $table->id();
             $table->enum('status', ['0','1'])->default(1);
@@ -31,14 +23,7 @@ class CreatePagesTable extends Migration
             $table->foreignId('page_id')->constrained('posts')->onDelete('cascade');
         });	
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
+    public function down(){
         Schema::dropIfExists('pages');
         Schema::dropIfExists('page_translations');
     }

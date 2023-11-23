@@ -1,20 +1,14 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
 class CreateAreasTable extends Migration {
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
 	public function up() {
 		Schema::create('areas', function (Blueprint $table) {
             $table->id();
-			$table->timestamps();
 			$table->foreignId('city_id')->nullable()->constrained('cities')->onDelete('cascade');
+			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
 			});
 		Schema::create('area_translations', function (Blueprint $table) {            
 			$table->id();
@@ -24,15 +18,8 @@ class CreateAreasTable extends Migration {
 			$table->unique(['area_id','lang']);  
 			$table->index(['title','slug']);
 			$table->foreignId('area_id')->constrained('areas')->onDelete('cascade');
-
 		});	
 	}
-
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
 	public function down() {		
 		Schema::dropIfExists('areas');
 		Schema::dropIfExists('area_translations');

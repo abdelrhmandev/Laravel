@@ -47,7 +47,11 @@ class DatabaseSeeder extends Seeder
             DistrictSeeder::class,
             SliderSeeder::class,   
             FaqSeeder::class,
-            // ClientSeeder::class,
+            ClientSeeder::class,
+            VacancySeeder::class,
+            ApplicantSeeder::class,
+
+            // SettingSeeder::class,
 
             // End Miscellaneous SEEDER
 
@@ -78,9 +82,7 @@ class DatabaseSeeder extends Seeder
             // End Fooding SEEDER
 
 
-            // PageSeeder::class,
 
-            // SettingSeeder::class,
 
 
         ]); 

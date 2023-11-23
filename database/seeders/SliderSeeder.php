@@ -4,17 +4,9 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 class SliderSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
-    {
-
+    public function run(){
         DB::table('sliders')->delete();
         DB::table('slider_translations')->delete();
-        
 
        $items = [
         ['image'=>'uploads/sliders/facebook.jpg','featured'=>'1'], 
@@ -41,8 +33,6 @@ class SliderSeeder extends Seeder
 
             ['title'=>'YouTube','description'=>'Enjoy the videos and music you love, upload original content, and share it all with friends, family, and the world on YouTube ','lang'=>'en','slider_id'=>'5'],
             ['title'=>'يوتيوب','description'=>'يمكنك الاستمتاع بالفيديوهات والموسيقى التي تحبها وتحميل المحتوى الأصلي ومشاركته بكامله مع أصدقائك وأفراد عائلتك والعالم أجمع على YouTube.','lang'=>'ar','slider_id'=>'5'],
-
-
 
        ];
        DB::table('slider_translations')->insert($translated_items);  

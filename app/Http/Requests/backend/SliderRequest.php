@@ -5,57 +5,22 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
 class SliderRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
+    public function authorize(){
         return true;
     }
-
-    /*
-    https://dev.to/secmohammed/laravel-form-request-tips-tricks-2p12
-    public function authorize()
-    {
-      return auth()->user()->can('update-slider', $this->slider);
-    }
-     */
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules()
-    {
+    public function rules(){
         ///MULTI Languages Inputs Validation///////////
-        foreach(\LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
-
-            $id = $this->request->get('id_'.substr($properties['regional'],0,2)) ? ',' . $this->request->get('id_'.substr($properties['regional'],0,2)) : '';
+        foreach(\LaravelLocalization::getSupportedLocales() as $localeCode => $properties){           
+            $id = $this->request->get('id_'.substr($properties['regional'],0,2)) ? ',' . $this->request->get('id_'.substr($properties['regional'],0,2)) : '';            
             $rules['title_'.substr($properties['regional'],0,2)] = 'required|unique:slider_translations,title'.$id;
             $rules['description_'.substr($properties['regional'],0,2)] = 'nullable|max:500'; 
         } 
-
-
-
-        $rules['featured']       = 'nullable|in:0,1'; 
-
-        $rules['image'] =  'nullable|max:1000|mimes:jpeg,bmp,png,gif'; // max size 1 MB  
-
-
-
+        $rules['featured']       = 'nullable|in:0,1';        
+        $required                =  ($this->request->get('id_'.substr($properties['regional'],0,2))) ? '' : 'required';
+        $rules['image']          =  $required.'|max:1000|mimes:jpeg,bmp,png,gif'; // max size 1 MB  
         return $rules; 
-
-    }
-
- 
-
-
- 
-    public function failedValidation(Validator $validator)
-    {
+    } 
+    public function failedValidation(Validator $validator){
         throw new HttpResponseException(response()->json([
             'status'   => 'RequestValidation',
             'msg'      => $validator->errors()

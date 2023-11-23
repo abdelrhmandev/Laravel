@@ -1,18 +1,10 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
 class CreateCategoriesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
+    public function up(){
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('parent_id')->default(NULL)->nullable();
@@ -21,7 +13,6 @@ class CreateCategoriesTable extends Migration
 			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
-
         Schema::create('category_translations', function (Blueprint $table) {                 
             $table->id();               
             $table->string('title');
@@ -33,14 +24,7 @@ class CreateCategoriesTable extends Migration
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
         });	
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
+    public function down(){
         Schema::dropIfExists('categories');
         Schema::dropIfExists('category_translations');
     }

@@ -1,8 +1,21 @@
 @extends('backend.base.base')
 
 @section('breadcrumbs')
-    <li class="breadcrumb-item text-muted"><a href="{{ $listingRoute}}" class="text-muted"> {{ __($trans.".plural") }}</a></li>
-    <li class="breadcrumb-item text-dark">{{ __($trans.".add") }}</li>
+
+
+{{-- <li class="breadcrumb-item text-muted"><a href="{{ $listingRoute}}" class="text-muted"> {{ __($trans.".plural") }}</a></li>
+<li class="breadcrumb-item text-dark">{{ __($trans.".add") }}</li> --}}
+
+<li class="breadcrumb-item text-muted">Categories</li>
+<li class="breadcrumb-item">
+    <span class="bullet bg-gray-200 w-5px h-2px"></span>
+</li>
+<li class="breadcrumb-item text-muted">User Profdsadile</li>
+<li class="breadcrumb-item">
+    <span class="bullet bg-gray-200 w-5px h-2px"></span>
+</li>
+<li class="breadcrumb-item text-gray-900">Pro5454545ts</li>
+
 @stop
 
 @section('style')

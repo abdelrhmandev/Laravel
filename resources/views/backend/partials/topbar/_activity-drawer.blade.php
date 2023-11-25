@@ -4,7 +4,7 @@
 			<div class="card shadow-none rounded-0">
 				<!--begin::Header-->
 				<div class="card-header" id="kt_activities_header">
-					<h3 class="card-title fw-bolder text-dark">Activity Logs</h3>
+					<h3 class="card-title fw-bolder text-dark">Activity Logs Demo 2</h3>
 					<div class="card-toolbar">
 						<button type="button" class="btn btn-sm btn-icon btn-active-light-primary me-n5" id="kt_activities_close">
 							<!--begin::Svg Icon | path: icons/duotone/Navigation/Close.svg-->

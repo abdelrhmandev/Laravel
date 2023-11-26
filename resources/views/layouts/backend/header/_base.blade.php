@@ -39,7 +39,7 @@
 				   >
 				   <!--begin:Menu item-->
 				   <div  data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-{{ (app()->getLocale() === 'en') ? 'start':'end' }}"  class="menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2" >
-					  <!--begin:Menu link--><span class="menu-link py-3"  ><span  class="menu-title" >Dashboards</span><span  class="menu-arrow d-lg-none" ></span></span><!--end:Menu link--><!--begin:Menu sub-->
+					  <!--begin:Menu link--><span class="menu-link py-3"  ><span  class="menu-title" >Dashboards www</span><span  class="menu-arrow d-lg-none" ></span></span><!--end:Menu link--><!--begin:Menu sub-->
 					  <div  class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown p-0 w-100 w-lg-850px" >
 						 <!--begin:Dashboards menu-->
 						 <div class="menu-state-bg menu-extended overflow-hidden overflow-lg-visible" data-kt-menu-dismiss="true">

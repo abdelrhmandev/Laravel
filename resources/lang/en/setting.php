@@ -1,0 +1,22 @@
+<?php
+return [
+'title'                     => 'Setting Title',
+'edit'                      => 'Edit Setting',
+'view'                      => 'View Setting',
+'add'                       => 'Add Setting',
+'delete'                    => 'Delete Setting',
+'select'                    => 'Select Setting',
+'select_multi'              =>' Select Settings',
+'plural'                    => 'Settings',
+'singular'                  => 'Setting',
+'deleteMessageSuccess'      => 'Setting has been deleted successfully',
+'MulideleteMessageSuccess'  => 'Settings has been deleted successfully',
+'delete_selected'           => 'Delete Selected Setting(s)',
+'not_delete_selected'       => 'Setting(s) not deleted',
+'deleteMessageError'        => 'Error in delete Setting',
+'MultideleteMessageError'   => 'Error in delete Settings',
+'updateMessageSuccess'      => 'Setting has been updated successfully',
+'updateMessageError'        => 'Error in update Setting',
+'storeMessageSuccess'       => 'Setting has been created successfully',
+'storeMessageError'         => 'Error in Store Setting',
+];

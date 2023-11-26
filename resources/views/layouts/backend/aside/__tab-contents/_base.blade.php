@@ -24,7 +24,11 @@
         @include('layouts.backend.aside.__tab-contents.includes.user')
         @include('layouts.backend.aside.__tab-contents.includes.cms')
         @include('layouts.backend.aside.__tab-contents.includes.pages')
+        @include('layouts.backend.aside.__tab-contents.includes.faq')
+        @include('layouts.backend.aside.__tab-contents.includes.slider')
+        @include('layouts.backend.aside.__tab-contents.includes.career')
         @include('layouts.backend.aside.__tab-contents.includes.city-area-district')
+        @include('layouts.backend.aside.__tab-contents.includes.settings')
  
 
         

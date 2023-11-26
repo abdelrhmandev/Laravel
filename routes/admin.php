@@ -1,6 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\backend\CategoryController;
+ 
 // Route::get('tree', function () {
 //     return Category::tree();
 // });
@@ -83,6 +83,9 @@ Route::controller(ApplicantController::class)->group(function () {
 });
 
 
+
+Route::resource('settings', SettingController::class)->except('show');
+Route::delete('settings/destroy/all', 'SettingController@destroyMultiple')->name('settings.destroyMultiple');
 
 
 

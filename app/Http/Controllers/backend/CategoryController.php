@@ -19,16 +19,13 @@ class CategoryController extends Controller
 {
     use UploadAble,Functions;
 
-    public function __construct() {
-
-        
+    public function __construct() {        
         $this->TblForignKey         = 'category_id';
         $this->ROUTE_PREFIX         = config('custom.route_prefix').'.categories'; 
         $this->TRANSLATECOLUMNS     = ['title','slug','description']; // Columns To be Trsanslated
         $this->TRANS                = 'category';
         $this->UPLOADFOLDER         = 'categories';
-        $this->Tbl                  = 'categories';
-    
+        $this->Tbl                  = 'categories';    
     }
 
 
@@ -65,15 +62,7 @@ public function index(Request $request){
                     return "<a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".Str::words($row->translate->title, '5')."</a>";                     
                 })                                                              
                 ->editColumn('image', function ($row) {
-                    $div = '<span aria-hidden="true">—</span>';
-                    if($row->image && File::exists(public_path($row->image))) {
-                        $imagePath = url(asset($row->image));
-                        
-                        $div = "<a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." title='".$row->translate->title."'>
-                                <div class=\"symbol symbol-50px\"><img class=\"img-fluid\" src=".$imagePath."></div>     
-                                </a>";                      
-                    }
-                    return $div;
+                    return $this->dataTableGetImage($row,$this->ROUTE_PREFIX.'.edit');
                 })         
                  ->editColumn('parent_id', function (MainModel $row) {
                     return $row->parent->translate->title ?? "<span aria-hidden=\"true\">—</span>";
@@ -84,33 +73,16 @@ public function index(Request $request){
                                 </a>";                   
                 })
                 ->editColumn('status', function (MainModel $row) {                                                           
-                if($row->status == 1){
-                    $checked = "checked";
-                    $statusLabel  = "<span class=\"text-success\">".__('site.published')."</span>";                                                   
-                }else{
-                    $checked = "";
-                    $statusLabel  ="<span class=\"text-danger\">".__('site.unpublished')."</span>";   
-                }                    
-                return  "<div class=\"form-check form-switch form-check-custom form-check-solid\"><input class=\"form-check-input UpdateStatus\" name=\"Updatetatus\" type=\"checkbox\" ".$checked." id=\"Status".$row->id."\" onclick=\"UpdateStatus($row->id,'".__($this->TRANS.'.plural')."','$this->Tbl','".route(config('custom.route_prefix').'.UpdateStatus')."')\" />&nbsp;".$statusLabel."</div>";                
-            })
+                    return $this->dataTableGetStatus($row);
+                })
             ->editColumn('created_at', function (MainModel $row) {
- 
-                return [                    
-                   'display' => "<div class=\"font-weight-bolder text-primary mb-0\">". Carbon::parse($row->created_at)->format('d/m/Y').'</div><div class=\"text-muted\">'.''."</div>", 
-                   'timestamp' => $row->created_at->timestamp
-                ];
+                return $this->dataTableGetCreatedat($row->created_at);
              })
              ->filterColumn('created_at', function ($query, $keyword) {
                 $query->whereRaw("DATE_FORMAT(created_at,'%d/%m/%Y') LIKE ?", ["%$keyword%"]);
              })             
-                ->editColumn('actions', function ($row) {      
-                                                 
-                    return view('backend.partials.btns.edit-delete', [
-                        'trans'         =>$this->TRANS,                       
-                        'editRoute'     =>route($this->ROUTE_PREFIX.'.edit',$row->id),
-                        'destroyRoute'  =>route($this->ROUTE_PREFIX.'.destroy',$row->id),
-                        'id'            =>$row->id
-                        ]);
+                ->editColumn('actions', function ($row) {                                                       
+                    return $this->dataTableEditRecordAction($row,$this->ROUTE_PREFIX);
                 })                            
                 ->rawColumns(['image','translate.title','parent_id','count','status','actions','created_at','created_at.display'])                  
                 ->make(true);    
@@ -225,15 +197,7 @@ public function index(Request $request){
 
 
     public function UpdateStatus(Request $request){               
-        if(DB::table($request->table)->find($request->id)){
-            if(DB::table($request->table)->where('id',$request->id)->update(['status'=>$request->status])){
-                //$request->status == 1 ? $TRANS = 'site.been_status':$TRANS = 'site.been_unstatus';
-                $arr = array('msg' => __('site.status_updated') , 'status' => true);
-            }else{
-                $arr = array('msg' => 'ERROR', 'status' => false);
-            }       
-            return response()->json($arr);
-      }
+        return $this->dataTableUpdateStatus($request);
     }
 
 

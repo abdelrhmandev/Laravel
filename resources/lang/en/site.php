@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'career'                =>'Career',
     'change'                =>'Change',
     'status'                =>'Status',
     'dashboard'             =>'Dashboard',

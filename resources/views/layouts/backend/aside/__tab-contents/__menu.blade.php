@@ -3,7 +3,7 @@
     <!--begin::Heading-->
     <div class="d-flex flex-column flex-center bgi-no-repeat rounded-top px-9 py-10" style="background-image:url('assets/media/misc/dropdown-header-bg.png')">
         <!--begin::Title-->
-        <h3 class="text-white fw-semibold mb-3">Quick Links</h3>
+        <h3 class="text-white fw-semibold mb-3">Quick Links DEMO 2</h3>
         <!--end::Title-->
         <!--begin::Status-->
         <span class="badge bg-primary py-2 px-3">25 pending tasks</span>

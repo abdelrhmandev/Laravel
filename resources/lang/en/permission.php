@@ -1,15 +1,23 @@
 <?php
-return [ 
-    'deleteMessageSuccess'  => 'Permission has been Deleted successfully',
-    'deleteMessageError'    => 'Error In delete this Permission',
-    'updateMessageSuccess'  => 'Permission has been updated successfully',
-    'updateMessageError'    => 'Error in update this Permission',
-    'storeMessageSuccess'   =>  'Permission has been added successfully',
-    'storeMessageError'     => 'Error In store this Permission',
-    'all'                   => 'Permissions',
-    'create'                =>'Create New Permission',  
-    'select'                =>'Select Permission',
-    'permission'            =>'Permission',
- 
-
+return [
+'title'                     => 'Permission Title',
+'edit'                      => 'Edit Permission',
+'add'                       => 'Add Permission',
+'view'                      => 'View Permission',
+'delete'                    => 'Delete Permission',
+'select'                    => 'Select Permission',
+'select_multi'              =>' Select Permissions',
+'plural'                    => 'Permissions',
+'singular'                  => 'Permission',
+'exportMessageSuccess'      => 'Permissions has been exported successfully',
+'deleteMessageSuccess'      => 'Permission has been deleted successfully',
+'MulideleteMessageSuccess'  => 'Permissions has been deleted successfully',
+'delete_selected'           => 'Delete Selected Permissions',
+'not_delete_selected'       => 'Permissions not deleted',
+'deleteMessageError'        => 'Error in delete Permission',
+'MultideleteMessageError'   => 'Error in delete Permissions',
+'updateMessageSuccess'      => 'Permission has been updated successfully',
+'updateMessageError'        => 'Error in update Permission',
+'storeMessageSuccess'       => 'Permission has been created successfully',
+'storeMessageError'         => 'Error in Store Permission',
 ];

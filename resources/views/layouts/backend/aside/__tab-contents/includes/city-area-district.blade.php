@@ -1,14 +1,14 @@
 <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="right-start" class="menu-item py-2">
     <span class="menu-link menu-center">
         <span class="menu-icon me-0">
-            <i class="ki-outline ki-document fs-2x"></i>
+            <i class="ki-outline ki-focus fs-2x"></i>
         </span>
-        <span class="menu-title">{{ __('post.plural') }}</span>
+        <span class="menu-title">{{ __('city.plural') }} / {{ __('area.plural') }} / {{ __('district.plural') }}</span>
     </span>
     <div class="menu-sub menu-sub-dropdown menu-sub-indention px-2 py-4 w-250px mh-75 overflow-auto">
         <div class="menu-item">
             <div class="menu-content">
-                <span class="menu-section fs-5 fw-bolder ps-1 py-1">{{ __('post.plural') }}</span>
+                <span class="menu-section fs-5 fw-bolder ps-1 py-1">{{ __('city.plural') }} - {{ __('area.plural') }} - {{ __('district.plural') }}</span>
             </div>
         </div>
         <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
@@ -16,24 +16,24 @@
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
-                <span class="menu-title"> {{ __('post.plural') }}</span>
+                <span class="menu-title"> {{ __('city.plural') }}</span>
                 <span class="menu-arrow"></span>
             </span>
             <div class="menu-sub menu-sub-accordion">
                 <div class="menu-item">
-                    <a class="menu-link" href="{{ route(config('custom.route_prefix').'.posts.index') }}">
+                    <a class="menu-link" href="{{ route(config('custom.route_prefix').'.cities.index') }}">
                         <span class="menu-bullet">
                             <span class="bullet bullet-dot"></span>
                         </span>
-                        <span class="menu-title">{{ __('site.all') }} {{ __('post.plural') }}</span>
+                        <span class="menu-title">{{ __('site.all') }} {{ __('city.plural') }}</span>
                     </a>
                 </div> 
                 <div class="menu-item">
-                    <a class="menu-link" href="{{ route(config('custom.route_prefix').'.posts.create') }}">
+                    <a class="menu-link" href="{{ route(config('custom.route_prefix').'.cities.create') }}">
                         <span class="menu-bullet">
                             <span class="bullet bullet-dot"></span>
                         </span>
-                        <span class="menu-title">{{ __('post.add') }}</span>
+                        <span class="menu-title">{{ __('city.add') }}</span>
                     </a>
                 </div> 
             </div>
@@ -43,26 +43,26 @@
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
-                <span class="menu-title">{{ __('category.plural') }}</span>
+                <span class="menu-title"> {{ __('area.plural') }}</span>
                 <span class="menu-arrow"></span>
             </span>
             <div class="menu-sub menu-sub-accordion">
                 <div class="menu-item">
-                    <a class="menu-link" href="{{ route(config('custom.route_prefix').'.categories.index') }}">
+                    <a class="menu-link" href="{{ route(config('custom.route_prefix').'.areas.index') }}">
                         <span class="menu-bullet">
                             <span class="bullet bullet-dot"></span>
                         </span>
-                        <span class="menu-title">{{ __('site.all') }} {{ __('category.plural') }}</span>
+                        <span class="menu-title">{{ __('site.all') }} {{ __('area.plural') }}</span>
                     </a>
                 </div> 
                 <div class="menu-item">
-                    <a class="menu-link" href="{{ route(config('custom.route_prefix').'.categories.create') }}">
+                    <a class="menu-link" href="{{ route(config('custom.route_prefix').'.areas.create') }}">
                         <span class="menu-bullet">
                             <span class="bullet bullet-dot"></span>
                         </span>
-                        <span class="menu-title">{{ __('category.add') }}</span>
+                        <span class="menu-title">{{ __('area.add') }}</span>
                     </a>
-                </div>
+                </div> 
             </div>
         </div>
         <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
@@ -70,51 +70,28 @@
                 <span class="menu-bullet">
                     <span class="bullet bullet-dot"></span>
                 </span>
-                <span class="menu-title">{{ __('tag.plural') }}</span>
+                <span class="menu-title"> {{ __('district.plural') }}</span>
                 <span class="menu-arrow"></span>
             </span>
             <div class="menu-sub menu-sub-accordion">
                 <div class="menu-item">
-                    <a class="menu-link" href="{{ route(config('custom.route_prefix').'.tags.index') }}">
+                    <a class="menu-link" href="{{ route(config('custom.route_prefix').'.districts.index') }}">
                         <span class="menu-bullet">
                             <span class="bullet bullet-dot"></span>
                         </span>
-                        <span class="menu-title">{{ __('site.all') }} {{ __('tag.plural') }}</span>
+                        <span class="menu-title">{{ __('site.all') }} {{ __('district.plural') }}</span>
                     </a>
                 </div> 
                 <div class="menu-item">
-                    <a class="menu-link" href="{{ route(config('custom.route_prefix').'.tags.create') }}">
+                    <a class="menu-link" href="{{ route(config('custom.route_prefix').'.districts.create') }}">
                         <span class="menu-bullet">
                             <span class="bullet bullet-dot"></span>
                         </span>
-                        <span class="menu-title">{{ __('tag.add') }}</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-
-        <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-            <span class="menu-link">
-                <span class="menu-bullet">
-                    <span class="bullet bullet-dot"></span>
-                </span>
-                <span class="menu-title">{{ __('comment.plural') }}</span>
-                <span class="menu-arrow"></span>
-            </span>
-            <div class="menu-sub menu-sub-accordion">
-                <div class="menu-item">
-                    <a class="menu-link" href="{{ route(config('custom.route_prefix').'.comments.index') }}">
-                        <span class="menu-bullet">
-                            <span class="bullet bullet-dot"></span>
-                        </span>
-                        <span class="menu-title">{{ __('site.all') }} {{ __('comment.plural') }}</span>
+                        <span class="menu-title">{{ __('district.add') }}</span>
                     </a>
                 </div> 
- 
             </div>
         </div>
-
 
     </div>
 </div>

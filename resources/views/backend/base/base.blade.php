@@ -55,9 +55,7 @@
 			</div>
 		</div>
 		@include('backend.partials.topbar._activity-drawer')
-		<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
-			@include('layouts.backend._scrolltop') 
-		</div>
+		@include('layouts.backend._scrolltop') 
 		<script src="{{ asset('assets/backend/plugins/global/plugins.bundle.js')}}"></script>
 		<script src="{{ asset('assets/backend/js/scripts.bundle.js')}}"></script> 
 		@yield('scripts')

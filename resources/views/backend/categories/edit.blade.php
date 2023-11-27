@@ -16,21 +16,14 @@
     type="text/css" />
 @stop
 @section('content')
-    <div class="container-xxl" id="kt_content_container">
-        
-
- 
-        
+    <div class="container-xxl" id="kt_content_container">        
         <form id="Edit{{ $trans }}" data-route-url="{{ $updateRoute }}" class="form d-flex flex-column flex-lg-row"            
         data-form-submit-error-message="{{ __('site.form_submit_error')}}"
         data-form-agree-label="{{ __('site.agree') }}" 
-        enctype="multipart/form-data">    
-        
+        enctype="multipart/form-data">            
         @method('PUT') 
-
         <div class="d-flex flex-column gap-3 gap-lg-7 w-100 mb-2 me-lg-5">
-            <div class="card card-flush py-0">
- 
+            <div class="card card-flush py-0"> 
               <div class="card-body pt-0">
                 <div class="d-flex flex-column gap-5">
                     <div class="separator"></div>                        
@@ -44,12 +37,8 @@
         <div class="d-flex flex-column flex-row-fluid gap-0 w-lg-400px gap-lg-5">
             <x-backend.cms.image :image="$row->image"/>
             <x-backend.cms.select-single-option-parent :categories="$categories" :level="0" :parentid="$row->parent_id ?? ''" />
-            <x-backend.cms.status :status="$row->status" :action="'edit'" />
-        
         </div>
     </form>
-
-
     </div>
 @stop
 

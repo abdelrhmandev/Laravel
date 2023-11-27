@@ -63,7 +63,9 @@
                 <input class="form-check-input AA" type="checkbox" data-kt-check="true" data-kt-check-target="#{{ __($trans.".plural") }} .AA" value="1" />
               </div>
             </th>            
-            <th class="w-500px">{{ __('faq.plural') }}</th>                                
+            <th class="w-400px">{{ __('faq.question') }}</th>                                
+            <th class="w-400px">{{ __('faq.answer') }}</th>                                
+            <th class="text-primary">{{ __('admin.created_at') }}</th>
             <th class="text-end min-w-50px noExport">{{ __('admin.actions') }}</th>  
           </tr>
         </thead>
@@ -83,11 +85,13 @@
 <script>
 var dynamicColumns = [ //as an array start from 0
 { data: 'id', name: 'id',exportable:false}, 
-{ data: 'translate.question', name: 'translate.question',orderable: false}, // 2
+{ data: 'translate.question', name: 'translate.question',orderable: false}, // 1
+{ data: 'translate.answer', name: 'translate.answer',orderable: false}, // 2
+{ data: 'created_at',name :'created_at', type: 'num', render: { _: 'display', sort: 'timestamp', order: 'desc'}}, // 4
 { data: 'actions' , name : 'actions' ,exportable:false,orderable: false,searchable: false},    
 ];
 KTUtil.onDOMContentLoaded(function () {
-  loadDatatable('{{ __($trans.".plural") }}','{{ $redirectRoute }}',dynamicColumns,'','1');
+  loadDatatable('{{ __($trans.".plural") }}','{{ $redirectRoute }}',dynamicColumns,'4','1');
 });
 </script>
 @stop

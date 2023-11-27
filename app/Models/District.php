@@ -3,18 +3,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 class District extends Model
 {
-    protected $fillable = [
-		'area_id',
-	];
-    public function district_translation(){
-        return $this->hasMany(DistrictTranslation::class);
+    protected $table = 'districts';
+    protected $fillable = ['area_id'];
+    protected $with = ['translate'];
+    protected $guarded = ['id'];
+
+    public function translate($lang = null){
+        if ($lang == 'getAll') {
+            return $this->hasMany(DistrictTranslation::class);
+        } else {
+            return $this->hasOne(DistrictTranslation::class)->where('lang', app()->getLocale());
+        }
     }
-    # Translation method
-    public function district(){
-        return $this->hasOne(DistrictTranslation::class)->where('lang',app()->getLocale());
-    }
-       public function area() {
+
+
+    public function area() {
 		return $this->belongsTo(Area::class);
 	}
+
+ 
+ 
 
 }

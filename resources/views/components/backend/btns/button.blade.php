@@ -4,7 +4,7 @@
 <span class="indicator-progress">{{ __('site.wait')}}...
 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
 </button>
-<button type="reset" id="cancel" class="btn btn-secondary me-5">{{ __('site.cancel') }}</button>
+<button type="reset" id="cancel" class="btn btn-outline btn-outline-dashed btn-outline-secondary btn-active-light-secondary me-5">{{ __('site.cancel') }}</button>
 @isset($destroyRoute)
 <button id="delete_item"
 data-back-list-text="{{ __('site.back_to_list') }}"        

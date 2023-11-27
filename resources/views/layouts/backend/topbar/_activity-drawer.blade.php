@@ -647,7 +647,7 @@
 					<div class="card-title">
 						<!--begin::User-->
 						<div class="d-flex justify-content-center flex-column me-3">
-							<a href="#" class="fs-4 fw-bolder text-gray-900 text-hover-primary me-1 mb-2 lh-1">Brian Cox</a>
+							<a href="#" class="fs-4 fw-bolder text-gray-900 text-hover-primary me-1 mb-2 lh-1">Brian Cox DEMO 2</a>
 							<!--begin::Info-->
 							<div class="mb-0 lh-1">
 								<span class="badge badge-success badge-circle w-10px h-10px me-1"></span>

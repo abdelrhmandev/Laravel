@@ -32,38 +32,37 @@ type="text/css" />
             enctype="multipart/form-data">            
 
             @method('PUT') 
+            <input type="hidden" name="id"
+            value="{{ $row->id }}" />
             <div class="d-flex flex-column gap-3 gap-lg-7 w-100 mb-2 me-lg-5">
                 <!--begin::General options-->
                 
                 <div class="card card-flush py-0">
-                    <div class="card-header">
-                        <div class="card-title">
-                            <h3>{{ __($trans.'.edit')}}</h3>
+                    <div class="card-body pt-5">                        
+                        <div class="d-flex flex-column gap-5">
+                            <div class="fv-row fl">
+                                <label class="required form-label"
+                                    for="title-">{{ __('site.title') }}</label>
+                                <input placeholder="{{ __('site.title') }}" type="text" id="title_"
+                                    name="title" class="form-control mb-2" required
+                                    data-fv-not-empty___message="{{ __('validation.required', ['attribute' => 'title' . '&nbsp;']) }}"
+                                    value="{{ $row->title}}" />
+                            </div>
+                                <div class="d-flex flex-column">
+                                    <label class="form-label"
+                                        for="description-">{{ __('site.description') }}</label>
+                                    <textarea placeholder="{{ __('site.description') }}" class="form-control form-control-solid" rows="4"
+                                        id="description"
+                                        name="description" placeholder="">{{ $row->description}}</textarea>
+                                </div>
                         </div>
-                    </div>
-                    <!--end::Card header-->
-                    <!--begin::Card body-->
-                    <div class="card-body pt-0">
-                          <div class="d-flex flex-column gap-5">
-                            <div class="separator"></div>                        
-                                <x-backend.langs.ulTabs/>
-                                <x-backend.langs.LangInputs :showDescription="1" :richTextArea="0" :showSlug="1" :row="$row" :columnvalues="$TrsanslatedColumnValues" />                    
-                            </div>                        
                     </div>
                 </div>
                 <x-backend.btns.button :destroyRoute="$destroyRoute" :redirectRoute="$redirect_after_destroy" :row="$row" :trans="$trans"/>
-            </div>
-            
-
-     
-            
-            <div class="d-flex flex-column flex-row-fluid gap-0 w-lg-400px gap-lg-5">
-                <x-backend.cms.image :image="$row->image"/>                    
+            </div>            
+            <div class="d-flex flex-column flex-row-fluid gap-0 w-lg-400px gap-lg-5">                                 
                 <x-backend.cms.status :status="$row->status" :action="'edit'" />
             </div>
-
-
-            
         </form>
     </div>
 @stop
@@ -74,15 +73,9 @@ type="text/css" />
 <script src="{{ asset('assets/backend/js/widgets.bundle.js') }}"></script>
 <script src="{{ asset('assets/backend/js/custom/handleFormSubmit.js') }}"></script>
 <script src="{{ asset('assets/backend/js/custom/deleteConfirmSwal.js') }}"></script>
-<script src="{{ asset('assets/backend/plugins/custom/tinymce/tinymce.bundle.js') }}"></script>
-
 <script>
 KTUtil.onDOMContentLoaded(function() {
    handleFormSubmitFunc('Edit{{ $trans }}');
 });
-@foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-tinymce.init({selector: ('.editor{{ substr($properties['regional'], 0, 2) }}'), height : "280"});
-@endforeach
- 
 </script>
 @stop

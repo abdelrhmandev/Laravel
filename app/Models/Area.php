@@ -3,17 +3,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 class Area extends Model
 {
-    protected $fillable = [
-		'city_id',
-	];
-    public function area_translation(){
-        return $this->hasMany(AreaTranslation::class);
+    protected $table = 'areas';
+    protected $fillable = ['city_id'];
+    protected $with = ['translate'];
+    protected $guarded = ['id'];
+
+    public function translate($lang = null){
+        if ($lang == 'getAll') {
+            return $this->hasMany(AreaTranslation::class);
+        } else {
+            return $this->hasOne(AreaTranslation::class)->where('lang', app()->getLocale());
+        }
     }
-    # Translation method
-    public function area(){
-        return $this->hasOne(AreaTranslation::class)->where('lang',app()->getLocale());
-    }
-       public function city() {
+
+    public function city() {
 		return $this->belongsTo(City::class);
 	}
 

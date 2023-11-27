@@ -46,25 +46,17 @@ class TagController extends Controller
                     return $count;
 
                 })
+
                 ->editColumn('created_at', function (MainModel $row) {
- 
-                    return [                    
-                       'display' => "<div class=\"font-weight-bolder text-primary mb-0\">". Carbon::parse($row->created_at)->format('d/m/Y').'</div><div class=\"text-muted\">'.''."</div>", 
-                       'timestamp' => $row->created_at->timestamp
-                    ];
+                    return $this->dataTableGetCreatedat($row->created_at);
                  })
                  ->filterColumn('created_at', function ($query, $keyword) {
                     $query->whereRaw("DATE_FORMAT(created_at,'%d/%m/%Y') LIKE ?", ["%$keyword%"]);
                  })             
-    
-                ->editColumn('actions', function ($row) {
-                    return view('backend.partials.btns.edit-delete', [
-                        'trans' => $this->TRANS,
-                        'editRoute' => route($this->ROUTE_PREFIX . '.edit', $row->id),
-                        'destroyRoute' => route($this->ROUTE_PREFIX . '.destroy', $row->id),
-                        'id' => $row->id,
-                    ]);
-                })
+                    ->editColumn('actions', function ($row) {                                                       
+                        return $this->dataTableEditRecordAction($row,$this->ROUTE_PREFIX);
+                    })     
+                    
 
                 ->rawColumns(['image','translate.title','count','actions','created_at','created_at.display'])                  
                 ->make(true);

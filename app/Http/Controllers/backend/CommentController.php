@@ -52,22 +52,14 @@ if ($request->ajax()) {
                     } 
                 })
                 ->editColumn('created_at', function (MainModel $row) {
-                    return [                    
-                       'display'   => "<div class=\"font-weight-bolder text-primary mb-0\">". Carbon::parse($row->created_at)->format('d/m/Y').'</div><div class=\"text-muted\">'.$row->created_at->diffForHumans()."</div>", 
-                       'timestamp' => $row->created_at->timestamp
-                    ];
-                 })                 
+                    return $this->dataTableGetCreatedat($row->created_at);
+                 })
                  ->filterColumn('created_at', function ($query, $keyword) {
                     $query->whereRaw("DATE_FORMAT(created_at,'%d/%m/%Y') LIKE ?", ["%$keyword%"]);
                  })             
                  ->editColumn('actions', function ($row) {                                                       
-                    return view('backend.partials.btns.edit-delete', [
-                        'trans'         =>$this->TRANS,                       
-                        'editRoute'     =>route($this->ROUTE_PREFIX.'.edit',$row->id),
-                        'destroyRoute'  =>route($this->ROUTE_PREFIX.'.destroy',$row->id),
-                        'id'            =>$row->id
-                        ]);
-                })                                          
+                    return $this->dataTableEditRecordAction($row,$this->ROUTE_PREFIX);
+                })                                              
                 ->rawColumns(['author','comment','posts','status','created_at','created_at.display','actions'])                  
                 ->make(true);    
     }  

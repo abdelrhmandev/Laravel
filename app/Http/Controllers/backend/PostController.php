@@ -103,22 +103,17 @@ if ($request->ajax()) {
                     $divCommentCounter = "<a href=".route(config('custom.route_prefix').'.comments.index',$row->id).">
                     <span class=\"badge badge-circle badge-info\">".$row->comments_count ?? '0' ."</span>
                     </a>" ;                  
+
+                    echo 'file:///C:/Users/abdel/Downloads/assem_demo6/demo6/dist/pages/social/feeds.html';
                     $divComment = "<div class=\"text-muted fs-7\">".__('comment.plural') .$divCommentCounter."</div>";
                 }                 
                 return "<a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".Str::words($row->translate->title, '5')."</a>".$divComment;    
 
             })                                                              
             ->editColumn('image', function ($row) {
-                $div = '<span aria-hidden="true">—</span>';
-                if($row->image && File::exists(public_path($row->image))) {
-                    $imagePath = url(asset($row->image));
-                    
-                    $div = "<a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." title='".$row->translate->title."'>
-                            <div class=\"symbol symbol-50px\"><img class=\"img-fluid\" src=".$imagePath."></div>     
-                            </a>";                      
-                }
-                return $div;
-            })         
+                return $this->dataTableGetImage($row,$this->ROUTE_PREFIX.'.edit');
+            })     
+    
             //////////////Category Search Filter Original Code////////////////////////
             ->filter(function ($instance) use ($request) {
             if ($request->get('category_id')) {
@@ -166,31 +161,18 @@ if ($request->ajax()) {
             ->editColumn('user_id', function (MainModel $row) {                                                    
                 return '<div class="\text-muted fs-7\">'.$row->user->name ?? '<span aria-hidden="true">—</span>'.'<div>';                                                
             })  
+ 
+            
             ->editColumn('created_at', function (MainModel $row) {
-                if($row->status == 1){
-                    $checked = "checked";
-                    $statusLabel  = "<span class=\"badge py-3 px-4 fs-7 badge-light-primary\">".__('site.published')."</span>";                                                   
-                }else{
-                    $checked = "";
-                    $statusLabel  ="<span class=\"badge py-3 px-4 fs-7 badge-light-danger\">".__('site.unpublished')."</span>";   
-                }                    
-                $status =   "<div class=\"form-check form-switch form-check-custom form-check-solid\"><input class=\"form-check-input h-20px w-30px UpdateStatus\" name=\"Updatetatus\" type=\"checkbox\" ".$checked." id=\"Status".$row->id."\" onclick=\"UpdateStatus($row->id,'".__($this->TRANS.'.plural')."','$this->Tbl','".route('admin.UpdateStatus')."')\" />&nbsp;".$statusLabel."</div>";                
-                return [                    
-                   'display'   => "<div class=\"font-weight-bolder text-primary mb-0\">". Carbon::parse($row->created_at)->format('d/m/Y').'</div><div class=\"text-muted\">'.$status."</div>", 
-                   'timestamp' => $row->created_at->timestamp
-                ];
+                return $this->dataTableGetCreatedat($row->created_at);
              })
              ->filterColumn('created_at', function ($query, $keyword) {
                 $query->whereRaw("DATE_FORMAT(created_at,'%d/%m/%Y') LIKE ?", ["%$keyword%"]);
              })             
-            ->editColumn('actions', function ($row) {                                                       
-                return view('backend.partials.btns.edit-delete', [
-                    'trans'         =>$this->TRANS,                       
-                    'editRoute'     =>route($this->ROUTE_PREFIX.'.edit',$row->id),
-                    'destroyRoute'  =>route($this->ROUTE_PREFIX.'.destroy',$row->id),
-                    'id'            =>$row->id
-                    ]);
-            })            
+                ->editColumn('actions', function ($row) {                                                       
+                    return $this->dataTableEditRecordAction($row,$this->ROUTE_PREFIX);
+                })   
+                            
             ->rawColumns(['image','translate.title','tags','categories','user_id','status','actions','created_at','created_at.display'])                  
             ->make(true);    
     }  

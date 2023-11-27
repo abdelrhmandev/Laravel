@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 class Applicant extends Model
 {
  
-    protected $table = 'applicant';
+    protected $table = 'applicants';
     protected $fillable = ['name','email','mobile','file','vacancy_id','status'];
 
     protected $guarded = ['id'];

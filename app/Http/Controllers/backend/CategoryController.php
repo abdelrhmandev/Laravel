@@ -34,7 +34,6 @@ class CategoryController extends Controller
         try {
             DB::beginTransaction();        
             $validated               = $request->validated();
-            $validated['status']     = isset($request->status) ? '1' : '0';       
             $validated['image']      = (!empty($request->file('image'))) ? $this->uploadFile($request->file('image'),$this->UPLOADFOLDER) : NULL;    
             $validated['parent_id']  = isset($request->parent_id) ? $request->parent_id : NULL;
             $query                   = MainModel::create($validated);                         
@@ -72,9 +71,6 @@ public function index(Request $request){
                                 <span class=\"badge badge-circle badge-primary\">".$row->posts_count ?? '0' ."</span>
                                 </a>";                   
                 })
-                ->editColumn('status', function (MainModel $row) {                                                           
-                    return $this->dataTableGetStatus($row);
-                })
             ->editColumn('created_at', function (MainModel $row) {
                 return $this->dataTableGetCreatedat($row->created_at);
              })
@@ -84,7 +80,7 @@ public function index(Request $request){
                 ->editColumn('actions', function ($row) {                                                       
                     return $this->dataTableEditRecordAction($row,$this->ROUTE_PREFIX);
                 })                            
-                ->rawColumns(['image','translate.title','parent_id','count','status','actions','created_at','created_at.display'])                  
+                ->rawColumns(['image','translate.title','parent_id','count','actions','created_at','created_at.display'])                  
                 ->make(true);    
     }  
         if (view()->exists('backend.categories.index')) {
@@ -94,11 +90,7 @@ public function index(Request $request){
                 'storeRoute'            => route($this->ROUTE_PREFIX.'.store'),
                 'destroyMultipleRoute'  => route($this->ROUTE_PREFIX.'.destroyMultiple'), 
                 'redirectRoute'         => route($this->ROUTE_PREFIX.'.index'),
-                'categories'            => MainModel::tree(),  
-                'allrecords'            => MainModel::count(),
-                'publishedCounter'      => MainModel::Status('1')->count(),
-                'unpublishedCounter'    => MainModel::Status('0')->count(),
-                
+                'categories'            => MainModel::tree(),                  
             ];            
             return view('backend.categories.index',$compact);
         }

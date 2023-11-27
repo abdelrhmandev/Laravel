@@ -1,4 +1,4 @@
-<div id="kt_header" style="" class="header  align-items-stretch" >
+<div id="kt_header" style="" class="header  align-items-stretch">
 	<!--begin::Container-->
 	<div class=" container-fluid  d-flex align-items-stretch justify-content-between">
 	   <!--begin::Aside mobile toggle-->
@@ -2345,7 +2345,7 @@
 							<!--begin::Heading-->
 							<div class="d-flex flex-stack fw-semibold mb-4">
 							   <!--begin::Label-->
-							   <span class="text-muted fs-6 me-2">Recently Searched ss:</span>
+							   <span class="text-muted fs-6 me-2">Recently Searched: DEMO 2</span>
 							   <!--end::Label-->
 							</div>
 							<!--end::Heading-->
@@ -2702,7 +2702,7 @@
 				   <div class="d-flex flex-column flex-center bgi-no-repeat rounded-top px-9 py-10" style="background-image:url('{{ asset('assets/backend/media/misc/menu-header-bg.jpg')}}')">
 					  <!--begin::Title-->
 					  <h3 class="text-white fw-semibold mb-3">
-						 Quick Links 
+						 Quick Links DEMO 2
 					  </h3>
 					  <!--end::Title-->
 					  <!--begin::Status-->
@@ -2769,7 +2769,7 @@
 			 </div>
 			 <!--end::Chat-->
 			 <!--begin::Notifications-->
-			 @include('layouts.backend.aside.__tab-contents.__notifications')
+			  @include('layouts.backend.aside.__tab-contents.__notifications')
 			 <!--end::Notifications-->
 			 <!--begin::Theme mode-->
 			 <div class="d-flex align-items-center ms-1 ms-lg-3">

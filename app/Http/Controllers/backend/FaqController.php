@@ -53,21 +53,27 @@ if ($request->ajax()) {
     $model = MainModel::where('id','>=',0);
     return Datatables::of($model)
                 ->addIndexColumn()   
+
                 ->editColumn('translate.question', function (MainModel $row) {
-                    $div =  "<a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".Str::words($row->translate->question, '20')."</a>";
-                    $div.=  "<p>".Str::words($row->translate->answer, '20')."</p>";                  
-                    return $div;   
+                    return  "<a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." class=\"fs-1x fw-bold text-primary\" data-kt-item-filter".$row->id."=\"item\">".Str::words($row->translate->question, '20')."</a>";
                 })                                                              
              
-                ->editColumn('actions', function ($row) {                                                       
-                    return view('backend.partials.btns.edit-delete', [
-                        'trans'         =>$this->TRANS,                       
-                        'editRoute'     =>route($this->ROUTE_PREFIX.'.edit',$row->id),
-                        'destroyRoute'  =>route($this->ROUTE_PREFIX.'.destroy',$row->id),
-                        'id'            =>$row->id
-                        ]);
-                })            
-                ->rawColumns(['translate.question','actions','created_at','created_at.display'])                  
+
+                ->editColumn('translate.answer', function (MainModel $row) {
+                    return  "<div class=\"card-label fw-bold text-dark\">".Str::words($row->translate->answer, '20')."</div>";
+                })                                                              
+
+                ->editColumn('created_at', function (MainModel $row) {
+                    return $this->dataTableGetCreatedat($row->created_at);
+                 })
+                 ->filterColumn('created_at', function ($query, $keyword) {
+                    $query->whereRaw("DATE_FORMAT(created_at,'%d/%m/%Y') LIKE ?", ["%$keyword%"]);
+                 })             
+                    ->editColumn('actions', function ($row) {                                                       
+                        return $this->dataTableEditRecordAction($row,$this->ROUTE_PREFIX);
+                    })     
+
+                ->rawColumns(['translate.question','translate.answer','actions','created_at','created_at.display'])                  
                 ->make(true);    
     }  
         if (view()->exists('backend.faqs.index')) {

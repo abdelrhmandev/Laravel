@@ -1,7 +1,3 @@
-
-الجزء اللي في الجنب
-file:///C:/Users/abdel/Desktop/demo7/dist/apps/invoices/create.html
-
 <div class="card card-flush">
     <div class="card-header">
         <div class="card-title">

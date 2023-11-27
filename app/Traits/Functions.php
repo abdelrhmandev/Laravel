@@ -33,7 +33,7 @@ trait Functions
             $checked = "";
             $statusLabel  ="<span class=\"text-danger\">".__('site.unpublished')."</span>";   
         }                    
-        $div = "<div class=\"form-check form-switch form-check-custom form-check-solid\"><input class=\"form-check-input UpdateStatus\" name=\"Updatetatus\" type=\"checkbox\" ".$checked." id=\"Status".$row->id."\" onclick=\"UpdateStatus($row->id,'".__($this->TRANS.'.plural')."','$this->Tbl','".route(config('custom.route_prefix').'.UpdateStatus')."')\" />&nbsp;".$statusLabel."</div>";
+        $div = "<div class=\"form-check form-switch form-check-custom form-check-solid\"><input class=\"form-check-input UpdateStatus\" name=\"Updatetatus\" type=\"checkbox\" ".$checked." id=\"Status".$row->id."\" onclick=\"UpdateStatus($row->id,'".__($this->TRANS.'.plural')."','$this->Tbl','".route('UpdateStatus')."')\" />&nbsp;".$statusLabel."</div>";
         return $div;       
 }
 
@@ -62,15 +62,14 @@ trait Functions
 
  
     public function dataTableUpdateStatus(Request $request){       
-        // if(DB::table($request->table)->find($request->id)){
-        //     if(DB::table($request->table)->where('id',$request->id)->update(['published'=>$request->status])){
-        //         // $request->status == 1 ? $TRANS = 'site.been_published':$TRANS = 'site.been_unpublished';
-        //         $arr = array('msg' => __($TRANS,['item'=> $request->transItem]) , 'status' => true);
-        //     }else{
-                $arr = array('msg' => 'ERROR', 'status' => false);
-            // }       
+        if(DB::table($request->table)->find($request->id)){
+            if(DB::table($request->table)->where('id',$request->id)->update(['status'=>$request->status])){
+                $arr = array('msg' => __('site.status_updated') , 'status' => true);
+            }else{
+                $arr = array('msg' => 'ERROR In Update Status', 'status' => false);
+            }       
             return response()->json($arr);
-    //   }
+      }
     }
     
 

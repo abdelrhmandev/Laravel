@@ -17,9 +17,9 @@ class ClientController extends Controller
 
 
     public function index(){ 
-        if (view()->exists('admin.clients.index')) {
-            $clients = Client::with('client')->latest()->get(); 
-            return view('admin.clients.index',['clients'=>$clients]);
+        if (view()->exists('backend.clients.index')) {
+            $clients = Client::get(); 
+            return view('backend.clients.index',['clients'=>$clients]);
         }
     }
 

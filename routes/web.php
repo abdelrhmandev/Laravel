@@ -24,6 +24,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::post('/UpdateStatus', [App\Http\Controllers\BaseController::class, 'UpdateStatus'])->name('UpdateStatus'); 
+
+
 
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home'); 

@@ -30,23 +30,16 @@
 
         <div class="d-flex flex-column gap-3 gap-lg-7 w-100 mb-2 me-lg-5">
             <div class="card card-flush py-0">
-                <div class="card-header">
-                    <div class="card-title">
-                        <h3>{{ __($trans.'.edit')}}</h3>
-                    </div>
-                </div>
+ 
               <div class="card-body pt-0">
                 <div class="d-flex flex-column gap-5">
                     <div class="separator"></div>                        
                     <x-backend.langs.ulTabs/>                
-
-                    <x-backend.langs.LangInputs :showDescription="1" :richTextArea="0" :showSlug="1" :row="$row" :columnvalues="$TrsanslatedColumnValues" />
-                    <div class="separator mb-6"></div>
-                    <x-backend.btns.button :destroyRoute="$destroyRoute" :redirectRoute="$redirect_after_destroy" :row="$row" :trans="$trans"/>
-                  
+                    <x-backend.langs.LangInputs :showDescription="1" :richTextArea="0" :showSlug="1" :row="$row" :columnvalues="$TrsanslatedColumnValues" />                  
                 </div>
             </div>               
         </div>
+        <x-backend.btns.button :destroyRoute="$destroyRoute" :redirectRoute="$redirect_after_destroy" :row="$row" :trans="$trans"/>        
         </div>
         <div class="d-flex flex-column flex-row-fluid gap-0 w-lg-400px gap-lg-5">
             <x-backend.cms.image :image="$row->image"/>

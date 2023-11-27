@@ -1,10 +1,8 @@
 @extends('backend.base.base')
-
 @section('breadcrumbs')
     <li class="breadcrumb-item text-muted"><a href="{{ $listingRoute}}" class="text-muted"> {{ __($trans.".plural") }}</a></li>
     <li class="breadcrumb-item text-dark">{{ __($trans.".add") }}</li>
 @stop
-
 @section('style')
     @if (app()->getLocale() === 'ar')
         <link href="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.rtl.css') }}" rel="stylesheet"
@@ -13,7 +11,6 @@
         <link href="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet"
             type="text/css" />
     @endif
-
     <link href="{{ asset('assets/backend/css/custom.css') }}" rel="stylesheet"
     type="text/css" />
 @stop
@@ -25,22 +22,16 @@
             data-form-agree-label="{{ __('site.agree') }}" 
             enctype="multipart/form-data">            
             <div class="d-flex flex-column gap-3 gap-lg-7 w-100 mb-2 me-lg-5">
-                <div class="card card-flush py-0">
-                    <div class="card-header">
-                        <div class="card-title">
-                            <h3>{{ __($trans.'.add')}}</h3>
-                        </div>
-                    </div>
+                <div class="card card-flush py-0">                    
                   <div class="card-body pt-0">
                     <div class="d-flex flex-column gap-5">
                         <div class="separator"></div>                        
                         <x-backend.langs.ulTabs/>
-                        <x-backend.langs.LangInputs :showDescription="1" :richTextArea="0" :showSlug="1" />
-                        <div class="separator mb-6"></div>
-                        <x-backend.btns.button />                    
+                        <x-backend.langs.LangInputs :showDescription="1" :richTextArea="0" :showSlug="1" />                                            
                     </div>
-                </div>               
+                </div>                              
             </div>
+            <x-backend.btns.button /> 
             </div>
         </form>
     </div>
@@ -51,13 +42,9 @@
 <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js') }}"></script>
 <script src="{{ asset('assets/backend/js/widgets.bundle.js') }}"></script>
 <script src="{{ asset('assets/backend/js/custom/handleFormSubmit.js') }}"></script>
-<script src="{{ asset('assets/backend/plugins/custom/tinymce/tinymce.bundle.js') }}"></script>
 <script>
 KTUtil.onDOMContentLoaded(function() {
    handleFormSubmitFunc('Add{{ $trans }}');
 });
-@foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-tinymce.init({selector: ('.editor{{ substr($properties['regional'], 0, 2) }}'), height : "280"});
-@endforeach
 </script>
 @stop

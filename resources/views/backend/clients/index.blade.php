@@ -21,19 +21,22 @@
               <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor" />
             </svg>
           </span>
-          <input type="text" data-kt-table-filter="search" class="form-control form-control-solid w-210px ps-15" placeholder="{{ __('admin.search') }} {{ __($trans.'.plural') }} ......" />
+          <input type="text" name="search" id="search" data-kt-table-filter="search" class="form-control form-control-solid w-210px ps-15" placeholder="{{ __('admin.search') }} {{ __($trans.'.plural') }} ......" />
         </div>
       </div>
       <div class="card-toolbar">
         <div class="d-flex justify-content-end" data-kt-table-toolbar="base">   
-          <div class="w-180px me-3">
+           <div class="w-150px me-3">
             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" id="status" name="status" data-placeholder="{{ __('site.sort_by')}} {{ __('site.status')}}" data-kt-filter="status">
               <option></option>
               <option value="all">{{ __('site.all') }}  ({{ $allrecords }})</option>
               <option value="1">{{ __('site.published') }} ({{ $publishedCounter}})</option>
               <option value="0">{{ __('site.unpublished') }} ({{ $unpublishedCounter}})</option>
             </select>
-          </div> 
+          </div>  
+          
+ 
+
           @include('backend.partials.modals._exportlisting')
           <a class="btn btn-primary" href="{{ $createRoute }}">
             <span class="svg-icon svg-icon-2 svg-icon-primary me-0 me-md-2">
@@ -73,9 +76,7 @@
               </div>
             </th>            
             <th>{{ __('site.image') }}</th>  
-            <th class="w-240px">{{ __('site.title') }}</th>                                
-            <th class="w-240px">{{ __('site.parent_id') }}</th> 
-            <th>{{ __('post.plural') }}</th> 
+            <th class="w-450px ">{{ __('site.title') }}</th>                                
             <th>{{ __('site.status') }}</th> 
             <th class="text-primary">{{ __('admin.created_at') }}</th>
             <th class="text-end min-w-50px noExport">{{ __('admin.actions') }}</th>  
@@ -92,7 +93,6 @@
 
 
 @section('scripts')
-
 <script src="{{ asset('assets/backend/js/custom/pdfMake/pdfmake.min.js')}}"></script> 
 <script src="{{ asset('assets/backend/js/custom/pdfMake/vfs_load_fonts.js')}}"></script>
 <script src="{{ asset('assets/backend/js/custom/pdfMake/pdfhandle.js')}}"></script>
@@ -103,15 +103,13 @@ var dynamicColumns = [ //as an array start from 0
 { data: 'id', name: 'id',exportable:false}, 
 { data: 'image', name: 'image' ,orderable: false,searchable: false},
 { data: 'translate.title', name: 'translate.title',orderable: false}, // 2
-{ data: 'parent_id', name: 'parent_id',orderable: false,searchable: false},
-{ data: 'count', name: 'count',orderable: false,searchable: false}, 
-{ data: 'status', name: 'status',orderable: false,searchable: true}, // 5
+{ data: 'status', name: 'status',orderable: false,searchable: true}, // 6
 { data: 'created_at',name :'created_at', type: 'num', render: { _: 'display', sort: 'timestamp', order: 'desc'}}, // 6
 { data: 'actions' , name : 'actions' ,exportable:false,orderable: false,searchable: false},    
 ];
 KTUtil.onDOMContentLoaded(function () {
-  loadDatatable('{{ __($trans.".plural") }}','{{ $redirectRoute }}',dynamicColumns,'5','2');
+  loadDatatable('{{ __($trans.".plural") }}','{{ $redirectRoute }}',dynamicColumns,'3','2');
 });
 </script>
-<script src="{{ asset('assets/backend/js/custom/updateStatus.js')}}"></script>
+ 
 @stop

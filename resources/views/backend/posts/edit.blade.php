@@ -36,11 +36,6 @@ type="text/css" />
                 <!--begin::General options-->
                 
                 <div class="card card-flush py-0">
-                    <div class="card-header">
-                        <div class="card-title">
-                            <h3>{{ __($trans.'.edit')}}</h3>
-                        </div>
-                    </div>
                     <!--end::Card header-->
                     <!--begin::Card body-->
                     <div class="card-body pt-0">

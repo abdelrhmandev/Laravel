@@ -196,9 +196,6 @@ public function index(Request $request){
 
 
 
-    public function UpdateStatus(Request $request){               
-        return $this->dataTableUpdateStatus($request);
-    }
-
+ 
 
 }

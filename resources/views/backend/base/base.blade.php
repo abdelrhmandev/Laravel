@@ -54,7 +54,6 @@
 				</div>
 			</div>
 		</div>
-		@include('backend.partials.topbar._activity-drawer')
 		@include('layouts.backend._scrolltop') 
 		<script src="{{ asset('assets/backend/plugins/global/plugins.bundle.js')}}"></script>
 		<script src="{{ asset('assets/backend/js/scripts.bundle.js')}}"></script> 

@@ -23,12 +23,7 @@ type="text/css" />
             data-form-agree-label="{{ __('site.agree') }}" 
             enctype="multipart/form-data">            
             <div class="d-flex flex-column gap-3 gap-lg-7 w-100 mb-2 me-lg-5">
-                <div class="card card-flush py-0">
-                    <div class="card-header">
-                        <div class="card-title">
-                            <h3>{{ __($trans.'.add')}}</h3>
-                        </div>
-                    </div>
+                <div class="card card-flush py-0">                    
                     <div class="card-body pt-0">
                           <div class="d-flex flex-column gap-5">
                             <div class="separator"></div>                        
@@ -52,10 +47,8 @@ type="text/css" />
 <script src="{{ asset('assets/backend/js/widgets.bundle.js') }}"></script>
 <script src="{{ asset('assets/backend/js/custom/handleFormSubmit.js') }}"></script>
 <script>
- 
-KTUtil.onDOMContentLoaded(function() {
+ KTUtil.onDOMContentLoaded(function() {
    handleFormSubmitFunc('Add{{ $trans }}');
 });
- 
-</script>
+ </script>
 @stop

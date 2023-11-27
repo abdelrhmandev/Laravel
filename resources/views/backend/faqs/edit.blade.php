@@ -17,11 +17,6 @@
 
 <link href="{{ asset('assets/backend/css/custom.css') }}" rel="stylesheet"
 type="text/css" />
-    
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="{{ asset('assets/backend/plugins/custom/file-upload/image-uploader.min.css') }}">
-
- 
 @stop
 @section('content')
 
@@ -31,17 +26,8 @@ type="text/css" />
             data-form-agree-label="{{ __('site.agree') }}" 
             enctype="multipart/form-data">            
             @method('PUT') 
-            <div class="d-flex flex-column gap-3 gap-lg-7 w-100 mb-2 me-lg-5">
-                <!--begin::General options-->
-                
-                <div class="card card-flush py-0">
-                    <div class="card-header">
-                        <div class="card-title">
-                            <h3>{{ __($trans.'.edit')}}</h3>
-                        </div>
-                    </div>
-                    <!--end::Card header-->
-                    <!--begin::Card body-->
+            <div class="d-flex flex-column gap-3 gap-lg-7 w-100 mb-2 me-lg-5">               
+                <div class="card card-flush py-0">                    
                     <div class="card-body pt-0">
                           <div class="d-flex flex-column gap-5">
                             <div class="separator"></div>                        
@@ -52,14 +38,6 @@ type="text/css" />
                 </div>
                 <x-backend.btns.button :destroyRoute="$destroyRoute" :redirectRoute="$redirect_after_destroy" :row="$row" :trans="$trans"/>
             </div>
-            
-
-     
-            
- 
-
-
-            
         </form>
     </div>
 @stop
@@ -70,13 +48,9 @@ type="text/css" />
 <script src="{{ asset('assets/backend/js/widgets.bundle.js') }}"></script>
 <script src="{{ asset('assets/backend/js/custom/handleFormSubmit.js') }}"></script>
 <script src="{{ asset('assets/backend/js/custom/deleteConfirmSwal.js') }}"></script>
-<script src="{{ asset('assets/backend/plugins/custom/tinymce/tinymce.bundle.js') }}"></script>
-
 <script>
 KTUtil.onDOMContentLoaded(function() {
    handleFormSubmitFunc('Edit{{ $trans }}');
 });
- 
- 
 </script>
 @stop

@@ -43,7 +43,7 @@ type="text/css" />
             
             <div class="d-flex flex-column flex-row-fluid gap-0 w-lg-400px gap-lg-5">
                   <x-backend.cms.image />
-                  <x-backend.cms.featured :featured="1" :action="'create'"/>                              
+                  <x-backend.cms.status :status="1" :action="'create'"/>                              
             </div>
         </form>
     </div>

@@ -30,8 +30,10 @@
             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" id="status" name="status" data-placeholder="{{ __('site.sort_by')}} {{ __('site.status')}}" data-kt-filter="status">
               <option></option>
               <option value="all">{{ __('site.all') }}  ({{ $allrecords }})</option>
-              <option value="1">{{ __('site.published') }} ({{ $publishedCounter}})</option>
-              <option value="0">{{ __('site.unpublished') }} ({{ $unpublishedCounter}})</option>
+              <option value="pending">pending</option>
+              <option value="accepted">accepted</option>
+              <option value="holded">holded</option>
+              <option value="rejected">rejected</option>
             </select>
           </div>  
           
@@ -66,12 +68,12 @@
                 <input class="form-check-input AA" type="checkbox" data-kt-check="true" data-kt-check-target="#{{ __($trans.".plural") }} .AA" value="1" />
               </div>
             </th>            
-            <th class="w-450px">Name</th>                                            
+            <th class="w-150px">Name</th>                                            
             <th>Email</th>
             <th>Mobile</th>
             <th>CV</th>
             <th>{{ __('site.status') }}</th>                                 
-            <th class="text-primary">{{ __('admin.created_at') }}</th>
+            <th class="text-primary">Applied On</th>
             <th class="text-end min-w-50px noExport">{{ __('admin.actions') }}</th>  
           </tr>
         </thead>

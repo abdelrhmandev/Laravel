@@ -162,7 +162,10 @@ if ($request->ajax()) {
                 return '<div class="\text-muted fs-7\">'.$row->user->name ?? '<span aria-hidden="true">—</span>'.'<div>';                                                
             })  
  
-            
+            ->editColumn('status', function (MainModel $row) {                                                           
+                return $this->dataTableGetStatus($row);
+            })
+        
             ->editColumn('created_at', function (MainModel $row) {
                 return $this->dataTableGetCreatedat($row->created_at);
              })

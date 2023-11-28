@@ -41,7 +41,7 @@ type="text/css" />
             </div>
             <div class="d-flex flex-column flex-row-fluid gap-0 w-lg-400px gap-lg-5">
                 <x-backend.cms.image :image="$row->image"/>                    
-                <x-backend.cms.featured :featured="$row->featured" :action="'edit'" />
+                <x-backend.cms.status :status="$row->status" :action="'edit'" />
             </div>
         </form>
     </div>

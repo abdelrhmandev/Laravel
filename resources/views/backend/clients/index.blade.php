@@ -26,14 +26,7 @@
       </div>
       <div class="card-toolbar">
         <div class="d-flex justify-content-end" data-kt-table-toolbar="base">   
-           <div class="w-150px me-3">
-            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" id="status" name="status" data-placeholder="{{ __('site.sort_by')}} {{ __('site.status')}}" data-kt-filter="status">
-              <option></option>
-              <option value="all">{{ __('site.all') }}  ({{ $allrecords }})</option>
-              <option value="1">{{ __('site.published') }} ({{ $publishedCounter}})</option>
-              <option value="0">{{ __('site.unpublished') }} ({{ $unpublishedCounter}})</option>
-            </select>
-          </div>  
+             
           
  
 
@@ -77,7 +70,7 @@
             </th>            
             <th>{{ __('site.image') }}</th>  
             <th class="w-450px ">{{ __('site.title') }}</th>                                
-            <th>{{ __('site.status') }}</th> 
+            <th>{{ __('site.link') }}</th> 
             <th class="text-primary">{{ __('admin.created_at') }}</th>
             <th class="text-end min-w-50px noExport">{{ __('admin.actions') }}</th>  
           </tr>
@@ -102,13 +95,13 @@
 var dynamicColumns = [ //as an array start from 0
 { data: 'id', name: 'id',exportable:false}, 
 { data: 'image', name: 'image' ,orderable: false,searchable: false},
-{ data: 'translate.title', name: 'translate.title',orderable: false}, // 2
-{ data: 'status', name: 'status',orderable: false,searchable: true}, // 6
+{ data: 'title', name: 'title',orderable: false}, // 2
+{ data: 'link', name: 'link',orderable: false}, // 2
 { data: 'created_at',name :'created_at', type: 'num', render: { _: 'display', sort: 'timestamp', order: 'desc'}}, // 6
 { data: 'actions' , name : 'actions' ,exportable:false,orderable: false,searchable: false},    
 ];
 KTUtil.onDOMContentLoaded(function () {
-  loadDatatable('{{ __($trans.".plural") }}','{{ $redirectRoute }}',dynamicColumns,'3','2');
+  loadDatatable('{{ __($trans.".plural") }}','{{ $redirectRoute }}',dynamicColumns,'','2');
 });
 </script>
  

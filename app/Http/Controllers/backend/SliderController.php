@@ -38,7 +38,7 @@ class SliderController extends Controller
         try {
             DB::beginTransaction();        
             $validated                     = $request->validated(); 
-            $validated['featured']         = isset($request->featured) ? '1' : '0';                          
+            $validated['status']         = isset($request->status) ? '1' : '0';                          
             $validated['image']            = (!empty($request->file('image'))) ? $this->uploadFile($request->file('image'),$this->UPLOADFOLDER) : NULL;    
  
 
@@ -83,7 +83,10 @@ if ($request->ajax()) {
                 return $this->dataTableGetImage($row,$this->ROUTE_PREFIX.'.edit');
             })        
             //////////////Category Search Filter Original Code////////////////////////
-       
+            ->editColumn('status', function (MainModel $row) {                                                           
+                return $this->dataTableGetStatus($row);
+            })
+   
             //////////////////////////////////////////////////////////            
             ->editColumn('created_at', function (MainModel $row) {
                 return $this->dataTableGetCreatedat($row->created_at);
@@ -95,7 +98,7 @@ if ($request->ajax()) {
                     return $this->dataTableEditRecordAction($row,$this->ROUTE_PREFIX);
                 })    
                           
-            ->rawColumns(['image','translate.title','featured','actions','created_at','created_at.display'])                  
+            ->rawColumns(['image','translate.title','status','actions','created_at','created_at.display'])                  
             ->make(true);    
     }  
         if (view()->exists('backend.sliders.index')) {
@@ -151,7 +154,7 @@ if ($request->ajax()) {
          
 
 
-            $validated['featured']         = isset($request->featured) ? '1' : '0';   
+            $validated['status']         = isset($request->status) ? '1' : '0';   
             $validated['image']            = $image;
 
 

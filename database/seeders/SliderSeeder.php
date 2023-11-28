@@ -9,11 +9,11 @@ class SliderSeeder extends Seeder
         DB::table('slider_translations')->delete();
 
        $items = [
-        ['image'=>'uploads/sliders/facebook.jpg','featured'=>'1'], 
-        ['image'=>'uploads/sliders/twitter.jpg','featured'=>'0'], 
-        ['image'=>'uploads/sliders/amazon.jpg','featured'=>'1'], 
-        ['image'=>'uploads/sliders/google.jpg','featured'=>'0'], 
-        ['image'=>'uploads/sliders/youtube.jpg','featured'=>'1'], 
+        ['image'=>'uploads/sliders/facebook.jpg','status'=>'1'], 
+        ['image'=>'uploads/sliders/twitter.jpg','status'=>'0'], 
+        ['image'=>'uploads/sliders/amazon.jpg','status'=>'1'], 
+        ['image'=>'uploads/sliders/google.jpg','status'=>'0'], 
+        ['image'=>'uploads/sliders/youtube.jpg','status'=>'1'], 
     ];
        DB::table('sliders')->insert($items);      
 

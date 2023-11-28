@@ -7,6 +7,7 @@ use App\Traits\Functions;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Country;
+use App\Models\Area;
 use App\Models\District as MainModel;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -30,6 +31,14 @@ class DistrictController extends Controller
         $this->Tbl                  = 'districts';
     }
 
+    public function getAjaxAreas($city_id){
+        $query = Area::select('id','city_id')->where('city_id',$city_id)->get();
+        $queryArr = [];
+        foreach($query as $value) {
+            $queryArr[$value->id] = $value->translate->title;
+        }
+        return response()->json($queryArr);
+    }
 
  
 

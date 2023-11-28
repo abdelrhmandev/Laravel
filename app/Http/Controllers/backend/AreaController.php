@@ -6,6 +6,7 @@ use LaravelLocalization;
 use App\Traits\Functions; 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\City;
 use App\Models\Country;
 use App\Models\Area as MainModel;
 use Illuminate\Support\Facades\DB;
@@ -31,7 +32,15 @@ class AreaController extends Controller
     }
 
 
- 
+    public function getAjaxCities($country_id){
+        $query = City::select('id','country_id')->where('country_id',$country_id)->get();
+        $queryArr = [];
+        foreach($query as $value) {
+            $queryArr[$value->id] = $value->translate->title;
+        }
+        return response()->json($queryArr);
+    }
+
 
     public function store(ModuleRequest $request){
 
@@ -126,8 +135,9 @@ if ($request->ajax()) {
                 'destroyRoute'            => route($this->ROUTE_PREFIX.'.destroy',$area->id),
                 'trans'                   => $this->TRANS,
                 'redirect_after_destroy'  => route($this->ROUTE_PREFIX.'.index'),
-                'countries'                => Country::get(),
+                'countries'               => Country::get(),
             ];                
+
              return view('backend.areas.edit',$compact);                    
             }
     }

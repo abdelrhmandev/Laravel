@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use App\Models\Vacancy as MainModel;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\VacancyTranslation as TransModel;
 use App\Http\Requests\backend\VacancyRequest as ModuleRequest;
 
 

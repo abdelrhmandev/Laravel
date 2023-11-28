@@ -55,11 +55,13 @@ Route::delete('cities/destroy/all', 'CityController@destroyMultiple')->name('cit
 
 #Areas
 Route::resource('areas', AreaController::class)->except('show');
+Route::get('/areas/getAjaxCities/{country_id}','AreaController@getAjaxCities')->name('areas.getAjaxCities');
 Route::delete('areas/destroy/all', 'AreaController@destroyMultiple')->name('areas.destroyMultiple');
 
 
 #Districts
 Route::resource('districts', DistrictController::class)->except('show');
+Route::get('/districts/getAjaxAreas/{city_id}','DistrictController@getAjaxAreas')->name('districts.getAjaxAreas');
 Route::delete('districts/destroy/all', 'DistrictController@destroyMultiple')->name('districts.destroyMultiple');
 
 

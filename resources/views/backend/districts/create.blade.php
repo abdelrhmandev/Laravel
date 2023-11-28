@@ -31,11 +31,15 @@ type="text/css" />
                             <x-backend.langs.LangInputs :showDescription="0" :richTextArea="0" :showSlug="1" />
                             <x-backend.cms.countries :countries="$countries" :action="'create'"/>
                             <x-backend.cms.cities/>
+                            <x-backend.cms.areas/>
                     </div>                        
                     </div>
                 </div>
                 <x-backend.btns.button />
-            </div>                                
+            </div>            
+               
+                  
+                    
         </form>
     </div>
 @stop
@@ -47,7 +51,6 @@ type="text/css" />
 <script src="{{ asset('assets/backend/js/custom/handleFormSubmit.js') }}"></script>
 <script>
 
-    //  Start Ajax country and city 
     $('select[name="country_id"]').on('change', function() {
       var country_id = $(this).val();      
       if(country_id > 0){
@@ -58,7 +61,7 @@ type="text/css" />
 		success: function(data) {
 			$('select[name="city_id"]').empty();
 			$.each(data, function(key, value){
-				$('select[name="city_id"]').append('<option value="0"></option><option value="'+ key +'">' + value + '</option>');
+				$('select[name="city_id"]').append('<option value="'+ key +'">' + value + '</option>');
 			});						
 		}
 	});
@@ -66,6 +69,31 @@ type="text/css" />
         $('select[name="city_id"]').append('<option value=""></option>');
     }
 	});	
+    
+    ///////////////////////////////////////////////////////////////////////
+
+    $('select[name="city_id"]').on('change', function() {
+      var city_id = $(this).val();      
+      if(city_id > 0){
+	  var url_x = '{{ route("admin.districts.getAjaxAreas",":x")}}';
+	$.ajax({
+		url: url_x.replace(":x",city_id),
+		method: 'GET',
+		success: function(data) {
+			$('select[name="area_id"]').empty();
+			$.each(data, function(key, value){
+				$('select[name="area_id"]').append('<option value="'+ key +'">' + value + '</option>');
+			});						
+		}
+	});
+    }else{
+        $('select[name="area_id"]').append('<option value=""></option>');
+    }
+	});	
+
+
+
+
  KTUtil.onDOMContentLoaded(function() {
    handleFormSubmitFunc('Add{{ $trans }}');
 });

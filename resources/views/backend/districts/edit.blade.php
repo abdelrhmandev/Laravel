@@ -30,9 +30,10 @@
                             <div class="separator"></div>                        
                                 <x-backend.langs.ulTabs/>
                                 <x-backend.langs.LangInputs :showDescription="0" :richTextArea="0" :showSlug="1" :row="$row" :columnvalues="$TrsanslatedColumnValues" />                    
-                                <x-backend.cms.countries :countries="$countries" :id="$row->city->country->id"/>
+                                <x-backend.cms.countries :countries="$countries" :id="$row->area->city->country->id"/>
                                 <x-backend.cms.cities/>
-                                </div>                        
+                                <x-backend.cms.areas/>
+                            </div>                        
                     </div>
                 </div>
                 <x-backend.btns.button :destroyRoute="$destroyRoute" :redirectRoute="$redirect_after_destroy" :row="$row" :trans="$trans"/>
@@ -50,37 +51,71 @@
 <script src="{{ asset('assets/backend/js/custom/deleteConfirmSwal.js') }}"></script>
 <script>
 
-
 var url_x = '{{ route("admin.areas.getAjaxCities",":x")}}';
-        $.ajax({
-            url: url_x.replace(":x",'{{  $row->city->country->id }}'),
-            method: 'GET',
-            success: function(data) {
-                $('select[name="city_id"]').empty();
-                $.each(data, function(key, value){
-                    $('select[name="city_id"]').append('<option value="'+ key +'">' + value + '</option>');
-                });						
-            }
-});
+	$.ajax({
+		url: url_x.replace(":x",'{{ $row->area->city->country->id }}'),
+		method: 'GET',
+		success: function(data) {
+			$('select[name="city_id"]').empty();
+			$.each(data, function(key, value){
+				$('select[name="city_id"]').append('<option value="'+ key +'">' + value + '</option>');
+			});						
+		}
+	});
 
 
-    $('select[name="country_id"]').on('change', function() {
+$('select[name="country_id"]').on('change', function() {
       var country_id = $(this).val();      
       if(country_id > 0){
 	  var url_x = '{{ route("admin.areas.getAjaxCities",":x")}}';
-        $.ajax({
-            url: url_x.replace(":x",country_id),
-            method: 'GET',
-            success: function(data) {
-                $('select[name="city_id"]').empty();
-                $.each(data, function(key, value){
-                    $('select[name="city_id"]').append('<option value="'+ key +'">' + value + '</option>');
-                });						
-            }
-        });
+	$.ajax({
+		url: url_x.replace(":x",country_id),
+		method: 'GET',
+		success: function(data) {
+			$('select[name="city_id"]').empty();
+			$.each(data, function(key, value){
+				$('select[name="city_id"]').append('<option value="'+ key +'">' + value + '</option>');
+			});						
+		}
+	});
+    }else{
+        $('select[name="city_id"]').append('<option value=""></option>');
     }
-});
+	});	
+    
+    ///////////////////////////////////////////////////////////////////////
 
+    var url_x = '{{ route("admin.districts.getAjaxAreas",":x")}}';
+	$.ajax({
+		url: url_x.replace(":x",'{{ $row->area->city->id }}'),
+		method: 'GET',
+		success: function(data) {
+			$('select[name="area_id"]').empty();
+			$.each(data, function(key, value){
+				$('select[name="area_id"]').append('<option value="'+ key +'">' + value + '</option>');
+			});						
+		}
+	});
+
+
+    $('select[name="city_id"]').on('change', function() {
+      var city_id = $(this).val();      
+      if(city_id > 0){
+	  var url_x = '{{ route("admin.districts.getAjaxAreas",":x")}}';
+	$.ajax({
+		url: url_x.replace(":x",city_id),
+		method: 'GET',
+		success: function(data) {
+			$('select[name="area_id"]').empty();
+			$.each(data, function(key, value){
+				$('select[name="area_id"]').append('<option value="'+ key +'">' + value + '</option>');
+			});						
+		}
+	});
+    }else{
+        $('select[name="area_id"]').append('<option value=""></option>');
+    }
+	});	
 
 KTUtil.onDOMContentLoaded(function() {
    handleFormSubmitFunc('Edit{{ $trans }}');

@@ -58,8 +58,7 @@ type="text/css" />
                 <x-backend.cms.image :image="$row->image"/>                    
                 <x-backend.cms.categories-multi-select-checkbox :categories="$categories" :row="$row" :level="0" />
                 <x-backend.cms.authors :authors="$authors" :id="$row->user_id" />
-                <x-backend.cms.status :status="$row->status" :action="'edit'" />
-                <x-backend.cms.featured :featured="$row->featured" :action="'edit'" />
+                <x-backend.cms.status :status="$row->status" :action="'edit'" />                
                 <x-backend.cms.allowComments :allowcomments="$row->allow_comments" :commentscount="$row->comments->count()" :postid="$row->id" :action="'edit'" />            
             </div>
 
@@ -75,7 +74,6 @@ type="text/css" />
 <script src="{{ asset('assets/backend/js/widgets.bundle.js') }}"></script>
 <script src="{{ asset('assets/backend/js/custom/handleFormSubmit.js') }}"></script>
 <script src="{{ asset('assets/backend/js/custom/deleteConfirmSwal.js') }}"></script>
-<script src="{{ asset('assets/backend/plugins/custom/tinymce/tinymce.bundle.js') }}"></script>
 <script src="{{ asset('assets/backend/plugins/custom/file-upload/image-uploader.min.js') }}"></script>
 <script>
 
@@ -161,9 +159,9 @@ $('.gallery').imageUploader({
 KTUtil.onDOMContentLoaded(function() {
    handleFormSubmitFunc('Edit{{ $trans }}');
 });
-@foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-tinymce.init({selector: ('.editor{{ substr($properties['regional'], 0, 2) }}'), height : "280"});
-@endforeach
+// @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+// tinymce.init({selector: ('.editor{{ substr($properties['regional'], 0, 2) }}'), height : "280"});
+// @endforeach
  
 </script>
 @stop

@@ -26,17 +26,8 @@
       </div>
       <div class="card-toolbar">
         <div class="d-flex justify-content-end" data-kt-table-toolbar="base">   
-           <div class="me-3">
-            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" id="status" name="status" data-placeholder="{{ __('site.sort_by')}} {{ __('site.status')}}" data-kt-filter="status">
-              <option></option>
-              <option value="all">{{ __('site.all') }}  ({{ $allrecords }})</option>
-              <option value="1">{{ __('site.published') }} ({{ $publishedCounter}})</option>
-              <option value="0">{{ __('site.unpublished') }} ({{ $unpublishedCounter}})</option>
-            </select>
-          </div>  
           
- 
-
+          @include('backend.partials.filter_options._status',['allrecords'=>$allrecords,'publishedCounter'=>$publishedCounter,'unpublishedCounter'=>$unpublishedCounter])          
           @include('backend.partials.modals._exportlisting')
           <a class="btn btn-primary" href="{{ $createRoute }}">
             <span class="svg-icon svg-icon-2 svg-icon-primary me-0 me-md-2">
@@ -111,5 +102,5 @@ KTUtil.onDOMContentLoaded(function () {
   loadDatatable('{{ __($trans.".plural") }}','{{ $redirectRoute }}',dynamicColumns,'3','1');
 });
 </script>
- 
+<script src="{{ asset('assets/backend/js/custom/updateStatus.js')}}"></script>
 @stop

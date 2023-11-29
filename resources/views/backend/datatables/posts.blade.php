@@ -127,7 +127,7 @@ function loadDatatable(tableId,RouteListing,dynamicColumns,StatusColumn=null,Tit
                         value = '';
                     }
                     dt.column(StatusColumn).search(value).draw();                    
-                });
+                });                       
             }
             // Delete one records
             var handleDeleteRows = () => {

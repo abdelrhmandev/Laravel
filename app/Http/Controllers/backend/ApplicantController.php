@@ -35,20 +35,42 @@ class ApplicantController extends Controller
         
 
 if ($request->ajax()) {              
-    $model = MainModel::Where('id','>','0'); 
+    $model = MainModel::with('vacancy'); 
     return Datatables::of($model)
             ->addIndexColumn()   
             ->editColumn('name', function (MainModel $row) {
                 return "<a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".$row->name."</a>";    
             })                                                              
-            // ->addColumn('applicants', function (MainModel $row) {
-            //     return $row->applicants_count ?? '0';
-            // })    
+            ->addColumn('vacancy', function (MainModel $row) {
+                return  "<span class=\"text-dark fw-bold\">".$row->vacancy->title."</span>";
+
+            })    
+            ->editColumn('file', function (MainModel $row) {                
+                $icon  = "<img src=".asset('assets/backend/media/svg/files/'.\File::extension($row->file).'.svg').">";
+                return "<a href=".asset($row->file)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".$icon."</a>";    
+            })                                                              
+
             
-            
-            // ->editColumn('status', function (MainModel $row) {
-            //     return $this->dataTableGetStatus($row);
-            //  })
+            ->editColumn('status', function (MainModel $row) {
+                if($row->status == 'pending'){                  
+                    $statusLabel  = __('site.pending');   
+                    $class  = "primary";                                                   
+                } 
+                else if($row->status == 'accepted'){                  
+                    $statusLabel  = __('site.accepted');  
+                    $class  = "success";   
+                } else if($row->status == 'holded'){                  
+                    $statusLabel  = __('site.holded');    
+                    $class  = "warning";                                                  
+                } else if($row->status == 'rejected'){                  
+                    $statusLabel  = __('site.rejected');  
+                    $class  = "danger";                                                    
+                } else{
+                    $statusLabel = '';
+                }
+
+                return  "<div class=\"badge py-3 px-4 fs-7 badge-light-".$class."\">&nbsp;"."<span class=\"text-".$class."\">".$statusLabel."</span></div>";
+             })
 
 
             ->editColumn('created_at', function (MainModel $row) {
@@ -60,7 +82,7 @@ if ($request->ajax()) {
                 ->editColumn('actions', function ($row) {                                                       
                     return $this->dataTableEditRecordAction($row,$this->ROUTE_PREFIX);
                 })                              
-            ->rawColumns(['name','status','actions','created_at','created_at.display'])                  
+            ->rawColumns(['name','vacancy','status','file','actions','created_at','created_at.display'])                  
             ->make(true);    
     }  
         if (view()->exists('backend.applicants.index')) {
@@ -78,6 +100,8 @@ if ($request->ajax()) {
 
      public function edit(Request $request,MainModel $applicant){ 
        
+
+       
         if (view()->exists('backend.applicants.edit')) {         
             $compact = [                
                 'updateRoute'             => route($this->ROUTE_PREFIX.'.update',$applicant->id), 
@@ -91,24 +115,15 @@ if ($request->ajax()) {
             }
     }
 
-    public function update(ModuleRequest $request, MainModel $applicant){        
-         try {
-            DB::beginTransaction();        
-            $validated = $request->validated();
+    public function update(Request $request, MainModel $applicant){        
+ 
 
-            $validated['status']          = isset($request->status) ? '1' : '0'; 
-            $validated['title']           = $request->title;
-            $validated['description']     = $request->description;   
-
-            MainModel::findOrFail($applicant->id)->update($validated);
+            $data['status']    = isset($request->status) ? ($request->status) : ($request->old_status); 
+            MainModel::findOrFail($applicant->id)->update($data);
             $arr = array('msg' => __($this->TRANS.'.'.'updateMessageSuccess'), 'status' => true);            
-            DB::commit();
-            $arr = array('msg' => __($this->TRANS.'.updateMessageSuccess'), 'status' => true);
-        } catch (\Exception $e) {
-            DB::rollback();            
-            $arr = array('msg' => __($this->TRANS.'.'.'updateMessageError'), 'status' => false);
-        }
-         return response()->json($arr);
+ 
+            return redirect()->route($this->ROUTE_PREFIX.'.edit',$applicant->id)->with(['success' => trans($this->TRANS.'.'.'updateMessageSuccess')]);
+
     }
     public function destroy(MainModel $applicant){        
         if($applicant->delete()){

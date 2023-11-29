@@ -73,9 +73,9 @@ Route::resource('vacancies', VacancyController::class)->except('show');
 Route::delete('vacancies/destroy/all', 'VacancyController@destroyMultiple')->name('vacancies.destroyMultiple');
 Route::controller(ApplicantController::class)->group(function () {
     Route::get('/applicants','index')->name('applicants.index');
-    Route::put('/applicants/update/{id}', 'update')->name('applicants.update');
-    Route::get('/applicants/edit/{id}', 'edit')->name('applicants.edit');
-    Route::delete('applicants/destroy/{id}', 'destroy')->name('applicants.destroy');
+    Route::put('/applicants/update/{applicant}', 'update')->name('applicants.update');
+    Route::get('/applicants/edit/{applicant}', 'edit')->name('applicants.edit');
+    Route::delete('applicants/destroy/{applicant}', 'destroy')->name('applicants.destroy');
     Route::delete('applicants/destroyAll', 'destroyMultiple')->name('applicants.destroyMultiple');
 });
 #Careers

@@ -18,10 +18,7 @@ class Category extends Model
 
     protected $with = ['translate'];
 
-    public function scopeStatus($query, $type)
-    {
-        return $query->where('status', $type);
-    }
+ 
  
 
     // # single Item

@@ -36,8 +36,9 @@ if ($request->ajax()) {
     return Datatables::of($model)
                 ->addIndexColumn()   
                 ->editColumn('author', function (MainModel $row) {                                                    
-                    $div = $row->user->name;                            
-                    return $div;
+                   
+                $div = "<div class=\"symbol symbol-50px\"><img class=\"img-fluid\" src=".!empty($row->user->avatar) ? asset($row->user->avatar) : asset('assets/backend/media/avatars/blank.png')."></div> &nbsp; ".$row->user->name;                
+                return $div;
                 })
                 ->editColumn('comment', function (MainModel $row) {
                     return "<a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".Str::words($row->comment, '5')."</a>";                     
@@ -51,6 +52,30 @@ if ($request->ajax()) {
                         $instance->where('comment','LIKE', '%'.$request->get('search').'%');
                     } 
                 })
+
+
+                ->editColumn('status', function (MainModel $row) {
+                    if($row->status == 'pending'){                  
+                        $statusLabel  = __('site.pending');   
+                        $class  = "primary";                                                   
+                    } 
+                    else if($row->status == 'approved'){                  
+                        $statusLabel  = __('site.approved');  
+                        $class  = "success";   
+                    } else if($row->status == 'spam'){                  
+                        $statusLabel  = __('site.spam');    
+                        $class  = "info";                                                  
+                    } else if($row->status == 'rejected'){                  
+                        $statusLabel  = __('site.rejected');  
+                        $class  = "danger";                                                    
+                    } else{
+                        $statusLabel = '';
+                    }
+    
+                    return  "<div class=\"badge py-3 px-4 fs-7 badge-light-".$class."\">&nbsp;"."<span class=\"text-".$class."\">".$statusLabel."</span></div>";
+                 })
+
+
                 ->editColumn('created_at', function (MainModel $row) {
                     return $this->dataTableGetCreatedat($row->created_at);
                  })

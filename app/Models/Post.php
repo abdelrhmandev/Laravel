@@ -7,7 +7,7 @@ class Post extends Model
 {
 
     protected $table = 'posts';
-    protected $fillable = ['status','featured','allow_comments','image','user_id'];
+    protected $fillable = ['status','allow_comments','image','user_id'];
     protected $with = ['translate'];
     protected $guarded = ['id'];
 

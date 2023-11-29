@@ -109,6 +109,8 @@ if ($request->ajax()) {
                 'destroyMultipleRoute'  => route($this->ROUTE_PREFIX.'.destroyMultiple'), 
                 'redirectRoute'         => route($this->ROUTE_PREFIX.'.index'),    
                 'allrecords'            => MainModel::count(),
+                'publishedCounter'      => MainModel::Status('1')->count(),
+                'unpublishedCounter'    => MainModel::Status('0')->count(),   
             ];                       
             return view('backend.sliders.index',$compact);
         }
@@ -151,13 +153,8 @@ if ($request->ajax()) {
                 $this->unlinkFile($slider->image);
                 $image = NULL;
             }
-         
-
-
             $validated['status']         = isset($request->status) ? '1' : '0';   
             $validated['image']            = $image;
-
-
             MainModel::findOrFail($slider->id)->update($validated);
 
 
@@ -174,7 +171,7 @@ if ($request->ajax()) {
     public function destroy(MainModel $slider){        
       
 
-
+        $slider->image ? $this->unlinkFile($slider->image) : ''; // Unlink Image  
         if($slider->delete()){
             $arr = array('msg' => __($this->TRANS.'.'.'deleteMessageSuccess'), 'status' => true);
         }else{

@@ -55,12 +55,12 @@ if ($request->ajax()) {
                 ->addIndexColumn()   
 
                 ->editColumn('translate.question', function (MainModel $row) {
-                    return  "<a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." class=\"fs-1x fw-bold text-primary\" data-kt-item-filter".$row->id."=\"item\">".Str::words($row->translate->question, '20')."</a>";
+                    return  "<a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".Str::words($row->translate->question, '20')."</a>";
                 })                                                              
              
 
                 ->editColumn('translate.answer', function (MainModel $row) {
-                    return  "<div class=\"card-label fw-bold text-dark\">".Str::words($row->translate->answer, '20')."</div>";
+                    return  "<div class=\"card-label\">".Str::words($row->translate->answer, '20')."</div>";
                 })                                                              
 
                 ->editColumn('created_at', function (MainModel $row) {
@@ -113,37 +113,12 @@ if ($request->ajax()) {
     }
 
     public function update(ModuleRequest $request, MainModel $faq){        
-         try {
-            DB::beginTransaction();        
-            $validated = $request->validated();
-            $image = $faq->image; 
-            if(!empty($request->file('image'))) {
-                $faq->image && File::exists(public_path($faq->image)) ? $this->unlinkFile($faq->image): '';
-                $image =  $this->uploadFile($request->file('image'),$this->UPLOADFOLDER);
-             }    
-            if(isset($request->drop_image_checkBox)  && $request->drop_image_checkBox == 1) {                
-                $this->unlinkFile($faq->image);
-                $image = NULL;
-            }
  
-
-            $validated['status']           = isset($request->status) ? '1' : '0'; 
-            $validated['image']            = $image;
-
-
-
-            MainModel::findOrFail($faq->id)->update($validated);
-
-            $arr = array('msg' => __($this->TRANS.'.'.'updateMessageSuccess'), 'status' => true);            
-            DB::commit();
-            $this->UpdateMultiLangsQuery($this->TRANSLATECOLUMNS,$this->TRANS."_translations",[$this->TblForignKey=>$faq->id]);            
-            $arr = array('msg' => __($this->TRANS.'.updateMessageSuccess'), 'status' => true);
-        } catch (\Exception $e) {
-            DB::rollback();            
-            $arr = array('msg' => __($this->TRANS.'.'.'updateMessageError'), 'status' => false);
-        }
-         return response()->json($arr);
+        $this->UpdateMultiLangsQuery($this->TRANSLATECOLUMNS,$this->TRANS."_translations",[$this->TblForignKey=>$faq->id]);            
+        $arr = array('msg' => __($this->TRANS.'.updateMessageSuccess'), 'status' => true);        
+        return response()->json($arr);
     }
+    
     public function destroy(MainModel $faq){              
         $faq->image ? $this->unlinkFile($faq->image) : ''; // Unlink Image           
         if($faq->delete()){

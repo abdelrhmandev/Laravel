@@ -17,7 +17,6 @@ trait Functions
             $div = '<span aria-hidden="true">—</span>';
             if($row->image && File::exists(public_path($row->image))) {
             $imagePath = url(asset($row->image));
-
                 $div = "<a href=".route($route,$row->id)." title='".$row->translate->title."'>
                 <div class=\"symbol symbol-50px\"><img class=\"img-fluid\" src=".$imagePath."></div>     
                 </a>";                      

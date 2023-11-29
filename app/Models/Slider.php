@@ -10,6 +10,9 @@ class Slider extends Model
 
     public $timestamps = true;
     
+    public function scopeStatus($query, $type){
+      return $query->where('status', $type);
+  }
  
  
 

@@ -30,10 +30,10 @@ type="text/css" />
             data-form-submit-error-message="{{ __('site.form_submit_error')}}"
             data-form-agree-label="{{ __('site.agree') }}" 
             enctype="multipart/form-data">            
-
             @method('PUT') 
             <input type="hidden" name="id"
             value="{{ $row->id }}" />
+            <input type="hidden" id="title_{{ app()->getLocale() }}" value="{{ $row->title }}"/>            
             <div class="d-flex flex-column gap-3 gap-lg-7 w-100 mb-2 me-lg-5">
                 <!--begin::General options-->
                 
@@ -60,9 +60,7 @@ type="text/css" />
                 </div>
                 <x-backend.btns.button :destroyRoute="$destroyRoute" :redirectRoute="$redirect_after_destroy" :row="$row" :trans="$trans"/>
             </div>            
-            <div class="d-flex flex-column flex-row-fluid gap-0 w-lg-400px gap-lg-5">                                 
-                <x-backend.cms.status :status="$row->status" :action="'edit'" />
-            </div>
+           
         </form>
     </div>
 @stop

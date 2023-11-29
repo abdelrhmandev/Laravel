@@ -44,7 +44,6 @@ class PostController extends Controller
             DB::beginTransaction();        
             $validated                     = $request->validated();
             $validated['status']           = isset($request->status) ? '1' : '0'; 
-            $validated['featured']         = isset($request->featured) ? '1' : '0';   
             $validated['allow_comments']   = isset($request->allow_comments) ? '1' : '0';                        
             $validated['image']            = (!empty($request->file('image'))) ? $this->uploadFile($request->file('image'),$this->UPLOADFOLDER) : NULL;    
             $validated['user_id']          = $request->user_id;  
@@ -97,18 +96,9 @@ if ($request->ajax()) {
  
     return Datatables::of($model)
             ->addIndexColumn()   
-            ->editColumn('translate.title', function (MainModel $row) {
-                $divComment =   '<span aria-hidden="true">—</span>'; 
-                if($row->comments_count>0){    
-                    $divCommentCounter = "<a href=".route(config('custom.route_prefix').'.comments.index',$row->id).">
-                    <span class=\"badge badge-circle badge-info\">".$row->comments_count ?? '0' ."</span>
-                    </a>" ;                  
-
-                    echo 'file:///C:/Users/abdel/Downloads/assem_demo6/demo6/dist/pages/social/feeds.html';
-                    $divComment = "<div class=\"text-muted fs-7\">".__('comment.plural') .$divCommentCounter."</div>";
-                }                 
-                return "<a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".Str::words($row->translate->title, '5')."</a>".$divComment;    
-
+            ->editColumn('translate.title', function (MainModel $row) {               
+                return "<a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".Str::words($row->translate->title, '5')."</a>
+                ";    
             })                                                              
             ->editColumn('image', function ($row) {
                 return $this->dataTableGetImage($row,$this->ROUTE_PREFIX.'.edit');
@@ -158,6 +148,15 @@ if ($request->ajax()) {
                 }
                 return $tags;
             })
+
+
+            ->AddColumn('comments', function (MainModel $row) {                    
+                return  "<a class=\"btn btn-sm btn-color-gray-600 btn-active-color-primary btn-active-light-primary fw-bold me-1 active\" href=".route(config('custom.route_prefix').'.posts.index',$row->id).">
+                                <i class=\"bi bi-chat-square fs-2 me-1\"></i>
+                                ".$row->comments_count ?? '0'."
+                            </a>";                   
+            })
+
             ->editColumn('user_id', function (MainModel $row) {                                                    
                 return '<div class="\text-muted fs-7\">'.$row->user->name ?? '<span aria-hidden="true">—</span>'.'<div>';                                                
             })  
@@ -176,7 +175,7 @@ if ($request->ajax()) {
                     return $this->dataTableEditRecordAction($row,$this->ROUTE_PREFIX);
                 })   
                             
-            ->rawColumns(['image','translate.title','tags','categories','user_id','status','actions','created_at','created_at.display'])                  
+            ->rawColumns(['image','translate.title','user_id','tags','comments','categories','status','actions','created_at','created_at.display'])                  
             ->make(true);    
     }  
         if (view()->exists('backend.posts.index')) {
@@ -259,7 +258,6 @@ if ($request->ajax()) {
             }
 
             $validated['status']           = isset($request->status) ? '1' : '0'; 
-            $validated['featured']         = isset($request->featured) ? '1' : '0';   
             $validated['allow_comments']   = isset($request->allow_comments) ? '1' : '0';                        
             $validated['image']            = $image;
             $validated['user_id']          = $request->user_id;  

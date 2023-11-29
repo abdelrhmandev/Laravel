@@ -9,7 +9,7 @@ class CreateClientsTable extends Migration
             $table->id();
             $table->string('title');
 			$table->string('image',150)->nullable();
-			$table->string('link',255)->nullable();
+			$table->string('link',150)->nullable();
 			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });

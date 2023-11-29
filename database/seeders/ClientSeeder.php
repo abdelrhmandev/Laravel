@@ -11,7 +11,7 @@ class ClientSeeder extends Seeder
             ['title'=>'Nike','link'=>'https://www.nike.com/eg/','image'=>'uploads/clients/nike.png'],
             ['title'=>'Kappa','link'=>'https://www.kappa.com/','image'=>'uploads/clients/kappa.png'],
             ['title'=>'Prada','link'=>'https://www.prada.com/ww/en.html','image'=>'uploads/clients/prada.jpg'],
-            ['title'=>'HP,','link'=>'https://www.hp.com/us-en/home.html','image'=>'uploads/clients/hp.png'],
+            ['title'=>'HP','link'=>'https://www.hp.com/us-en/home.html','image'=>'uploads/clients/hp.png'],
             ['title'=>'Deloit','link'=>'https://www2.deloitte.com/us/en.html','image'=>'uploads/clients/deloitte.jpg'],
             ['title'=>'Nokia','link'=>'https://www.nokia.com/','image'=>'uploads/clients/nokia.png'],
             ['title'=>'Sony','link'=>'https://www.sony.com','image'=>'uploads/clients/sony.jpg'],

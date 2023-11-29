@@ -134,8 +134,7 @@ public function index(Request $request){
             if(isset($request->drop_image_checkBox)  && $request->drop_image_checkBox == 1) {                
                 $this->unlinkFile($category->image);
                 $image = NULL;
-            }
-            $validated['status']     = isset($request->status) ? '1' : '0';       
+            }                 
             $validated['image']      = $image;
             $validated['parent_id']  = isset($request->parent_id) ? $request->parent_id : NULL;
             $validated['']   = 'posts';

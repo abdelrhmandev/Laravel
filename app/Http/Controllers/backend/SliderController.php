@@ -67,7 +67,16 @@ class SliderController extends Controller
         
 
 if ($request->ajax()) {              
-    $model = MainModel::where('id','>=','0');
+
+
+    
+    $model = MainModel::with([
+        'translate' => function($query) {
+            $query->select($this->TblForignKey, 'title','description'); # Many to many
+        },  
+    ])
+    ->select(['id', 'image', 'status', 'created_at']);
+     
 
     
  

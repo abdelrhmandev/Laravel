@@ -35,7 +35,15 @@ class ApplicantController extends Controller
         
 
 if ($request->ajax()) {              
-    $model = MainModel::with('vacancy'); 
+    
+
+    $model = MainModel::with([
+        'vacancy' => function($query) {
+            $query->select('id', 'title'); # Many to many
+        },  
+    ]);
+
+
     return Datatables::of($model)
             ->addIndexColumn()   
             ->editColumn('name', function (MainModel $row) {

@@ -50,7 +50,13 @@ class FaqController extends Controller
 public function index(Request $request){     
 if ($request->ajax()) {           
        
-    $model = MainModel::where('id','>=',0);
+    $model = MainModel::with([
+        'translate' => function($query) {
+            $query->select($this->TblForignKey, 'question','answer'); # Many to many
+        },  
+    ])
+    ->select(['id','created_at']);
+
     return Datatables::of($model)
                 ->addIndexColumn()   
 

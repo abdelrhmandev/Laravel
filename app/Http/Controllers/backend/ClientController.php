@@ -70,7 +70,7 @@ public function index(Request $request){
     
 if ($request->ajax()) {              
 
-    $model = MainModel::where('id','>=',0);
+    $model = MainModel::select('id','title','image','link','created_at');
 
  
     return Datatables::of($model)

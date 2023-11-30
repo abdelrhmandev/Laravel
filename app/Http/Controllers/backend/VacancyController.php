@@ -61,7 +61,12 @@ class VacancyController extends Controller
         
 
 if ($request->ajax()) {              
-    $model = MainModel::withCount(['applicants']); 
+
+    $model = MainModel::select('id','title','status','created_at')->withCount(['applicants']); 
+
+
+
+
     return Datatables::of($model)
             ->addIndexColumn()   
             ->editColumn('title', function (MainModel $row) {

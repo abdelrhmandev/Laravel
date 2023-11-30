@@ -26,14 +26,14 @@
       </div>
       <div class="card-toolbar">
         <div class="d-flex justify-content-end" data-kt-table-toolbar="base">   
-           <div class="me-3">
+          <div class="w-200px me-3">
             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" id="status" name="status" data-placeholder="{{ __('site.sort_by')}} {{ __('site.status')}}" data-kt-filter="status">
               <option></option>
               <option value="all">{{ __('site.all') }}  ({{ $allrecords }})</option>
-              <option value="pending">pending</option>
-              <option value="accepted">accepted</option>
-              <option value="holded">holded</option>
-              <option value="rejected">rejected</option>
+              <option value="pending">{{ __('site.pending') }}</option>
+              <option value="accepted">{{ __('site.accepted') }}</option>
+              <option value="holded">{{ __('site.holded') }}</option>
+              <option value="rejected">{{ __('site.rejected') }}</option>
             </select>
           </div>  
           

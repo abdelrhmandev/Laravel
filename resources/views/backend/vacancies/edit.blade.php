@@ -59,7 +59,12 @@ type="text/css" />
                     </div>
                 </div>
                 <x-backend.btns.button :destroyRoute="$destroyRoute" :redirectRoute="$redirect_after_destroy" :row="$row" :trans="$trans"/>
-            </div>            
+            </div> 
+            
+            <div class="d-flex flex-column flex-row-fluid gap-0 w-lg-400px gap-lg-5">                                 
+                <x-backend.cms.status :status="$row->status" :action="'edit'" />
+            </div>
+
            
         </form>
     </div>

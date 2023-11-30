@@ -37,11 +37,12 @@ if ($request->ajax()) {
                 ->addIndexColumn()   
                 ->editColumn('author', function (MainModel $row) {                                                    
                    
-                $div = "<div class=\"symbol symbol-50px\"><img class=\"img-fluid\" src=".!empty($row->user->avatar) ? asset($row->user->avatar) : asset('assets/backend/media/avatars/blank.png')."></div> &nbsp; ".$row->user->name;                
+                $src = !empty($row->user->avatar) ? asset($row->user->avatar) : asset('assets/backend/media/avatars/blank.png');   
+                $div = "<div class=\"symbol symbol-50px\"><img class=\"img-fluid\" src=".$src."></div> &nbsp; ".$row->user->name;                
                 return $div;
                 })
                 ->editColumn('comment', function (MainModel $row) {
-                    return "<a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".Str::words($row->comment, '5')."</a>";                     
+                    return "<a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".Str::words($row->comment, '10')."</a>";                     
                 })                
                 ->editColumn('post', function (MainModel $row) {
                     $div = $row->post->translate->title;                                 

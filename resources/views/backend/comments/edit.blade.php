@@ -125,7 +125,7 @@
                     <x-backend.btns.button :destroyRoute="$destroyRoute" :redirectRoute="$redirect_after_destroy" :trans="$trans"/>                     
                 </div>
             </div>
-            <div class="d-flex flex-column flex-row-fluid gap-0 w-lg-300px gap-lg-5">
+            <div class="d-flex flex-column flex-row-fluid gap-0 w-lg-500px gap-lg-5">
                 <div class="card card-flush">
                     <div class="card-header">
                         <div class="card-title">
@@ -137,7 +137,6 @@
                             {{  (Carbon\Carbon::parse($row->created_at)->format('j F, Y') )  }}
                         </span>
                         <p>
-
                             {{  (Carbon\Carbon::parse($row->created_at)->format('D h:i a') )  }}
                         </p>
                     </div>

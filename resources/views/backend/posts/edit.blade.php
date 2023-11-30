@@ -87,7 +87,7 @@ type="text/css" />
             }
         });     
         $.ajax({
-            url: '{{ route('admin.AjaxLoadGallery',$row) }}',
+            url: '{{ route(config('custom.route_prefix').'.AjaxLoadGallery',$row) }}',
             type:"GET",
             cache: false,
             dataType: "json",
@@ -116,7 +116,7 @@ type="text/css" />
     $(document).on('click', '.delete_media_btn', function (e) {
         e.preventDefault();
         var id = $(this).val();
-        var url = '{{ route("admin.delete_media_image", ":id") }}';
+        var url = '{{ route(config('custom.route_prefix').".delete_media_image", ":id") }}';
         url = url.replace(':id', id); 
         $.ajaxSetup({
         headers: {

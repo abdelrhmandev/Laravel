@@ -25,7 +25,7 @@ class PostSeeder extends Seeder
 
        for($i=1;$i<=10;$i++){
             $translated_items = [        
-                    ['title'=>'Post Lorem ipsum Test' .$i,'slug'=>'post-loremvipsum-test '.$i,'description'=>'Lorem ipsum, or lipsum as it is sometimes known','lang'=>'en','post_id'=>$i],
+                    ['title'=>'Post Lorem ipsum Test' .$i,'slug'=>'post-loremvipsum-test '.$i,'description'=>'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisl tincidunt eget.','lang'=>'en','post_id'=>$i],
                     ['title'=>$i. ' مقال وريم ايبسوم هو نموذج افتراضي','slug'=>$i.'-مقال-وريم-ايبسوم-هو-نموذج-افتراضي','description'=>'وريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل','lang'=>'ar','post_id'=>$i],
                 ];
             DB::table('post_translations')->insert($translated_items);     

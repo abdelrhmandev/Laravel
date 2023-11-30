@@ -26,17 +26,7 @@
       </div>
       <div class="card-toolbar">
         <div class="d-flex justify-content-end" data-kt-table-toolbar="base">   
-           <div class="w-150px me-3">
-            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" id="status" name="status" data-placeholder="{{ __('site.sort_by')}} {{ __('site.status')}}" data-kt-filter="status">
-              <option></option>
-              <option value="all">{{ __('site.all') }}  ({{ $allrecords }})</option>
-              <option value="1">{{ __('site.published') }} ({{ $publishedCounter}})</option>
-              <option value="0">{{ __('site.unpublished') }} ({{ $unpublishedCounter}})</option>
-            </select>
-          </div>  
-          
- 
-
+          @include('backend.partials.filter_options._status',['allrecords'=>$allrecords,'publishedCounter'=>$publishedCounter,'unpublishedCounter'=>$unpublishedCounter])          
           @include('backend.partials.modals._exportlisting')
           <a class="btn btn-primary" href="{{ $createRoute }}">
             <span class="svg-icon svg-icon-2 svg-icon-primary me-0 me-md-2">
@@ -76,7 +66,8 @@
               </div>
             </th>            
             <th>{{ __('site.image') }}</th>  
-            <th class="w-450px ">{{ __('site.title') }}</th>                                
+            <th class="w-150px">{{ __('site.title') }}</th>                                
+            <th class="w-450px">{{ __('site.description') }}</th>                                
             <th>{{ __('site.status') }}</th> 
             <th class="text-primary">{{ __('admin.created_at') }}</th>
             <th class="text-end min-w-50px noExport">{{ __('admin.actions') }}</th>  
@@ -103,13 +94,14 @@ var dynamicColumns = [ //as an array start from 0
 { data: 'id', name: 'id',exportable:false}, 
 { data: 'image', name: 'image' ,orderable: false,searchable: false},
 { data: 'translate.title', name: 'translate.title',orderable: false}, // 2
+{ data: 'translate.description', name: 'translate.description',orderable: false}, // 2
 { data: 'status', name: 'status',orderable: false,searchable: true}, // 3
 { data: 'created_at',name :'created_at', type: 'num', render: { _: 'display', sort: 'timestamp', order: 'desc'}}, // 6
 { data: 'actions' , name : 'actions' ,exportable:false,orderable: false,searchable: false},    
 ];
 KTUtil.onDOMContentLoaded(function () {
-  loadDatatable('{{ __($trans.".plural") }}','{{ $redirectRoute }}',dynamicColumns,'3','2');
+  loadDatatable('{{ __($trans.".plural") }}','{{ $redirectRoute }}',dynamicColumns,'4','2');
 });
 </script>
- 
+<script src="{{ asset('assets/backend/js/custom/updateStatus.js')}}"></script> 
 @stop

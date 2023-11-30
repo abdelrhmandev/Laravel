@@ -11,53 +11,34 @@ class PageSeeder extends Seeder
      */
     public function run()
     {
-
- 
-
         DB::table('pages')->delete();
         DB::table('page_translations')->delete();
 
-        
+        $items = [['status' => '1'], ['status' => '1'], ['status' => '0'], ['status' => '1'], ['status' => '0'], ['status' => '0'], ['status' => '1']];
+        DB::table('pages')->insert($items);
 
-       $items = [
-        ['status'=>'1'],
-        ['status'=>'1'],
-        ['status'=>'0'],
-        ['status'=>'1'],
-        ['status'=>'0'],
-        ['status'=>'0'],
-        ['status'=>'1']
-       ];
-       DB::table('pages')->insert($items);      
+        $translated_items = [
+            ['title' => 'About Us', 'slug' => 'about-us', 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisl tincidunt eget.', 'lang' => 'en', 'page_id' => '1'],
+            ['title' => 'نبذه عن الشركه', 'slug' => 'نبذه-عن-الشركه', 'description' => ' ببساطة نص شكلي (بمعنى أن الغاية هي الشكل وليس المحتوى) ويُستخدم في صناعات المطابع ودور النشر. كان لوريم إيبسوم ولايزال المعيار للنص الشكلي منذ القرن الخامس عشر عندما قامت مطبعة مجهولة برص مجموعة من الأحرف بشكل عشوائي أخذتها من نص، لتكوّن كتيّب بمثابة دليل أو مرجع شكلي لهذه الأحرف','lang' => 'ar', 'page_id' => '1'],
 
-       $translated_items = [
+            ['title' => 'Services', 'slug' => 'services', 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisl tincidunt eget.', 'lang' => 'en', 'page_id' => '2'],
+            ['title' => 'الخدمات', 'slug' => 'الخدمات', 'description' => ' ببساطة نص شكلي (بمعنى أن الغاية هي الشكل وليس المحتوى) ويُستخدم في صناعات المطابع ودور النشر. كان لوريم إيبسوم ولايزال المعيار للنص الشكلي منذ القرن الخامس عشر عندما قامت مطبعة مجهولة برص مجموعة من الأحرف بشكل عشوائي أخذتها من نص، لتكوّن كتيّب بمثابة دليل أو مرجع شكلي لهذه الأحرف','lang' => 'ar', 'page_id' => '2'],
 
+            ['title' => 'Contact Us', 'slug' => 'contact-us', 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisl tincidunt eget.', 'lang' => 'en', 'page_id' => '3'],
+            ['title' => 'أتصل بنا', 'slug' => 'أتصل-بنا', 'description' => ' ببساطة نص شكلي (بمعنى أن الغاية هي الشكل وليس المحتوى) ويُستخدم في صناعات المطابع ودور النشر. كان لوريم إيبسوم ولايزال المعيار للنص الشكلي منذ القرن الخامس عشر عندما قامت مطبعة مجهولة برص مجموعة من الأحرف بشكل عشوائي أخذتها من نص، لتكوّن كتيّب بمثابة دليل أو مرجع شكلي لهذه الأحرف','lang' => 'ar', 'page_id' => '3'],
 
-            ['title'=>'About Us','slug'=>'about-us','lang'=>'en','page_id'=>'1'],
-            ['title'=>'نبذه عن الشركه','slug'=>'نبذه-عن-الشركه','lang'=>'ar','page_id'=>'1'],
+            ['title' => 'Blog', 'slug' => 'blog', 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisl tincidunt eget.', 'lang' => 'en', 'page_id' => '4'],
+            ['title' => 'المدونه ', 'slug' => 'المدونه ', 'description' => ' ببساطة نص شكلي (بمعنى أن الغاية هي الشكل وليس المحتوى) ويُستخدم في صناعات المطابع ودور النشر. كان لوريم إيبسوم ولايزال المعيار للنص الشكلي منذ القرن الخامس عشر عندما قامت مطبعة مجهولة برص مجموعة من الأحرف بشكل عشوائي أخذتها من نص، لتكوّن كتيّب بمثابة دليل أو مرجع شكلي لهذه الأحرف','lang' => 'ar', 'page_id' => '4'],
 
+            ['title' => 'Clients', 'slug' => 'clients', 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisl tincidunt eget.', 'lang' => 'en', 'page_id' => '5'],
+            ['title' => 'العملاء', 'slug' => 'العملاء', 'description' => ' ببساطة نص شكلي (بمعنى أن الغاية هي الشكل وليس المحتوى) ويُستخدم في صناعات المطابع ودور النشر. كان لوريم إيبسوم ولايزال المعيار للنص الشكلي منذ القرن الخامس عشر عندما قامت مطبعة مجهولة برص مجموعة من الأحرف بشكل عشوائي أخذتها من نص، لتكوّن كتيّب بمثابة دليل أو مرجع شكلي لهذه الأحرف','lang' => 'ar', 'page_id' => '5'],
 
-            ['title'=>'Services','slug'=>'services','lang'=>'en','page_id'=>'2'],
-            ['title'=>'الخدمات','slug'=>'الخدمات','lang'=>'ar','page_id'=>'2'],
+            ['title' => 'Products', 'slug' => 'products', 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisl tincidunt eget.', 'lang' => 'en', 'page_id' => '6'],
+            ['title' => 'المنتجات', 'slug' => 'المنتجات', 'description' => ' ببساطة نص شكلي (بمعنى أن الغاية هي الشكل وليس المحتوى) ويُستخدم في صناعات المطابع ودور النشر. كان لوريم إيبسوم ولايزال المعيار للنص الشكلي منذ القرن الخامس عشر عندما قامت مطبعة مجهولة برص مجموعة من الأحرف بشكل عشوائي أخذتها من نص، لتكوّن كتيّب بمثابة دليل أو مرجع شكلي لهذه الأحرف','lang' => 'ar', 'page_id' => '6'],
 
-            ['title'=>'Contact Us','slug'=>'contact-us','lang'=>'en','page_id'=>'3'],
-            ['title'=>'أتصل بنا','slug'=>'أتصل-بنا','lang'=>'ar','page_id'=>'3'],      
-
-
-            ['title'=>'Blog','slug'=>'blog','lang'=>'en','page_id'=>'4'],
-            ['title'=>'المدونه ','slug'=>'المدونه ','lang'=>'ar','page_id'=>'4'],      
-
-
-            ['title'=>'Clients','slug'=>'clients','lang'=>'en','page_id'=>'5'],
-            ['title'=>'العملاء','slug'=>'العملاء','lang'=>'ar','page_id'=>'5'],
-
-            ['title'=>'Products','slug'=>'products','lang'=>'en','page_id'=>'6'],
-            ['title'=>'المنتجات','slug'=>'المنتجات','lang'=>'ar','page_id'=>'6'],
-
-            ['title'=>'FAQs','slug'=>'faqs','lang'=>'en','page_id'=>'7'],
-            ['title'=>'سؤال و جواب','slug'=>'سؤال-و-جواب','lang'=>'ar','page_id'=>'7'],
+            ['title' => 'FAQs', 'slug' => 'faqs', 'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisl tincidunt eget.', 'lang' => 'en', 'page_id' => '7'],
+            ['title' => 'سؤال و جواب', 'slug' => 'سؤال-و-جواب', 'description' => ' ببساطة نص شكلي (بمعنى أن الغاية هي الشكل وليس المحتوى) ويُستخدم في صناعات المطابع ودور النشر. كان لوريم إيبسوم ولايزال المعيار للنص الشكلي منذ القرن الخامس عشر عندما قامت مطبعة مجهولة برص مجموعة من الأحرف بشكل عشوائي أخذتها من نص، لتكوّن كتيّب بمثابة دليل أو مرجع شكلي لهذه الأحرف','lang' => 'ar', 'page_id' => '7'],
         ];
-       DB::table('page_translations')->insert($translated_items);  
-
+        DB::table('page_translations')->insert($translated_items);
     }
 }

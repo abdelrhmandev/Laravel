@@ -73,7 +73,8 @@
               </div>
             </th>            
             <th>{{ __('site.image') }}</th>  
-            <th class="w-240px">{{ __('site.title') }}</th>                                
+            <th class="w-240px">{{ __('site.title') }}</th>
+            <th class="w-240px">{{ __('site.description') }}</th>                                
             <th class="w-240px">{{ __('site.parent_id') }}</th> 
             <th>{{ __('post.plural') }}</th> 
             <th class="text-primary">{{ __('admin.created_at') }}</th>
@@ -102,6 +103,7 @@ var dynamicColumns = [ //as an array start from 0
 { data: 'id', name: 'id',exportable:false}, 
 { data: 'image', name: 'image' ,orderable: false,searchable: false},
 { data: 'translate.title', name: 'translate.title',orderable: false}, // 2
+{ data: 'translate.description', name: 'translate.description',orderable: false}, // 2
 { data: 'parent_id', name: 'parent_id',orderable: false,searchable: false},
 { data: 'count', name: 'count',orderable: false,searchable: false}, 
 { data: 'created_at',name :'created_at', type: 'num', render: { _: 'display', sort: 'timestamp', order: 'desc'}}, // 6

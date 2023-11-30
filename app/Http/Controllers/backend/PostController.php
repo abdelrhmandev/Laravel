@@ -81,7 +81,25 @@ class PostController extends Controller
     public function index(Request $request,$category_id=null){    
         
 
+
+
 if ($request->ajax()) {              
+
+    /*
+    $model = MainModel::with([
+        'tags' => function($query) {
+            $query->select('id', 'name'); # Many to many
+        }, 
+        'images' => function($query) {
+            $query->select('id', 'url', 'post_id'); # One to many
+        }, 
+        'user' => function($query) {
+            $query->select('id', 'name'); # One to many
+        }
+    ])
+    ->get(['id', 'title', 'content', 'user_id']);
+     */
+
     $model = MainModel::with(['user','tags','categories'])->withCount('comments');
 
     

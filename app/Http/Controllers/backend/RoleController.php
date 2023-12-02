@@ -1,189 +1,116 @@
 <?php
 namespace App\Http\Controllers\backend;
-use App\Http\Requests\backend\RoleRequest as ObjectRequest;
+use Carbon\Carbon;
+use LaravelLocalization;
+use App\Traits\Functions; 
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Spatie\Permission\Models\Role;
-use Response;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role as MainModel;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\backend\RoleRequest as ModuleRequest;
+/////////////////
 
-use DB;
 
-    
+
+
+//////////////////
 
 class RoleController extends Controller
-
 {
-    protected $model;
-    protected $resource;
-    protected $trans_file;
+    use Functions;
 
+    public function __construct() {
 
-    /**
-
-     * Display a listing of the resource.
-
-     *
-
-     * @return \Illuminate\Http\Response
-
-     */
-
-    function __construct(Role $model)
-
-    {
-        $this->model = $model;
-        $this->resource = 'roles';
-        $this->trans_file = 'role';
         
-        //  $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index','store']]);
 
-        //  $this->middleware('permission:role-create', ['only' => ['create','store']]);
-
-        //  $this->middleware('permission:role-edit', ['only' => ['edit','update']]);
-
-        //  $this->middleware('permission:role-delete', ['only' => ['destroy']]);
-
-    
-
+        $this->ROUTE_PREFIX         = config('custom.route_prefix').'.roles'; 
+        $this->TRANS                = 'page';
+        $this->Tbl                  = 'pages';
     }
 
-    
 
-    /**
+ 
 
-     * Display a listing of the resource.
+    public function store(ModuleRequest $request){
 
-     *
 
-     * @return \Illuminate\Http\Response
-
-     */
-
-    public function index(){
-        $compact = [
-            'rows'        => $this->model::select('id','name','trans')->with('permissions')->withCount(['users','permissions'])->latest()->paginate(9), 
-            'resource'    => $this->resource,
-            'trans_file'  => $this->trans_file,
-
-        ];
-        return view('backend.'.$this->resource.'.index', $compact);
     }
-
-    
-
-    /**
-
-     * Show the form for creating a new resource.
-
-     *
-
-     * @return \Illuminate\Http\Response
-
-     */
+        
 
     public function create(){
         $compact = [
-            'rows'       => $this->model::select('id','name','trans')->with('permissions')->withCount(['users','permissions'])->latest()->get(), 
-            'resource'   => $this->resource,
-            'trans_file' => $this->trans_file,
+            'rows'       => MainModel::select('id','name','trans')->with('permissions')->withCount(['users','permissions'])->latest()->get(), 
+
             'permission' => Permission::get(),
         ];
-        return view('backend.'.$this->resource.'.create', $compact);
+        return view('backend.roles.create', $compact);
     }
 
-    
 
-    /**
-
-     * Store a newly created resource in storage.
-
-     *
-
-     * @param  \Illuminate\Http\Request  $request
-
-     * @return \Illuminate\Http\Response
-
-     */
-
-    public function store(ObjectRequest $request){
-
-
-
-        
- 
-
-            // return $request->validated();
-            $arr = array('msg' => __($this->trans_file.'.storeMessageSuccess'), 'status' => true);    
+public function index(Request $request){     
 
        
- 
-        return response()->json($arr); // 400 being the HTTP code for an invalid request.
 
 
-  
-        
-                
-                                         
-                  
-            
-                
+        if (view()->exists('backend.roles.index')) {
+            $compact = [
+                'rows'                  => MainModel::select('id','name','trans')->with('permissions')->withCount(['users','permissions'])->latest()->paginate(9),
+                'trans'                 => $this->TRANS,
+                'createRoute'           => route($this->ROUTE_PREFIX.'.create'),                
+                'storeRoute'            => route($this->ROUTE_PREFIX.'.store'),
+                'destroyMultipleRoute'  => route($this->ROUTE_PREFIX.'.destroyMultiple'), 
+                'redirectRoute'         => route($this->ROUTE_PREFIX.'.index'),    
+                'allrecords'            => MainModel::count(),
+            ];                       
+            return view('backend.roles.index',$compact);
+        }
+}
 
-
-     
-
+     public function edit(Request $request,MainModel $page){ 
+        if (view()->exists('backend.roles.edit')) {         
+            $compact = [                
+                'updateRoute'             => route($this->ROUTE_PREFIX.'.update',$page->id), 
+                'row'                     => $page,
+                'TrsanslatedColumnValues' => $this->getItemtranslatedllangs($page,$this->TRANSLATECOLUMNS,$this->TblForignKey),
+                'destroyRoute'            => route($this->ROUTE_PREFIX.'.destroy',$page->id),
+                'trans'                   => $this->TRANS,
+                'redirect_after_destroy'  => route($this->ROUTE_PREFIX.'.index'),
+            ];                
+             return view('backend.roles.edit',$compact);                    
+            }
     }
 
-    public function show($id){
-        $row = $this->model::find($id);
-        $rolePermissions = Permission::join("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")
-            ->where("role_has_permissions.role_id",$id)
-            ->get();
-        return view($this->$resource.'.show',compact('row','rolePermissions'));
+    public function update(ModuleRequest $request, MainModel $page){        
 
+    }
+    public function destroy(MainModel $page){              
+        $page->image ? $this->unlinkFile($page->image) : ''; // Unlink Image           
+        if($page->delete()){
+            $arr = array('msg' => __($this->TRANS.'.'.'deleteMessageSuccess'), 'status' => true);
+        }else{
+            $arr = array('msg' => __($this->TRANS.'.'.'deleteMessageError'), 'status' => false);
+        }        
+        return response()->json($arr);
     }
 
     
 
-    /**
 
-     * Show the form for editing the specified resource.
 
-     *
 
-     * @param  int  $id
-
-     * @return \Illuminate\Http\Response
-
-     */
-
-    public function edit($id){
-        $row = $this->model::find($id);
-        $permission = Permission::get();
-        $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id",$id)
-            ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
-            ->all();
-        return view($this->$resource.'.edit',compact('row','permission','rolePermissions'));
-
+    public function destroyMultiple(Request $request){  
+        $ids = explode(',', $request->ids);             
+        $items = MainModel::whereIn('id',$ids); // Check          
+        if($items->delete()){
+            $arr = array('msg' => __($this->TRANS.'.'.'MulideleteMessageSuccess'), 'status' => true);
+        }else{
+            $arr = array('msg' => __($this->TRANS.'.'.'MiltideleteMessageError'), 'status' => false);
+        }        
+        return response()->json($arr);
     }
 
-    public function update(Request $request, $id){
-        $this->validate($request, [
-            'name' => 'required',
-            'permission' => 'required',
 
-        ]);
-        $row = $this->model::find($id);
-        $row->name = $request->input('name');
-        $row->save();
-        $row->syncPermissions($request->input('permission'));
-        return redirect()->route($this->$resource.'.index')
-        >with('success',$this->trans_file.'.updateMessageSuccess');
-    }
-
-    public function destroy($id){
-        // $this->modelwhere('id',$id)->delete();
-            return redirect()->route($this->$resource.'.index')->with('success',$this->trans_file.'.deleteMessageSuccess');
-    }
 
 }

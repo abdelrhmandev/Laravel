@@ -1,6 +1,6 @@
 @extends('backend.base.base')
 @section('breadcrumbs')
-<li class="breadcrumb-item text-muted">{{ __($trans_file.'.all')}}</li>
+<li class="breadcrumb-item text-muted">sadasd</li>
 <li class="breadcrumb-item text-dark">Listings</li>
 @stop
 @section('style')
@@ -16,8 +16,8 @@
    @if($rows->count())
    <div class="d-flex flex-wrap flex-stack mb-6">
       <!--begin::Heading-->
-      <h3 class="fw-bold my-2">{{ __($trans_file.'.all')}}
-         <span class="badge badge-primary badge-circle badge-lg">{{ $rows->total() }}</span>
+      <h3 class="fw-bold my-2">dasdsad
+         <span class="badge badge-primary badge-circle badge-lg">sdasd</span>
          <span class="fs-6 text-gray-400 fw-semibold ms-1">Active</span>
       </h3>
       <!--end::Heading-->
@@ -36,7 +36,7 @@
             <!--end::Link-->
             <!--begin::Link-->
             <!--end::Link-->    
-            <a href="{{ route('admin.'.$resource.'.create')}}" class="btn btn-success btn-sm">{{ __($trans_file.'.create')}}</a>
+            <a href="{{ route('admin.roles.create')}}" class="btn btn-success btn-sm">CREATE</a>
          </div>
       </div>
       <!--end::Actions-->
@@ -60,11 +60,11 @@
             <div class="card-body pt-1">
                <!--begin::Users-->
                @if($row->users_count)
-               <div class="fw-bold text-success">{{ __($trans_file.'.associated_users')}}            
+               <div class="fw-bold text-success">{{ __('role.associated_users')}}            
                   <span class="badge badge-primary badge-circle badge-lg">{{ $row->users_count}}</span>          
                </div>
                @else
-               <span class="fw-bold text-danger">{{ __($trans_file.'.no_associated_users') }}</span>
+               <span class="fw-bold text-danger">{{ __('role.no_associated_users') }}</span>
                @endif
                <!--end::Users-->
                <!--begin::Permissions-->
@@ -78,7 +78,7 @@
                   @empty
                   <span class="d-flex position-relative">
                   <span class="d-inline-block mb-2 fs fw-bold text-danger">
-                  {{ __($trans_file.'.no_permissions_assigned')}} 
+                  {{ __('role.no_permissions_assigned')}} 
                   </span> 
                   </span>
                   @endforelse
@@ -89,7 +89,7 @@
             <!--end::Card body-->
             <!--begin::Card footer-->
             <div class="card-footer flex-wrap pt-0">
-               <a href="{{ route('admin.'.$resource.'.edit',$row->id)}}" class="btn btn-light btn-active-primary my-1 me-2">{{ __('site.edit')}}</a>
+               <a href="{{ route('admin.roles.edit',$row->id)}}" class="btn btn-light btn-active-primary my-1 me-2">{{ __('site.edit')}}</a>
             </div>
             <!--end::Card footer-->
          </div>
@@ -118,7 +118,7 @@
                   <br /> 
                   <!--end::Description-->
                   <!--begin::Action-->
-                  <a href="{{ route('admin.'.$resource.'.create')}}" class="btn btn-primary er fs-6 px-8 py-4">{{ __($trans_file.'.create')}}</a>
+                  <a href="{{ route('admin.roles.create')}}" class="btn btn-primary er fs-6 px-8 py-4">{{ __('role.create')}}</a>
                   <!--end::Action-->
                </div>
                <!--end::Heading-->

@@ -72,7 +72,24 @@ class AreaController extends Controller
         
 
 if ($request->ajax()) {              
-    $model = MainModel::with(['city','city.country']); 
+
+    
+
+    $model = MainModel::with([
+        'translate' => function($query) {
+            $query->select('id','area_id','title');
+        }, 
+        'city' => function($query) {
+            $query->select('id','country_id');
+        }, 
+        'city.country' => function($query) {
+            $query->select('id','title_'.app()->getLocale()); 
+        }
+    ])
+    ->select(['id','city_id','created_at']);
+
+
+
     return Datatables::of($model)
             ->addIndexColumn()   
             ->editColumn('translate.title', function (MainModel $row) {

@@ -52,7 +52,7 @@ if ($request->ajax()) {
        
     $model = MainModel::with([
         'translate' => function($query) {
-            $query->select($this->TblForignKey, 'question','answer'); # Many to many
+            $query->select($this->TblForignKey, 'question','answer');
         },  
     ])
     ->select(['id','created_at']);

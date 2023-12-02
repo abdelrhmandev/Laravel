@@ -97,7 +97,7 @@ if ($request->ajax()) {
             $query->select('id', 'name'); # One to many
         }
     ])
-    ->get(['id', 'title', 'content', 'user_id']);
+    ->select(['id', 'title', 'content', 'user_id']);
      */
 
     $model = MainModel::with(['user','tags','categories'])->withCount('comments');

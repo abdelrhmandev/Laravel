@@ -121,9 +121,6 @@ if ($request->ajax()) {
                 'post_id'               => $post_id ?? '',    
                 'post'                  => $post_id ? Post::findOrFail($post_id) :'',        
             ];                       
-
-
-
             return view('backend.comments.index',$compact);
         }
 }

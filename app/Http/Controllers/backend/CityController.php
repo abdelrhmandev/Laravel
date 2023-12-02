@@ -60,11 +60,16 @@ class CityController extends Controller
         
 
 if ($request->ajax()) {              
-    $model = MainModel::with('country');
 
-    
- 
-    
+    $model = MainModel::with([
+        'country' => function($query) {
+            $query->select('id','title_'.app()->getLocale());
+        }, 
+        'translate' => function($query) {
+            $query->select('title',$this->TblForignKey); 
+        }
+    ])
+    ->select(['id','country_id','created_at']);
  
     return Datatables::of($model)
             ->addIndexColumn()   

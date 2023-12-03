@@ -24,6 +24,7 @@ class UserSeeder extends Seeder
                 'avatar'           =>'uploads/avatars/admin.jpg',
             ])->assignRole(1);
 
+            /*
             \App\Models\User::create([    
                 'username'         =>'NickLogan',
                 'password'         =>bcrypt('12345678'),
@@ -104,5 +105,6 @@ class UserSeeder extends Seeder
             'is_admin'         =>'1',
             'avatar'           =>'uploads/avatars/brad.jpg',
         ])->assignRole(2);
+        */
     }
 }

@@ -61,19 +61,37 @@
 
 
 
-<form id="FormId" data-form-id="create_role" data-route-url="{{ route('admin.roles.store') }}" class="form mb-15" method="post">
+<form id="FormId" data-form-id="create_role" action="{{ route('admin.roles.store') }}" data-route-url="{{ route('admin.roles.store') }}" class="form mb-15" method="post">
 
     @csrf
    
         <div class="fl w-100">
-        <label class="required fs-5 fw-semibold mb-2">Role title</label>
-        <input type="text" class="input-reset" name="title" required data-fv-not-empty="true" data-fv-not-empty___message="The Role is required"/>
+        <label class="required fs-5 fw-semibold mb-2">Role title EN</label>
+        <input type="text" class="input-reset" name="title_en" required data-fv-not-empty="true" data-fv-not-empty___message="The Role EN is required"/>
         </div>
 
+
+        <div class="fl w-100">
+            <label class="required fs-5 fw-semibold mb-2">Role title AR</label>
+            <input type="text" class="input-reset" name="title_ar" required data-fv-not-empty="true" data-fv-not-empty___message="The Role AR is required"/>
+            </div>
+
+-------------------------------------------
+
+<div class="fl w-100">
+    <label class="required fs-5 fw-semibold mb-2">KEY NAME</label>
+    <input type="text" class="input-reset" name="name" required data-fv-not-empty="true" data-fv-not-empty___message="The Role KEY NAME is required"/>
+    </div>
+
+
+
+    
         <div class="fl w-100">
             <label class="required fs-5 fw-semibold mb-2">Permissions</label>
             @foreach($permission as $value)
-                <input type="checkbox" value="{{ $value->id}}" name="permission[]" required data-fv-not-empty="true" data-fv-not-empty___message="The Permission is required">{{ $value->name }}
+                <p>
+                    <input type="checkbox" value="{{ $value->id}}" name="permission[]">{{ $value->name }}
+                </p>
             @endforeach                
         </div>
     

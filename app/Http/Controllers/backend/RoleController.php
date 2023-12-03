@@ -26,15 +26,30 @@ class RoleController extends Controller
         
 
         $this->ROUTE_PREFIX         = config('custom.route_prefix').'.roles'; 
-        $this->TRANS                = 'page';
-        $this->Tbl                  = 'pages';
+        $this->TRANS                = 'role';
+        $this->Tbl                  = 'roles';
     }
 
 
  
 
-    public function store(ModuleRequest $request){
+    public function store(Request $request){
 
+        foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties) {
+            $regional = substr($properties['regional'], 0, 2);
+            $trans[] = [
+                $regional => request()->get('title_'. $regional)
+            ]; 
+        }    
+            $arry = [
+            'name'          => $request->input('name'),            
+            'trans'         => json_encode($trans),
+            'guard_name'    =>'web'
+        ];              
+        $role = MainModel::create($arry);
+        $role->syncPermissions($request->input('permission'));
+
+        dd();
 
     }
         
@@ -68,13 +83,12 @@ public function index(Request $request){
         }
 }
 
-     public function edit(Request $request,MainModel $page){ 
+     public function edit(Request $request,MainModel $role){ 
         if (view()->exists('backend.roles.edit')) {         
             $compact = [                
-                'updateRoute'             => route($this->ROUTE_PREFIX.'.update',$page->id), 
-                'row'                     => $page,
-                'TrsanslatedColumnValues' => $this->getItemtranslatedllangs($page,$this->TRANSLATECOLUMNS,$this->TblForignKey),
-                'destroyRoute'            => route($this->ROUTE_PREFIX.'.destroy',$page->id),
+                'updateRoute'             => route($this->ROUTE_PREFIX.'.update',$role->id), 
+                'row'                     => $role,
+                'destroyRoute'            => route($this->ROUTE_PREFIX.'.destroy',$role->id),
                 'trans'                   => $this->TRANS,
                 'redirect_after_destroy'  => route($this->ROUTE_PREFIX.'.index'),
             ];                
@@ -82,12 +96,36 @@ public function index(Request $request){
             }
     }
 
-    public function update(ModuleRequest $request, MainModel $page){        
+    public function update(ModuleRequest $request, MainModel $role){        
+
+//////////
+foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties) {
+    $regional = substr($properties['regional'], 0, 2);
+    $trans[] = [
+        $regional => request()->get('title_'. $regional)
+    ]; 
+}    
+//////////
+
+
+        $row = MainModel::find($role->id);
+        $row->name = $request->input('name');
+        $row->trans = json_encode($trans);
+
+        $row->save();
+        $row->syncPermissions($request->input('permission'));
+
+        // return redirect()->route($this->$resource.'.index')
+        // >with('success',$this->trans_file.'.updateMessageSuccess');
+
 
     }
-    public function destroy(MainModel $page){              
-        $page->image ? $this->unlinkFile($page->image) : ''; // Unlink Image           
-        if($page->delete()){
+    public function destroy(MainModel $role){              
+
+
+
+
+        if($role->delete()){
             $arr = array('msg' => __($this->TRANS.'.'.'deleteMessageSuccess'), 'status' => true);
         }else{
             $arr = array('msg' => __($this->TRANS.'.'.'deleteMessageError'), 'status' => false);

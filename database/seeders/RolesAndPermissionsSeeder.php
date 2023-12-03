@@ -55,8 +55,10 @@ class RolesAndPermissionsSeeder extends Seeder
         // create roles and assign created permissions
 
         $role = Role::create(['name' => 'super-admin','trans' => '{"ar" : "المدير العام", "en" : "SuperAdmin"}']);
+        
         $role->givePermissionTo(Permission::all());
 
+        /*
         // // this can be done as separate statements
         $role = Role::create(['name' => 'writer','trans'=>'{"ar" : "كاتب محتوي", "en" : "Writer"}']);
         $role = Role::create(['name' => 'editor','trans'=>'{"ar" : "محرر", "en" : "Editor"}']);
@@ -73,7 +75,7 @@ class RolesAndPermissionsSeeder extends Seeder
 
         $role = Role::create(['name' => 'moderator','trans'=>'{"ar" : "رئيس جلسة", "en" : "Moderator"}'])
             ->givePermissionTo(['posts-publish']);
-
+        */
 
     }
 }

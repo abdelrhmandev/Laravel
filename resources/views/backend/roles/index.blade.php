@@ -1,7 +1,6 @@
 @extends('backend.base.base')
 @section('breadcrumbs')
-<li class="breadcrumb-item text-muted">sadasd</li>
-<li class="breadcrumb-item text-dark">Listings</li>
+<li class="breadcrumb-item text-dark">{{ __($trans.".plural") }}</li>
 @stop
 @section('style')
 @if(app()->getLocale() === 'ar')
@@ -11,38 +10,8 @@
 @endif
 @stop
 @section('content')
-<div class="container-xxl" id="kt_content_container">
-   <!--begin::Row-->
-   @if($rows->count())
-   <div class="d-flex flex-wrap flex-stack mb-6">
-      <!--begin::Heading-->
-      <h3 class="fw-bold my-2">dasdsad
-         <span class="badge badge-primary badge-circle badge-lg">sdasd</span>
-         <span class="fs-6 text-gray-400 fw-semibold ms-1">Active</span>
-      </h3>
-      <!--end::Heading-->
-      <!--begin::Actions-->
-      <div class="d-flex flex-wrap my-2">
-         <div class="me-4">
-            <!--begin::Select-->
-            <select name="status" data-control="select2" data-hide-search="true" class="form-select form-select-sm bg-body border-body w-125px">
-               <option value="Active" selected="selected">Active</option>
-            </select>
-            <!--end::Select-->
-         </div>
-         <div class="text-center mb-1">
-            <!--begin::Link-->
-            <a class="btn btn-sm btn-primary me-2">{{ __('site.filter')}}</a>
-            <!--end::Link-->
-            <!--begin::Link-->
-            <!--end::Link-->    
-            <a href="{{ route('admin.roles.create')}}" class="btn btn-success btn-sm">CREATE</a>
-         </div>
-      </div>
-      <!--end::Actions-->
-   </div>
+<div id="kt_content_container" class="container-xxl">
    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-5 g-xl-9">
-      <!--begin::Col-->
       @foreach ( $rows as $row)
       <div class="col-md-4">
          <!--begin::Card-->
@@ -52,14 +21,9 @@
                <!--begin::Card title-->
                <div class="card-title">
                   <h2>
-                     <?php
-                     foreach (json_decode($row->trans,true) as $role){
-                        echo isset($role[app()->getLocale()]) ? $role[app()->getLocale()] : ''; // this is your area from json response
-                     
-                     }
-                     ?>
-
-                  
+                     @foreach (json_decode($row->trans,true) as $role)
+                        {{  isset($role[app()->getLocale()]) ? $role[app()->getLocale()] : ''; }}
+                     @endforeach
                   </h2>
                </div>
                <!--end::Card title-->
@@ -105,46 +69,32 @@
          <!--end::Card-->
       </div>
       @endforeach
-      <div class="d-flex flex-stack flex-wrap pt-10">
-         {!! $rows->links() !!}
-      </div>
-      <!--end::Col-->
-      <!--begin::Add new card-->
-      <!--begin::Add new card-->
-   </div>
-   @else
-   <div class="col-md-12">
-      <div class="row row-cols-12">
-         <div class="card">
+
+      <div class="ol-md-4">
+         <!--begin::Card-->
+         <div class="card h-md-100">
             <!--begin::Card body-->
-            <div class="card-body">
-               <!--begin::Heading-->
-               <div class="card-px text-center pt-15 pb-15">
-                  <!--begin::Title-->
-                  <h3 class="fs-2x fw-bold mb-0 text-danger">{{ __('site.empty_records')}}</h3>
-                  <!--end::Title-->
-                  <!--begin::Description-->
-                  <br /> 
-                  <!--end::Description-->
-                  <!--begin::Action-->
-                  <a href="{{ route('admin.roles.create')}}" class="btn btn-primary er fs-6 px-8 py-4">{{ __('role.create')}}</a>
-                  <!--end::Action-->
-               </div>
-               <!--end::Heading-->
-               <!--begin::Illustration-->
-               <div class="text-center pb-15 px-5">
-                  <img src="{{ asset('assets/backend/media/illustrations/unitedpalms-1/4.png')}}" alt="" class="mw-100 h-200px h-sm-325px" />
-               </div>
-               <!--end::Illustration-->
+            <div class="card-body d-flex flex-center">
+               <!--begin::Button-->
+               <button type="button" class="btn btn-clear d-flex flex-column flex-center" data-bs-toggle="modal" data-bs-target="#kt_modal_add_role">
+                  <!--begin::Illustration-->
+                  <img src="assets/media/illustrations/sketchy-1/4.png" alt="" class="mw-100 mh-150px mb-7" />
+                  <!--end::Illustration-->
+                  <!--begin::Label-->
+                  <div class="fw-bold fs-3 text-gray-600 text-hover-primary">Add New Role</div>
+                  <!--end::Label-->
+               </button>
+               <!--begin::Button-->
             </div>
-            <!--end::Card body-->
+            <!--begin::Card body-->
          </div>
-         <!--end::Card body-->
+         <!--begin::Card-->
       </div>
    </div>
-   @endif
+
 </div>
 @stop
+
+
 @section('scripts')
-<!--end::Custom Javascript-->
 @stop

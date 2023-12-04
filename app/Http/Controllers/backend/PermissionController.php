@@ -64,7 +64,7 @@ class PermissionController extends Controller
             'trans_file'                      => $this->trans_file,
 
         ];
-        return view('backend.'.$this->resource.'.index', $compact);
+        return view('backend.roles.index', $compact);
     }
 
     
@@ -90,7 +90,7 @@ class PermissionController extends Controller
             'trans_file'                      => $this->trans_file,
 
         ];
-        return view('backend.'.$this->resource.'.create', $compact);
+        return view('backend.roles.create', $compact);
 
 
     }
@@ -161,7 +161,7 @@ class PermissionController extends Controller
 
     
 
-        return view('roles.show',compact('role','rolePermissions'));
+        return view('backend.roles.show',compact('role','rolePermissions'));
 
     }
 
@@ -195,7 +195,7 @@ class PermissionController extends Controller
 
     
 
-        return view('roles.edit',compact('role','permission','rolePermissions'));
+        return view('backend.roles.edit',compact('role','permission','rolePermissions'));
 
     }
 

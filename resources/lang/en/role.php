@@ -20,4 +20,9 @@ return [
 'updateMessageError'        => 'Error in update Role',
 'storeMessageSuccess'       => 'Role has been created successfully',
 'storeMessageError'         => 'Error in Store Role',
+//
+'associated_users'           =>'Associated Users',
+'no_associated_users'        =>'No Associated Users',
+'no_permissions_assigned'    =>'No Permissions Assigned',
+
 ];

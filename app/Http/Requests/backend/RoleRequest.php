@@ -30,18 +30,33 @@ class RoleRequest extends FormRequest
      */
     public function rules()
     {
-        ////////////////
-        return [
-            'title'           =>'required|unique:roles,name',
-            'permission'      => 'required|array|min:1',
-        ];
+        ///MULTI Languages Inputs Validation///////////
+        $id = $this->request->get('id') ? ',' . $this->request->get('id') : '';
+
+        foreach(\LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
+            $rules['title_'.substr($properties['regional'],0,2)] = 'required|unique:roles,trans'.$id;
+        } 
+
+
+
+
+
+        $rules['name'] = 'required|unique:roles,name'.$id;
+        $rules['permissions'] =  'exists:permissions,id';   
+       
+
+        return $rules; 
+
     }
+
+ 
+
 
  
     public function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(response()->json([
-            'status'   => false,
+            'status'   => 'RequestValidation',
             'msg'      => $validator->errors()
         ]));
     }

@@ -1,90 +1,118 @@
-@extends('layouts.admin')
+@extends('backend.base.base')
+
+@section('breadcrumbs')
+    <li class="breadcrumb-item text-muted"><a href="{{ $redirect_after_destroy }}" class="text-muted">
+            {{ __($trans . '.plural') }}</a></li>
+    <li class="breadcrumb-item text-dark">{{ __($trans . '.edit') }}</li>
+@stop
+
+@section('style')
+
+    @if (app()->getLocale() === 'ar')
+        <link href="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.rtl.css') }}" rel="stylesheet"
+            type="text/css" />
+    @else
+        <link href="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet"
+            type="text/css" />
+    @endif
+    <link href="{{ asset('assets/backend/css/custom.css') }}" rel="stylesheet" type="text/css" />
+
+@stop
 @section('content')
-<div>
- {{-- <form method="POST" action="{{ route('recipes.update',$row->id)}}" enctype="multipart/form-data">
-  @csrf
-  @method('PUT') --}}
+
+    <div class="container-xxl" id="kt_content_container">
+        <form id="Edit{{ $trans }}" data-route-url="{{ $updateRoute }}" class="form d-flex flex-column flex-lg-row"
+            data-form-submit-error-message="{{ __('site.form_submit_error') }}"
+            data-form-agree-label="{{ __('site.agree') }}" enctype="multipart/form-data">
+
+            <input type="hidden" name="id" value="{{ $row->id}}" />
+                                                
+            @method('PUT')
+            
+            <div class="d-flex flex-column gap-3 gap-lg-7 w-100 mb-2 me-lg-5">
+                <div class="card card-flush py-0">
+                    <div class="card-body pt-0">
+                        <div class="d-flex flex-column gap-5">
+                            <div class="separator"></div>
+                            <x-backend.langs.ulTabs />
+                            <div class="tab-content">
+                                @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                    <div class="tab-pane fade {{ LaravelLocalization::getCurrentLocaleName() == $properties['name'] ? 'show active' : '' }}"
+                                        id="{{ substr($properties['regional'], 0, 2) }}" role="tabpanel">
+                                        <div class="d-flex flex-column gap-5">
+                                            <div class="fv-row fl">
+                                                <label class="required form-label"
+                                                    for="title-{{ substr($properties['regional'], 0, 2) }}">{{ __('site.title') }}</label>
+                                                <input placeholder="{{ __('site.title') . ' ' . $properties['name'] }}"
+                                                    type="text" id="title_{{ substr($properties['regional'], 0, 2) }}"
+                                                    name="title_{{ substr($properties['regional'], 0, 2) }}"
+                                                    class="form-control mb-2" required
+                                                    data-fv-not-empty___message="{{ __('validation.required', ['attribute' => 'title' . '&nbsp;' . substr($properties['regional'], 0, 2)]) }}"
+                                                    value="@foreach (json_decode($row->trans, true) as $per) {{ isset($per[substr($properties['regional'], 0, 2)]) ? $per[substr($properties['regional'], 0, 2)] : '' }} @endforeach" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div class="fv-row fl">
+                                <label class="required form-label" for="name-">Name</label>
+                                <input type="text" id="name" name="name" class="form-control mb-2" required
+                                    data-fv-not-empty___message="{{ __('validation.required', ['attribute' => 'name' . '&nbsp;']) }}"
+                                    value="{{ $row->name }}" />
+                            </div>
+                        </div>
+                    </div>
+
 
  
+                  
+                    <div class="card card-flush py-4">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <h2>{{ __('permission.plural')}}</h2>
+                            </div>
+                        </div>
+                        <div class="card-body pt-0">      
+                                <div class="row row-cols-1 row-cols-md-0 row-cols-lg-1 row-cols-xl-5 g-2" data-kt-buttons="true" data-kt-buttons-target="[data-kt-button='true']">
+                                    @foreach ($permissions as $permission)               
+                                    <div class="form-check form-check-custom form-check-solid mb-2">
+                                        <input class="form-check-input" type="checkbox" name="permissions[]" value="{{ $permission->id }}"
+                                        
+                                        @if(in_array($permission->id,$row->permissions->pluck('id')->toArray())) checked @endif
+                                        />                  
+                                        <label class="form-check-label" for="flexCheckDefault">    
+                                            
+                                            @foreach (json_decode($permission->trans,true) as $per)
+                                                {{ isset($per[app()->getLocale()]) ? $per[app()->getLocale()] : '' }}                                                                     
+                                            @endforeach                                           
 
-{{-- <img src="{{ asset("storage/".$row->image) }}" width="50"> --}}
- 
-{{--  
-<p> cook  : {{ $row->cook }} </p>  
-<p> servings  : {{ $row->servings }}</p> 
-<p> featured  : {{ $row->featured }} </p>  
-<p> created_at  : {{ $row->created_at }} </p> --}}
-
-
-{{-- @include('backend.partials.title') --}}
-
-
-{{-- @include('backend.partials.likes',['likes'=>$row->likes,'counter'=>$row->likes->count()]) --}}
-
-{{-- @include('backend.partials.dislikes',['dislikes'=>$row->dislikes,'counter'=>$row->dislikes->count()]) --}}
-
-
-
-
-{{-- @include ('backend.partials.comments.list', ['collection' => $comments['root']]) --}}
-
-
-    {{-- https://www.youtube.com/watch?v=wCfKSpIMVpY --}}
- 
-
-    {{-- {{ $counter}} --}}
- 
-
-
- 
-{{-- {{ $counter}} --}}
-
-
-
- 
- 
- 
-</div>
-  
-{{-- @endforeach  --}}
+                                        </label>
+                                    </div>
+                                    @endforeach
+                                </div>       
+                        </div>
+                    </div>
+                    
+                </div>
+                <x-backend.btns.button :destroyRoute="$destroyRoute" :redirectRoute="$redirect_after_destroy" :row="$row" :trans="$trans" />
+            </div>
 
 
 
 
-
-<br><br><br>
-
-<h1><input type="submit" value="UPDATE"></h1>
-
-</form>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-<script>
-    $("#selectbtn-tag").click(function(){
-        $("#selectall-tag > option").prop("selected","selected");
-        $("#selectall-tag").trigger("change");
-    });
-    $("#deselectbtn-tag").click(function(){
-        $("#selectall-tag > option").prop("selected","");
-        $("#selectall-tag").trigger("change");
-    });
-
-    $(document).ready(function () {
-        $('.select2').select2();
-    });
-   
-        $('document').ready(function () {
-            $('.nutrition-enable').on('click', function () {
-                let id = $(this).attr('data-id')
-                let enabled = $(this).is(":checked")
-                $('.nutrition-value[data-id="' + id + '"]').attr('disabled', !enabled)
-                $('.nutrition-value[data-id="' + id + '"]').val(null)
-            })
+        </form>
+    </div>
+@stop
+@section('scripts')
+    <script src="{{ asset('assets/backend/js/custom/Tachyons.min.js') }}"></script>
+    <script src="{{ asset('assets/backend/js/custom/es6-shim.min.js') }}"></script>
+    <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+    <script src="{{ asset('assets/backend/js/widgets.bundle.js') }}"></script>
+    <script src="{{ asset('assets/backend/js/custom/handleFormSubmit.js') }}"></script>
+    <script src="{{ asset('assets/backend/js/custom/deleteConfirmSwal.js') }}"></script>
+    <script>
+        KTUtil.onDOMContentLoaded(function() {
+            handleFormSubmitFunc('Edit{{ $trans }}');
         });
     </script>
-
 @stop

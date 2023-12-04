@@ -53,9 +53,20 @@
                      <div class="ms-6">
                         <!--begin::Name-->
                         <a href="{{ route('admin.'.$resource.'.edit',$row->id)}}" class="d-flex align-items-center fs-5 fw-bold text-dark text-hover-primary">
-                           {{ json_decode($row->trans)->{app()->getLocale()}; }}
+
+
+                           @foreach (json_decode($row->trans,true) as $permi)
+                           {{  isset($permi[app()->getLocale()]) ? $permi[app()->getLocale()] : ''; }}
+                        @endforeach
+
                            @foreach ($row->roles as $role)
-                           <span class="badge badge-light fs-8 fw-semibold ms-2"> {{ json_decode($role->trans)->{app()->getLocale()}; }}</span>
+                           <span class="badge badge-light fs-8 fw-semibold ms-2">
+                              
+                              @foreach (json_decode($role->trans,true) as $ro)
+                              {{  isset($ro[app()->getLocale()]) ? $ro[app()->getLocale()] : ''; }}
+                           @endforeach
+                              
+                           </span>
                            <div class="separator separator-dashed my-4"></div>
                            @endforeach
                         </a>

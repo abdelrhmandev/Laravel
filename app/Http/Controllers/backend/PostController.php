@@ -226,8 +226,8 @@ if ($request->ajax()) {
                     'listingRoute'       => route($this->ROUTE_PREFIX.'.index'),
                     'storeRoute'         => route($this->ROUTE_PREFIX.'.store'), 
                     'categories'         => Category::tree(),
-                    'tags'               => Tag::get(),
-                    'authors'            => User::get(),
+                    'tags'                => Tag::select('id'),
+                    'authors'              => User::select('id','name'),
                 ];            
                 return view('backend.posts.create',$compact);
             }
@@ -247,8 +247,8 @@ if ($request->ajax()) {
                 'trans'                   => $this->TRANS,
                 'categories'              => Category::tree(),
                 'redirect_after_destroy'  => route($this->ROUTE_PREFIX.'.index'),
-                'tags'                    => Tag::get(),
-                'authors'                 => User::get(),
+                'tags'                    => Tag::select('id'),
+                'authors'                 => User::select('id','name'),
             ];                
              return view('backend.posts.edit',$compact);                    
             }

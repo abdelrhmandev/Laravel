@@ -88,9 +88,9 @@
     
         <div class="fl w-100">
             <label class="required fs-5 fw-semibold mb-2">Permissions</label>
-            @foreach($permission as $value)
+            @foreach($permissions as $value)
                 <p>
-                    <input type="checkbox" value="{{ $value->id}}" name="permission[]">{{ $value->name }}
+                    <input type="checkbox" value="{{ $value->id}}" name="permissions[]">{{ $value->name }}
                 </p>
             @endforeach                
         </div>

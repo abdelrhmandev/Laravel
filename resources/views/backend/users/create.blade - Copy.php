@@ -31,25 +31,7 @@
                     <div class="card-body pt-0">
                         <div class="d-flex flex-column gap-5">
                             <div class="separator"></div>
-                            <x-backend.langs.ulTabs />
-                            <div class="tab-content">
-                                @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                    <div class="tab-pane fade {{ LaravelLocalization::getCurrentLocaleName() == $properties['name'] ? 'show active' : '' }}"
-                                        id="{{ substr($properties['regional'], 0, 2) }}" role="tabpanel">
-                                        <div class="d-flex flex-column gap-5">
-                                            <div class="fv-row fl">
-                                                <label class="required form-label"
-                                                    for="title-{{ substr($properties['regional'], 0, 2) }}">{{ __('site.title') }}</label>
-                                                <input placeholder="{{ __('site.title') . ' ' . $properties['name'] }}"
-                                                    type="text" id="title_{{ substr($properties['regional'], 0, 2) }}"
-                                                    name="title_{{ substr($properties['regional'], 0, 2) }}"
-                                                    class="form-control mb-2" required
-                                                    data-fv-not-empty___message="{{ __('validation.required', ['attribute' => 'title' . '&nbsp;' . substr($properties['regional'], 0, 2)]) }}"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
+                            
                             <div class="fv-row fl">
                                 <label class="required form-label" for="name">Name</label>
                                 <input type="text" id="name" name="name" class="form-control mb-2" required
@@ -64,17 +46,17 @@
                     <div class="card card-flush py-4">
                         <div class="card-header">
                             <div class="card-title">
-                                <h2>{{ __('permission.plural')}}</h2>
+                                <h2>{{ __('role.plural')}}</h2>
                             </div>
                         </div>
                         <div class="card-body pt-0">      
                                 <div class="row row-cols-1 row-cols-md-0 row-cols-lg-1 row-cols-xl-5 g-2" data-kt-buttons="true" data-kt-buttons-target="[data-kt-button='true']">
-                                    @foreach ($permissions as $permission)               
+                                    @foreach ($roles as $role)               
                                     <div class="form-check form-check-custom form-check-solid mb-2">
-                                        <input class="form-check-input" type="checkbox" name="permissions[]" value="{{ $permission->id }}"/>                  
+                                        <input class="form-check-input" type="checkbox" name="roles[]" value="{{ $role->id }}"/>                  
                                         <label class="form-check-label" for="flexCheckDefault">                                                
-                                            @foreach (json_decode($permission->trans,true) as $per)
-                                                {{ isset($per[app()->getLocale()]) ? $per[app()->getLocale()] : '' }}                                                                     
+                                            @foreach (json_decode($role->trans,true) as $rl)
+                                                {{ isset($rl[app()->getLocale()]) ? $rl[app()->getLocale()] : '' }}                                                                     
                                             @endforeach                                           
                                         </label>
                                     </div>

@@ -11,31 +11,16 @@ use Spatie\Permission\Models\Role as MainModel;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\backend\RoleRequest as ModuleRequest;
-/////////////////
-
-
-
-
-//////////////////
-
 class RoleController extends Controller
 {
     use Functions;
 
     public function __construct() {
-
-        
-
         $this->ROUTE_PREFIX         = config('custom.route_prefix').'.roles'; 
         $this->TRANS                = 'role';
         $this->Tbl                  = 'roles';
     }
-
-
- 
-
-    public function store(Request $request){
-
+    public function store(ModuleRequest $request){
         foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties) {
             $regional = substr($properties['regional'], 0, 2);
             $trans[] = [
@@ -48,18 +33,21 @@ class RoleController extends Controller
             'guard_name'    =>'web'
         ];              
         $role = MainModel::create($arry);
-        $role->syncPermissions($request->input('permissions'));
-
-        dd();
-
+        if($role && $role->syncPermissions($request->input('permissions'))){
+            $arr = array('msg' => __($this->TRANS.'.'.'storeMessageSuccess'), 'status' => true);              
+        }else{
+            $arr = array('msg' => __($this->TRANS.'.'.'storeMessageError'), 'status' => false);
+        }
+        return response()->json($arr);
     }
-        
-
     public function create(){
         $compact = [
-            'rows'       => MainModel::select('id','name','trans')->with('permissions')->withCount(['users','permissions'])->latest()->get(), 
+            'rows'               => MainModel::select('id','name','trans')->with('permissions')->withCount(['users','permissions'])->latest()->get(), 
+            'permissions'        => Permission::select('id','name','trans')->get(),
+            'trans'              => $this->TRANS,
+            'listingRoute'       => route($this->ROUTE_PREFIX.'.index'),
+            'storeRoute'         => route($this->ROUTE_PREFIX.'.store'), 
 
-            'permissions' => Permission::get(),
         ];
         return view('backend.roles.create', $compact);
     }
@@ -67,11 +55,7 @@ class RoleController extends Controller
 //////
 public function index(Request $request){    
         
-
-
-
     if ($request->ajax()) {              
-
         $model = MainModel::select('id','name','trans','created_at')
         ->with([
             'permissions' => function($query) {
@@ -81,12 +65,7 @@ public function index(Request $request){
                 $query->select('id','name','avatar'); # One to many
             }, 
         ])
-        ->withCount(['users','permissions']);
-     
-         
-
-        
-     
+        ->withCount(['users','permissions']);     
         return Datatables::of($model)
                 ->addIndexColumn()   
                 ->editColumn('name', function (MainModel $row) {               
@@ -100,9 +79,11 @@ public function index(Request $request){
                     foreach($row->permissions as $permission){
                         foreach (json_decode($permission->trans,true) as $per){
                             $p = isset($per[app()->getLocale()]) ? $per[app()->getLocale()] : '';
-                            $permissionDiv.="<a href=".route(config('custom.route_prefix').'.permissions.edit',$permission->id)." class=\"text-hover-success badge badge-light-primary\" data-kt-item-filter".$permission->id."=\"item\" title=".$p.">".$p."</a>, ";                     
+                            $permissionDiv.="<a href=".route(config('custom.route_prefix').'.permissions.edit',$permission->id)." class=\"text-hover-success badge badge-light-primary\" data-kt-item-filter".$permission->id."=\"item\" title=".$p.">".$p."</a>";                     
                         }
-                        }
+                    $permissionDiv.=' ,';
+                    }
+
                     }else{
                         $permissionDiv =  "<span class=\"text-danger\">".__('role.no_permissions_assigned')."</span>";
                     }  
@@ -121,14 +102,8 @@ public function index(Request $request){
                 }else{
                     $associated_usersDiv =  "<span class=\"text-danger\">".__('role.no_associated_users')."</span>";
                 }
-
-                    
                     return  $associated_usersDiv;                
                 })
-    
-              
- 
-            
                 ->editColumn('created_at', function (MainModel $row) {
                     return $this->dataTableGetCreatedat($row->created_at);
                  })
@@ -137,8 +112,7 @@ public function index(Request $request){
                  })             
                     ->editColumn('actions', function ($row) {                                                       
                         return $this->dataTableEditRecordAction($row,$this->ROUTE_PREFIX);
-                    })   
-                                
+                    })                                   
                 ->rawColumns(['name','permissions','associated_users','actions','created_at','created_at.display'])                  
                 ->make(true);    
         }  
@@ -149,22 +123,13 @@ public function index(Request $request){
                     'storeRoute'            => route($this->ROUTE_PREFIX.'.store'),
                     'destroyMultipleRoute'  => route($this->ROUTE_PREFIX.'.destroyMultiple'), 
                     'redirectRoute'         => route($this->ROUTE_PREFIX.'.index'),    
-                    'allrecords'            => MainModel::count(),
-    
+                    'allrecords'            => MainModel::count(),    
                 ];                       
                 return view('backend.roles.index',$compact);
             }
     }
-    //////
-
      public function edit(Request $request,MainModel $role){ 
-        if (view()->exists('backend.roles.edit')) {
-            
-
-
- 
-
-            
+        if (view()->exists('backend.roles.edit')) {            
             $compact = [                
                 'updateRoute'             => route($this->ROUTE_PREFIX.'.update',$role->id), 
                 'row'                     => $role,
@@ -173,15 +138,11 @@ public function index(Request $request){
                 'permissions'             => Permission::select('id','trans')->get(),
                 'redirect_after_destroy'  => route($this->ROUTE_PREFIX.'.index'),
             ];                
-
- 
-
              return view('backend.roles.edit',$compact);                    
             }
     }
 
     public function update(ModuleRequest $request, MainModel $role){        
-
         foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties) {
             $regional = substr($properties['regional'], 0, 2);
             $trans[] = [
@@ -199,23 +160,13 @@ public function index(Request $request){
         return response()->json($arr);
     }
     public function destroy(MainModel $role){              
-
-
-
-
-        if($role->delete()){
+       if($role->delete()){
             $arr = array('msg' => __($this->TRANS.'.'.'deleteMessageSuccess'), 'status' => true);
         }else{
             $arr = array('msg' => __($this->TRANS.'.'.'deleteMessageError'), 'status' => false);
         }        
         return response()->json($arr);
     }
-
-    
-
-
-
-
     public function destroyMultiple(Request $request){  
         $ids = explode(',', $request->ids);             
         $items = MainModel::whereIn('id',$ids); // Check          
@@ -226,7 +177,4 @@ public function index(Request $request){
         }        
         return response()->json($arr);
     }
-
-
-
 }

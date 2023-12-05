@@ -3,7 +3,7 @@
 @section('breadcrumbs')
     <li class="breadcrumb-item text-muted"><a href="" class="text-muted">
             {{ __($trans . '.plural') }}</a></li>
-    <li class="breadcrumb-item text-dark">{{ __($trans . '.edit') }}</li>
+    <li class="breadcrumb-item text-dark">{{ __($trans . '.add') }}</li>
 @stop
 
 @section('style')
@@ -61,27 +61,6 @@
 
 
                   
-                    <div class="card card-flush py-4">
-                        <div class="card-header">
-                            <div class="card-title">
-                                <h2>{{ __('permission.plural')}}</h2>
-                            </div>
-                        </div>
-                        <div class="card-body pt-0">      
-                                <div class="row row-cols-1 row-cols-md-0 row-cols-lg-1 row-cols-xl-5 g-2" data-kt-buttons="true" data-kt-buttons-target="[data-kt-button='true']">
-                                    @foreach ($permissions as $permission)               
-                                    <div class="form-check form-check-custom form-check-solid mb-2">
-                                        <input class="form-check-input" type="checkbox" name="permissions[]" value="{{ $permission->id }}"/>                  
-                                        <label class="form-check-label" for="flexCheckDefault">                                                
-                                            @foreach (json_decode($permission->trans,true) as $per)
-                                                {{ isset($per[app()->getLocale()]) ? $per[app()->getLocale()] : '' }}                                                                     
-                                            @endforeach                                           
-                                        </label>
-                                    </div>
-                                    @endforeach
-                                </div>       
-                        </div>
-                    </div>                    
                 </div>
                 <x-backend.btns.button />
             </div>

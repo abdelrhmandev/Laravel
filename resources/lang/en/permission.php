@@ -20,4 +20,6 @@ return [
 'updateMessageError'        => 'Error in update Permission',
 'storeMessageSuccess'       => 'Permission has been created successfully',
 'storeMessageError'         => 'Error in Store Permission',
+'associated_roles'          =>'Associated roles',
+'no_associated_role'        =>'No Associated role',
 ];

@@ -3,7 +3,7 @@ namespace App\Http\Requests\backend;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
-class RoleRequest extends FormRequest
+class PermissionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,24 +15,15 @@ class RoleRequest extends FormRequest
         return true;
     }
 
-
     public function rules()
     {
         ///MULTI Languages Inputs Validation///////////
         $id = $this->request->get('id') ? ',' . $this->request->get('id') : '';
 
         foreach(\LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
-            $rules['title_'.substr($properties['regional'],0,2)] = 'required|unique:roles,trans'.$id;
+            $rules['title_'.substr($properties['regional'],0,2)] = 'required|unique:permissions,trans'.$id;
         } 
-
-
-
-
-
-        $rules['name'] = 'required|unique:roles,name'.$id;
-        $rules['permissions'] =  'exists:permissions,id';   
-       
-
+        $rules['name'] = 'required|unique:permissions,name'.$id;
         return $rules; 
 
     }

@@ -20,4 +20,5 @@ return [
 'updateMessageError'        => 'Error in update User',
 'storeMessageSuccess'       => 'User has been created successfully',
 'storeMessageError'         => 'Error in Store User',
+'no_roles_assigned'         => 'No Roles Assigned',
 ];

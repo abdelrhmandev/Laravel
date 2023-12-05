@@ -1,335 +1,176 @@
 <?php
 namespace App\Http\Controllers\backend;
-use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Builder;
-use App\Http\Controllers\Controller;
-use Spatie\Permission\Models\Role;
-use LaravelLocalization;
-use App\Models\User;
-use App\Traits\UploadAble;
-use App\Traits\Functions;
-// use App\Traits\DatatableLang;
 use Carbon\Carbon;
+use LaravelLocalization;
+use App\Traits\Functions; 
+use App\Traits\UploadAble;
 use DataTables;
-use DB; 
 use Illuminate\Support\Str;
 
-
+use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use App\Models\User as MainModel;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File; 
+use App\Http\Requests\backend\UserRequest as ModuleRequest;
 class UserController extends Controller
 {
     use UploadAble,Functions;
-    protected $model;
-    protected $resource;
-    protected $trans_file;
 
- 
- 
-    public function index(Request $request){    
-         
- 
-        ?>
-        <h1>لما تمسح اليوزر اساله نمسح كل الحاجات اللي متعلقه بيه زي المقالات و التعليقات و اي شيء مرتبط بيه </h1>
-        <?php
 
-        dd('dasd');
-             
-            
-       
-        $query = $this->model::with('roles');
+    public function __construct() {
+        $this->ROUTE_PREFIX         = config('custom.route_prefix').'.users'; 
+        $this->TRANS                = 'user';
+        $this->Tbl                  = 'users';
+    }
+    public function store(ModuleRequest $request){
+        foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties) {
+            $regional = substr($properties['regional'], 0, 2);
+            $trans[] = [
+                $regional => request()->get('title_'. $regional)
+            ]; 
+        }    
+            $arry = [
+            'name'          => $request->input('name'),            
+            'trans'         => json_encode($trans),
+            'guard_name'    =>'web'
+        ];              
+        $user = MainModel::create($arry);
+        if($user && $user->syncPermissions($request->input('permissions'))){
+            $arr = array('msg' => __($this->TRANS.'.'.'storeMessageSuccess'), 'status' => true);              
+        }else{
+            $arr = array('msg' => __($this->TRANS.'.'.'storeMessageError'), 'status' => false);
+        }
+        return response()->json($arr);
+    }
+    public function create(){
+        $compact = [
+            'roles'              => Role::select('id','name','trans')->get(),
+            'trans'              => $this->TRANS,
+            'listingRoute'       => route($this->ROUTE_PREFIX.'.index'),
+            'storeRoute'         => route($this->ROUTE_PREFIX.'.store'), 
 
-            if ($request->ajax()) {
+        ];
+        return view('backend.users.create', $compact);
+    }
+
+//////
+public function index(Request $request){    
+        
+    if ($request->ajax()) {              
+        $model = MainModel::select('id','name','email','avatar','created_at')
+        ->with([
+            'roles' => function($query) {
+                $query->select('id','trans'); # Many to many
+            } 
+        ])
+        ->withCount(['roles']);     
+        return Datatables::of($model)
+                ->addIndexColumn()   
+
+                ->editColumn('avatar', function ($row) {
+                $avatar = !empty($row->avatar) ? asset($row->avatar) : asset('assets/backend/media/avatars/blank.png');    
+                $div = "<a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." title='".$row->name."'>
+                <div class=\"symbol symbol-circle symbol-5\"><img class=\"img-fluid\" src=".$avatar."></div>     
+                </a>";                      
+                return $div;                                   
+                })        
+                ->editColumn('name', function (MainModel $row) {               
+                    return "<a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".Str::words($row->name, '5')."</a>
+                    ";    
+                })
+
                 
-
-                 return Datatables::of($query->latest())    
-                            ->addIndexColumn()
-                  
-                            
-                            ->editColumn('name', function ($row) {
-                             $route = route('admin.'.$this->resource.'.edit',$row->id);   
-                            $div = "<div class=\"d-flex align-items-center\">";                            
-                            if($row->avatar){
-                                $div.= "<a href=".$route." title='".$row->name."' class=\"symbol symbol-50px\">
-                                            <span class=\"symbol-label\" style=\"background-image:url(".asset("storage/".$row->avatar).")\" />
-                                            </span>
-                                        </a>";                                                                
-                            }else{
-                                $div.="<a href=".$route." class=\"symbol symbol-50px\" title='".$row->name."'>
-                                                <div class=\"symbol-label fs-3 bg-light-success text-success\">".$this->str_split($row->name,1)."</div>
-                                       </a>";  
-                            } 
-                      
-                                $div.="<div class=\"ms-5\">
-                                <a href=".$route." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-recipes-filter=\"item\">".$row->name."</a>
-                                </div>"; 
-
-                            $div.= "</div>";
-                            return $div;
-                        
-                        })
-
-                                                             
-        
- 
- 
-
-                        ->editColumn('actions', function ($row) {      
-                                                         
-                        return view('backend.partials.btns.edit-delete', ['edit_route'=>route('admin.'.$this->resource.'.edit',$row->id),'destroy_route'=> route('admin.'.$this->resource.'.destroy',$row->id)]);
-                        })        
-                        
-                        
-                        ->editColumn('created_at', function ($row) {
-                             return $row->created_at->format('d/m/Y')."<div class=\"fw-semibold text-success fs-7\">".Carbon::createFromFormat('Y-m-d H:i:s', $row->created_at)->diffForHumans()."</div>";
-                        })
-
-                        ->editColumn('role', function ($row) {      
-                           $role = '';                              
-                            if(!empty($row->getRoleNames())){
-                            foreach($row->getRoleNames() as $v){
-                                $role.= "<a class=\"text-primary fw-bold\" href =".route('admin.roles.edit',$row->id).">".json_decode($v)->{app()->getLocale()}."</a>";
-                             }
-                         }
-
-
-                            return $role;
-                            })    
-
-                        ->rawColumns(['name','role','created_at','actions'])    
-                        ->make(true);    
-            }    
-
-         
-
-
-            $compact                          = [
-            'counter'                         =>$query->count(),       
-            'resource'                        => $this->resource,
-            'trans_file'                      => $this->trans_file,
-            'page_title'                      => trans('orphan.interventions_menu'),
-            'header_title'                    => trans('orphan.interventions_menu')
-            ];
-            //
-            
-            return view('backend.'.$this->resource.'.index', $compact);
-        
-
-
-    
-        }
-        
-
-      
-        
- 
-    
-        /**
-         * Show the form for creating a new resource.
-         *
-         * @return \Illuminate\Http\Response
-         */
-        public function create(){             
-
-            $compact                          = [
-                'resource'                        => $this->resource,
-                'trans_file'                      => $this->trans_file,
-            
-                'page_title'                      => trans('orphan.interventions_menu'),
-                'header_title'                    => trans('orphan.interventions_menu')
-                ];
-
-            // $this->recipe->create(['pulished'=>1,'featured'=>1]);            
-            // $users =  Input::get('posts');
-            // $users->tags()->sync($request->tags, false);
-            //
-            return view('backend.'.$this->resource.'.create', $compact);
-        }
-    
- 
-        public function store(Request $request)
-        {
-            // Product::whereId($request -> product_id) -> update($request -> only(['price','special_price','special_price_type','special_price_start','special_price_end']));
-
-        }
-    
-   
- 
- 
-        public function edit($id){
-            
-         
-    
-         
-          
-
-       
-            
-            
-            $row = $this->model::findOrFail($id);
+                ->AddColumn('role', function (MainModel $row) {                                                            
+                    $roleDiv = '';
+                    if($row->roles_count>0){                    
+                        foreach($row->roles as $role){
+                            foreach (json_decode($role->trans,true) as $r){
+                                if(isset($r[app()->getLocale()])){
+                                    $roleDiv.="<div class=\"badge py-3 px-4 fs-7 badge-light-primary\"><span class=\"text-primary\">".$r[app()->getLocale()]."</span></div> ";                     
+                                }
+                                }
+                        }                        
+                    }else{
+                        $roleDiv =  "<span class=\"text-danger\">".__('user.no_roles_assigned')."</span>";
+                    }  
+                    return  $roleDiv;                
 
 
 
-
-
-
-            
-
-
-          
-              
- 
-            
-            
-   
-
-            
-
-
-     
-            $compact                               = [
-            'row'                                => $row,
-            // 'comments'                           => $row->getThreadedComments(),   
-            // 'media'                           => $row->media,
-            // 'tags'                            => Tag::select('id')->with('item')->latest()->get(),
-            // 'nutritions'                      => $nutritions,
-            // 'categories'                      => RecipeCategory::select('id')->with('item')->get(),
-            'page_title'                      => trans('orphan.interventions_menu'),
-            'header_title'                    => trans('orphan.interventions_menu')
-            ];
-            return view('backend.users.edit', $compact);
-            //
-        }
-    
- 
-        public function update(Request $request, $id)
-        {
-
-
-            $row = $this->model::findOrFail($id);
-            // Product::whereId($request -> product_id) -> update($request -> only(['price','special_price','special_price_type','special_price_start','special_price_end']));
-
-
-            // tags update         
-            $row->tag()->sync((array)$request->input('tag'));           
-            $row->nutritions()->sync($this->mapnutritions($request->input('nutritions')));
-         
-            return redirect()->back();
-            //
-        }
-    
- 
-        public function destroy($id){
-
-            // https://qcode.in/easy-roles-and-permissions-in-laravel-5-4/
-
-            if ( Auth::user()->id == $id ) {
-                flash()->warning('Deletion of currently logged in user is not allowed :(')->important();
-                return redirect()->back();
+                })
+                ->editColumn('created_at', function (MainModel $row) {
+                    return $this->dataTableGetCreatedat($row->created_at);
+                 })
+                 ->filterColumn('created_at', function ($query, $keyword) {
+                    $query->whereRaw("DATE_FORMAT(created_at,'%d/%m/%Y') LIKE ?", ["%$keyword%"]);
+                 })             
+                    ->editColumn('actions', function ($row) {                                                       
+                        return $this->dataTableEditRecordAction($row,$this->ROUTE_PREFIX);
+                    })                                   
+                ->rawColumns(['avatar','name','role','actions','created_at','created_at.display'])                  
+                ->make(true);    
+        }  
+            if (view()->exists('backend.users.index')) {
+                $compact = [
+                    'trans'                 => $this->TRANS,
+                    'createRoute'           => route($this->ROUTE_PREFIX.'.create'),                
+                    'storeRoute'            => route($this->ROUTE_PREFIX.'.store'),
+                    'destroyMultipleRoute'  => route($this->ROUTE_PREFIX.'.destroyMultiple'), 
+                    'redirectRoute'         => route($this->ROUTE_PREFIX.'.index'),    
+                    'allrecords'            => MainModel::count(),    
+                ];                       
+                return view('backend.users.index',$compact);
             }
-
-
-            $deleteMessageSuccess = __('admin.deleteMessageSuccess:Recipe');
-            $deleteMessageError = __('admin.deleteMessageError:Recipe');
-            // DB::table('settings')->where('id',$id)->delete();
-
-            if($id == 100)
-            {
-                return response()->json([
-                    'status'=>"error",
-                    'msg'=>$deleteMessageError.$id
-                ]); // Bad Request
-
-
-            }else{
-
-                return response()->json([
-                    'status'=>"success",
-                    'msg'=>$deleteMessageSuccess.$id
-                ]); // 
-    
-            }
-
- 
-
-
-            return $id;
-
-            // return redirect()->route('users.index')->with(['success' => 'تم  الحذف بنجاح']);
-            // try {
-            //     //get specific categories and its translations
-            //     $recipe = $this->model::find($id);
-    
-            //     if (!$recipe)
-            //         return redirect()->route('admin.users')->with(['error' => 'هذا الماركة غير موجود ']);
-    
-            //     $recipe->delete();
-    
-            //     return redirect()->route('admin.users')->with(['success' => 'تم  الحذف بنجاح']);
-    
-            // } catch (\Exception $ex) {
-            //     return redirect()->route('admin.users')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
-            // }
-        }
-
-        /*
-            public function deleteAll(Request $request)
-
-    {
-
-        $ids = $request->ids;
-
-        DB::table("products")->whereIn('id',explode(",",$ids))->delete();
-
-        return response()->json(['success'=>"Products Deleted successfully."]);
-
     }
-     */
-        public function destroyMultiple(Request $request){
-            // if (is_array(request('ids'))) {
-               
- 
-
-                // return $ids;
-
-                $ids = $request->ids;
-
-                $deleteMessageSuccess = __('admin.deleteMessageSuccess');
-                // $deleteMessageError = __('admin.deleteMessageError:Recipe');
-    
-
-                    //  return response()->json([
-                    //     'status'=>"error",
-                    //     'msg'=>$deleteMessageError
-                    // ]); // Bad Request
-    
-     
-                    return response()->json([
-                        'status'=>"success",
-                        'msg'=>$deleteMessageSuccess
-                    ]); // 
-        
-     
-
-
-                // $ids = [];
-                // foreach (request('item') as $id) {
-                //    $ids = $id;
-                // }
-                // return $ids;
-            // } 
-    /*
-         try {
-
-            Post::destroy($request->ids);
-            return response()->json([
-                'message'=>"Posts Deleted successfully."
-            ],200);
-
-        } catch(\Exception $e) {
-            report($e);
-        }*/
-    
-        }
- 
-
+     public function edit(Request $request,MainModel $user){ 
+        if (view()->exists('backend.users.edit')) {            
+            $compact = [                
+                'updateRoute'             => route($this->ROUTE_PREFIX.'.update',$user->id), 
+                'row'                     => $user,
+                'destroyRoute'            => route($this->ROUTE_PREFIX.'.destroy',$user->id),
+                'trans'                   => $this->TRANS,
+                'permissions'             => Permission::select('id','trans')->get(),
+                'redirect_after_destroy'  => route($this->ROUTE_PREFIX.'.index'),
+            ];                
+             return view('backend.users.edit',$compact);                    
+            }
     }
 
+    public function update(ModuleRequest $request, MainModel $user){        
+        foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties) {
+            $regional = substr($properties['regional'], 0, 2);
+            $trans[] = [
+                $regional => request()->get('title_'. $regional)
+            ]; 
+        }    
+        $row = MainModel::find($user->id);
+        $row->name = $request->input('name');
+        $row->trans = json_encode($trans);
+        if($row->save() && $row->syncPermissions($request->input('permissions'))){
+            $arr = array('msg' => __($this->TRANS.'.updateMessageSuccess'), 'status' => true);
+        }else{
+            $arr = array('msg' => __($this->TRANS.'.'.'updateMessageError'), 'status' => false);
+        }
+        return response()->json($arr);
+    }
+    public function destroy(MainModel $user){              
+       if($user->delete()){
+            $arr = array('msg' => __($this->TRANS.'.'.'deleteMessageSuccess'), 'status' => true);
+        }else{
+            $arr = array('msg' => __($this->TRANS.'.'.'deleteMessageError'), 'status' => false);
+        }        
+        return response()->json($arr);
+    }
+    public function destroyMultiple(Request $request){  
+        $ids = explode(',', $request->ids);             
+        $items = MainModel::whereIn('id',$ids); // Check          
+        if($items->delete()){
+            $arr = array('msg' => __($this->TRANS.'.'.'MulideleteMessageSuccess'), 'status' => true);
+        }else{
+            $arr = array('msg' => __($this->TRANS.'.'.'MiltideleteMessageError'), 'status' => false);
+        }        
+        return response()->json($arr);
+    }
+}

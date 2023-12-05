@@ -36,9 +36,22 @@ if ($request->ajax()) {
     return Datatables::of($model)
                 ->addIndexColumn()   
                 ->editColumn('author', function (MainModel $row) {                                                    
-                   
+ 
+/*
+<div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
+	<a href="apps/user-management/users/view.html">
+		<div class="symbol-label">
+			<img src="assets/media/avatars/300-9.jpg" alt="Francis Mitcham" class="w-100" />
+		</div>
+	</a>
+</div>
+<div class="d-flex flex-column">
+	<a href="apps/user-management/users/view.html" class="text-gray-800 text-hover-primary mb-1">Francis Mitcham</a>
+	<span>f.mit@kpmg.com</span>
+</div>*/                    
+
                 $src = !empty($row->user->avatar) ? asset($row->user->avatar) : asset('assets/backend/media/avatars/blank.png');   
-                $div = "<div class=\"symbol symbol-50px\"><img class=\"img-fluid\" src=".$src."></div> &nbsp; ".$row->user->name;                
+                $div = "<div class=\"symbol symbol-45px symbol-circle\"><img class=\"img-fluid\" src=".$src."></div> &nbsp; ".$row->user->name;                
                 return $div;
                 })
                 ->editColumn('comment', function (MainModel $row) {

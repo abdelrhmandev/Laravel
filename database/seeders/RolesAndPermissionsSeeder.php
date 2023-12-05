@@ -13,7 +13,12 @@ class RolesAndPermissionsSeeder extends Seeder
 
         // create permissions
 
-        
+
+        Permission::create(['name' => 'users-list','trans' => '[{"ar" : "عرض المستخدمين", "en" : "List Users"}]']);
+        Permission::create(['name' => 'users-delete','trans' => '[{"ar" : "حذف المستخدمين", "en" : "Delete Users"}]']);
+        Permission::create(['name' => 'users-create','trans' => '[{"ar" : "أنشاء المستخدمين", "en" : "Create Users"}]']);
+        Permission::create(['name' => 'users-edit','trans' => '[{"ar" : "تحرير المستخدمين", "en" : "Edit Users"}]']);
+
 
 
         Permission::create(['name' => 'posts-list','trans' => '[{"ar" : "عرض المقالات", "en" : "List Posts"}]']);
@@ -59,20 +64,34 @@ class RolesAndPermissionsSeeder extends Seeder
 
         // // this can be done as separate statements
         $role = Role::create(['name' => 'writer','trans'=>'[{"ar" : "كاتب محتوي", "en" : "Writer"}]']);
+        $role->givePermissionTo('posts-create')
+        ->givePermissionTo(['clients-create']);
+
+
         $role = Role::create(['name' => 'editor','trans'=>'[{"ar" : "محرر", "en" : "Editor"}]']);
   
         $role = Role::create(['name' => 'support','trans'=>'[{"ar" : "دعم فني", "en" : "Support"}]']);
-        $role = Role::create(['name' => 'analyst','trans'=>'[{"ar" : "محلل", "en" : "Analyst"}]']);
+        $role->givePermissionTo('users-list')
+        ->givePermissionTo(['menus-list'])
+        ->givePermissionTo(['menus-edit']);
 
+
+
+        $role = Role::create(['name' => 'analyst','trans'=>'[{"ar" : "محلل", "en" : "Analyst"}]']);
         
-        
-        
-        $role->givePermissionTo('posts-list');
+        $role->givePermissionTo('posts-list')
+        ->givePermissionTo(['posts-publish'])
+        ->givePermissionTo(['menus-list'])
+        ->givePermissionTo(['menus-edit']);
 
         // // or may be done by chaining
 
         $role = Role::create(['name' => 'moderator','trans'=>'[{"ar" : "رئيس جلسة", "en" : "Moderator"}]'])
-            ->givePermissionTo(['posts-publish']);
+        ->givePermissionTo(['posts-list'])
+        ->givePermissionTo(['posts-publish'])
+        ->givePermissionTo(['menus-edit'])
+        ->givePermissionTo(['menus-create']);
+            
 
 
     }

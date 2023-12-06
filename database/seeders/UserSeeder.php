@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
                 'email'            =>'admin@domain.com',
                 'name'             =>'Abdelrahman Magdy',
                 'is_admin'         =>'1',
+                'mobile'           =>'01872971280',
                 'avatar'           =>'uploads/avatars/admin.jpg',
             ])->assignRole(1);
 
@@ -31,6 +32,7 @@ class UserSeeder extends Seeder
                 'email'            =>'NickLogan@domain.com',
                 'name'             =>'Nick Logan',
                 'is_admin'         =>'1',
+                'mobile'           =>'01872971220',
                 'avatar'           =>'uploads/avatars/nick.jpg',
             ])->assignRole(2);
 
@@ -48,6 +50,7 @@ class UserSeeder extends Seeder
                 'email'            =>'FrancisMitcham@domain.com',
                 'name'             =>'Francis Mitcham',
                 'is_admin'         =>'1',
+                'mobile'           =>'01872971230',
             ])->assignRole(3);
 
             \App\Models\User::create([    
@@ -56,6 +59,7 @@ class UserSeeder extends Seeder
                 'email'            =>'Kevin@domain.com',
                 'name'             =>'Kevin Leonard',
                 'is_admin'         =>'1',
+                'mobile'           =>'01872971450',
                 'avatar'           =>'uploads/avatars/kevin.jpg',
             ])->assignRole(4);
 
@@ -79,7 +83,21 @@ class UserSeeder extends Seeder
              
             ])->assignRole(5);
 
-
+            \App\Models\User::create([    
+                'username'         =>'Adam',
+                'password'         =>bcrypt('12345678'),
+                'email'            =>'Adam@domain.com',
+                'name'             =>'Adam Mon',
+                'is_admin'         =>'1',
+            ]);
+            \App\Models\User::create([    
+                'username'         =>'Randy',
+                'password'         =>bcrypt('12345678'),
+                'email'            =>'Randy@domain.com',
+                'name'             =>'Randy Mob',
+                'is_admin'         =>'1',
+            ]);
+    
         ////////////////////
 
         \App\Models\User::create([    
@@ -98,6 +116,7 @@ class UserSeeder extends Seeder
             'email'            =>'AliceDanchik@domain.com',
             'name'             =>'Alice Danchik',
             'is_admin'         =>'1',
+            'mobile'           =>'01872971150',
             'avatar'           =>'uploads/avatars/alice.jpg',
             
         ])->assignRole(4);
@@ -108,8 +127,11 @@ class UserSeeder extends Seeder
             'email'            =>'Brad@domain.com',
             'name'             =>'Brad Simmons',
             'is_admin'         =>'1',
+            'mobile'           =>'01872371450',
             'avatar'           =>'uploads/avatars/brad.jpg',
         ])->assignRole(2);
         
+
+
     }
 }

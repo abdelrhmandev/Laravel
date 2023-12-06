@@ -12,6 +12,7 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique();
             $table->string('email')->unique();
             $table->string('avatar')->nullable();
+            $table->string('mobile',20)->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->enum('is_admin', ['0','1'])->default(1);
             $table->string('provider_name')->nullable();

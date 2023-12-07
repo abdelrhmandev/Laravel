@@ -1,3 +1,4 @@
+alert('dasdas');
 document.addEventListener('DOMContentLoaded', function (e) {
     FormValidation.formValidation(document.getElementById('demoForm'), {
         fields: {

@@ -24,12 +24,12 @@ class UserRequest extends FormRequest
         $rules['email']     = 'required|string|max:255|email|unique:users,email';
         $rules['roles']     = 'required|exists:roles,id';   
 
-        $rules['mobile']    = 'required|int|max:255|unique:users,mobile'; 
-        $rules['avatar']    =  'nullable|max:1000|mimes:jpeg,bmp,png,gif'; // max size 1 MB  
+        $rules['mobile']    = 'required|max:255|unique:users,mobile'; 
+        $rules['avatar']    = 'nullable|max:1000|mimes:jpeg,bmp,png,gif'; // max size 1 MB  
 
 
 
-        $rules['username']  = 'required|string|max:255|unique:users,name';
+        $rules['username']  = 'required|string|max:255|unique:users,username';
         $rules['password']  = 'required|string|min:8|confirmed';
 
 

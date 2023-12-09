@@ -6,7 +6,7 @@ use App\Traits\Functions;
 use App\Traits\UploadAble;
 use DataTables;
 use Illuminate\Support\Str;
-
+use Hash;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Models\User as MainModel;
@@ -25,19 +25,16 @@ class UserController extends Controller
         $this->Tbl                  = 'users';
     }
     public function store(ModuleRequest $request){
-        foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties) {
-            $regional = substr($properties['regional'], 0, 2);
-            $trans[] = [
-                $regional => request()->get('title_'. $regional)
-            ]; 
-        }    
-            $arry = [
+           
+        $arry = [
             'name'          => $request->input('name'),            
-            'trans'         => json_encode($trans),
-            'guard_name'    =>'web'
+            'email'         => $request->input('email'),            
+            'mobile'        => $request->input('mobile'),            
+            'username'      => $request->input('username'),                            
+            'password'      =>  Hash::make($request->input('password')),            
         ];              
         $user = MainModel::create($arry);
-        if($user && $user->syncPermissions($request->input('permissions'))){
+        if($user && $user->assignRole($request->input('roles'))){
             $arr = array('msg' => __($this->TRANS.'.'.'storeMessageSuccess'), 'status' => true);              
         }else{
             $arr = array('msg' => __($this->TRANS.'.'.'storeMessageError'), 'status' => false);

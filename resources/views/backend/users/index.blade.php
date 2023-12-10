@@ -64,9 +64,8 @@
                 <input class="form-check-input AA" type="checkbox" data-kt-check="true" data-kt-check-target="#{{ __($trans.".plural") }} .AA" value="1" />
               </div>
             </th>            
-            <th class="w-50px">{{ __('user.avatar') }}</th>  
-            <th class="w-300px">{{ __('site.name') }}</th>  
-            <th class="w-200px">{{ __('site.email') }}</th>  
+            <th class="w-50px">{{ __('site.user') }}</th>  
+            <th class="w-50px">{{ __('site.mobile') }}</th>  
             <th class="w-500px">{{ __('role.singular') }}</th>                                
             <th class="text-primary w-100px">{{ __('admin.created_at') }}</th>
             <th class="text-end min-w-100px noExport">{{ __('admin.actions') }}</th>  
@@ -85,9 +84,8 @@
 <script>
 var dynamicColumns = [ //as an array start from 0
 { data: 'id', name: 'id',exportable:false}, 
-{ data: 'avatar', name: 'avatar',orderable: false}, 
-{ data: 'name', name: 'name',orderable: false}, // 2
-{ data: 'email', name: 'email',orderable: false}, 
+{ data: 'name', name: 'name',orderable: false}, 
+{ data: 'mobile', name: 'mobile',orderable: false}, 
 { data: 'role', name: 'role',orderable: false,searchable: false},
 { data: 'created_at',name :'created_at', type: 'num', render: { _: 'display', sort: 'timestamp', order: 'desc'}}, // 6
 { data: 'actions' , name : 'actions' ,exportable:false,orderable: false,searchable: false},    

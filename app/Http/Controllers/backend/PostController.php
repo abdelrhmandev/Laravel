@@ -226,8 +226,8 @@ if ($request->ajax()) {
                     'listingRoute'       => route($this->ROUTE_PREFIX.'.index'),
                     'storeRoute'         => route($this->ROUTE_PREFIX.'.store'), 
                     'categories'         => Category::tree(),
-                    'tags'                => Tag::select('id'),
-                    'authors'              => User::select('id','name'),
+                    'tags'               => Tag::select('id')->get(),
+                    'authors'            => User::select('id','name')->get(),
                 ];            
                 return view('backend.posts.create',$compact);
             }

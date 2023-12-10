@@ -118,8 +118,8 @@
               </div>
             </th>            
             <th>{{ __('site.author') }}</th>
-            <th>{{ __('comment.singular') }}</th>                                              
-            <th>{{ __('post.singular') }}</th>
+            <th class="w-200px">{{ __('comment.singular') }}</th>                                              
+            <th class="w-200px">{{ __('post.singular') }}</th>
             <th>{{ __('site.status') }}</th>            
             <th class="text-primary">{{ __('admin.created_at') }}</th>
             <th class="text-end min-w-50px noExport">{{ __('admin.actions') }}</th>  

@@ -3,8 +3,8 @@
 					<!--begin::Brand-->
 					<div class="aside-logo py-8" id="kt_aside_logo">
 						<!--begin::Logo-->
-						<a href="index.html" class="d-flex align-items-center">
-							<img alt="Logo" src="{{ asset('assets/backend/media/logos/demo6.svg')}}" class="h-45px logo" />
+						<a href="{{ route(config('custom.route_prefix').'.dashboard') }}" class="d-flex align-items-center">
+							<img alt="Logo" src="{{ asset('assets/backend/media/logos/logo.svg')}}" class="h-45px logo" />
 						</a>
 						<!--end::Logo-->
 					</div>

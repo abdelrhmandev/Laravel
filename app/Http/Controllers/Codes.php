@@ -1,5 +1,6 @@
 <?php
 // https://www.larashout.com/update-model-status-using-toggles-in-laravel
+/*
 $books = DB::table('books')
             ->whereNot(function ($query) {
                 $query->where('rating', '>', 2)
@@ -52,4 +53,4 @@ class Post extends Model{
    public function isAuthUserLikedPost(){
       return $this->likes()->where('user_id',  auth()->id())->exists();
    }
-}
+}*/

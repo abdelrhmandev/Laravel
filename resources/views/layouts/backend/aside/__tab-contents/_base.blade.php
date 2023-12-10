@@ -17,7 +17,7 @@
         @include('layouts.backend.aside.__tab-contents.includes.slider')
         @include('layouts.backend.aside.__tab-contents.includes.career')
         @include('layouts.backend.aside.__tab-contents.includes.city-area-district')
-        @include('layouts.backend.aside.__tab-contents.includes.settings')
+        {{-- @include('layouts.backend.aside.__tab-contents.includes.settings') --}}
     </div>
 </div>
 </div>

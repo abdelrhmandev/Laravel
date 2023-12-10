@@ -50,6 +50,7 @@ class DatabaseSeeder extends Seeder
             ClientSeeder::class,
             VacancySeeder::class,
             ApplicantSeeder::class,
+            ContactSeeder::class,
 
             // SettingSeeder::class,
 

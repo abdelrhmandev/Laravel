@@ -23,6 +23,8 @@ class UserController extends Controller
         $this->ROUTE_PREFIX         = config('custom.route_prefix').'.users'; 
         $this->TRANS                = 'user';
         $this->Tbl                  = 'users';
+        $this->UPLOADFOLDER         = 'avatars';
+
     }
     public function store(ModuleRequest $request){
            
@@ -30,6 +32,7 @@ class UserController extends Controller
             'name'          => $request->input('name'),            
             'email'         => $request->input('email'),            
             'mobile'        => $request->input('mobile'),            
+            'avatar'         => (!empty($request->file('avatar'))) ? $this->uploadFile($request->file('avatar'),$this->UPLOADFOLDER) : NULL,            
             'username'      => $request->input('username'),                            
             'password'      =>  Hash::make($request->input('password')),            
         ];              
@@ -56,7 +59,7 @@ class UserController extends Controller
 public function index(Request $request){    
         
     if ($request->ajax()) {              
-        $model = MainModel::select('id','name','email','avatar','created_at')
+        $model = MainModel::select('id','name','mobile','email','avatar','created_at')
         ->with([
             'roles' => function($query) {
                 $query->select('id','trans'); # Many to many
@@ -66,17 +69,23 @@ public function index(Request $request){
         return Datatables::of($model)
                 ->addIndexColumn()   
 
-                ->editColumn('avatar', function ($row) {
-                $avatar = !empty($row->avatar) ? asset($row->avatar) : asset('assets/backend/media/avatars/blank.png');    
-                $div = "<a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." title='".$row->name."'>
-                <div class=\"symbol symbol-circle symbol-5\"><img class=\"img-fluid\" src=".$avatar."></div>     
-                </a>";                      
-                return $div;                                   
+                ->editColumn('name', function ($row) {
+                    $avatar = !empty($row->avatar) ? asset($row->avatar) : asset('assets/backend/media/avatars/blank.png');   
+                    return "<div class=\"d-flex align-items-center\">
+                    <div class=\"symbol symbol-circle symbol-50px overflow-hidden me-3\">
+                        <a href=\"#\">
+                            <div class=\"symbol-label\">
+                                <img src=".$avatar." alt=".$row->name." class=\"w-100\" />
+                            </div>
+                        </a>
+                    </div>
+                    <div class=\"d-flex flex-column\">
+                        <a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." class=\"text-gray-800 text-hover-primary mb-1\">".$row->name."</a>
+                        <span><a href=\"mailto:".$row->email."\">".$row->email."</a></span>
+                    </div>
+                </div>";                
+    
                 })        
-                ->editColumn('name', function (MainModel $row) {               
-                    return "<a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".Str::words($row->name, '5')."</a>
-                    ";    
-                })
 
                 
                 ->AddColumn('role', function (MainModel $row) {                                                            
@@ -106,7 +115,7 @@ public function index(Request $request){
                     ->editColumn('actions', function ($row) {                                                       
                         return $this->dataTableEditRecordAction($row,$this->ROUTE_PREFIX);
                     })                                   
-                ->rawColumns(['avatar','name','role','actions','created_at','created_at.display'])                  
+                ->rawColumns(['name','role','actions','created_at','created_at.display'])                  
                 ->make(true);    
         }  
             if (view()->exists('backend.users.index')) {

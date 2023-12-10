@@ -89,6 +89,13 @@ margin-right: 0;
 }
 
 
+.fv-plugins-icon[data-field='roles'] {
+    display: inline-block;
+    position: static;
+    height: auto;
+    line-height: normal;
+}
+
 .my-field-error .fv-plugins-message-container,
 .my-field-error .fv-plugins-icon {
 font-size: 0.925rem;

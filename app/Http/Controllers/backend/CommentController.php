@@ -11,12 +11,12 @@ use App\Models\Comment as MainModel;
 use App\Models\Post;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\File; 
+
 
 class CommentController extends Controller
 {
 
-    use UploadAble,Functions;
+    use Functions;
     public function __construct() {
         $this->ROUTE_PREFIX         = config('custom.route_prefix').'.comments'; 
         $this->TRANS                = 'comment'; 
@@ -37,29 +37,29 @@ if ($request->ajax()) {
                 ->addIndexColumn()   
                 ->editColumn('author', function (MainModel $row) {                                                    
  
-/*
-<div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
-	<a href="apps/user-management/users/view.html">
-		<div class="symbol-label">
-			<img src="assets/media/avatars/300-9.jpg" alt="Francis Mitcham" class="w-100" />
-		</div>
-	</a>
-</div>
-<div class="d-flex flex-column">
-	<a href="apps/user-management/users/view.html" class="text-gray-800 text-hover-primary mb-1">Francis Mitcham</a>
-	<span>f.mit@kpmg.com</span>
-</div>*/                    
+                   
 
-                $src = !empty($row->user->avatar) ? asset($row->user->avatar) : asset('assets/backend/media/avatars/blank.png');   
-                $div = "<div class=\"symbol symbol-45px symbol-circle\"><img class=\"img-fluid\" src=".$src."></div> &nbsp; ".$row->user->name;                
-                return $div;
+                $avatar = !empty($row->user->avatar) ? asset($row->user->avatar) : asset('assets/backend/media/avatars/blank.png');   
+                return "<div class=\"d-flex align-items-center\">
+                <div class=\"symbol symbol-circle symbol-50px overflow-hidden me-3\">
+                    <a href=\"#\">
+                        <div class=\"symbol-label\">
+                            <img src=".$avatar." alt=".$row->user->name." class=\"w-100\" />
+                        </div>
+                    </a>
+                </div>
+                <div class=\"d-flex flex-column\">
+                    <a href=\"#\" class=\"text-gray-800 text-hover-primary mb-1\">".$row->user->name."</a>
+                    <span><a href=\"mailto:".$row->user->email."\">".$row->user->email."</a></span>
+                </div>
+            </div>";                
+
                 })
                 ->editColumn('comment', function (MainModel $row) {
                     return "<a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".Str::words($row->comment, '10')."</a>";                     
                 })                
                 ->editColumn('post', function (MainModel $row) {
-                    $div = $row->post->translate->title;                                 
-                    return $div;
+                    return "<a href=".route(config('custom.route_prefix').'.posts.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".Str::words($row->post->translate->title, '10')."</a>";                     
                 })
                 ->filter(function ($instance) use ($request) {
                     if ($request->get('search')) {
@@ -99,7 +99,7 @@ if ($request->ajax()) {
                  ->editColumn('actions', function ($row) {                                                       
                     return $this->dataTableEditRecordAction($row,$this->ROUTE_PREFIX);
                 })                                              
-                ->rawColumns(['author','comment','posts','status','created_at','created_at.display','actions'])                  
+                ->rawColumns(['author','comment','post','status','created_at','created_at.display','actions'])                  
                 ->make(true);    
     }  
         if (view()->exists('backend.comments.index')) {  

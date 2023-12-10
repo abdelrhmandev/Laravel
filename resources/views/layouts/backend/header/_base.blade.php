@@ -10,8 +10,8 @@
 	   <!--end::Aside mobile toggle-->
 	   <!--begin::Mobile logo-->
 	   <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
-		  <a href="/metronic8/demo6/../demo6/rtl/index.html" class="d-lg-none">
-		  <img alt="Logo" src="{{ asset('assets/backend/media/logos/demo6.svg')}}" class="h-25px"/>
+		  <a href="{{ route(config('custom.route_prefix').'.dashboard') }}" class="d-lg-none">
+		  <img alt="Logo" src="{{ asset('assets/backend/media/logos/logo.svg')}}" class="h-25px"/>
 		  </a>
 	   </div>
 	   <!--end::Mobile logo-->
@@ -37,8 +37,12 @@
 				   id="#kt_header_menu" 
 				   data-kt-menu="true"
 				   >
+				   <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-{{ (app()->getLocale() === 'en') ? 'start':'end' }}"  class="menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2">
+					<span class="menu-link py-3"><span  class="menu-title" >Beta Version</span><span  class="menu-arrow d-lg-none" ></span></span>					  
+				  </div>
+
 				   <!--begin:Menu item-->
-				   <div  data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-{{ (app()->getLocale() === 'en') ? 'start':'end' }}"  class="menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2" >
+				   {{-- <div  data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-{{ (app()->getLocale() === 'en') ? 'start':'end' }}"  class="menu-item here show menu-here-bg menu-lg-down-accordion me-0 me-lg-2" >
 					  <!--begin:Menu link--><span class="menu-link py-3"  ><span  class="menu-title" >Dashboards www</span><span  class="menu-arrow d-lg-none" ></span></span><!--end:Menu link--><!--begin:Menu sub-->
 					  <div  class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown p-0 w-100 w-lg-850px" >
 						 <!--begin:Dashboards menu-->
@@ -333,9 +337,9 @@
 						 <!--end:Dashboards menu-->
 					  </div>
 					  <!--end:Menu sub-->
-				   </div>
+				   </div> --}}
 				   <!--end:Menu item--><!--begin:Menu item-->
-				   <div  data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-{{ (app()->getLocale() === 'en') ? 'start':'end' }}"  class="menu-item menu-lg-down-accordion me-0 me-lg-2" >
+				   {{-- <div  data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-{{ (app()->getLocale() === 'en') ? 'start':'end' }}"  class="menu-item menu-lg-down-accordion me-0 me-lg-2" >
 					  <!--begin:Menu link--><span class="menu-link py-3"  ><span  class="menu-title" >Pages</span><span  class="menu-arrow d-lg-none" ></span></span><!--end:Menu link--><!--begin:Menu sub-->
 					  <div  class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown p-0" >
 						 <!--begin:Pages menu-->
@@ -1566,9 +1570,9 @@
 						 <!--end:Pages menu-->
 					  </div>
 					  <!--end:Menu sub-->
-				   </div>
+				   </div> --}}
 				   <!--end:Menu item--><!--begin:Menu item-->
-				   <div  data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-{{ (app()->getLocale() === 'en') ? 'start':'end' }}"  class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2" >
+				   {{-- <div  data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-{{ (app()->getLocale() === 'en') ? 'start':'end' }}"  class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2" >
 					  <!--begin:Menu link--><span class="menu-link py-3"  ><span  class="menu-title" >Apps</span><span  class="menu-arrow d-lg-none" ></span></span><!--end:Menu link--><!--begin:Menu sub-->
 					  <div  class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-250px" >
 						 <!--begin:Menu item-->
@@ -1994,9 +1998,9 @@
 						 <!--end:Menu item-->
 					  </div>
 					  <!--end:Menu sub-->
-				   </div>
+				   </div> --}}
 				   <!--end:Menu item--><!--begin:Menu item-->
-				   <div  data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-{{ (app()->getLocale() === 'en') ? 'start':'end' }}"  class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2" >
+				   {{-- <div  data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-{{ (app()->getLocale() === 'en') ? 'start':'end' }}"  class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2" >
 					  <!--begin:Menu link--><span class="menu-link py-3"  ><span  class="menu-title" >Help</span><span  class="menu-arrow d-lg-none" ></span></span><!--end:Menu link--><!--begin:Menu sub-->
 					  <div  class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-200px" >
 						 <!--begin:Menu item-->
@@ -2018,7 +2022,7 @@
 						 <!--end:Menu item-->
 					  </div>
 					  <!--end:Menu sub-->
-				   </div>
+				   </div> --}}
 				   <!--end:Menu item-->    
 				</div>
 				<!--end::Menu-->
@@ -2750,7 +2754,8 @@
 				   <div class="py-2 text-center border-top">
 					  <a href="/metronic8/demo6/../demo6/rtl/pages/user-profile/activity.html" class="btn btn-color-gray-600 btn-active-color-primary">
 					  View All 
-					  <i class="ki-outline ki-arrow-right fs-5"></i>        </a>			 
+					  <i class="ki-outline ki-arrow-right fs-5"></i>        
+					</a>			 
 				   </div>
 				   <!--end::View more--> 
 				</div>
@@ -2769,7 +2774,7 @@
 			 </div>
 			 <!--end::Chat-->
 			 <!--begin::Notifications-->
-			  @include('layouts.backend.aside.__tab-contents.__notifications')
+			  {{-- @include('layouts.backend.aside.__tab-contents.__notifications') --}}
 			 <!--end::Notifications-->
 			 <!--begin::Theme mode-->
 			 <div class="d-flex align-items-center ms-1 ms-lg-3">
@@ -2837,10 +2842,12 @@
 						 <!--begin::Username-->
 						 <div class="d-flex flex-column">
 							<div class="fw-bold d-flex align-items-center fs-5">
-							   Max Smith                    <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span>
+							   Max Smidsdsadth                    
+							   <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span>
 							</div>
 							<a href="#" class="fw-semibold text-muted text-hover-primary fs-7">
-							max@kt.com                </a>
+							max@kt.com                
+						</a>
 						 </div>
 						 <!--end::Username-->
 					  </div>
@@ -2851,23 +2858,22 @@
 				   <!--end::Menu separator-->
 				   <!--begin::Menu item-->
 				   <div class="menu-item px-5">
-					  <a href="/metronic8/demo6/../demo6/rtl/account/overview.html" class="menu-link px-5">
-					  My Profile
+						<a href="{{ route(config('custom.route_prefix').'.profile') }}" class="menu-link px-5">{{ __('site.profile')}}</a>
 					  </a>
 				   </div>
 				   <!--end::Menu item-->
 				   <!--begin::Menu item-->
-				   <div class="menu-item px-5">
+				   {{-- <div class="menu-item px-5">
 					  <a href="/metronic8/demo6/../demo6/rtl/apps/projects/list.html" class="menu-link px-5">
 					  <span class="menu-text">My Projects</span>
 					  <span class="menu-badge">
 					  <span class="badge badge-light-danger badge-circle fw-bold fs-7">3</span>
 					  </span>
 					  </a>
-				   </div>
+				   </div> --}}
 				   <!--end::Menu item-->
 				   <!--begin::Menu item-->
-				   <div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="left-start" data-kt-menu-offset="-15px, 0">
+				   {{-- <div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="left-start" data-kt-menu-offset="-15px, 0">
 					  <a href="#" class="menu-link px-5">
 					  <span class="menu-title">My Subscription</span>
 					  <span class="menu-arrow"></span>
@@ -2921,14 +2927,14 @@
 						 <!--end::Menu item-->
 					  </div>
 					  <!--end::Menu sub-->
-				   </div>
+				   </div> --}}
 				   <!--end::Menu item-->
 				   <!--begin::Menu item-->
-				   <div class="menu-item px-5">
+				   {{-- <div class="menu-item px-5">
 					  <a href="/metronic8/demo6/../demo6/rtl/account/statements.html" class="menu-link px-5">
 					  My Statements
 					  </a>
-				   </div>
+				   </div> --}}
 				   <!--end::Menu item-->
 				   <!--begin::Menu separator-->
 				   <div class="separator my-2"></div>
@@ -2937,7 +2943,7 @@
 				   <div class="menu-item px-5" data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="left-start" data-kt-menu-offset="-15px, 0">
 					 
 					<a href="#" class="menu-link px-5">
-						<span class="menu-title position-relative">{{ __('admin.language')}} 
+						<span class="menu-title position-relative">{{ __('site.languages')}} 
 						<span class="fs-8 rounded bg-light px-3 py-2 position-absolute translate-middle-y top-50 end-0">{{ LaravelLocalization::getCurrentLocaleName() }} 
 						<img class="w-15px h-15px rounded-1 ms-2" src="{{ asset('assets/backend/media/flags/' . app()->getLocale() . '.svg') }}" alt="" /></span></span>
 					</a>
@@ -2960,9 +2966,6 @@
 				   </div>
 				   <!--end::Menu item-->
 				   <!--begin::Menu item-->
-				   <div class="menu-item px-5 my-1">
-					<a href="{{ route('admin.profile') }}" class="menu-link px-5">{{ __('site.profile')}}</a>
-				   </div>
 				   <!--end::Menu item-->
 				   <!--begin::Menu item-->
 				   <div class="menu-item px-5">

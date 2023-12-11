@@ -42,14 +42,14 @@ if ($request->ajax()) {
                 $avatar = !empty($row->user->avatar) ? asset($row->user->avatar) : asset('assets/backend/media/avatars/blank.png');   
                 return "<div class=\"d-flex align-items-center\">
                 <div class=\"symbol symbol-circle symbol-50px overflow-hidden me-3\">
-                    <a href=\"#\">
+                    
                         <div class=\"symbol-label\">
                             <img src=".$avatar." alt=".$row->user->name." class=\"w-100\" />
                         </div>
-                    </a>
+                  
                 </div>
                 <div class=\"d-flex flex-column\">
-                    <a href=\"#\" class=\"text-gray-800 text-hover-primary mb-1\">".$row->user->name."</a>
+                    <span class=\"text-gray-800 mb-1\">".$row->user->name."</span>
                     <span><a href=\"mailto:".$row->user->email."\">".$row->user->email."</a></span>
                 </div>
             </div>";                

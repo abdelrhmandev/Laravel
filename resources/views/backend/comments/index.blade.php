@@ -117,9 +117,9 @@
                 <input class="form-check-input AA" type="checkbox" data-kt-check="true" data-kt-check-target="#{{ __($trans.".plural") }} .AA" value="1" />
               </div>
             </th>            
-            <th>{{ __('site.author') }}</th>
-            <th class="w-200px">{{ __('comment.singular') }}</th>                                              
-            <th class="w-200px">{{ __('post.singular') }}</th>
+            <th class="w-80px">{{ __('site.author') }}</th>
+            <th class="w-250px">{{ __('comment.singular') }}</th>                                              
+            <th class="w-250px">{{ __('post.singular') }}</th>
             <th>{{ __('site.status') }}</th>            
             <th class="text-primary">{{ __('admin.created_at') }}</th>
             <th class="text-end min-w-50px noExport">{{ __('admin.actions') }}</th>  

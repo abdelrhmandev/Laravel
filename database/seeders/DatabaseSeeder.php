@@ -28,29 +28,29 @@ class DatabaseSeeder extends Seeder
 
 
             /* CMS SEEDER */            
-            CategorySeeder::class,
+            // CategorySeeder::class,
             PostSeeder::class,
-            PostMedia::class,
-            PostCategorySeeder::class,
-            TagSeeder::class,
-            PostTagSeeder::class,
-            CommentSeeder::class,  
-            PageSeeder::class,
-            /* CMS SEEDER */
+            // PostMedia::class,
+            // PostCategorySeeder::class,
+            // TagSeeder::class,
+            // PostTagSeeder::class,
+            // CommentSeeder::class,  
+            // PageSeeder::class,
+            // /* CMS SEEDER */
 
 
             // Start Miscellaneous SEEDER
 
-            CountrySeeder::class,
-            CitySeeder::class,
-            AreaSeeder::class,
-            DistrictSeeder::class,
-            SliderSeeder::class,   
-            FaqSeeder::class,
-            ClientSeeder::class,
-            VacancySeeder::class,
-            ApplicantSeeder::class,
-            ContactSeeder::class,
+            // CountrySeeder::class,
+            // CitySeeder::class,
+            // AreaSeeder::class,
+            // DistrictSeeder::class,
+            // SliderSeeder::class,   
+            // FaqSeeder::class,
+            // ClientSeeder::class,
+            // VacancySeeder::class,
+            // ApplicantSeeder::class,
+            // ContactSeeder::class,
 
             // SettingSeeder::class,
 

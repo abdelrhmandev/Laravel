@@ -4,20 +4,25 @@ use Illuminate\Database\Seeder;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Faker\Factory as Faker;
 class ContactSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
+
+    //https://dev.to/olodocoder/laravel-seeding-generate-mock-data-using-faker-5473
     public function run()
     {
-        DB::table('contacts')->delete();        
+
+        //slug = $faker->unique()->slug
+        DB::table('contacts')->delete();              
+        $faker = Faker::create();
+      
+        for ($i=0; $i < 20; $i++) {    
         $items = [        
-            ['name'=>Str::random(10),'email'=>Str::random(10).'@gmail.com','subject'=>Str::random(15),'message'=>Str::random(30),'created_at'=>Carbon::now()->subDay(10)], 
-        ];
+                ['name'=>$faker->name,'email'=>$faker->email,'subject'=>$faker->words(10, true),'message'=>$faker->sentence(45),'created_at'=>Carbon::now()->subDay(10)], 
+            ];
            DB::table('contacts')->insert($items);      
+        }
+
     
     }
 }

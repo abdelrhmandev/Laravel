@@ -25,18 +25,9 @@
         </div>
       </div>
       <div class="card-toolbar">
-        <div class="d-flex justify-content-end" data-kt-table-toolbar="base">    
+        <div class="d-flex justify-content-end" data-kt-table-toolbar="base">   
           @include('backend.partials.modals._exportlisting')
-          <a class="btn btn-primary" href="{{ $createRoute }}">
-            <span class="svg-icon svg-icon-2 svg-icon-primary me-0 me-md-2">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path opacity="0.3" d="M19 22H5C4.4 22 4 21.6 4 21V3C4 2.4 4.4 2 5 2H14L20 8V21C20 21.6 19.6 22 19 22ZM16 13.5L12.5 13V10C12.5 9.4 12.6 9.5 12 9.5C11.4 9.5 11.5 9.4 11.5 10L11 13L8 13.5C7.4 13.5 7 13.4 7 14C7 14.6 7.4 14.5 8 14.5H11V18C11 18.6 11.4 19 12 19C12.6 19 12.5 18.6 12.5 18V14.5L16 14C16.6 14 17 14.6 17 14C17 13.4 16.6 13.5 16 13.5Z" fill="currentColor"></path>
-                <rect x="11" y="19" width="10" height="2" rx="1" transform="rotate(-90 11 19)" fill="currentColor"></rect>
-                <rect x="7" y="13" width="10" height="2" rx="1" fill="currentColor"></rect>
-                <path d="M15 8H20L14 2V7C14 7.6 14.4 8 15 8Z" fill="currentColor"></path>
-              </svg>
-            </span>
-            {{ __($trans.'.add')}}</a>
+       
         </div>
         <div class="d-flex justify-content-end align-items-center d-none" data-kt-table-toolbar="selected">
           <div class="fw-bold me-5">
@@ -64,11 +55,10 @@
                 <input class="form-check-input AA" type="checkbox" data-kt-check="true" data-kt-check-target="#{{ __($trans.".plural") }} .AA" value="1" />
               </div>
             </th>            
-            <th>{{ __('user.singular') }}</th>  
-            <th>{{ __('site.mobile') }}</th>  
-            <th>{{ __('role.singular') }}</th>                                
-            <th class="text-primary w-100px">{{ __('admin.created_at') }}</th>
-            <th class="text-end min-w-100px noExport">{{ __('admin.actions') }}</th>  
+            <th>{{ __('contact.singular') }}</th>  
+            <th class="w-550px">{{ __('site.message') }}</th>                                
+            <th class="text-primary">{{ __('admin.created_at') }}</th>
+            <th class="text-end min-w-50px noExport">{{ __('admin.actions') }}</th>  
           </tr>
         </thead>
         <tbody class="text-gray-600"> 
@@ -77,21 +67,26 @@
     </div>
   </div>
 </div>
+
 @stop
+
+
 @section('scripts')
+<script src="{{ asset('assets/backend/js/custom/pdfMake/pdfmake.min.js')}}"></script> 
+<script src="{{ asset('assets/backend/js/custom/pdfMake/vfs_load_fonts.js')}}"></script>
+<script src="{{ asset('assets/backend/js/custom/pdfMake/pdfhandle.js')}}"></script>
 <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js')}}"></script>
 @include('backend.Classicdatatables')
 <script>
 var dynamicColumns = [ //as an array start from 0
 { data: 'id', name: 'id',exportable:false}, 
-{ data: 'name', name: 'name',orderable: false}, 
-{ data: 'mobile', name: 'mobile',orderable: false}, 
-{ data: 'role', name: 'role',orderable: false,searchable: false},
-{ data: 'created_at',name :'created_at', type: 'num', render: { _: 'display', sort: 'timestamp', order: 'desc'}}, // 6
+{ data: 'name', name: 'name',orderable: false},
+{ data: 'message', name: 'message',orderable: false},
+{ data: 'created_at',name :'created_at', type: 'num', render: { _: 'display', sort: 'timestamp', order: 'desc'}}, // 4
 { data: 'actions' , name : 'actions' ,exportable:false,orderable: false,searchable: false},    
 ];
 KTUtil.onDOMContentLoaded(function () {
-  loadDatatable('{{ __($trans.".plural") }}','{{ $redirectRoute }}',dynamicColumns,'','1');
+  loadDatatable('{{ __($trans.".plural") }}','{{ $redirectRoute }}',dynamicColumns,'','2');
 });
 </script>
 @stop

@@ -47,10 +47,13 @@ trait Functions
     }
 
 
-    public function dataTableEditRecordAction($row,$route){
+    public function dataTableEditRecordAction($row,$route,$hide_edit=null){
+
+        $editRoute = ($hide_edit == 'hide_edit') ? 'hide_edit' : route($route.'.edit',$row->id);
+
         return view('backend.partials.btns.edit-delete', [
             'trans'         =>$this->TRANS,                       
-            'editRoute'     =>route($route.'.edit',$row->id),
+            'editRoute'     => $editRoute,
             'destroyRoute'  =>route($route.'.destroy',$row->id),
             'id'            =>$row->id
             ]);

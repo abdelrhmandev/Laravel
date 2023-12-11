@@ -1,0 +1,23 @@
+<?php
+return [
+'title'                     => 'خبر عنوان',
+'edit'                      => 'تعديل خبر',
+'add'                       => 'أضافه خبر',
+'view'                      => 'عرض الخبر',
+'delete'                    => 'حذف خبر',
+'select'                    => 'أختر خبر',
+'select_multi'              =>' أختر التعليقات',
+'plural'                    => 'التعليقات',
+'singular'                  => 'خبر',
+'exportMessageSuccess'      => 'تم تصدير التعليقات بنجاح',
+'deleteMessageSuccess'      => 'خبر تم حذف الخبر بنجاح',
+'MulideleteMessageSuccess'  => 'تم حذف التعليقات بنجاح',
+'delete_selected'           => 'حذف التعليقات المختاره',
+'not_delete_selected'       => 'لم يتم حذف التعليقات',
+'deleteMessageError'        => 'خطأ في حذف الخبر',
+'MultideleteMessageError'   => 'خطأ في حذف التعليقات',
+'updateMessageSuccess'      => 'خبر تم تحديث بنجاح',
+'updateMessageError'        => 'خطأ في حذف الخبر',
+'storeMessageSuccess'       => 'تم أنشاء الخبر بنجاح',
+'storeMessageError'         => 'خطأ في أضافه الخبر',
+];

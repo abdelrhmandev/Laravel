@@ -1,22 +1,28 @@
 <?php
 
-namespace Database\Seeders;
-use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
-use Illuminate\Database\Seeder;
-use Faker\Factory as Faker;
+namespace Database\Factories;
+
 use App\Models\Post;
-
-class PostSeeder extends Seeder
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\DB;
+use Faker\Factory as Faker;
+class PostFactory extends Factory
 {
-
-    // https://etharshrouf.com/article/53/%D8%A5%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85-seeder-%D9%88-factory-%D9%81%D9%8A-%D8%AA%D9%88%D9%84%D9%8A%D8%AF-%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA-%D8%B9%D8%B4%D9%88%D8%A7%D8%A6%D9%8A%D8%A9-%D9%81%D9%8A-%D9%84%D8%A7%D8%B1%D8%A7%D9%81%D9%8A%D9%84%D8%8C-%D9%88%D9%83%D9%8A%D9%81%D9%8A%D8%A9-%D8%A5%D8%AF%D8%AE%D8%A7%D9%84-%D8%A7%D9%84%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA-%D8%A8%D8%A7%D9%84%D9%84%D8%BA%D8%A9-%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9
     /**
-     * Run the database seeds.
+     * The name of the factory's corresponding model.
      *
-     * @return void
+     * @var string
      */
-    public function run()
+    protected $model = Post::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
     {
         $items = [
             ['status'=>'1','image'=>'uploads/posts/1.jpg','user_id'=>'1','featured'=>'1','allow_comments'=>'1','created_at'=>Carbon::now()->subDays(10)],
@@ -30,22 +36,14 @@ class PostSeeder extends Seeder
             ['status'=>'0','image'=>'uploads/posts/9.jpg','user_id'=>'5','featured'=>'1','allow_comments'=>'1','created_at'=>Carbon::now()->subDays(18)],
             ['status'=>'1','image'=>'uploads/posts/10.jpg','user_id'=>'1','featured'=>'0','allow_comments'=>'0','created_at'=>Carbon::now()->subDays(19)],
            ];
-           DB::table('posts')->insert($items);
-
-
-           $fakerEn = Faker::create('en_GB');
-
-           $fakerAr = Faker::create('ar_SA');
-
-         
-           
+           DB::table('posts')->insert($items);      
+    
            for($i=1;$i<=10;$i++){
                 $translated_items = [        
-                    ['title'=>$fakerEn->name(),'slug'=>$fakerEn->name(),'description'=>$fakerEn->words(45),'lang'=>'en','post_id'=>$i],
-                    ['title'=>$fakerAr->name(),'slug'=>$fakerAr->name(),'description'=>$fakerAr->words(45),'lang'=>'ar','post_id'=>$i],
+                        ['title'=>$faker->words(10, true),'slug'=>$faker->unique()->slug,'description'=>$faker->sentence(45),'lang'=>'en','post_id'=>$i],
                     ];
-                     DB::table('post_translations')->insert($translated_items);     
+                DB::table('post_translations')->insert($translated_items);     
              }  
-
     }
 }
+

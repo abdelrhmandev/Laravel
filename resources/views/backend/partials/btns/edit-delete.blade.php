@@ -10,12 +10,16 @@
   </span>
 </a>
 <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
+  
+  @if($editRoute !== 'hide_edit')
   <div class="menu-item px-3">
       <a href="{{ $editRoute }}" class="menu-link px-3" data-kt-table-filter="edit_row">
         <i class="fa fa-pencil-alt m-1 w-1 h-1 mr-1 rtl:ml-1"></i>             
         {{ __('site.edit')}}  
       </a>
   </div>
+  @endif
+
   <div class="menu-item px-3">
       <a id="delete_item" data-destroy-route="{{ $destroyRoute}}" class="menu-link px-3"  data-kt-table-filter="delete_row"      
       data-back-list-text="{{ __('site.back_to_list') }}"        

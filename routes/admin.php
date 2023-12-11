@@ -115,8 +115,11 @@ Route::resource('clients', ClientController::class)->except('show');
 Route::delete('clients/destroy/all', 'ClientController@destroyMultiple')->name('clients.destroyMultiple');
  
 
-Route::get('/contacts', 'ContactController@index')->name('contacts');
-
+Route::controller(ContactController::class)->group(function () {
+    Route::get('/contacts','index')->name('contacts.index');
+    Route::delete('contacts/destroy/{contact}', 'destroy')->name('contacts.destroy');
+    Route::delete('contacts/destroyAll', 'destroyMultiple')->name('contacts.destroyMultiple');
+});
 
 
 Route::get('/logout', 'ProfileController@logout')->name('logout');

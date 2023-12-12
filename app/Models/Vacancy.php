@@ -7,7 +7,7 @@ class Vacancy extends Model
 {
  
     protected $table = 'vacancies';
-    protected $fillable = ['title','description','slug'];
+    protected $fillable = ['title','description','slug','status'];
 
     protected $guarded = ['id'];
 

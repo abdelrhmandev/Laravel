@@ -80,6 +80,9 @@
 
 
 @section('scripts')
+<script src="{{ asset('assets/backend/js/custom/pdfMake/pdfmake.min.js')}}"></script> 
+<script src="{{ asset('assets/backend/js/custom/pdfMake/vfs_load_fonts.js')}}"></script>
+<script src="{{ asset('assets/backend/js/custom/pdfMake/pdfhandle.js')}}"></script>
 <script src="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.js')}}"></script>
 @include('backend.Classicdatatables')
 <script>

@@ -20,7 +20,7 @@ class CreatePagesTable extends Migration
 			$table->string('lang')->index();			
 			$table->unique(['page_id','lang']);  
             $table->index(['title','slug']);
-            $table->foreignId('page_id')->constrained('posts')->onDelete('cascade');
+            $table->foreignId('page_id')->constrained('pages')->onDelete('cascade');
         });	
     }
     public function down(){

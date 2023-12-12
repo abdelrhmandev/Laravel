@@ -247,8 +247,8 @@ if ($request->ajax()) {
                 'trans'                   => $this->TRANS,
                 'categories'              => Category::tree(),
                 'redirect_after_destroy'  => route($this->ROUTE_PREFIX.'.index'),
-                'tags'               => Tag::select('id')->get(),
-                'authors'            => User::select('id','name')->get(),
+                'tags'                    => Tag::select('id')->get(),
+                'authors'                 => User::select('id','name')->get(),
             ];                
              return view('backend.posts.edit',$compact);                    
             }

@@ -72,7 +72,8 @@ return [
     'confirmDeleteMessage'       =>'Are you sure you want to delete :item',    
     'confirmMultiDeleteMessage'  =>'Are you sure you want to delete selected :item',
     'delete_selected'            =>'Delete Selecetd :item',
-
+    'message'                    =>'Message',
+    'subject'                    =>'Subject',
     'none'                       =>'None',
 
 

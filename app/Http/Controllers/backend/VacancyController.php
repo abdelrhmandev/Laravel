@@ -142,6 +142,7 @@ if ($request->ajax()) {
             $validated['title']           = $request->title;
             $validated['description']     = $request->description;   
 
+            
             MainModel::findOrFail($vacancy->id)->update($validated);
             $arr = array('msg' => __($this->TRANS.'.'.'updateMessageSuccess'), 'status' => true);            
             DB::commit();

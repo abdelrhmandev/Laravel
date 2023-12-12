@@ -70,7 +70,6 @@
             </th>            
             <th class="w-150px">{{ __('site.name') }}</th>                                            
             <th>{{ __('vacancy.singular')}}</th>
-            <th>{{ __('site.email') }}</th>
             <th>{{ __('site.mobile') }}</th>            
             <th>{{ __('site.cv') }}</th>
             <th>{{ __('site.status') }}</th>                                 
@@ -99,7 +98,6 @@ var dynamicColumns = [ //as an array start from 0
 { data: 'id', name: 'id',exportable:false}, 
 { data: 'name', name: 'name',orderable: false}, 
 { data: 'vacancy', name: 'vacancy',orderable: false}, 
-{ data: 'email', name: 'email',orderable: false}, 
 { data: 'mobile', name: 'mobile',orderable: false}, 
 { data: 'file', name: 'file',orderable: false}, 
 { data: 'status', name: 'status',orderable: false,searchable: true}, 

@@ -26,8 +26,7 @@
       </div>
       <div class="card-toolbar">
         <div class="d-flex justify-content-end" data-kt-table-toolbar="base">   
-          @include('backend.partials.modals._exportlisting')
-       
+          @include('backend.partials.modals._exportlisting')       
         </div>
         <div class="d-flex justify-content-end align-items-center d-none" data-kt-table-toolbar="selected">
           <div class="fw-bold me-5">
@@ -55,7 +54,7 @@
                 <input class="form-check-input AA" type="checkbox" data-kt-check="true" data-kt-check-target="#{{ __($trans.".plural") }} .AA" value="1" />
               </div>
             </th>            
-            <th>{{ __('contact.singular') }}</th>  
+            <th>{{ __('contacts.singular') }}</th>  
             <th class="w-550px">{{ __('site.message') }}</th>                                
             <th class="text-primary">{{ __('admin.created_at') }}</th>
             <th class="text-end min-w-50px noExport">{{ __('admin.actions') }}</th>  

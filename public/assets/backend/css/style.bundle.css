@@ -33973,10 +33973,10 @@ h6 {
 }
 .btn.btn-outline.btn-outline-secondary .svg-icon,
 .btn.btn-outline.btn-outline-secondary i {
-    color: var(--bs-secondary-inverse);
+    color: var(--bs-secondary);
 }
 .btn.btn-outline.btn-outline-secondary.dropdown-toggle:after {
-    color: var(--bs-secondary-inverse);
+    color: var(--bs-secondary);
 }
 .btn-check:active + .btn.btn-outline.btn-outline-secondary,
 .btn-check:checked + .btn.btn-outline.btn-outline-secondary,

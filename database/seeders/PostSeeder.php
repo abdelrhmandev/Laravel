@@ -1,5 +1,4 @@
 <?php
-
 namespace Database\Seeders;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -40,10 +39,19 @@ class PostSeeder extends Seeder
          
            
            for($i=1;$i<=10;$i++){
+
+
+ 
+ 
+
+
+
+
+
                 $translated_items = [        
-                    ['title'=>$fakerEn->name(),'slug'=>$fakerEn->name(),'description'=>$fakerEn->words(45),'lang'=>'en','post_id'=>$i],
-                    ['title'=>$fakerAr->name(),'slug'=>$fakerAr->name(),'description'=>$fakerAr->words(45),'lang'=>'ar','post_id'=>$i],
-                    ];
+                    ['title'=>$fakerEn->sentence(8),'slug'=>$fakerEn->slug(),'description'=>$fakerEn->paragraph(8),'lang'=>'en','post_id'=>$i],
+                    ['title'=>$fakerAr->realText(30,true),'slug'=>str_replace(' ', '-',$fakerAr->realText(30, true)),'description'=>$fakerAr->realText(20, true),'lang'=>'ar','post_id'=>$i],
+                ];
                      DB::table('post_translations')->insert($translated_items);     
              }  
 

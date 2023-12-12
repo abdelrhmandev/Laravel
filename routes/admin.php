@@ -25,9 +25,9 @@ Route::delete('tags/destroy/all', 'TagController@destroyMultiple')->name('tags.d
 Route::controller(CommentController::class)->group(function () {
     Route::get('/comments/{post_id?}','index')->name('comments.index');
     Route::post('/comments/changeStatus', 'ChangeStatus')->name('comments.changeStatus');
-    Route::put('/comments/update/{id}', 'update')->name('comments.update');
-    Route::get('/comments/edit/{id}', 'edit')->name('comments.edit');
-    Route::delete('comments/destroy/{id}', 'destroy')->name('comments.destroy');
+    Route::put('/comments/update/{comment}', 'update')->name('comments.update');
+    Route::get('/comments/edit/{comment}', 'edit')->name('comments.edit');
+    Route::delete('comments/destroy/{comment}', 'destroy')->name('comments.destroy');
     Route::delete('comments/destroyAll', 'destroyMultiple')->name('comments.destroyMultiple');
 });
 
@@ -117,8 +117,8 @@ Route::delete('clients/destroy/all', 'ClientController@destroyMultiple')->name('
 
 Route::controller(ContactController::class)->group(function () {
     Route::get('/contacts','index')->name('contacts.index');
-    Route::delete('contacts/destroy/{contact}', 'destroy')->name('contacts.destroy');
-    Route::delete('contacts/destroyAll', 'destroyMultiple')->name('contacts.destroyMultiple');
+    Route::delete('/contacts/destroy/{contact}', 'destroy')->name('contacts.destroy');
+    Route::delete('/contacts/destroyMultiple', 'destroyMultiple')->name('contacts.destroyMultiple');
 });
 
 

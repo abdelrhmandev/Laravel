@@ -64,7 +64,7 @@ class PageController extends Controller
 public function index(Request $request){     
 if ($request->ajax()) {           
        
-    $model = MainModel::query();
+    $model = MainModel::select('id','image','status','created_at');
     return Datatables::of($model)
                 ->addIndexColumn()   
                 ->editColumn('translate.title', function (MainModel $row) {

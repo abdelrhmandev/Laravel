@@ -59,7 +59,7 @@ if ($request->ajax()) {
                     return "<a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".Str::words($row->comment, '10')."</a>";                     
                 })                
                 ->editColumn('post', function (MainModel $row) {
-                    return "<a href=".route(config('custom.route_prefix').'.posts.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".Str::words($row->post->translate->title, '10')."</a>";                     
+                    return "<a href=".route(config('custom.route_prefix').'.posts.edit',$row->post->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".Str::words($row->post->translate->title, '10')."</a>";                     
                 })
                 ->filter(function ($instance) use ($request) {
                     if ($request->get('search')) {
@@ -153,8 +153,8 @@ if ($request->ajax()) {
 
 
  
-    public function destroy($id){   
-        if(MainModel::select('id')->find($id)->delete()){    
+    public function destroy(MainModel $comment){   
+        if($comment->delete()){
             $arr = array('msg' => __($this->TRANS.'.'.'deleteMessageSuccess'), 'status' => true);
         }else{
             $arr = array('msg' => __($this->TRANS.'.'.'deleteMessageError'), 'status' => false);

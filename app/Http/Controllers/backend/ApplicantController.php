@@ -47,7 +47,15 @@ if ($request->ajax()) {
     return Datatables::of($model)
             ->addIndexColumn()   
             ->editColumn('name', function (MainModel $row) {
-                return "<a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".$row->name."</a>";    
+                return "<div class=\"d-flex align-items-center\">
+                
+                <div class=\"d-flex flex-column\">
+                    <a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." class=\"text-gray-800 text-hover-primary mb-1\">".$row->name."</a>
+                    <span><a href=\"mailto:".$row->email."\">".$row->email."</a></span>
+                </div>
+            </div>";                
+
+                
             })                                                              
             ->addColumn('vacancy', function (MainModel $row) {
                 return  "<span class=\"text-dark fw-bold\">".$row->vacancy->title."</span>";

@@ -84,7 +84,6 @@ public function index(Request $request){
                         <span><a href=\"mailto:".$row->email."\">".$row->email."</a></span>
                     </div>
                 </div>";                
-    
                 })        
 
                 

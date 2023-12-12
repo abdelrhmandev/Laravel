@@ -44,12 +44,9 @@ class FaqController extends Controller
 
 
     }
-        
-
 
 public function index(Request $request){     
-if ($request->ajax()) {           
-       
+if ($request->ajax()) {                  
     $model = MainModel::with([
         'translate' => function($query) {
             $query->select($this->TblForignKey, 'question','answer');

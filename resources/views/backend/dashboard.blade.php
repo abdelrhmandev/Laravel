@@ -1,11 +1,16 @@
 @extends('backend.base.base')
+@section('title', 'dasdas')
+@section('breadcrumbs')
+<h1 class="d-flex align-items-center text-gray-900 fw-bold my-1 fs-3">{{ __('site.dashboard')}}</h1>
+<span class="h-20px border-gray-200 border-start mx-3"></span>
+<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-1">
+    <li class="breadcrumb-item text-muted">
+        <a href="{{ route(config('custom.route_prefix').'.dashboard') }}" class="text-muted text-hover-primary">{{ __('site.home') }}</a>
+    </li> 
+</ul>
+@stop
 @section('style')
 <link href="{{ asset('assets/backend/plugins/custom/fullcalendar/fullcalendar.bundle.css')}}" rel="stylesheet" type="text/css" />
-@if(app()->getLocale() === 'ar')
-	<link href="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.rtl.css')}}" rel="stylesheet" type="text/css" />
-@else
-	<link href="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
-@endif
 @stop
 @section('content')
 <div id="kt_content_container" class="container-xxl">

@@ -1,21 +1,16 @@
 @extends('backend.base.base')
-
+@section('title', __($trans . '.plural').' - '.__($trans .'.add'))
 @section('breadcrumbs')
-    <li class="breadcrumb-item text-muted"><a href="" class="text-muted">
-            {{ __($trans . '.plural') }}</a></li>
-    <li class="breadcrumb-item text-dark">{{ __($trans . '.edit') }}</li>
+<h1 class="d-flex align-items-center text-gray-900 fw-bold my-1 fs-3">{{ __($trans . '.plural') }}</h1>
+<span class="h-20px border-gray-200 border-start mx-3"></span>
+<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-1">
+    <li class="breadcrumb-item text-muted"><a href="{{ route(config('custom.route_prefix').'.dashboard') }}" class="text-muted text-hover-primary">{{ __('site.home') }}</a></li>
+    <li class="breadcrumb-item"><span class="bullet bg-gray-200 w-5px h-2px"></span></li>
+    <li class="breadcrumb-item text-dark">{{ __($trans . '.add') }}</li>
+</ul>
 @stop
-
-@section('style')
-
-    @if (app()->getLocale() === 'ar')
-        <link href="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.rtl.css') }}" rel="stylesheet"
-            type="text/css" />
-    @else
-        <link href="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet"
-            type="text/css" />
-    @endif
-    <link href="{{ asset('assets/backend/css/custom.css') }}" rel="stylesheet" type="text/css" />
+@section('style') 
+<link href="{{ asset('assets/backend/css/custom.css') }}" rel="stylesheet" type="text/css" />
 @stop
 @section('content')
     <div id="kt_content_container" class="container-xxl">
@@ -29,14 +24,9 @@
                 data-form-submit-error-message="{{ __('site.form_submit_error') }}"
                 data-form-agree-label="{{ __('site.agree') }}" enctype="multipart/form-data">
                 <div class="card-body border-top p-6">
-
                     <div class="d-flex flex-column gap-5">
-
-
                         <div class="fv-row fl">
                             <label class="form-label" for="avatar">{{ __('site.avatar') }}</label>
-
-
                             <div class="pt-1 mt-1 fl">
                                 <style>
                                     .image-input-placeholder {
@@ -76,12 +66,8 @@
                                     </span>
                                 </div>
                                 <div class="text-muted fs-7">{{ __('site.uploadOnlyImages') }}</div>
-
                             </div>
-
                         </div>
-
-
 
                         <div class="fv-row fl">
                             <label class="required form-label" for="name">{{ __('site.name') }}</label>
@@ -106,27 +92,22 @@
                             <label class="required form-label" for="mobile">{{ __('site.mobile') }}</label>
                             <input type="text" class="form-control form-control-lg form-control-solid" id="mobile"
                                 placeholder="mobile" name="mobile" required data-fv-numeric="true" maxlength="20"
+                                data-fv-field="roles"
                                 data-fv-numeric___message="{{ __('validation.numeric', ['attribute' => 'mobile' . '&nbsp;']) }}"
                                 data-fv-not-empty___message="{{ __('validation.required', ['attribute' => 'mobile' . '&nbsp;']) }}" />
                         </div>
-                        <div class="fv-row fl">
+                         <div class="fv-row fl">
                             <label class="required form-label" for="roles">{{ __('role.plural') }}</label>
                             @foreach ($roles as $role)
                                 <label class="form-check form-check-custom form-check-solid align-items-start">
-                                    <input class="form-check-input me-3" type="checkbox" id="roles" name="roles[]"
-                                        value="{{ $role->id }}"
-                                        required
-                                        data-fv-not-empty___message="{{ __('validation.required', ['attribute' => 'roles' . '&nbsp;']) }}"
-                                        />
+                                    <input class="form-check-input me-3" type="checkbox" id="roles" name="roles[]" value="{{ $role->id }}" required data-fv-not-empty___message="{{ __('validation.required', ['attribute' => 'roles' . '&nbsp;']) }}" />
                                     <span class="form-check-label text-dark d-flex flex-column align-items-start">
                                         <span class="fw-bold fs-5 mb-0">{{ $role->name }}</span>
                                     </span>
                                 </label>
                                 <div class="separator separator-dashed my-6"></div>
                             @endforeach
-
                         </div>
-
                         <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed mb-9 p-6">
                             <i class="ki-outline ki-design-1 fs-2tx text-primary me-4"></i>
                             <div class="d-flex flex-stack flex-grow-1">
@@ -148,7 +129,7 @@
                                 autocomplete="off" required maxlength="20"
                                 data-fv-not-empty___message="{{ __('validation.required', ['attribute' => 'password' . '&nbsp;']) }}"
                                 data-fv-string-length="true" data-fv-string-length___min="6"
-                                data-fv-string-length___max="20" value="12345678"
+                                data-fv-string-length___max="20"
                                 data-fv-string-length___message="{{ __('passwords.password', ['attribute' => 'password' . '&nbsp;']) }}" />
                             <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2"
                                 data-kt-password-meter-control="visibility">
@@ -178,10 +159,11 @@
                                 data-fv-not-empty___message="{{ __('validation.required', ['attribute' => 'password confirmation']) }}"
                                 data-fv-string-length="true" data-fv-string-length___min="6"
                                 data-fv-string-length___max="20"
-                                data-fv-string-length___message="{{ __('passwords.password_confirmation', ['attribute' => 'password_confirmation' . '&nbsp;']) }}" />
+                                data-fv-callback="true"
+                                data-fv-callback___callback="checkidenticalPassword"
+                                 />
                         </div>
                     </div>
-
                 </div>
                 <div class="card-footer d-flex">
                     <x-backend.btns.button />
@@ -198,14 +180,26 @@
     <script src="{{ asset('assets/backend/js/widgets.bundle.js') }}"></script>
     <script src="{{ asset('assets/backend/js/custom/handleFormSubmit.js') }}"></script>
 
-
-
-
     <script>
         KTUtil.onDOMContentLoaded(function() {
             handleFormSubmitFunc('Add{{ $trans }}');
         });
-
+        function checkidenticalPassword(){
+            var form = document.getElementById('Add{{ $trans }}');            
+            var password = form.querySelector('[name="password"]').value;
+            var password_confirmation = form.querySelector('[name="password_confirmation"]').value;
+            if(password === password_confirmation){
+                    return {
+                        valid: true,    // true
+                    };                    
+            }
+            else{
+                    return {
+                        valid: false,    // or false
+                        message: "{{ __('passwords.password_confirmation') }}"
+                    };                    
+            }
+        }
         "use strict";
         var KTGeneralPasswordMeterDemos = {
             init: function() {
@@ -224,6 +218,12 @@
                                 confirmButton: "btn btn-primary"
                             }
                         });
+
+////////////////
+
+
+
+
                     });
                 })();
             },

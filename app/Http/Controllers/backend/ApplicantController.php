@@ -105,7 +105,7 @@ if ($request->ajax()) {
             $compact = [
                 'trans'                 => $this->TRANS,
                 'destroyMultipleRoute'  => route($this->ROUTE_PREFIX.'.destroyMultiple'), 
-                'redirectRoute'         => route($this->ROUTE_PREFIX.'.index'),    
+                'listingRoute'         => route($this->ROUTE_PREFIX.'.index'),    
                 'allrecords'            => MainModel::count(),
                 'publishedCounter'      => MainModel::Status('1')->count(),
                 'unpublishedCounter'    => MainModel::Status('0')->count(),   

@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html direction="{{ LaravelLocalization::getCurrentLocaleDirection() }}" dir="{{ LaravelLocalization::getCurrentLocaleDirection() }}" style="direction: {{ LaravelLocalization::getCurrentLocaleDirection() }}" lang="{{ app()->getLocale() }}">
-	<!--begin::Head-->
 	<head>
-		<title>{{ config('app.name', 'Laravel') }} CMS| @yield('title')</title>
+		<title>{{ config('app.name', 'Laravel') }} CMS - @yield('title')</title>
 		<meta name="csrf-token" content="{{ csrf_token() }}">
 		<meta name="description" content="The most advanced Bootstrap Admin " />
 		<meta name="keywords" content="Metronic, bootstrap, bootstrap 5, Angular" />
@@ -16,44 +15,23 @@
 		<meta property="og:site_name" content="CMS | Metronic" />
 		<link rel="canonical" href="google.com" />
 		<link rel="shortcut icon" href="{{ asset('assets/backend/media/logos/favicon.ico')}}" />
-		<!--begin::Fonts-->		
-		<!--end::Fonts-->
-		<!--begin::Vendor Stylesheets(used for this page only)-->
 		@yield('style')
-		<!--end::Vendor Stylesheets-->
 		<script>
 			window.Laravel = {!! json_encode([
 				'csrfToken' => csrf_token(),
 			]) !!};
 		</script>		
-		@if(app()->getLocale() === 'ar')
-		{{-- font-family: Droid Arabic Naskh,serif; --}}		
-		{{-- font arabic
-		18-khebrat-musamim_WdGUl --}}
-
-
- 
+		@if(app()->getLocale() === 'ar') 
 		<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic&family=Roboto:wght@500&display=swap" rel="stylesheet">
-
-
 			<link href="{{ asset('assets/backend/plugins/global/plugins.bundle.rtl.css')}}" rel="stylesheet" type="text/css" />
 			<link href="{{ asset('assets/backend/css/style.bundle.rtl.css')}}" rel="stylesheet" type="text/css" />
-		@else
-	 
-
- 
-
- 
+			<link href="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.rtl.css') }}" rel="stylesheet"
+            type="text/css" />
+		@else 
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"/>
-		
-
-		 
-
- 
-
-		<!--begin::Global Stylesheets Bundle(used by all pages)-->
 		<link href="{{ asset('assets/backend/plugins/global/plugins.bundle.css')}}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('assets/backend/css/style.bundle.css')}}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.css')}}" rel="stylesheet" type="text/css" />
 		@endif
 	</head>
 	<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed aside-enabled aside-fixed">

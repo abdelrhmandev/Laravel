@@ -84,17 +84,10 @@ margin-right: 0;
 
  
 
-.fv-plugins-tachyons .fv-plugins-icon[data-field='country_id'] {
-    top: 38px;
-}
+.fv-plugins-message-container--enabled {
+    color: #f1416c;
+  }
 
-
-.fv-plugins-icon[data-field='roles'] {
-    display: inline-block;
-    position: static;
-    height: auto;
-    line-height: normal;
-}
 
 .my-field-error .fv-plugins-message-container,
 .my-field-error .fv-plugins-icon {

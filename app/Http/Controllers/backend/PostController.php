@@ -18,8 +18,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File; 
 use App\Models\PostTranslation as TransModel;
 use App\Http\Requests\backend\PostRequest as ModuleRequest;
-
-
 class PostController extends Controller
 {
     use UploadAble,Functions;
@@ -202,7 +200,7 @@ if ($request->ajax()) {
                 'createRoute'           => route($this->ROUTE_PREFIX.'.create'),                
                 'storeRoute'            => route($this->ROUTE_PREFIX.'.store'),
                 'destroyMultipleRoute'  => route($this->ROUTE_PREFIX.'.destroyMultiple'), 
-                'redirectRoute'         => route($this->ROUTE_PREFIX.'.index'),    
+                'listingRoute'         => route($this->ROUTE_PREFIX.'.index'),    
                 'categories'            => Category::tree(),  
                 'allrecords'            => MainModel::count(),
                 'publishedCounter'      => MainModel::Status('1')->count(),

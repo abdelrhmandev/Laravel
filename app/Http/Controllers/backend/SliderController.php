@@ -116,7 +116,7 @@ if ($request->ajax()) {
                 'createRoute'           => route($this->ROUTE_PREFIX.'.create'),                
                 'storeRoute'            => route($this->ROUTE_PREFIX.'.store'),
                 'destroyMultipleRoute'  => route($this->ROUTE_PREFIX.'.destroyMultiple'), 
-                'redirectRoute'         => route($this->ROUTE_PREFIX.'.index'),    
+                'listingRoute'         => route($this->ROUTE_PREFIX.'.index'),    
                 'allrecords'            => MainModel::count(),
                 'publishedCounter'      => MainModel::Status('1')->count(),
                 'unpublishedCounter'    => MainModel::Status('0')->count(),   

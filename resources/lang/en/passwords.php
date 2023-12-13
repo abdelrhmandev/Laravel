@@ -13,7 +13,7 @@ return [
     |
     */
     'password' => 'Passwords must be at least six characters and match the confirmation.',
-    'confirmpassword' => 'Confirm Passwords must be at least six characters and match the password.',
+    'password_confirmation' => 'Confirm Passwords must be at least six characters and match the password.',
     'reset' => 'Your password has been reset!',
     'sent' => 'We have emailed your password reset link!',
     'throttled' => 'Please wait before retrying.',

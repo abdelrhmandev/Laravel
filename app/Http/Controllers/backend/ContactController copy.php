@@ -65,7 +65,7 @@ class ContactController extends Controller
                     
                     $compact = [
                         'trans'                 => $this->TRANS,                
-                        'redirectRoute'         => route($this->ROUTE_PREFIX.'.index'),                        
+                        'listingRoute'         => route($this->ROUTE_PREFIX.'.index'),                        
                         'destroyMultipleRoute'  => route($this->ROUTE_PREFIX.'.destroyMultiple'),       
                     ];                       
                     return view('backend.contacts.index',$compact);

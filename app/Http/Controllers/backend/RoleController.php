@@ -122,7 +122,7 @@ public function index(Request $request){
                     'createRoute'           => route($this->ROUTE_PREFIX.'.create'),                
                     'storeRoute'            => route($this->ROUTE_PREFIX.'.store'),
                     'destroyMultipleRoute'  => route($this->ROUTE_PREFIX.'.destroyMultiple'), 
-                    'redirectRoute'         => route($this->ROUTE_PREFIX.'.index'),    
+                    'listingRoute'         => route($this->ROUTE_PREFIX.'.index'),    
                     'allrecords'            => MainModel::count(),    
                 ];                       
                 return view('backend.roles.index',$compact);

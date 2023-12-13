@@ -123,7 +123,7 @@ if ($request->ajax()) {
             
             $compact = [
                 'trans'                 => $this->TRANS,                
-                'redirectRoute'         => route($this->ROUTE_PREFIX.'.index'),    
+                'listingRoute'         => route($this->ROUTE_PREFIX.'.index'),    
                 'allrecords'            => $allrecords->count(),
                 'destroyMultipleRoute'  => route($this->ROUTE_PREFIX.'.destroyMultiple'), 
                 'ChangeStatusRoute'     => route($this->ROUTE_PREFIX.'.changeStatus'),

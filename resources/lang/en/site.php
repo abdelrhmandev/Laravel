@@ -179,5 +179,10 @@ return [
     'excel'                 =>'Excel',
     'csv'                   =>'CSV',
     'pdf'                   =>'PDF',  
-    'sort_by'               =>'Sort by'  
+    'sort_by'               =>'Sort by',  
+    'active'                =>'Active',
+    'deactivated'           =>'Deactivated',
+    'change_image'          =>'Change Image',
+    'change_status'          =>'Change Status',
+    'languages'             =>'Languages'
 ];

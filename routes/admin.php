@@ -3,7 +3,7 @@ use Illuminate\Support\Facades\Route;
  
 
 
-
+// https://laravel-news.com/laravel-route-organization-tips
 Route::get('/', 'DashboardController@index')->name('dashboard');
 
 /////////////////////////////////////////////////////////////////////////////////////////////////

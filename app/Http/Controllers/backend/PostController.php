@@ -113,7 +113,11 @@ if ($request->ajax()) {
     return Datatables::of($model)
             ->addIndexColumn()   
             ->editColumn('translate.title', function (MainModel $row) {               
-                return "<a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".Str::words($row->translate->title, '5')."</a>
+                return "<a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter".$row->id."=\"item\">".Str::words($row->translate->title, '7')."</a><br>
+                <span class=\"text-success fs-7 fw-bold\">".__('site.author')."</span><small> ".$row->user->name."</small>
+                 | 
+                <span class=\"text-warning fs-7 fw-bold\">".__('comment.plural')."</span><a href=".route(config('custom.route_prefix').'.comments.index',$row->id)."> (".($row->comments_count ?? '0') .")</a>
+
                 ";    
             })                                                              
             ->editColumn('image', function ($row) {
@@ -164,18 +168,6 @@ if ($request->ajax()) {
                 }
                 return $tags;
             })
-
-
-            ->AddColumn('comments', function (MainModel $row) {                    
-                return  "<a class=\"btn btn-sm btn-color-gray-600 btn-active-color-primary btn-active-light-primary fw-bold me-1 active\" href=".route(config('custom.route_prefix').'.posts.index',$row->id).">
-                                <i class=\"bi bi-chat-square fs-2 me-1\"></i>
-                                ".$row->comments_count ?? '0'."
-                            </a>";                   
-            })
-
-            ->editColumn('user_id', function (MainModel $row) {                                                    
-                return '<div class="\text-muted fs-7\">'.$row->user->name ?? '<span aria-hidden="true">—</span>'.'<div>';                                                
-            })  
  
             ->editColumn('status', function (MainModel $row) {                                                           
                 return $this->dataTableGetStatus($row);
@@ -200,7 +192,7 @@ if ($request->ajax()) {
                 'createRoute'           => route($this->ROUTE_PREFIX.'.create'),                
                 'storeRoute'            => route($this->ROUTE_PREFIX.'.store'),
                 'destroyMultipleRoute'  => route($this->ROUTE_PREFIX.'.destroyMultiple'), 
-                'listingRoute'         => route($this->ROUTE_PREFIX.'.index'),    
+                'listingRoute'          => route($this->ROUTE_PREFIX.'.index'),    
                 'categories'            => Category::tree(),  
                 'allrecords'            => MainModel::count(),
                 'publishedCounter'      => MainModel::Status('1')->count(),

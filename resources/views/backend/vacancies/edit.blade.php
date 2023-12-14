@@ -1,31 +1,19 @@
 @extends('backend.base.base')
-
+@section('title', __($trans . '.plural').' - '.__($trans .'.edit'))
 @section('breadcrumbs')
-    <li class="breadcrumb-item text-muted"><a href="{{ $redirect_after_destroy}}" class="text-muted"> {{ __($trans.".plural") }}</a></li>
-    <li class="breadcrumb-item text-dark">{{ __($trans.".edit") }}</li>
+<h1 class="d-flex align-items-center text-gray-900 fw-bold my-1 fs-3">{{ __($trans . '.plural') }}</h1>
+<span class="h-20px border-gray-200 border-start mx-3"></span>
+<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-1">
+    <li class="breadcrumb-item text-muted"><a href="{{ route(config('custom.route_prefix').'.dashboard') }}" class="text-muted text-hover-primary">{{ __('site.home') }}</a></li>
+    <li class="breadcrumb-item"><span class="bullet bg-gray-200 w-5px h-2px"></span></li>
+    <li class="breadcrumb-item text-dark">{{ __($trans . '.edit') }}</li>
+</ul>
 @stop
-
-@section('style')
-
-@if (app()->getLocale() === 'ar')
-<link href="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.rtl.css') }}" rel="stylesheet"
-    type="text/css" />
-@else
-<link href="{{ asset('assets/backend/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet"
-    type="text/css" />
-@endif
-
-<link href="{{ asset('assets/backend/css/custom.css') }}" rel="stylesheet"
-type="text/css" />
-    
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="{{ asset('assets/backend/plugins/custom/file-upload/image-uploader.min.css') }}">
-
- 
+@section('style') 
+<link href="{{ asset('assets/backend/css/custom.css') }}" rel="stylesheet" type="text/css" />
 @stop
 @section('content')
-
-    <div class="container-xxl" id="kt_content_container">
+    <div id="kt_content_container" class="container-xxl">
         <form id="Edit{{ $trans }}" data-route-url="{{ $updateRoute }}" class="form d-flex flex-column flex-lg-row"            
             data-form-submit-error-message="{{ __('site.form_submit_error')}}"
             data-form-agree-label="{{ __('site.agree') }}" 

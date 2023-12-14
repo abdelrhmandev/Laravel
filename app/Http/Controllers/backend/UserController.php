@@ -32,9 +32,11 @@ class UserController extends Controller
             'name'          => $request->input('name'),            
             'email'         => $request->input('email'),            
             'mobile'        => $request->input('mobile'),            
-            'avatar'         => (!empty($request->file('avatar'))) ? $this->uploadFile($request->file('avatar'),$this->UPLOADFOLDER) : NULL,            
+            'avatar'        => (!empty($request->file('avatar'))) ? $this->uploadFile($request->file('avatar'),$this->UPLOADFOLDER) : NULL,            
             'username'      => $request->input('username'),                            
             'password'      =>  Hash::make($request->input('password')),            
+            'status'        => isset($request->status) ? '1' : '0',
+
         ];              
         $user = MainModel::create($arry);
         if($user && $user->assignRole($request->input('roles'))){
@@ -59,7 +61,7 @@ class UserController extends Controller
 public function index(Request $request){    
         
     if ($request->ajax()) {              
-        $model = MainModel::select('id','name','mobile','email','avatar','created_at')
+        $model = MainModel::select('id','name','mobile','email','avatar','status','created_at')
         ->with([
             'roles' => function($query) {
                 $query->select('id','trans'); # Many to many
@@ -92,19 +94,29 @@ public function index(Request $request){
                     if($row->roles_count>0){                    
                         foreach($row->roles as $role){
                             foreach (json_decode($role->trans,true) as $r){
-                                if(isset($r[app()->getLocale()])){
-                                    $roleDiv.="<div class=\"badge py-3 px-4 fs-7 badge-light-primary\"><span class=\"text-primary\">".$r[app()->getLocale()]."</span></div> ";                     
-                                }
+                                    if(isset($r[app()->getLocale()])){
+                                        $roleDiv.="<div class=\"badge py-3 px-4 fs-7 badge-light-primary\"><span class=\"text-primary\">".$r[app()->getLocale()]."</span></div> ";                     
+                                    }
                                 }
                         }                        
                     }else{
                         $roleDiv =  "<span class=\"text-danger\">".__('user.no_roles_assigned')."</span>";
                     }  
                     return  $roleDiv;                
-
-
-
                 })
+
+                ->editColumn('status', function (MainModel $row) {                                                           
+                    if($row->status == 1){
+                        $checked = "checked";
+                        $statusLabel  = "<span class=\"text-success\">".__('site.active')."</span>";                                                   
+                    }else{
+                        $checked = "";
+                        $statusLabel  ="<span class=\"text-danger\">".__('site.deactivated')."</span>";   
+                    }                    
+                    $div = "<div class=\"form-check form-switch form-check-custom form-check-solid\"><input class=\"form-check-input UpdateStatus\" name=\"Updatetatus\" type=\"checkbox\" ".$checked." id=\"Status".$row->id."\" onclick=\"UpdateStatus($row->id,'".__($this->TRANS.'.plural')."','$this->Tbl','".route('UpdateStatus')."')\" />&nbsp;".$statusLabel."</div>";
+                    return $div;    
+                })
+
                 ->editColumn('created_at', function (MainModel $row) {
                     return $this->dataTableGetCreatedat($row->created_at);
                  })
@@ -114,7 +126,7 @@ public function index(Request $request){
                     ->editColumn('actions', function ($row) {                                                       
                         return $this->dataTableEditRecordAction($row,$this->ROUTE_PREFIX);
                     })                                   
-                ->rawColumns(['name','role','actions','created_at','created_at.display'])                  
+                ->rawColumns(['name','role','status','actions','created_at','created_at.display'])                  
                 ->make(true);    
         }  
             if (view()->exists('backend.users.index')) {

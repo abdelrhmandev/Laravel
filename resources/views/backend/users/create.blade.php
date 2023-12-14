@@ -163,6 +163,16 @@
                                 data-fv-callback___callback="checkidenticalPassword"
                                  />
                         </div>
+
+                        <div class="fv-row fl">
+                            <label class="required form-label" for="status">{{ __('site.status') }}</label>                                                    
+                            <div class="form-check form-switch form-check-custom form-check-solid">                                
+                                <span class="p-2">{{ __('site.active')}}</span>
+                                    <input class="form-check-input" type="checkbox" value="1" name="status">                               
+                            </div>                            
+                        </div>
+   
+                        
                     </div>
                 </div>
                 <div class="card-footer d-flex">

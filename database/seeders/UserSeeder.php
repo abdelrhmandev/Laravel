@@ -23,6 +23,7 @@ class UserSeeder extends Seeder
                 'is_admin'         =>'1',
                 'mobile'           =>'01872971280',
                 'avatar'           =>'uploads/avatars/admin.jpg',
+                'status'           =>'1',
             ])->assignRole(1);
 
             
@@ -34,6 +35,7 @@ class UserSeeder extends Seeder
                 'is_admin'         =>'1',
                 'mobile'           =>'01872971220',
                 'avatar'           =>'uploads/avatars/nick.jpg',
+                'status'           =>'1',
             ])->assignRole(2);
 
             \App\Models\User::create([    
@@ -42,6 +44,7 @@ class UserSeeder extends Seeder
                 'email'            =>'DanWilson@domain.com',
                 'name'             =>'Dan Wilson',
                 'is_admin'         =>'1',
+                'status'           =>'0',
             ])->assignRole(2);
 
             \App\Models\User::create([    
@@ -51,6 +54,7 @@ class UserSeeder extends Seeder
                 'name'             =>'Francis Mitcham',
                 'is_admin'         =>'1',
                 'mobile'           =>'01872971230',
+                'status'           =>'1',
             ])->assignRole(3);
 
             \App\Models\User::create([    
@@ -61,6 +65,7 @@ class UserSeeder extends Seeder
                 'is_admin'         =>'1',
                 'mobile'           =>'01872971450',
                 'avatar'           =>'uploads/avatars/kevin.jpg',
+                'status'           =>'1',
             ])->assignRole(4);
 
        
@@ -70,6 +75,7 @@ class UserSeeder extends Seeder
                 'email'            =>'JessieClarcson@domain.com',
                 'name'             =>'Jessie Clarcson',
                 'is_admin'         =>'1',
+                'status'           =>'1',
            ])->assignRole(3);
 
 
@@ -80,6 +86,8 @@ class UserSeeder extends Seeder
                 'name'             =>'ken Trump',
                 'is_admin'         =>'1',
                 'avatar'           =>'uploads/avatars/ken.jpg',
+                'status'          =>'1',
+                
              
             ])->assignRole(5);
 
@@ -89,6 +97,7 @@ class UserSeeder extends Seeder
                 'email'            =>'Adam@domain.com',
                 'name'             =>'Adam Mon',
                 'is_admin'         =>'1',
+                'status'           =>'0',
             ]);
             \App\Models\User::create([    
                 'username'         =>'Randy',
@@ -96,6 +105,7 @@ class UserSeeder extends Seeder
                 'email'            =>'Randy@domain.com',
                 'name'             =>'Randy Mob',
                 'is_admin'         =>'1',
+                'status'          =>'1',
             ]);
     
         ////////////////////
@@ -107,6 +117,7 @@ class UserSeeder extends Seeder
             'name'             =>'Lebron Wayde',
             'is_admin'         =>'1',
             'avatar'           =>'uploads/avatars/lebron.jpg',
+            'status'          =>'1',
         ])->assignRole(3);
 
 
@@ -118,6 +129,7 @@ class UserSeeder extends Seeder
             'is_admin'         =>'1',
             'mobile'           =>'01872971150',
             'avatar'           =>'uploads/avatars/alice.jpg',
+            'status'           =>'0',
             
         ])->assignRole(4);
 
@@ -129,6 +141,7 @@ class UserSeeder extends Seeder
             'is_admin'         =>'1',
             'mobile'           =>'01872371450',
             'avatar'           =>'uploads/avatars/brad.jpg',
+            'status'          =>'1',
         ])->assignRole(2);
         
 

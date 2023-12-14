@@ -65,14 +65,23 @@ class RouteServiceProvider extends ServiceProvider
         function(){
             Route::name('admin.')->group(function () {
              Route::group([
-                'prefix'        =>config('custom.route_prefix') , 
+                'prefix'        => config('custom.route_prefix') , 
                 'namespace'     => $this->backend_namespace,      
                 'middleware'    => ['web'],                
-                ], function() {
+                ], function() {                    
                     require_once base_path('routes/admin.php');
-                    require_once base_path('routes/admin.ecommerce.php');
+                    require_once base_path('routes/admin.auth.php');   
+                    // require_once base_path('routes/admin.ecommerce.php');
             });
          });
+
+ 
+                
+
+     
+
+
+
         });
     }
 

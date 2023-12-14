@@ -31,7 +31,7 @@ class UserRequest extends FormRequest
 
         $rules['username']  = 'required|string|max:255|unique:users,username';
         $rules['password']  = 'required|string|min:8|confirmed';
-
+        $rules['status']    = 'nullable|in:0,1';
 
         return $rules; 
 

@@ -21,9 +21,13 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const HOME = '/home';
 
+
     protected $backend_namespace = 'App\Http\Controllers\backend';
 
     protected $admin_route_alias = 'admin.';
+
+
+    public const ADMNHOME = '/admin';
 
     /**
      * The controller namespace for the application.

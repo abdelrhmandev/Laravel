@@ -27,11 +27,10 @@ class LoginController extends Controller{
         return view('backend.auth.login');
     }
 
-    public function do_login(LoginRequest $request) {
+    public function login(LoginRequest $request) {
 
-        dd(request('password'));
         if (Auth::guard('admin')->attempt(['email' => request('email'),'status'=>'1','password' => request('password')],request('rememberme') == 1 ? true:false)) {            
-			return redirect()->intended(route('backend.dashboard'));
+			return redirect()->intended(route('admin.dashboard'));
         } 
         return $this->sendFailedLoginResponse($request);
     }
@@ -44,14 +43,6 @@ class LoginController extends Controller{
                 $this->username() => trans('auth.failed'),
             ]);
     }
-
-
-    public function logout(Request $request){
-		Auth::guard('admin')->logout();
-		return redirect()->route('admin.auth.login')->with('info',trans('user.logout'));  // redirect to backend login page
-
-	}
-
     public function username(){
         $login = request()->input('email');
         $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
@@ -62,4 +53,12 @@ class LoginController extends Controller{
     protected function guard(){
     	return Auth::guard('admin');
     }
+
+    public function logout(Request $request){
+		if(Auth::guard('admin')->check()){
+            Auth::guard('admin')->logout();
+		    return redirect()->route('admin.auth.login')->with('info',trans('user.logout'));  // redirect to backend login page
+        }
+	}
+
 }

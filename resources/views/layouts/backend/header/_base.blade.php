@@ -2841,13 +2841,12 @@
 						 <!--end::Avatar-->
 						 <!--begin::Username-->
 						 <div class="d-flex flex-column">
-							<div class="fw-bold d-flex align-items-center fs-5">
-							   Max Smidsdsadth                    
-							   <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span>
+							<div class="fw-bold d-flex align-items-center fs-5">							   
+							   {{ Auth::guard('admin')->user()->name }}
+							   <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">{{  Auth::guard('admin')->user()->getRoleNames() }}</span>
 							</div>
-							<a href="#" class="fw-semibold text-muted text-hover-primary fs-7">
-							max@kt.com                
-						</a>
+							<a href="{{ route(config('custom.route_prefix').'.profile') }}" class="fw-semibold text-muted text-hover-primary fs-7">
+								{{ Auth::guard('admin')->user()->email }}</a>
 						 </div>
 						 <!--end::Username-->
 					  </div>
@@ -2969,8 +2968,11 @@
 				   <!--end::Menu item-->
 				   <!--begin::Menu item-->
 				   <div class="menu-item px-5">
-					<a href="{{ route('admin.logout') }}" class="menu-link px-5">{{ __('site.logout')}}</a>
-				   </div>
+						<a href="{{ route(config('custom.route_prefix').'.auth.logout') }}" class="menu-link px-5" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('site.logout')}}</a>
+						<form id="logout-form" action="{{ route(config('custom.route_prefix').'.auth.logout') }}" method="POST" class="d-none">
+							@csrf
+						</form>
+					</div>
 				   <!--end::Menu item-->
 				</div>
 				<!--end::User account menu-->

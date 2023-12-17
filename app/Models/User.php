@@ -12,7 +12,7 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable , HasRoles;
 
 
-    protected $guard_name = 'admin'; // or whatever guard you want to use
+    // protected $guard_name = 'admin'; // or whatever guard you want to use
     
     /**
      * The attributes that are mass assignable.

@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+use App\Notifications\AdminPasswordResetNotification as ResetPasswordNotification;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -60,4 +61,9 @@ class User extends Authenticatable
     // {
     //     $this->attributes['password'] = Hash::make($value);
     // }
+
+    
+        public function sendPasswordResetNotification($token){
+        $this->notify(new ResetPasswordNotification($token));
+        }
 }

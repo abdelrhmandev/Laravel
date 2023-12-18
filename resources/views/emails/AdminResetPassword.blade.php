@@ -10,6 +10,6 @@
 
 <p>{{ trans('admin.reset_password_expire') }}</p>
 
-{{ trans('admin.best_regards') }} <br>
-{{ config('admin.webapp') }}
+{{ trans('admin.best_regards') }}sssssssssssssss <br>
+{{ config('admin.webapp') }} ssssssssssssssssss
 @endcomponent

@@ -64,29 +64,10 @@ class RouteServiceProvider extends ServiceProvider
     }
 
     protected function mapAdminRoutes(){
-        Route::group(['prefix' => LaravelLocalization::setLocale() , 
-        'middleware' => ['localeSessionRedirect', 'localizationRedirect','localeViewPath']] , 
-        function(){
-            Route::name('admin.')->group(function () {
-             Route::group([
-                'prefix'        => config('custom.route_prefix') , 
-                'namespace'     => $this->backend_namespace,      
-                'middleware'    => ['web'],                
-                ], function() {                    
-                    require_once base_path('routes/admin.php');
-                    require_once base_path('routes/admin.auth.php');   
-                    // require_once base_path('routes/admin.ecommerce.php');
-            });
-         });
 
- 
-                
-
-     
-
-
-
-        });
+        Route::middleware('web')
+        ->namespace($this->backend_namespace)
+        ->group(base_path('routes/admin.php'));
     }
 
     /**

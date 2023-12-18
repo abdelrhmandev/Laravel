@@ -2,26 +2,24 @@
 namespace App\Http\Controllers\backend\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use App\Http\Requests\backend\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
+use App\Http\Requests\backend\LoginRequest;
 class LoginController extends Controller{
 
 
-
-    use AuthenticatesUsers;
+    use AuthenticatesUsers, ThrottlesLogins;
+ 
 
     protected $redirectTo = '/admin';
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-       $this->middleware('guest:admin')->except('logout');
-       
-	}
+
+    
+     public function __construct(){
+        $this->middleware('guest:admin', ['except' => ['logout']]);
+      
+      }
+
 
     public function showLoginForm(){
         return view('backend.auth.login');
@@ -29,20 +27,31 @@ class LoginController extends Controller{
 
     public function login(LoginRequest $request) {
 
+
+
+        
+        $throttles = $this->isUsingThrottlesLoginsTrait();
+        if ($throttles && $lockedOut = $this->hasTooManyLoginAttempts($request)) {
+                $this->fireLockoutEvent($request);
+                $key = $this->getThrottleKey($request).':lockout';
+                return $this->sendLockoutResponse($request);
+        }
+
         if (Auth::guard('admin')->attempt(['email' => request('email'),'status'=>'1','password' => request('password')],request('rememberme') == 1 ? true:false)) {            
-			return redirect()->intended(route('admin.dashboard'));
+            return $this->handleUserWasAuthenticated($request, $throttles);
         } 
+
+
+        if ($throttles && ! $lockedOut) {
+            $this->incrementLoginAttempts($request);
+        }
+
         return $this->sendFailedLoginResponse($request);
     }
 
 
-    public function sendFailedLoginResponse(Request $request){
-        return redirect()->back()
-            ->withInput($request->only($this->username(), 'remember'))
-            ->withErrors([
-                $this->username() => trans('auth.failed'),
-            ]);
-    }
+
+    
     public function username(){
         $login = request()->input('email');
         $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
@@ -60,5 +69,17 @@ class LoginController extends Controller{
 		    return redirect()->route('admin.auth.login')->with('info',trans('user.logout'));  // redirect to backend login page
         }
 	}
+    public function sendFailedLoginResponse(Request $request){
+        return response()->json(array('msg' => __('auth.failed'), 'status' => false));
+    }
 
+
+    protected function isUsingThrottlesLoginsTrait(){
+        return in_array(
+            ThrottlesLogins::class, class_uses_recursive(get_class($this))
+        );
+
+	
+
+    }
 }

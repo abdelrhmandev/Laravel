@@ -11,14 +11,28 @@ class LoginController extends Controller{
 
     use AuthenticatesUsers, ThrottlesLogins;
  
-
     protected $redirectTo = '/admin';
 
-    
+    protected $auth;
+
      public function __construct(){
         $this->middleware('guest:admin', ['except' => ['logout']]);
       
       }
+
+      protected function hasTooManyLoginAttempts(Request $request){
+        return $this->limiter()->tooManyAttempts(
+            $this->throttleKey($request), $this->maxAttempts(), $this->decayMinutes()
+        );
+    }
+
+    public function maxAttempts(){
+        return property_exists($this, 'maxAttempts') ? $this->maxAttempts : 5; // 5 times to login 
+    }
+
+    public function decayMinutes(){
+        return property_exists($this, 'decayMinutes') ? $this->decayMinutes : 3; // 3 minutes = 180 seconds
+    }
 
 
     public function showLoginForm(){
@@ -30,22 +44,14 @@ class LoginController extends Controller{
 
 
         
-        $throttles = $this->isUsingThrottlesLoginsTrait();
-        if ($throttles && $lockedOut = $this->hasTooManyLoginAttempts($request)) {
-                $this->fireLockoutEvent($request);
-                $key = $this->getThrottleKey($request).':lockout';
-                return $this->sendLockoutResponse($request);
-        }
-
+ 
+        
         if (Auth::guard('admin')->attempt(['email' => request('email'),'status'=>'1','password' => request('password')],request('rememberme') == 1 ? true:false)) {            
             return $this->handleUserWasAuthenticated($request, $throttles);
         } 
 
 
-        if ($throttles && ! $lockedOut) {
-            $this->incrementLoginAttempts($request);
-        }
-
+ 
         return $this->sendFailedLoginResponse($request);
     }
 
@@ -70,16 +76,10 @@ class LoginController extends Controller{
         }
 	}
     public function sendFailedLoginResponse(Request $request){
-        return response()->json(array('msg' => __('auth.failed'), 'status' => false));
+        return redirect()->route('admin.auth.login')->with(['error' => trans('auth.failed')]);
     }
 
 
-    protected function isUsingThrottlesLoginsTrait(){
-        return in_array(
-            ThrottlesLogins::class, class_uses_recursive(get_class($this))
-        );
 
-	
-
-    }
+    
 }

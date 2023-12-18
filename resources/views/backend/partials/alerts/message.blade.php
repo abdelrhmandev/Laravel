@@ -9,7 +9,7 @@
                         fill="currentColor" />
                 </svg>
             </span>
-            <div class="me-3">&nbsp;{{ Session::get('success') }}.</div>
+            <div class="me-3">&nbsp;{{ Session::get('success') }}</div>
         </div>
     </div>
 @elseif(Session::has('error'))
@@ -22,7 +22,7 @@
                 <rect x="8.41422" y="7" width="12" height="2" rx="1" transform="rotate(45 8.41422 7)" fill="currentColor"></rect>
             </svg>
         </span>
-        <div class="me-3">&nbsp;{{ Session::get('error') }}.</div>
+        <div class="me-3">&nbsp;{{ Session::get('error') }}</div>
     </div>
 </div>
 @elseif(Session::has('warning'))

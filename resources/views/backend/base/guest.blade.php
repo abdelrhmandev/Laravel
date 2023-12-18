@@ -12,7 +12,7 @@
 		<meta property="og:type" content="article" />
 		<meta property="og:title" content="Metronic - Bootstrap 5 HTML, VueJS, React" />
 		<meta property="og:url" content="#" />
-		<meta property="og:site_name" content= Metronic" />
+		<meta property="og:site_name" content= "Metronic" />
 		<link rel="canonical" href="google.com" />
 		<link rel="shortcut icon" href="{{ asset('assets/backend/media/logos/favicon.ico')}}" />
 		@yield('style')
@@ -33,10 +33,9 @@
 
 		<link href="{{ asset('assets/backend/css/custom.css') }}" rel="stylesheet" type="text/css" />
 
-
 	</head>
 	<body id="kt_body" class="app-blank bgi-size-cover bgi-position-center bgi-no-repeat">
-		<div class="d-flex flex-column flex-root">
+		<div class="d-flex flex-column flex-root">						
 			@yield('content')
 		</div>
 		<script src="{{ asset('assets/backend/plugins/global/plugins.bundle.js')}}"></script>

@@ -1,8 +1,11 @@
 <?php
 namespace App\Http\Requests\backend;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
+
+
+
 class LoginRequest extends FormRequest
 {
     /**
@@ -23,27 +26,18 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email|',
+            'email' => 'required|email',
             'password' => 'required'
         ];
     }
 
-    public function messages(){
-        return [
-
-                'email.required' => 'يجب الدخال البريد الالكتروني ',
-                'email.email' => 'صيغة البريد الالكتروني غير صحيحة ',
-                'password.required' => 'يجب الدخال كلمة المرور'
-
-            ];
-    }
+    //  public function messages(){
+    //     return [
+    //         'email.required' => 'Email is required!',
+    //         'password.required' => 'Password is required!'
+    //     ];
+    // }
 
 
-    public function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(response()->json([
-            'status'   => 'RequestValidation',
-            'msg'      => $validator->errors()
-        ]));
-    }
+
 }

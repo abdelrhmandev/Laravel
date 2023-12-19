@@ -22,7 +22,7 @@ class AreaController extends Controller
 
     public function __construct() {
 
-        
+        $this->middleware('auth:admin');
         $this->TblForignKey         = 'area_id';
         $this->ROUTE_PREFIX         = config('custom.route_prefix').'.areas'; 
         $this->TRANSLATECOLUMNS     = ['title','slug']; // Columns To be Trsanslated

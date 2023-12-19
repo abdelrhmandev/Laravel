@@ -32,7 +32,6 @@
                                     .image-input-placeholder {
                                         background-image: url({{ asset('assets/backend/media/svg/files/blank-image.svg') }});
                                     }
-
                                     [data-theme="dark"] .image-input-placeholder {
                                         background-image: url({{ asset('assets/backend/media/svg/files/blank-image.svg') }});
                                     }
@@ -72,7 +71,7 @@
                         <div class="fv-row fl">
                             <label class="required form-label" for="name">{{ __('site.name') }}</label>
                             <input placeholder="{{ __('site.name') }}" type="text" id="name" name="name"
-                                pattern="^[a-zA-Z]*$"
+                                pattern="[a-zA-Z]"
                                 data-fv-regexp___message="{{ __('validation.alpha', ['attribute' => 'name' . '&nbsp;']) }}"
                                 class="form-control form-control-lg form-control-solid" required
                                 data-fv-not-empty___message="{{ __('validation.required', ['attribute' => 'name' . '&nbsp;']) }}" />
@@ -92,7 +91,6 @@
                             <label class="required form-label" for="mobile">{{ __('site.mobile') }}</label>
                             <input type="text" class="form-control form-control-lg form-control-solid" id="mobile"
                                 placeholder="mobile" name="mobile" required data-fv-numeric="true" maxlength="20"
-                                data-fv-field="roles"
                                 data-fv-numeric___message="{{ __('validation.numeric', ['attribute' => 'mobile' . '&nbsp;']) }}"
                                 data-fv-not-empty___message="{{ __('validation.required', ['attribute' => 'mobile' . '&nbsp;']) }}" />
                         </div>

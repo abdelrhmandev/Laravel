@@ -1,8 +1,8 @@
 <?php
-
-namespace App\Http\Requests;
-
+namespace App\Http\Requests\backend;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Contracts\Validation\Validator;
 
 class ProfileRequest extends FormRequest
 {
@@ -25,8 +25,18 @@ class ProfileRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'email' => 'required|email|unique:users,email,'.$this -> id,
+            'email' => 'required|email|unique:users,email,'.\Auth::guard('admin')->user()->id,
+            'username' => 'required|unique:users,username,'.\Auth::guard('admin')->user()->id,
             'password'  => 'nullable|confirmed|min:8'
         ];
+    }
+
+
+    public function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'status'   => 'RequestValidation',
+            'msg'      => $validator->errors()
+        ]));
     }
 }

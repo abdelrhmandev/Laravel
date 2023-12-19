@@ -93,7 +93,7 @@
 
                             @error('email')
                                 <span
-                                    class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                                    class="text-danger">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
@@ -106,7 +106,7 @@
 
                             @error('password')
                                 <span
-                                    class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                                    class="text-danger">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror

@@ -18,6 +18,7 @@ class ClientController extends Controller
 
     use UploadAble,Functions;
     public function __construct() {
+        $this->middleware('auth:admin');
         $this->ROUTE_PREFIX         = config('custom.route_prefix').'.clients'; 
         $this->TRANS                = 'client'; 
         $this->Tbl                  = 'clients';

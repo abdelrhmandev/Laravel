@@ -17,6 +17,7 @@ class FaqController extends Controller
 {
     use Functions;
     public function __construct() {        
+        $this->middleware('auth:admin');
         $this->TblForignKey         = 'faq_id';
         $this->ROUTE_PREFIX         = config('custom.route_prefix').'.faqs'; 
         $this->TRANSLATECOLUMNS     = ['question','answer']; // Columns To be Trsanslated

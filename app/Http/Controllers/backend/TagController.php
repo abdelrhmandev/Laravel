@@ -17,11 +17,12 @@ class TagController extends Controller
 
     public function __construct()
     {
+        $this->middleware('auth:admin');
         $this->TblForignKey = 'tag_id';
         $this->ROUTE_PREFIX = config('custom.route_prefix') . '.tags';
         $this->TRANSLATECOLUMNS = ['title', 'slug','description']; // Columns To be Trsanslated
         $this->TRANS = 'tag';
-        $this->UPLOADFOLDER = 'tags';
+  
         $this->Tbl = 'tags';
     }
 

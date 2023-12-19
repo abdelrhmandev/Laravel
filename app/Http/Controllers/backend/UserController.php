@@ -20,6 +20,7 @@ class UserController extends Controller
 
 
     public function __construct() {
+        $this->middleware('auth:admin');
         $this->ROUTE_PREFIX         = config('custom.route_prefix').'.users'; 
         $this->TRANS                = 'user';
         $this->Tbl                  = 'users';

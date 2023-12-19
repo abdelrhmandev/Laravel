@@ -22,7 +22,7 @@ class CityController extends Controller
 
     public function __construct() {
 
-        
+        $this->middleware('auth:admin');
         $this->TblForignKey         = 'city_id';
         $this->ROUTE_PREFIX         = config('custom.route_prefix').'.cities'; 
         $this->TRANSLATECOLUMNS     = ['title','slug']; // Columns To be Trsanslated

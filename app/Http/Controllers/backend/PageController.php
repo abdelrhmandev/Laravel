@@ -21,7 +21,7 @@ class PageController extends Controller
 
     public function __construct() {
 
-        
+        $this->middleware('auth:admin');
         $this->TblForignKey         = 'page_id';
         $this->ROUTE_PREFIX         = config('custom.route_prefix').'.pages'; 
         $this->TRANSLATECOLUMNS     = ['title','slug','description']; // Columns To be Trsanslated

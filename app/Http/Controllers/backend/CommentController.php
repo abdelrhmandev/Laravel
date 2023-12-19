@@ -18,6 +18,7 @@ class CommentController extends Controller
 
     use Functions;
     public function __construct() {
+        $this->middleware('auth:admin');
         $this->ROUTE_PREFIX         = config('custom.route_prefix').'.comments'; 
         $this->TRANS                = 'comment'; 
         $this->Tbl                  = 'comments';

@@ -6,7 +6,6 @@ use LaravelLocalization;
 use App\Traits\Functions; 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-
 use App\Models\Applicant as MainModel;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -20,7 +19,7 @@ class ApplicantController extends Controller
 
     public function __construct() {
 
-        
+        $this->middleware('auth:admin');
         $this->ROUTE_PREFIX         = config('custom.route_prefix').'.applicants'; 
         $this->TRANS                = 'applicant';
         $this->Tbl                  = 'applicants';

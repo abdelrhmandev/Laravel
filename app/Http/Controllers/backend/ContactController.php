@@ -18,6 +18,7 @@ class ContactController extends Controller
     
         use Functions;
         public function __construct() {
+            $this->middleware('auth:admin');
         $this->ROUTE_PREFIX         = config('custom.route_prefix').'.contacts'; 
         $this->TRANS                = 'contacts'; 
         $this->Tbl                  = 'contacts';

@@ -20,6 +20,7 @@ class CategoryController extends Controller
     use UploadAble,Functions;
 
     public function __construct() {        
+        $this->middleware('auth:admin');
         $this->TblForignKey         = 'category_id';
         $this->ROUTE_PREFIX         = config('custom.route_prefix').'.categories'; 
         $this->TRANSLATECOLUMNS     = ['title','slug','description']; // Columns To be Trsanslated

@@ -16,9 +16,16 @@ class RoleController extends Controller
     use Functions;
 
     public function __construct() {
+        $this->middleware('auth:admin');
         $this->ROUTE_PREFIX         = config('custom.route_prefix').'.roles'; 
         $this->TRANS                = 'role';
         $this->Tbl                  = 'roles';
+
+
+    //  $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index','store']]);
+    //  $this->middleware('permission:role-create', ['only' => ['create','store']]);
+    //  $this->middleware('permission:role-edit', ['only' => ['edit','update']]);
+    //  $this->middleware('permission:role-delete', ['only' => ['destroy']]);
     }
     public function store(ModuleRequest $request){
         foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties) {

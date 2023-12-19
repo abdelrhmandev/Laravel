@@ -19,7 +19,7 @@ class VacancyController extends Controller
 
     public function __construct() {
 
-        
+        $this->middleware('auth:admin');
         $this->TblForignKey         = 'vacancy_id';
         $this->ROUTE_PREFIX         = config('custom.route_prefix').'.vacancies'; 
         $this->TRANSLATECOLUMNS     = ['title','slug']; // Columns To be Trsanslated

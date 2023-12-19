@@ -26,6 +26,10 @@ function(){
 
 
 
+
+
+
+
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('auth.login');
 Route::post('/login', 'Auth\LoginController@login')->name('auth.login.submit');
 Route::post('logout', 'Auth\LoginController@logout')->name('auth.logout');
@@ -154,8 +158,12 @@ Route::controller(ContactController::class)->group(function () {
 Route::get('/logout', 'ProfileController@logout')->name('logout');
 Route::group(['prefix' => 'profile'], function () {
     Route::get('/', 'ProfileController@index')->name('profile');
-    Route::get('/edit', 'ProfileController@edit')->name('edit.profile');
-    Route::put('update', 'ProfileController@update')->name('update.profile');
+    Route::get('/edit', 'ProfileController@edit')->name('profile.edit');
+    Route::put('update', 'ProfileController@update')->name('profile.update');
+
+    Route::get('/edit/password', 'ProfileController@editpassword')->name('profile.editpassword');
+    Route::put('update/password', 'ProfileController@updatepassword')->name('profile.updatepassword');
+
 });
 
             

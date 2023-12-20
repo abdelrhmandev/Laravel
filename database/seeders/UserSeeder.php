@@ -2,6 +2,7 @@
 namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 class UserSeeder extends Seeder
 {
     /**
@@ -17,7 +18,7 @@ class UserSeeder extends Seeder
 
           \App\Models\User::create([     
                 'username'         =>'admin',
-                'password'         =>bcrypt('12345678'),
+                'password'         =>Hash::make('12345678'),
                 'email'            =>'admin@domain.com',
                 'name'             =>'Abdelrahman Magdy',
                 'is_admin'         =>'1',
@@ -29,7 +30,7 @@ class UserSeeder extends Seeder
             
             \App\Models\User::create([    
                 'username'         =>'NickLogan',
-                'password'         =>bcrypt('12345678'),
+                'password'         =>Hash::make('12345678'),
                 'email'            =>'NickLogan@domain.com',
                 'name'             =>'Nick Logan',
                 'is_admin'         =>'1',
@@ -40,7 +41,7 @@ class UserSeeder extends Seeder
 
             \App\Models\User::create([    
                 'username'         =>'DanWilson',
-                'password'         =>bcrypt('12345678'),
+                'password'         =>Hash::make('12345678'),
                 'email'            =>'DanWilson@domain.com',
                 'name'             =>'Dan Wilson',
                 'is_admin'         =>'1',
@@ -49,7 +50,7 @@ class UserSeeder extends Seeder
 
             \App\Models\User::create([    
                 'username'         =>'FrancisMitcham',
-                'password'         =>bcrypt('12345678'),
+                'password'         =>Hash::make('12345678'),
                 'email'            =>'FrancisMitcham@domain.com',
                 'name'             =>'Francis Mitcham',
                 'is_admin'         =>'1',
@@ -59,7 +60,7 @@ class UserSeeder extends Seeder
 
             \App\Models\User::create([    
                 'username'         =>'Kevin',
-                'password'         =>bcrypt('12345678'),
+                'password'         =>Hash::make('12345678'),
                 'email'            =>'Kevin@domain.com',
                 'name'             =>'Kevin Leonard',
                 'is_admin'         =>'1',
@@ -71,7 +72,7 @@ class UserSeeder extends Seeder
        
             \App\Models\User::create([    
                 'username'         =>'JessieClarcson',
-                'password'         =>bcrypt('12345678'),
+                'password'         =>Hash::make('12345678'),
                 'email'            =>'JessieClarcson@domain.com',
                 'name'             =>'Jessie Clarcson',
                 'is_admin'         =>'1',
@@ -81,7 +82,7 @@ class UserSeeder extends Seeder
 
             \App\Models\User::create([    
                 'username'         =>'ken',
-                'password'         =>bcrypt('12345678'),
+                'password'         =>Hash::make('12345678'),
                 'email'            =>'ken@domain.com',
                 'name'             =>'ken Trump',
                 'is_admin'         =>'1',
@@ -93,7 +94,7 @@ class UserSeeder extends Seeder
 
             \App\Models\User::create([    
                 'username'         =>'Adam',
-                'password'         =>bcrypt('12345678'),
+                'password'         =>Hash::make('12345678'),
                 'email'            =>'Adam@domain.com',
                 'name'             =>'Adam Mon',
                 'is_admin'         =>'1',
@@ -101,7 +102,7 @@ class UserSeeder extends Seeder
             ]);
             \App\Models\User::create([    
                 'username'         =>'Randy',
-                'password'         =>bcrypt('12345678'),
+                'password'         =>Hash::make('12345678'),
                 'email'            =>'Randy@domain.com',
                 'name'             =>'Randy Mob',
                 'is_admin'         =>'1',
@@ -112,7 +113,7 @@ class UserSeeder extends Seeder
 
         \App\Models\User::create([    
             'username'         =>'Lebron',
-            'password'         =>bcrypt('12345678'),
+            'password'         =>Hash::make('12345678'),
             'email'            =>'Lebron@domain.com',
             'name'             =>'Lebron Wayde',
             'is_admin'         =>'1',
@@ -123,7 +124,7 @@ class UserSeeder extends Seeder
 
         \App\Models\User::create([    
             'username'         =>'AliceDanchik',
-            'password'         =>bcrypt('12345678'),
+            'password'         =>Hash::make('12345678'),
             'email'            =>'AliceDanchik@domain.com',
             'name'             =>'Alice Danchik',
             'is_admin'         =>'1',
@@ -135,7 +136,7 @@ class UserSeeder extends Seeder
 
         \App\Models\User::create([    
             'username'         =>'Brad',
-            'password'         =>bcrypt('12345678'),
+            'password'         =>Hash::make('12345678'),
             'email'            =>'Brad@domain.com',
             'name'             =>'Brad Simmons',
             'is_admin'         =>'1',

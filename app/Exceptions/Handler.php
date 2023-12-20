@@ -51,7 +51,7 @@ class Handler extends ExceptionHandler
 		$guard = Arr::get($exception->guards(), 0);
         switch ($guard) {
           case 'admin':
-            $login = 'admin.auth.login'; // if admin try to login redirect to backend.auth.login
+            $login = 'admin.auth.login'; // if admin try to login redirect to admin.auth.login
             break;
 
           default:

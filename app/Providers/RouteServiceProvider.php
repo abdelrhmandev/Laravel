@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Providers;
 use LaravelLocalization;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -10,8 +9,6 @@ use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
-    // use \Mcamara\LaravelLocalization\Traits\LoadsTranslatedCachedRoutes;
-    
     /**
      * The path to the "home" route for your application.
      *
@@ -20,14 +17,8 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/home';
-
-
-    protected $backend_namespace = 'App\Http\Controllers\backend';
-
-    protected $admin_route_alias = 'admin.';
-
-
-    public const ADMNHOME = '/admin';
+    // protected $backend_namespace = 'App\Http\Controllers\backend';
+    // protected $admin_route_alias = 'admin.';
 
     /**
      * The controller namespace for the application.
@@ -56,22 +47,22 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
-            
-                // Route::middleware('web')
-                // ->namespace($this->namespace)
-                // ->group(base_path('routes/web-errors.php'));
 
-                // $this->mapAdminRoutes();
+
+            // Route::middleware('web')
+            // ->namespace($this->namespace)
+            // ->group(base_path('routes/web-errors.php'));
+
+            // $this->mapAdminRoutes();
 
         });
     }
 
-    protected function mapAdminRoutes(){
-
-        Route::middleware('web')
-        ->namespace($this->backend_namespace)
-        ->group(base_path('routes/admin.php'));
-    }
+    // protected function mapAdminRoutes(){
+    //     Route::middleware('web')
+    //     ->namespace($this->backend_namespace)
+    //     ->group(base_path('routes/admin.php'));
+    // }
 
     /**
      * Configure the rate limiters for the application.
@@ -81,7 +72,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function configureRateLimiting()
     {
         RateLimiter::for('api', function (Request $request) {
-            return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
+            return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
     }
 }

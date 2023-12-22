@@ -1,7 +1,5 @@
 <?php
 return [
-'question'                  => 'Question',
-'answer'                    => 'Answer',
 'title'                     => 'Vacancy Title',
 'edit'                      => 'Edit Vacancy',
 'view'                      => 'View Vacancy',

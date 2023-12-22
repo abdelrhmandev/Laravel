@@ -17,8 +17,9 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/home';
-    // protected $backend_namespace = 'App\Http\Controllers\backend';
-    // protected $admin_route_alias = 'admin.';
+    public const ADMIN = '/backoffice';
+
+
 
     /**
      * The controller namespace for the application.
@@ -27,7 +28,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string|null
      */
-    // protected $namespace = 'App\\Http\\Controllers';
+    protected $namespace = 'App\Http\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -49,20 +50,20 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
 
 
-            // Route::middleware('web')
-            // ->namespace($this->namespace)
-            // ->group(base_path('routes/web-errors.php'));
+            Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web-errors.php'));
 
-            // $this->mapAdminRoutes();
+            $this->mapAdminRoutes();
 
         });
     }
 
-    // protected function mapAdminRoutes(){
-    //     Route::middleware('web')
-    //     ->namespace($this->backend_namespace)
-    //     ->group(base_path('routes/admin.php'));
-    // }
+    protected function mapAdminRoutes(){
+        Route::middleware('web')
+        ->namespace($this->namespace)
+        ->group(base_path('routes/admin.php'));
+    }
 
     /**
      * Configure the rate limiters for the application.
@@ -72,7 +73,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function configureRateLimiting()
     {
         RateLimiter::for('api', function (Request $request) {
-            return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
+            return Limit::perMinute(60)->by($request->user()->id ?: $request->ip());
         });
     }
 }

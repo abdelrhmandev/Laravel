@@ -19,7 +19,7 @@
         <div class="card mb-5 mb-xl-10">
             <div class="card-header border-0">
                 <div class="card-title m-0">
-                    <h3 class="fw-bold m-0">{{ __('site.edit_profile') }}</h3>
+                    <h3 class="fw-bold m-0">{{  __('site.edit') . ' ' . __('site.profile') }}</h3>
                 </div>
             </div>
             <form id="EditPorfile" data-route-url="{{ $updateRoute }}" class="form"

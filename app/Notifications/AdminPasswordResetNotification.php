@@ -18,7 +18,7 @@ class AdminPasswordResetNotification extends Notification
 
     public function toMail($notifiable){
         
-        $url = url(route('admin.auth.password.reset', [
+        $url = url(route(config('custom.route_prefix').'.auth.password.reset', [
             'token' => $this->token,
             'email' => $notifiable->getEmailForPasswordReset(),
         ], false));

@@ -4,7 +4,6 @@ return [
 'login' => 'Login',
 'login_information'=>'Login Information',
 'remind' => 'Remember me',
-'forget' => 'Forget Password',
 'my_profile'=>'My Profile',
 'register_now' => 'Register Now',
 'not_register' => 'Not registered ?',

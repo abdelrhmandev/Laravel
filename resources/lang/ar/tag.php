@@ -1,15 +1,13 @@
 <?php
 return [
-'title'                     => 'وسم عنوان',
-'edit'                      => 'تعديل وسم',
 'add'                       => 'أضافه وسم',
 'delete'                    => 'حذف وسم',
 'select'                    => 'أختر وسم',
 'select_multi'              =>' أختر الوسوم',
 'plural'                    => 'الوسوم',
-'singular'                  => 'وسم',
+'singular'                  => 'الوسم',
 'exportMessageSuccess'      => 'تم تصدير الوسوم بنجاح',
-'deleteMessageSuccess'      => 'وسم تم حذف الوسم بنجاح',
+'deleteMessageSuccess'      => 'تم حذف الوسم بنجاح',
 'MulideleteMessageSuccess'  => 'تم حذف الوسوم بنجاح',
 'delete_selected'           => 'حذف الوسوم المختاره',
 'not_delete_selected'       => 'لم يتم حذف الوسوم',

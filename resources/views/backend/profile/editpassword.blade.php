@@ -17,7 +17,7 @@
         <div class="card mb-5 mb-xl-10">
             <div class="card-header border-0">
                 <div class="card-title m-0">
-                    <h3 class="fw-bold m-0">Password Details</h3>
+                    <h3 class="fw-bold m-0">{{ __('passwords.details') }}</h3>
                 </div>
             </div>
             <form id="EditProfilePassword" data-route-url="{{ $updatePasswordRoute }}" class="form"
@@ -26,10 +26,6 @@
                 @method('PUT')
                 <div class="card-body border-top p-6">
                     <div class="d-flex flex-column gap-5">
-                     
-
- 
-
                         <div class="fv-row fl">
                             <label class="required form-label"
                                 for="old-password">{{ __('passwords.old') }}</label>
@@ -41,14 +37,7 @@
                                 data-fv-string-length___max="20"
                                 data-fv-string-length___message="{{ __('passwords.password', ['attribute' => 'new password' . '&nbsp;']) }}"
                                  />
-                        </div>
- 
-
-
-   
- 
- 
- 
+                        </div> 
                         <div class="fv-row fl" id="kt_password_meter_example" data-kt-password-meter="true">
                             <label class="required form-label" for="password">{{ __('passwords.new') }}</label>
                             <input class="form-control form-control-lg form-control-solid" type="password"
@@ -83,17 +72,13 @@
                             <input class="form-control form-control-lg form-control-solid" type="password"
                                 placeholder="{{ __('passwords.confirm_new') }}" name="new_password_confirmation"
                                 id="new-password-confirm" autocomplete="off" required maxlength="20"
-                                data-fv-not-empty___message="{{ __('validation.required', ['attribute' => 'new password confirmation']) }}"
+                                data-fv-not-empty___message="{{ __('validation.required', ['attribute' => 'confrim new password confirmation']) }}"
                                 data-fv-string-length="true" data-fv-string-length___min="6"
                                 data-fv-string-length___max="20"
                                 data-fv-callback="true"
                                 data-fv-callback___callback="checkidenticalPassword"
                                  />
                         </div>
-
- 
-   
-                        
                     </div>
                 </div>
                 <div class="card-footer d-flex">

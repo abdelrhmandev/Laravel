@@ -14,7 +14,6 @@ class ResetPasswordController extends Controller
 
     use ResetsPasswords;
 
-    protected $redirectTo = '/admin';
   
 
     public function __construct(){
@@ -34,9 +33,22 @@ class ResetPasswordController extends Controller
             $this->resetPassword($user, $password);
         }
         );
-        return $response == Password::PASSWORD_RESET
-            ? $this->sendResetResponse($response)
-            : $this->sendResetFailedResponse($request, $response);
+
+
+        if($response == Password::PASSWORD_RESET){
+            $this->sendResetResponse($response);
+            return redirect()->route(config('custom.route_prefix').'.dashboard');
+        }else{
+        
+          return $this->sendResetFailedResponse($request, $response);
+        }
+
+
+
+
+
+
+            
     }
 
     protected function rules(){

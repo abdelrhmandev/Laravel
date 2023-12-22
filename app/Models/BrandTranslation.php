@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Models;
+// namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+// use Illuminate\Database\Eloquent\Model;
 
-class BrandTranslation extends Model
-{
-    protected $table = 'brand_translations';
+// class BrandTranslation extends Model
+// {
+//     protected $table = 'brand_translations';
 
-    protected $fillable = [
-		'brand_id',
-		'title',
-        'slug',
-		'lang',
-	];
+//     protected $fillable = [
+// 		'brand_id',
+// 		'title',
+//         'slug',
+// 		'lang',
+// 	];
 
-    public function brand(){
-        return $this->belongsTo(Brand::class);
-    }
+//     public function brand(){
+//         return $this->belongsTo(Brand::class);
+//     }
 
-}
+// }

@@ -1,0 +1,23 @@
+<?php
+return [
+'title'                     => 'تعديل شريحه',
+'edit'                      => 'تعديل شريحه',
+'add'                       => 'أضافه شريحه',
+'view'                      => 'عرض الشرائح',
+'delete'                    => 'حذف شريحه',
+'select'                    => 'أختر شريحه',
+'select_multi'              =>' أختر الشرائح',
+'plural'                    => 'الشرائح',
+'singular'                  => 'شريحه',
+'exportMessageSuccess'      => 'تم تصدير الشرائح بنجاح',
+'deleteMessageSuccess'      => 'تم حذف الشرائح بنجاح',
+'MulideleteMessageSuccess'  => 'تم حذف الشرائح بنجاح',
+'delete_selected'           => 'حذف الشرائح المختاره',
+'not_delete_selected'       => 'لم يتم حذف الشرائح',
+'deleteMessageError'        => 'خطأ في حذف الشرائح',
+'MultideleteMessageError'   => 'خطأ في حذف الشرائح',
+'updateMessageSuccess'      => ' تم تحديث الشرائح بنجاح',
+'updateMessageError'        => 'خطأ في حذف الشرائح',
+'storeMessageSuccess'       => 'تم أنشاء الشرائح بنجاح',
+'storeMessageError'         => 'خطأ في أضافه الشرائح',
+];

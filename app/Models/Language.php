@@ -1,15 +1,15 @@
 <?php
-namespace App\Models;
-use Illuminate\Database\Eloquent\Model;
-class Language extends Model
-{
-    protected $table = 'languages';
+// namespace App\Models;
+// use Illuminate\Database\Eloquent\Model;
+// class Language extends Model
+// {
+//     protected $table = 'languages';
 
-    protected $fillable = [
-		'area_id',
-		'title',
-        'slug',
-		'lang',
-	];
+//     protected $fillable = [
+// 		'area_id',
+// 		'title',
+//         'slug',
+// 		'lang',
+// 	];
 
-}
+// }

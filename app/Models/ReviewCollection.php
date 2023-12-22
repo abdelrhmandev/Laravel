@@ -1,25 +1,25 @@
 <?php
 
-namespace App\Models;
+// namespace App\Models;
 
-use Illuminate\Database\Eloquent\Collection;
+// use Illuminate\Database\Eloquent\Collection;
 
-class ReviewCollection extends Collection
-{
-    /**
-     * Thread the comment tree.
-     *
-     * @return $this
-     */
-    public function threaded()
-    {
-        $reviews = parent::groupBy('parent_id');
+// class ReviewCollection extends Collection
+// {
+//     /**
+//      * Thread the comment tree.
+//      *
+//      * @return $this
+//      */
+//     public function threaded()
+//     {
+//         $reviews = parent::groupBy('parent_id');
 
-        if (count($reviews)) {
-            $reviews['root'] = $reviews[''];
-            unset($reviews['']);
-        }
+//         if (count($reviews)) {
+//             $reviews['root'] = $reviews[''];
+//             unset($reviews['']);
+//         }
 
-        return $reviews;
-    }
-}
+//         return $reviews;
+//     }
+// }

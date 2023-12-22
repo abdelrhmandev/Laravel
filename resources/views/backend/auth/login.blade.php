@@ -19,7 +19,8 @@
                     src="{{ asset('assets/backend/media/auth/agency.png') }}" alt="" />
                 <img class="theme-dark-show mx-auto mw-100 w-150px w-lg-300px mb-10 mb-lg-20"
                     src="{{ asset('assets/backend/media/auth/agency-dark.png') }}" alt="" />
-                <h1 class="text-gray-800 fs-2qx fw-bold text-center mb-7">Fast, Efficient and Productive</h1>
+                <h1 class="text-gray-800 fs-2qx fw-bold text-center mb-7">{{ config('app.name') }} Fast, Efficient and
+                    Productive</h1>
                 <div class="text-gray-600 fs-base text-center fw-semibold">In this kind of post,
                     <a href="#" class="opacity-75-hover text-primary me-1">the blogger</a>introduces a person they’ve
                     interviewed
@@ -37,7 +38,7 @@
 
 
 
-                    <form id="login" method="POST" action="{{ route('admin.auth.login.submit') }} " class="form w-100"
+                    <form id="login" method="POST" action="{{ route(config('custom.route_prefix').'.auth.login.submit') }} " class="form w-100"
                         data-form-submit-error-message="{{ __('site.form_submit_error') }}"
                         data-form-agree-label="{{ __('site.agree') }}">
                         @csrf
@@ -45,7 +46,7 @@
 
                         <div class="text-center mb-11">
                             <h1 class="text-dark fw-bolder mb-3">{{ __('login.login') }}</h1>
-                            <div class="text-gray-500 fw-semibold fs-6">Your Social Campaigns</div>
+                            <div class="text-gray-500 fw-semibold fs-6">{{ config('app.name') }}</div>
                         </div>
 
                         @if (Session::has('error'))
@@ -69,21 +70,24 @@
                         @endif
 
 
-                        {{-- <div class="row g-3 mb-9">
-									<div class="col-md-6">
-										<a href="#" class="btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100">
-										<img alt="Logo" src="{{ asset('assets/backend/media/svg/brand-logos/google-icon.svg')}}" class="h-15px me-3" />Sign in with Google</a>
-									</div>
-									<div class="col-md-6">
-										<a href="#" class="btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100">
-										<img alt="Logo" src="{{ asset('assets/backend/media/svg/brand-logos/apple-black.svg')}}" class="theme-light-show h-15px me-3" />
-										<img alt="Logo" src="{{ asset('assets/backend/media/svg/brand-logos/apple-black-dark.svg')}}" class="theme-dark-show h-15px me-3" />Sign in with Apple</a>
-									</div>
-								</div> --}}
-                        {{-- <div class="separator separator-content my-14">
-									<span class="w-125px text-gray-500 fw-semibold fs-7">Or with email</span>
-								</div> --}}
-
+                        @if (Session::has('logout'))
+                            <div class="w-md-400px">
+                                <div
+                                    class="alert alert-dismissible bg-primary me-3 text-white d-flex flex-column flex-sm-row p-5 mb-10">
+                                    <span class="svg-icon svg-icon-1 svg-icon-primary text-white">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10"
+                                                fill="currentColor" />
+                                            <path
+                                                d="M10.4343 12.4343L8.75 10.75C8.33579 10.3358 7.66421 10.3358 7.25 10.75C6.83579 11.1642 6.83579 11.8358 7.25 12.25L10.2929 15.2929C10.6834 15.6834 11.3166 15.6834 11.7071 15.2929L17.25 9.75C17.6642 9.33579 17.6642 8.66421 17.25 8.25C16.8358 7.83579 16.1642 7.83579 15.75 8.25L11.5657 12.4343C11.2533 12.7467 10.7467 12.7467 10.4343 12.4343Z"
+                                                fill="currentColor" />
+                                        </svg>
+                                    </span>
+                                    <div class="me-3">&nbsp; {{ Session::get('logout') }}</div>
+                                </div>
+                            </div>
+                        @endif
 
 
                         <div class="fv-row mb-3 fl">
@@ -92,8 +96,7 @@
                                 class="form-control bg-transparent" />
 
                             @error('email')
-                                <span
-                                    class="text-danger">
+                                <span class="text-danger">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
@@ -105,8 +108,7 @@
                                 autocomplete="off" />
 
                             @error('password')
-                                <span
-                                    class="text-danger">
+                                <span class="text-danger">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
@@ -123,8 +125,8 @@
                         </div>
                         <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
                             <div></div>
-                            @if (Route::has('admin.auth.password.request'))
-                                <a href="{{ route('admin.auth.password.request') }}"
+                            @if (Route::has(config('custom.route_prefix').'.auth.password.request'))
+                                <a href="{{ route(config('custom.route_prefix').'.auth.password.request') }}"
                                     class="link-primary">{{ __('Forgot Your Password?') }}</a>
                             @endif
                         </div>

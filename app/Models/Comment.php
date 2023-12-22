@@ -20,9 +20,9 @@ class Comment extends Model
         return $this->belongsTo(Post::class, 'post_id');
     }
     
-    public function newCollection(array $models = []){
-        return new CommentCollection($models);
-    }
+    // public function newCollection(array $models = []){
+    //     return new CommentCollection($models);
+    // }
     public function scopeStatus($query, $type){
         return $query->where('status', $type);
     }

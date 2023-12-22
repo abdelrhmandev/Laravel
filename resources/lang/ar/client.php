@@ -1,0 +1,23 @@
+<?php
+return [
+'title'                     => 'تعديل عميل',
+'edit'                      => 'تعديل عميل',
+'add'                       => 'أضافه عميل',
+'view'                      => 'عرض العميل',
+'delete'                    => 'حذف عميل',
+'select'                    => 'أختر عميل',
+'select_multi'              =>' أختر العملاء',
+'plural'                    => 'العملاء',
+'singular'                  => 'عميل',
+'exportMessageSuccess'      => 'تم تصدير العملاء بنجاح',
+'deleteMessageSuccess'      => 'تم حذف العميل بنجاح',
+'MulideleteMessageSuccess'  => 'تم حذف العملاء بنجاح',
+'delete_selected'           => 'حذف العملاء المختاره',
+'not_delete_selected'       => 'لم يتم حذف العملاء',
+'deleteMessageError'        => 'خطأ في حذف العميل',
+'MultideleteMessageError'   => 'خطأ في حذف العملاء',
+'updateMessageSuccess'      => ' تم تحديث العميل بنجاح',
+'updateMessageError'        => 'خطأ في حذف العميل',
+'storeMessageSuccess'       => 'تم أنشاء العميل بنجاح',
+'storeMessageError'         => 'خطأ في أضافه العميل',
+];

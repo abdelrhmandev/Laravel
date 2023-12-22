@@ -6,7 +6,7 @@
                 <span class="menu-icon me-0">
                     <i class="ki-outline ki-home-2 fs-2x"></i>
                 </span>
-                <span class="menu-title"><a href="{{ route('admin.dashboard')}}">Home</a></span>
+                <span class="menu-title"><a href="{{ route(config('custom.route_prefix').'.dashboard')}}">Home</a></span>
             </span>
         </div>
         @include('layouts.backend.aside.__tab-contents.includes.user')

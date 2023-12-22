@@ -1,48 +1,48 @@
 <?php
-namespace App\Models;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+// namespace App\Models;
+// use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-use Illuminate\Database\Eloquent\Model;
-class Recipe extends Model
-{
+// use Illuminate\Database\Eloquent\Model;
+// class Recipe extends Model
+// {
     
-    use HasFactory;
+//     use HasFactory;
 
-    protected $table = 'recipes';
+//     protected $table = 'recipes';
 
 
  
 
-    protected $fillable = [
-		'image','published','cook','servings','featured','category_id'
-	];
+//     protected $fillable = [
+// 		'image','published','cook','servings','featured','category_id'
+// 	];
 
-    public function translation(){
-        return $this->hasMany(RecipeTranslation::class);
-    }
+//     public function translation(){
+//         return $this->hasMany(RecipeTranslation::class);
+//     }
 
-    // # single Item
-    public function item(){
-        return $this->hasOne(RecipeTranslation::class)->where('lang',app()->getLocale());
-    }
+//     // # single Item
+//     public function item(){
+//         return $this->hasOne(RecipeTranslation::class)->where('lang',app()->getLocale());
+//     }
 
-    public function category(){
-        return $this->belongsTo(RecipeCategory::class,'category_id');
-    } 
+//     public function category(){
+//         return $this->belongsTo(RecipeCategory::class,'category_id');
+//     } 
 
-    public function likes(){
-        return $this->hasMany(RecipeLike::class)->where('likes',1);
-    }
-    public function dislikes(){
-        return $this->hasMany(RecipeLike::class)->where('likes',0);
-    }
+//     public function likes(){
+//         return $this->hasMany(RecipeLike::class)->where('likes',1);
+//     }
+//     public function dislikes(){
+//         return $this->hasMany(RecipeLike::class)->where('likes',0);
+//     }
 
-    public function reviews(){
-        return $this->hasMany(RecipeReview::class);
-    }
+//     public function reviews(){
+//         return $this->hasMany(RecipeReview::class);
+//     }
     
-    public function tags(){
-        return $this->belongsToMany(Tag::class, 'recipe_tag', 'recipe_id', 'tag_id')->withPivot('tag_id');
+//     public function tags(){
+//         return $this->belongsToMany(Tag::class, 'recipe_tag', 'recipe_id', 'tag_id')->withPivot('tag_id');
 
-    }
-}
+//     }
+// }

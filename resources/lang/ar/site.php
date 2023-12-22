@@ -113,7 +113,7 @@ return [
         'path'              => 'HTTP path',
     ],
     'all_methods_if_empty'  => 'كل الوسائل فارغة',
-    'all'                   => 'الكل',
+    'all'                   => 'كل',
     'current_page'          => 'الصفحة الحالية',
     'selected_rows'         => 'الصفوف المختارة',
     'select'                => 'حدد من فضلك',

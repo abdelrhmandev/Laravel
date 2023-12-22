@@ -1,0 +1,23 @@
+<?php
+return [
+'title'                     => 'تعديل وظيفه',
+'edit'                      => 'تعديل وظيفه',
+'add'                       => 'أضافه وظيفه',
+'view'                      => 'عرض الوظيفه',
+'delete'                    => 'حذف وظيفه',
+'select'                    => 'أختر وظيفه',
+'select_multi'              =>' أختر الوظائف',
+'plural'                    => 'الوظائف',
+'singular'                  => 'وظيفه',
+'exportMessageSuccess'      => 'تم تصدير الوظائف بنجاح',
+'deleteMessageSuccess'      => 'تم حذف الوظيفه بنجاح',
+'MulideleteMessageSuccess'  => 'تم حذف الوظائف بنجاح',
+'delete_selected'           => 'حذف الوظائف المختاره',
+'not_delete_selected'       => 'لم يتم حذف الوظائف',
+'deleteMessageError'        => 'خطأ في حذف الوظيفه',
+'MultideleteMessageError'   => 'خطأ في حذف الوظائف',
+'updateMessageSuccess'      => ' تم تحديث الوظيفه بنجاح',
+'updateMessageError'        => 'خطأ في حذف الوظيفه',
+'storeMessageSuccess'       => 'تم أنشاء الوظيفه بنجاح',
+'storeMessageError'         => 'خطأ في أضافه الوظيفه',
+];

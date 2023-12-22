@@ -19,9 +19,9 @@ class ProfileController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:admin');  
+    $this->middleware('auth:admin');  
       $this->ROUTE_PREFIX         = config('custom.route_prefix').'.profile'; 
-      $this->TRANS                = 'profile';
+      $this->TRANS                = 'site';
       $this->UPLOADFOLDER         = 'avarats';
     }
 
@@ -45,7 +45,6 @@ class ProfileController extends Controller
             $compact = [
             'trans'                => $this->TRANS,
             'updatePasswordRoute'  => route($this->ROUTE_PREFIX.'.updatepassword'), 
-
         ];  
             return view('backend.profile.editpassword',$compact);
         }
@@ -66,9 +65,9 @@ class ProfileController extends Controller
 
         ];              
         if(MainModel::findOrFail(\Auth::guard('admin')->user()->id)->update($arry)){
-            $arr = array('msg' => __($this->TRANS.'.'.'updateMessageSuccess'), 'status' => true);   
+            $arr = array('msg' => __($this->TRANS.'.'.'ProfileupdateMessageSuccess'), 'status' => true);   
         }else{
-            $arr = array('msg' => __($this->TRANS.'.'.'updateMessageError'), 'status' => false);
+            $arr = array('msg' => __($this->TRANS.'.'.'ProfileupdateMessageError'), 'status' => false);
         }
         return response()->json($arr);
     }

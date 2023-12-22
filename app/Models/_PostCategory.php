@@ -1,19 +1,19 @@
 <?php
-namespace App\Models;
-use Illuminate\Database\Eloquent\Model;
-class PostCategory extends Model
-{
+// namespace App\Models;
+// use Illuminate\Database\Eloquent\Model;
+// class PostCategory extends Model
+// {
  
-    protected $table = 'post_category';
+//     protected $table = 'post_category';
  
-    protected $fillable = [
-		'post_id','category_id'
-	];
+//     protected $fillable = [
+// 		'post_id','category_id'
+// 	];
  
  
- 
-
  
 
+ 
 
-}
+
+// }

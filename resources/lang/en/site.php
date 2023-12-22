@@ -140,6 +140,8 @@ return [
     'yes'                   =>'Yes',
     'no'                    =>'No',
     'email'                 =>'Email',
+    'ProfileupdateMessageSuccess'      => 'Profile has been updated successfully',
+    'ProfileupdateMessageError'        => 'Error in update Profile',
     'profile'               => 'Profile',
     'light'                 => 'light',
     'dark'                  => 'dark',

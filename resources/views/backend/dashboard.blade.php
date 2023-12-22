@@ -1,5 +1,5 @@
 @extends('backend.base.base')
-@section('title', 'dasdas')
+@section('title', __('site.dashboard'))
 @section('breadcrumbs')
 <h1 class="d-flex align-items-center text-gray-900 fw-bold my-1 fs-3">{{ __('site.dashboard')}}</h1>
 <span class="h-20px border-gray-200 border-start mx-3"></span>

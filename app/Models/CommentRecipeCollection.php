@@ -1,25 +1,25 @@
 <?php
 
-namespace App\Models;
+// namespace App\Models;
 
-use Illuminate\Database\Eloquent\Collection;
+// use Illuminate\Database\Eloquent\Collection;
 
-class CommentRecipeCollection extends Collection
-{
-    /**
-     * Thread the comment tree.
-     *
-     * @return $this
-     */
-    public function threaded()
-    {
-        $comments = parent::groupBy('parent_id');
+// class CommentRecipeCollection extends Collection
+// {
+//     /**
+//      * Thread the comment tree.
+//      *
+//      * @return $this
+//      */
+//     public function threaded()
+//     {
+//         $comments = parent::groupBy('parent_id');
 
-        if (count($comments)) {
-            $comments['root'] = $comments[''];
-            unset($comments['']);
-        }
+//         if (count($comments)) {
+//             $comments['root'] = $comments[''];
+//             unset($comments['']);
+//         }
 
-        return $comments;
-    }
-}
+//         return $comments;
+//     }
+// }

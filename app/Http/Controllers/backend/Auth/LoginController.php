@@ -9,7 +9,6 @@ use App\Http\Requests\backend\LoginRequest;
 class LoginController extends Controller{
     use AuthenticatesUsers, ThrottlesLogins;
     
-    protected $redirectTo = '/admin';
 
     protected $maxAttempts = 5;
     protected $decayMinutes = 1;
@@ -41,7 +40,7 @@ class LoginController extends Controller{
 
             $request->session()->regenerate();
             $this->clearLoginAttempts($request);
-            return redirect()->intended(route('admin.dashboard')); // get redirect to backend dashboard 
+            return redirect()->intended(route(config('custom.route_prefix').'.dashboard')); // get redirect to backend dashboard 
 
         } 
 
@@ -69,12 +68,12 @@ class LoginController extends Controller{
             $request->session()->flush();
             $request->session()->regenerate();
 
-		    return redirect()->route('admin.auth.login')->with('info',trans('user.logout'));  // redirect to backend login page
+		    return redirect()->route(config('custom.route_prefix').'.auth.login')->with('logout',trans('login.logout'));  // redirect to backend login page
         }
 	}
     public function sendFailedLoginResponse(Request $request){
         $this->incrementLoginAttempts($request);
-        return redirect()->route('admin.auth.login')->withInput()->with(['error' => trans('auth.failed')]);   // redirect to backend login page          
+        return redirect()->route(config('custom.route_prefix').'.auth.login')->withInput()->with(['error' => trans('auth.failed')]);   // redirect to backend login page          
 
     }
 

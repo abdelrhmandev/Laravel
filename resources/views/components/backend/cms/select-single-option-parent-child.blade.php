@@ -6,7 +6,7 @@
                 {{ $category->translate->title }} 
 
 
-                {{ $category->posts_count; }} 
+                {{ $category->posts_count }} 
                 
                 @if ($category->children->isNotEmpty())
                     <x-backend.cms.select-single-option-childs :childs="$category->children" :parentid="$parentid ?? ''" level="{{ $level + 1 }}" :categoryid="$categoryid"/>

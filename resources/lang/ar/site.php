@@ -1,8 +1,8 @@
 <?php
 return [
-    'career'                =>'Career',
-    'change'                =>'Change',
-    'status'                =>'Status',
+    'career'                =>'الوظائف',
+    'change'                =>'تغير',
+    'status'                =>'الحاله',
     'dashboard'             =>'داش بورد',
     'home'                  =>'الرئيسيه',
 
@@ -62,17 +62,17 @@ return [
     'succeeded'             => 'تمت بنجاح',
     'failed'                => 'فشل',
     // Confirmation Delete
-    'deletingItemMessage'        =>'Deleting selected :item',
-    'delete_failed'              => 'Delete failed !',
-    'confirmButtonText'          =>'Yes, delete!',
-    'cancelButtonText'           =>'No, cancel',
-    'confirmButtonTextGotit'     =>'Ok, got it!',
-    'notdeletedMessage'          =>'Selected :item was not deleted.',
-    'confirmDeleteMessage'       =>'Are you sure you want to delete :item',    
-    'confirmMultiDeleteMessage'  =>'Are you sure you want to delete selected :item',
-    'delete_selected'            =>'Delete Selecetd :item',
-    'message'                    =>'Message',
-    'subject'                    =>'Subject',
+    'deletingItemMessage'        =>'حذف العناصر المحدده :item',
+    'delete_failed'              => 'فشل الحذف !',
+    'confirmButtonText'          =>'نعم, حذف!',
+    'cancelButtonText'           =>'لا, ألغ',
+    'confirmButtonTextGotit'     =>'حسنا',
+    'notdeletedMessage'          =>'لم يتم الحذف',
+    'confirmDeleteMessage'       =>'هل تريد حذف :item',    
+    'confirmMultiDeleteMessage'  =>'هل تريد حذف العناصر المحدده :item',
+    'delete_selected'            =>'حذف العناصر المحدده',
+    'message'                    =>'الرساله',
+    'subject'                    =>'الموضوع',
     'none'                       =>'None',
 
 
@@ -165,7 +165,7 @@ return [
     'unpublished'           =>'غير منشور',
     'been_published'        =>':item has been published successfully',
     'been_unpublished'      =>':item has been unpublished successfully',
-    'status_updated'        =>'Status has been Updated successfully',
+    'status_updated'        =>'تم تغير الحاله بنجاح',
     'wait'                  =>'انتظر ...',
     'update'                =>'تحديث',
     'remove_image'          =>'حذف الصوره',
@@ -187,5 +187,7 @@ return [
     'deactivated'           =>'غير نشط',
     'change_image'          =>'تغير الصورة',
     'change_status'          =>'تغير الحاله',
-    'languages'             =>'اللغات'
+    'languages'             =>'اللغات',
+    'link'                  =>'الرابط',
+    'cv'                    =>'السيره الذاتيه',
 ];

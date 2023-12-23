@@ -185,5 +185,7 @@ return [
     'deactivated'           =>'Deactivated',
     'change_image'          =>'Change Image',
     'change_status'          =>'Change Status',
-    'languages'             =>'Languages'
+    'languages'             =>'Languages',
+    'link'                  =>'Link',
+    'cv'                    =>'CV',
 ];

@@ -46,7 +46,7 @@
     $('select[name="country_id"]').on('change', function() {
       var country_id = $(this).val();      
       if(country_id > 0){
-	  var url_x = '{{ route("admin.areas.getAjaxCities",":x")}}';
+	  var url_x = '{{ route(config('custom.route_prefix').".areas.getAjaxCities",":x")}}';
 	$.ajax({
 		url: url_x.replace(":x",country_id),
 		method: 'GET',

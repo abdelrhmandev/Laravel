@@ -1,4 +1,4 @@
-@extends('backend.base.base')
+{{-- @extends('backend.base.base')
 @section('title', __($trans . '.plural'))
 @section('breadcrumbs')
 <h1 class="d-flex align-items-center text-gray-900 fw-bold my-1 fs-3">{{ __($trans . '.plural') }}</h1>
@@ -110,4 +110,4 @@
         </div>
     </div>
 
-    @stop
+    @stop --}}

@@ -14,11 +14,11 @@ return [
 'not_delete_selected'       => 'لم يتم حذف الرتب',
 'deleteMessageError'        => 'خطأ في حذف الرتبه',
 'MultideleteMessageError'   => 'خطأ في حذف الرتب',
-'updateMessageSuccess'      => 'مستخدم تم تحديث بنجاح',
+'updateMessageSuccess'      => ' تم تحديث الرتبه بنجاح',
 'updateMessageError'        => 'خطأ في حذف الرتب',
 'storeMessageSuccess'       => 'تم أنشاء الرتب بنجاح',
 'storeMessageError'         => 'خطأ في أضافه الرتب',
-'associated_users'          =>'الرتب المرتبطين',
+'associated_users'          =>'المستخدمين المرتبطين',
 'no_associated_users'       =>'لا يوجد مستخدمين مرتبطين بهذه الرتبه',
 'no_permissions_assigned'   =>'لا توجد صلاحيات لهذه الرتبه',
 ];

@@ -1,0 +1,23 @@
+<?php
+return [
+'title'                     => 'تعديل منطقة',
+'edit'                      => 'تعديل منطقة',
+'add'                       => 'أضافه منطقة',
+'view'                      => 'عرض المنطقة',
+'delete'                    => 'حذف منطقة',
+'select'                    => 'أختر منطقة',
+'select_multi'              =>' أختر المناطق',
+'plural'                    => 'المناطق',
+'singular'                  => 'منطقة',
+'exportMessageSuccess'      => 'تم تصدير المناطق بنجاح',
+'deleteMessageSuccess'      => 'تم حذف المنطقة بنجاح',
+'MulideleteMessageSuccess'  => 'تم حذف المناطق بنجاح',
+'delete_selected'           => 'حذف المناطق المختاره',
+'not_delete_selected'       => 'لم يتم حذف المناطق',
+'deleteMessageError'        => 'خطأ في حذف المنطقة',
+'MultideleteMessageError'   => 'خطأ في حذف المناطق',
+'updateMessageSuccess'      => ' تم تحديث المنطقة بنجاح',
+'updateMessageError'        => 'خطأ في حذف المنطقة',
+'storeMessageSuccess'       => 'تم أنشاء المنطقة بنجاح',
+'storeMessageError'         => 'خطأ في أضافه المنطقة',
+];

@@ -83,7 +83,7 @@ public function index(Request $request){
                         </a>
                     </div>
                     <div class=\"d-flex flex-column\">
-                        <a href=".route($this->ROUTE_PREFIX.'.edit',$row->id)." class=\"text-gray-800 text-hover-primary mb-1\">".$row->name."</a>
+                        <a href=".'#'." class=\"text-gray-800 text-hover-primary mb-1\">".$row->name."</a>
                         <span><a href=\"mailto:".$row->email."\">".$row->email."</a></span>
                     </div>
                 </div>";                
@@ -125,7 +125,7 @@ public function index(Request $request){
                     $query->whereRaw("DATE_FORMAT(created_at,'%d/%m/%Y') LIKE ?", ["%$keyword%"]);
                  })             
                     ->editColumn('actions', function ($row) {                                                       
-                        return $this->dataTableEditRecordAction($row,$this->ROUTE_PREFIX);
+                        return $this->dataTableEditRecordAction($row,$this->ROUTE_PREFIX,'hide_edit');
                     })                                   
                 ->rawColumns(['name','role','status','actions','created_at','created_at.display'])                  
                 ->make(true);    

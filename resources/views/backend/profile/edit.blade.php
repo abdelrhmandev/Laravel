@@ -101,7 +101,7 @@
                         <div class="fv-row fl">
                             <label class="required form-label" for="email">{{ __('site.email') }}</label>
                             <input type="email" class="form-control form-control-lg form-control-solid" id="email"
-                                placeholder="Email Address" name="email"
+                                placeholder="{{ __('site.email') }}" name="email"
                                 value="{{ Auth::guard('admin')->user()->email }}" required
                                 data-fv-email-address___message="{{ __('validation.email', ['attribute' => 'email' . '&nbsp;']) }}"
                                 data-fv-not-empty___message="{{ __('validation.required', ['attribute' => 'email' . '&nbsp;']) }}" />
@@ -111,7 +111,7 @@
                         <div class="fv-row fl">
                             <label class="required form-label" for="mobile">{{ __('site.mobile') }}</label>
                             <input type="text" class="form-control form-control-lg form-control-solid" id="mobile"
-                                placeholder="mobile" name="mobile" required data-fv-numeric="true" maxlength="20"
+                                placeholder="{{ __('site.mobile') }}" name="mobile" required data-fv-numeric="true" maxlength="20"
                                 value="{{ Auth::guard('admin')->user()->mobile }}"
                                 data-fv-numeric___message="{{ __('validation.numeric', ['attribute' => 'mobile' . '&nbsp;']) }}"
                                 data-fv-not-empty___message="{{ __('validation.required', ['attribute' => 'mobile' . '&nbsp;']) }}" />
@@ -124,7 +124,7 @@
                             <i class="ki-outline ki-design-1 fs-2tx text-primary me-4"></i>
                             <div class="d-flex flex-stack flex-grow-1">
                                 <div class="fw-semibold">
-                                    <div class="fs-6 text-dark-700">Login Information</div>
+                                    <div class="fs-6 text-dark-700">{{ __('login.login_information') }}</div>
                                 </div>
                             </div>
                         </div>

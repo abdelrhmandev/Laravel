@@ -11,7 +11,7 @@
 	   <!--begin::Mobile logo-->
 	   <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
 		  <a href="{{ route(config('custom.route_prefix').'.dashboard') }}" class="d-lg-none">
-		  <img alt="Logo" src="{{ asset('assets/backend/media/logos/logo.svg')}}" class="h-25px"/>
+		  <img alt="{{ Auth::guard('admin')->user()->name }}" src="{{ asset('assets/backend/media/logos/logo.svg')}}" class="h-25px"/>
 		  </a>
 	   </div>
 	   <!--end::Mobile logo-->
@@ -2827,7 +2827,7 @@
 			 <div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle">
 				<!--begin::Menu wrapper-->
 				<div class="cursor-pointer symbol symbol-30px symbol-md-40px" data-kt-menu-trigger="click" data-kt-menu-attach="parent" data-kt-menu-placement="bottom-start">
-				   <img src="{{ asset('assets/backend/media/avatars/300-1.jpg')}}" alt="image"/>
+				   <img src="{{ !empty(Auth::guard('admin')->user()->avatar) ? asset(Auth::guard('admin')->user()->avatar) : asset('assets/backend/media/avatars/blank.png') }}" alt="image"/>
 				</div>
 				<!--begin::User account menu-->
 				<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-color fw-semibold py-4 fs-6 w-275px" data-kt-menu="true">
@@ -2836,7 +2836,7 @@
 					  <div class="menu-content d-flex align-items-center px-3">
 						 <!--begin::Avatar-->
 						 <div class="symbol symbol-50px me-5">
-							<img alt="Logo" src="{{ asset('assets/backend/media/avatars/300-1.jpg')}}"/>
+							<img alt="{{ Auth::guard('admin')->user()->name }}" src="{{ !empty(Auth::guard('admin')->user()->avatar) ? asset(Auth::guard('admin')->user()->avatar) : asset('assets/backend/media/avatars/blank.png') }}"/>
 						 </div>
 						 <!--end::Avatar-->
 						 <!--begin::Username-->

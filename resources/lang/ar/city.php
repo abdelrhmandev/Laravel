@@ -1,0 +1,23 @@
+<?php
+return [
+'title'                     => 'تعديل مدينه',
+'edit'                      => 'تعديل مدينه',
+'add'                       => 'أضافه مدينه',
+'view'                      => 'عرض المدينه',
+'delete'                    => 'حذف مدينه',
+'select'                    => 'أختر مدينه',
+'select_multi'              =>' أختر المدن',
+'plural'                    => 'المدن',
+'singular'                  => 'مدينه',
+'exportMessageSuccess'      => 'تم تصدير المدن بنجاح',
+'deleteMessageSuccess'      => 'تم حذف المدينه بنجاح',
+'MulideleteMessageSuccess'  => 'تم حذف المدن بنجاح',
+'delete_selected'           => 'حذف المدن المختاره',
+'not_delete_selected'       => 'لم يتم حذف المدن',
+'deleteMessageError'        => 'خطأ في حذف المدينه',
+'MultideleteMessageError'   => 'خطأ في حذف المدن',
+'updateMessageSuccess'      => ' تم تحديث المدينه بنجاح',
+'updateMessageError'        => 'خطأ في حذف المدينه',
+'storeMessageSuccess'       => 'تم أنشاء المدينه بنجاح',
+'storeMessageError'         => 'خطأ في أضافه المدينه',
+];

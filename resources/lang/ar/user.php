@@ -14,8 +14,9 @@ return [
 'not_delete_selected'       => 'لم يتم حذف المستخدمين',
 'deleteMessageError'        => 'خطأ في حذف المستخدم',
 'MultideleteMessageError'   => 'خطأ في حذف المستخدمين',
-'updateMessageSuccess'      => 'مستخدم تم تحديث بنجاح',
+'updateMessageSuccess'      => ' تم تحديث  مستخدم  بنجاح',
 'updateMessageError'        => 'خطأ في حذف المستخدم',
 'storeMessageSuccess'       => 'تم أنشاء المستخدم بنجاح',
 'storeMessageError'         => 'خطأ في أضافه المستخدم',
+'no_roles_assigned'         => 'لا توجد رتب محدده',
 ];

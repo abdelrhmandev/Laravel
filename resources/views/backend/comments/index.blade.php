@@ -43,7 +43,7 @@
               <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="currentColor" />
             </svg>
           </span>
-          <input type="text" name="search" id="search" data-kt-table-filter="search" class="form-control form-control-solid w-210px ps-15" placeholder="{{ __('admin.search') }} {{ __($trans.'.plural') }} ......" />
+          <input type="text" name="search" id="search" data-kt-table-filter="search" class="form-control form-control-solid w-210px ps-15" placeholder="{{ __('site.search') }} {{ __($trans.'.plural') }} ......" />
         </div>
       </div>
 
@@ -70,7 +70,7 @@
         </div>
         <div class="d-flex justify-content-end align-items-center d-none" data-kt-table-toolbar="selected">
           <div class="fw-bold me-2">
-          <span class="me-2" data-kt-table-select="selected_count"></span>{{ __('admin.selected') }}</div>          
+          <span class="me-2" data-kt-table-select="selected_count"></span>{{ __('site.selected') }}</div>          
           <button type="button" class="btn btn-danger me-2" id="destroyMultipleroute"              
           data-destroyMultiple-route = "{{ $destroyMultipleRoute }}"
           data-kt-table-select="delete_selected"             
@@ -81,7 +81,7 @@
           data-confirm-button-textGotit = "{{ __('site.confirmButtonTextGotit') }}"
           data-delete-selected-records-text = "{{ __($trans.'.delete_selected') }}"
           data-not-deleted-message = "{{ __($trans.'.not_delete_selected') }}"
-          ><i class="fa fa-trash-alt"></i>{{ __('admin.delete_selected') }}</button>
+          ><i class="fa fa-trash-alt"></i>{{ __('site.delete_selected') }}</button>
             &nbsp;
       
             <span class="me-5"> {{ __('site.change_status')}} </span>
@@ -123,8 +123,8 @@
             <th class="w-250px">{{ __('comment.singular') }}</th>                                              
             <th class="w-250px">{{ __('post.singular') }}</th>
             <th>{{ __('site.status') }}</th>            
-            <th class="text-primary">{{ __('admin.created_at') }}</th>
-            <th class="text-end min-w-50px noExport">{{ __('admin.actions') }}</th>  
+            <th class="text-primary">{{ __('site.created_at') }}</th>
+            <th class="text-end min-w-50px noExport">{{ __('site.actions') }}</th>  
           </tr>
         </thead>
         <tbody class="text-gray-600"> 

@@ -35,7 +35,7 @@
               </svg>
             </span>
             <!--end::Svg Icon-->
-            <input type="text" data-kt-table-filter="search" class="form-control form-control-solid w-200px ps-15" placeholder="{{ __('admin.search') }} ......" />
+            <input type="text" data-kt-table-filter="search" class="form-control form-control-solid w-200px ps-15" placeholder="{{ __('site.search') }} ......" />
           </div>
           <!--end::Search-->
         </div>
@@ -52,13 +52,13 @@
                 <path d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z" fill="currentColor" />
               </svg>
             </span>
-            <!--end::Svg Icon-->{{ __('admin.filter') }}</button>
+            <!--end::Svg Icon-->{{ __('site.filter') }}</button>
             <!--begin::Menu 1-->
            
             <div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px" data-kt-menu="true" id="kt-toolbar-filter">
               <!--begin::Header-->
               <div class="px-7 py-5">
-                <div class="fs-4 text-dark fw-bold">{{ __('admin.filter_options') }}</div>
+                <div class="fs-4 text-dark fw-bold">{{ __('site.filter_options') }}</div>
               </div>
               <!--end::Header-->
               <!--begin::Separator-->
@@ -76,8 +76,8 @@
                 <!--end::Input group-->
                 <!--begin::Actions-->
                 <div class="d-flex justify-content-end">
-                  <button type="reset" class="btn btn-light btn-active-light-primary fw-semibold me-2 px-6" data-kt-menu-dismiss="true" data-kt-table-filter="reset">{{ __('admin.reset') }}</button>
-                  <button type="submit" class="btn btn-primary fw-semibold px-6" data-kt-menu-dismiss="true" data-kt-table-filter="filter">{{ __('admin.apply') }}</button>
+                  <button type="reset" class="btn btn-light btn-active-light-primary fw-semibold me-2 px-6" data-kt-menu-dismiss="true" data-kt-table-filter="reset">{{ __('site.reset') }}</button>
+                  <button type="submit" class="btn btn-primary fw-semibold px-6" data-kt-menu-dismiss="true" data-kt-table-filter="filter">{{ __('site.apply') }}</button>
                 </div>
                 <!--end::Actions-->
               </div>
@@ -96,15 +96,15 @@
             <!--end::Export-->
             <!--begin::Add-->
             
-            <a class="btn btn-primary" href="{{ route('admin.'.$resource.'.create') }}">{{ __($trans_file.'.add')}}</a>
+            <a class="btn btn-primary" href="{{ route('site.'.$resource.'.create') }}">{{ __($trans_file.'.add')}}</a>
             <!--end::Add-->
           </div>
           <!--end::Toolbar-->
           <!--begin::Group actions-->
           <div class="d-flex justify-content-end align-items-center d-none" data-kt-table-toolbar="selected">
             <div class="fw-bold me-5">
-            <span class="me-2" data-kt-table-select="selected_count"></span>{{ __('admin.selected') }}</div>
-            <button type="button" class="btn btn-danger" id="destroyMultipleroute" data-destroyMultiple-route = "{{ route('admin.recipes.destroyMultiple') }}" data-kt-table-select="delete_selected">{{ __('admin.delete_selected') }}</button>
+            <span class="me-2" data-kt-table-select="selected_count"></span>{{ __('site.selected') }}</div>
+            <button type="button" class="btn btn-danger" id="destroyMultipleroute" data-destroyMultiple-route = "{{ route('site.recipes.destroyMultiple') }}" data-kt-table-select="delete_selected">{{ __('site.delete_selected') }}</button>
           </div>
           <!--end::Group actions-->
         </div>
@@ -128,14 +128,14 @@
                   <input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_datatable .form-check-input" value="1" />
                 </div>
               </th>            
-              <th>{{ __('admin.title') }}</th>             
-               <th>{{ __('admin.category') }}</th> 
-              {{-- <th>{{ __('admin.tags') }}</th> --}}
-              {{-- <th>{{ __('admin.comments') }}</th> --}}
-              <th>{{ __('admin.status') }}</th>
-              {{-- <th>{{ __('admin.featured') }}</th> --}}
-              <th>{{ __('admin.created_at') }}</th>
-              <th class="text-end min-w-70px noExport">{{ __('admin.actions') }}</th>  
+              <th>{{ __('site.title') }}</th>             
+               <th>{{ __('site.category') }}</th> 
+              {{-- <th>{{ __('site.tags') }}</th> --}}
+              {{-- <th>{{ __('site.comments') }}</th> --}}
+              <th>{{ __('site.status') }}</th>
+              {{-- <th>{{ __('site.featured') }}</th> --}}
+              <th>{{ __('site.created_at') }}</th>
+              <th class="text-end min-w-70px noExport">{{ __('site.actions') }}</th>  
             </tr>
 
           
@@ -187,7 +187,7 @@ var dynamicColumns = [
 { data: 'actions' , name : 'actions' },    
 ];
 KTUtil.onDOMContentLoaded(function () {
-  loadDatatable('{{ route('admin.recipes.index') }}',dynamicColumns);
+  loadDatatable('{{ route('site.recipes.index') }}',dynamicColumns);
 });
 </script>
 <!--end::Custom Javascript-->

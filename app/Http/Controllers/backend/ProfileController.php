@@ -14,19 +14,14 @@ class ProfileController extends Controller
     protected $resource;
     protected $trans_file;
 
-
     use UploadAble,Functions;
 
     public function __construct()
     {
-    $this->middleware('auth:admin');  
       $this->ROUTE_PREFIX         = config('custom.route_prefix').'.profile'; 
       $this->TRANS                = 'site';
       $this->UPLOADFOLDER         = 'avarats';
     }
-
- 
-
     public function index()
     {
         if (view()->exists('backend.profile.edit')) {
@@ -34,12 +29,10 @@ class ProfileController extends Controller
             'trans'              => $this->TRANS,
             'updateRoute'        => route($this->ROUTE_PREFIX.'.update'), 
             'editPasswordRoute'  => route($this->ROUTE_PREFIX.'.editpassword'), 
-
         ];  
             return view('backend.profile.edit',$compact);
         }
     }
-
     public function editpassword(){
         if (view()->exists('backend.profile.editpassword')) {
             $compact = [
@@ -71,35 +64,21 @@ class ProfileController extends Controller
         }
         return response()->json($arr);
     }
-
- 
-
     public function updatepassword(Request $request){
-      
-  
         $this->validate($request, [
             'current_password' => 'required|string',
             'new_password' => 'required|confirmed|min:8|string'
         ]);
-        $auth = \Auth::guard('admin')->user();
- 
+        $auth = \Auth::guard('admin')->user(); 
         if (!Hash::check($request->get('current_password'), $auth->password)) {
             $arr = array('msg' => __('passwords.invalid_current'), 'status' => false);
         }
- 
-
         if (Hash::check($request->get('current_password'), $auth->password)) {
             $user =  MainModel::find($auth->id);
             $user->password =  Hash::make($request->new_password);
             $user->save();
             $arr = array('msg' =>__('passwords.updated'), 'status' => true);
         }
-
-
-
-
         return response()->json($arr);
-       
-
     }
 }

@@ -1,5 +1,6 @@
 <?php
 return [
+    'country'               =>'Country',
     'career'                =>'Career',
     'change'                =>'Change',
     'status'                =>'Status',

@@ -1,0 +1,21 @@
+<?php
+return [
+'title'                     => 'تعديل متقدم لوظيفه',
+'edit'                      => 'تعديل متقدم لوظيفه',
+'view'                      => 'عرض المتقدم لوظيفه',
+'delete'                    => 'حذف متقدم لوظيفه',
+'select'                    => 'أختر متقدم لوظيفه',
+'select_multi'              =>' أختر المتقدمين للوظائف',
+'plural'                    => 'المتقدمين للوظائف',
+'singular'                  => 'متقدم لوظيفه',
+'deleteMessageSuccess'      => 'تم حذف المتقدم لوظيفه بنجاح',
+'MulideleteMessageSuccess'  => 'تم حذف المتقدمين للوظائف بنجاح',
+'delete_selected'           => 'حذف المتقدمين للوظائف المختاره',
+'not_delete_selected'       => 'لم يتم حذف المتقدمين للوظائف',
+'deleteMessageError'        => 'خطأ في حذف المتقدم لوظيفه',
+'MultideleteMessageError'   => 'خطأ في حذف المتقدمين للوظائف',
+'updateMessageSuccess'      => ' تم تحديث المتقدم لوظيفه بنجاح',
+'updateMessageError'        => 'خطأ في حذف المتقدم لوظيفه',
+'storeMessageSuccess'       => 'تم أنشاء المتقدم لوظيفه بنجاح',
+'storeMessageError'         => 'خطأ في أضافه المتقدم لوظيفه',
+];

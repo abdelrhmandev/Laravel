@@ -1,11 +1,11 @@
 <?php
-Route::group(['prefix' => 'ecommerce','namespace'=>'ecommerce'], function () {
+// Route::group(['prefix' => 'ecommerce','namespace'=>'ecommerce'], function () {
     
 // Route::resource('brands','BrandController')->except('show'); // Brands
 
 
 
-Route::resource('product-category', CategoryController::class)->except('show');
+// Route::resource('product-category', CategoryController::class)->except('show');
 
 
 // Route::resource('products','ProductController')->except('show'); // Product
@@ -27,6 +27,6 @@ Route::resource('product-category', CategoryController::class)->except('show');
 //  Route::post('attributes/add', 'ProductAttributeController@addAttribute');
 //  Route::post('attributes/delete', 'ProductAttributeController@deleteAttribute');
 
-});
+// });
 
 

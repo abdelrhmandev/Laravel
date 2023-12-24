@@ -1,4 +1,4 @@
-<select class="form-select form-select-solid" data-control="select2" name="category_id" id="category_id" data-placeholder="{{ __('site.filter_by')}} {{ __('category.singular')}} " data-allow-clear="true">
+<select class="form-select form-select-solid" data-control="select2" name="category_id" id="category_id" data-placeholder="{{ __('site.sort_by')}} {{ __('category.singular')}} " data-allow-clear="true">
     <option value="">{{ __('site.none') }}</option>
     @if(!(empty($categories)))
         @foreach ($categories as $category)

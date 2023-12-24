@@ -16,16 +16,9 @@ class RoleController extends Controller
     use Functions;
 
     public function __construct() {
-        $this->middleware('auth:admin');
         $this->ROUTE_PREFIX         = config('custom.route_prefix').'.roles'; 
         $this->TRANS                = 'role';
         $this->Tbl                  = 'roles';
-
-
-    //  $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index','store']]);
-    //  $this->middleware('permission:role-create', ['only' => ['create','store']]);
-    //  $this->middleware('permission:role-edit', ['only' => ['edit','update']]);
-    //  $this->middleware('permission:role-delete', ['only' => ['destroy']]);
     }
     public function store(ModuleRequest $request){
         foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties) {
@@ -58,8 +51,6 @@ class RoleController extends Controller
         ];
         return view('backend.roles.create', $compact);
     }
-
-//////
 public function index(Request $request){    
         
     if ($request->ajax()) {              
@@ -129,7 +120,7 @@ public function index(Request $request){
                     'createRoute'           => route($this->ROUTE_PREFIX.'.create'),                
                     'storeRoute'            => route($this->ROUTE_PREFIX.'.store'),
                     'destroyMultipleRoute'  => route($this->ROUTE_PREFIX.'.destroyMultiple'), 
-                    'listingRoute'         => route($this->ROUTE_PREFIX.'.index'),    
+                    'listingRoute'          => route($this->ROUTE_PREFIX.'.index'),    
                     'allrecords'            => MainModel::count(),    
                 ];                       
                 return view('backend.roles.index',$compact);

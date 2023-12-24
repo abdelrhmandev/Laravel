@@ -14,29 +14,24 @@ use DataTables;
 class TagController extends Controller
 {
     use Functions;
-
     public function __construct()
     {
-        $this->middleware('auth:admin');
         $this->TblForignKey = 'tag_id';
         $this->ROUTE_PREFIX = config('custom.route_prefix') . '.tags';
         $this->TRANSLATECOLUMNS = ['title', 'slug','description']; // Columns To be Trsanslated
-        $this->TRANS = 'tag';
-  
+        $this->TRANS = 'tag';  
         $this->Tbl = 'tags';
     }
 
     public function index(Request $request)
     {
         $model = MainModel::with(['posts'])->withCount('posts');
-
         if ($request->ajax()) {
             return Datatables::of($model)
                 ->addIndexColumn()
                 ->editColumn('translate.title', function (MainModel $row) {
                     return '<a href=' . route($this->ROUTE_PREFIX . '.edit', $row->id) . " class=\"text-gray-800 text-hover-primary fs-5 fw-bold mb-1\" data-kt-item-filter" . $row->id . "=\"item\">" . Str::words($row->translate->title, '5') . '</a>';
                 })
-
                 ->AddColumn('count', function (MainModel $row) {                                        
                     $count = '<span aria-hidden="true">—</span>'; 
                     if($row->posts_count >0){    
@@ -45,9 +40,7 @@ class TagController extends Controller
                                 </a>"; 
                     }
                     return $count;
-
                 })
-
                 ->editColumn('created_at', function (MainModel $row) {
                     return $this->dataTableGetCreatedat($row->created_at);
                  })
@@ -56,9 +49,7 @@ class TagController extends Controller
                  })             
                     ->editColumn('actions', function ($row) {                                                       
                         return $this->dataTableEditRecordAction($row,$this->ROUTE_PREFIX);
-                    })     
-                    
-
+                    })                         
                 ->rawColumns(['image','translate.title','count','actions','created_at','created_at.display'])                  
                 ->make(true);
         }
@@ -78,17 +69,14 @@ class TagController extends Controller
     {
         if (view()->exists('backend.tags.create')) {
             $compact = [
-                'trans' => $this->TRANS,
-                'listingRoute' => route($this->ROUTE_PREFIX . '.index'),
-                'storeRoute' => route($this->ROUTE_PREFIX . '.store'),
-                'tags' => MainModel::with('posts'),
+                'trans'         => $this->TRANS,
+                'listingRoute'  => route($this->ROUTE_PREFIX . '.index'),
+                'storeRoute'    => route($this->ROUTE_PREFIX . '.store'),
+                'tags'          => MainModel::with('posts'),
             ];
             return view('backend.tags.create', $compact);
         }
     }
-
-
-
     public function store(ModuleRequest $request){
         try {
             DB::beginTransaction();        
@@ -114,12 +102,12 @@ class TagController extends Controller
     {
         if (view()->exists('backend.tags.edit')) {
             $compact = [
-                'updateRoute' => route($this->ROUTE_PREFIX . '.update', $tag->id),
-                'row' => $tag,
+                'updateRoute'             => route($this->ROUTE_PREFIX . '.update', $tag->id),
+                'row'                     => $tag,
                 'TrsanslatedColumnValues' => $this->getItemtranslatedllangs($tag, $this->TRANSLATECOLUMNS, $this->TblForignKey),
-                'destroyRoute' => route($this->ROUTE_PREFIX . '.destroy', $tag->id),
-                'redirect_after_destroy' => route($this->ROUTE_PREFIX . '.index'),
-                'trans' => $this->TRANS,
+                'destroyRoute'            => route($this->ROUTE_PREFIX . '.destroy', $tag->id),
+                'redirect_after_destroy'  => route($this->ROUTE_PREFIX . '.index'),
+                'trans'                   => $this->TRANS,
             ];
             return view('backend.tags.edit', $compact);
         }
@@ -134,10 +122,6 @@ class TagController extends Controller
         }
         return response()->json($arr);
     }
-
-    /////////
-
-
     public function destroy(MainModel $tag){        
         //SET ALL childs to NULL 
         if($tag->delete()){
@@ -147,7 +131,6 @@ class TagController extends Controller
         }        
         return response()->json($arr);
     }
-
     public function destroyMultiple(Request $request){  
         $ids = explode(',', $request->ids);
         $items = MainModel::whereIn('id',$ids); // Check          
@@ -158,7 +141,4 @@ class TagController extends Controller
         }        
         return response()->json($arr);
     }
-
-
-
 }

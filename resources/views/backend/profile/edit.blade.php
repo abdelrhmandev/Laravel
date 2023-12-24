@@ -118,7 +118,7 @@
                         </div>
                         <div class="fv-row fl">
                             <label class="form-label" for="roles">{{ __('role.plural') }}</label>
-                            <h1>راجعها</h1>
+                            <h1>{{  Auth::guard('admin')->user()->getRoleNames() }}</h1>
                         </div>
                         <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed mb-9 p-6">
                             <i class="ki-outline ki-design-1 fs-2tx text-primary me-4"></i>

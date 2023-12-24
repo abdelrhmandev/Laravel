@@ -59,12 +59,14 @@ Route::group([
 
                 ######################### Start Comments ##########################
                 Route::controller(CommentController::class)->group(function () {
-                    Route::get('/comments/{post_id?}','index')->name('comments.index');
-                    Route::post('/comments/changeStatus', 'ChangeStatus')->name('comments.changeStatus');
-                    Route::put('/comments/update/{comment}', 'update')->name('comments.update');
-                    Route::get('/comments/edit/{comment}', 'edit')->name('comments.edit');
-                    Route::delete('comments/destroy/{comment}', 'destroy')->name('comments.destroy');
-                    Route::delete('comments/destroyAll', 'destroyMultiple')->name('comments.destroyMultiple');
+                    Route::group(['prefix' => 'comments'], function () {
+                        Route::get('/{post_id?}','index')->name('comments.index');
+                        Route::post('/changeStatus', 'ChangeStatus')->name('comments.changeStatus');
+                        Route::put('/update/{comment}', 'update')->name('comments.update');
+                        Route::get('/edit/{comment}', 'edit')->name('comments.edit');
+                        Route::delete('/destroy/{comment}', 'destroy')->name('comments.destroy');
+                        Route::delete('/destroyAll', 'destroyMultiple')->name('comments.destroyMultiple');
+                    });
                 });
                 ######################### End Comments ##########################
                 
@@ -90,12 +92,15 @@ Route::group([
                 ######################### Start Vacancies ##########################
                 Route::resource('vacancies', VacancyController::class)->except('show');
                 Route::delete('vacancies/destroy/all', 'VacancyController@destroyMultiple')->name('vacancies.destroyMultiple');
+                
                 Route::controller(ApplicantController::class)->group(function () {
-                    Route::get('/applicants','index')->name('applicants.index');
-                    Route::put('/applicants/update/{applicant}', 'update')->name('applicants.update');
-                    Route::get('/applicants/edit/{applicant}', 'edit')->name('applicants.edit');
-                    Route::delete('applicants/destroy/{applicant}', 'destroy')->name('applicants.destroy');
-                    Route::delete('applicants/destroyAll', 'destroyMultiple')->name('applicants.destroyMultiple');
+                    Route::group(['prefix' => 'applicants'], function () {
+                        Route::get('/','index')->name('applicants.index');
+                        Route::put('/update/{applicant}', 'update')->name('applicants.update');
+                        Route::get('/edit/{applicant}', 'edit')->name('applicants.edit');
+                        Route::delete('/destroy/{applicant}', 'destroy')->name('applicants.destroy');
+                        Route::delete('/destroyAll', 'destroyMultiple')->name('applicants.destroyMultiple');
+                    });
                 });
                 ######################### End Vacancies ##########################
 
@@ -134,9 +139,11 @@ Route::group([
 
                 ######################### Start Contacts ##########################
                 Route::controller(ContactController::class)->group(function () {
-                    Route::get('/contacts','index')->name('contacts.index');
-                    Route::delete('/contacts/destroy/{contact}', 'destroy')->name('contacts.destroy');
-                    Route::delete('/contacts/destroyMultiple', 'destroyMultiple')->name('contacts.destroyMultiple');
+                    Route::group(['prefix' => 'contacts'], function () {
+                        Route::get('/','index')->name('contacts.index');
+                        Route::delete('/destroy/{contact}', 'destroy')->name('contacts.destroy');
+                        Route::delete('/destroyMultiple', 'destroyMultiple')->name('contacts.destroyMultiple');
+                    });
                 });
                 ######################### End Contacts ##########################
 
@@ -161,19 +168,29 @@ Route::group([
 
 
             ######################### Start Auth Guest Routes #################################
-            Route::get('/login', 'Auth\LoginController@showLoginForm')->name('auth.login');
-            Route::post('/login', 'Auth\LoginController@login')->name('auth.login.submit');
+            Route::group(['prefix' => 'login'], function () {
+                Route::get('/', 'Auth\LoginController@showLoginForm')->name('auth.login');
+                 Route::post('/', 'Auth\LoginController@login')->name('auth.login.submit');
+            });
+
+            Route::group(['prefix' => 'email'], function () {
+                Route::get('/verify', 'Auth\VerificationController@show')->name('auth.verification.notice');
+                Route::get('/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('auth.verification.verify'); // v6.x
+                Route::get('/resend', 'Auth\VerificationController@resend')->name('auth.verification.resend');
+            });
+
+
             ######################### End Auth Guest Routes ###################################
 
 
             #########################  Start Password Reset Routes ######################### 
-            Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('auth.password.request');
-            Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('auth.password.email');
-            Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('auth.password.reset');
-            Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('auth.password.update');
+            Route::group(['prefix' => 'password'], function () {
+                Route::get('/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('auth.password.request');
+                Route::post('/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('auth.password.email');
+                Route::get('/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('auth.password.reset');
+                Route::post('/reset', 'Auth\ResetPasswordController@reset')->name('auth.password.update');
+            });
             #########################  End Password Reset Routes ########################### 
-
-            
         });
 
 });

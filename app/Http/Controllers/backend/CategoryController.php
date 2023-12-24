@@ -20,7 +20,6 @@ class CategoryController extends Controller
     use UploadAble,Functions;
 
     public function __construct() {        
-        $this->middleware('auth:admin');
         $this->TblForignKey         = 'category_id';
         $this->ROUTE_PREFIX         = config('custom.route_prefix').'.categories'; 
         $this->TRANSLATECOLUMNS     = ['title','slug','description']; // Columns To be Trsanslated
@@ -43,7 +42,6 @@ class CategoryController extends Controller
                      $arr = array('msg' => __($this->TRANS.'.'.'storeMessageSuccess'), 'status' => true);              
             }
             DB::commit();   
-
         
         } catch (\Exception $e) {
             DB::rollback();            
@@ -52,7 +50,6 @@ class CategoryController extends Controller
         return response()->json($arr);
         
 }
-
 public function index(Request $request){     
     $model = MainModel::with(['parent','posts'])->withCount('posts');
     if ($request->ajax()) {              
@@ -90,7 +87,7 @@ public function index(Request $request){
                 'createRoute'           => route($this->ROUTE_PREFIX.'.create'),                
                 'storeRoute'            => route($this->ROUTE_PREFIX.'.store'),
                 'destroyMultipleRoute'  => route($this->ROUTE_PREFIX.'.destroyMultiple'), 
-                'listingRoute'         => route($this->ROUTE_PREFIX.'.index'),
+                'listingRoute'          => route($this->ROUTE_PREFIX.'.index'),
                 'categories'            => MainModel::tree(),                  
             ];            
             return view('backend.categories.index',$compact);
@@ -185,9 +182,4 @@ public function index(Request $request){
         }        
         return response()->json($arr);
     }
-
-
-
- 
-
 }

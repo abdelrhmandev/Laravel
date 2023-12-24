@@ -60,12 +60,12 @@
       </div>
     </div>
     <div class="card-body pt-0">
-      <table class="table align-middle table-row-bordered fs-6 gy-5" id="{{ __($trans.'.plural') }}">         
+      <table class="table align-middle table-row-bordered fs-6 gy-5" id="applicants">         
         <thead>
           <tr class="text-start fw-bold fs-7 text-uppercase gs-0">
             <th class="w-10px pe-2 noExport">             
               <div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-                <input class="form-check-input AA" type="checkbox" data-kt-check="true" data-kt-check-target="#{{ __($trans.".plural") }} .AA" value="1" />
+                <input class="form-check-input AA" type="checkbox" data-kt-check="true" data-kt-check-target="#applicants .AA" value="1" />
               </div>
             </th>            
             <th class="w-150px">{{ __('site.name') }}</th>                                            
@@ -105,7 +105,7 @@ var dynamicColumns = [ //as an array start from 0
 { data: 'actions' , name : 'actions' ,exportable:false,orderable: false,searchable: false},    
 ];
 KTUtil.onDOMContentLoaded(function () {
-  loadDatatable('{{ __($trans.".plural") }}','{{ $listingRoute }}',dynamicColumns,'5','2');
+  loadDatatable('applicants','{{ $listingRoute }}',dynamicColumns,'5','2');
 });
 </script>
  

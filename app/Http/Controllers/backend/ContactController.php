@@ -9,29 +9,18 @@ use Illuminate\Http\Request;
 use App\Models\Contact as MainModel;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-
-
-    
-
 class ContactController extends Controller
-{
-    
+{    
         use Functions;
         public function __construct() {
-            $this->middleware('auth:admin');
         $this->ROUTE_PREFIX         = config('custom.route_prefix').'.contacts'; 
         $this->TRANS                = 'contacts'; 
         $this->Tbl                  = 'contacts';
         }
-
-
     public function index(Request $request)
     {
         if ($request->ajax()) {              
-
-            $model = MainModel::select('id','name','email','subject','message','created_at');
- 
-        
+            $model = MainModel::select('id','name','email','subject','message','created_at');        
             return Datatables::of($model)
                         ->addIndexColumn()   
                         ->editColumn('name', function (MainModel $row) {   
@@ -65,13 +54,12 @@ class ContactController extends Controller
                 if (view()->exists('backend.contacts.index')) {  
                     $compact = [
                         'trans'                 => $this->TRANS,                
-                        'listingRoute'         => route($this->ROUTE_PREFIX.'.index'),                        
+                        'listingRoute'          => route($this->ROUTE_PREFIX.'.index'),                        
                         'destroyMultipleRoute'  => route($this->ROUTE_PREFIX.'.destroyMultiple'),       
                     ];                       
                     return view('backend.contacts.index',$compact);
                 }
-        }
-        
+        }        
         public function destroy(MainModel $contact){   
             if($contact->delete()){
                 $arr = array('msg' => __($this->TRANS.'.'.'deleteMessageSuccess'), 'status' => true);
@@ -79,8 +67,7 @@ class ContactController extends Controller
                 $arr = array('msg' => __($this->TRANS.'.'.'deleteMessageError'), 'status' => false);
             }        
             return response()->json($arr);
-        }
-    
+        }    
         public function destroyMultiple(Request $request){  
             $ids = explode(',', $request->ids);
             $items = MainModel::whereIn('id',$ids); // Check          
@@ -91,5 +78,4 @@ class ContactController extends Controller
             } 
                 return response()->json($arr);
         }
- 
 }

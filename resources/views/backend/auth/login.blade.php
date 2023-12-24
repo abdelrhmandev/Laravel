@@ -120,14 +120,14 @@
                                 <input class="form-check-input" type="checkbox" name="remember" id="remember"
                                     {{ old('remember') ? 'checked' : '' }}>
                                 <span
-                                    class="form-check-label fw-semibold text-gray-700 fs-base ms-1">{{ __('Remember Me') }}</span>
+                                    class="form-check-label fw-semibold text-gray-700 fs-base ms-1">{{ __('site.remember_me') }}</span>
                             </label>
                         </div>
                         <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
                             <div></div>
                             @if (Route::has(config('custom.route_prefix').'.auth.password.request'))
                                 <a href="{{ route(config('custom.route_prefix').'.auth.password.request') }}"
-                                    class="link-primary">{{ __('Forgot Your Password?') }}</a>
+                                    class="link-primary">{{ __('passwords.forget') }}</a>
                             @endif
                         </div>
                         <div class="d-grid mb-10">

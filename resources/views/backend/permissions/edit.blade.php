@@ -46,8 +46,8 @@
                                 @endforeach
                             </div>
                             <div class="fv-row fl">
-                                <label class="required form-label" for="name">Name</label>
-                                <input type="text" id="name" name="name" class="form-control mb-2" required
+                                <label class="required form-label" for="name">{{ __('site.name')}}</label>
+                                <input type="text" id="name" name="name" class="form-control mb-2" placeholder="Example posts-create" required
                                     data-fv-not-empty___message="{{ __('validation.required', ['attribute' => 'name' . '&nbsp;']) }}"
                                     value="{{ $row->name }}" />
                                     <small class="fs-7 fw-semibold text-danger">English Only No Spaces</small>

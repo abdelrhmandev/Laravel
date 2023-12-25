@@ -14,26 +14,22 @@ Route::group([
                 ######################### End Dashboard ########################
 
                 ######################### Start Users ##########################
-                Route::resource('users', UserController::class)->except('show');
-                Route::delete('users/destroy/all', 'UserController@destroyMultiple')->name('users.destroyMultiple');
-                ######################### End Users   ##########################
+                Route::group(['middleware' => ['role:super-admin']], function () {
+                    Route::resource('users', UserController::class)->except('show');
+                    Route::delete('users/destroy/all', 'UserController@destroyMultiple')->name('users.destroyMultiple');
+                    ######################### End Users   ##########################
 
 
-                ######################### Start Roles ##########################
-                Route::resource('roles', RoleController::class)->except('show');
-                Route::delete('roles/destroy/all', 'RoleController@destroyMultiple')->name('roles.destroyMultiple');
-                ######################### End Roles ##########################
-                
-                ######################### Start Permissions ##########################
-                Route::resource('permissions', PermissionController::class)->except('show');
-                Route::delete('permissions/destroy/all', 'RecipeController@destroyMultiple')->name('permissions.destroyMultiple');
-                ######################### End Permissions ##########################
-                
-                ######################### Start Permissions ##########################
-                Route::resource('roles', RoleController::class)->except('show');
-                Route::delete('roles/destroy/all', 'RoleController@destroyMultiple')->name('roles.destroyMultiple');
-                ######################### End Permissions ##########################
-
+                    ######################### Start Roles ##########################
+                    Route::resource('roles', RoleController::class)->except('show');
+                    Route::delete('roles/destroy/all', 'RoleController@destroyMultiple')->name('roles.destroyMultiple');
+                    ######################### End Roles ##########################
+                    
+                    ######################### Start Permissions ##########################
+                    Route::resource('permissions', PermissionController::class)->except('show');
+                    Route::delete('permissions/destroy/all', 'RecipeController@destroyMultiple')->name('permissions.destroyMultiple');
+                    ######################### End Permissions ##########################                
+               });
 
                 ######################### Start Posts ##########################
                 Route::resource('posts', PostController::class)->except('show');
@@ -58,15 +54,17 @@ Route::group([
 
 
                 ######################### Start Comments ##########################
-                Route::controller(CommentController::class)->group(function () {
-                    Route::group(['prefix' => 'comments'], function () {
-                        Route::get('/{post_id?}','index')->name('comments.index');
-                        Route::post('/changeStatus', 'ChangeStatus')->name('comments.changeStatus');
-                        Route::put('/update/{comment}', 'update')->name('comments.update');
-                        Route::get('/edit/{comment}', 'edit')->name('comments.edit');
-                        Route::delete('/destroy/{comment}', 'destroy')->name('comments.destroy');
-                        Route::delete('/destroyAll', 'destroyMultiple')->name('comments.destroyMultiple');
-                    });
+                Route::group(['middleware' => ['role:super-admin|moderator']], function () {
+                    Route::controller(CommentController::class)->group(function () {
+                        Route::group(['prefix' => 'comments'], function () {
+                            Route::get('/{post_id?}','index')->name('comments.index');
+                            Route::post('/changeStatus', 'ChangeStatus')->name('comments.changeStatus');
+                            Route::put('/update/{comment}', 'update')->name('comments.update');
+                            Route::get('/edit/{comment}', 'edit')->name('comments.edit');
+                            Route::delete('/destroy/{comment}', 'destroy')->name('comments.destroy');
+                            Route::delete('/destroyAll', 'destroyMultiple')->name('comments.destroyMultiple');
+                        });
+                     });
                 });
                 ######################### End Comments ##########################
                 
@@ -90,31 +88,41 @@ Route::group([
 
 
                 ######################### Start Vacancies ##########################
-                Route::resource('vacancies', VacancyController::class)->except('show');
-                Route::delete('vacancies/destroy/all', 'VacancyController@destroyMultiple')->name('vacancies.destroyMultiple');
-                
-                Route::controller(ApplicantController::class)->group(function () {
-                    Route::group(['prefix' => 'applicants'], function () {
-                        Route::get('/','index')->name('applicants.index');
-                        Route::put('/update/{applicant}', 'update')->name('applicants.update');
-                        Route::get('/edit/{applicant}', 'edit')->name('applicants.edit');
-                        Route::delete('/destroy/{applicant}', 'destroy')->name('applicants.destroy');
-                        Route::delete('/destroyAll', 'destroyMultiple')->name('applicants.destroyMultiple');
+                Route::group(['middleware' => ['role:super-admin|hr']], function () {
+
+                    Route::resource('vacancies', VacancyController::class)->except('show');
+                    Route::delete('vacancies/destroy/all', 'VacancyController@destroyMultiple')->name('vacancies.destroyMultiple');
+                                
+                    Route::controller(ApplicantController::class)->group(function () {
+                        Route::group(['prefix' => 'applicants'], function () {
+                            Route::get('/','index')->name('applicants.index');
+                            Route::put('/update/{applicant}', 'update')->name('applicants.update');
+                            Route::get('/edit/{applicant}', 'edit')->name('applicants.edit');
+                            Route::delete('/destroy/{applicant}', 'destroy')->name('applicants.destroy');
+                            Route::delete('/destroyAll', 'destroyMultiple')->name('applicants.destroyMultiple');
+                        });
                     });
                 });
                 ######################### End Vacancies ##########################
 
-
-                ######################### Start Careers ##########################
-                Route::resource('careers', CareerController::class)->except('show');
-                Route::delete('career/destroy/all', 'CareerController@destroyMultiple')->name('careers.destroyMultiple');
-                ######################### End Careers ##########################
+ 
 
 
-                ######################### Start Settings ##########################
-                Route::resource('settings', SettingController::class)->except('show');
-                Route::delete('settings/destroy/all', 'SettingController@destroyMultiple')->name('settings.destroyMultiple');
-                ######################### End Settings ##########################
+
+                Route::group(['middleware' => ['role:super-admin']], function () {
+                    
+                    ######################### Start Settings ##########################
+                    Route::resource('settings', SettingController::class)->except('show');
+                    Route::delete('settings/destroy/all', 'SettingController@destroyMultiple')->name('settings.destroyMultiple');
+                    ######################### End Settings ##########################
+
+                    ######################### Start Clients ##########################
+                    Route::resource('clients', ClientController::class)->except('show');
+                    Route::delete('clients/destroy/all', 'ClientController@destroyMultiple')->name('clients.destroyMultiple');
+                    ######################### End Clients ##########################
+
+                });
+
 
                 ######################### Start FAQS ##########################
                 Route::resource('faqs', FaqController::class)->except('show');
@@ -132,17 +140,16 @@ Route::group([
                 Route::delete('slider/destroy/all', 'SliderController@destroyMultiple')->name('sliders.destroyMultiple');
                 ######################### End Sliders ##########################
 
-                ######################### Start Clients ##########################
-                Route::resource('clients', ClientController::class)->except('show');
-                Route::delete('clients/destroy/all', 'ClientController@destroyMultiple')->name('clients.destroyMultiple');
-                ######################### End Clients ##########################
+
 
                 ######################### Start Contacts ##########################
-                Route::controller(ContactController::class)->group(function () {
-                    Route::group(['prefix' => 'contacts'], function () {
-                        Route::get('/','index')->name('contacts.index');
-                        Route::delete('/destroy/{contact}', 'destroy')->name('contacts.destroy');
-                        Route::delete('/destroyMultiple', 'destroyMultiple')->name('contacts.destroyMultiple');
+                Route::group(['middleware' => ['role:super-admin|moderator|hr']], function () {
+                    Route::controller(ContactController::class)->group(function () {
+                        Route::group(['prefix' => 'contacts'], function () {
+                            Route::get('/','index')->name('contacts.index');
+                            Route::delete('/destroy/{contact}', 'destroy')->name('contacts.destroy');
+                            Route::delete('/destroyMultiple', 'destroyMultiple')->name('contacts.destroyMultiple');
+                        });
                     });
                 });
                 ######################### End Contacts ##########################

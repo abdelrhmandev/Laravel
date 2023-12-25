@@ -1,6 +1,7 @@
 <?php
 return [
 'add'                       => 'Add Permission',
+'edit'                      => 'Edit Permission',
 'delete'                    => 'Delete Permission',
 'select'                    => 'Select Permission',
 'select_multi'              =>' Select Permissions',

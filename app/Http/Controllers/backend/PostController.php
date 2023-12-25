@@ -31,7 +31,7 @@ class PostController extends Controller
         $this->UPLOADFOLDER     = 'posts';
         $this->Tbl              = 'posts';
     
-        $this->middleware('permission:posts-list|posts-create|posts-edit|posts-delete', ['only' => ['index','store']]);
+        // $this->middleware('permission:posts-list|posts-create|posts-edit|posts-delete', ['only' => ['index','store']]);
         // $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index','store']]);
         // $this->middleware('permission:role-create', ['only' => ['create','store']]);
         // $this->middleware('permission:role-edit', ['only' => ['edit','update']]);

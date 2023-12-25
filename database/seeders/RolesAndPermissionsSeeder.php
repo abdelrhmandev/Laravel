@@ -32,6 +32,20 @@ class RolesAndPermissionsSeeder extends Seeder
 
 
 
+        Permission::create(['name' => 'pages-list','trans' => '[{"ar" : "عرض الصفحات", "en" : "List Pages"}]']);
+        Permission::create(['name' => 'pages-delete','trans' => '[{"ar" : "حذف الصفحات", "en" : "Delete Pages"}]']);
+        Permission::create(['name' => 'pages-create','trans' => '[{"ar" : "أنشاء الصفحات", "en" : "Create Pages"}]']);
+        Permission::create(['name' => 'pages-edit','trans' => '[{"ar" : "تحرير الصفحات", "en" : "Edit Pages"}]']);
+
+
+
+        Permission::create(['name' => 'tags-list','trans' => '[{"ar" : "عرض الوسوم", "en" : "List Tags"}]']);
+        Permission::create(['name' => 'tags-delete','trans' => '[{"ar" : "حذف الوسوم", "en" : "Delete Tags"}]']);
+        Permission::create(['name' => 'tags-create','trans' => '[{"ar" : "أنشاء الوسوم", "en" : "Create Tags"}]']);
+        Permission::create(['name' => 'tags-edit','trans' => '[{"ar" : "تحرير الوسوم", "en" : "Edit Tags"}]']);
+
+
+
         Permission::create(['name' => 'roles-list','trans' => '[{"ar" : "عرض الرتب", "en" : "List Roles"}]']);
         Permission::create(['name' => 'roles-delete','trans' => '[{"ar" : "حذف الرتب", "en" : "Delete Roles"}]']);
         Permission::create(['name' => 'roles-create','trans' => '[{"ar" : "أنشاء الرتب", "en" : "Create Roles"}]']);
@@ -56,22 +70,49 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'menus-edit','trans' => '[{"ar" : "تحرير القوائم", "en" : "Edit Menus"}]']);
 
 
-        
+        Permission::create(['name' => 'vacancies-list','trans' => '[{"ar" : "عرض الوظائف", "en" : "List Vacancies"}]']);
+        Permission::create(['name' => 'vacancies-delete','trans' => '[{"ar" : "حذف الوظائف", "en" : "Delete Vacancies"}]']);
+        Permission::create(['name' => 'vacancies-create','trans' => '[{"ar" : "أنشاء الوظائف", "en" : "Create Vacancies"}]']);
+        Permission::create(['name' => 'vacancies-edit','trans' => '[{"ar" : "تحرير الوظائف", "en" : "Edit Vacancies"}]']);        
+        Permission::create(['name' => 'applicants-list','trans' => '[{"ar" : "عرض المتقدمين للوظائف", "en" : "List Applicants"}]']);
+
+
+
+
+        Permission::create(['name' => 'comments-list','trans' => '[{"ar" : "عرض التعليقات", "en" : "List Comments"}]']);
+        Permission::create(['name' => 'comments-delete','trans' => '[{"ar" : "حذف التعليقات", "en" : "Delete Comments"}]']);
+        Permission::create(['name' => 'comments-edit','trans' => '[{"ar" : "تحرير التعليقات", "en" : "Edit Comments"}]']);
+
         // create roles and assign created permissions
 
         $role = Role::create(['name' => 'super-admin','trans' => '[{"ar" : "المدير العام", "en" : "SuperAdmin"}]']);
         $role->givePermissionTo(Permission::all());
 
         // // this can be done as separate statements
+
+        $role = Role::create(['name' => 'hr','trans'=>'[{"ar" : "موارد بشريه", "en" : "HR"}]']);
+        $role->givePermissionTo('vacancies-list')
+        ->givePermissionTo(['vacancies-delete'])
+        ->givePermissionTo(['vacancies-create'])
+        ->givePermissionTo(['vacancies-edit'])
+        ->givePermissionTo(['applicants-list'])
+        ;
+
+
         $role = Role::create(['name' => 'writer','trans'=>'[{"ar" : "كاتب محتوي", "en" : "Writer"}]']);
         $role->givePermissionTo('posts-create')
         ->givePermissionTo(['clients-create']);
 
 
         $role = Role::create(['name' => 'editor','trans'=>'[{"ar" : "محرر", "en" : "Editor"}]']);
+        $role->givePermissionTo('posts-list')
+        ->givePermissionTo(['tags-list'])
+        ->givePermissionTo(['tags-edit']);
+
+
   
         $role = Role::create(['name' => 'support','trans'=>'[{"ar" : "دعم فني", "en" : "Support"}]']);
-        $role->givePermissionTo('users-list')
+        $role->givePermissionTo('pages-list')
         ->givePermissionTo(['menus-list'])
         ->givePermissionTo(['menus-edit']);
 
@@ -88,9 +129,9 @@ class RolesAndPermissionsSeeder extends Seeder
 
         $role = Role::create(['name' => 'moderator','trans'=>'[{"ar" : "رئيس جلسة", "en" : "Moderator"}]'])
         ->givePermissionTo(['posts-list'])
-        ->givePermissionTo(['posts-publish'])
-        ->givePermissionTo(['menus-edit'])
-        ->givePermissionTo(['menus-create']);
+        ->givePermissionTo(['comments-list'])
+        ->givePermissionTo(['comments-edit'])
+        ->givePermissionTo(['comments-delete']);
             
 
 

@@ -14,7 +14,15 @@ class PageSeeder extends Seeder
         DB::table('pages')->delete();
         DB::table('page_translations')->delete();
 
-        $items = [['status' => '1'], ['status' => '1'], ['status' => '0'], ['status' => '1'], ['status' => '0'], ['status' => '0'], ['status' => '1']];
+        $items = [
+            ['status' => '1', 'image' => 'uploads/pages/1.jpg'], 
+            ['status' => '1', 'image' => 'uploads/pages/2.png'], 
+            ['status' => '0', 'image' => 'uploads/pages/3.jpg'], 
+            ['status' => '1', 'image' => 'uploads/pages/4.jpg'], 
+            ['status' => '0', 'image' => 'uploads/pages/5.jpg'], 
+            ['status' => '0', 'image' => NULL],
+            ['status' => '1', 'image' => NULL],
+            ];
         DB::table('pages')->insert($items);
 
         $translated_items = [

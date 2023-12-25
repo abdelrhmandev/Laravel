@@ -16,7 +16,7 @@ class Applicant extends Model
     }
 
     public function vacancy(){
-        return $this->belongsTo(vacancy::class);
+        return $this->belongsTo(Vacancy::class);
     }
  
  

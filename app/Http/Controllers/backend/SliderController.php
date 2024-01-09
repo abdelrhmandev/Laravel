@@ -103,7 +103,7 @@ class SliderController extends Controller
             return view('backend.sliders.create', $compact);
         }
     }
-    public function edit(Request $request, MainModel $slider)
+    public function edit(MainModel $slider)
     {
         if (view()->exists('backend.sliders.edit')) {
             $compact = [

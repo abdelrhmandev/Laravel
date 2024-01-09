@@ -95,7 +95,7 @@ class FaqController extends Controller
             return view('backend.faqs.create', $compact);
         }
     }
-    public function edit(Request $request, MainModel $faq)
+    public function edit(MainModel $faq)
     {
         if (view()->exists('backend.faqs.edit')) {
             $compact = [

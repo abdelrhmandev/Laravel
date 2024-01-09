@@ -100,7 +100,7 @@ class CityController extends Controller
             return view('backend.cities.create', $compact);
         }
     }
-    public function edit(Request $request, MainModel $city)
+    public function edit(MainModel $city)
     {
         if (view()->exists('backend.cities.edit')) {
             $compact = [

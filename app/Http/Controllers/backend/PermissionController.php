@@ -136,7 +136,7 @@ class PermissionController extends Controller
         return response()->json($arr);
     }
 
-    public function edit(Request $request, MainModel $permission)
+    public function edit(MainModel $permission)
     {
         if (view()->exists('backend.permissions.edit')) {
             $compact = [

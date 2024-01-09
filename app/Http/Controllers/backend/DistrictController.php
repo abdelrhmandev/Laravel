@@ -116,7 +116,7 @@ class DistrictController extends Controller
             return view('backend.districts.create', $compact);
         }
     }
-    public function edit(Request $request, MainModel $district)
+    public function edit(MainModel $district)
     {
         if (view()->exists('backend.districts.edit')) {
             $compact = [

@@ -135,7 +135,7 @@ class ClientController extends Controller
         return response()->json($arr);
     }
 
-    public function edit(Request $request, MainModel $client)
+    public function edit(MainModel $client)
     {
         $compact = [
             'trans'                  => $this->TRANS,

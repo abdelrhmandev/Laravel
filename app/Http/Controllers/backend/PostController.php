@@ -211,7 +211,7 @@ class PostController extends Controller
             return view('backend.posts.create', $compact);
         }
     }
-    public function edit(Request $request, MainModel $post)
+    public function edit(MainModel $post)
     {
         if ($request->ajax()) {
             $media = $post->media;

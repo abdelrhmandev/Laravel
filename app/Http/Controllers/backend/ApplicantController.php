@@ -94,7 +94,7 @@ class ApplicantController extends Controller
             return view('backend.applicants.index', $compact);
         }
     }
-    public function edit(Request $request, MainModel $applicant)
+    public function edit(MainModel $applicant)
     {
         if (view()->exists('backend.applicants.edit')) {
             $compact = [

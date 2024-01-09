@@ -120,7 +120,7 @@ class AreaController extends Controller
             return view('backend.areas.create', $compact);
         }
     }
-    public function edit(Request $request, MainModel $area)
+    public function edit(MainModel $area)
     {
         if (view()->exists('backend.areas.edit')) {
             $compact = [

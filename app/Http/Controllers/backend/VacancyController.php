@@ -93,7 +93,7 @@ class VacancyController extends Controller
             return view('backend.vacancies.create', $compact);
         }
     }
-    public function edit(Request $request, MainModel $vacancy)
+    public function edit(MainModel $vacancy)
     {
         if (view()->exists('backend.vacancies.edit')) {
             $compact = [

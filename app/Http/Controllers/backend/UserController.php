@@ -143,7 +143,7 @@ class UserController extends Controller
             return view('backend.users.index', $compact);
         }
     }
-    public function edit(Request $request, MainModel $user)
+    public function edit(MainModel $user)
     {
         if (view()->exists('backend.users.edit')) {
             $compact = [

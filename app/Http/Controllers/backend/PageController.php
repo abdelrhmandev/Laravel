@@ -101,7 +101,7 @@ class PageController extends Controller
             return view('backend.pages.create', $compact);
         }
     }
-    public function edit(Request $request, MainModel $page)
+    public function edit(MainModel $page)
     {
         if (view()->exists('backend.pages.edit')) {
             $compact = [

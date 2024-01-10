@@ -17,7 +17,11 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
+<<<<<<< HEAD
     public function boot(): void
+=======
+    public function boot()
+>>>>>>> cab9740849138dd8d3b042f8303653335d5ef8f4
     {
         //
     }

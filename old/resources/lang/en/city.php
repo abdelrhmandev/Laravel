@@ -1,0 +1,23 @@
+<?php
+return [
+'title'                     => 'City Title',
+'edit'                      => 'Edit City',
+'add'                       => 'Add City',
+'delete'                    => 'Delete City',
+'select'                    => 'Select City',
+'select_multi'              =>' Select Cities',
+'parent'                    => 'Parent City',
+'plural'                    => 'Cities',
+'singular'                  => 'City',
+'exportMessageSuccess'      => 'Cities has been exported successfully',
+'deleteMessageSuccess'      => 'City has been deleted successfully',
+'MulideleteMessageSuccess'  => 'Cities has been deleted successfully',
+'delete_selected'           => 'Delete Selected City(ies)',
+'not_delete_selected'       => 'City(ies) not deleted',
+'deleteMessageError'        => 'Error in delete City',
+'MultideleteMessageError'   => 'Error in delete Cities',
+'updateMessageSuccess'      => 'City has been updated successfully',
+'updateMessageError'        => 'Error in update City',
+'storeMessageSuccess'       => 'City has been created successfully',
+'storeMessageError'         => 'Error in Store City',
+];

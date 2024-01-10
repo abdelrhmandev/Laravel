@@ -1,0 +1,23 @@
+<?php
+return [
+'title'                     => 'Area Title',
+'edit'                      => 'Edit Area',
+'add'                       => 'Add Area',
+'delete'                    => 'Delete Area',
+'select'                    => 'Select Area',
+'select_multi'              =>' Select Areas',
+'parent'                    => 'Parent Area',
+'plural'                    => 'Areas',
+'singular'                  => 'Area',
+'exportMessageSuccess'      => 'Areas has been exported successfully',
+'deleteMessageSuccess'      => 'Area has been deleted successfully',
+'MulideleteMessageSuccess'  => 'Areas has been deleted successfully',
+'delete_selected'           => 'Delete Selected Categor(ies)',
+'not_delete_selected'       => 'Categor(ies) not deleted',
+'deleteMessageError'        => 'Error in delete Area',
+'MultideleteMessageError'   => 'Error in delete Areas',
+'updateMessageSuccess'      => 'Area has been updated successfully',
+'updateMessageError'        => 'Error in update Area',
+'storeMessageSuccess'       => 'Area has been created successfully',
+'storeMessageError'         => 'Error in Store Area',
+];

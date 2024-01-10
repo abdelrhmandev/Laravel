@@ -1,0 +1,23 @@
+<?php
+return [
+'title'                     => 'Category Title',
+'edit'                      => 'Edit Category',
+'add'                       => 'Add Category',
+'delete'                    => 'Delete Category',
+'select'                    => 'Select Category',
+'select_multi'              =>' Select Categories',
+'parent'                    => 'Parent Category',
+'plural'                    => 'Categories',
+'singular'                  => 'Category',
+'exportMessageSuccess'      => 'Categories has been exported successfully',
+'deleteMessageSuccess'      => 'Category has been deleted successfully',
+'MulideleteMessageSuccess'  => 'Categories has been deleted successfully',
+'delete_selected'           => 'Delete Selected Categor(ies)',
+'not_delete_selected'       => 'Categor(ies) not deleted',
+'deleteMessageError'        => 'Error in delete Category',
+'MultideleteMessageError'   => 'Error in delete Categories',
+'updateMessageSuccess'      => 'Category has been updated successfully',
+'updateMessageError'        => 'Error in update Category',
+'storeMessageSuccess'       => 'Category has been created successfully',
+'storeMessageError'         => 'Error in Store Category',
+];

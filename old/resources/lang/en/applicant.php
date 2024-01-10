@@ -1,0 +1,21 @@
+<?php
+return [
+'title'                     => 'Applicant Title',
+'edit'                      => 'Edit Applicant',
+'view'                      => 'View Applicant',
+'delete'                    => 'Delete Applicant',
+'select'                    => 'Select Applicant',
+'select_multi'              =>' Select Applicants',
+'plural'                    => 'Applicants',
+'singular'                  => 'Applicant',
+'deleteMessageSuccess'      => 'Applicant has been deleted successfully',
+'MulideleteMessageSuccess'  => 'Applicants has been deleted successfully',
+'delete_selected'           => 'Delete Selected Applicant(s)',
+'not_delete_selected'       => 'Applicant(s) not deleted',
+'deleteMessageError'        => 'Error in delete Applicant',
+'MultideleteMessageError'   => 'Error in delete Applicants',
+'updateMessageSuccess'      => 'Applicant has been updated successfully',
+'updateMessageError'        => 'Error in update Applicant',
+'storeMessageSuccess'       => 'Applicant has been created successfully',
+'storeMessageError'         => 'Error in Store Applicant',
+];

@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 import 'bootstrap';
+=======
+import _ from 'lodash';
+window._ = _;
+>>>>>>> cab9740849138dd8d3b042f8303653335d5ef8f4
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -26,7 +31,11 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     broadcaster: 'pusher',
 //     key: import.meta.env.VITE_PUSHER_APP_KEY,
 //     cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER ?? 'mt1',
+<<<<<<< HEAD
 //     wsHost: import.meta.env.VITE_PUSHER_HOST ?? `ws-${import.meta.env.VITE_PUSHER_APP_CLUSTER}.pusher.com`,
+=======
+//     wsHost: import.meta.env.VITE_PUSHER_HOST ? import.meta.env.VITE_PUSHER_HOST : `ws-${import.meta.env.VITE_PUSHER_APP_CLUSTER}.pusher.com`,
+>>>>>>> cab9740849138dd8d3b042f8303653335d5ef8f4
 //     wsPort: import.meta.env.VITE_PUSHER_PORT ?? 80,
 //     wssPort: import.meta.env.VITE_PUSHER_PORT ?? 443,
 //     forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',

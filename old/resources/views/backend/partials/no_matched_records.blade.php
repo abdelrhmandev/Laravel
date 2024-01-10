@@ -1,0 +1,1 @@
+<div class="d-flex flex-center flex-column py-10 px-10 px-lg-20 mb-10"> <div class="text-center text-dark"> <h1 class="fw-bold mb-5">{{ __('site.no_matched_records') }}</h1> </div> <div class="text-center pb-15 px-5"><img src="{{ asset('assets/backend/media/illustrations/sigma-1/5.png') }}" alt="" class="mw-100 h-200px h-sm-325px" /></div></div>

@@ -1,0 +1,23 @@
+<?php
+return [
+'title'                     => 'Page Title',
+'edit'                      => 'Edit Page',
+'view'                      => 'View Page',
+'add'                       => 'Add Page',
+'delete'                    => 'Delete Page',
+'select'                    => 'Select Page',
+'select_multi'              =>' Select Pages',
+'parent'                    => 'Parent Page',
+'plural'                    => 'Pages',
+'singular'                  => 'Page',
+'deleteMessageSuccess'      => 'Page has been deleted successfully',
+'MulideleteMessageSuccess'  => 'Pages has been deleted successfully',
+'delete_selected'           => 'Delete Selected Page(s)',
+'not_delete_selected'       => 'Page(s) not deleted',
+'deleteMessageError'        => 'Error in delete Page',
+'MultideleteMessageError'   => 'Error in delete Pages',
+'updateMessageSuccess'      => 'Page has been updated successfully',
+'updateMessageError'        => 'Error in update Page',
+'storeMessageSuccess'       => 'Page has been created successfully',
+'storeMessageError'         => 'Error in Store Page',
+];

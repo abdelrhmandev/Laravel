@@ -21,6 +21,11 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+<<<<<<< HEAD
+=======
+        $this->registerPolicies();
+
+>>>>>>> cab9740849138dd8d3b042f8303653335d5ef8f4
         //
     }
 }

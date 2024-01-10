@@ -1,0 +1,23 @@
+<?php
+return [
+'title'                     => 'قسم عنوان',
+'edit'                      => 'تعديل قسم',
+'add'                       => 'أضافه قسم',
+'delete'                    => 'حذف قسم',
+'select'                    => 'أختر قسم',
+'select_multi'              =>' أختر الأقسام',
+'parent'                    => 'القسم الأساسي',
+'plural'                    => 'الأقسام',
+'singular'                  => 'قسم',
+'exportMessageSuccess'      => 'تم تصدير الأقسام بنجاح',
+'deleteMessageSuccess'      => 'قسم تم حذف القسم بنجاح',
+'MulideleteMessageSuccess'  => 'تم حذف الأقسام بنجاح',
+'delete_selected'           => 'حذف الأقسام المختاره',
+'not_delete_selected'       => 'لم يتم حذف الأقسام',
+'deleteMessageError'        => 'خطأ في حذف القسم',
+'MultideleteMessageError'   => 'خطأ في حذف الأقسام',
+'updateMessageSuccess'      => 'قسم تم تحديث بنجاح',
+'updateMessageError'        => 'خطأ في حذف القسم',
+'storeMessageSuccess'       => 'تم أنشاء القسم بنجاح',
+'storeMessageError'         => 'خطأ في أضافه القسم',
+];

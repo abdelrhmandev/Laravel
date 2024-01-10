@@ -1,0 +1,23 @@
+<?php
+return [
+'title'                     => 'District Title',
+'edit'                      => 'Edit District',
+'add'                       => 'Add District',
+'delete'                    => 'Delete District',
+'select'                    => 'Select District',
+'select_multi'              =>' Select Districts',
+'parent'                    => 'Parent District',
+'plural'                    => 'Districts',
+'singular'                  => 'District',
+'exportMessageSuccess'      => 'Districts has been exported successfully',
+'deleteMessageSuccess'      => 'District has been deleted successfully',
+'MulideleteMessageSuccess'  => 'Districts has been deleted successfully',
+'delete_selected'           => 'Delete Selected Categor(ies)',
+'not_delete_selected'       => 'Categor(ies) not deleted',
+'deleteMessageError'        => 'Error in delete District',
+'MultideleteMessageError'   => 'Error in delete Districts',
+'updateMessageSuccess'      => 'District has been updated successfully',
+'updateMessageError'        => 'Error in update District',
+'storeMessageSuccess'       => 'District has been created successfully',
+'storeMessageError'         => 'Error in Store District',
+];

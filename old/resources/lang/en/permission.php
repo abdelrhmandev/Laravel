@@ -1,0 +1,23 @@
+<?php
+return [
+'add'                       => 'Add Permission',
+'edit'                      => 'Edit Permission',
+'delete'                    => 'Delete Permission',
+'select'                    => 'Select Permission',
+'select_multi'              =>' Select Permissions',
+'plural'                    => 'Permissions',
+'singular'                  => 'Permission',
+'exportMessageSuccess'      => 'Permissions has been exported successfully',
+'deleteMessageSuccess'      => 'Permission has been deleted successfully',
+'MulideleteMessageSuccess'  => 'Permissions has been deleted successfully',
+'delete_selected'           => 'Delete Selected Permissions',
+'not_delete_selected'       => 'Permissions not deleted',
+'deleteMessageError'        => 'Error in delete Permission',
+'MultideleteMessageError'   => 'Error in delete Permissions',
+'updateMessageSuccess'      => 'Permission has been updated successfully',
+'updateMessageError'        => 'Error in update Permission',
+'storeMessageSuccess'       => 'Permission has been created successfully',
+'storeMessageError'         => 'Error in Store Permission',
+'associated_roles'          =>'Associated roles',
+'no_associated_role'        =>'No Associated role',
+];

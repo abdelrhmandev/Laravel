@@ -52,7 +52,11 @@ class Kernel extends HttpKernel
      *
      * @var array<string, class-string|string>
      */
+<<<<<<< HEAD
     protected $middlewareAliases = [
+=======
+    protected $routeMiddleware = [
+>>>>>>> cab9740849138dd8d3b042f8303653335d5ef8f4
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'auth.session' => \Illuminate\Session\Middleware\AuthenticateSession::class,
@@ -60,7 +64,10 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
+<<<<<<< HEAD
         'precognitive' => \Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests::class,
+=======
+>>>>>>> cab9740849138dd8d3b042f8303653335d5ef8f4
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,

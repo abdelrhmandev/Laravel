@@ -1,0 +1,9 @@
+ 
+{!! $dataTable->table() !!}
+ 
+
+ 
+ 
+ 
+{!! $dataTable->scripts() !!}
+ 

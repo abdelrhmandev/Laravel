@@ -1,0 +1,23 @@
+<?php
+return [
+'title'                     => 'تعديل حي',
+'edit'                      => 'تعديل حي',
+'add'                       => 'أضافه حي',
+'view'                      => 'عرض الحي',
+'delete'                    => 'حذف حي',
+'select'                    => 'أختر حي',
+'select_multi'              =>' أختر الأحياء',
+'plural'                    => 'الأحياء',
+'singular'                  => 'حي',
+'exportMessageSuccess'      => 'تم تصدير الأحياء بنجاح',
+'deleteMessageSuccess'      => 'تم حذف الحي بنجاح',
+'MulideleteMessageSuccess'  => 'تم حذف الأحياء بنجاح',
+'delete_selected'           => 'حذف الأحياء المختاره',
+'not_delete_selected'       => 'لم يتم حذف الأحياء',
+'deleteMessageError'        => 'خطأ في حذف الحي',
+'MultideleteMessageError'   => 'خطأ في حذف الأحياء',
+'updateMessageSuccess'      => ' تم تحديث الحي بنجاح',
+'updateMessageError'        => 'خطأ في حذف الحي',
+'storeMessageSuccess'       => 'تم أنشاء الحي بنجاح',
+'storeMessageError'         => 'خطأ في أضافه الحي',
+];

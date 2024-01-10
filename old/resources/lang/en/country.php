@@ -1,0 +1,23 @@
+<?php
+return [
+'title'                     => 'Country Title',
+'edit'                      => 'Edit Country',
+'add'                       => 'Add Country',
+'delete'                    => 'Delete Country',
+'select'                    => 'Select Country',
+'select_multi'              =>' Select Countries',
+'parent'                    => 'Parent Country',
+'plural'                    => 'Countries',
+'singular'                  => 'Country',
+'exportMessageSuccess'      => 'Countries has been exported successfully',
+'deleteMessageSuccess'      => 'Country has been deleted successfully',
+'MulideleteMessageSuccess'  => 'Countries has been deleted successfully',
+'delete_selected'           => 'Delete Selected Categor(ies)',
+'not_delete_selected'       => 'Categor(ies) not deleted',
+'deleteMessageError'        => 'Error in delete Country',
+'MultideleteMessageError'   => 'Error in delete Countries',
+'updateMessageSuccess'      => 'Country has been updated successfully',
+'updateMessageError'        => 'Error in update Country',
+'storeMessageSuccess'       => 'Country has been created successfully',
+'storeMessageError'         => 'Error in Store Country',
+];

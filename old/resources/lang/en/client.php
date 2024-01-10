@@ -1,0 +1,22 @@
+<?php
+return [
+'title'                     => 'Client Title',
+'edit'                      => 'Edit Client',
+'view'                      => 'View Client',
+'add'                       => 'Add Client',
+'delete'                    => 'Delete Client',
+'select'                    => 'Select Client',
+'select_multi'              =>' Select Clients',
+'plural'                    => 'Clients',
+'singular'                  => 'Client',
+'deleteMessageSuccess'      => 'Client has been deleted successfully',
+'MulideleteMessageSuccess'  => 'Clients has been deleted successfully',
+'delete_selected'           => 'Delete Selected Client(s)',
+'not_delete_selected'       => 'Client(s) not deleted',
+'deleteMessageError'        => 'Error in delete Client',
+'MultideleteMessageError'   => 'Error in delete Clients',
+'updateMessageSuccess'      => 'Client has been updated successfully',
+'updateMessageError'        => 'Error in update Client',
+'storeMessageSuccess'       => 'Client has been created successfully',
+'storeMessageError'         => 'Error in Store Client',
+];

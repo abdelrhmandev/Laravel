@@ -1,0 +1,23 @@
+<?php
+return [
+'title'                     => 'تعديل سؤال',
+'edit'                      => 'تعديل سؤال',
+'add'                       => 'أضافه سؤال',
+'view'                      => 'عرض السؤال',
+'delete'                    => 'حذف سؤال',
+'select'                    => 'أختر سؤال',
+'select_multi'              =>' أختر الأسئله',
+'plural'                    => 'الأسئله',
+'singular'                  => 'سؤال',
+'exportMessageSuccess'      => 'تم تصدير الأسئله بنجاح',
+'deleteMessageSuccess'      => 'تم حذف السؤال بنجاح',
+'MulideleteMessageSuccess'  => 'تم حذف الأسئله بنجاح',
+'delete_selected'           => 'حذف الأسئله المختاره',
+'not_delete_selected'       => 'لم يتم حذف الأسئله',
+'deleteMessageError'        => 'خطأ في حذف السؤال',
+'MultideleteMessageError'   => 'خطأ في حذف الأسئله',
+'updateMessageSuccess'      => ' تم تحديث السؤال بنجاح',
+'updateMessageError'        => 'خطأ في حذف السؤال',
+'storeMessageSuccess'       => 'تم أنشاء السؤال بنجاح',
+'storeMessageError'         => 'خطأ في أضافه السؤال',
+];

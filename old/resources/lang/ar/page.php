@@ -1,0 +1,23 @@
+<?php
+return [
+'title'                     => 'تعديل صفحه',
+'edit'                      => 'تعديل صفحه',
+'add'                       => 'أضافه صفحه',
+'view'                      => 'عرض الصفحه',
+'delete'                    => 'حذف صفحه',
+'select'                    => 'أختر صفحه',
+'select_multi'              =>' أختر الصفحات',
+'plural'                    => 'الصفحات',
+'singular'                  => 'صفحه',
+'exportMessageSuccess'      => 'تم تصدير الصفحات بنجاح',
+'deleteMessageSuccess'      => 'تم حذف الصفحه بنجاح',
+'MulideleteMessageSuccess'  => 'تم حذف الصفحات بنجاح',
+'delete_selected'           => 'حذف الصفحات المختاره',
+'not_delete_selected'       => 'لم يتم حذف الصفحات',
+'deleteMessageError'        => 'خطأ في حذف الصفحه',
+'MultideleteMessageError'   => 'خطأ في حذف الصفحات',
+'updateMessageSuccess'      => ' تم تحديث الصفحه بنجاح',
+'updateMessageError'        => 'خطأ في حذف الصفحه',
+'storeMessageSuccess'       => 'تم أنشاء الصفحه بنجاح',
+'storeMessageError'         => 'خطأ في أضافه الصفحه',
+];

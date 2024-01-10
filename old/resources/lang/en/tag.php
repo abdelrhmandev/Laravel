@@ -1,0 +1,23 @@
+<?php
+return [
+'title'                     => 'Tag Title',
+'edit'                      => 'Edit Tag',
+'add'                       => 'Add Tag',
+'view'                      => 'View Tag',
+'delete'                    => 'Delete Tag',
+'select'                    => 'Select Tag',
+'select_multi'              =>' Select Tags',
+'plural'                    => 'Tags',
+'singular'                  => 'Tag',
+'exportMessageSuccess'      => 'Tags has been exported successfully',
+'deleteMessageSuccess'      => 'Tag has been deleted successfully',
+'MulideleteMessageSuccess'  => 'Tags has been deleted successfully',
+'delete_selected'           => 'Delete Selected Tags',
+'not_delete_selected'       => 'Tags not deleted',
+'deleteMessageError'        => 'Error in delete Tag',
+'MultideleteMessageError'   => 'Error in delete Tags',
+'updateMessageSuccess'      => 'Tag has been updated successfully',
+'updateMessageError'        => 'Error in update Tag',
+'storeMessageSuccess'       => 'Tag has been created successfully',
+'storeMessageError'         => 'Error in Store Tag',
+];

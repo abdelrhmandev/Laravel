@@ -1,0 +1,23 @@
+<?php
+return [
+'on'                        => 'التعليقات علي',
+'allow'                     => 'أتاحه التعليقات',   
+'title'                     => 'التغليق',
+'add'                       => 'أضافه تعليق ',
+'edit'                      => 'تعديل تعليق',
+'view'                      => 'عرض التعليق',
+'delete'                    => 'حذف تعليق',
+'select'                    => 'أختر تعليق',
+'select_multi'              =>' أختر التعليقات',
+'plural'                    => 'التعليقات',
+'singular'                  => 'التعليق',
+'exportMessageSuccess'      => 'تم تصدير التعليقات بنجاح',
+'deleteMessageSuccess'      => 'تم حذف التعليق بنجاح',
+'MulideleteMessageSuccess'  => 'تم حذف التعليقات بنجاح',
+'delete_selected'           => 'حذف التعليقات المختاره',
+'not_delete_selected'       => 'لم يتم حذف التعليقات',
+'deleteMessageError'        => 'خطأ في حذف التعليق',
+'MultideleteMessageError'   => 'خطأ في حذف التعليقات',
+'updateMessageSuccess'      => 'تم تحديث التعليق بنجاح',
+'updateMessageError'        => 'خطأ في حذف التعليق',
+];

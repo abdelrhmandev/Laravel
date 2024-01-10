@@ -1,0 +1,28 @@
+<?php
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+class CreateDistrictsTable extends Migration {
+	public function up() {
+		Schema::create('districts', function (Blueprint $table) {
+            $table->id();
+			$table->foreignId('area_id')->nullable()->constrained('areas')->onDelete('cascade');
+			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+			});
+		Schema::create('district_translations', function (Blueprint $table) {            
+			$table->id();
+			$table->string('title');
+            $table->string('slug')->unique();
+			$table->string('lang')->index();			
+			$table->unique(['district_id','lang']);  
+            $table->index(['title','slug']);
+            $table->foreignId('district_id')->constrained('districts')->onDelete('cascade');
+
+		});	
+	}
+	public function down() {		
+		Schema::dropIfExists('districts');
+		Schema::dropIfExists('district_translations');
+	}
+}

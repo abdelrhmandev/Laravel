@@ -7,7 +7,8 @@ Route::group([
 
     Route::name(config('custom.route_prefix').'.')->group(function () {
 
-        Route::group(['namespace' => 'backend','middleware' => 'auth:admin', 'prefix' => config('custom.route_prefix')], function () {
+        Route::group(['namespace' => 'backend','middleware' => 'auth:admin',
+         'prefix' => config('custom.route_prefix')], function () {
 
                 ######################### Start Dashboard #################################
                 Route::get('/', 'DashboardController@index')->name('dashboard');
@@ -171,7 +172,8 @@ Route::group([
 
         });
 
-        Route::group(['namespace' => 'backend','middleware' => 'guest:admin', 'prefix' => config('custom.route_prefix')], function () {
+        Route::group(['namespace' => 'backend','middleware' => 'guest:admin', 
+        'prefix' => config('custom.route_prefix')], function () {
 
 
             ######################### Start Auth Guest Routes #################################
@@ -187,7 +189,7 @@ Route::group([
             });
 
 
-            ######################### End Auth Guest Routes ###################################
+        
 
 
             #########################  Start Password Reset Routes ######################### 
@@ -197,7 +199,10 @@ Route::group([
                 Route::get('/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('auth.password.reset');
                 Route::post('/reset', 'Auth\ResetPasswordController@reset')->name('auth.password.update');
             });
-            #########################  End Password Reset Routes ########################### 
+            #########################  End Password Reset Routes ###########################
+            
+            ######################### End Auth Guest Routes ###################################
+
         });
 
 });
